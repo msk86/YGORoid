@@ -17,4 +17,6 @@ local.properties
 
 # idea profiles
 .idea/
+*.ipr
+*.iws
 *.iml
