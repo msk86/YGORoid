@@ -3,6 +3,7 @@ package android.ygo.utils;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.util.DisplayMetrics;
 
 public class Utils {
@@ -33,5 +34,13 @@ public class Utils {
         options.inSampleSize = (int)(options.outHeight * 1.0f / targetHeight);
         options.inJustDecodeBounds = false;
         return BitmapFactory.decodeFile(file, options);
+    }
+
+    public static Bitmap rotate(Bitmap bitmap, int degree) {
+        Matrix matrix = new Matrix();
+        matrix.postScale(1f, 1f);
+        matrix.postRotate(degree);
+        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
+                bitmap.getHeight(), matrix, true);
     }
 }

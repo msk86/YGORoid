@@ -2,7 +2,6 @@ package android.ygo.core;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.ygo.utils.Utils;
 
@@ -22,7 +21,6 @@ public class Card implements Item {
         this.type = type;
         this.positive = positive;
     }
-
 
     @Override
     public Bitmap toBitmap() {
@@ -47,11 +45,7 @@ public class Card implements Item {
             canvas.drawBitmap(cardPic, cardPicX, cardPicY, paint);
         }
         if (!positive) {
-            Matrix matrix = new Matrix();
-            matrix.postScale(1f, 1f);
-            matrix.postRotate(90);
-            cardBmp = Bitmap.createBitmap(cardBmp, 0, 0, cardBmp.getWidth(),
-                    cardBmp.getHeight(), matrix, true);
+            cardBmp = Utils.rotate(cardBmp, 90);
         }
         return cardBmp;
     }
