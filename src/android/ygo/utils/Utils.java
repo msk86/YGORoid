@@ -1,32 +1,19 @@
 package android.ygo.utils;
 
 import android.app.Activity;
-import android.content.Context;
 import android.util.DisplayMetrics;
 
 public class Utils {
-    public static Utils utils;
+    private static DisplayMetrics dm;
 
-    private DisplayMetrics dm;
-
-    private Utils(Activity activity) {
+    public static void initInstance(Activity activity) {
         dm = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
     }
 
-    public static void initInstance(Activity activity) {
-        utils = new Utils(activity);
-    }
-
-    public static Utils getInstance(){
-        return utils;
-    }
-
-    public int scaleX(float xPercentage) {
-        return (int)(dm.widthPixels * xPercentage);
-    }
-
-    public int scaleY(float yPercentage) {
-        return (int)(dm.heightPixels * yPercentage);
+    public static int unitLength() {
+        int unitLengthW = (int)(dm.widthPixels / 6f);
+        int unitLengthH = (int)(dm.heightPixels * 0.92f / 4);
+        return unitLengthW < unitLengthH ? unitLengthW : unitLengthH;
     }
 }
