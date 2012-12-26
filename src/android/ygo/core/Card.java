@@ -2,6 +2,7 @@ package android.ygo.core;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.ygo.utils.Utils;
 
@@ -16,33 +17,41 @@ public class Card implements Item {
     boolean set = false;
     boolean positive = true;
 
-    public Card(String id, CardType type) {
+    public Card(String id, CardType type, boolean positive) {
         this.id = id;
         this.type = type;
+        this.positive = positive;
     }
 
 
     @Override
     public Bitmap toBitmap() {
         int height = Utils.cardHeight();
+        int width = height;
         Bitmap cardBmp = Bitmap.createBitmap(height, height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(cardBmp);
         Paint paint = new Paint();
-        if(set) {
+        if (set) {
             Bitmap protector = Utils.readBitmapScaleByHeight(cardProtector + ".png", height);
-            canvas.drawBitmap(protector, 0, 0, paint);
+            int drawX = (width - protector.getWidth()) / 2;
+            canvas.drawBitmap(protector, drawX, 0, paint);
         } else {
             Bitmap cardBackground = Utils.readBitmapScaleByHeight(type.toString() + ".png", height);
-            canvas.drawBitmap(cardBackground, 0, 0, paint);
+            int drawX = (width - cardBackground.getWidth()) / 2;
+            canvas.drawBitmap(cardBackground, drawX, 0, paint);
             Bitmap cardPic = Utils.readBitmapScaleByHeight(id + ".png", height / 2);
 
-            int cardPicX = (cardBackground.getWidth() - cardPic.getWidth()) / 2;
-            int cardPicY = cardBackground.getHeight() / 5;
+            int cardPicX = (width - cardPic.getWidth()) / 2;
+            int cardPicY = (int) (cardBackground.getHeight() / 4.63);
 
             canvas.drawBitmap(cardPic, cardPicX, cardPicY, paint);
         }
-        if(!positive) {
-            canvas.rotate(90);
+        if (!positive) {
+            Matrix matrix = new Matrix();
+            matrix.postScale(1f, 1f);
+            matrix.postRotate(90);
+            cardBmp = Bitmap.createBitmap(cardBmp, 0, 0, cardBmp.getWidth(),
+                    cardBmp.getHeight(), matrix, true);
         }
         return cardBmp;
     }

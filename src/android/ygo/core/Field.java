@@ -7,16 +7,19 @@ import android.graphics.Paint;
 import android.ygo.utils.Utils;
 
 public class Field implements Item {
-    int index;
 
+    private Item setItem;
 
-    public Field(int index) {
-        this.index = index;
+    public void setItem(Item item) {
+        this.setItem = item;
     }
 
-    public Field() {
-        this(0);
+    public Item removeItem() {
+        Item item = this.setItem;
+        this.setItem = null;
+        return item;
     }
+
 
     public Bitmap toBitmap() {
         int width = Utils.unitLength();
@@ -31,6 +34,16 @@ public class Field implements Item {
         canvas.drawLine(width - padding, padding, width - padding, width - padding, paint);
         canvas.drawLine(width - padding, width - padding, padding, width - padding, paint);
         canvas.drawLine(padding, width - padding, padding, padding, paint);
+
+        if(setItem != null) {
+            Bitmap itemBmp = setItem.toBitmap();
+            int itemW = itemBmp.getWidth();
+            int itemH = itemBmp.getHeight();
+            int itemPosX = (width - itemW) / 2;
+            int itemPosY = (width - itemH) / 2;
+            canvas.drawBitmap(itemBmp, itemPosX, itemPosY, paint);
+        }
+
         return bitmap;
     }
 }
