@@ -1,21 +1,30 @@
 package android.ygo.core;
 
 import android.graphics.*;
+import android.ygo.utils.Utils;
 
 public class Field implements Item {
+    int index;
+
+    public Field(int index) {
+        this.index = index;
+    }
 
     @Override
     public Bitmap toBitmap() {
-        Bitmap bitmap = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
+        Utils u = Utils.getInstance();
+        int width = u.scaleX(0.125f);
+        int padding = 2;
+        Bitmap bitmap = Bitmap.createBitmap(width, width, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         canvas.drawColor(Color.TRANSPARENT);
         Paint paint = new Paint();
         paint.setColor(Color.WHITE);
         paint.setStrokeWidth(2);
-        canvas.drawLine(5, 5, 95, 5, paint);
-        canvas.drawLine(95, 5, 95, 95, paint);
-        canvas.drawLine(95, 95, 5, 95, paint);
-        canvas.drawLine(5,95,5,5,paint);
+        canvas.drawLine(padding, padding, width - padding, padding, paint);
+        canvas.drawLine(width - padding, padding, width - padding, width - padding, paint);
+        canvas.drawLine(width - padding, width - padding, padding, width - padding, paint);
+        canvas.drawLine(padding, width - padding, padding, padding, paint);
         return bitmap;
     }
 }
