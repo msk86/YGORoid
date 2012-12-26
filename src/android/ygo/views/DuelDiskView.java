@@ -5,26 +5,33 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.View;
+import android.ygo.core.DuelFields;
 
 public class DuelDiskView extends View {
 
-    private Paint painter = new Paint();
+    private Paint painter;
+
+    private DuelFields duelFields;
 
     public DuelDiskView(Context context) {
         super(context);
+        initDuelDisk();
+    }
+
+    private void initDuelDisk() {
+        painter = new Paint();
+        duelFields = new DuelFields();
     }
 
     @Override
     public void draw(Canvas canvas){
         drawBackground(canvas);
-        painter.setColor(Color.WHITE);
-        canvas.drawText("TEST FOR DUEL DISK", 10, 10, painter);
+        duelFields.draw(canvas, painter);
     }
 
     private void drawBackground(Canvas canvas) {
+        canvas.drawColor(Color.GRAY);
         // IMAGE BACKGROUND
-        painter.setColor(Color.GRAY);
-        canvas.drawRect(0,0,100,100,painter);
     }
 
 }
