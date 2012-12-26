@@ -24,19 +24,19 @@ public class DuelDiskView extends View {
     private void initDuelDisk() {
         painter = new Paint();
         duelFields = new DuelFields();
+        Card card = new Card("12345678", CardType.SYNC_MONSTER, true);
+        Field f = duelFields.testField();
+        f.setItem(card);
     }
 
     @Override
     public void draw(Canvas canvas){
         drawBackground(canvas);
-        Card card = new Card("12345678", CardType.SYNC_MONSTER, false);
-        Field f = duelFields.testField();
-        f.setItem(card);
         canvas.drawBitmap(duelFields.toBitmap(), 0, 0, painter);
     }
 
     private void drawBackground(Canvas canvas) {
-        canvas.drawColor(Color.GRAY);
+        canvas.drawColor(Color.BLACK);
         // IMAGE BACKGROUND
     }
 
