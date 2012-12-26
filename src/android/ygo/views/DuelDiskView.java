@@ -5,6 +5,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.View;
+import android.ygo.core.Card;
+import android.ygo.core.CardType;
 import android.ygo.core.DuelFields;
 
 public class DuelDiskView extends View {
@@ -27,6 +29,8 @@ public class DuelDiskView extends View {
     public void draw(Canvas canvas){
         drawBackground(canvas);
         canvas.drawBitmap(duelFields.toBitmap(), 0, 0, painter);
+        Card card = new Card("12345678", CardType.SYNC_MONSTER);
+        canvas.drawBitmap(card.toBitmap(), 0, 0, painter);
     }
 
     private void drawBackground(Canvas canvas) {
