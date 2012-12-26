@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.view.View;
 import android.ygo.core.DuelFields;
 
@@ -26,7 +27,7 @@ public class DuelDiskView extends View {
     @Override
     public void draw(Canvas canvas){
         drawBackground(canvas);
-        duelFields.draw(canvas, painter);
+        canvas.drawBitmap(duelFields.toBitmap(), 0, 0, painter);
     }
 
     private void drawBackground(Canvas canvas) {
