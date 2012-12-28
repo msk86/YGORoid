@@ -71,7 +71,7 @@ public class DuelFields implements Item {
     }
 
     //test
-    public Field testField() {
-        return monsterZoneFields.get(2);
+    public Field testField(int i) {
+        return monsterZoneFields.get(i);
     }
 }

@@ -16,10 +16,12 @@ public class Card implements Item {
     boolean set = false;
     boolean positive = true;
 
-    public Card(String id, CardType type, boolean positive) {
+    public Card(String id, CardType type, boolean positive, boolean set) {
         this.id = id;
         this.type = type;
         this.positive = positive;
+        this.set = set;
+        cardProtector = DEFAULT_CARD_PROTECTOR;
     }
 
     @Override

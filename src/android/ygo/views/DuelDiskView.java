@@ -24,9 +24,12 @@ public class DuelDiskView extends View {
     private void initDuelDisk() {
         painter = new Paint();
         duelFields = new DuelFields();
-        Card card = new Card("12345678", CardType.SYNC_MONSTER, true);
-        Field f = duelFields.testField();
+        Card card = new Card("12345678", CardType.SYNC_MONSTER, true, false);
+        Field f = duelFields.testField(0);
         f.setItem(card);
+        Card setCard = new Card("12345678", CardType.SYNC_MONSTER, false, true);
+        f = duelFields.testField(1);
+        f.setItem(setCard);
     }
 
     @Override
