@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DuelFields implements Item {
+    private List<Field> allFields;
+
     List<Field> monsterZoneFields;
     List<Field> magicZoneFields;
     Field deckField;
@@ -20,21 +22,31 @@ public class DuelFields implements Item {
     Field fieldMagicField;
 
     public DuelFields() {
+        allFields = new ArrayList<Field>();
+
         monsterZoneFields = new ArrayList<Field>();
         magicZoneFields = new ArrayList<Field>();
 
         for(int i=0;i<5;i++) {
             Field monsterField = new Field();
             monsterZoneFields.add(monsterField);
+            allFields.add(monsterField);
             Field magicField = new Field();
             magicZoneFields.add(magicField);
+            allFields.add(magicField);
         }
         deckField = new DeckField("DECK");
+        allFields.add(deckField);
         graveyardField = new DeckField("GRAVEYARD");
+        allFields.add(graveyardField);
         removedField = new DeckField("REMOVED");
+        allFields.add(removedField);
         exDeckField = new DeckField("EX");
+        allFields.add(exDeckField);
         fieldMagicField = new FieldMagicField();
+        allFields.add(fieldMagicField);
         tempField = new DeckField("TEMPORARY");
+        allFields.add(tempField);
     }
 
     @Override
@@ -68,6 +80,13 @@ public class DuelFields implements Item {
         canvas.drawBitmap(deckField.toBitmap(), xs[5], ys[2], paint);
 
         return bitmap;
+    }
+
+    public void select(Field field) {
+        for(Field field1 : allFields) {
+            field1.unSelect();
+        }
+        field.select();
     }
 
     public Field getMonsterField(int i) {

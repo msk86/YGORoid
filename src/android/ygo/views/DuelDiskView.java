@@ -27,13 +27,14 @@ public class DuelDiskView extends View {
         Card card = new Card("12345678", CardType.SYNC_MONSTER, true, false);
         Field f = duelFields.getMonsterField(2);
         f.setItem(card);
-        f.select();
         Card setCard = new Card("12345678", CardType.SYNC_MONSTER, false, true);
         f = duelFields.getMonsterField(1);
         f.setItem(setCard);
         Card setMagicCard = new Card("12345678", CardType.MAGIC, true, true);
         f = duelFields.getMagicField(2);
         f.setItem(setMagicCard);
+
+        duelFields.select(f);
     }
 
     @Override
