@@ -14,6 +14,10 @@ public class Field implements Item {
         this.setItem = item;
     }
 
+    public Item getItem() {
+        return setItem;
+    }
+
     public Item removeItem() {
         Item item = this.setItem;
         this.setItem = null;
