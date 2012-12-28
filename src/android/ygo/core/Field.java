@@ -8,20 +8,28 @@ import android.ygo.utils.Utils;
 
 public class Field implements Item {
 
-    private Item setItem;
+    private SelectableItem setItem;
+    private boolean selected = false;
 
-    public void setItem(Item item) {
+    public void setItem(SelectableItem item) {
         this.setItem = item;
     }
 
-    public Item getItem() {
+    public SelectableItem getItem() {
         return setItem;
     }
 
-    public Item removeItem() {
-        Item item = this.setItem;
+    public SelectableItem removeItem() {
+        SelectableItem item = this.setItem;
         this.setItem = null;
         return item;
+    }
+
+    public void select() {
+        selected = true;
+    }
+    public void unSelect() {
+        selected = false;
     }
 
 
@@ -42,6 +50,10 @@ public class Field implements Item {
         if(setItem != null) {
             Bitmap itemBmp = setItem.toBitmap();
             Utils.drawBitmapOnCanvas(canvas, itemBmp, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_CENTER);
+            if(selected) {
+                Bitmap highLight = setItem.highLight();
+                Utils.drawBitmapOnCanvas(canvas, highLight, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_CENTER);
+            }
         }
 
         return bitmap;

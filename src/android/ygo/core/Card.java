@@ -2,11 +2,11 @@ package android.ygo.core;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
-import android.util.Log;
 import android.ygo.utils.Utils;
 
-public class Card implements Item {
+public class Card implements SelectableItem {
     public static final String DEFAULT_CARD_PROTECTOR = "defaultProtector";
 
     String id;
@@ -37,7 +37,7 @@ public class Card implements Item {
             Utils.drawBitmapOnCanvas(canvas, protector, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_FIRST);
             protector.recycle();
         } else {
-            if(Configuration.isTotalCardPic()) {
+            if (Configuration.isTotalCardPic()) {
                 Bitmap cardPic = Utils.readBitmapScaleByHeight(id + ".png", height / 2);
                 Utils.drawBitmapOnCanvas(canvas, cardPic, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_FIRST);
                 cardPic.recycle();
@@ -55,5 +55,27 @@ public class Card implements Item {
             cardBmp = Utils.rotate(cardBmp, 90);
         }
         return cardBmp;
+    }
+
+    @Override
+    public Bitmap highLight() {
+        int height = Utils.cardHeight();
+        int width = Utils.cardWidth();
+        Bitmap highLightBmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+
+        Canvas canvas = new Canvas(highLightBmp);
+        Paint paint = new Paint();
+        canvas.drawColor(Color.TRANSPARENT);
+        paint.setColor(Color.BLUE);
+        paint.setStrokeWidth(4);
+        canvas.drawLine(0, 0, width, 0, paint);
+        canvas.drawLine(width, 0, width, height, paint);
+        canvas.drawLine(width, height, 0, height, paint);
+        canvas.drawLine(0, height, 0, 0, paint);
+
+        if (!positive) {
+            highLightBmp = Utils.rotate(highLightBmp, 90);
+        }
+        return highLightBmp;
     }
 }
