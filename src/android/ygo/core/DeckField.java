@@ -7,8 +7,10 @@ import android.graphics.Paint;
 import android.ygo.utils.Utils;
 
 public class DeckField extends Field {
-    public DeckField() {
+    private String fieldName;
+    public DeckField(String fieldName) {
         super();
+        this.fieldName = fieldName;
     }
 
     @Override
@@ -23,6 +25,7 @@ public class DeckField extends Field {
         paint.setColor(Color.WHITE);
         canvas.drawLine(padding, padding, width - padding, width - padding, paint);
         canvas.drawLine(padding, width - padding, width - padding, padding, paint);
+        canvas.drawText(fieldName, 10, 15, paint);
 
         return bitmap;
     }

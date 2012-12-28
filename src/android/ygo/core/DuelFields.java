@@ -29,12 +29,12 @@ public class DuelFields implements Item {
             Field magicField = new Field();
             magicZoneFields.add(magicField);
         }
-        deckField = new DeckField();
-        graveyardField = new DeckField();
-        removedField = new DeckField();
-        exDeckField = new DeckField();
+        deckField = new DeckField("DECK");
+        graveyardField = new DeckField("GRAVEYARD");
+        removedField = new DeckField("REMOVED");
+        exDeckField = new DeckField("EX");
         fieldMagicField = new FieldMagicField();
-        tempField = new DeckField();
+        tempField = new DeckField("TEMPORARY");
     }
 
     @Override
