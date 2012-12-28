@@ -17,7 +17,7 @@ public class Utils {
 
     public static int unitLength() {
         int unitLengthW = (int)(dm.widthPixels / 6f);
-        int unitLengthH = (int)(dm.heightPixels * 0.92f / 4);
+        int unitLengthH = (int)(dm.heightPixels / 4f);
         return unitLengthW < unitLengthH ? unitLengthW : unitLengthH;
     }
 
@@ -28,19 +28,27 @@ public class Utils {
 
     public static Bitmap readBitmapScaleByHeight(String file, int targetHeight) {
         file = baseDir + file;
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(file, options);
-        options.inSampleSize = (int)(options.outHeight * 1.0f / targetHeight);
-        options.inJustDecodeBounds = false;
-        return BitmapFactory.decodeFile(file, options);
+        Bitmap bitmap = BitmapFactory.decodeFile(file);
+        return scaleByHeight(bitmap, targetHeight);
+    }
+
+    public static Bitmap scaleByHeight(Bitmap bitmap, int targetHeight) {
+        Matrix matrix = new Matrix();
+        float changeRate = targetHeight * 1.0f / bitmap.getHeight();
+        matrix.postScale(changeRate, changeRate);
+        Bitmap newBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
+                bitmap.getHeight(), matrix, true);
+        bitmap.recycle();
+        return newBitmap;
     }
 
     public static Bitmap rotate(Bitmap bitmap, int degree) {
         Matrix matrix = new Matrix();
         matrix.postScale(1f, 1f);
         matrix.postRotate(degree);
-        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
+        Bitmap newBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
                 bitmap.getHeight(), matrix, true);
+        bitmap.recycle();
+        return newBitmap;
     }
 }

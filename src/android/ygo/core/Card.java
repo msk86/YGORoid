@@ -33,19 +33,23 @@ public class Card implements Item {
             Bitmap protector = Utils.readBitmapScaleByHeight(cardProtector + ".png", height);
             int drawX = (width - protector.getWidth()) / 2;
             canvas.drawBitmap(protector, drawX, 0, paint);
+            protector.recycle();
         } else {
             if(Configuration.isTotalCardPic()) {
                 Bitmap cardPic = Utils.readBitmapScaleByHeight(id + ".png", height / 2);
                 int drawX = (width - cardPic.getWidth()) / 2;
                 canvas.drawBitmap(cardPic, drawX, 0, paint);
+                cardPic.recycle();
             } else {
                 Bitmap cardBackground = Utils.readBitmapScaleByHeight(type.toString() + ".png", height);
                 int drawX = (width - cardBackground.getWidth()) / 2;
                 canvas.drawBitmap(cardBackground, drawX, 0, paint);
+                cardBackground.recycle();
                 Bitmap cardPic = Utils.readBitmapScaleByHeight(id + ".png", height / 2);
                 int cardPicX = (width - cardPic.getWidth()) / 2;
                 int cardPicY = (int) (cardBackground.getHeight() / 4.63);
                 canvas.drawBitmap(cardPic, cardPicX, cardPicY, paint);
+                cardPic.recycle();
             }
         }
         if (!positive) {
