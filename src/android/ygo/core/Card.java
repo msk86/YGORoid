@@ -3,6 +3,7 @@ package android.ygo.core;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.util.Log;
 import android.ygo.utils.Utils;
 
 public class Card implements Item {
@@ -27,30 +28,26 @@ public class Card implements Item {
     @Override
     public Bitmap toBitmap() {
         int height = Utils.cardHeight();
-        int width = height;
-        Bitmap cardBmp = Bitmap.createBitmap(height, height, Bitmap.Config.ARGB_8888);
+        int width = Utils.cardWidth();
+        Bitmap cardBmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(cardBmp);
         Paint paint = new Paint();
         if (set) {
             Bitmap protector = Utils.readBitmapScaleByHeight(cardProtector + ".png", height);
-            int drawX = (width - protector.getWidth()) / 2;
-            canvas.drawBitmap(protector, drawX, 0, paint);
+            Utils.drawBitmapOnCanvas(canvas, protector, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_FIRST);
             protector.recycle();
         } else {
             if(Configuration.isTotalCardPic()) {
                 Bitmap cardPic = Utils.readBitmapScaleByHeight(id + ".png", height / 2);
-                int drawX = (width - cardPic.getWidth()) / 2;
-                canvas.drawBitmap(cardPic, drawX, 0, paint);
+                Utils.drawBitmapOnCanvas(canvas, cardPic, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_FIRST);
                 cardPic.recycle();
             } else {
                 Bitmap cardBackground = Utils.readBitmapScaleByHeight(type.toString() + ".png", height);
-                int drawX = (width - cardBackground.getWidth()) / 2;
-                canvas.drawBitmap(cardBackground, drawX, 0, paint);
+                Utils.drawBitmapOnCanvas(canvas, cardBackground, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_FIRST);
                 cardBackground.recycle();
                 Bitmap cardPic = Utils.readBitmapScaleByHeight(id + ".png", height / 2);
-                int cardPicX = (width - cardPic.getWidth()) / 2;
                 int cardPicY = (int) (cardBackground.getHeight() / 4.63);
-                canvas.drawBitmap(cardPic, cardPicX, cardPicY, paint);
+                Utils.drawBitmapOnCanvas(canvas, cardPic, paint, Utils.DRAW_POSITION_CENTER, cardPicY);
                 cardPic.recycle();
             }
         }
