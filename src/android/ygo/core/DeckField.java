@@ -23,10 +23,9 @@ public class DeckField extends Field {
         Canvas canvas = new Canvas(bitmap);
         Paint paint = new Paint();
         paint.setColor(Color.WHITE);
-        canvas.drawLine(padding, padding, width - padding, width - padding, paint);
-        canvas.drawLine(padding, width - padding, width - padding, padding, paint);
         canvas.drawText(fieldName, 10, 15, paint);
 
+        bitmap = Utils.rotate(bitmap, 90);
         return bitmap;
     }
 }

@@ -70,8 +70,11 @@ public class DuelFields implements Item {
         return bitmap;
     }
 
-    //test
-    public Field testField(int i) {
+    public Field getMonsterField(int i) {
         return monsterZoneFields.get(i);
+    }
+
+    public Field getMagicField(int i) {
+        return magicZoneFields.get(i);
     }
 }
