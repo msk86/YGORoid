@@ -46,6 +46,12 @@ public class DuelDiskView extends View {
         f = duelFields.getGraveyardField();
         f.setItem(graveyard);
 
+        CardList removed = new CardList(new ArrayList<String>());
+        Card removedCard = new Card("23456789", CardType.XYZ_MONSTER, false, true);
+        removed.push(removedCard);
+        f = duelFields.getRemovedField();
+        f.setItem(removed);
+
         duelFields.select(f);
     }
 

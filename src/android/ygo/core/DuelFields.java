@@ -104,4 +104,8 @@ public class DuelFields implements Item {
     public Field getGraveyardField() {
         return graveyardField;
     }
+
+    public Field getRemovedField() {
+        return removedField;
+    }
 }
