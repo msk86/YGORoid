@@ -24,7 +24,7 @@ public class DeckField extends Field {
 
         CharSequence cs = fieldName;
         TextPaint textPaint = new TextPaint();
-        textPaint.setColor(Color.WHITE);
+        textPaint.setColor(Configuration.fontColor());
 
         canvas.translate(0, 5);
         StaticLayout layout = new StaticLayout(cs, textPaint, Utils.unitLength(), Layout.Alignment.ALIGN_CENTER, 0,0,false);

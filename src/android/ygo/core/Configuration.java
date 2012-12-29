@@ -10,4 +10,8 @@ public class Configuration {
     public static int highlightColor() {
         return Color.BLUE;
     }
+
+    public static int fontColor() {
+        return Color.WHITE;
+    }
 }
