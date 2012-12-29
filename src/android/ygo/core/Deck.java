@@ -1,6 +1,10 @@
 package android.ygo.core;
 
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.ygo.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +55,7 @@ public class Deck implements SelectableItem {
         } else {
             card.set();
         }
+        card.positive();
         cards.add(0, card);
     }
 
@@ -60,17 +65,37 @@ public class Deck implements SelectableItem {
         } else {
             card.set();
         }
+        card.positive();
         cards.add(card);
     }
 
 
     @Override
     public Bitmap highLight() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        int height = Utils.cardHeight();
+        int width = Utils.cardWidth();
+        Bitmap highLightBmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+
+        Canvas canvas = new Canvas(highLightBmp);
+        Paint paint = new Paint();
+        canvas.drawColor(Color.TRANSPARENT);
+        paint.setColor(Configuration.highlightColor());
+        paint.setStrokeWidth(4);
+        canvas.drawLine(0, 0, width, 0, paint);
+        canvas.drawLine(width, 0, width, height, paint);
+        canvas.drawLine(width, height, 0, height, paint);
+        canvas.drawLine(0, height, 0, 0, paint);
+        return highLightBmp;
     }
 
     @Override
     public Bitmap toBitmap() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        if(cards.size() > 0) {
+            return cards.get(0).toBitmap();
+        }
+        Bitmap deckBmp = Bitmap.createBitmap(Utils.cardWidth(), Utils.cardHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(deckBmp);
+        canvas.drawColor(Color.TRANSPARENT);
+        return deckBmp;
     }
 }

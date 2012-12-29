@@ -45,6 +45,18 @@ public class Card implements SelectableItem {
         set = true;
     }
 
+    public void changePosition() {
+        positive = !positive;
+    }
+
+    public void positive() {
+        positive = true;
+    }
+
+    public void negative() {
+        positive = false;
+    }
+
     @Override
     public Bitmap toBitmap() {
         int height = Utils.cardHeight();
@@ -86,7 +98,7 @@ public class Card implements SelectableItem {
         Canvas canvas = new Canvas(highLightBmp);
         Paint paint = new Paint();
         canvas.drawColor(Color.TRANSPARENT);
-        paint.setColor(Color.BLUE);
+        paint.setColor(Configuration.highlightColor());
         paint.setStrokeWidth(4);
         canvas.drawLine(0, 0, width, 0, paint);
         canvas.drawLine(width, 0, width, height, paint);
