@@ -40,6 +40,12 @@ public class DuelDiskView extends View {
         f = duelFields.getDeckField();
         f.setItem(deck);
 
+        CardList graveyard = new CardList(new ArrayList<String>());
+        Card usedCard = new Card("12345678", CardType.SYNC_MONSTER, false, true);
+        graveyard.push(usedCard);
+        f = duelFields.getGraveyardField();
+        f.setItem(graveyard);
+
         duelFields.select(f);
     }
 

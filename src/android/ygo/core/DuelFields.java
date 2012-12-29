@@ -100,4 +100,8 @@ public class DuelFields implements Item {
     public Field getDeckField() {
         return deckField;
     }
+
+    public Field getGraveyardField() {
+        return graveyardField;
+    }
 }

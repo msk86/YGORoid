@@ -15,7 +15,7 @@ import java.util.Random;
 
 public class CardList implements SelectableItem {
     List<Card> cards;
-    boolean open = false;
+    boolean open = true;
 
     public CardList(List<String> cardIds) {
         cards = new ArrayList<Card>();
