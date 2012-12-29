@@ -70,7 +70,7 @@ public class Card implements SelectableItem {
             protector.recycle();
         } else {
             if (Configuration.isTotalCardPic()) {
-                Bitmap cardPic = Utils.readBitmapScaleByHeight(id + ".png", height / 2);
+                Bitmap cardPic = Utils.readBitmapScaleByHeight(id + ".png", height);
                 Utils.drawBitmapOnCanvas(canvas, cardPic, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_FIRST);
                 cardPic.recycle();
             } else {

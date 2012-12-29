@@ -4,7 +4,7 @@ import android.graphics.Color;
 
 public class Configuration {
     public static boolean isTotalCardPic() {
-        return false;
+        return true;
     }
 
     public static int highlightColor() {
@@ -13,5 +13,9 @@ public class Configuration {
 
     public static int fontColor() {
         return Color.WHITE;
+    }
+
+    public static String baseDir() {
+        return "/Device/bluetooth/images/ygo2/";
     }
 }

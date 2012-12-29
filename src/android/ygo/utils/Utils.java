@@ -4,10 +4,10 @@ import android.app.Activity;
 import android.graphics.*;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.ygo.core.Configuration;
 
 public class Utils {
     private static DisplayMetrics dm;
-    private static String baseDir = "/Device/bluetooth/images/";
 
     public static void initInstance(Activity activity) {
         dm = new DisplayMetrics();
@@ -30,7 +30,7 @@ public class Utils {
     }
 
     public static Bitmap readBitmapScaleByHeight(String file, int targetHeight) {
-        file = baseDir + file;
+        file = Configuration.baseDir() + file;
         Bitmap bitmap = BitmapFactory.decodeFile(file);
         return scaleByHeight(bitmap, targetHeight);
     }
