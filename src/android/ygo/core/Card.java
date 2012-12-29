@@ -17,6 +17,14 @@ public class Card implements SelectableItem {
     boolean set = false;
     boolean positive = true;
 
+    public Card(String id) {
+        this.id = id;
+        this.type = CardType.NORMAL_MONSTER;
+        this.set = true;
+        cardProtector = DEFAULT_CARD_PROTECTOR;
+    }
+
+
     public Card(String id, CardType type, boolean positive, boolean set) {
         this.id = id;
         this.type = type;
