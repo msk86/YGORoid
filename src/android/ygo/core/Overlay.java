@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.util.Log;
 import android.ygo.utils.Utils;
 
 public class Overlay implements SelectableItem {
@@ -27,6 +26,14 @@ public class Overlay implements SelectableItem {
         }
     }
 
+    private int totalCard() {
+        int count = materials.cards.size();
+        if(xyzMonster != null) {
+            count ++;
+        }
+        return count;
+    }
+
     private Card topCard() {
         if(xyzMonster != null) {
             return xyzMonster;
@@ -40,25 +47,28 @@ public class Overlay implements SelectableItem {
 
     @Override
     public Bitmap highLight() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        Card top = topCard();
+        if(top != null) {
+            return top.highLight();
+        }
+        return Bitmap.createBitmap(0, 0, Bitmap.Config.ARGB_8888);
     }
 
     @Override
     public Bitmap toBitmap() {
         int overlayOffset = Utils.cardWidth() / 15;
-        int width = Utils.cardWidth() + materials.getCards().size() * overlayOffset;
+        int width = Utils.cardWidth() + (totalCard() - 1) * overlayOffset;
         Bitmap overlayBmp = Bitmap.createBitmap(width, Utils.cardHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(overlayBmp);
         canvas.drawColor(Color.TRANSPARENT);
         Paint paint = new Paint();
-        canvas.translate(materials.getCards().size() * overlayOffset, 0);
+        canvas.translate((totalCard()- 1) * overlayOffset, 0);
         for (int i = materials.getCards().size() - 1; i >= 0; i--) {
             Card card = materials.getCards().get(i);
             Utils.drawBitmapOnCanvas(canvas, card.toBitmap(), paint, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_CENTER);
             canvas.translate(-overlayOffset, 0);
         }
         if(xyzMonster != null) {
-            Log.e("YGO", "XYZ");
             Utils.drawBitmapOnCanvas(canvas, xyzMonster.toBitmap(), paint, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_CENTER);
         }
         return overlayBmp;

@@ -24,15 +24,39 @@ public class DuelDiskView extends View {
     private void initDuelDisk() {
         painter = new Paint();
         duelFields = new DuelFields();
-        Card card = new Card("12345678", CardType.SYNC_MONSTER, true, false);
-        Field f = duelFields.getMonsterField(2);
-        f.setItem(card);
-        Card setCard = new Card("12345678", CardType.SYNC_MONSTER, false, true);
-        f = duelFields.getMonsterField(1);
-        f.setItem(setCard);
+
+        // set magic
         Card setMagicCard = new Card("12345678", CardType.MAGIC, true, true);
-        f = duelFields.getMagicField(2);
+        Field f = duelFields.getMagicField(2);
         f.setItem(setMagicCard);
+
+        // Monsters
+        // set
+        Card setCard = new Card("12345678", CardType.SYNC_MONSTER, false, true);
+        f = duelFields.getMonsterField(0);
+        f.setItem(setCard);
+        // atk monster
+        Card card = new Card("12345678", CardType.SYNC_MONSTER, true, false);
+        f = duelFields.getMonsterField(1);
+        f.setItem(card);
+        // xyz + 2m
+        Card material1 = new Card("12345678", CardType.SYNC_MONSTER, false, true);
+        Card material2 = new Card("12345678", CardType.SYNC_MONSTER, false, true);
+        Card xyzCard = new Card("23456789", CardType.XYZ_MONSTER, true, false);
+        Overlay overlay = new Overlay(material1);
+        overlay.overlay(material2);
+        overlay.overlay(xyzCard);
+        f = duelFields.getMonsterField(2);
+        f.setItem(overlay);
+        // xyz + 1m
+        Card material21 = new Card("12345678", CardType.SYNC_MONSTER, false, true);
+        Card xyzCard2 = new Card("23456789", CardType.XYZ_MONSTER, false, false);
+
+        Overlay overlay2 = new Overlay(material21);
+        overlay2.overlay(xyzCard2);
+
+        f = duelFields.getMonsterField(3);
+        f.setItem(overlay2);
 
         List<Card> cards = new ArrayList<Card>();
         cards.add(new Card("12345678"));
@@ -51,21 +75,7 @@ public class DuelDiskView extends View {
         removed.push(removedCard);
         f = duelFields.getRemovedField();
         f.setItem(removed);
-
-        duelFields.select(f);
-
-
-        Card material1 = new Card("12345678", CardType.SYNC_MONSTER, false, true);
-        Card material2 = new Card("12345678", CardType.SYNC_MONSTER, false, true);
-        Card xyzCard = new Card("23456789", CardType.XYZ_MONSTER, true, false);
-
-        Overlay overlay = new Overlay(material1);
-        overlay.overlay(material2);
-        overlay.overlay(xyzCard);
-
-        f = duelFields.getMonsterField(3);
-        f.setItem(overlay);
-
+//        duelFields.select(f);
 
     }
 
