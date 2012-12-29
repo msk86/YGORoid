@@ -14,14 +14,15 @@ import java.util.List;
 import java.util.Random;
 
 public class CardList implements SelectableItem {
-    List<Card> cards;
+    List<Card> cards = new ArrayList<Card>();
     boolean open = true;
 
-    public CardList(List<String> cardIds) {
-        cards = new ArrayList<Card>();
-        for (String id : cardIds) {
-            cards.add(new Card(id));
-        }
+    public CardList() {
+        List<Card> cards = new ArrayList<Card>();
+    }
+
+    public CardList(List<Card> cards) {
+        this.cards = cards;
     }
 
     public Card pop() {

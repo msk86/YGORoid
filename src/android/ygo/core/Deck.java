@@ -5,10 +5,13 @@ import java.util.List;
 import java.util.Random;
 
 public class Deck extends CardList {
-    List<Card> cards;
 
-    public Deck(List<String> cardIds) {
-        super(cardIds);
+    public Deck() {
+        super();
+    }
+
+    public Deck(List<Card> cards) {
+        super(cards);
         super.open = false;
     }
 

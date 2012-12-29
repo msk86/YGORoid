@@ -34,19 +34,19 @@ public class DuelDiskView extends View {
         f = duelFields.getMagicField(2);
         f.setItem(setMagicCard);
 
-        List<String> ids = new ArrayList<String>();
-        ids.add("12345678");
-        Deck deck = new Deck(ids);
+        List<Card> cards = new ArrayList<Card>();
+        cards.add(new Card("12345678"));
+        Deck deck = new Deck(cards);
         f = duelFields.getDeckField();
         f.setItem(deck);
 
-        CardList graveyard = new CardList(new ArrayList<String>());
+        CardList graveyard = new CardList();
         Card usedCard = new Card("12345678", CardType.SYNC_MONSTER, false, true);
         graveyard.push(usedCard);
         f = duelFields.getGraveyardField();
         f.setItem(graveyard);
 
-        CardList removed = new CardList(new ArrayList<String>());
+        CardList removed = new CardList();
         Card removedCard = new Card("23456789", CardType.XYZ_MONSTER, false, true);
         removed.push(removedCard);
         f = duelFields.getRemovedField();
