@@ -5,10 +5,10 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.View;
-import android.ygo.core.Card;
-import android.ygo.core.CardType;
-import android.ygo.core.DuelFields;
-import android.ygo.core.Field;
+import android.ygo.core.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DuelDiskView extends View {
 
@@ -33,6 +33,12 @@ public class DuelDiskView extends View {
         Card setMagicCard = new Card("12345678", CardType.MAGIC, true, true);
         f = duelFields.getMagicField(2);
         f.setItem(setMagicCard);
+
+        List<String> ids = new ArrayList<String>();
+        ids.add("12345678");
+        Deck deck = new Deck(ids);
+        f = duelFields.getDeckField();
+        f.setItem(deck);
 
         duelFields.select(f);
     }

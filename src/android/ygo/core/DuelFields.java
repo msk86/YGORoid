@@ -96,4 +96,8 @@ public class DuelFields implements Item {
     public Field getMagicField(int i) {
         return magicZoneFields.get(i);
     }
+
+    public Field getDeckField() {
+        return deckField;
+    }
 }

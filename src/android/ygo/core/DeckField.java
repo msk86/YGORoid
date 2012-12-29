@@ -17,15 +17,11 @@ public class DeckField extends Field {
     public Bitmap toBitmap(){
         Bitmap bitmap = super.toBitmap();
 
-        int width = Utils.unitLength();
-        int padding = 2;
-
         Canvas canvas = new Canvas(bitmap);
         Paint paint = new Paint();
         paint.setColor(Color.WHITE);
-        canvas.drawText(fieldName, 10, 15, paint);
+        canvas.drawText(fieldName, 5, 15, paint);
 
-        bitmap = Utils.rotate(bitmap, 90);
         return bitmap;
     }
 }
