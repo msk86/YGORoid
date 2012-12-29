@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Deck implements SelectableItem {
     List<Card> cards;
@@ -17,7 +18,16 @@ public class Deck implements SelectableItem {
     }
 
     public void shuffle() {
+        Random random = new Random();
+        for(int i=1;i<cards.size();i++) {
+            swapCard(i, random.nextInt(i));
+        }
+    }
 
+    private void swapCard(int indexA, int indexB) {
+        Card temp = cards.get(indexA);
+        cards.set(indexA, cards.get(indexB));
+        cards.set(indexB, temp);
     }
 
     public void reserve() {
