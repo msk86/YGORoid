@@ -39,6 +39,14 @@ public class CardList implements SelectableItem {
         cards.add(0, card);
     }
 
+    public void push(CardList list) {
+        for(Card card : list.cards) {
+            this.push(card);
+        }
+        list.cards.clear();
+    }
+
+
     public void unShift(Card card) {
         if(open) {
             card.open();
@@ -47,6 +55,10 @@ public class CardList implements SelectableItem {
         }
         card.positive();
         cards.add(card);
+    }
+
+    public List<Card> getCards() {
+        return cards;
     }
 
 

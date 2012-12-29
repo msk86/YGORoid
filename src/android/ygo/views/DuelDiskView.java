@@ -53,6 +53,20 @@ public class DuelDiskView extends View {
         f.setItem(removed);
 
         duelFields.select(f);
+
+
+        Card material1 = new Card("12345678", CardType.SYNC_MONSTER, false, true);
+        Card material2 = new Card("12345678", CardType.SYNC_MONSTER, false, true);
+        Card xyzCard = new Card("23456789", CardType.XYZ_MONSTER, true, false);
+
+        Overlay overlay = new Overlay(material1);
+        overlay.overlay(material2);
+        overlay.overlay(xyzCard);
+
+        f = duelFields.getMonsterField(3);
+        f.setItem(overlay);
+
+
     }
 
     @Override
