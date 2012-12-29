@@ -4,6 +4,9 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.text.Layout;
+import android.text.StaticLayout;
+import android.text.TextPaint;
 import android.ygo.utils.Utils;
 
 import java.util.ArrayList;
@@ -90,12 +93,21 @@ public class Deck implements SelectableItem {
 
     @Override
     public Bitmap toBitmap() {
+        Bitmap deckBmp;
         if(cards.size() > 0) {
-            return cards.get(0).toBitmap();
+            deckBmp = cards.get(0).toBitmap();
+        } else {
+            deckBmp = Bitmap.createBitmap(Utils.cardWidth(), Utils.cardHeight(), Bitmap.Config.ARGB_8888);
         }
-        Bitmap deckBmp = Bitmap.createBitmap(Utils.cardWidth(), Utils.cardHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(deckBmp);
-        canvas.drawColor(Color.TRANSPARENT);
+
+        CharSequence cs = "" + cards.size();
+        TextPaint textPaint = new TextPaint();
+        textPaint.setColor(Color.WHITE);
+
+        canvas.translate(0, Utils.cardHeight() - 20);
+        StaticLayout layout = new StaticLayout(cs, textPaint, Utils.cardWidth(), Layout.Alignment.ALIGN_CENTER, 0,0,false);
+        layout.draw(canvas);
         return deckBmp;
     }
 }
