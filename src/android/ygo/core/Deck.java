@@ -12,14 +12,14 @@ public class Deck implements SelectableItem {
 
     public Deck(List<String> cardIds) {
         cards = new ArrayList<Card>();
-        for(String id : cardIds) {
+        for (String id : cardIds) {
             cards.add(new Card(id));
         }
     }
 
     public void shuffle() {
         Random random = new Random();
-        for(int i=1;i<cards.size();i++) {
+        for (int i = 1; i < cards.size(); i++) {
             swapCard(i, random.nextInt(i));
         }
     }
@@ -31,21 +31,37 @@ public class Deck implements SelectableItem {
     }
 
     public void reserve() {
-
+        List<Card> reservedCards = new ArrayList<Card>();
+        for (int i = cards.size() - 1; i >= 0; i--) {
+            Card card = cards.get(i);
+            card.turnOver();
+            reservedCards.add(card);
+        }
+        cards = reservedCards;
+        reserved = !reserved;
     }
 
     public Card pop() {
-        return null;
+        return cards.remove(0);
     }
 
     public void push(Card card) {
-
+        if(reserved) {
+            card.open();
+        } else {
+            card.set();
+        }
+        cards.add(0, card);
     }
 
     public void unShift(Card card) {
-
+        if(reserved) {
+            card.open();
+        } else {
+            card.set();
+        }
+        cards.add(card);
     }
-
 
 
     @Override

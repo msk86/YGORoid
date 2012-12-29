@@ -33,6 +33,18 @@ public class Card implements SelectableItem {
         cardProtector = DEFAULT_CARD_PROTECTOR;
     }
 
+    public void turnOver() {
+        set = !set;
+    }
+
+    public void open() {
+        set = false;
+    }
+
+    public void set() {
+        set = true;
+    }
+
     @Override
     public Bitmap toBitmap() {
         int height = Utils.cardHeight();
