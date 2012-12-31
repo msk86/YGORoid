@@ -11,7 +11,6 @@ import android.ygo.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class CardList implements SelectableItem {
     private boolean selected = false;
@@ -22,8 +21,25 @@ public class CardList implements SelectableItem {
         cards = new ArrayList<Card>();
     }
 
+    public CardList(boolean open) {
+        this();
+        this.open = open;
+    }
+
     public CardList(List<Card> cards) {
-        this.cards = cards;
+        this(cards, true);
+    }
+
+    public CardList(List<Card> cards, boolean open) {
+        this(open);
+        for(Card card : cards) {
+            if(open) {
+                card.open();
+            } else {
+                card.set();
+            }
+            this.push(card);
+        }
     }
 
     public Card pop() {
@@ -40,11 +56,14 @@ public class CardList implements SelectableItem {
         cards.add(0, card);
     }
 
-    public void push(CardList list) {
-        for(Card card : list.cards) {
+    public void push(List<Card> cards) {
+        for(Card card : cards) {
             this.push(card);
         }
-        list.cards.clear();
+    }
+
+    public void push(CardList list) {
+        this.push(list.cards);
     }
 
 

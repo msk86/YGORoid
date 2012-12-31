@@ -18,13 +18,27 @@ public class DuelDiskView extends View {
 
     public DuelDiskView(Context context) {
         super(context);
+        painter = new Paint();
         initDuelDisk();
+
+        initDuelDiskTest();
     }
 
     private void initDuelDisk() {
-        painter = new Paint();
         duelFields = new DuelFields();
+        Deck deck = new Deck();
+        Deck exDeck = new Deck();
+        CardList graveyard = new CardList();
+        CardList removed = new CardList();
+        CardList temp = new CardList();
+        duelFields.getDeckField().setItem(deck);
+        duelFields.getExDeckField().setItem(exDeck);
+        duelFields.getGraveyardField().setItem(graveyard);
+        duelFields.getRemovedField().setItem(removed);
+        duelFields.getTempField().setItem(temp);
+    }
 
+    private void initDuelDiskTest() {
         // set magic
         Card setMagicCard = new Card("12345678", CardType.MAGIC, true, true);
         Field f = duelFields.getMagicField(2);
@@ -70,21 +84,16 @@ public class DuelDiskView extends View {
 
         List<Card> cards = new ArrayList<Card>();
         cards.add(new Card("12345678"));
-        Deck deck = new Deck(cards);
-        f = duelFields.getDeckField();
-        f.setItem(deck);
+        Deck deck = (Deck)duelFields.getDeckField().getItem();
+        deck.push(cards);
 
-        CardList graveyard = new CardList();
+        CardList graveyard = (CardList)duelFields.getGraveyardField().getItem();
         Card usedCard = new Card("12345678", CardType.SYNC_MONSTER, false, true);
         graveyard.push(usedCard);
-        f = duelFields.getGraveyardField();
-        f.setItem(graveyard);
 
-        CardList removed = new CardList();
+        CardList removed = (CardList)duelFields.getRemovedField().getItem();
         Card removedCard = new Card("23456789", CardType.XYZ_MONSTER, false, true);
         removed.push(removedCard);
-        f = duelFields.getRemovedField();
-        f.setItem(removed);
     }
 
     @Override

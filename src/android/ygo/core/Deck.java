@@ -7,12 +7,11 @@ import java.util.Random;
 public class Deck extends CardList {
 
     public Deck() {
-        super();
+        super(false);
     }
 
     public Deck(List<Card> cards) {
-        super(cards);
-        super.open = false;
+        super(cards, false);
     }
 
     public void shuffle() {

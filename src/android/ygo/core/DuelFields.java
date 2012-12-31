@@ -94,11 +94,19 @@ public class DuelFields implements Item {
         return deckField;
     }
 
+    public Field getExDeckField() {
+        return exDeckField;
+    }
+
     public Field getGraveyardField() {
         return graveyardField;
     }
 
     public Field getRemovedField() {
         return removedField;
+    }
+
+    public Field getTempField() {
+        return tempField;
     }
 }
