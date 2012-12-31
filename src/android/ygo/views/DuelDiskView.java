@@ -48,15 +48,25 @@ public class DuelDiskView extends View {
         overlay.overlay(xyzCard);
         f = duelFields.getMonsterField(2);
         f.setItem(overlay);
+//        overlay.select();
         // xyz + 1m
         Card material21 = new Card("12345678", CardType.SYNC_MONSTER, false, true);
+        Card material22 = new Card("12345678", CardType.SYNC_MONSTER, false, true);
         Card xyzCard2 = new Card("23456789", CardType.XYZ_MONSTER, false, false);
-
         Overlay overlay2 = new Overlay(material21);
+        overlay2.overlay(material22);
         overlay2.overlay(xyzCard2);
-
+        overlay2.select();
         f = duelFields.getMonsterField(3);
         f.setItem(overlay2);
+        // 2m
+        Card material31 = new Card("12345678", CardType.SYNC_MONSTER, false, true);
+        Card material32 = new Card("12345678", CardType.SYNC_MONSTER, false, false);
+        Overlay overlay3 = new Overlay(material31);
+        overlay3.overlay(material32);
+        overlay3.select();
+        f = duelFields.getMonsterField(4);
+        f.setItem(overlay3);
 
         List<Card> cards = new ArrayList<Card>();
         cards.add(new Card("12345678"));
@@ -75,10 +85,6 @@ public class DuelDiskView extends View {
         removed.push(removedCard);
         f = duelFields.getRemovedField();
         f.setItem(removed);
-
-        removedCard.select();
-//        duelFields.select(f);
-
     }
 
     @Override

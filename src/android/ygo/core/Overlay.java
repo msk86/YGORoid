@@ -46,22 +46,44 @@ public class Overlay implements SelectableItem {
         return null;
     }
 
-    @Override
-    public Bitmap toBitmap() {
+    private Bitmap materialsBmp() {
+        int materialOffset = materials.cards.size() - 1;
         int overlayOffset = Utils.cardWidth() / 15;
-        int width = Utils.cardWidth() + (totalCard() - 1) * overlayOffset;
-        Bitmap overlayBmp = Bitmap.createBitmap(width, Utils.cardHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(overlayBmp);
+        int materialWidth = Utils.cardWidth() + materialOffset * overlayOffset;
+        int height = Utils.cardHeight();
+        Bitmap materialsBmp = Bitmap.createBitmap(materialWidth, height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(materialsBmp);
         canvas.drawColor(Color.TRANSPARENT);
         Paint paint = new Paint();
-        canvas.translate((totalCard()- 1) * overlayOffset, 0);
+        canvas.translate(materialOffset * overlayOffset, 0);
         for (int i = materials.getCards().size() - 1; i >= 0; i--) {
             Card card = materials.getCards().get(i);
             Utils.drawBitmapOnCanvas(canvas, card.toBitmap(), paint, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_CENTER);
             canvas.translate(-overlayOffset, 0);
         }
+        return materialsBmp;
+    }
+
+    @Override
+    public Bitmap toBitmap() {
+        int overlayOffset = Utils.cardWidth() / 15;
+        int height = Utils.cardHeight();
+        int width = height;
+        Bitmap overlayBmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(overlayBmp);
+        canvas.drawColor(Color.TRANSPARENT);
+        Paint paint = new Paint();
+        Bitmap materialsBmp = materialsBmp();
+
+        int materialX = (width - Utils.cardWidth()) / 2;
         if(xyzMonster != null) {
-            Utils.drawBitmapOnCanvas(canvas, xyzMonster.toBitmap(), paint, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_CENTER);
+            materialX += overlayOffset;
+        }
+        Utils.drawBitmapOnCanvas(canvas, materialsBmp, paint, materialX, Utils.DRAW_POSITION_CENTER);
+        materialsBmp.recycle();
+
+        if(xyzMonster != null) {
+            Utils.drawBitmapOnCanvas(canvas, xyzMonster.toBitmap(), paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_CENTER);
         }
         return overlayBmp;
     }
@@ -80,12 +102,12 @@ public class Overlay implements SelectableItem {
         selected = false;
         Card topCard = topCard();
         if(topCard != null) {
-            topCard.select();
+            topCard.unSelect();
         }
     }
 
     @Override
     public boolean isSelect() {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        return selected;
     }
 }
