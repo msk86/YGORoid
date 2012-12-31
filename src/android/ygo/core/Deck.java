@@ -1,5 +1,7 @@
 package android.ygo.core;
 
+import android.ygo.utils.Utils;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -15,16 +17,7 @@ public class Deck extends CardList {
     }
 
     public void shuffle() {
-        Random random = new Random();
-        for (int i = 1; i < cards.size(); i++) {
-            swapCard(i, random.nextInt(i));
-        }
-    }
-
-    private void swapCard(int indexA, int indexB) {
-        Card temp = cards.get(indexA);
-        cards.set(indexA, cards.get(indexB));
-        cards.set(indexB, temp);
+        Utils.shuffle(cards);
     }
 
     public void reserve() {

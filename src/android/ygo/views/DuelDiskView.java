@@ -80,6 +80,13 @@ public class DuelDiskView extends View {
         CardList removed = (CardList)duelFields.getRemovedField().getItem();
         Card removedCard = new Card("23456789", CardType.XYZ_MONSTER, false, true);
         removed.push(removedCard);
+
+        List<Card> hands = new ArrayList<Card>();
+        hands.add(new Card("12345678", CardType.SYNC_MONSTER, false, true));
+        hands.add(new Card("12345678", CardType.SYNC_MONSTER, false, true));
+        hands.add(new Card("12345678", CardType.SYNC_MONSTER, false, true));
+        hands.add(new Card("12345678", CardType.SYNC_MONSTER, false, true));
+        duel.getHandCards().add(hands);
     }
 
     @Override

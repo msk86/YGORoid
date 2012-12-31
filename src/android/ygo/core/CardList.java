@@ -51,6 +51,13 @@ public class CardList implements SelectableItem {
         return cards.remove(0);
     }
 
+    public Card remove(Card card) {
+        if(cards.remove(card)) {
+            return card;
+        }
+        return null;
+    }
+
     public void push(Card card) {
         if (open) {
             card.open();

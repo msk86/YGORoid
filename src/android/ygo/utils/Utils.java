@@ -4,7 +4,11 @@ import android.app.Activity;
 import android.graphics.*;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.ygo.core.Card;
 import android.ygo.core.Configuration;
+
+import java.util.List;
+import java.util.Random;
 
 public class Utils {
     private static DisplayMetrics dm;
@@ -16,7 +20,7 @@ public class Utils {
 
     public static int unitLength() {
         int unitLengthW = (int)(dm.widthPixels / 6f);
-        int unitLengthH = (int)(dm.heightPixels / 4f);
+        int unitLengthH = (int)(dm.heightPixels / 3.9f);
         return unitLengthW < unitLengthH ? unitLengthW : unitLengthH;
     }
 
@@ -90,5 +94,19 @@ public class Utils {
                 posY = positionY;
         }
         canvas.drawBitmap(bitmap, posX, posY, paint);
+    }
+
+
+    public static void shuffle(List<Card> cards) {
+        Random random = new Random();
+        for (int i = 1; i < cards.size(); i++) {
+            swapCard(cards, i, random.nextInt(i));
+        }
+    }
+
+    private static void swapCard(List<Card> cards, int indexA, int indexB) {
+        Card temp = cards.get(indexA);
+        cards.set(indexA, cards.get(indexB));
+        cards.set(indexB, temp);
     }
 }
