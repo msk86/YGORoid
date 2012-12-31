@@ -14,11 +14,12 @@ import java.util.List;
 import java.util.Random;
 
 public class CardList implements SelectableItem {
+    private boolean selected = false;
     List<Card> cards = new ArrayList<Card>();
     boolean open = true;
 
     public CardList() {
-        List<Card> cards = new ArrayList<Card>();
+        cards = new ArrayList<Card>();
     }
 
     public CardList(List<Card> cards) {
@@ -61,9 +62,7 @@ public class CardList implements SelectableItem {
         return cards;
     }
 
-
-    @Override
-    public Bitmap highLight() {
+    private Bitmap highLight() {
         int height = Utils.cardHeight();
         int width = Utils.cardWidth();
         Bitmap highLightBmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
@@ -98,5 +97,20 @@ public class CardList implements SelectableItem {
         StaticLayout layout = new StaticLayout(cs, textPaint, Utils.cardWidth(), Layout.Alignment.ALIGN_CENTER, 0,0,false);
         layout.draw(canvas);
         return deckBmp;
+    }
+
+    @Override
+    public void select() {
+        selected = true;
+    }
+
+    @Override
+    public void unSelect() {
+        selected = false;
+    }
+
+    @Override
+    public boolean isSelect() {
+        return selected;
     }
 }

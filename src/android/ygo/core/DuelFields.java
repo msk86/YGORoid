@@ -82,13 +82,6 @@ public class DuelFields implements Item {
         return bitmap;
     }
 
-    public void select(Field field) {
-        for(Field field1 : allFields) {
-            field1.unSelect();
-        }
-        field.select();
-    }
-
     public Field getMonsterField(int i) {
         return monsterZoneFields.get(i);
     }

@@ -9,6 +9,8 @@ import android.ygo.utils.Utils;
 public class Card implements SelectableItem {
     public static final String DEFAULT_CARD_PROTECTOR = "defaultProtector";
 
+    private boolean selected = false;
+
     String id;
     String name;
     String desc;
@@ -83,14 +85,20 @@ public class Card implements SelectableItem {
                 cardPic.recycle();
             }
         }
+
+        if(selected) {
+            Bitmap highlight = highLight();
+            Utils.drawBitmapOnCanvas(canvas, highlight, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_FIRST);
+            highlight.recycle();
+        }
+
         if (!positive) {
             cardBmp = Utils.rotate(cardBmp, 90);
         }
         return cardBmp;
     }
 
-    @Override
-    public Bitmap highLight() {
+    private Bitmap highLight() {
         int height = Utils.cardHeight();
         int width = Utils.cardWidth();
         Bitmap highLightBmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
@@ -104,10 +112,21 @@ public class Card implements SelectableItem {
         canvas.drawLine(width, 0, width, height, paint);
         canvas.drawLine(width, height, 0, height, paint);
         canvas.drawLine(0, height, 0, 0, paint);
-
-        if (!positive) {
-            highLightBmp = Utils.rotate(highLightBmp, 90);
-        }
         return highLightBmp;
+    }
+
+    @Override
+    public void select() {
+        selected = true;
+    }
+
+    @Override
+    public void unSelect() {
+        selected = false;
+    }
+
+    @Override
+    public boolean isSelect() {
+        return selected;
     }
 }

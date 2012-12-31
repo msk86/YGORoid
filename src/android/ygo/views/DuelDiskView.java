@@ -75,6 +75,8 @@ public class DuelDiskView extends View {
         removed.push(removedCard);
         f = duelFields.getRemovedField();
         f.setItem(removed);
+
+        removedCard.select();
 //        duelFields.select(f);
 
     }

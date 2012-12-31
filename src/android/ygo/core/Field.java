@@ -9,7 +9,6 @@ import android.ygo.utils.Utils;
 public class Field implements Item {
 
     private SelectableItem setItem;
-    private boolean selected = false;
 
     public void setItem(SelectableItem item) {
         this.setItem = item;
@@ -24,14 +23,6 @@ public class Field implements Item {
         this.setItem = null;
         return item;
     }
-
-    public void select() {
-        selected = true;
-    }
-    public void unSelect() {
-        selected = false;
-    }
-
 
     public Bitmap toBitmap() {
         int width = Utils.unitLength();
@@ -50,10 +41,6 @@ public class Field implements Item {
         if(setItem != null) {
             Bitmap itemBmp = setItem.toBitmap();
             Utils.drawBitmapOnCanvas(canvas, itemBmp, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_CENTER);
-            if(selected) {
-                Bitmap highLight = setItem.highLight();
-                Utils.drawBitmapOnCanvas(canvas, highLight, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_CENTER);
-            }
         }
 
         return bitmap;

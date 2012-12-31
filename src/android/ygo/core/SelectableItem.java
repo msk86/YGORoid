@@ -1,7 +1,9 @@
 package android.ygo.core;
 
-import android.graphics.Bitmap;
-
 public interface SelectableItem extends Item {
-    public Bitmap highLight();
+    public void select();
+
+    public void unSelect();
+
+    public boolean isSelect();
 }

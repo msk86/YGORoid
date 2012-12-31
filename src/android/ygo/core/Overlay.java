@@ -7,6 +7,8 @@ import android.graphics.Paint;
 import android.ygo.utils.Utils;
 
 public class Overlay implements SelectableItem {
+    private boolean selected = false;
+
     Card xyzMonster;
     CardList materials;
 
@@ -44,16 +46,6 @@ public class Overlay implements SelectableItem {
         return null;
     }
 
-
-    @Override
-    public Bitmap highLight() {
-        Card top = topCard();
-        if(top != null) {
-            return top.highLight();
-        }
-        return Bitmap.createBitmap(0, 0, Bitmap.Config.ARGB_8888);
-    }
-
     @Override
     public Bitmap toBitmap() {
         int overlayOffset = Utils.cardWidth() / 15;
@@ -72,5 +64,28 @@ public class Overlay implements SelectableItem {
             Utils.drawBitmapOnCanvas(canvas, xyzMonster.toBitmap(), paint, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_CENTER);
         }
         return overlayBmp;
+    }
+
+    @Override
+    public void select() {
+        selected = true;
+        Card topCard = topCard();
+        if(topCard != null) {
+            topCard.select();
+        }
+    }
+
+    @Override
+    public void unSelect() {
+        selected = false;
+        Card topCard = topCard();
+        if(topCard != null) {
+            topCard.select();
+        }
+    }
+
+    @Override
+    public boolean isSelect() {
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 }
