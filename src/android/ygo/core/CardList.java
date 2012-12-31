@@ -7,7 +7,6 @@ import android.graphics.Paint;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
-import android.util.Log;
 import android.ygo.utils.Utils;
 
 import java.util.ArrayList;
@@ -38,8 +37,8 @@ public class CardList implements SelectableItem {
 
     public CardList(String name, List<Card> cards, boolean open) {
         this(name, open);
-        for(Card card : cards) {
-            if(open) {
+        for (Card card : cards) {
+            if (open) {
                 card.open();
             } else {
                 card.set();
@@ -53,7 +52,7 @@ public class CardList implements SelectableItem {
     }
 
     public void push(Card card) {
-        if(open) {
+        if (open) {
             card.open();
         } else {
             card.set();
@@ -63,7 +62,7 @@ public class CardList implements SelectableItem {
     }
 
     public void push(List<Card> cards) {
-        for(Card card : cards) {
+        for (Card card : cards) {
             this.push(card);
         }
     }
@@ -74,7 +73,7 @@ public class CardList implements SelectableItem {
 
 
     public void unShift(Card card) {
-        if(open) {
+        if (open) {
             card.open();
         } else {
             card.set();
@@ -107,7 +106,7 @@ public class CardList implements SelectableItem {
     @Override
     public Bitmap toBitmap() {
         Bitmap deckBmp;
-        if(cards.size() > 0) {
+        if (cards.size() > 0) {
             deckBmp = cards.get(0).toBitmap();
         } else {
             deckBmp = Bitmap.createBitmap(Utils.cardWidth(), Utils.cardHeight(), Bitmap.Config.ARGB_8888);
@@ -115,23 +114,26 @@ public class CardList implements SelectableItem {
         Canvas canvas = new Canvas(deckBmp);
 
         TextPaint textPaint = new TextPaint();
+        textPaint.setTextSize(Utils.unitLength() / 10);
         textPaint.setColor(Configuration.fontColor());
-        textPaint.setShadowLayer(200, 0, 0, Color.RED);
+        textPaint.setShadowLayer(1, 0, 0, Color.BLACK);
+        textPaint.setUnderlineText(true);
 
         canvas.translate(0, 5);
         CharSequence cs = name;
-        StaticLayout layout = new StaticLayout(cs, textPaint, Utils.cardWidth(), Layout.Alignment.ALIGN_CENTER, 0,0,false);
+        StaticLayout layout = new StaticLayout(cs, textPaint, Utils.cardWidth(), Layout.Alignment.ALIGN_CENTER, 0, 0, false);
         layout.draw(canvas);
         canvas.translate(0, -5);
 
-
+        textPaint.setUnderlineText(false);
         canvas.translate(0, Utils.cardHeight() - 20);
         cs = "" + cards.size();
-        layout = new StaticLayout(cs, textPaint, Utils.cardWidth(), Layout.Alignment.ALIGN_CENTER, 0,0,false);
+        layout = new StaticLayout(cs, textPaint, Utils.cardWidth(), Layout.Alignment.ALIGN_CENTER, 0, 0, false);
         layout.draw(canvas);
+
         canvas.translate(0, 20 - Utils.cardHeight());
 
-        if(selected) {
+        if (selected) {
             Bitmap highLight = highLight();
             Utils.drawBitmapOnCanvas(canvas, highLight, null, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_FIRST);
             highLight.recycle();

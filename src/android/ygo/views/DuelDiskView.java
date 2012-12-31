@@ -14,31 +14,19 @@ public class DuelDiskView extends View {
 
     private Paint painter;
 
-    private DuelFields duelFields;
+    private Duel duel;
 
     public DuelDiskView(Context context) {
         super(context);
         painter = new Paint();
-        initDuelDisk();
+        duel = new Duel();
 
         initDuelDiskTest();
     }
 
-    private void initDuelDisk() {
-        duelFields = new DuelFields();
-        Deck deck = new Deck("DECK");
-        Deck exDeck = new Deck("EX");
-        CardList graveyard = new CardList("GRAVEYARD");
-        CardList removed = new CardList("REMOVED");
-        CardList temp = new CardList("TEMPORARY");
-        duelFields.getDeckField().setItem(deck);
-        duelFields.getExDeckField().setItem(exDeck);
-        duelFields.getGraveyardField().setItem(graveyard);
-        duelFields.getRemovedField().setItem(removed);
-        duelFields.getTempField().setItem(temp);
-    }
-
     private void initDuelDiskTest() {
+        DuelFields duelFields = duel.getDuelFields();
+
         // set magic
         Card setMagicCard = new Card("12345678", CardType.MAGIC, true, true);
         Field f = duelFields.getMagicField(2);
@@ -97,7 +85,7 @@ public class DuelDiskView extends View {
     @Override
     public void draw(Canvas canvas){
         drawBackground(canvas);
-        canvas.drawBitmap(duelFields.toBitmap(), 0, 0, painter);
+        canvas.drawBitmap(duel.toBitmap(), 0, 0, painter);
     }
 
     private void drawBackground(Canvas canvas) {
