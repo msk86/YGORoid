@@ -82,8 +82,8 @@ public class CardList implements SelectableItem {
     }
 
     private Bitmap highLight() {
-        int height = Utils.cardHeight();
         int width = Utils.cardWidth();
+        int height = Utils.cardHeight();
         Bitmap highLightBmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 
         Canvas canvas = new Canvas(highLightBmp);
@@ -115,6 +115,14 @@ public class CardList implements SelectableItem {
         canvas.translate(0, Utils.cardHeight() - 20);
         StaticLayout layout = new StaticLayout(cs, textPaint, Utils.cardWidth(), Layout.Alignment.ALIGN_CENTER, 0,0,false);
         layout.draw(canvas);
+        canvas.translate(0, 20 - Utils.cardHeight());
+
+        if(selected) {
+            Bitmap highLight = highLight();
+            Utils.drawBitmapOnCanvas(canvas, highLight, null, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_FIRST);
+            highLight.recycle();
+        }
+
         return deckBmp;
     }
 

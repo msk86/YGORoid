@@ -62,7 +62,6 @@ public class DuelDiskView extends View {
         overlay.overlay(xyzCard);
         f = duelFields.getMonsterField(2);
         f.setItem(overlay);
-//        overlay.select();
         // xyz + 1m
         Card material21 = new Card("12345678", CardType.SYNC_MONSTER, false, true);
         Card material22 = new Card("12345678", CardType.SYNC_MONSTER, false, true);
@@ -70,7 +69,6 @@ public class DuelDiskView extends View {
         Overlay overlay2 = new Overlay(material21);
         overlay2.overlay(material22);
         overlay2.overlay(xyzCard2);
-        overlay2.select();
         f = duelFields.getMonsterField(3);
         f.setItem(overlay2);
         // 2m
@@ -78,7 +76,6 @@ public class DuelDiskView extends View {
         Card material32 = new Card("12345678", CardType.SYNC_MONSTER, false, false);
         Overlay overlay3 = new Overlay(material31);
         overlay3.overlay(material32);
-        overlay3.select();
         f = duelFields.getMonsterField(4);
         f.setItem(overlay3);
 
@@ -86,6 +83,7 @@ public class DuelDiskView extends View {
         cards.add(new Card("12345678"));
         Deck deck = (Deck)duelFields.getDeckField().getItem();
         deck.push(cards);
+        deck.select();
 
         CardList graveyard = (CardList)duelFields.getGraveyardField().getItem();
         Card usedCard = new Card("12345678", CardType.SYNC_MONSTER, false, true);
