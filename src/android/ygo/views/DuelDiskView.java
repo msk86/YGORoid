@@ -26,11 +26,11 @@ public class DuelDiskView extends View {
 
     private void initDuelDisk() {
         duelFields = new DuelFields();
-        Deck deck = new Deck();
-        Deck exDeck = new Deck();
-        CardList graveyard = new CardList();
-        CardList removed = new CardList();
-        CardList temp = new CardList();
+        Deck deck = new Deck("DECK");
+        Deck exDeck = new Deck("EX");
+        CardList graveyard = new CardList("GRAVEYARD");
+        CardList removed = new CardList("REMOVED");
+        CardList temp = new CardList("TEMPORARY");
         duelFields.getDeckField().setItem(deck);
         duelFields.getExDeckField().setItem(exDeck);
         duelFields.getGraveyardField().setItem(graveyard);

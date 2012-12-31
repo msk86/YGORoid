@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
+import android.util.Log;
 import android.ygo.utils.Utils;
 
 import java.util.ArrayList;
@@ -14,24 +15,29 @@ import java.util.List;
 
 public class CardList implements SelectableItem {
     private boolean selected = false;
+
+    String name;
+
     List<Card> cards = new ArrayList<Card>();
     boolean open = true;
 
     public CardList() {
         cards = new ArrayList<Card>();
+        this.name = "";
     }
 
-    public CardList(boolean open) {
+    public CardList(String name) {
         this();
+        this.name = name;
+    }
+
+    public CardList(String name, boolean open) {
+        this(name);
         this.open = open;
     }
 
-    public CardList(List<Card> cards) {
-        this(cards, true);
-    }
-
-    public CardList(List<Card> cards, boolean open) {
-        this(open);
+    public CardList(String name, List<Card> cards, boolean open) {
+        this(name, open);
         for(Card card : cards) {
             if(open) {
                 card.open();
@@ -108,12 +114,20 @@ public class CardList implements SelectableItem {
         }
         Canvas canvas = new Canvas(deckBmp);
 
-        CharSequence cs = "" + cards.size();
         TextPaint textPaint = new TextPaint();
         textPaint.setColor(Configuration.fontColor());
+        textPaint.setShadowLayer(200, 0, 0, Color.RED);
+
+        canvas.translate(0, 5);
+        CharSequence cs = name;
+        StaticLayout layout = new StaticLayout(cs, textPaint, Utils.cardWidth(), Layout.Alignment.ALIGN_CENTER, 0,0,false);
+        layout.draw(canvas);
+        canvas.translate(0, -5);
+
 
         canvas.translate(0, Utils.cardHeight() - 20);
-        StaticLayout layout = new StaticLayout(cs, textPaint, Utils.cardWidth(), Layout.Alignment.ALIGN_CENTER, 0,0,false);
+        cs = "" + cards.size();
+        layout = new StaticLayout(cs, textPaint, Utils.cardWidth(), Layout.Alignment.ALIGN_CENTER, 0,0,false);
         layout.draw(canvas);
         canvas.translate(0, 20 - Utils.cardHeight());
 

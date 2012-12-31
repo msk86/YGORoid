@@ -35,17 +35,17 @@ public class DuelFields implements Item {
             magicZoneFields.add(magicField);
             allFields.add(magicField);
         }
-        deckField = new DeckField("DECK");
+        deckField = new Field();
         allFields.add(deckField);
-        graveyardField = new DeckField("GRAVEYARD");
+        graveyardField = new Field();
         allFields.add(graveyardField);
-        removedField = new DeckField("REMOVED");
+        removedField = new Field();
         allFields.add(removedField);
-        exDeckField = new DeckField("EX");
+        exDeckField = new Field();
         allFields.add(exDeckField);
         fieldMagicField = new FieldMagicField();
         allFields.add(fieldMagicField);
-        tempField = new DeckField("TEMPORARY");
+        tempField = new Field();
         allFields.add(tempField);
     }
 

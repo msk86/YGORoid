@@ -6,12 +6,12 @@ import java.util.Random;
 
 public class Deck extends CardList {
 
-    public Deck() {
-        super(false);
+    public Deck(String name) {
+        super(name, false);
     }
 
-    public Deck(List<Card> cards) {
-        super(cards, false);
+    public Deck(String name, List<Card> cards) {
+        super(name, cards, false);
     }
 
     public void shuffle() {
