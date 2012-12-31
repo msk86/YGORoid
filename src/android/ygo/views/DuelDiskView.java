@@ -86,6 +86,18 @@ public class DuelDiskView extends View {
         hands.add(new Card("12345678", CardType.SYNC_MONSTER, false, true));
         hands.add(new Card("12345678", CardType.SYNC_MONSTER, false, true));
         hands.add(new Card("12345678", CardType.SYNC_MONSTER, false, true));
+        hands.add(new Card("12345678", CardType.SYNC_MONSTER, false, true));
+        hands.add(new Card("12345678", CardType.SYNC_MONSTER, false, true));
+        hands.add(new Card("12345678", CardType.SYNC_MONSTER, false, true));
+        hands.add(new Card("12345678", CardType.SYNC_MONSTER, false, true));
+        hands.add(new Card("12345678", CardType.SYNC_MONSTER, false, true));
+        hands.add(new Card("12345678", CardType.SYNC_MONSTER, false, true));
+        hands.add(new Card("12345678", CardType.SYNC_MONSTER, false, true));
+        hands.add(new Card("12345678", CardType.SYNC_MONSTER, false, true));
+        hands.add(new Card("12345678", CardType.SYNC_MONSTER, false, true));
+        hands.add(new Card("12345678", CardType.SYNC_MONSTER, false, true));
+        hands.add(new Card("12345678", CardType.SYNC_MONSTER, false, true));
+        hands.get(2).select();
         duel.getHandCards().add(hands);
     }
 

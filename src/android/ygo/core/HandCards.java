@@ -48,21 +48,27 @@ public class HandCards implements Item {
         int maxWidth = Utils.unitLength() * 6;
         int maxPadding = Utils.cardWidth() / 10;
         int wPadding = (maxWidth - Utils.cardWidth()) / (cards.size() - 1) - Utils.cardWidth();
+        int hPadding = Utils.cardHeight() / 10;
 
         wPadding = wPadding < maxPadding ? wPadding : maxPadding;
 
         int width = cards.size() * Utils.cardWidth() + (cards.size() - 1) * wPadding;
-        int height = Utils.cardHeight();
+        int height = Utils.cardHeight() + hPadding;
 
         Bitmap handCardBmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(handCardBmp);
         Paint paint = new Paint();
 
+        int posX = 0;
+        int posY = 0;
         for (int i = 0; i < cards.size(); i++) {
+            posY = hPadding;
             Card card = cards.get(i);
-            Utils.drawBitmapOnCanvas(canvas, card.toBitmap(), paint, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_FIRST);
-            canvas.translate(Utils.cardWidth(), 0);
-            canvas.translate(wPadding, 0);
+            if(card.isSelect()) {
+                posY = 0;
+            }
+            Utils.drawBitmapOnCanvas(canvas, card.toBitmap(), paint, posX, posY);
+            posX += Utils.cardWidth() + wPadding;
         }
 
         return handCardBmp;
@@ -71,7 +77,8 @@ public class HandCards implements Item {
     @Override
     public Bitmap toBitmap() {
         int width = Utils.unitLength() * 6;
-        int height = Utils.cardHeight();
+        int hPadding = Utils.cardHeight() / 10;
+        int height = Utils.cardHeight() + hPadding;
 
         Bitmap handCardBmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(handCardBmp);

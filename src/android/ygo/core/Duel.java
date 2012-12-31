@@ -46,9 +46,7 @@ public class Duel implements Item {
         Paint paint = new Paint();
         Utils.drawBitmapOnCanvas(canvas, fieldBmp, paint, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_FIRST);
 
-        int padding = Utils.cardHeight() / 15;
-
-        Utils.drawBitmapOnCanvas(canvas, handBmp, paint, Utils.DRAW_POSITION_FIRST, fieldBmp.getHeight() + padding);
+        Utils.drawBitmapOnCanvas(canvas, handBmp, paint, Utils.DRAW_POSITION_FIRST, fieldBmp.getHeight() + 1);
 
         return duelBmp;
     }
