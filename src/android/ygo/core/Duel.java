@@ -10,6 +10,8 @@ public class Duel implements Item {
 
     private HandCards handCards;
 
+    private InfoWindow window;
+
     public Duel() {
         duelFields = new DuelFields();
         Deck deck = new Deck("DECK");
@@ -24,6 +26,8 @@ public class Duel implements Item {
         duelFields.getTempField().setItem(temp);
 
         handCards = new HandCards();
+
+        window = new InfoWindow();
     }
 
 
@@ -35,18 +39,26 @@ public class Duel implements Item {
         return handCards;
     }
 
+    public InfoWindow getInfoWindow() {
+        return window;
+    }
+
     @Override
     public Bitmap toBitmap() {
         Bitmap duelBmp = Bitmap.createBitmap(Utils.unitLength() * 6, Utils.unitLength() * 4, Bitmap.Config.ARGB_8888);
 
         Bitmap fieldBmp = duelFields.toBitmap();
         Bitmap handBmp = handCards.toBitmap();
+        Bitmap winBmp = window.toBitmap();
 
         Canvas canvas = new Canvas(duelBmp);
         Paint paint = new Paint();
         Utils.drawBitmapOnCanvas(canvas, fieldBmp, paint, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_FIRST);
 
         Utils.drawBitmapOnCanvas(canvas, handBmp, paint, Utils.DRAW_POSITION_FIRST, fieldBmp.getHeight() + 1);
+
+        int winPosY = Utils.screenHeight() - winBmp.getHeight();
+        Utils.drawBitmapOnCanvas(canvas, winBmp, paint, Utils.DRAW_POSITION_CENTER, winPosY);
 
         return duelBmp;
     }

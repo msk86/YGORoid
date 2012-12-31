@@ -18,6 +18,10 @@ public class Utils {
         activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
     }
 
+    public static int screenHeight() {
+        return dm.heightPixels;
+    }
+
     public static int unitLength() {
         int unitLengthW = (int)(dm.widthPixels / 6f);
         int unitLengthH = (int)(dm.heightPixels / 3.9f);
