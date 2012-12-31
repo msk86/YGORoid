@@ -52,7 +52,7 @@ public class CardList implements SelectableItem {
     }
 
     public Card remove(Card card) {
-        if(cards.remove(card)) {
+        if (cards.remove(card)) {
             return card;
         }
         return null;

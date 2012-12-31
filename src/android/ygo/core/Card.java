@@ -86,7 +86,7 @@ public class Card implements SelectableItem {
             }
         }
 
-        if(selected) {
+        if (selected) {
             Bitmap highlight = highLight();
             Utils.drawBitmapOnCanvas(canvas, highlight, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_FIRST);
             highlight.recycle();

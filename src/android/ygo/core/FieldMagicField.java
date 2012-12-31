@@ -12,7 +12,7 @@ public class FieldMagicField extends Field {
     }
 
     @Override
-    public Bitmap toBitmap(){
+    public Bitmap toBitmap() {
         Bitmap bitmap = super.toBitmap();
 
         int width = Utils.unitLength();
@@ -22,7 +22,7 @@ public class FieldMagicField extends Field {
         Paint paint = new Paint();
         paint.setColor(Color.WHITE);
         canvas.drawLine(width / 2, padding, width / 2, width - padding, paint);
-        canvas.drawLine(padding, width / 2, width - padding, width / 2,  paint);
+        canvas.drawLine(padding, width / 2, width - padding, width / 2, paint);
 
         return bitmap;
     }

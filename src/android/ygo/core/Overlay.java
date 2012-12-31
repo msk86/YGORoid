@@ -30,17 +30,17 @@ public class Overlay implements SelectableItem {
 
     private int totalCard() {
         int count = materials.cards.size();
-        if(xyzMonster != null) {
-            count ++;
+        if (xyzMonster != null) {
+            count++;
         }
         return count;
     }
 
     private Card topCard() {
-        if(xyzMonster != null) {
+        if (xyzMonster != null) {
             return xyzMonster;
         }
-        if(materials.cards.size() > 0) {
+        if (materials.cards.size() > 0) {
             return materials.cards.get(0);
         }
         return null;
@@ -76,13 +76,13 @@ public class Overlay implements SelectableItem {
         Bitmap materialsBmp = materialsBmp();
 
         int materialX = (width - Utils.cardWidth()) / 2;
-        if(xyzMonster != null) {
+        if (xyzMonster != null) {
             materialX += overlayOffset;
         }
         Utils.drawBitmapOnCanvas(canvas, materialsBmp, paint, materialX, Utils.DRAW_POSITION_CENTER);
         materialsBmp.recycle();
 
-        if(xyzMonster != null) {
+        if (xyzMonster != null) {
             Utils.drawBitmapOnCanvas(canvas, xyzMonster.toBitmap(), paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_CENTER);
         }
         return overlayBmp;
@@ -92,7 +92,7 @@ public class Overlay implements SelectableItem {
     public void select() {
         selected = true;
         Card topCard = topCard();
-        if(topCard != null) {
+        if (topCard != null) {
             topCard.select();
         }
     }
@@ -101,7 +101,7 @@ public class Overlay implements SelectableItem {
     public void unSelect() {
         selected = false;
         Card topCard = topCard();
-        if(topCard != null) {
+        if (topCard != null) {
             topCard.unSelect();
         }
     }

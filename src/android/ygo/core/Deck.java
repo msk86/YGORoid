@@ -4,7 +4,6 @@ import android.ygo.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class Deck extends CardList {
 

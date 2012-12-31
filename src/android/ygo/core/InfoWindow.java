@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.text.TextPaint;
 import android.ygo.utils.Utils;
 
 public class InfoWindow implements Item {
@@ -16,7 +15,7 @@ public class InfoWindow implements Item {
     }
 
     private String cardDesc() {
-        if(card == null) {
+        if (card == null) {
             return "";
         }
         return "流天类星龙 L12 4000/4000 光 龙";

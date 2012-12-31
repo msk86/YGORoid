@@ -69,15 +69,15 @@ public class DuelDiskView extends View {
 
         List<Card> cards = new ArrayList<Card>();
         cards.add(new Card("12345678"));
-        Deck deck = (Deck)duelFields.getDeckField().getItem();
+        Deck deck = (Deck) duelFields.getDeckField().getItem();
         deck.push(cards);
         deck.select();
 
-        CardList graveyard = (CardList)duelFields.getGraveyardField().getItem();
+        CardList graveyard = (CardList) duelFields.getGraveyardField().getItem();
         Card usedCard = new Card("12345678", CardType.SYNC_MONSTER, false, true);
         graveyard.push(usedCard);
 
-        CardList removed = (CardList)duelFields.getRemovedField().getItem();
+        CardList removed = (CardList) duelFields.getRemovedField().getItem();
         Card removedCard = new Card("23456789", CardType.XYZ_MONSTER, false, true);
         removed.push(removedCard);
 
@@ -104,7 +104,7 @@ public class DuelDiskView extends View {
     }
 
     @Override
-    public void draw(Canvas canvas){
+    public void draw(Canvas canvas) {
         drawBackground(canvas);
         canvas.drawBitmap(duel.toBitmap(), 0, 0, painter);
     }

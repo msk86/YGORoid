@@ -27,7 +27,7 @@ public class DuelFields implements Item {
         monsterZoneFields = new ArrayList<Field>();
         magicZoneFields = new ArrayList<Field>();
 
-        for(int i=0;i<5;i++) {
+        for (int i = 0; i < 5; i++) {
             Field monsterField = new Field();
             monsterZoneFields.add(monsterField);
             allFields.add(monsterField);
@@ -67,14 +67,14 @@ public class DuelFields implements Item {
         canvas.drawBitmap(removedField.toBitmap(), xs[4], ys[0], paint);
         canvas.drawBitmap(tempField.toBitmap(), xs[5], ys[0], paint);
 
-        for(int i = 0; i < monsterZoneFields.size(); i++) {
-            Field field  = monsterZoneFields.get(i);
+        for (int i = 0; i < monsterZoneFields.size(); i++) {
+            Field field = monsterZoneFields.get(i);
             canvas.drawBitmap(field.toBitmap(), xs[i], ys[1], paint);
         }
         canvas.drawBitmap(exDeckField.toBitmap(), xs[5], ys[1], paint);
 
-        for(int i = 0; i < magicZoneFields.size(); i++) {
-            Field field  = magicZoneFields.get(i);
+        for (int i = 0; i < magicZoneFields.size(); i++) {
+            Field field = magicZoneFields.get(i);
             canvas.drawBitmap(field.toBitmap(), xs[i], ys[2], paint);
         }
         canvas.drawBitmap(deckField.toBitmap(), xs[5], ys[2], paint);

@@ -3,7 +3,6 @@ package android.ygo.utils;
 import android.app.Activity;
 import android.graphics.*;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.ygo.core.Card;
 import android.ygo.core.Configuration;
 
@@ -23,8 +22,8 @@ public class Utils {
     }
 
     public static int unitLength() {
-        int unitLengthW = (int)(dm.widthPixels / 6f);
-        int unitLengthH = (int)(dm.heightPixels / 3.9f);
+        int unitLengthW = (int) (dm.widthPixels / 6f);
+        int unitLengthH = (int) (dm.heightPixels / 3.9f);
         return unitLengthW < unitLengthH ? unitLengthW : unitLengthH;
     }
 
@@ -34,7 +33,7 @@ public class Utils {
     }
 
     public static int cardWidth() {
-        return (int)(cardHeight() / 1.45);
+        return (int) (cardHeight() / 1.45);
     }
 
     public static Bitmap readBitmapScaleByHeight(String file, int targetHeight) {
@@ -72,29 +71,29 @@ public class Utils {
         int posX = 0;
         int posY = 0;
         switch (positionX) {
-            case DRAW_POSITION_FIRST :
+            case DRAW_POSITION_FIRST:
                 posX = 0;
                 break;
-            case DRAW_POSITION_CENTER :
+            case DRAW_POSITION_CENTER:
                 posX = (canvas.getWidth() - bitmap.getWidth()) / 2;
                 break;
-            case DRAW_POSITION_LAST :
+            case DRAW_POSITION_LAST:
                 posX = canvas.getWidth() - bitmap.getWidth();
                 break;
-            default :
+            default:
                 posX = positionX;
         }
         switch (positionY) {
-            case DRAW_POSITION_FIRST :
+            case DRAW_POSITION_FIRST:
                 posY = 0;
                 break;
-            case DRAW_POSITION_CENTER :
+            case DRAW_POSITION_CENTER:
                 posY = (canvas.getHeight() - bitmap.getHeight()) / 2;
                 break;
-            case DRAW_POSITION_LAST :
+            case DRAW_POSITION_LAST:
                 posY = canvas.getHeight() - bitmap.getHeight();
                 break;
-            default :
+            default:
                 posY = positionY;
         }
         canvas.drawBitmap(bitmap, posX, posY, paint);

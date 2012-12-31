@@ -38,7 +38,7 @@ public class Field implements Item {
         canvas.drawLine(width - padding, width - padding, padding, width - padding, paint);
         canvas.drawLine(padding, width - padding, padding, padding, paint);
 
-        if(setItem != null) {
+        if (setItem != null) {
             Bitmap itemBmp = setItem.toBitmap();
             Utils.drawBitmapOnCanvas(canvas, itemBmp, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_CENTER);
         }

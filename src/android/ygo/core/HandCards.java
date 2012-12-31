@@ -27,13 +27,13 @@ public class HandCards implements Item {
     }
 
     public void add(List<Card> cards) {
-        for(Card card : cards) {
+        for (Card card : cards) {
             add(card);
         }
     }
 
     public Card remove(Card card) {
-        if(cards.remove(card)) {
+        if (cards.remove(card)) {
             return card;
         }
         return null;
@@ -64,7 +64,7 @@ public class HandCards implements Item {
         for (int i = 0; i < cards.size(); i++) {
             posY = hPadding;
             Card card = cards.get(i);
-            if(card.isSelect()) {
+            if (card.isSelect()) {
                 posY = 0;
             }
             Utils.drawBitmapOnCanvas(canvas, card.toBitmap(), paint, posX, posY);
