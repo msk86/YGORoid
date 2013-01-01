@@ -2,8 +2,6 @@ package android.ygo.core;
 
 import android.graphics.Color;
 
-import java.security.PublicKey;
-
 public class Configuration {
     public static boolean isTotalCardPic() {
         return true;

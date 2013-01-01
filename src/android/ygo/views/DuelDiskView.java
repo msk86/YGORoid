@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.ygo.core.*;
-import android.ygo.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
