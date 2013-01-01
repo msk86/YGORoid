@@ -3,6 +3,7 @@ package android.ygo.core;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.util.Log;
 import android.ygo.utils.Utils;
 
 import java.util.ArrayList;
@@ -43,16 +44,47 @@ public class HandCards implements Item {
         return cards.size();
     }
 
+    public Card cardAt(int x, int y) {
+        int padding = (Utils.unitLength() * 6 - cardsWidth() ) / 2;
+        if(x <= padding) {
+            return null;
+        }
 
-    private Bitmap cardsBmp() {
+        int cardPadding = cardPadding();
+
+        int currX = padding;
+        int cw = Utils.cardWidth();
+        for(int i=0;i<cards.size();i++) {
+            if(i == cards.size() - 1) {
+                cw = 0;
+            }
+            if(currX < x && x < currX + cw) {
+                return cards.get(i);
+            }
+            currX += cw + cardPadding;
+        }
+        return null;
+    }
+
+    private int cardPadding() {
         int maxWidth = Utils.unitLength() * 6;
         int maxPadding = Utils.cardWidth() / 10;
         int wPadding = (maxWidth - Utils.cardWidth()) / (cards.size() - 1) - Utils.cardWidth();
+        wPadding = wPadding < maxPadding ? wPadding : maxPadding;
+        return wPadding;
+    }
+
+    private int cardsWidth() {
+        int wPadding = cardPadding();
+        return  cards.size() * Utils.cardWidth() + (cards.size() - 1) * wPadding;
+    }
+
+
+    private Bitmap cardsBmp() {
+        int wPadding = cardPadding();
         int hPadding = Utils.cardHeight() / 10;
 
-        wPadding = wPadding < maxPadding ? wPadding : maxPadding;
-
-        int width = cards.size() * Utils.cardWidth() + (cards.size() - 1) * wPadding;
+        int width = cardsWidth();
         int height = Utils.cardHeight() + hPadding;
 
         Bitmap handCardBmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
