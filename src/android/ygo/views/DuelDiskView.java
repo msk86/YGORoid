@@ -92,15 +92,9 @@ public class DuelDiskView extends View {
 
         duel.getInfoWindow().setCard(hands.get(2));
 
-        SelectableItem item = duelFields.itemOnFieldAt(10, 170);
-        if(item != null) {
-            item.select();
-        }
-
-        Card c = duel.getHandCards().cardAt(70, 0);
-        if(c != null) {
-            c.select();
-        }
+        duel.selectAt(70, 430);
+        duel.selectAt(170, 430);
+        duel.selectAt(170, 200);
     }
 
     @Override

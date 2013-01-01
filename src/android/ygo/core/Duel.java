@@ -12,6 +12,8 @@ public class Duel implements Item {
 
     private InfoWindow window;
 
+    private SelectableItem currentSelectItem;
+
     public Duel() {
         duelFields = new DuelFields();
         Deck deck = new Deck("DECK");
@@ -30,7 +32,6 @@ public class Duel implements Item {
         window = new InfoWindow();
     }
 
-
     public DuelFields getDuelFields() {
         return duelFields;
     }
@@ -41,6 +42,25 @@ public class Duel implements Item {
 
     public InfoWindow getInfoWindow() {
         return window;
+    }
+
+    public SelectableItem selectAt(int x, int y) {
+        SelectableItem item = itemAt(x, y);
+        if(item != null) {
+            if(currentSelectItem != null) {
+                currentSelectItem.unSelect();
+            }
+            currentSelectItem = item;
+            currentSelectItem.select();
+        }
+        return item;
+    }
+
+    public SelectableItem itemAt(int x, int y) {
+        if(y <= Utils.unitLength() * 3) {
+            return duelFields.itemOnFieldAt(x, y);
+        }
+        return handCards.cardAt(x, y);
     }
 
     @Override
