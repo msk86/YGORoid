@@ -56,9 +56,9 @@ public class HandCards implements Item {
         int cw = Utils.cardWidth();
         for(int i=0;i<cards.size();i++) {
             if(i == cards.size() - 1) {
-                cw = 0;
+                cardPadding = 0;
             }
-            if(currX < x && x < currX + cw) {
+            if(currX < x && x < currX + cw + cardPadding) {
                 return cards.get(i);
             }
             currX += cw + cardPadding;

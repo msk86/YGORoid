@@ -4,8 +4,11 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.ygo.core.*;
+import android.ygo.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +23,10 @@ public class DuelDiskView extends View {
         super(context);
         painter = new Paint();
         duel = new Duel();
+        new TouchListener(this);
 
         initDuelDiskTest();
+
     }
 
     private void initDuelDiskTest() {
@@ -94,18 +99,43 @@ public class DuelDiskView extends View {
 
         duel.selectAt(70, 430);
         duel.selectAt(170, 430);
-        duel.selectAt(170, 200);
+        duel.selectAt(260, 200);
     }
 
     @Override
     public void draw(Canvas canvas) {
         drawBackground(canvas);
+        long st = System.currentTimeMillis();
         canvas.drawBitmap(duel.toBitmap(), 0, 0, painter);
+        long et = System.currentTimeMillis();
+        Log.e("YGO", "DRAW_TIME:" + (et - st));
     }
 
     private void drawBackground(Canvas canvas) {
         canvas.drawColor(Color.BLACK);
         // IMAGE BACKGROUND
+    }
+
+    private static class TouchListener implements OnTouchListener {
+
+        DuelDiskView view;
+
+        public TouchListener(DuelDiskView view) {
+            this.view = view;
+            this.view.setOnTouchListener(this);
+        }
+
+        @Override
+        public boolean onTouch(View view, MotionEvent event) {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN :
+                    int x = (int)event.getX();
+                    int y = (int)event.getY();
+                    this.view.duel.selectAt(x, y);
+                    this.view.invalidate();
+            }
+            return false;
+        }
     }
 
 }
