@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DuelFields implements Item {
-    private List<Field> allFields;
+    private List<List<Field>> fieldMatrix;
 
     List<Field> monsterZoneFields;
     List<Field> magicZoneFields;
@@ -22,7 +22,29 @@ public class DuelFields implements Item {
     Field fieldMagicField;
 
     public DuelFields() {
-        allFields = new ArrayList<Field>();
+        fieldMatrix = new ArrayList<List<Field>>();
+
+        List<Field> fieldLine0 = new ArrayList<Field>();
+        List<Field> fieldLine1 = new ArrayList<Field>();
+        List<Field> fieldLine2 = new ArrayList<Field>();
+        fieldMatrix.add(fieldLine0);
+        fieldMatrix.add(fieldLine1);
+        fieldMatrix.add(fieldLine2);
+
+        fieldMagicField = new FieldMagicField();
+        fieldLine0.add(fieldMagicField);
+
+        fieldLine0.add(null);
+        fieldLine0.add(null);
+
+        graveyardField = new Field();
+        fieldLine0.add(graveyardField);
+
+        removedField = new Field();
+        fieldLine0.add(removedField);
+
+        tempField = new Field();
+        fieldLine0.add(tempField);
 
         monsterZoneFields = new ArrayList<Field>();
         magicZoneFields = new ArrayList<Field>();
@@ -30,23 +52,16 @@ public class DuelFields implements Item {
         for (int i = 0; i < 5; i++) {
             Field monsterField = new Field();
             monsterZoneFields.add(monsterField);
-            allFields.add(monsterField);
+            fieldLine1.add(monsterField);
             Field magicField = new Field();
             magicZoneFields.add(magicField);
-            allFields.add(magicField);
+            fieldLine2.add(magicField);
         }
-        deckField = new Field();
-        allFields.add(deckField);
-        graveyardField = new Field();
-        allFields.add(graveyardField);
-        removedField = new Field();
-        allFields.add(removedField);
         exDeckField = new Field();
-        allFields.add(exDeckField);
-        fieldMagicField = new FieldMagicField();
-        allFields.add(fieldMagicField);
-        tempField = new Field();
-        allFields.add(tempField);
+        fieldLine1.add(exDeckField);
+
+        deckField = new Field();
+        fieldLine2.add(deckField);
     }
 
     @Override
@@ -59,25 +74,15 @@ public class DuelFields implements Item {
         Paint paint = new Paint();
         int ul = Utils.unitLength();
 
-        int[] xs = {0, ul, ul * 2, ul * 3, ul * 4, ul * 5};
-        int[] ys = {0, ul, ul * 2, ul * 3};
-
-        canvas.drawBitmap(fieldMagicField.toBitmap(), xs[0], ys[0], paint);
-        canvas.drawBitmap(graveyardField.toBitmap(), xs[3], ys[0], paint);
-        canvas.drawBitmap(removedField.toBitmap(), xs[4], ys[0], paint);
-        canvas.drawBitmap(tempField.toBitmap(), xs[5], ys[0], paint);
-
-        for (int i = 0; i < monsterZoneFields.size(); i++) {
-            Field field = monsterZoneFields.get(i);
-            canvas.drawBitmap(field.toBitmap(), xs[i], ys[1], paint);
+        for(int y=0;y<fieldMatrix.size();y++) {
+            List<Field> fieldLine = fieldMatrix.get(y);
+            for(int x=0;x<fieldLine.size();x++) {
+                Field field = fieldLine.get(x);
+                if(field != null) {
+                    Utils.drawBitmapOnCanvas(canvas, field.toBitmap(), paint, ul*x, ul *y);
+                }
+            }
         }
-        canvas.drawBitmap(exDeckField.toBitmap(), xs[5], ys[1], paint);
-
-        for (int i = 0; i < magicZoneFields.size(); i++) {
-            Field field = magicZoneFields.get(i);
-            canvas.drawBitmap(field.toBitmap(), xs[i], ys[2], paint);
-        }
-        canvas.drawBitmap(deckField.toBitmap(), xs[5], ys[2], paint);
 
         return bitmap;
     }
