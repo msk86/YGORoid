@@ -71,7 +71,6 @@ public class DuelDiskView extends View {
         cards.add(new Card("12345678"));
         Deck deck = (Deck) duelFields.getDeckField().getItem();
         deck.push(cards);
-        deck.select();
 
         CardList graveyard = (CardList) duelFields.getGraveyardField().getItem();
         Card usedCard = new Card("12345678", CardType.SYNC_MONSTER, false, true);
@@ -101,6 +100,11 @@ public class DuelDiskView extends View {
         duel.getHandCards().add(hands);
 
         duel.getInfoWindow().setCard(hands.get(2));
+
+            SelectableItem item = duelFields.itemOnFieldAt(10, 170);
+            if(item != null) {
+                item.select();
+            }
     }
 
     @Override

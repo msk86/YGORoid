@@ -64,6 +64,21 @@ public class DuelFields implements Item {
         fieldLine2.add(deckField);
     }
 
+    public Field fieldAt(int x, int y) {
+        int fieldLength = Utils.unitLength();
+        int indexX = x / fieldLength;
+        int indexY = y / fieldLength;
+        return fieldMatrix.get(indexY).get(indexX);
+    }
+
+    public SelectableItem itemOnFieldAt(int x, int y) {
+        Field field = fieldAt(x, y);
+        if(field != null) {
+            return field.getItem();
+        }
+        return null;
+    }
+
     @Override
     public Bitmap toBitmap() {
         int width = Utils.unitLength() * 6;
