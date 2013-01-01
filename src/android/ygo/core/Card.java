@@ -7,7 +7,7 @@ import android.graphics.Paint;
 import android.ygo.utils.Utils;
 
 public class Card implements SelectableItem {
-    public static final String DEFAULT_CARD_PROTECTOR = "defaultProtector";
+    public static final Bitmap CARD_PROTECTOR = Utils.readBitmapScaleByHeight(Configuration.cardProtector() + ".png", Utils.cardHeight());
 
     private boolean selected = false;
 
@@ -15,15 +15,13 @@ public class Card implements SelectableItem {
     String name;
     String desc;
     CardType type;
-    String cardProtector;
     boolean set = false;
     boolean positive = true;
 
+    Bitmap cardPic;
+
     public Card(String id) {
-        this.id = id;
-        this.type = CardType.NORMAL_MONSTER;
-        this.set = true;
-        cardProtector = DEFAULT_CARD_PROTECTOR;
+        this(id, CardType.NORMAL_MONSTER, true, true);
     }
 
 
@@ -32,7 +30,7 @@ public class Card implements SelectableItem {
         this.type = type;
         this.positive = positive;
         this.set = set;
-        cardProtector = DEFAULT_CARD_PROTECTOR;
+        initCardPic();
     }
 
     public void turnOver() {
@@ -59,6 +57,21 @@ public class Card implements SelectableItem {
         positive = false;
     }
 
+    private void initCardPic() {
+        int height = Utils.cardHeight();
+        if (Configuration.isTotalCardPic()) {
+            cardPic = Utils.readBitmapScaleByHeight(id + ".png", height);
+        } else {
+            cardPic = Utils.readBitmapScaleByHeight(type.toString() + ".png", height);
+            Canvas canvas = new Canvas(cardPic);
+            Paint paint = new Paint();
+            Utils.drawBitmapOnCanvas(canvas, cardPic, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_FIRST);
+            Bitmap pic = Utils.readBitmapScaleByHeight(id + ".png", height / 2);
+            int cardPicY = (int) (cardPic.getHeight() / 4.63);
+            Utils.drawBitmapOnCanvas(canvas, pic, paint, Utils.DRAW_POSITION_CENTER, cardPicY);
+        }
+    }
+
     @Override
     public Bitmap toBitmap() {
         int height = Utils.cardHeight();
@@ -67,23 +80,9 @@ public class Card implements SelectableItem {
         Canvas canvas = new Canvas(cardBmp);
         Paint paint = new Paint();
         if (set) {
-            Bitmap protector = Utils.readBitmapScaleByHeight(cardProtector + ".png", height);
-            Utils.drawBitmapOnCanvas(canvas, protector, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_FIRST);
-            protector.recycle();
+            Utils.drawBitmapOnCanvas(canvas, CARD_PROTECTOR, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_FIRST);
         } else {
-            if (Configuration.isTotalCardPic()) {
-                Bitmap cardPic = Utils.readBitmapScaleByHeight(id + ".png", height);
-                Utils.drawBitmapOnCanvas(canvas, cardPic, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_FIRST);
-                cardPic.recycle();
-            } else {
-                Bitmap cardBackground = Utils.readBitmapScaleByHeight(type.toString() + ".png", height);
-                Utils.drawBitmapOnCanvas(canvas, cardBackground, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_FIRST);
-                cardBackground.recycle();
-                Bitmap cardPic = Utils.readBitmapScaleByHeight(id + ".png", height / 2);
-                int cardPicY = (int) (cardBackground.getHeight() / 4.63);
-                Utils.drawBitmapOnCanvas(canvas, cardPic, paint, Utils.DRAW_POSITION_CENTER, cardPicY);
-                cardPic.recycle();
-            }
+            Utils.drawBitmapOnCanvas(canvas, cardPic, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_FIRST);
         }
 
         if (selected) {

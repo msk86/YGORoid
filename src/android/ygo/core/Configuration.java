@@ -2,6 +2,8 @@ package android.ygo.core;
 
 import android.graphics.Color;
 
+import java.security.PublicKey;
+
 public class Configuration {
     public static boolean isTotalCardPic() {
         return true;
@@ -17,5 +19,9 @@ public class Configuration {
 
     public static String baseDir() {
         return "/Device/bluetooth/images/ygo2/";
+    }
+
+    public static String cardProtector() {
+        return "defaultProtector";
     }
 }
