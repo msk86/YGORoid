@@ -141,8 +141,6 @@ public class DuelDiskView extends View {
                     } else {
                         DoubleClick dblClick = new DoubleClick(this.view.duel, x, y);
                     }
-                    this.view.duel.selectAt(x, y);
-                    this.view.invalidate();
                     break;
                 case MotionEvent.ACTION_MOVE :
                     if(currentDrag == null) {
@@ -158,7 +156,8 @@ public class DuelDiskView extends View {
                     }
                     break;
             }
-            return false;
+            this.view.invalidate();
+            return true;
         }
     }
 

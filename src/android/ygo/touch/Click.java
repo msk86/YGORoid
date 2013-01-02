@@ -12,7 +12,7 @@ public class Click {
     public Click(Duel duel, int x, int y) {
         this.x = x;
         this.y = y;
-        item = duel.itemAt(x, y);
+        item = duel.selectAt(x, y);
     }
 
     public SelectableItem getItem() {
