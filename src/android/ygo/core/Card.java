@@ -19,6 +19,7 @@ public class Card implements SelectableItem {
     boolean positive = true;
 
     Bitmap cardPic;
+    Bitmap highLight;
 
     public Card(String id) {
         this(id, CardType.NORMAL_MONSTER, true, true);
@@ -70,6 +71,8 @@ public class Card implements SelectableItem {
             int cardPicY = (int) (cardPic.getHeight() / 4.63);
             Utils.drawBitmapOnCanvas(canvas, pic, paint, Utils.DRAW_POSITION_CENTER, cardPicY);
         }
+
+        highLight = highLight();
     }
 
     @Override
@@ -86,9 +89,7 @@ public class Card implements SelectableItem {
         }
 
         if (selected) {
-            Bitmap highlight = highLight();
-            Utils.drawBitmapOnCanvas(canvas, highlight, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_FIRST);
-            highlight.recycle();
+            Utils.drawBitmapOnCanvas(canvas, highLight, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_FIRST);
         }
 
         if (!positive) {

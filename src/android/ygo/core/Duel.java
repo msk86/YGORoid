@@ -57,10 +57,24 @@ public class Duel implements Item {
     }
 
     public SelectableItem itemAt(int x, int y) {
-        if(y <= Utils.unitLength() * 3) {
+        if(inDuelFields(x, y)) {
             return duelFields.itemOnFieldAt(x, y);
+        } else if(inHand(x, y)) {
+            return handCards.cardAt(x, y);
         }
-        return handCards.cardAt(x, y);
+        return null;
+    }
+
+    public Field fieldAt(int x, int y) {
+        return duelFields.fieldAt(x, y);
+    }
+
+    public boolean inDuelFields(int x, int y) {
+        return y <= Utils.unitLength() * 3 && x <= Utils.unitLength() * 6;
+    }
+
+    public boolean inHand(int x, int y) {
+        return y> Utils.unitLength() * 3 && x <= Utils.unitLength() * 6;
     }
 
     @Override

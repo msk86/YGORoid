@@ -8,6 +8,9 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.ygo.core.*;
+import android.ygo.touch.Click;
+import android.ygo.touch.DoubleClick;
+import android.ygo.touch.Drag;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -118,6 +121,8 @@ public class DuelDiskView extends View {
     private static class TouchListener implements OnTouchListener {
 
         DuelDiskView view;
+        long lastClickTime;
+        Drag currentDrag;
 
         public TouchListener(DuelDiskView view) {
             this.view = view;
@@ -126,12 +131,32 @@ public class DuelDiskView extends View {
 
         @Override
         public boolean onTouch(View view, MotionEvent event) {
+            int x = (int)event.getX();
+            int y = (int)event.getY();
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN :
-                    int x = (int)event.getX();
-                    int y = (int)event.getY();
+                    long currentClickTime = System.currentTimeMillis();
+                    if(currentClickTime - lastClickTime > 300) {
+                        Click click = new Click(this.view.duel, x, y);
+                    } else {
+                        DoubleClick dblClick = new DoubleClick(this.view.duel, x, y);
+                    }
                     this.view.duel.selectAt(x, y);
                     this.view.invalidate();
+                    break;
+                case MotionEvent.ACTION_MOVE :
+                    if(currentDrag == null) {
+                        currentDrag = new Drag(this.view.duel, x, y);
+                    }
+                    currentDrag.move(x, y);
+                    break;
+                case MotionEvent.ACTION_UP :
+                    if(currentDrag != null) {
+                        Drag drag = currentDrag;
+                        currentDrag = null;
+                        drag.dropTo(x, y);
+                    }
+                    break;
             }
             return false;
         }
