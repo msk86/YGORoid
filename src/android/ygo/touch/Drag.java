@@ -53,4 +53,8 @@ public class Drag {
         }
         return target;
     }
+
+    public SelectableItem getItem() {
+        return item;
+    }
 }

@@ -146,7 +146,11 @@ public class DuelDiskView extends View {
                     if(currentDrag == null) {
                         currentDrag = new Drag(this.view.duel, x, y);
                     }
-                    currentDrag.move(x, y);
+                    if(currentDrag.getItem() == null) {
+                        currentDrag = null;
+                    } else {
+                        currentDrag.move(x, y);
+                    }
                     break;
                 case MotionEvent.ACTION_UP :
                     if(currentDrag != null) {
