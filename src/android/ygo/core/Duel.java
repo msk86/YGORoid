@@ -3,6 +3,7 @@ package android.ygo.core;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.ygo.touch.Drag;
 import android.ygo.utils.Utils;
 
 public class Duel implements Item {
@@ -13,6 +14,9 @@ public class Duel implements Item {
     private InfoWindow window;
 
     private SelectableItem currentSelectItem;
+
+    private SelectableItem draggingItem;
+    private int dragX, dragY;
 
     public Duel() {
         duelFields = new DuelFields();
@@ -69,6 +73,12 @@ public class Duel implements Item {
         return duelFields.fieldAt(x, y);
     }
 
+    public void setDraggingItem(SelectableItem item, int x, int y) {
+        draggingItem = item;
+        dragX = x;
+        dragY = y;
+    }
+
     public boolean inDuelFields(int x, int y) {
         return y <= Utils.unitLength() * 3 && x <= Utils.unitLength() * 6;
     }
@@ -93,6 +103,11 @@ public class Duel implements Item {
 
         int winPosY = Utils.screenHeight() - winBmp.getHeight();
         Utils.drawBitmapOnCanvas(canvas, winBmp, paint, Utils.DRAW_POSITION_CENTER, winPosY);
+
+        if(draggingItem != null) {
+            Bitmap draggingItemBmp = draggingItem.toBitmap();
+            Utils.drawBitmapOnCanvas(canvas, draggingItemBmp, paint, dragX-draggingItemBmp.getWidth()/2, dragY - draggingItemBmp.getHeight()/2);
+        }
 
         return duelBmp;
     }

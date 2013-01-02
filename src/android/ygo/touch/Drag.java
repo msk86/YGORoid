@@ -27,11 +27,13 @@ public class Drag {
             item = duel.itemAt(fx, fy);
             duel.getHandCards().remove((Card)item);
         }
+        duel.setDraggingItem(item, x, y);
     }
 
     public void move(int x, int y) {
         this.x = x;
         this.y = y;
+        duel.setDraggingItem(item, x, y);
     }
 
     public Item dropTo(int tx, int ty) {
@@ -42,6 +44,7 @@ public class Drag {
         } else if(duel.inDuelFields(tx, ty)) {
             target = duel.fieldAt(tx, ty);
         }
+        duel.setDraggingItem(null, -1, -1);
         dragging = false;
         if(target instanceof HandCards) {
             ((HandCards)target).add((Card) item);
