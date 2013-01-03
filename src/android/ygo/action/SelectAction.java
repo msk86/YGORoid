@@ -1,18 +1,12 @@
 package android.ygo.action;
 
-import android.ygo.core.Duel;
-import android.ygo.core.SelectableItem;
+import android.ygo.touch.Touch;
 
-public class SelectAction implements Action {
+public class SelectAction extends BaseAction {
 
-    private Duel duel;
-    private SelectableItem item;
-
-    public SelectAction(Duel duel, SelectableItem item) {
-        this.duel = duel;
-        this.item = item;
+    public SelectAction(Touch touch) {
+        super(touch.getDuel(), touch.getContainer(), touch.getItem());
     }
-
 
     @Override
     public void execute() {

@@ -121,7 +121,6 @@ public class DuelDiskView extends View {
 
         DuelDiskView view;
         long lastClickTime;
-        Drag currentDrag;
 
         public TouchListener(DuelDiskView view) {
             this.view = view;
@@ -136,11 +135,13 @@ public class DuelDiskView extends View {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN :
                     long currentClickTime = System.currentTimeMillis();
-                    if(currentClickTime - lastClickTime > 300) {
+                    if(currentClickTime - lastClickTime > 500) {
                         touch = new Click(this.view.duel, x, y);
                     } else {
+                        Log.e("YGO", "DBLCLICK");
                         touch = new DoubleClick(this.view.duel, x, y);
                     }
+                    lastClickTime = currentClickTime;
                     break;
                 case MotionEvent.ACTION_MOVE :
                     if(view.duel.getDrag() == null) {
