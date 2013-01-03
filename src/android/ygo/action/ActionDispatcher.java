@@ -37,6 +37,9 @@ public class ActionDispatcher {
             if(drag.getItem() instanceof Card && (targetItem instanceof Card || targetItem instanceof Overlay)) {
                 action = new OverlayAction(drag);
             }
+            if((drag.getItem() instanceof Card || drag.getItem() instanceof Overlay) && targetItem instanceof CardList) {
+                action = new AddCardListAction(drag);
+            }
         }
         if(drag.getContainer() instanceof HandCards) {
             if(drag.getItem() instanceof Card) {

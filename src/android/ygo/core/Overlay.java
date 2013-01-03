@@ -21,6 +21,10 @@ public class Overlay implements SelectableItem {
         return xyzMonster;
     }
 
+    public CardList getMaterials() {
+        return materials;
+    }
+
     public void overlay(Card card) {
         if (card.type == CardType.XYZ_MONSTER) {
             if (xyzMonster != null) {
