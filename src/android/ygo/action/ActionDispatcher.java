@@ -18,7 +18,8 @@ public class ActionDispatcher {
         if (press.getItem() != null) {
             if (press.getContainer() instanceof Field) {
                 Field field = (Field) press.getContainer();
-                if (field.getType() == FieldType.MONSTER_ZONE) {
+                if (field.getType() == FieldType.MONSTER_ZONE || field.getType() == FieldType.MAGIC_ZONE ||
+                        field.getType() == FieldType.FIELD_MAGIC_ZONE) {
                     action = new MonsterPositionAction(press);
                 }
             }
