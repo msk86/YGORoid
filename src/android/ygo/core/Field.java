@@ -7,15 +7,15 @@ import android.graphics.Paint;
 import android.ygo.utils.Utils;
 
 public class Field implements Item {
-    private boolean enable;
+    private FieldType type;
     private SelectableItem setItem;
 
-    public Field() {
-        enable = true;
+    public Field(FieldType type) {
+        this.type = type;
     }
 
-    public Field(boolean enable) {
-        this.enable = enable;
+    public FieldType getType() {
+        return type;
     }
 
     public void setItem(SelectableItem item) {
@@ -38,19 +38,17 @@ public class Field implements Item {
         Bitmap bitmap = Bitmap.createBitmap(width, width, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         canvas.drawColor(Color.TRANSPARENT);
-        if(enable) {
-            Paint paint = new Paint();
-            paint.setColor(Color.WHITE);
-            paint.setStrokeWidth(2);
-            canvas.drawLine(padding, padding, width - padding, padding, paint);
-            canvas.drawLine(width - padding, padding, width - padding, width - padding, paint);
-            canvas.drawLine(width - padding, width - padding, padding, width - padding, paint);
-            canvas.drawLine(padding, width - padding, padding, padding, paint);
+        Paint paint = new Paint();
+        paint.setColor(Color.WHITE);
+        paint.setStrokeWidth(2);
+        canvas.drawLine(padding, padding, width - padding, padding, paint);
+        canvas.drawLine(width - padding, padding, width - padding, width - padding, paint);
+        canvas.drawLine(width - padding, width - padding, padding, width - padding, paint);
+        canvas.drawLine(padding, width - padding, padding, padding, paint);
 
-            if (setItem != null) {
-                Bitmap itemBmp = setItem.toBitmap();
-                Utils.drawBitmapOnCanvas(canvas, itemBmp, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_CENTER);
-            }
+        if (setItem != null) {
+            Bitmap itemBmp = setItem.toBitmap();
+            Utils.drawBitmapOnCanvas(canvas, itemBmp, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_CENTER);
         }
 
         return bitmap;

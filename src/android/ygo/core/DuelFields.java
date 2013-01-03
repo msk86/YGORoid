@@ -31,36 +31,36 @@ public class DuelFields implements Item {
         fieldMatrix.add(fieldLine1);
         fieldMatrix.add(fieldLine2);
 
-        fieldMagicField = new FieldMagicField();
+        fieldMagicField = new Field(FieldType.FIELD_MAGIC_ZONE);
         fieldLine0.add(fieldMagicField);
 
         fieldLine0.add(null);
         fieldLine0.add(null);
 
-        graveyardField = new Field();
+        graveyardField = new Field(FieldType.GRAVEYARD);
         fieldLine0.add(graveyardField);
 
-        removedField = new Field();
+        removedField = new Field(FieldType.REMOVED);
         fieldLine0.add(removedField);
 
-        tempField = new Field();
+        tempField = new Field(FieldType.TEMP);
         fieldLine0.add(tempField);
 
         monsterZoneFields = new ArrayList<Field>();
         magicZoneFields = new ArrayList<Field>();
 
         for (int i = 0; i < 5; i++) {
-            Field monsterField = new Field();
+            Field monsterField = new Field(FieldType.MONSTER_ZONE);
             monsterZoneFields.add(monsterField);
             fieldLine1.add(monsterField);
-            Field magicField = new Field();
+            Field magicField = new Field(FieldType.MAGIC_ZONE);
             magicZoneFields.add(magicField);
             fieldLine2.add(magicField);
         }
-        exDeckField = new Field();
+        exDeckField = new Field(FieldType.EXDECK);
         fieldLine1.add(exDeckField);
 
-        deckField = new Field();
+        deckField = new Field(FieldType.DECK);
         fieldLine2.add(deckField);
     }
 

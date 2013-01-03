@@ -7,10 +7,13 @@ import android.graphics.Paint;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.ygo.action.Action;
+import android.ygo.action.ActionDispatcher;
 import android.ygo.core.*;
 import android.ygo.touch.Click;
 import android.ygo.touch.DoubleClick;
 import android.ygo.touch.Drag;
+import android.ygo.touch.Touch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,10 +101,6 @@ public class DuelDiskView extends View {
         duel.getHandCards().add(hands);
 
         duel.getInfoWindow().setCard(hands.get(2));
-
-        duel.selectAt(70, 430);
-        duel.selectAt(170, 430);
-        duel.selectAt(260, 200);
     }
 
     @Override
@@ -130,36 +129,44 @@ public class DuelDiskView extends View {
         }
 
         @Override
-        public boolean onTouch(View view, MotionEvent event) {
+        public boolean onTouch(View view1, MotionEvent event) {
             int x = (int)event.getX();
             int y = (int)event.getY();
+            Touch touch = null;
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN :
                     long currentClickTime = System.currentTimeMillis();
                     if(currentClickTime - lastClickTime > 300) {
-                        Click click = new Click(this.view.duel, x, y);
+                        touch = new Click(this.view.duel, x, y);
                     } else {
-                        DoubleClick dblClick = new DoubleClick(this.view.duel, x, y);
+                        touch = new DoubleClick(this.view.duel, x, y);
                     }
                     break;
                 case MotionEvent.ACTION_MOVE :
-                    if(currentDrag == null) {
-                        currentDrag = new Drag(this.view.duel, x, y);
+                    if(view.duel.getDrag() == null) {
+                        Drag drag = new Drag(view.duel, x, y);
+                        if(drag.getItem() != null) {
+                            view.duel.setDrag(drag);
+                        }
                     }
-                    if(currentDrag.getItem() == null) {
-                        currentDrag = null;
-                    } else {
-                        currentDrag.move(x, y);
+                    Drag duelDrag = view.duel.getDrag();
+                    if(duelDrag != null) {
+                        duelDrag.move(x, y);
                     }
                     break;
                 case MotionEvent.ACTION_UP :
-                    if(currentDrag != null) {
-                        Drag drag = currentDrag;
-                        currentDrag = null;
+                    if(view.duel.getDrag() != null) {
+                        Drag drag = view.duel.getDrag();
+                        view.duel.setDrag(null);
                         drag.dropTo(x, y);
+                        touch = drag;
                     }
                     break;
             }
+
+            Action action = ActionDispatcher.dispatch(touch);
+            action.execute();
+
             this.view.invalidate();
             return true;
         }

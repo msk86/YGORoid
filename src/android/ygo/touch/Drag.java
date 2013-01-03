@@ -2,7 +2,7 @@ package android.ygo.touch;
 
 import android.ygo.core.*;
 
-public class Drag {
+public class Drag implements Touch {
     int fromX, fromY;
     int x, y;
     int toX, toY;
@@ -27,13 +27,11 @@ public class Drag {
             item = duel.itemAt(fx, fy);
             duel.getHandCards().remove((Card)item);
         }
-        duel.setDraggingItem(item, x, y);
     }
 
     public void move(int x, int y) {
         this.x = x;
         this.y = y;
-        duel.setDraggingItem(item, x, y);
     }
 
     public Item dropTo(int tx, int ty) {
@@ -44,7 +42,6 @@ public class Drag {
         } else if(duel.inDuelFields(tx, ty)) {
             target = duel.fieldAt(tx, ty);
         }
-        duel.setDraggingItem(null, -1, -1);
         dragging = false;
         if(target instanceof HandCards) {
             ((HandCards)target).add((Card) item);
@@ -54,7 +51,26 @@ public class Drag {
         return target;
     }
 
+    @Override
+    public Duel getDuel() {
+        return duel;
+    }
+
+    @Override
     public SelectableItem getItem() {
         return item;
+    }
+
+    @Override
+    public Item getContainer() {
+        return target;
+    }
+
+    public int x() {
+        return x;
+    }
+
+    public int y() {
+        return y;
     }
 }

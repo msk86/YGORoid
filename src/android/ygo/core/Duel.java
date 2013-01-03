@@ -15,8 +15,8 @@ public class Duel implements Item {
 
     private SelectableItem currentSelectItem;
 
-    private SelectableItem draggingItem;
-    private int dragX, dragY;
+
+    private Drag drag;
 
     public Duel() {
         duelFields = new DuelFields();
@@ -48,16 +48,19 @@ public class Duel implements Item {
         return window;
     }
 
-    public SelectableItem selectAt(int x, int y) {
-        SelectableItem item = itemAt(x, y);
+    public void unSelect() {
+        if(currentSelectItem != null) {
+            currentSelectItem.unSelect();
+            currentSelectItem = null;
+        }
+    }
+
+    public void select(SelectableItem item) {
         if(item != null) {
-            if(currentSelectItem != null) {
-                currentSelectItem.unSelect();
-            }
+            unSelect();
             currentSelectItem = item;
             currentSelectItem.select();
         }
-        return item;
     }
 
     public SelectableItem itemAt(int x, int y) {
@@ -69,14 +72,25 @@ public class Duel implements Item {
         return null;
     }
 
+    public Item containerAt(int x, int y) {
+        if(inDuelFields(x, y)) {
+            return duelFields.fieldAt(x, y);
+        } else if(inHand(x, y)) {
+            return handCards;
+        }
+        return null;
+    }
+
     public Field fieldAt(int x, int y) {
         return duelFields.fieldAt(x, y);
     }
 
-    public void setDraggingItem(SelectableItem item, int x, int y) {
-        draggingItem = item;
-        dragX = x;
-        dragY = y;
+    public void setDrag(Drag drag) {
+        this.drag = drag;
+    }
+
+    public Drag getDrag() {
+        return drag;
     }
 
     public boolean inDuelFields(int x, int y) {
@@ -104,9 +118,9 @@ public class Duel implements Item {
         int winPosY = Utils.screenHeight() - winBmp.getHeight();
         Utils.drawBitmapOnCanvas(canvas, winBmp, paint, Utils.DRAW_POSITION_CENTER, winPosY);
 
-        if(draggingItem != null) {
-            Bitmap draggingItemBmp = draggingItem.toBitmap();
-            Utils.drawBitmapOnCanvas(canvas, draggingItemBmp, paint, dragX-draggingItemBmp.getWidth()/2, dragY - draggingItemBmp.getHeight()/2);
+        if(drag != null && drag.getItem() != null) {
+            Bitmap draggingItemBmp = drag.getItem().toBitmap();
+            Utils.drawBitmapOnCanvas(canvas, draggingItemBmp, paint, drag.x()-draggingItemBmp.getWidth()/2, drag.y() - draggingItemBmp.getHeight()/2);
         }
 
         return duelBmp;
