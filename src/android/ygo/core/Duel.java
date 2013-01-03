@@ -103,11 +103,11 @@ public class Duel implements Item {
     }
 
     public boolean inDuelFields(int x, int y) {
-        return y <= Utils.unitLength() * 3 && x <= Utils.unitLength() * 6;
+        return y < Utils.unitLength() * 3 && x < Utils.unitLength() * 6;
     }
 
     public boolean inHand(int x, int y) {
-        return y > Utils.unitLength() * 3 && x <= Utils.unitLength() * 6;
+        return y >= Utils.unitLength() * 3 && x < Utils.unitLength() * 6;
     }
 
     @Override
