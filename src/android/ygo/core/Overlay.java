@@ -50,6 +50,17 @@ public class Overlay implements SelectableItem {
         return null;
     }
 
+    public Card removeTopCard() {
+        Card card = null;
+        if(xyzMonster != null) {
+            card = xyzMonster;
+            xyzMonster = null;
+        } else if(materials.cards.size() > 0) {
+            card = materials.cards.remove(0);
+        }
+        return card;
+    }
+
     private Bitmap materialsBmp() {
         int materialOffset = materials.cards.size() - 1;
         int overlayOffset = Utils.cardWidth() / 15;

@@ -25,7 +25,21 @@ public class Drag implements Touch {
             Field field = duel.fieldAt(fromX, fromY);
             from = field;
             if(field != null) {
-                item = field.removeItem();
+                item = field.getItem();
+                if(item instanceof CardList) {
+                    from = item;
+                    item = ((CardList)item).pop();
+                } else if(item instanceof Overlay) {
+                    Overlay overlay = (Overlay)item;
+                    if(!overlay.isSelect()) {
+                        item = overlay.removeTopCard();
+                        from = overlay;
+                    } else {
+                        field.removeItem();
+                    }
+                } else {
+                    field.removeItem();
+                }
             }
         } else if(duel.inHand(fromX, fromY)) {
             from = duel.getHandCards();
