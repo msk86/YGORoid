@@ -47,6 +47,15 @@ public class CardList implements SelectableItem {
         }
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int size() {
+        return cards.size();
+    }
+
+
     public Card pop() {
         if(cards.size() > 0) {
             return cards.remove(0);
@@ -62,6 +71,9 @@ public class CardList implements SelectableItem {
     }
 
     public void push(Card card) {
+        if(card == null) {
+            return;
+        }
         if (open) {
             card.open();
         } else {

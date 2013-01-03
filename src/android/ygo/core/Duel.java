@@ -53,6 +53,7 @@ public class Duel implements Item {
             currentSelectItem.unSelect();
             currentSelectItem = null;
         }
+        window.clearInfo();
     }
 
     public void select(SelectableItem item) {
@@ -64,6 +65,10 @@ public class Duel implements Item {
             currentSelectItem.select();
         } else {
             unSelect();
+        }
+
+        if(item != null) {
+            window.setInfo(item);
         }
     }
 

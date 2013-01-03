@@ -8,17 +8,27 @@ import android.ygo.utils.Utils;
 
 public class InfoWindow implements Item {
 
-    Card card;
+    String info;
 
-    public void setCard(Card card) {
-        this.card = card;
+    public void setInfo(SelectableItem item) {
+        String info = null;
+        if(item instanceof Card) {
+            info = ((Card)item).toString();
+        } else if(item instanceof Overlay) {
+            info = ((Overlay)item).topCard().toString();
+        } else if(item instanceof CardList) {
+            CardList cardList = (CardList) item;
+            info = cardList.getName() + "[" + cardList.size() + "]";
+        }
+        setInfo(info);
     }
 
-    private String cardDesc() {
-        if (card == null) {
-            return "";
-        }
-        return "流天类星龙 L12 4000/4000 光 龙";
+    public void setInfo(String info) {
+        this.info = info == null ? "" : info;
+    }
+
+    public void clearInfo() {
+        this.info = "";
     }
 
     @Override
@@ -41,7 +51,7 @@ public class InfoWindow implements Item {
         paint.setColor(Color.WHITE);
         paint.setStrokeWidth(1);
         paint.setTextSize(height);
-        canvas.drawText(cardDesc(), 5, height - 2, paint);
+        canvas.drawText(info, 5, height - 2, paint);
 
         return winBmp;
     }

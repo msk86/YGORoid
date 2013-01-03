@@ -106,7 +106,7 @@ public class DuelDiskView extends View {
         hands.add(new Card("12345678", CardType.SYNC_MONSTER, false, true));
         duel.getHandCards().add(hands);
 
-        duel.getInfoWindow().setCard(hands.get(2));
+        duel.getInfoWindow().setInfo("No 39 希望皇 霍普 R4 2500/2000 光 战士");
     }
 
     @Override
