@@ -22,8 +22,10 @@ public class Utils {
     }
 
     public static int unitLength() {
-        int unitLengthW = (int) (dm.widthPixels / 6f);
-        int unitLengthH = (int) (dm.heightPixels / 3.9f);
+        int longer = dm.widthPixels > dm.heightPixels ? dm.widthPixels : dm.heightPixels;
+        int shorter = dm.widthPixels < dm.heightPixels ? dm.widthPixels : dm.heightPixels;
+        int unitLengthW = (int) (longer / 6f);
+        int unitLengthH = (int) (shorter / 3.9f);
         return unitLengthW < unitLengthH ? unitLengthW : unitLengthH;
     }
 
