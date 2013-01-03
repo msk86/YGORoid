@@ -22,6 +22,8 @@ public class PlayGestureListener extends GestureDetector.SimpleOnGestureListener
             drag.dropTo(event.getX(), event.getY());
             view.getDuel().setDrag(null);
         }
+        Action action = ActionDispatcher.dispatch(drag);
+        action.execute();
         view.invalidate();
     }
 

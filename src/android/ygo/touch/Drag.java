@@ -8,6 +8,7 @@ public class Drag implements Touch {
     int toX, toY;
     boolean dragging;
     private Duel duel;
+    Item from;
     SelectableItem item;
     Item target;
 
@@ -22,10 +23,12 @@ public class Drag implements Touch {
         dragging = true;
         if(duel.inDuelFields(fromX, fromY)) {
             Field field = duel.fieldAt(fromX, fromY);
+            from = field;
             if(field != null) {
                 item = field.removeItem();
             }
         } else if(duel.inHand(fromX, fromY)) {
+            from = duel.getHandCards();
             item = duel.itemAt(fromX, fromY);
             duel.getHandCards().remove((Card)item);
         }
@@ -47,10 +50,12 @@ public class Drag implements Touch {
         dragging = false;
         if(target instanceof HandCards) {
             ((HandCards)target).add((Card) item);
-        } else if(target instanceof Field) {
-            ((Field)target).setItem(item);
         }
         return target;
+    }
+
+    public Item getFrom() {
+        return from;
     }
 
     @Override
