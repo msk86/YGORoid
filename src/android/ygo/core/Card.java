@@ -34,7 +34,7 @@ public class Card implements SelectableItem {
         initCardPic();
     }
 
-    public void turnOver() {
+    public void flip() {
         set = !set;
     }
 

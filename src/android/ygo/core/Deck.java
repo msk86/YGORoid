@@ -23,7 +23,7 @@ public class Deck extends CardList {
         List<Card> reservedCards = new ArrayList<Card>();
         for (int i = cards.size() - 1; i >= 0; i--) {
             Card card = cards.get(i);
-            card.turnOver();
+            card.flip();
             reservedCards.add(card);
         }
         cards = reservedCards;

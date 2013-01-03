@@ -48,7 +48,7 @@ public class CardList implements SelectableItem {
     }
 
     public Card pop() {
-        if(cards.size() >= 0) {
+        if(cards.size() > 0) {
             return cards.remove(0);
         }
         return null;

@@ -8,6 +8,7 @@ import android.ygo.action.ActionDispatcher;
 import android.ygo.touch.Click;
 import android.ygo.touch.DoubleClick;
 import android.ygo.touch.Drag;
+import android.ygo.touch.Press;
 
 public class PlayGestureListener extends GestureDetector.SimpleOnGestureListener {
     DuelDiskView view;
@@ -43,7 +44,10 @@ public class PlayGestureListener extends GestureDetector.SimpleOnGestureListener
 
     @Override
     public void onLongPress(MotionEvent event) {
-        Log.e("YGO", "Longggggggggg~");
+        Press press = new Press(view.getDuel(), event.getX(), event.getY());
+        Action action = ActionDispatcher.dispatch(press);
+        action.execute();
+        view.invalidate();
     }
 
     @Override

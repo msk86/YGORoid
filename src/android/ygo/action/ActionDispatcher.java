@@ -4,28 +4,37 @@ import android.ygo.core.*;
 import android.ygo.touch.Click;
 import android.ygo.touch.DoubleClick;
 import android.ygo.touch.Drag;
+import android.ygo.touch.Press;
 
 public class ActionDispatcher {
 
     public static Action dispatch(Click click) {
-        Action action = new EmptyAction();
-        if(click.getItem() != null) {
-            action = new SelectAction(click);
-        }
+        Action action = new SelectAction(click);
         return action;
     }
-    public static Action dispatch(DoubleClick dblClick) {
+    public static Action dispatch(Press press) {
         Action action = new EmptyAction();
-        if(dblClick.getItem() != null) {
-            if(dblClick.getContainer() instanceof Field) {
-                Field field = (Field)dblClick.getContainer();
+        if(press.getItem() != null) {
+            if(press.getContainer() instanceof Field) {
+                Field field = (Field)press.getContainer();
                 if(field.getType() == FieldType.MONSTER_ZONE) {
-                    action = new MonsterPositionAction(dblClick);
+                    action = new MonsterPositionAction(press);
                 }
             }
         }
         return action;
     }
+
+    public static Action dispatch(DoubleClick dblClick) {
+        Action action = new EmptyAction();
+        if(dblClick.getContainer() instanceof Field) {
+            if(dblClick.getItem() instanceof Card || dblClick.getItem() instanceof Overlay) {
+                action = new FlipAction(dblClick);
+            }
+        }
+        return action;
+    }
+
     public static Action dispatch(Drag drag) {
         Action action = new RevertDragAction(drag);
         if(drag.getContainer() instanceof Field) {

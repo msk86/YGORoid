@@ -66,6 +66,9 @@ public class HandCards implements Item {
     }
 
     private int cardPadding() {
+        if(cards.size() <= 1) {
+            return 0;
+        }
         int maxWidth = Utils.unitLength() * 6;
         int maxPadding = Utils.cardWidth() / 10;
         int wPadding = (maxWidth - Utils.cardWidth()) / (cards.size() - 1) - Utils.cardWidth();
@@ -75,7 +78,7 @@ public class HandCards implements Item {
 
     private int cardsWidth() {
         int wPadding = cardPadding();
-        return  cards.size() * Utils.cardWidth() + (cards.size() - 1) * wPadding;
+        return  cards.size() * Utils.cardWidth() + (cards.size() - 1) * wPadding + 1;
     }
 
 

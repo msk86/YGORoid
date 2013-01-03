@@ -62,6 +62,8 @@ public class Duel implements Item {
                 currentSelectItem = item;
             }
             currentSelectItem.select();
+        } else {
+            unSelect();
         }
     }
 
