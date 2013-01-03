@@ -12,11 +12,11 @@ public class InfoWindow implements Item {
 
     public void setInfo(SelectableItem item) {
         String info = null;
-        if(item instanceof Card) {
-            info = ((Card)item).toString();
-        } else if(item instanceof Overlay) {
-            info = ((Overlay)item).topCard().toString();
-        } else if(item instanceof CardList) {
+        if (item instanceof Card) {
+            info = ((Card) item).toString();
+        } else if (item instanceof Overlay) {
+            info = ((Overlay) item).topCard().toString();
+        } else if (item instanceof CardList) {
             CardList cardList = (CardList) item;
             info = cardList.getName() + "[" + cardList.size() + "]";
         }

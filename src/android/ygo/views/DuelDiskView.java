@@ -7,16 +7,9 @@ import android.graphics.Paint;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.util.Log;
-import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.ygo.action.Action;
-import android.ygo.action.ActionDispatcher;
 import android.ygo.core.*;
-import android.ygo.touch.Click;
-import android.ygo.touch.DoubleClick;
-import android.ygo.touch.Drag;
-import android.ygo.touch.Touch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +27,7 @@ public class DuelDiskView extends View {
         painter = new Paint();
         duel = new Duel();
         mGestureDetector = new PlayGestureDetector(new PlayGestureListener(this));
-        sensorManager = ((SensorManager)context.getSystemService(Context.SENSOR_SERVICE));
+        sensorManager = ((SensorManager) context.getSystemService(Context.SENSOR_SERVICE));
         Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         sensorManager.registerListener(new PlaySensorEventListener(this), sensor, SensorManager.SENSOR_DELAY_GAME);
         this.setLongClickable(true);

@@ -23,7 +23,7 @@ public class HandCards implements Item {
     }
 
     public void add(Card card) {
-        if(!set) {
+        if (!set) {
             card.open();
         } else {
             card.set();
@@ -50,8 +50,8 @@ public class HandCards implements Item {
     }
 
     public Card cardAt(int x, int y) {
-        int padding = (Utils.unitLength() * 6 - cardsWidth() ) / 2;
-        if(x <= padding) {
+        int padding = (Utils.unitLength() * 6 - cardsWidth()) / 2;
+        if (x <= padding) {
             return null;
         }
 
@@ -59,11 +59,11 @@ public class HandCards implements Item {
 
         int currX = padding;
         int cw = Utils.cardWidth();
-        for(int i=0;i<cards.size();i++) {
-            if(i == cards.size() - 1) {
+        for (int i = 0; i < cards.size(); i++) {
+            if (i == cards.size() - 1) {
                 cardPadding = 0;
             }
-            if(currX < x && x < currX + cw + cardPadding) {
+            if (currX < x && x < currX + cw + cardPadding) {
                 return cards.get(i);
             }
             currX += cw + cardPadding;
@@ -72,7 +72,7 @@ public class HandCards implements Item {
     }
 
     private int cardPadding() {
-        if(cards.size() <= 1) {
+        if (cards.size() <= 1) {
             return 0;
         }
         int maxWidth = Utils.unitLength() * 6;
@@ -84,25 +84,25 @@ public class HandCards implements Item {
 
     private int cardsWidth() {
         int wPadding = cardPadding();
-        return  cards.size() * Utils.cardWidth() + (cards.size() - 1) * wPadding + 1;
+        return cards.size() * Utils.cardWidth() + (cards.size() - 1) * wPadding + 1;
     }
 
     public void setAll() {
-        for(Card card : cards) {
+        for (Card card : cards) {
             card.set();
         }
         set = true;
     }
 
     public void openAll() {
-        for(Card card : cards) {
+        for (Card card : cards) {
             card.open();
         }
         set = false;
     }
 
     public void flipAll() {
-        if(set) {
+        if (set) {
             openAll();
         } else {
             setAll();

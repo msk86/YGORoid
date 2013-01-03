@@ -1,6 +1,7 @@
 package android.ygo.action;
 
-import android.ygo.core.*;
+import android.ygo.core.Card;
+import android.ygo.core.Overlay;
 import android.ygo.touch.Touch;
 
 public class MonsterPositionAction extends BaseAction {
@@ -12,12 +13,12 @@ public class MonsterPositionAction extends BaseAction {
     @Override
     public void execute() {
         Card card;
-        if(item instanceof Overlay) {
-            card = ((Overlay)item).topCard();
+        if (item instanceof Overlay) {
+            card = ((Overlay) item).topCard();
         } else {
-            card = (Card)item;
+            card = (Card) item;
         }
-        if(card != null) {
+        if (card != null) {
             card.changePosition();
             duel.select(card);
         }

@@ -14,26 +14,26 @@ public class Drag implements Touch {
 
     public Drag(Duel duel, float fx, float fy) {
         this.duel = duel;
-        fromX = (int)fx;
-        fromY = (int)fy;
+        fromX = (int) fx;
+        fromY = (int) fy;
         x = fromX;
         y = fromY;
         toX = -1;
         toY = -1;
         dragging = true;
-        if(duel.inDuelFields(fromX, fromY)) {
+        if (duel.inDuelFields(fromX, fromY)) {
             Field field = duel.fieldAt(fromX, fromY);
             from = field;
-            if(field != null) {
+            if (field != null) {
                 item = field.getItem();
-                if(item instanceof CardList) {
+                if (item instanceof CardList) {
                     from = item;
-                    item = ((CardList)item).pop();
-                } else if(item instanceof Overlay) {
-                    Overlay overlay = (Overlay)item;
-                    if(overlay.topCard().isSelect()) {
+                    item = ((CardList) item).pop();
+                } else if (item instanceof Overlay) {
+                    Overlay overlay = (Overlay) item;
+                    if (overlay.topCard().isSelect()) {
                         item = overlay.removeTopCard();
-                        if(overlay.totalCard() > 0) {
+                        if (overlay.totalCard() > 0) {
                             from = overlay;
                         } else {
                             field.removeItem();
@@ -45,27 +45,27 @@ public class Drag implements Touch {
                     field.removeItem();
                 }
             }
-        } else if(duel.inHand(fromX, fromY)) {
+        } else if (duel.inHand(fromX, fromY)) {
             from = duel.getHandCards();
             item = duel.itemAt(fromX, fromY);
-            duel.getHandCards().remove((Card)item);
+            duel.getHandCards().remove((Card) item);
         }
-        if(item != null && !item.isSelect()) {
+        if (item != null && !item.isSelect()) {
             duel.select(item);
         }
     }
 
     public void move(float fx, float fy) {
-        this.x = (int)fx;
-        this.y = (int)fy;
+        this.x = (int) fx;
+        this.y = (int) fy;
     }
 
     public Item dropTo(float tx, float ty) {
-        toX = (int)tx;
-        toY = (int)ty;
-        if(duel.inHand(toX, toY)){
+        toX = (int) tx;
+        toY = (int) ty;
+        if (duel.inHand(toX, toY)) {
             target = duel.getHandCards();
-        } else if(duel.inDuelFields(toX, toY)) {
+        } else if (duel.inDuelFields(toX, toY)) {
             target = duel.fieldAt(toX, toY);
         }
         dragging = false;

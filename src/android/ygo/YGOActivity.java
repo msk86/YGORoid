@@ -18,7 +18,7 @@ public class YGOActivity extends Activity {
 
     public boolean onTouch(View v, MotionEvent event) {
         switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN :
+            case MotionEvent.ACTION_DOWN:
 
         }
         return false;

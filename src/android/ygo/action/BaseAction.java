@@ -3,7 +3,6 @@ package android.ygo.action;
 import android.ygo.core.Duel;
 import android.ygo.core.Item;
 import android.ygo.core.SelectableItem;
-import android.ygo.touch.Touch;
 
 public abstract class BaseAction implements Action {
     protected Duel duel;

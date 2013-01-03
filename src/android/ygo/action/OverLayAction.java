@@ -14,12 +14,12 @@ public class OverlayAction extends BaseAction {
 
     @Override
     public void execute() {
-        Card card = (Card)item;
+        Card card = (Card) item;
         Field field = (Field) container;
         SelectableItem targetItem = field.getItem();
-        if(targetItem instanceof Overlay) {
-             ((Overlay)targetItem).overlay(card);
-        } else if(targetItem instanceof Card) {
+        if (targetItem instanceof Overlay) {
+            ((Overlay) targetItem).overlay(card);
+        } else if (targetItem instanceof Card) {
             Card targetCard = (Card) targetItem;
             field.removeItem();
             Overlay overlay = new Overlay(targetCard);

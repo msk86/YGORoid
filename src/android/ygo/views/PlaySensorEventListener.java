@@ -18,10 +18,10 @@ public class PlaySensorEventListener implements SensorEventListener {
 
     @Override
     public void onSensorChanged(SensorEvent e) {
-        int z = (int)e.values[SensorManager.DATA_Z];
-        if(lastZ != z) {
+        int z = (int) e.values[SensorManager.DATA_Z];
+        if (lastZ != z) {
             HandCards handCards = view.getDuel().getHandCards();
-            if(z >= 7) {
+            if (z >= 7) {
                 handCards.setAll();
             } else {
                 handCards.openAll();

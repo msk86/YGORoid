@@ -22,10 +22,10 @@ public class Overlay implements SelectableItem {
     }
 
     public void overlay(Card card) {
-        if(topCard == null) {
+        if (topCard == null) {
             topCard = card;
         } else {
-            if(topCard.type == CardType.XYZ_MONSTER && card.type != CardType.XYZ_MONSTER) {
+            if (topCard.type == CardType.XYZ_MONSTER && card.type != CardType.XYZ_MONSTER) {
                 materials.push(card);
             } else {
                 materials.push(topCard);
@@ -103,7 +103,7 @@ public class Overlay implements SelectableItem {
     @Override
     public void select() {
         Card topCard = topCard();
-        if(topCard != null) {
+        if (topCard != null) {
             topCard.select();
         }
         selected = true;

@@ -73,7 +73,7 @@ public class DuelFields implements Item {
 
     public SelectableItem itemOnFieldAt(int x, int y) {
         Field field = fieldAt(x, y);
-        if(field != null) {
+        if (field != null) {
             return field.getItem();
         }
         return null;
@@ -89,12 +89,12 @@ public class DuelFields implements Item {
         Paint paint = new Paint();
         int ul = Utils.unitLength();
 
-        for(int y=0;y<fieldMatrix.size();y++) {
+        for (int y = 0; y < fieldMatrix.size(); y++) {
             List<Field> fieldLine = fieldMatrix.get(y);
-            for(int x=0;x<fieldLine.size();x++) {
+            for (int x = 0; x < fieldLine.size(); x++) {
                 Field field = fieldLine.get(x);
-                if(field != null) {
-                    Utils.drawBitmapOnCanvas(canvas, field.toBitmap(), paint, ul*x, ul *y);
+                if (field != null) {
+                    Utils.drawBitmapOnCanvas(canvas, field.toBitmap(), paint, ul * x, ul * y);
                 }
             }
         }

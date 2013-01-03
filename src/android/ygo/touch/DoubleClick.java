@@ -13,8 +13,8 @@ public class DoubleClick implements Touch {
     Item container;
 
     public DoubleClick(Duel duel, float fx, float fy) {
-        x = (int)fx;
-        y = (int)fy;
+        x = (int) fx;
+        y = (int) fy;
         this.duel = duel;
         item = duel.itemAt(x, y);
         container = duel.containerAt(x, y);

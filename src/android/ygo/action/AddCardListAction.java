@@ -13,14 +13,14 @@ public class AddCardListAction extends BaseAction {
 
     @Override
     public void execute() {
-        CardList cl = (CardList)((Field)container).getItem();
-        if(item instanceof Card) {
-            cl.push((Card)item);
-        } else if(item instanceof Overlay) {
-            Overlay ol = (Overlay)item;
+        CardList cl = (CardList) ((Field) container).getItem();
+        if (item instanceof Card) {
+            cl.push((Card) item);
+        } else if (item instanceof Overlay) {
+            Overlay ol = (Overlay) item;
             cl.push(ol.getMaterials());
             Card xyzMonster = ol.topCard();
-            if(xyzMonster != null) {
+            if (xyzMonster != null) {
                 cl.push(xyzMonster);
             }
         }

@@ -8,15 +8,16 @@ public class FlipAction extends BaseAction {
     public FlipAction(Touch touch) {
         super(touch.getDuel(), touch.getContainer(), touch.getItem());
     }
+
     @Override
     public void execute() {
         Card card = null;
-        if(item instanceof Card) {
-            card = (Card)item;
-        } else if(item instanceof Overlay) {
-            card = ((Overlay)item).topCard();
+        if (item instanceof Card) {
+            card = (Card) item;
+        } else if (item instanceof Overlay) {
+            card = ((Overlay) item).topCard();
         }
-        if(card != null) {
+        if (card != null) {
             card.flip();
             duel.select(card);
         }

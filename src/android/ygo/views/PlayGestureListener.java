@@ -1,6 +1,5 @@
 package android.ygo.views;
 
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.ygo.action.Action;
@@ -19,7 +18,7 @@ public class PlayGestureListener extends GestureDetector.SimpleOnGestureListener
 
     public void onUp(MotionEvent event) {
         Drag drag = view.getDuel().getDrag();
-        if(drag != null) {
+        if (drag != null) {
             drag.dropTo(event.getX(), event.getY());
             view.getDuel().setDrag(null);
             Action action = ActionDispatcher.dispatch(drag);
@@ -62,7 +61,7 @@ public class PlayGestureListener extends GestureDetector.SimpleOnGestureListener
     @Override
     public boolean onScroll(MotionEvent event1, MotionEvent event2, float dx, float dy) {
         Drag drag = view.getDuel().getDrag();
-        if(drag == null) {
+        if (drag == null) {
             drag = new Drag(view.getDuel(), event1.getX(), event1.getY());
             view.getDuel().setDrag(drag);
         }
