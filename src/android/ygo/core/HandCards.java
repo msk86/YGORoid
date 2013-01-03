@@ -11,9 +11,11 @@ import java.util.List;
 public class HandCards implements Item {
 
     private List<Card> cards;
+    private boolean set;
 
     public HandCards() {
         cards = new ArrayList<Card>();
+        set = false;
     }
 
     public void shuffle() {
@@ -81,6 +83,27 @@ public class HandCards implements Item {
         return  cards.size() * Utils.cardWidth() + (cards.size() - 1) * wPadding + 1;
     }
 
+    public void setAll() {
+        for(Card card : cards) {
+            card.set();
+        }
+        set = true;
+    }
+
+    public void openAll() {
+        for(Card card : cards) {
+            card.open();
+        }
+        set = false;
+    }
+
+    public void flipAll() {
+        if(set) {
+            openAll();
+        } else {
+            setAll();
+        }
+    }
 
     private Bitmap cardsBmp() {
         int wPadding = cardPadding();

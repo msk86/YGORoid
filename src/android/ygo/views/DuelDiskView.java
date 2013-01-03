@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -21,6 +23,9 @@ import java.util.List;
 
 public class DuelDiskView extends View {
     private PlayGestureDetector mGestureDetector;
+    private SensorManager sensorManager;
+    private Sensor sensor;
+
     private Paint painter;
 
     private Duel duel;
@@ -30,6 +35,9 @@ public class DuelDiskView extends View {
         painter = new Paint();
         duel = new Duel();
         mGestureDetector = new PlayGestureDetector(new PlayGestureListener(this));
+        sensorManager = ((SensorManager)context.getSystemService(Context.SENSOR_SERVICE));
+        sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        sensorManager.registerListener(new PlaySensorEventListener(this), sensor, SensorManager.SENSOR_DELAY_GAME);
         this.setLongClickable(true);
 
         initDuelDiskTest();
