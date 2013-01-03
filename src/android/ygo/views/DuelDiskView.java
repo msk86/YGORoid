@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.ygo.action.Action;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DuelDiskView extends View {
-
+    private PlayGestureDetector mGestureDetector;
     private Paint painter;
 
     private Duel duel;
@@ -28,10 +29,15 @@ public class DuelDiskView extends View {
         super(context);
         painter = new Paint();
         duel = new Duel();
-        new TouchListener(this);
+        mGestureDetector = new PlayGestureDetector(new PlayGestureListener(this));
+        this.setLongClickable(true);
 
         initDuelDiskTest();
 
+    }
+
+    public Duel getDuel() {
+        return duel;
     }
 
     private void initDuelDiskTest() {
@@ -112,65 +118,13 @@ public class DuelDiskView extends View {
         Log.e("YGO", "DRAW_TIME:" + (et - st));
     }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return mGestureDetector.onTouchEvent(event);
+    }
+
     private void drawBackground(Canvas canvas) {
         canvas.drawColor(Color.BLACK);
         // IMAGE BACKGROUND
     }
-
-    private static class TouchListener implements OnTouchListener {
-
-        DuelDiskView view;
-        long lastClickTime;
-
-        public TouchListener(DuelDiskView view) {
-            this.view = view;
-            this.view.setOnTouchListener(this);
-        }
-
-        @Override
-        public boolean onTouch(View view1, MotionEvent event) {
-            int x = (int)event.getX();
-            int y = (int)event.getY();
-            Touch touch = null;
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN :
-                    long currentClickTime = System.currentTimeMillis();
-                    if(currentClickTime - lastClickTime > 500) {
-                        touch = new Click(this.view.duel, x, y);
-                    } else {
-                        Log.e("YGO", "DBLCLICK");
-                        touch = new DoubleClick(this.view.duel, x, y);
-                    }
-                    lastClickTime = currentClickTime;
-                    break;
-                case MotionEvent.ACTION_MOVE :
-                    if(view.duel.getDrag() == null) {
-                        Drag drag = new Drag(view.duel, x, y);
-                        if(drag.getItem() != null) {
-                            view.duel.setDrag(drag);
-                        }
-                    }
-                    Drag duelDrag = view.duel.getDrag();
-                    if(duelDrag != null) {
-                        duelDrag.move(x, y);
-                    }
-                    break;
-                case MotionEvent.ACTION_UP :
-                    if(view.duel.getDrag() != null) {
-                        Drag drag = view.duel.getDrag();
-                        view.duel.setDrag(null);
-                        drag.dropTo(x, y);
-                        touch = drag;
-                    }
-                    break;
-            }
-
-            Action action = ActionDispatcher.dispatch(touch);
-            action.execute();
-
-            this.view.invalidate();
-            return true;
-        }
-    }
-
 }

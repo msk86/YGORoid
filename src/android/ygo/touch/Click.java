@@ -12,9 +12,9 @@ public class Click implements Touch {
     SelectableItem item;
     Item container;
 
-    public Click(Duel duel, int x, int y) {
-        this.x = x;
-        this.y = y;
+    public Click(Duel duel, float fx, float fy) {
+        x = (int)fx;
+        y = (int)fy;
         this.duel = duel;
         item = duel.itemAt(x, y);
         container = duel.containerAt(x, y);

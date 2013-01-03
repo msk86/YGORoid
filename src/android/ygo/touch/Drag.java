@@ -11,36 +11,38 @@ public class Drag implements Touch {
     SelectableItem item;
     Item target;
 
-    public Drag(Duel duel, int fx, int fy) {
+    public Drag(Duel duel, float fx, float fy) {
         this.duel = duel;
-        fromX = fx;
-        fromY = fy;
-        x = fx;
-        y = fy;
+        fromX = (int)fx;
+        fromY = (int)fy;
+        x = fromX;
+        y = fromY;
         toX = -1;
         toY = -1;
         dragging = true;
-        if(duel.inDuelFields(fx, fy)) {
-            Field field = duel.fieldAt(fx, fy);
-            item = field.removeItem();
-        } else if(duel.inHand(fx, fy)) {
-            item = duel.itemAt(fx, fy);
+        if(duel.inDuelFields(fromX, fromY)) {
+            Field field = duel.fieldAt(fromX, fromY);
+            if(field != null) {
+                item = field.removeItem();
+            }
+        } else if(duel.inHand(fromX, fromY)) {
+            item = duel.itemAt(fromX, fromY);
             duel.getHandCards().remove((Card)item);
         }
     }
 
-    public void move(int x, int y) {
-        this.x = x;
-        this.y = y;
+    public void move(float fx, float fy) {
+        this.x = (int)fx;
+        this.y = (int)fy;
     }
 
-    public Item dropTo(int tx, int ty) {
-        toX = tx;
-        toY = ty;
-        if(duel.inHand(tx, ty)){
+    public Item dropTo(float tx, float ty) {
+        toX = (int)tx;
+        toY = (int)ty;
+        if(duel.inHand(toX, toY)){
             target = duel.getHandCards();
-        } else if(duel.inDuelFields(tx, ty)) {
-            target = duel.fieldAt(tx, ty);
+        } else if(duel.inDuelFields(toX, toY)) {
+            target = duel.fieldAt(toX, toY);
         }
         dragging = false;
         if(target instanceof HandCards) {
