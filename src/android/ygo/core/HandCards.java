@@ -23,6 +23,7 @@ public class HandCards implements Item {
     public void add(Card card) {
         card.open();
         card.positive();
+        card.unSelect();
         cards.add(card);
     }
 

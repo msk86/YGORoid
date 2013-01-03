@@ -68,6 +68,7 @@ public class CardList implements SelectableItem {
             card.set();
         }
         card.positive();
+        card.unSelect();
         cards.add(0, card);
     }
 
@@ -89,6 +90,7 @@ public class CardList implements SelectableItem {
             card.set();
         }
         card.positive();
+        card.unSelect();
         cards.add(card);
     }
 

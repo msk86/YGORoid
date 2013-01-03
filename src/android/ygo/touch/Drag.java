@@ -62,9 +62,6 @@ public class Drag implements Touch {
             target = duel.fieldAt(toX, toY);
         }
         dragging = false;
-        if(target instanceof HandCards) {
-            ((HandCards)target).add((Card) item);
-        }
         return target;
     }
 

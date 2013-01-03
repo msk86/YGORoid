@@ -1,7 +1,9 @@
 package android.ygo.action;
 
+import android.ygo.core.Card;
 import android.ygo.core.Field;
 import android.ygo.core.FieldType;
+import android.ygo.core.HandCards;
 import android.ygo.touch.Click;
 import android.ygo.touch.DoubleClick;
 import android.ygo.touch.Drag;
@@ -33,6 +35,11 @@ public class ActionDispatcher {
             Field field = (Field)drag.getContainer();
             if(field.getItem() == null) {
                 action = new MoveAction(drag);
+            }
+        }
+        if(drag.getContainer() instanceof HandCards) {
+            if(drag.getItem() instanceof Card) {
+                action = new AddHandCardAction(drag);
             }
         }
         return action;
