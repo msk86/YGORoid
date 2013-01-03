@@ -10,7 +10,6 @@ public class SelectAction extends BaseAction {
 
     @Override
     public void execute() {
-        duel.unSelect();
         duel.select(item);
     }
 }

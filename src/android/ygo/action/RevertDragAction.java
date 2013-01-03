@@ -1,9 +1,6 @@
 package android.ygo.action;
 
-import android.ygo.core.Card;
-import android.ygo.core.Field;
-import android.ygo.core.HandCards;
-import android.ygo.core.Item;
+import android.ygo.core.*;
 import android.ygo.touch.Drag;
 import android.ygo.touch.Touch;
 
@@ -23,6 +20,10 @@ public class RevertDragAction extends BaseAction {
             ((Field)from).setItem(item);
         } else if(from instanceof HandCards) {
             ((HandCards)from).add((Card)item);
+        } else if(from instanceof CardList) {
+            ((CardList)from).push((Card)item);
+        } else if(from instanceof Overlay) {
+            ((Overlay)from).overlay((Card)item);
         }
     }
 }

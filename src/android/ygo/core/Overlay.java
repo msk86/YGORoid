@@ -40,7 +40,7 @@ public class Overlay implements SelectableItem {
         return count;
     }
 
-    private Card topCard() {
+    public Card topCard() {
         if (xyzMonster != null) {
             return xyzMonster;
         }
@@ -68,6 +68,22 @@ public class Overlay implements SelectableItem {
         return materialsBmp;
     }
 
+    private Bitmap highLight() {
+        int height = Utils.cardHeight();
+        int width = height;
+        Bitmap highLightBmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(highLightBmp);
+        canvas.drawColor(Color.TRANSPARENT);
+        Paint paint = new Paint();
+        paint.setColor(Configuration.highlightColor());
+        paint.setStrokeWidth(4);
+        canvas.drawLine(0, 0, width, 0, paint);
+        canvas.drawLine(width, 0, width, height, paint);
+        canvas.drawLine(width, height, 0, height, paint);
+        canvas.drawLine(0, height, 0, 0, paint);
+        return highLightBmp;
+    }
+
     @Override
     public Bitmap toBitmap() {
         int overlayOffset = Utils.cardWidth() / 15;
@@ -89,16 +105,27 @@ public class Overlay implements SelectableItem {
         if (xyzMonster != null) {
             Utils.drawBitmapOnCanvas(canvas, xyzMonster.toBitmap(), paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_CENTER);
         }
+        if(selected) {
+            Bitmap highLight = highLight();
+            Utils.drawBitmapOnCanvas(canvas, highLight, paint, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_FIRST);
+        }
         return overlayBmp;
     }
 
     @Override
     public void select() {
-        selected = true;
         Card topCard = topCard();
-        if (topCard != null) {
-            topCard.select();
+        if(topCard != null) {
+            if(!topCard.isSelect()) {
+                topCard.select();
+                selected = false;
+            } else {
+                topCard.unSelect();
+                selected = true;
+            }
         }
+
+
     }
 
     @Override
