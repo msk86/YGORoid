@@ -33,7 +33,11 @@ public class Drag implements Touch {
                     Overlay overlay = (Overlay)item;
                     if(overlay.topCard().isSelect()) {
                         item = overlay.removeTopCard();
-                        from = overlay;
+                        if(overlay.totalCard() > 0) {
+                            from = overlay;
+                        } else {
+                            field.removeItem();
+                        }
                     } else {
                         field.removeItem();
                     }

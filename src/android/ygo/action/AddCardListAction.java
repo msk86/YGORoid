@@ -19,7 +19,7 @@ public class AddCardListAction extends BaseAction {
         } else if(item instanceof Overlay) {
             Overlay ol = (Overlay)item;
             cl.push(ol.getMaterials());
-            Card xyzMonster = ol.getXyzMonster();
+            Card xyzMonster = ol.topCard();
             if(xyzMonster != null) {
                 cl.push(xyzMonster);
             }

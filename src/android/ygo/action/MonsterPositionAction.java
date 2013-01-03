@@ -13,7 +13,7 @@ public class MonsterPositionAction extends BaseAction {
     public void execute() {
         Card card;
         if(item instanceof Overlay) {
-            card = ((Overlay)item).getXyzMonster();
+            card = ((Overlay)item).topCard();
         } else {
             card = (Card)item;
         }

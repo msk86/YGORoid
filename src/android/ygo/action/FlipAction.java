@@ -14,7 +14,7 @@ public class FlipAction extends BaseAction {
         if(item instanceof Card) {
             card = (Card)item;
         } else if(item instanceof Overlay) {
-            card = ((Overlay)item).getXyzMonster();
+            card = ((Overlay)item).topCard();
         }
         if(card != null) {
             card.flip();

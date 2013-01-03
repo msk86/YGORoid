@@ -24,7 +24,6 @@ import java.util.List;
 public class DuelDiskView extends View {
     private PlayGestureDetector mGestureDetector;
     private SensorManager sensorManager;
-    private Sensor sensor;
 
     private Paint painter;
 
@@ -36,7 +35,7 @@ public class DuelDiskView extends View {
         duel = new Duel();
         mGestureDetector = new PlayGestureDetector(new PlayGestureListener(this));
         sensorManager = ((SensorManager)context.getSystemService(Context.SENSOR_SERVICE));
-        sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         sensorManager.registerListener(new PlaySensorEventListener(this), sensor, SensorManager.SENSOR_DELAY_GAME);
         this.setLongClickable(true);
 
