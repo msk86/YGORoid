@@ -31,7 +31,7 @@ public class Drag implements Touch {
                     item = ((CardList) item).pop();
                 } else if (item instanceof Overlay) {
                     Overlay overlay = (Overlay) item;
-                    if (overlay.topCard().isSelect()) {
+                    if (overlay.topCard().isSelect() || overlay.totalCard() == 1) {
                         item = overlay.removeTopCard();
                         if (overlay.totalCard() > 0) {
                             from = overlay;
