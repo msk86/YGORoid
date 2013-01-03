@@ -14,5 +14,6 @@ public class AddHandCardAction extends BaseAction {
         HandCards hc = (HandCards)container;
         hc.add((Card) item);
 //        hc.shuffle();
+        duel.select(item);
     }
 }

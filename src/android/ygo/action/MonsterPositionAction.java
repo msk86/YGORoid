@@ -11,16 +11,15 @@ public class MonsterPositionAction extends BaseAction {
 
     @Override
     public void execute() {
-        if(container instanceof Field) {
-            Card card;
-            if(item instanceof Overlay) {
-                card = ((Overlay)item).getXyzMonster();
-            } else {
-                card = (Card)item;
-            }
-            if(card != null) {
-                card.changePosition();
-            }
+        Card card;
+        if(item instanceof Overlay) {
+            card = ((Overlay)item).getXyzMonster();
+        } else {
+            card = (Card)item;
         }
+        if(card != null) {
+            card.changePosition();
+        }
+        duel.select(card);
     }
 }

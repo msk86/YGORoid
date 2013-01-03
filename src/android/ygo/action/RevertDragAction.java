@@ -25,5 +25,6 @@ public class RevertDragAction extends BaseAction {
         } else if(from instanceof Overlay) {
             ((Overlay)from).overlay((Card)item);
         }
+        duel.select(item);
     }
 }

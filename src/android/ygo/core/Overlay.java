@@ -135,8 +135,6 @@ public class Overlay implements SelectableItem {
                 selected = true;
             }
         }
-
-
     }
 
     @Override

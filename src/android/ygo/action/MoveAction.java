@@ -12,5 +12,6 @@ public class MoveAction extends BaseAction {
     @Override
     public void execute() {
         ((Field)container).setItem(item);
+        duel.select(item);
     }
 }
