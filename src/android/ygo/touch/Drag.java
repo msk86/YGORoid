@@ -31,7 +31,7 @@ public class Drag implements Touch {
                     item = ((CardList)item).pop();
                 } else if(item instanceof Overlay) {
                     Overlay overlay = (Overlay)item;
-                    if(!overlay.isSelect()) {
+                    if(overlay.topCard().isSelect()) {
                         item = overlay.removeTopCard();
                         from = overlay;
                     } else {
@@ -45,6 +45,9 @@ public class Drag implements Touch {
             from = duel.getHandCards();
             item = duel.itemAt(fromX, fromY);
             duel.getHandCards().remove((Card)item);
+        }
+        if(item != null && !item.isSelect()) {
+            duel.select(item);
         }
     }
 

@@ -29,6 +29,11 @@ public class PlayGestureListener extends GestureDetector.SimpleOnGestureListener
 
     @Override
     public boolean onDown(MotionEvent event) {
+        return true;
+    }
+
+    @Override
+    public boolean onSingleTapConfirmed(MotionEvent event) {
         Click click = new Click(view.getDuel(), event.getX(), event.getY());
         Action action = ActionDispatcher.dispatch(click);
         action.execute();
