@@ -15,7 +15,6 @@ public class Duel implements Item {
 
     private SelectableItem currentSelectItem;
 
-
     private Drag drag;
 
     public Duel() {
@@ -24,7 +23,7 @@ public class Duel implements Item {
         Deck exDeck = new Deck("EX");
         CardList graveyard = new CardList("GRAVEYARD");
         CardList removed = new CardList("REMOVED");
-        CardList temp = new CardList("TEMPORARY");
+        TempList temp = new TempList("TEMPORARY");
         duelFields.getDeckField().setItem(deck);
         duelFields.getExDeckField().setItem(exDeck);
         duelFields.getGraveyardField().setItem(graveyard);
