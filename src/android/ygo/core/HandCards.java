@@ -23,7 +23,11 @@ public class HandCards implements Item {
     }
 
     public void add(Card card) {
-        card.open();
+        if(!set) {
+            card.open();
+        } else {
+            card.set();
+        }
         card.positive();
         cards.add(card);
     }
