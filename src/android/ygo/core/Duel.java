@@ -11,6 +11,8 @@ public class Duel implements Item {
 
     private HandCards handCards;
 
+    private CardSelector cardSelector;
+
     private InfoWindow window;
 
     private SelectableItem currentSelectItem;
@@ -33,6 +35,14 @@ public class Duel implements Item {
         handCards = new HandCards();
 
         window = new InfoWindow();
+    }
+
+    public CardSelector getCardSelector() {
+        return cardSelector;
+    }
+
+    public void clearCardSelector() {
+        cardSelector = null;
     }
 
     public DuelFields getDuelFields() {
@@ -76,6 +86,8 @@ public class Duel implements Item {
             return duelFields.itemOnFieldAt(x, y);
         } else if (inHand(x, y)) {
             return handCards.cardAt(x, y);
+        } else if (inCardSelector(x, y)) {
+            return null;
         }
         return null;
     }
@@ -85,6 +97,8 @@ public class Duel implements Item {
             return duelFields.fieldAt(x, y);
         } else if (inHand(x, y)) {
             return handCards;
+        } else if (inCardSelector(x, y)) {
+            return cardSelector.cardList;
         }
         return null;
     }
@@ -101,11 +115,24 @@ public class Duel implements Item {
         return drag;
     }
 
+    public boolean inCardSelector(int x, int y) {
+        if(cardSelector == null) {
+            return false;
+        }
+        return false;
+    }
+
     public boolean inDuelFields(int x, int y) {
+        if(cardSelector != null) {
+            return false;
+        }
         return y < Utils.unitLength() * 3 && x < Utils.unitLength() * 6;
     }
 
     public boolean inHand(int x, int y) {
+        if(cardSelector != null) {
+            return false;
+        }
         return y >= Utils.unitLength() * 3 && x < Utils.unitLength() * 6;
     }
 
