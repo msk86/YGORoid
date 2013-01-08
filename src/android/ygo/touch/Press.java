@@ -33,4 +33,14 @@ public class Press implements Touch {
     public Item getContainer() {
         return container;
     }
+
+    @Override
+    public int x() {
+        return x;
+    }
+
+    @Override
+    public int y() {
+        return y;
+    }
 }

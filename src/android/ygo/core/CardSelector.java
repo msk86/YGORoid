@@ -19,6 +19,10 @@ public class CardSelector implements Item {
         this.cardList = cardList;
     }
 
+    public SelectableItem getSourceItem() {
+        return sourceItem;
+    }
+
     public Card cardAt(int x, int y) {
         return null;
     }

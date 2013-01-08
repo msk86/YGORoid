@@ -10,17 +10,25 @@ public class ActionDispatcher {
 
     public static Action dispatch(Click click) {
         Action action = new SelectAction(click);
+        Duel duel = click.getDuel();
+        if(duel.getCardSelector() != null) {
+            if(!duel.inCardSelector(click.x(), click.y())) {
+                action = new CloseCardSelectorAction(click);
+            }
+        }
         return action;
     }
 
     public static Action dispatch(Press press) {
         Action action = new EmptyAction();
-        if (press.getItem() != null) {
-            if (press.getContainer() instanceof Field) {
-                Field field = (Field) press.getContainer();
-                if (field.getType() == FieldType.MONSTER_ZONE || field.getType() == FieldType.MAGIC_ZONE ||
-                        field.getType() == FieldType.FIELD_MAGIC_ZONE) {
-                    action = new MonsterPositionAction(press);
+        SelectableItem item = press.getItem();
+        if (item != null) {
+            if(item instanceof CardList) {
+                action = new OpenCardSelectorAction(press);
+            } else if(item instanceof Overlay) {
+                Overlay overlay = (Overlay)item;
+                if(overlay.topCard().getType() == CardType.XYZ_MONSTER && overlay.materialCount() != 0) {
+                    action = new OpenCardSelectorAction(press);
                 }
             }
         }

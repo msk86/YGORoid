@@ -91,10 +91,12 @@ public class Drag implements Touch {
         return target;
     }
 
+    @Override
     public int x() {
         return x;
     }
 
+    @Override
     public int y() {
         return y;
     }

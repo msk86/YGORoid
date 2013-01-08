@@ -34,6 +34,10 @@ public class Card implements SelectableItem {
         initCardPic();
     }
 
+    public CardType getType() {
+        return type;
+    }
+
     public void flip() {
         set = !set;
     }

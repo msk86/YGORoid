@@ -11,4 +11,8 @@ public interface Touch {
     public SelectableItem getItem();
 
     public Item getContainer();
+
+    public int x();
+
+    public int y();
 }
