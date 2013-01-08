@@ -30,8 +30,11 @@ public class ActionDispatcher {
     public static Action dispatch(DoubleClick dblClick) {
         Action action = new EmptyAction();
         if (dblClick.getContainer() instanceof Field) {
-            if (dblClick.getItem() instanceof Card || dblClick.getItem() instanceof Overlay) {
+            SelectableItem item = dblClick.getItem();
+            if (item instanceof Card || item instanceof Overlay) {
                 action = new FlipAction(dblClick);
+            } else if(item instanceof Deck && ((Deck)item).getName() == "DECK") {
+                action = new ShuffleAction(dblClick);
             }
         }
         return action;
