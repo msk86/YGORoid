@@ -41,8 +41,8 @@ public class Duel implements Item {
         return cardSelector;
     }
 
-    public void clearCardSelector() {
-        cardSelector = null;
+    public void setCardSelector(CardSelector cardSelector) {
+        this.cardSelector = cardSelector;
     }
 
     public DuelFields getDuelFields() {
@@ -152,6 +152,11 @@ public class Duel implements Item {
 
         int winPosY = Utils.screenHeight() - winBmp.getHeight();
         Utils.drawBitmapOnCanvas(canvas, winBmp, paint, Utils.DRAW_POSITION_CENTER, winPosY);
+
+        if(cardSelector != null) {
+            Bitmap selectorBmp = cardSelector.toBitmap();
+            Utils.drawBitmapOnCanvas(canvas, selectorBmp, paint, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_CENTER);
+        }
 
         if (drag != null && drag.getItem() != null) {
             Bitmap draggingItemBmp = drag.getItem().toBitmap();

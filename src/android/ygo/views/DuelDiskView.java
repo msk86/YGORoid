@@ -85,6 +85,13 @@ public class DuelDiskView extends View {
 
         List<Card> cards = new ArrayList<Card>();
         cards.add(new Card("12345678"));
+        cards.add(new Card("23456789"));
+        cards.add(new Card("12345678"));
+        cards.add(new Card("23456789"));
+        cards.add(new Card("12345678"));
+        cards.add(new Card("23456789"));
+        cards.add(new Card("12345678"));
+        cards.add(new Card("23456789"));
         Deck deck = (Deck) duelFields.getDeckField().getItem();
         deck.push(cards);
 
@@ -107,6 +114,9 @@ public class DuelDiskView extends View {
         duel.getHandCards().add(hands);
 
         duel.getInfoWindow().setInfo("No 39 希望皇 霍普 R4 2500/2000 光 战士");
+
+        CardSelector selector = new CardSelector(deck, deck);
+        duel.setCardSelector(selector);
     }
 
     @Override
