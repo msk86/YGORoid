@@ -87,7 +87,7 @@ public class Duel implements Item {
         } else if (inHand(x, y)) {
             return handCards.cardAt(x, y);
         } else if (inCardSelector(x, y)) {
-            return null;
+            return cardSelector.cardAt(x, y);
         }
         return null;
     }

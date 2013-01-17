@@ -60,7 +60,9 @@ public class CardSelector implements Item {
             }
             x += cardPadding;
 
-            Utils.drawBitmapOnCanvas(canvas, card.getCardPic(), paint, x, y);
+            card.open();
+            Utils.drawBitmapOnCanvas(canvas, card.toBitmap(), paint, x, y);
+            card.set();
 
             x += Utils.cardWidth();
         }

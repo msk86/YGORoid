@@ -20,7 +20,7 @@ public class ActionDispatcher {
     }
 
     public static Action dispatch(Press press) {
-        Action action = new EmptyAction();
+        Action action = new SelectAction(press);
         SelectableItem item = press.getItem();
         if (item != null) {
             if(item instanceof CardList) {
