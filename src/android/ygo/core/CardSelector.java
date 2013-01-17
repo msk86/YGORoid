@@ -7,7 +7,6 @@ import android.graphics.Paint;
 import android.ygo.utils.Utils;
 
 public class CardSelector implements Item {
-
     SelectableItem sourceItem;
     CardList cardList;
 
@@ -23,8 +22,19 @@ public class CardSelector implements Item {
         return sourceItem;
     }
 
+    public CardList getCardList() {
+        return cardList;
+    }
+
     public Card cardAt(int x, int y) {
-        return null;
+        if(cardList.size() == 0) {
+            return null;
+        }
+        return cardList.getCards().get(0);
+    }
+
+    public Card remove(Card card) {
+        return cardList.remove(card);
     }
 
     @Override
@@ -50,7 +60,7 @@ public class CardSelector implements Item {
             }
             x += cardPadding;
 
-            Utils.drawBitmapOnCanvas(canvas, card.toBitmap(), paint, x, y);
+            Utils.drawBitmapOnCanvas(canvas, card.getCardPic(), paint, x, y);
 
             x += Utils.cardWidth();
         }

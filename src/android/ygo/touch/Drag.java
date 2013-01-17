@@ -49,6 +49,12 @@ public class Drag implements Touch {
             from = duel.getHandCards();
             item = duel.itemAt(fromX, fromY);
             duel.getHandCards().remove((Card) item);
+        } else if (duel.inCardSelector(fromX, fromY)) {
+            from = duel.getCardSelector().getCardList();
+            Card card = duel.getCardSelector().cardAt(fromX, fromY);
+            card.open();
+            item = duel.getCardSelector().remove(card);
+            duel.setCardSelector(null);
         }
         if (item != null && !item.isSelect()) {
             duel.select(item);

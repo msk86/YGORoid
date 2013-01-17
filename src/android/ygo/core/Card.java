@@ -79,6 +79,10 @@ public class Card implements SelectableItem {
         highLight = highLight();
     }
 
+    public Bitmap getCardPic() {
+        return cardPic;
+    }
+
     @Override
     public Bitmap toBitmap() {
         int height = Utils.cardHeight();

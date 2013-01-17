@@ -119,6 +119,12 @@ public class Duel implements Item {
         if(cardSelector == null) {
             return false;
         }
+
+        // test
+        if(y>50&& y<300 && x>50&&x<400) {
+            return true;
+        }
+
         return false;
     }
 
