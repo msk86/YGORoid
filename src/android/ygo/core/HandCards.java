@@ -3,6 +3,7 @@ package android.ygo.core;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.ygo.layout.LinerLayout;
 import android.ygo.utils.Utils;
 
 import java.util.ArrayList;
@@ -12,10 +13,12 @@ public class HandCards implements Item {
 
     private List<Card> cards;
     private boolean set;
+    private LinerLayout layout;
 
     public HandCards() {
         cards = new ArrayList<Card>();
         set = false;
+        layout = new LinerLayout(cards, Utils.unitLength() * 6);
     }
 
     public void shuffle() {
@@ -51,24 +54,7 @@ public class HandCards implements Item {
 
     public Card cardAt(int x, int y) {
         int padding = (Utils.unitLength() * 6 - cardsWidth()) / 2;
-        if (x <= padding) {
-            return null;
-        }
-
-        int cardPadding = cardPadding();
-
-        int currX = padding;
-        int cw = Utils.cardWidth();
-        for (int i = 0; i < cards.size(); i++) {
-            if (i == cards.size() - 1) {
-                cardPadding = 0;
-            }
-            if (currX < x && x < currX + cw + cardPadding) {
-                return cards.get(i);
-            }
-            currX += cw + cardPadding;
-        }
-        return null;
+        return layout.cardAt(x - padding);
     }
 
     private int cardPadding() {
@@ -145,10 +131,8 @@ public class HandCards implements Item {
         Canvas canvas = new Canvas(handCardBmp);
         Paint paint = new Paint();
 
-        Bitmap cardsBmp = cardsBmp();
-
+        Bitmap cardsBmp = layout.toBitmap();
         Utils.drawBitmapOnCanvas(canvas, cardsBmp, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_FIRST);
-
         cardsBmp.recycle();
 
         return handCardBmp;
