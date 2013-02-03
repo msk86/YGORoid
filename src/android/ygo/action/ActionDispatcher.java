@@ -1,5 +1,6 @@
 package android.ygo.action;
 
+import android.util.Log;
 import android.ygo.core.*;
 import android.ygo.touch.Click;
 import android.ygo.touch.DoubleClick;

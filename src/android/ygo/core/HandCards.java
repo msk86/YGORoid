@@ -54,7 +54,7 @@ public class HandCards implements Item {
 
     public Card cardAt(int x, int y) {
         int padding = (Utils.unitLength() * 6 - cardsWidth()) / 2;
-        return layout.cardAt(x - padding);
+        return layout.cardAt(x - padding, y);
     }
 
     private int cardPadding() {

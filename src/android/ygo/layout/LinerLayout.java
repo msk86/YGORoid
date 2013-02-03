@@ -22,8 +22,15 @@ public class LinerLayout {
 
     public void fixPosition() {
         int maxPadding = Utils.cardWidth() / 10;
-        cardPadding = (maxWidth - Utils.cardWidth()) / (cards.size() - 1) - Utils.cardWidth();
-        cardPadding = cardPadding < maxPadding ? cardPadding : maxPadding;
+        if(cards.size() > 1) {
+            cardPadding = (maxWidth - Utils.cardWidth()) / (cards.size() - 1) - Utils.cardWidth();
+            cardPadding = cardPadding < maxPadding ? cardPadding : maxPadding;
+        } else if(cards.size() == 1) {
+            cardPadding = maxPadding;
+        } else {
+            cardPadding = 0;
+        }
+
         realWidth = cards.size() * Utils.cardWidth() + (cards.size() - 1) * cardPadding + 1;
     }
 
@@ -42,23 +49,14 @@ public class LinerLayout {
         return bmp;
     }
 
-    public Card cardAt(int x) {
+    public Card cardAt(int x, int y) {
         fixPosition();
-        if(x < 0 || x > realWidth) {
+        if(x < 0 || x >= realWidth) {
             return null;
         }
 
-        int currX = 0;
-        int cw = Utils.cardWidth();
-        for (int i = 0; i < cards.size(); i++) {
-            if (i == cards.size() - 1) {
-                cardPadding = 0;
-            }
-            if (currX < x && x < currX + cw + cardPadding) {
-                return cards.get(i);
-            }
-            currX += cw + cardPadding;
-        }
-        return null;
+        int index = x / (Utils.cardWidth() + cardPadding);
+        index = index < cards.size() ? index : cards.size() - 1;
+        return cards.get(index);
     }
 }

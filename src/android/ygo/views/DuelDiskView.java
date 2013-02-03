@@ -92,6 +92,16 @@ public class DuelDiskView extends View {
         cards.add(new Card("23456789"));
         cards.add(new Card("12345678"));
         cards.add(new Card("23456789"));
+        cards.add(new Card("23456789"));
+        cards.add(new Card("23456789"));
+        cards.add(new Card("23456789"));
+        cards.add(new Card("23456789"));
+        cards.add(new Card("23456789"));
+        cards.add(new Card("23456789"));
+        cards.add(new Card("23456789"));
+        cards.add(new Card("23456789"));
+        cards.add(new Card("23456789"));
+        cards.add(new Card("23456789"));
         Deck deck = (Deck) duelFields.getDeckField().getItem();
         deck.push(cards);
 
