@@ -1,10 +1,7 @@
 package android.ygo.action;
 
-import android.ygo.core.CardList;
 import android.ygo.core.CardSelector;
-import android.ygo.core.Overlay;
-import android.ygo.core.SelectableItem;
-import android.ygo.touch.Touch;
+import android.ygo.op.Touch;
 
 public class CloseCardSelectorAction extends BaseAction {
     public CloseCardSelectorAction(Touch touch) {

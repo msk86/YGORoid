@@ -2,25 +2,29 @@ package android.ygo;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.ygo.utils.Utils;
 import android.ygo.views.DuelDiskView;
+import android.ygo.views.PlayOnKeyProcessor;
 
 public class YGOActivity extends Activity {
+    private PlayOnKeyProcessor keyProcessor;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Utils.initInstance(this);
 
-        setContentView(new DuelDiskView(this));
+        DuelDiskView duelDiskView = new DuelDiskView(this);
+
+        setContentView(duelDiskView);
+        keyProcessor = new PlayOnKeyProcessor(duelDiskView);
     }
 
-    public boolean onTouch(View v, MotionEvent event) {
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-
-        }
-        return false;
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        return keyProcessor.onKey(keyCode, event);
     }
 }
+

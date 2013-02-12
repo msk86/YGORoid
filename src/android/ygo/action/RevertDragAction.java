@@ -1,8 +1,8 @@
 package android.ygo.action;
 
 import android.ygo.core.*;
-import android.ygo.touch.Drag;
-import android.ygo.touch.Touch;
+import android.ygo.op.Drag;
+import android.ygo.op.Touch;
 
 public class RevertDragAction extends BaseAction {
 

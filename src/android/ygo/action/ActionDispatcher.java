@@ -2,10 +2,7 @@ package android.ygo.action;
 
 import android.util.Log;
 import android.ygo.core.*;
-import android.ygo.touch.Click;
-import android.ygo.touch.DoubleClick;
-import android.ygo.touch.Drag;
-import android.ygo.touch.Press;
+import android.ygo.op.*;
 
 public class ActionDispatcher {
 
@@ -73,6 +70,11 @@ public class ActionDispatcher {
                 action = new AddHandCardAction(drag);
             }
         }
+        return action;
+    }
+    public static Action dispatch(ReturnClick click) {
+        Log.e("YGO", "Dispatch the return click");
+        Action action = new EmptyAction();
         return action;
     }
 }

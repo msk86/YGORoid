@@ -1,4 +1,4 @@
-package android.ygo.touch;
+package android.ygo.op;
 
 import android.ygo.core.Duel;
 import android.ygo.core.Item;

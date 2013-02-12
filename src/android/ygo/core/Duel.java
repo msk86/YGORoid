@@ -3,7 +3,7 @@ package android.ygo.core;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.ygo.touch.Drag;
+import android.ygo.op.Drag;
 import android.ygo.utils.Utils;
 
 public class Duel implements Item {
@@ -170,5 +170,9 @@ public class Duel implements Item {
         }
 
         return duelBmp;
+    }
+
+    public SelectableItem getCurrentSelectItem() {
+        return currentSelectItem;
     }
 }

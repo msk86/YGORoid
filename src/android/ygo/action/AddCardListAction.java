@@ -4,7 +4,7 @@ import android.ygo.core.Card;
 import android.ygo.core.CardList;
 import android.ygo.core.Field;
 import android.ygo.core.Overlay;
-import android.ygo.touch.Touch;
+import android.ygo.op.Touch;
 
 public class AddCardListAction extends BaseAction {
     public AddCardListAction(Touch touch) {

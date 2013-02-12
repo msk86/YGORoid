@@ -1,6 +1,6 @@
 package android.ygo.action;
 
-import android.ygo.touch.Touch;
+import android.ygo.op.Touch;
 
 public class SelectAction extends BaseAction {
 

@@ -1,24 +1,23 @@
-package android.ygo.touch;
+package android.ygo.op;
 
 import android.ygo.core.Duel;
 import android.ygo.core.Item;
 import android.ygo.core.SelectableItem;
 
-public class DoubleClick implements Touch {
-    int x;
-    int y;
-
+public class Press implements Touch {
+    int x, y;
     Duel duel;
-    SelectableItem item;
     Item container;
+    SelectableItem item;
 
-    public DoubleClick(Duel duel, float fx, float fy) {
+    public Press(Duel duel, float fx, float fy) {
         x = (int) fx;
         y = (int) fy;
         this.duel = duel;
-        item = duel.itemAt(x, y);
         container = duel.containerAt(x, y);
+        item = duel.itemAt(x, y);
     }
+
 
     @Override
     public Duel getDuel() {

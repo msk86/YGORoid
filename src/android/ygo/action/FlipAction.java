@@ -2,7 +2,7 @@ package android.ygo.action;
 
 import android.ygo.core.Card;
 import android.ygo.core.Overlay;
-import android.ygo.touch.Touch;
+import android.ygo.op.Touch;
 
 public class FlipAction extends BaseAction {
     public FlipAction(Touch touch) {

@@ -4,10 +4,10 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.ygo.action.Action;
 import android.ygo.action.ActionDispatcher;
-import android.ygo.touch.Click;
-import android.ygo.touch.DoubleClick;
-import android.ygo.touch.Drag;
-import android.ygo.touch.Press;
+import android.ygo.op.Click;
+import android.ygo.op.DoubleClick;
+import android.ygo.op.Drag;
+import android.ygo.op.Press;
 
 public class PlayGestureListener extends GestureDetector.SimpleOnGestureListener {
     DuelDiskView view;

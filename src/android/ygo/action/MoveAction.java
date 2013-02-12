@@ -1,7 +1,7 @@
 package android.ygo.action;
 
 import android.ygo.core.Field;
-import android.ygo.touch.Touch;
+import android.ygo.op.Touch;
 
 public class MoveAction extends BaseAction {
 

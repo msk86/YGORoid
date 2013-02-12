@@ -2,7 +2,7 @@ package android.ygo.action;
 
 import android.ygo.core.Card;
 import android.ygo.core.Field;
-import android.ygo.touch.Touch;
+import android.ygo.op.Touch;
 
 public class SummonAction extends BaseAction {
     public SummonAction(Touch touch) {
