@@ -4,12 +4,12 @@ import android.ygo.core.Card;
 import android.ygo.core.Field;
 import android.ygo.core.Overlay;
 import android.ygo.core.SelectableItem;
-import android.ygo.op.Touch;
+import android.ygo.op.Operation;
 
 public class OverlayAction extends BaseAction {
 
-    public OverlayAction(Touch touch) {
-        super(touch.getDuel(), touch.getContainer(), touch.getItem());
+    public OverlayAction(Operation operation) {
+        super(operation.getDuel(), operation.getContainer(), operation.getItem());
     }
 
     @Override

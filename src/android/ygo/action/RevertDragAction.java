@@ -2,15 +2,15 @@ package android.ygo.action;
 
 import android.ygo.core.*;
 import android.ygo.op.Drag;
-import android.ygo.op.Touch;
+import android.ygo.op.Operation;
 
 public class RevertDragAction extends BaseAction {
 
     private Drag drag;
 
-    public RevertDragAction(Touch touch) {
-        super(touch.getDuel(), touch.getContainer(), touch.getItem());
-        drag = (Drag) touch;
+    public RevertDragAction(Operation operation) {
+        super(operation.getDuel(), operation.getContainer(), operation.getItem());
+        drag = (Drag) operation;
     }
 
     @Override

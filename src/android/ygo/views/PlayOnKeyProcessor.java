@@ -1,7 +1,10 @@
 package android.ygo.views;
 
 import android.view.KeyEvent;
+import android.ygo.action.Action;
 import android.ygo.action.ActionDispatcher;
+import android.ygo.action.EmptyAction;
+import android.ygo.op.MenuClick;
 import android.ygo.op.ReturnClick;
 
 public class PlayOnKeyProcessor {
@@ -12,15 +15,20 @@ public class PlayOnKeyProcessor {
     }
 
     public boolean onKey(int keyCode, KeyEvent event) {
+        Action action = new EmptyAction();
         switch (keyCode) {
             case KeyEvent.KEYCODE_BACK :
-                ReturnClick click = new ReturnClick(view.getDuel());
-                ActionDispatcher.dispatch(click);
-                view.invalidate();
-                return true;
+                ReturnClick returnClick = new ReturnClick(view.getDuel());
+                action = ActionDispatcher.dispatch(returnClick);
+                break;
             case KeyEvent.KEYCODE_MENU :
-                return true;
+                MenuClick menuClick = new MenuClick(view.getDuel());
+                action = ActionDispatcher.dispatch(menuClick);
+                break;
         }
+        action.execute();
+        view.invalidate();
+
         return true;
     }
 }

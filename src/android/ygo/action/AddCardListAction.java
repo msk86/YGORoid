@@ -4,11 +4,11 @@ import android.ygo.core.Card;
 import android.ygo.core.CardList;
 import android.ygo.core.Field;
 import android.ygo.core.Overlay;
-import android.ygo.op.Touch;
+import android.ygo.op.Operation;
 
 public class AddCardListAction extends BaseAction {
-    public AddCardListAction(Touch touch) {
-        super(touch.getDuel(), touch.getContainer(), touch.getItem());
+    public AddCardListAction(Operation operation) {
+        super(operation.getDuel(), operation.getContainer(), operation.getItem());
     }
 
     @Override

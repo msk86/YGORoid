@@ -4,11 +4,11 @@ import android.ygo.core.CardList;
 import android.ygo.core.CardSelector;
 import android.ygo.core.Overlay;
 import android.ygo.core.SelectableItem;
-import android.ygo.op.Touch;
+import android.ygo.op.Operation;
 
 public class OpenCardSelectorAction extends BaseAction {
-    public OpenCardSelectorAction(Touch touch) {
-        super(touch.getDuel(), touch.getContainer(), touch.getItem());
+    public OpenCardSelectorAction(Operation operation) {
+        super(operation.getDuel(), operation.getContainer(), operation.getItem());
     }
 
     @Override

@@ -4,7 +4,7 @@ import android.ygo.core.Duel;
 import android.ygo.core.Item;
 import android.ygo.core.SelectableItem;
 
-public class Click implements Touch {
+public class Click implements Operation {
     int x;
     int y;
 

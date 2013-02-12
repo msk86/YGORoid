@@ -1,12 +1,12 @@
 package android.ygo.action;
 
 import android.ygo.core.Deck;
-import android.ygo.op.Touch;
+import android.ygo.op.Operation;
 
 public class ShuffleAction extends BaseAction {
 
-    public ShuffleAction(Touch touch) {
-        super(touch.getDuel(), touch.getContainer(), touch.getItem());
+    public ShuffleAction(Operation operation) {
+        super(operation.getDuel(), operation.getContainer(), operation.getItem());
     }
 
     @Override

@@ -1,11 +1,11 @@
 package android.ygo.action;
 
 import android.ygo.core.CardSelector;
-import android.ygo.op.Touch;
+import android.ygo.op.Operation;
 
 public class CloseCardSelectorAction extends BaseAction {
-    public CloseCardSelectorAction(Touch touch) {
-        super(touch.getDuel(), touch.getContainer(), touch.getItem());
+    public CloseCardSelectorAction(Operation operation) {
+        super(operation.getDuel(), operation.getContainer(), operation.getItem());
     }
 
     @Override

@@ -4,43 +4,38 @@ import android.ygo.core.Duel;
 import android.ygo.core.Item;
 import android.ygo.core.SelectableItem;
 
-public class Press implements Operation {
-    int x, y;
+public class MenuClick implements Operation {
+
     Duel duel;
-    Item container;
     SelectableItem item;
 
-    public Press(Duel duel, float fx, float fy) {
-        x = (int) fx;
-        y = (int) fy;
+    public MenuClick(Duel duel) {
         this.duel = duel;
-        container = duel.containerAt(x, y);
-        item = duel.itemAt(x, y);
+        item = duel.getCurrentSelectItem();
     }
-
-
+    
     @Override
     public Duel getDuel() {
-        return duel;
+        return duel; 
     }
 
     @Override
     public SelectableItem getItem() {
-        return item;
+        return item; 
     }
 
     @Override
     public Item getContainer() {
-        return container;
+        return null;
     }
 
     @Override
     public int x() {
-        return x;
+        return 0;
     }
 
     @Override
     public int y() {
-        return y;
+        return 0;
     }
 }

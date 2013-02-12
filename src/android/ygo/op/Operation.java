@@ -4,7 +4,7 @@ import android.ygo.core.Duel;
 import android.ygo.core.Item;
 import android.ygo.core.SelectableItem;
 
-public interface Touch {
+public interface Operation {
 
     public Duel getDuel();
 

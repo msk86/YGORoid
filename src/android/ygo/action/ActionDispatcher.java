@@ -19,17 +19,6 @@ public class ActionDispatcher {
 
     public static Action dispatch(Press press) {
         Action action = new SelectAction(press);
-        SelectableItem item = press.getItem();
-        if (item != null) {
-            if(item instanceof CardList) {
-                action = new OpenCardSelectorAction(press);
-            } else if(item instanceof Overlay) {
-                Overlay overlay = (Overlay)item;
-                if(overlay.topCard().getType() == CardType.XYZ_MONSTER && overlay.materialCount() != 0) {
-                    action = new OpenCardSelectorAction(press);
-                }
-            }
-        }
         return action;
     }
 
@@ -75,6 +64,22 @@ public class ActionDispatcher {
     public static Action dispatch(ReturnClick click) {
         Log.e("YGO", "Dispatch the return click");
         Action action = new EmptyAction();
+        return action;
+    }
+    public static Action dispatch(MenuClick click) {
+        Action action = new EmptyAction();
+        SelectableItem item = click.getItem();
+        if (item != null) {
+            if(item instanceof CardList) {
+                action = new OpenCardSelectorAction(click);
+            } else if(item instanceof Overlay) {
+                Overlay overlay = (Overlay)item;
+                if(overlay.topCard().getType() == CardType.XYZ_MONSTER && overlay.materialCount() != 0) {
+                    action = new OpenCardSelectorAction(click);
+                }
+            }
+        }
+        Log.e("YGO", action.toString());
         return action;
     }
 }

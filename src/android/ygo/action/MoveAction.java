@@ -1,12 +1,12 @@
 package android.ygo.action;
 
 import android.ygo.core.Field;
-import android.ygo.op.Touch;
+import android.ygo.op.Operation;
 
 public class MoveAction extends BaseAction {
 
-    public MoveAction(Touch touch) {
-        super(touch.getDuel(), touch.getContainer(), touch.getItem());
+    public MoveAction(Operation operation) {
+        super(operation.getDuel(), operation.getContainer(), operation.getItem());
     }
 
     @Override

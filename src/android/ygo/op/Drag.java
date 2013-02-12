@@ -2,7 +2,7 @@ package android.ygo.op;
 
 import android.ygo.core.*;
 
-public class Drag implements Touch {
+public class Drag implements Operation {
     int fromX, fromY;
     int x, y;
     int toX, toY;
