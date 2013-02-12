@@ -22,6 +22,9 @@ public class OpenCardSelectorAction extends BaseAction {
             list = (CardList)item;
             source = item;
         }
+        if(list.size() == 0) {
+            return;
+        }
         CardSelector selector = new CardSelector(source, list);
         duel.setCardSelector(selector);
     }

@@ -8,12 +8,6 @@ public class ActionDispatcher {
 
     public static Action dispatch(Click click) {
         Action action = new SelectAction(click);
-        Duel duel = click.getDuel();
-        if(duel.getCardSelector() != null) {
-            if(!duel.inCardSelector(click.x(), click.y())) {
-                action = new CloseCardSelectorAction(click);
-            }
-        }
         return action;
     }
 
@@ -71,8 +65,10 @@ public class ActionDispatcher {
         return action;
     }
     public static Action dispatch(ReturnClick click) {
-        Log.e("YGO", "Dispatch the return click");
         Action action = new EmptyAction();
+        if(click.getDuel().getCardSelector() != null) {
+            action = new CloseCardSelectorAction(click);
+        }
         return action;
     }
     public static Action dispatch(MenuClick click) {
@@ -88,7 +84,6 @@ public class ActionDispatcher {
                 }
             }
         }
-        Log.e("YGO", action.toString());
         return action;
     }
 }

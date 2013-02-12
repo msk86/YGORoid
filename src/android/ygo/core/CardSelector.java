@@ -30,10 +30,7 @@ public class CardSelector implements Item {
     }
 
     public Card cardAt(int x, int y) {
-        if(cardList.size() == 0) {
-            return null;
-        }
-        return cardList.getCards().get(0);
+        return layout.cardAt(x, y);
     }
 
     public Card remove(Card card) {
@@ -51,26 +48,6 @@ public class CardSelector implements Item {
 
         Bitmap cardsBmp = layout.toBitmap();
         Utils.drawBitmapOnCanvas(canvas, cardsBmp, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_CENTER);
-
-//        int x = border;
-//        int y = border;
-//        for(int i=page * pageLimit;i<cardList.size();i++) {
-//            if(i == (page + 1) * pageLimit) {
-//                break;
-//            }
-//            Card card = cardList.cards.get(i);
-//            if(i != 0 && i % 7 == 0) {
-//                x = border;
-//                y += Utils.cardHeight() + cardPadding;
-//            }
-//            x += cardPadding;
-//
-//            card.open();
-//            Utils.drawBitmapOnCanvas(canvas, card.toBitmap(), paint, x, y);
-//            card.set();
-//
-//            x += Utils.cardWidth();
-//        }
 
         return bmp;
     }
