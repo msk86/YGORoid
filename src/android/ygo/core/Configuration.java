@@ -16,10 +16,10 @@ public class Configuration {
     }
 
     public static String baseDir() {
-        return "/Device/bluetooth/images/ygo2/";
+        return "/Device/bluetooth/images/ygo/";
     }
 
     public static String cardProtector() {
-        return "defaultProtector";
+        return "cover";
     }
 }
