@@ -114,4 +114,14 @@ public class Utils {
         cards.set(indexA, cards.get(indexB));
         cards.set(indexB, temp);
     }
+
+    public static int textPlace(char c) {
+        if(c < 32) {
+            return 0;
+        }
+        if(c < 256) {
+            return 1;
+        }
+        return 2;
+    }
 }
