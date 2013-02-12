@@ -10,8 +10,8 @@ import android.text.TextPaint;
 import android.ygo.utils.Utils;
 
 public class Card implements SelectableItem {
-    public static final Bitmap UNKNOWN_CARD = Utils.readBitmapScaleByHeight(Configuration.unknownCard() + ".png", Utils.cardHeight());
-    public static final Bitmap CARD_PROTECTOR = Utils.readBitmapScaleByHeight(Configuration.cardProtector() + ".png", Utils.cardHeight());
+    public static final Bitmap UNKNOWN_CARD = Utils.readBitmapScaleByHeight(Configuration.unknownCard() + ".jpg", Utils.cardHeight());
+    public static final Bitmap CARD_PROTECTOR = Utils.readBitmapScaleByHeight(Configuration.cardProtector() + ".jpg", Utils.cardHeight());
 
     private boolean selected = false;
 
@@ -70,7 +70,7 @@ public class Card implements SelectableItem {
     private void initCardPic() {
         int height = Utils.cardHeight();
         try {
-            cardPic = Utils.readBitmapScaleByHeight(id + ".png", height);
+            cardPic = Utils.readBitmapScaleByHeight(id + ".jpg", height);
         } catch (Exception e) {
             cardPic = Bitmap.createBitmap(Utils.cardWidth(), Utils.cardHeight(), Bitmap.Config.ARGB_8888);
             Canvas canvas = new Canvas(cardPic);
