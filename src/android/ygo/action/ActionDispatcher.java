@@ -19,6 +19,15 @@ public class ActionDispatcher {
 
     public static Action dispatch(Press press) {
         Action action = new SelectAction(press);
+        if (press.getContainer() instanceof Field) {
+            Field field = (Field)press.getContainer();
+            if(field.getType() == FieldType.MONSTER_ZONE) {
+                SelectableItem item = press.getItem();
+                if (item instanceof Card || item instanceof Overlay) {
+                    action = new MonsterPositionAction(press);
+                }
+            }
+        }
         return action;
     }
 
