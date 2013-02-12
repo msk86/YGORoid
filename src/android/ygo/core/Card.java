@@ -4,9 +4,13 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.text.Layout;
+import android.text.StaticLayout;
+import android.text.TextPaint;
 import android.ygo.utils.Utils;
 
 public class Card implements SelectableItem {
+    public static final Bitmap UNKNOWN_CARD = Utils.readBitmapScaleByHeight(Configuration.unknownCard() + ".png", Utils.cardHeight());
     public static final Bitmap CARD_PROTECTOR = Utils.readBitmapScaleByHeight(Configuration.cardProtector() + ".png", Utils.cardHeight());
 
     private boolean selected = false;
@@ -31,6 +35,7 @@ public class Card implements SelectableItem {
         this.type = type;
         this.positive = positive;
         this.set = set;
+        name = "希望皇";
         initCardPic();
     }
 
@@ -64,18 +69,23 @@ public class Card implements SelectableItem {
 
     private void initCardPic() {
         int height = Utils.cardHeight();
-        if (Configuration.isTotalCardPic()) {
+        try {
             cardPic = Utils.readBitmapScaleByHeight(id + ".png", height);
-        } else {
-            cardPic = Utils.readBitmapScaleByHeight(type.toString() + ".png", height);
+        } catch (Exception e) {
+            cardPic = Bitmap.createBitmap(Utils.cardWidth(), Utils.cardHeight(), Bitmap.Config.ARGB_8888);
             Canvas canvas = new Canvas(cardPic);
             Paint paint = new Paint();
-            Utils.drawBitmapOnCanvas(canvas, cardPic, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_FIRST);
-            Bitmap pic = Utils.readBitmapScaleByHeight(id + ".png", height / 2);
-            int cardPicY = (int) (cardPic.getHeight() / 4.63);
-            Utils.drawBitmapOnCanvas(canvas, pic, paint, Utils.DRAW_POSITION_CENTER, cardPicY);
+            Utils.drawBitmapOnCanvas(canvas, UNKNOWN_CARD, paint, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_FIRST);
+            CharSequence cs = name;
+            TextPaint textPaint = new TextPaint();
+            textPaint.setTextSize(Utils.unitLength() / 10);
+            textPaint.setColor(Configuration.fontColor());
+            textPaint.setShadowLayer(1, 0, 0, Color.BLACK);
+            StaticLayout layout = new StaticLayout(cs, textPaint, Utils.cardWidth(), Layout.Alignment.ALIGN_CENTER, 0, 0, false);
+            canvas.translate(0, 5);
+            layout.draw(canvas);
+            canvas.translate(0, -5);
         }
-
         highLight = highLight();
     }
 

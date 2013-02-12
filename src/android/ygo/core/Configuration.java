@@ -3,10 +3,6 @@ package android.ygo.core;
 import android.graphics.Color;
 
 public class Configuration {
-    public static boolean isTotalCardPic() {
-        return true;
-    }
-
     public static int highlightColor() {
         return Color.BLUE;
     }
@@ -21,5 +17,8 @@ public class Configuration {
 
     public static String cardProtector() {
         return "cover";
+    }
+    public static String unknownCard() {
+        return "unknown";
     }
 }
