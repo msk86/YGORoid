@@ -141,18 +141,16 @@ public class Duel implements Item {
     public Bitmap toBitmap() {
         Bitmap duelBmp = Bitmap.createBitmap(Utils.unitLength() * 6, Utils.unitLength() * 4, Bitmap.Config.ARGB_8888);
 
-        Bitmap fieldBmp = duelFields.toBitmap();
-        Bitmap handBmp = handCards.toBitmap();
         Bitmap winBmp = window.toBitmap();
-
         Canvas canvas = new Canvas(duelBmp);
         Paint paint = new Paint();
-        Utils.drawBitmapOnCanvas(canvas, fieldBmp, paint, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_FIRST);
 
-        Utils.drawBitmapOnCanvas(canvas, handBmp, paint, Utils.DRAW_POSITION_FIRST, fieldBmp.getHeight() + 1);
-
-
-        if(cardSelector != null) {
+        if(cardSelector == null) {
+            Bitmap fieldBmp = duelFields.toBitmap();
+            Bitmap handBmp = handCards.toBitmap();
+            Utils.drawBitmapOnCanvas(canvas, fieldBmp, paint, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_FIRST);
+            Utils.drawBitmapOnCanvas(canvas, handBmp, paint, Utils.DRAW_POSITION_FIRST, fieldBmp.getHeight() + 1);
+        } else {
             Bitmap selectorBmp = cardSelector.toBitmap();
             Utils.drawBitmapOnCanvas(canvas, selectorBmp, paint, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_CENTER);
         }

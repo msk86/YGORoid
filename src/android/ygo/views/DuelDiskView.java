@@ -47,7 +47,7 @@ public class DuelDiskView extends View {
         DuelFields duelFields = duel.getDuelFields();
 
         // set magic
-        Card setMagicCard = new Card("35952884", null, null, CardType.MAGIC, true, true);
+        Card setMagicCard = new Card("35952884", null, null, CardType.SYNC_MONSTER, true, true);
         Field f = duelFields.getMagicField(2);
         f.setItem(setMagicCard);
 
@@ -88,12 +88,42 @@ public class DuelDiskView extends View {
 
 
         List<String> ids = new ArrayList<String>();
-        ids.add("39272762");
-        ids.add("39272762");
-        ids.add("35952884");
-        ids.add("35952884");
-        ids.add("84013237");
-        ids.add("46986414");
+        // normal mon
+        ids.add("32864");
+        ids.add("11549357");
+        // eff mon
+        ids.add("62121");
+        ids.add("11548522");
+        // xyz mon
+        ids.add("359563");
+        ids.add("12014404");
+        // fusion mon
+        ids.add("1412158");
+        ids.add("11901678");
+        // sync mon
+        ids.add("2203790");
+        ids.add("9012916");
+        // rat mon
+        ids.add("3627449");
+        ids.add("10789972");
+
+        // normal magic
+        ids.add("213326");
+        // field magic
+        ids.add("295517");
+        // equip magic
+        ids.add("242146");
+        // speed magic
+        ids.add("5318639");
+        // forever magic
+        ids.add("403847");
+
+        // normal trap
+        ids.add("1248895");
+        // forever trap
+        ids.add("27551");
+        // counter trap
+        ids.add("11593137");
         List<Card> cards = dbHelper.loadCard(ids);
         Deck deck = (Deck) duelFields.getDeckField().getItem();
         deck.push(cards);
