@@ -1,5 +1,6 @@
 package android.ygo.op;
 
+import android.ygo.action.CloseCardSelectorAction;
 import android.ygo.core.*;
 
 public class Drag implements Operation {
@@ -59,7 +60,7 @@ public class Drag implements Operation {
             if (card != null) {
                 card.open();
                 item = duel.getCardSelector().remove(card);
-                duel.setCardSelector(null);
+                new CloseCardSelectorAction(this).execute();
             }
         }
         if (item != null && !item.isSelect() && canSelect) {

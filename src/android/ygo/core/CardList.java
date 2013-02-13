@@ -110,6 +110,18 @@ public class CardList implements SelectableItem {
         cards.add(card);
     }
 
+    public void openAll() {
+        for(Card card : cards) {
+            card.open();
+        }
+    }
+
+    public void setAll() {
+        for(Card card : cards) {
+            card.set();
+        }
+    }
+
     public List<Card> getCards() {
         return cards;
     }

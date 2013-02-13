@@ -25,6 +25,12 @@ public class OpenCardSelectorAction extends BaseAction {
         if (list.size() == 0) {
             return;
         }
+
+        if(list.getName().equals("DECK") ||
+                list.getName().equals("EX")) {
+            list.openAll();
+        }
+
         CardSelector selector = new CardSelector(source, list);
         duel.setCardSelector(selector);
     }

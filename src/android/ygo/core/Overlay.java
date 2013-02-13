@@ -13,7 +13,7 @@ public class Overlay implements SelectableItem {
     CardList materials;
 
     public Overlay(Card card) {
-        materials = new CardList();
+        materials = new CardList("OVERLAY");
         overlay(card);
     }
 
