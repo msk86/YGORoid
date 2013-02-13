@@ -73,6 +73,10 @@ public class HandCards implements Item {
         return cards.size() * Utils.cardWidth() + (cards.size() - 1) * wPadding + 1;
     }
 
+    public boolean isSet() {
+        return set;
+    }
+
     public void setAll() {
         for (Card card : cards) {
             card.set();
