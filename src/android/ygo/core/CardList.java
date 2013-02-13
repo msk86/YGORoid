@@ -104,7 +104,6 @@ public class CardList implements SelectableItem {
         this.push(list.cards);
     }
 
-
     public void unShift(Card card) {
         if (open) {
             card.open();
@@ -114,6 +113,10 @@ public class CardList implements SelectableItem {
         card.positive();
         card.unSelect();
         cards.add(card);
+    }
+
+    public boolean isOpen() {
+        return open;
     }
 
     public void openAll() {

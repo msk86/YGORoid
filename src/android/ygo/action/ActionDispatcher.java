@@ -30,9 +30,10 @@ public class ActionDispatcher {
 
     public static Action dispatch(DoubleClick dblClick) {
         Action action = new EmptyAction();
-        if (dblClick.getContainer() instanceof Field) {
-            Field field = (Field) dblClick.getContainer();
-            SelectableItem item = dblClick.getItem();
+        SelectableItem item = dblClick.getItem();
+        Item container = dblClick.getContainer();
+        if (container instanceof Field) {
+            Field field = (Field) container;
             if (item == null) {
                 if (field.getType() == FieldType.MONSTER_ZONE) {
                     action = new NewTokenAction(dblClick);
@@ -46,6 +47,11 @@ public class ActionDispatcher {
                         action = new ShuffleAction(dblClick);
                     }
                 }
+            }
+        } else if(container instanceof CardList) {
+            CardList cardList = (CardList) container;
+            if(cardList.getName().equals("TEMPORARY")) {
+                action = new FlipAction(dblClick);
             }
         }
         return action;

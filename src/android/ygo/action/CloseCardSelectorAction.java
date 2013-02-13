@@ -14,10 +14,14 @@ public class CloseCardSelectorAction extends BaseAction {
         CardSelector selector = duel.getCardSelector();
         CardList list = selector.getCardList();
 
-        if (list.getName().equals("DECK") ||
-                list.getName().equals("EX")) {
-            list.setAll();
+        if(!list.getName().equals("TEMPORARY")) {
+            if(list.isOpen()) {
+                list.openAll();
+            } else {
+                list.setAll();
+            }
         }
+
         duel.setCardSelector(null);
         duel.select(selector.getSourceItem());
     }

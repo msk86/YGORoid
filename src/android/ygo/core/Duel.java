@@ -25,7 +25,7 @@ public class Duel implements Item {
         Deck exDeck = new Deck("EX");
         CardList graveyard = new CardList("GRAVEYARD");
         CardList removed = new CardList("REMOVED");
-        TempList temp = new TempList("TEMPORARY");
+        CardList temp = new CardList("TEMPORARY");
         duelFields.getDeckField().setItem(deck);
         duelFields.getExDeckField().setItem(exDeck);
         duelFields.getGraveyardField().setItem(graveyard);
