@@ -45,7 +45,9 @@ public class ActionDispatcher {
             SelectableItem targetItem = field.getItem();
             if (targetItem == null) {
                 if (drag.getFrom() instanceof HandCards) {
+                    // summon
                     action = new SummonAction(drag);
+                    // set
                 } else {
                     action = new MoveAction(drag);
                 }

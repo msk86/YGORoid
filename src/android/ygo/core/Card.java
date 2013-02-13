@@ -25,14 +25,15 @@ public class Card implements SelectableItem {
     Bitmap cardPic;
     Bitmap highLight;
 
-    public Card(String id, String name) {
-        this(id, name, CardType.NORMAL_MONSTER, true, true);
+    public Card(String id, String name, String desc) {
+        this(id, name, desc, CardType.NORMAL_MONSTER, true, true);
     }
 
 
-    public Card(String id, String name, CardType type, boolean positive, boolean set) {
+    public Card(String id, String name, String desc, CardType type, boolean positive, boolean set) {
         this.id = id;
         this.name = name;
+        this.desc = desc;
         this.type = type;
         this.positive = positive;
         this.set = set;
@@ -160,5 +161,10 @@ public class Card implements SelectableItem {
     @Override
     public boolean isSelect() {
         return selected;
+    }
+
+    @Override
+    public String toString() {
+        return name + " " + desc;
     }
 }
