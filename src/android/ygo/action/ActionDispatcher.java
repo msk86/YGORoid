@@ -110,18 +110,19 @@ public class ActionDispatcher {
         Action action = new EmptyAction();
         if (click.getDuel().getCardSelector() != null) {
             action = new CloseCardSelectorAction(click);
+        } else {
+            SelectableItem item = click.getItem();
+            if (item != null) {
+                if (item instanceof CardList || item instanceof Overlay) {
+                    action = new OpenCardSelectorAction(click);
+                }
+            }
         }
         return action;
     }
 
     public static Action dispatch(MenuClick click) {
         Action action = new EmptyAction();
-        SelectableItem item = click.getItem();
-        if (item != null) {
-            if (item instanceof CardList || item instanceof Overlay) {
-                action = new OpenCardSelectorAction(click);
-            }
-        }
         return action;
     }
 }
