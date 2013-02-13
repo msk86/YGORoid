@@ -25,6 +25,7 @@ public class Card implements SelectableItem {
     List<CardSubType> subTypes;
     Attribute attribute;
     Race race;
+    int level;
     int atk;
     int def;
     boolean set = false;
@@ -34,11 +35,11 @@ public class Card implements SelectableItem {
     Bitmap highLight;
 
     public Card(String id, String name, String desc) {
-        this(id, name, desc, 0, 0, 0, 0, 0);
+        this(id, name, desc, 0, 0, 0, 0, 0, 0);
     }
 
 
-    public Card(String id, String name, String desc, int typeCode, int attrCode, int raceCode, int atk, int def) {
+    public Card(String id, String name, String desc, int typeCode, int attrCode, int raceCode, int level, int atk, int def) {
         this.id = id;
         this.name = name;
         this.desc = desc;
@@ -46,6 +47,7 @@ public class Card implements SelectableItem {
         this.subTypes = CardSubType.getCardSubType(typeCode);
         this.attribute = Attribute.getAttribute(attrCode);
         this.race = Race.getRace(raceCode);
+        this.level = level;
         this.atk = atk;
         this.def = def;
         this.positive = true;
@@ -182,6 +184,29 @@ public class Card implements SelectableItem {
 
     @Override
     public String toString() {
-        return name + " " + desc;
+        StringBuilder result = new StringBuilder();
+        result.append(name);
+        result.append(" ");
+        result.append(type.toString());
+        for(CardSubType subType : subTypes) {
+            result.append("|" + subType.toString());
+        }
+        if(type != CardType.MONSTER) {
+            return result.toString();
+        }
+        result.append(" ");
+        if(subTypes.contains(CardSubType.XYZ)) {
+            result.append("R");
+        } else {
+            result.append("L");
+        }
+        result.append(level);
+        result.append(" ");
+        result.append(atk + "/" + def);
+        result.append(" ");
+        result.append(attribute.toString());
+        result.append(" ");
+        result.append(race.toString());
+        return result.toString();
     }
 }

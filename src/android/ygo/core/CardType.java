@@ -16,6 +16,9 @@ public enum CardType {
 
     public static CardType getCardType(int code) {
         for (CardType type : CardType.values()) {
+            if(type == NULL) {
+                continue;
+            }
             if ((code & type.code) == type.code) {
                 return type;
             }

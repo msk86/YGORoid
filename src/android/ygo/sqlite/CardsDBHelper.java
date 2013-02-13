@@ -38,7 +38,8 @@ public class CardsDBHelper extends SQLiteOpenHelper {
                     new String[]{"t.id", "t.name", "t.desc", "d.atk", "d.def", "d.race", "d.level", "d.attribute", "d.type", "d.category"},
                     "t.id = d.id and t.id = ?", new String[]{id}, null, null, null);
             c.moveToFirst();
-            Card card = new Card(c.getString(0), c.getString(1), c.getString(2));
+            Card card = new Card(c.getString(0), c.getString(1), c.getString(2), c.getInt(8),
+                    c.getInt(7), c.getInt(5), c.getInt(6), c.getInt(3), c.getInt(4));
             cards.add(card);
         }
         database.close();
