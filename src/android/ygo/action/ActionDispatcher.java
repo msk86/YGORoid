@@ -40,8 +40,11 @@ public class ActionDispatcher {
             } else {
                 if (item instanceof Card || item instanceof Overlay) {
                     action = new FlipAction(dblClick);
-                } else if (item instanceof Deck && ((Deck) item).getName() == "DECK") {
-                    action = new ShuffleAction(dblClick);
+                } else if (item instanceof CardList) {
+                    CardList cardList = (CardList) item;
+                    if(cardList.getName().equals("TEMPORARY") || cardList.getName().equals("DECK")) {
+                        action = new ShuffleAction(dblClick);
+                    }
                 }
             }
         }

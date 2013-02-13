@@ -1,6 +1,6 @@
 package android.ygo.action;
 
-import android.ygo.core.Deck;
+import android.ygo.core.CardList;
 import android.ygo.op.Operation;
 
 public class ShuffleAction extends BaseAction {
@@ -11,8 +11,8 @@ public class ShuffleAction extends BaseAction {
 
     @Override
     public void execute() {
-        Deck deck = (Deck) item;
-        deck.shuffle();
+        CardList cardList = (CardList) item;
+        cardList.shuffle();
         // show animation of shuffle
     }
 }

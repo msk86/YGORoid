@@ -122,6 +122,10 @@ public class CardList implements SelectableItem {
         }
     }
 
+    public void shuffle() {
+        Utils.shuffle(cards);
+    }
+
     public List<Card> getCards() {
         return cards;
     }

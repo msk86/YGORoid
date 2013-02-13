@@ -15,10 +15,6 @@ public class Deck extends CardList {
         super(name, cards, false);
     }
 
-    public void shuffle() {
-        Utils.shuffle(cards);
-    }
-
     public void reserve() {
         List<Card> reservedCards = new ArrayList<Card>();
         for (int i = cards.size() - 1; i >= 0; i--) {
