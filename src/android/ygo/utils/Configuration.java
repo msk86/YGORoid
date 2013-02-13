@@ -18,4 +18,8 @@ public class Configuration {
     public static String cardProtector() {
         return "cover";
     }
+
+    public static boolean isMirror() {
+        return true;
+    }
 }

@@ -1,6 +1,7 @@
 package android.ygo.views;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -10,6 +11,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.ygo.core.*;
 import android.ygo.sqlite.CardsDBHelper;
+import android.ygo.utils.Configuration;
+import android.ygo.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -135,7 +138,14 @@ public class DuelDiskView extends View {
     @Override
     public void draw(Canvas canvas) {
         drawBackground(canvas);
-        canvas.drawBitmap(duel.toBitmap(), 0, 0, painter);
+        Bitmap duelBmp = duel.toBitmap();
+        int mirrorOffset = 0;
+        if(Configuration.isMirror()) {
+            duelBmp = Utils.rotate(duelBmp, 180);
+            mirrorOffset = -4;
+        }
+        canvas.drawBitmap(duelBmp, 0, 0 + mirrorOffset, painter);
+        duelBmp.recycle();
     }
 
     @Override

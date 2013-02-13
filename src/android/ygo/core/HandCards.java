@@ -18,7 +18,7 @@ public class HandCards implements Item {
     public HandCards() {
         cards = new ArrayList<Card>();
         set = false;
-        layout = new LinerLayout(cards, Utils.unitLength() * 6);
+        layout = new LinerLayout(cards, Utils.totalWidth());
     }
 
     public void shuffle() {
@@ -59,7 +59,7 @@ public class HandCards implements Item {
     }
 
     public Card cardAt(int x, int y) {
-        int padding = (Utils.unitLength() * 6 - cardsWidth()) / 2;
+        int padding = (Utils.totalWidth() - cardsWidth()) / 2;
         return layout.cardAt(x - padding, y);
     }
 
@@ -67,7 +67,7 @@ public class HandCards implements Item {
         if (cards.size() <= 1) {
             return 0;
         }
-        int maxWidth = Utils.unitLength() * 6;
+        int maxWidth = Utils.totalWidth();
         int maxPadding = Utils.cardWidth() / 10;
         int wPadding = (maxWidth - Utils.cardWidth()) / (cards.size() - 1) - Utils.cardWidth();
         wPadding = wPadding < maxPadding ? wPadding : maxPadding;
@@ -133,7 +133,7 @@ public class HandCards implements Item {
 
     @Override
     public Bitmap toBitmap() {
-        int width = Utils.unitLength() * 6;
+        int width = Utils.totalWidth();
         int hPadding = Utils.cardHeight() / 10;
         int height = Utils.cardHeight() + hPadding;
 

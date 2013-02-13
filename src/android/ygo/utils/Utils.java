@@ -28,6 +28,10 @@ public class Utils {
         return unitLengthW < unitLengthH ? unitLengthW : unitLengthH;
     }
 
+    public static int totalWidth() {
+        return unitLength() * 6;
+    }
+
     public static int cardHeight() {
         int padding = 2;
         return unitLength() - padding * 2;
@@ -122,5 +126,13 @@ public class Utils {
             return 1;
         }
         return 2;
+    }
+
+    public static float mirrorX(float x) {
+        return !Configuration.isMirror() ? x : totalWidth() - x;
+    }
+
+    public static float mirrorY(float y) {
+        return !Configuration.isMirror() ? y : screenHeight() - y;
     }
 }

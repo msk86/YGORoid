@@ -15,7 +15,7 @@ public class CardSelector implements Item {
     public CardSelector(SelectableItem sourceItem, CardList cardList) {
         this.sourceItem = sourceItem;
         this.cardList = cardList;
-        layout = new GridLayout(cardList.cards, Utils.unitLength() * 6, 4);
+        layout = new GridLayout(cardList.cards, Utils.totalWidth(), 4);
     }
 
     public SelectableItem getSourceItem() {
@@ -50,7 +50,7 @@ public class CardSelector implements Item {
     }
 
     public Bitmap background() {
-        int width = Utils.unitLength() * 6;
+        int width = Utils.totalWidth();
         int height = Utils.screenHeight();
         Bitmap background = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(background);

@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.ygo.op.Drag;
+import android.ygo.utils.Configuration;
 import android.ygo.utils.Utils;
 
 public class Duel implements Item {
@@ -133,7 +134,7 @@ public class Duel implements Item {
         if (cardSelector != null) {
             return false;
         }
-        return y < Utils.unitLength() * 3 && x < Utils.unitLength() * 6;
+        return y < Utils.unitLength() * 3 && x < Utils.totalWidth();
     }
 
     public boolean inHand(int x, int y) {
@@ -149,11 +150,11 @@ public class Duel implements Item {
 
     @Override
     public Bitmap toBitmap() {
-        Bitmap duelBmp = Bitmap.createBitmap(Utils.unitLength() * 6, Utils.unitLength() * 4, Bitmap.Config.ARGB_8888);
-
-        Bitmap winBmp = window.toBitmap();
+        Bitmap duelBmp = Bitmap.createBitmap(Utils.totalWidth(), Utils.unitLength() * 4, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(duelBmp);
         Paint paint = new Paint();
+
+        Bitmap winBmp = window.toBitmap();
 
         if (cardSelector == null) {
             Bitmap fieldBmp = duelFields.toBitmap();

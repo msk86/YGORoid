@@ -81,7 +81,7 @@ public class DuelFields implements Item {
 
     @Override
     public Bitmap toBitmap() {
-        int width = Utils.unitLength() * 6;
+        int width = Utils.totalWidth();
         int height = Utils.unitLength() * 3;
         Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);

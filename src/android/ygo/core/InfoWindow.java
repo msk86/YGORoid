@@ -33,7 +33,7 @@ public class InfoWindow implements Item {
 
     @Override
     public Bitmap toBitmap() {
-        int width = Utils.unitLength() * 6;
+        int width = Utils.totalWidth();
         int height = Utils.cardHeight() / 6 + 3;
         Bitmap winBmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 
