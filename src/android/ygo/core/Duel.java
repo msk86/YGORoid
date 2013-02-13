@@ -88,6 +88,8 @@ public class Duel implements Item {
             return handCards.cardAt(x, y);
         } else if (inCardSelector(x, y)) {
             return cardSelector.cardAt(x, y);
+        } else if (inInfo(x, y)) {
+            return currentSelectItem;
         }
         return null;
     }
@@ -99,6 +101,8 @@ public class Duel implements Item {
             return handCards;
         } else if (inCardSelector(x, y)) {
             return cardSelector.cardList;
+        } else if (inInfo(x, y)) {
+            return window;
         }
         return null;
     }
@@ -119,6 +123,9 @@ public class Duel implements Item {
         if (cardSelector == null) {
             return false;
         }
+        if(y >= Utils.screenHeight() - Utils.cardHeight() / 6) {
+            return false;
+        }
         return true;
     }
 
@@ -133,7 +140,11 @@ public class Duel implements Item {
         if (cardSelector != null) {
             return false;
         }
-        return y >= Utils.unitLength() * 3 && x < Utils.unitLength() * 6;
+        return y >= Utils.unitLength() * 3 && y < Utils.screenHeight() - Utils.cardHeight() / 6;
+    }
+
+    public boolean inInfo(int x, int y) {
+        return y >= Utils.screenHeight() - Utils.cardHeight() / 6;
     }
 
     @Override

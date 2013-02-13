@@ -41,9 +41,14 @@ public class LinerLayout {
         Paint paint = new Paint();
 
         int posX = 0;
+        int posY;
         for (int i = 0; i < cards.size(); i++) {
             Card card = cards.get(i);
-            Utils.drawBitmapOnCanvas(canvas, card.toBitmap(), paint, posX, 0);
+            posY = Utils.cardHeight() / 7;
+            if(card.isSelect()) {
+                posY = 0;
+            }
+            Utils.drawBitmapOnCanvas(canvas, card.toBitmap(), paint, posX, posY);
             posX += Utils.cardWidth() + cardPadding;
         }
         return bmp;

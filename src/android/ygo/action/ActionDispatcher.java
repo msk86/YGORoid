@@ -7,6 +7,10 @@ public class ActionDispatcher {
 
     public static Action dispatch(Click click) {
         Action action = new SelectAction(click);
+        if(click.getContainer() instanceof InfoWindow) {
+            if(click.getItem() instanceof Card || click.getItem() instanceof Overlay)
+            action = new OpenInfoAction(click);
+        }
         return action;
     }
 
