@@ -21,12 +21,16 @@ public class Drag implements Operation {
         toX = -1;
         toY = -1;
         dragging = true;
+        boolean canSelect = true;
         if (duel.inDuelFields(fromX, fromY)) {
             Field field = duel.fieldAt(fromX, fromY);
             from = field;
             if (field != null) {
                 item = field.getItem();
                 if (item instanceof CardList) {
+                    if(item instanceof Deck) {
+                        canSelect = false;
+                    }
                     from = item;
                     item = ((CardList) item).pop();
                 } else if (item instanceof Overlay) {
@@ -58,7 +62,7 @@ public class Drag implements Operation {
                 duel.setCardSelector(null);
             }
         }
-        if (item != null && !item.isSelect()) {
+        if (item != null && !item.isSelect() && canSelect) {
             duel.select(item);
         }
     }
