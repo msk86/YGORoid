@@ -52,9 +52,11 @@ public class Drag implements Operation {
         } else if (duel.inCardSelector(fromX, fromY)) {
             from = duel.getCardSelector().getCardList();
             Card card = duel.getCardSelector().cardAt(fromX, fromY);
-            card.open();
-            item = duel.getCardSelector().remove(card);
-            duel.setCardSelector(null);
+            if(card != null) {
+                card.open();
+                item = duel.getCardSelector().remove(card);
+                duel.setCardSelector(null);
+            }
         }
         if (item != null && !item.isSelect()) {
             duel.select(item);

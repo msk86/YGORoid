@@ -68,7 +68,9 @@ public class GridLayout {
         }
 
         int indexX = x / (Utils.cardWidth() + cardPaddingW);
-        indexX = indexX < cards.size() ? indexX : cards.size() - 1;
+        if(indexX >= cards.size()) {
+            return null;
+        }
         int indexY = y / (Utils.cardHeight() + cardPaddingH);
 
         int index = indexY * col + indexX;
