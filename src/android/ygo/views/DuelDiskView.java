@@ -150,11 +150,6 @@ public class DuelDiskView extends View {
         hands.add(new Card("84013237", null, null));
         hands.add(new Card("84013237", null, null));
         duel.getHandCards().add(hands);
-
-        duel.getInfoWindow().setInfo("No 39 希望皇 霍普 R4 2500/2000 光 战士");
-
-        CardSelector selector = new CardSelector(deck, deck);
-        duel.setCardSelector(selector);
     }
 
     @Override

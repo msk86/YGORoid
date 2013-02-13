@@ -8,10 +8,10 @@ import android.ygo.utils.Utils;
 
 public class InfoWindow implements Item {
 
-    String info;
+    String info = "";
 
     public void setInfo(SelectableItem item) {
-        String info = null;
+        String info = "";
         if (item instanceof Card) {
             info = ((Card) item).toString();
         } else if (item instanceof Overlay) {

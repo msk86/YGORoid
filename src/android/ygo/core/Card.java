@@ -101,6 +101,7 @@ public class Card implements SelectableItem {
             TextPaint textPaint = new TextPaint();
             textPaint.setTextSize(Utils.unitLength() / 10);
             textPaint.setColor(Configuration.fontColor());
+            textPaint.setShadowLayer(1, 0, 0, Color.BLACK);
             StaticLayout layout = new StaticLayout(cs, textPaint, Utils.cardWidth(), Layout.Alignment.ALIGN_CENTER, 0, 0, true);
             canvas.translate(0, Utils.cardHeight() / 20);
             layout.draw(canvas);
@@ -112,11 +113,14 @@ public class Card implements SelectableItem {
         if(type.getCardBmp() != null) {
             return type.getCardBmp();
         }
-        for(CardSubType subType : subTypes) {
-            if(subType.getCardBmp() != null) {
+
+        for(int i=subTypes.size() - 1; i>=0;i --) {
+            CardSubType subType = subTypes.get(i);
+            if (subType.getCardBmp() != null) {
                 return subType.getCardBmp();
             }
         }
+
         Bitmap bmp = Bitmap.createBitmap(Utils.cardWidth(), Utils.cardHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bmp);
         canvas.drawColor(Color.GRAY);
@@ -126,7 +130,7 @@ public class Card implements SelectableItem {
     private String longName() {
         char[] cs = name.toCharArray();
         int charLen = 0;
-        int maxCutFlag = 10;
+        int maxCutFlag = 11;
         int cutIndex = cs.length;
         for (int i = 0; i < cs.length; i++) {
             int newLen = charLen + Utils.textPlace(cs[i]);
