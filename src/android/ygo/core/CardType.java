@@ -7,8 +7,7 @@ public enum CardType {
     NULL(0, ""),
     MONSTER(Const.TYPE_MONSTER, "怪兽"),
     SPELL(Const.TYPE_SPELL, "魔法"),
-    TRAP(Const.TYPE_TRAP, "陷阱")
-    ;
+    TRAP(Const.TYPE_TRAP, "陷阱");
 
     private int code;
     private String text;
@@ -25,7 +24,7 @@ public enum CardType {
 
     public static CardType getCardType(int code) {
         for (CardType type : CardType.values()) {
-            if(type == NULL) {
+            if (type == NULL) {
                 continue;
             }
             if ((code & type.code) == type.code) {

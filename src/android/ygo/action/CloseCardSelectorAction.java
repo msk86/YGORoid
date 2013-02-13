@@ -6,7 +6,7 @@ import android.ygo.op.Operation;
 
 public class CloseCardSelectorAction extends BaseAction {
     public CloseCardSelectorAction(Operation operation) {
-        super(operation.getDuel(), operation.getContainer(), operation.getItem());
+        super(operation);
     }
 
     @Override
@@ -14,13 +14,11 @@ public class CloseCardSelectorAction extends BaseAction {
         CardSelector selector = duel.getCardSelector();
         CardList list = selector.getCardList();
 
-        if(list.getName().equals("DECK") ||
+        if (list.getName().equals("DECK") ||
                 list.getName().equals("EX")) {
             list.setAll();
         }
         duel.setCardSelector(null);
         duel.select(selector.getSourceItem());
-
-
     }
 }

@@ -1,7 +1,5 @@
 package android.ygo.core;
 
-import android.ygo.utils.Utils;
-
 import java.util.ArrayList;
 import java.util.List;
 

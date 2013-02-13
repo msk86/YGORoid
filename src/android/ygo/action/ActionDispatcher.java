@@ -7,9 +7,9 @@ public class ActionDispatcher {
 
     public static Action dispatch(Click click) {
         Action action = new SelectAction(click);
-        if(click.getContainer() instanceof InfoWindow) {
-            if(click.getItem() instanceof Card || click.getItem() instanceof Overlay)
-            action = new OpenInfoAction(click);
+        if (click.getContainer() instanceof InfoWindow) {
+            if (click.getItem() instanceof Card || click.getItem() instanceof Overlay)
+                action = new OpenInfoAction(click);
         }
         return action;
     }
@@ -33,8 +33,8 @@ public class ActionDispatcher {
         if (dblClick.getContainer() instanceof Field) {
             Field field = (Field) dblClick.getContainer();
             SelectableItem item = dblClick.getItem();
-            if(item == null) {
-                if(field.getType() == FieldType.MONSTER_ZONE) {
+            if (item == null) {
+                if (field.getType() == FieldType.MONSTER_ZONE) {
                     action = new NewTokenAction(dblClick);
                 }
             } else {
@@ -42,11 +42,32 @@ public class ActionDispatcher {
                     action = new FlipAction(dblClick);
                 } else if (item instanceof CardList) {
                     CardList cardList = (CardList) item;
-                    if(cardList.getName().equals("TEMPORARY") || cardList.getName().equals("DECK")) {
+                    if (cardList.getName().equals("TEMPORARY") || cardList.getName().equals("DECK")) {
                         action = new ShuffleAction(dblClick);
                     }
                 }
             }
+        }
+        return action;
+    }
+
+    public static Action dispatch(StartDrag startDrag) {
+        Action action = new EmptyAction();
+        if (startDrag.getContainer() instanceof HandCards) {
+            action = new DragHandCardAction(startDrag);
+        } else if (startDrag.getContainer() instanceof Field) {
+            SelectableItem item = startDrag.getItem();
+            if (item != null) {
+                if (item instanceof Overlay) {
+                    action = new DragOverlayAction(startDrag);
+                } else if (item instanceof Card) {
+                    action = new DragFieldCardAction(startDrag);
+                } else if (item instanceof CardList) {
+                    action = new DragCardListAction(startDrag);
+                }
+            }
+        } else if (startDrag.getContainer() instanceof CardList) {
+            action = new DragCardSelectorAction(startDrag);
         }
         return action;
     }
@@ -57,8 +78,7 @@ public class ActionDispatcher {
             Field field = (Field) drag.getContainer();
             SelectableItem targetItem = field.getItem();
             if (targetItem == null) {
-                if (drag.getFrom() instanceof HandCards) {
-                    // summon
+                if (drag.getStartDrag().getContainer() instanceof HandCards) {
                     action = new SummonAction(drag);
                     // set
                 } else {

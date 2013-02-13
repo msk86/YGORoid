@@ -24,5 +24,6 @@ public class AddCardListAction extends BaseAction {
                 cl.push(xyzMonster);
             }
         }
+        duel.select(cl);
     }
 }

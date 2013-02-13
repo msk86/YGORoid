@@ -123,7 +123,7 @@ public class Duel implements Item {
         if (cardSelector == null) {
             return false;
         }
-        if(y >= Utils.screenHeight() - Utils.cardHeight() / 6) {
+        if (y >= Utils.screenHeight() - Utils.cardHeight() / 6) {
             return false;
         }
         return true;

@@ -13,7 +13,8 @@ public class NewTokenAction extends BaseAction {
     @Override
     public void execute() {
         Card token = new Card("0", "TOKEN", "TOKEN", Const.TYPE_TOKEN + Const.TYPE_MONSTER, Const.NULL, Const.NULL, 0, 0, 0);
-        Field field = (Field)container;
+        Field field = (Field) container;
         field.setItem(token);
+        duel.select(token);
     }
 }

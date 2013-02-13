@@ -110,11 +110,11 @@ public class Card implements SelectableItem {
     }
 
     private Bitmap cardTypeBmp() {
-        if(type.getCardBmp() != null) {
+        if (type.getCardBmp() != null) {
             return type.getCardBmp();
         }
 
-        for(int i=subTypes.size() - 1; i>=0;i --) {
+        for (int i = subTypes.size() - 1; i >= 0; i--) {
             CardSubType subType = subTypes.get(i);
             if (subType.getCardBmp() != null) {
                 return subType.getCardBmp();
@@ -208,14 +208,14 @@ public class Card implements SelectableItem {
         result.append(name);
         result.append(" ");
         result.append(type.toString());
-        for(CardSubType subType : subTypes) {
+        for (CardSubType subType : subTypes) {
             result.append("|" + subType.toString());
         }
-        if(type != CardType.MONSTER) {
+        if (type != CardType.MONSTER) {
             return result.toString();
         }
         result.append(" ");
-        if(subTypes.contains(CardSubType.XYZ)) {
+        if (subTypes.contains(CardSubType.XYZ)) {
             result.append("R");
         } else {
             result.append("L");

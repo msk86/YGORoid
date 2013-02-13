@@ -56,6 +56,12 @@ public class CardList implements SelectableItem {
         return cards.size();
     }
 
+    public Card topCard() {
+        if (cards.size() > 0) {
+            return cards.get(0);
+        }
+        return null;
+    }
 
     public Card pop() {
         if (cards.size() > 0) {
@@ -75,7 +81,7 @@ public class CardList implements SelectableItem {
         if (card == null) {
             return;
         }
-        if(card.getSubTypes().contains(CardSubType.TOKEN)) {
+        if (card.getSubTypes().contains(CardSubType.TOKEN)) {
             return;
         }
         if (open) {
@@ -111,13 +117,13 @@ public class CardList implements SelectableItem {
     }
 
     public void openAll() {
-        for(Card card : cards) {
+        for (Card card : cards) {
             card.open();
         }
     }
 
     public void setAll() {
-        for(Card card : cards) {
+        for (Card card : cards) {
             card.set();
         }
     }

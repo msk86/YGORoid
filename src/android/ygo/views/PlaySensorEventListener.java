@@ -20,21 +20,21 @@ public class PlaySensorEventListener implements SensorEventListener {
         boolean changed = false;
         HandCards handCards = view.getDuel().getHandCards();
         if (z >= 7) {
-            if(z >= 7.3) {
-                if(!handCards.isSet()) {
+            if (z >= 7.3) {
+                if (!handCards.isSet()) {
                     handCards.setAll();
                     changed = true;
                 }
             }
         } else {
-            if(z <= 6.7) {
-                if(handCards.isSet()) {
+            if (z <= 6.7) {
+                if (handCards.isSet()) {
                     handCards.openAll();
                     changed = true;
                 }
             }
         }
-        if(changed) {
+        if (changed) {
             view.invalidate();
         }
     }

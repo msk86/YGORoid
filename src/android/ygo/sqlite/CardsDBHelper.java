@@ -29,17 +29,30 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         // NOTHING
     }
 
+    private Card loadCard(SQLiteDatabase database, String cardID) {
+        Cursor c = database.query("texts t, datas d",
+                new String[]{"t.id", "t.name", "t.desc", "d.atk", "d.def", "d.race", "d.level", "d.attribute", "d.type", "d.category"},
+                "t.id = d.id and t.id = ?", new String[]{cardID}, null, null, null);
+        c.moveToFirst();
+        Card card = new Card(c.getString(0), c.getString(1), c.getString(2), c.getInt(8),
+                c.getInt(7), c.getInt(5), c.getInt(6), c.getInt(3), c.getInt(4));
+        return card;
+    }
+
+    public Card loadCard(String cardID) {
+        CardsDBHelper helper = new CardsDBHelper(context, 1);
+        SQLiteDatabase database = helper.getReadableDatabase();
+        Card card = loadCard(database, cardID);
+        database.close();
+        return card;
+    }
+
     public List<Card> loadCard(List<String> cardIDs) {
         List<Card> cards = new ArrayList<Card>();
         CardsDBHelper helper = new CardsDBHelper(context, 1);
         SQLiteDatabase database = helper.getReadableDatabase();
         for (String id : cardIDs) {
-            Cursor c = database.query("texts t, datas d",
-                    new String[]{"t.id", "t.name", "t.desc", "d.atk", "d.def", "d.race", "d.level", "d.attribute", "d.type", "d.category"},
-                    "t.id = d.id and t.id = ?", new String[]{id}, null, null, null);
-            c.moveToFirst();
-            Card card = new Card(c.getString(0), c.getString(1), c.getString(2), c.getInt(8),
-                    c.getInt(7), c.getInt(5), c.getInt(6), c.getInt(3), c.getInt(4));
+            Card card = loadCard(database, id);
             cards.add(card);
         }
         database.close();

@@ -4,10 +4,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.ygo.action.Action;
 import android.ygo.action.ActionDispatcher;
-import android.ygo.op.Click;
-import android.ygo.op.DoubleClick;
-import android.ygo.op.Drag;
-import android.ygo.op.Press;
+import android.ygo.op.*;
 
 public class PlayGestureListener extends GestureDetector.SimpleOnGestureListener {
     DuelDiskView view;
@@ -62,7 +59,11 @@ public class PlayGestureListener extends GestureDetector.SimpleOnGestureListener
     public boolean onScroll(MotionEvent event1, MotionEvent event2, float dx, float dy) {
         Drag drag = view.getDuel().getDrag();
         if (drag == null) {
-            drag = new Drag(view.getDuel(), event1.getX(), event1.getY());
+            StartDrag startDrag = new StartDrag(view.getDuel(), event1.getX(), event1.getY());
+            Action action = ActionDispatcher.dispatch(startDrag);
+            action.execute();
+
+            drag = new Drag(startDrag, view.getDuel(), event1.getX(), event1.getY());
             view.getDuel().setDrag(drag);
         }
         drag.move(event2.getX(), event2.getY());
