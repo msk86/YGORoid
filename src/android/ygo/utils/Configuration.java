@@ -1,4 +1,4 @@
-package android.ygo.core;
+package android.ygo.utils;
 
 import android.graphics.Color;
 
@@ -17,9 +17,5 @@ public class Configuration {
 
     public static String cardProtector() {
         return "cover";
-    }
-
-    public static String unknownCard() {
-        return "unknown";
     }
 }

@@ -1,5 +1,8 @@
 package android.ygo.core;
 
+import android.graphics.Bitmap;
+import android.ygo.utils.Utils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,10 +32,15 @@ public enum CardSubType {
 
     private int code;
     private String text;
+    private Bitmap cardBmp;
 
     CardSubType(int code, String text) {
         this.code = code;
         this.text = text;
+        try {
+            cardBmp = Utils.readBitmapScaleByHeight("textures/" + "card-" + code + ".jpg", Utils.cardHeight());
+        } catch (Exception e) {
+        }
     }
 
     public static List<CardSubType> getCardSubType(int code) {
@@ -43,6 +51,10 @@ public enum CardSubType {
             }
         }
         return types;
+    }
+
+    public Bitmap getCardBmp() {
+        return cardBmp;
     }
 
     @Override

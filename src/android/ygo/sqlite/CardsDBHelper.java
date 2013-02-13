@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.ygo.core.Card;
-import android.ygo.core.Configuration;
+import android.ygo.utils.Configuration;
 
 import java.util.ArrayList;
 import java.util.List;

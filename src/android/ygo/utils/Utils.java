@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.graphics.*;
 import android.util.DisplayMetrics;
 import android.ygo.core.Card;
-import android.ygo.core.Configuration;
 
 import java.util.List;
 import java.util.Random;

@@ -7,12 +7,12 @@ import android.graphics.Paint;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
+import android.ygo.utils.Configuration;
 import android.ygo.utils.Utils;
 
 import java.util.List;
 
 public class Card implements SelectableItem {
-    public static final Bitmap UNKNOWN_CARD = Utils.readBitmapScaleByHeight(Configuration.unknownCard() + ".jpg", Utils.cardHeight());
     public static final Bitmap CARD_PROTECTOR = Utils.readBitmapScaleByHeight(Configuration.cardProtector() + ".jpg", Utils.cardHeight());
 
     private boolean selected = false;
@@ -95,7 +95,8 @@ public class Card implements SelectableItem {
             cardPic = Bitmap.createBitmap(Utils.cardWidth(), Utils.cardHeight(), Bitmap.Config.ARGB_8888);
             Canvas canvas = new Canvas(cardPic);
             Paint paint = new Paint();
-            Utils.drawBitmapOnCanvas(canvas, UNKNOWN_CARD, paint, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_FIRST);
+            Bitmap cardTypeBmp = cardTypeBmp();
+            Utils.drawBitmapOnCanvas(canvas, cardTypeBmp, paint, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_FIRST);
             CharSequence cs = longName();
             TextPaint textPaint = new TextPaint();
             textPaint.setTextSize(Utils.unitLength() / 10);
@@ -105,6 +106,18 @@ public class Card implements SelectableItem {
             layout.draw(canvas);
         }
         highLight = highLight();
+    }
+
+    private Bitmap cardTypeBmp() {
+        if(type.getCardBmp() != null) {
+            return type.getCardBmp();
+        }
+        for(CardSubType subType : subTypes) {
+            if(subType.getCardBmp() != null) {
+                return subType.getCardBmp();
+            }
+        }
+        return CardSubType.TOKEN.getCardBmp();
     }
 
     private String longName() {
