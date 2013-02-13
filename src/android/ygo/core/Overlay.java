@@ -25,7 +25,8 @@ public class Overlay implements SelectableItem {
         if (topCard == null) {
             topCard = card;
         } else {
-            if (topCard.type == CardType.XYZ_MONSTER && card.type != CardType.XYZ_MONSTER) {
+            if (topCard.getSubTypes().contains(CardSubType.XYZ)
+                    && !card.getSubTypes().contains(CardSubType.XYZ)) {
                 materials.push(card);
             } else {
                 materials.push(topCard);

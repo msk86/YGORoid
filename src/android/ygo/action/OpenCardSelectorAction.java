@@ -15,14 +15,14 @@ public class OpenCardSelectorAction extends BaseAction {
     public void execute() {
         CardList list;
         SelectableItem source;
-        if(item instanceof Overlay) {
-            list = ((Overlay)item).getMaterials();
+        if (item instanceof Overlay) {
+            list = ((Overlay) item).getMaterials();
             source = item;
         } else {
-            list = (CardList)item;
+            list = (CardList) item;
             source = item;
         }
-        if(list.size() == 0) {
+        if (list.size() == 0) {
             return;
         }
         CardSelector selector = new CardSelector(source, list);

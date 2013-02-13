@@ -1,6 +1,5 @@
 package android.ygo.action;
 
-import android.util.Log;
 import android.ygo.core.*;
 import android.ygo.op.*;
 
@@ -14,8 +13,8 @@ public class ActionDispatcher {
     public static Action dispatch(Press press) {
         Action action = new SelectAction(press);
         if (press.getContainer() instanceof Field) {
-            Field field = (Field)press.getContainer();
-            if(field.getType() == FieldType.MONSTER_ZONE) {
+            Field field = (Field) press.getContainer();
+            if (field.getType() == FieldType.MONSTER_ZONE) {
                 SelectableItem item = press.getItem();
                 if (item instanceof Card || item instanceof Overlay) {
                     action = new MonsterPositionAction(press);
@@ -31,7 +30,7 @@ public class ActionDispatcher {
             SelectableItem item = dblClick.getItem();
             if (item instanceof Card || item instanceof Overlay) {
                 action = new FlipAction(dblClick);
-            } else if(item instanceof Deck && ((Deck)item).getName() == "DECK") {
+            } else if (item instanceof Deck && ((Deck) item).getName() == "DECK") {
                 action = new ShuffleAction(dblClick);
             }
         }
@@ -66,22 +65,24 @@ public class ActionDispatcher {
         }
         return action;
     }
+
     public static Action dispatch(ReturnClick click) {
         Action action = new EmptyAction();
-        if(click.getDuel().getCardSelector() != null) {
+        if (click.getDuel().getCardSelector() != null) {
             action = new CloseCardSelectorAction(click);
         }
         return action;
     }
+
     public static Action dispatch(MenuClick click) {
         Action action = new EmptyAction();
         SelectableItem item = click.getItem();
         if (item != null) {
-            if(item instanceof CardList) {
+            if (item instanceof CardList) {
                 action = new OpenCardSelectorAction(click);
-            } else if(item instanceof Overlay) {
-                Overlay overlay = (Overlay)item;
-                if(overlay.topCard().getType() == CardType.XYZ_MONSTER && overlay.materialCount() != 0) {
+            } else if (item instanceof Overlay) {
+                Overlay overlay = (Overlay) item;
+                if (overlay.topCard().getSubTypes().contains(CardSubType.XYZ) && overlay.materialCount() != 0) {
                     action = new OpenCardSelectorAction(click);
                 }
             }

@@ -2,7 +2,7 @@ package android.ygo.core;
 
 import java.util.List;
 
-public class TempList extends CardList{
+public class TempList extends CardList {
 
     public TempList(String name) {
         super(name);

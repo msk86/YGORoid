@@ -1,42 +1,42 @@
 package android.ygo.core;
 
 public enum Race {
-    NULL(0, ""),
-    ZHAN_SHI(1, "战士"),
-    MO_FA_SHI(2, "魔法师"),
-    TIAN_SHI(4, "天使"),
-    E_MO(8, "恶魔"),
-    BU_SI(16, "不死"),
-    JI_XIE(32, "机械"),
-    SHUI(64, "水"),
-    YAN(128, "炎"),
-    YAN_SHI(256, "岩石"),
-    NIAO_SHOU(512, "鸟兽"),
-    ZHI_WU(1024, "植物"),
-    KUN_CHONG(2048, "昆虫"),
-    LEI(4096, "雷"),
-    LONG(8192, "龙"),
-    SHOU(16384, "兽"),
-    SHOU_ZHAN_SHI(32768, "兽战士"),
-    KONG_LONG(65536, "恐龙"),
-    YU(131072, "鱼"),
-    HAI_LONG(262144, "海龙"),
-    PA_CHONG(524288, "爬虫"),
-    NIAN_DONG_LI(1048576, "念动力"),
-    HUAN_SHEN_SHOU(2097152, "换神兽"),
-    CHUANG_SHI_SHEN(4194304, "创世神")
-    ;
+    NULL(Const.NULL, ""),
+    WARRIOR(Const.RACE_WARRIOR, "战士"),
+    SPELL_CASTER(Const.RACE_SPELLCASTER, "魔法师"),
+    FAIRY(Const.RACE_FAIRY, "天使"),
+    FIEND(Const.RACE_FIEND, "恶魔"),
+    ZOMBIE(Const.RACE_ZOMBIE, "不死"),
+    MACHINE(Const.RACE_MACHINE, "机械"),
+    AQUA(Const.RACE_AQUA, "水"),
+    PYRO(Const.RACE_PYRO, "炎"),
+    ROCK(Const.RACE_ROCK, "岩石"),
+    WIND_BEAST(Const.RACE_WINDBEAST, "鸟兽"),
+    PLANT(Const.RACE_PLANT, "植物"),
+    INSECT(Const.RACE_INSECT, "昆虫"),
+    THUNDER(Const.RACE_THUNDER, "雷"),
+    DRAGON(Const.RACE_DRAGON, "龙"),
+    BEAST(Const.RACE_BEAST, "兽"),
+    BEAST_WARRIOR(Const.RACE_BEASTWARRIOR, "兽战士"),
+    DINOSAUR(Const.RACE_DINOSAUR, "恐龙"),
+    FISH(Const.RACE_FISH, "鱼"),
+    SEA_SERPENT(Const.RACE_SEASERPENT, "海龙"),
+    REPTILE(Const.RACE_REPTILE, "爬虫"),
+    PSYCHO(Const.RACE_PSYCHO, "念动力"),
+    DEVINE(Const.RACE_DEVINE, "换神兽"),
+    CREATOR_GOD(Const.RACE_CREATORGOD, "创世神");
 
-    Race(int code, String chn){
+    Race(int code, String text) {
         this.code = code;
-        this.chn = chn;
+        this.text = text;
     }
-    private int code;
-    private String chn;
 
-    public Race getAttribute(int code) {
-        for(Race race : Race.values()) {
-            if(race.code == code) {
+    private int code;
+    private String text;
+
+    public static Race getRace(int code) {
+        for (Race race : Race.values()) {
+            if (race.code == code) {
                 return race;
             }
         }
@@ -45,6 +45,6 @@ public enum Race {
 
     @Override
     public String toString() {
-        return chn;
+        return text;
     }
 }

@@ -22,10 +22,10 @@ public class LinerLayout {
 
     public void fixPosition() {
         int maxPadding = Utils.cardWidth() / 10;
-        if(cards.size() > 1) {
+        if (cards.size() > 1) {
             cardPadding = (maxWidth - Utils.cardWidth()) / (cards.size() - 1) - Utils.cardWidth();
             cardPadding = cardPadding < maxPadding ? cardPadding : maxPadding;
-        } else if(cards.size() == 1) {
+        } else if (cards.size() == 1) {
             cardPadding = maxPadding;
         } else {
             cardPadding = 0;
@@ -51,7 +51,7 @@ public class LinerLayout {
 
     public Card cardAt(int x, int y) {
         fixPosition();
-        if(x < 0 || x >= realWidth) {
+        if (x < 0 || x >= realWidth) {
             return null;
         }
 

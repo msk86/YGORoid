@@ -116,10 +116,10 @@ public class Utils {
     }
 
     public static int textPlace(char c) {
-        if(c < 32) {
+        if (c < 32) {
             return 0;
         }
-        if(c < 256) {
+        if (c < 256) {
             return 1;
         }
         return 2;

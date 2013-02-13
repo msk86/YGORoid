@@ -5,10 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.ygo.layout.GridLayout;
-import android.ygo.layout.LinerLayout;
 import android.ygo.utils.Utils;
-
-import java.util.List;
 
 public class CardSelector implements Item {
     SelectableItem sourceItem;
@@ -18,7 +15,7 @@ public class CardSelector implements Item {
     public CardSelector(SelectableItem sourceItem, CardList cardList) {
         this.sourceItem = sourceItem;
         this.cardList = cardList;
-        layout = new GridLayout(cardList.cards, Utils.unitLength()*6, 4);
+        layout = new GridLayout(cardList.cards, Utils.unitLength() * 6, 4);
     }
 
     public SelectableItem getSourceItem() {

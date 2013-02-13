@@ -18,6 +18,7 @@ public class Configuration {
     public static String cardProtector() {
         return "cover";
     }
+
     public static String unknownCard() {
         return "unknown";
     }

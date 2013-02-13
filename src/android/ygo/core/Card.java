@@ -9,6 +9,8 @@ import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.ygo.utils.Utils;
 
+import java.util.List;
+
 public class Card implements SelectableItem {
     public static final Bitmap UNKNOWN_CARD = Utils.readBitmapScaleByHeight(Configuration.unknownCard() + ".jpg", Utils.cardHeight());
     public static final Bitmap CARD_PROTECTOR = Utils.readBitmapScaleByHeight(Configuration.cardProtector() + ".jpg", Utils.cardHeight());
@@ -19,6 +21,12 @@ public class Card implements SelectableItem {
     String name;
     String desc;
     CardType type;
+
+    List<CardSubType> subTypes;
+    Attribute attribute;
+    Race race;
+    int atk;
+    int def;
     boolean set = false;
     boolean positive = true;
 
@@ -26,22 +34,31 @@ public class Card implements SelectableItem {
     Bitmap highLight;
 
     public Card(String id, String name, String desc) {
-        this(id, name, desc, CardType.NORMAL_MONSTER, true, true);
+        this(id, name, desc, 0, 0, 0, 0, 0);
     }
 
 
-    public Card(String id, String name, String desc, CardType type, boolean positive, boolean set) {
+    public Card(String id, String name, String desc, int typeCode, int attrCode, int raceCode, int atk, int def) {
         this.id = id;
         this.name = name;
         this.desc = desc;
-        this.type = type;
-        this.positive = positive;
-        this.set = set;
+        this.type = CardType.getCardType(typeCode);
+        this.subTypes = CardSubType.getCardSubType(typeCode);
+        this.attribute = Attribute.getAttribute(attrCode);
+        this.race = Race.getRace(raceCode);
+        this.atk = atk;
+        this.def = def;
+        this.positive = true;
+        this.set = false;
         initCardPic();
     }
 
     public CardType getType() {
         return type;
+    }
+
+    public List<CardSubType> getSubTypes() {
+        return subTypes;
     }
 
     public void flip() {
@@ -93,16 +110,16 @@ public class Card implements SelectableItem {
         int charLen = 0;
         int maxCutFlag = 10;
         int cutIndex = cs.length;
-        for(int i=0;i<cs.length;i++) {
+        for (int i = 0; i < cs.length; i++) {
             int newLen = charLen + Utils.textPlace(cs[i]);
-            if(newLen > maxCutFlag) {
+            if (newLen > maxCutFlag) {
                 cutIndex = i;
                 break;
             }
             charLen = newLen;
         }
         String nName = name.substring(0, cutIndex);
-        if(cutIndex != name.length()) {
+        if (cutIndex != name.length()) {
             nName += "...";
         }
         return nName;

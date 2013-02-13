@@ -15,7 +15,7 @@ public class RevertDragAction extends BaseAction {
 
     @Override
     public void execute() {
-        if(drag.getItem() == null) {
+        if (drag.getItem() == null) {
             return;
         }
         Item from = drag.getFrom();

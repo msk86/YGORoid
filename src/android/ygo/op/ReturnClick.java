@@ -13,15 +13,15 @@ public class ReturnClick implements Operation {
         this.duel = duel;
         item = duel.getCurrentSelectItem();
     }
-    
+
     @Override
     public Duel getDuel() {
-        return duel; 
+        return duel;
     }
 
     @Override
     public SelectableItem getItem() {
-        return item; 
+        return item;
     }
 
     @Override

@@ -47,40 +47,40 @@ public class DuelDiskView extends View {
         DuelFields duelFields = duel.getDuelFields();
 
         // set magic
-        Card setMagicCard = new Card("35952884", null, null, CardType.SYNC_MONSTER, true, true);
+        Card setMagicCard = new Card("35952884", null, null);
         Field f = duelFields.getMagicField(2);
         f.setItem(setMagicCard);
 
         // Monsters
         // set
-        Card setCard = new Card("35952884", null, null, CardType.SYNC_MONSTER, false, true);
+        Card setCard = new Card("35952884", null, null);
         f = duelFields.getMonsterField(0);
         f.setItem(setCard);
         // atk monster
-        Card card = new Card("35952884", null, null, CardType.SYNC_MONSTER, true, false);
+        Card card = new Card("35952884", null, null);
         f = duelFields.getMonsterField(1);
         f.setItem(card);
         // xyz + 2m
-        Card material1 = new Card("35952884", null, null, CardType.SYNC_MONSTER, false, true);
-        Card material2 = new Card("35952884", null, null, CardType.SYNC_MONSTER, false, true);
-        Card xyzCard = new Card("84013237", null, null, CardType.XYZ_MONSTER, true, false);
+        Card material1 = new Card("35952884", null, null);
+        Card material2 = new Card("35952884", null, null);
+        Card xyzCard = new Card("84013237", null, null);
         Overlay overlay = new Overlay(material1);
         overlay.overlay(material2);
         overlay.overlay(xyzCard);
         f = duelFields.getMonsterField(2);
         f.setItem(overlay);
         // xyz + 1m
-        Card material21 = new Card("35952884", null, null, CardType.SYNC_MONSTER, false, true);
-        Card material22 = new Card("35952884", null, null, CardType.SYNC_MONSTER, false, true);
-        Card xyzCard2 = new Card("84013237", null, null, CardType.XYZ_MONSTER, false, false);
+        Card material21 = new Card("35952884", null, null);
+        Card material22 = new Card("35952884", null, null);
+        Card xyzCard2 = new Card("84013237", null, null);
         Overlay overlay2 = new Overlay(material21);
         overlay2.overlay(material22);
         overlay2.overlay(xyzCard2);
         f = duelFields.getMonsterField(3);
         f.setItem(overlay2);
         // 2m
-        Card material31 = new Card("35952884", null, null, CardType.SYNC_MONSTER, false, true);
-        Card material32 = new Card("35952884", null, null, CardType.SYNC_MONSTER, false, false);
+        Card material31 = new Card("35952884", null, null);
+        Card material32 = new Card("35952884", null, null);
         Overlay overlay3 = new Overlay(material31);
         overlay3.overlay(material32);
         f = duelFields.getMonsterField(4);
@@ -106,6 +106,11 @@ public class DuelDiskView extends View {
         // rat mon
         ids.add("3627449");
         ids.add("10789972");
+        // tuner mon
+        ids.add("42685062");
+        // dual 69488544
+        ids.add("69488544");
+        //
 
         // normal magic
         ids.add("213326");
@@ -129,21 +134,21 @@ public class DuelDiskView extends View {
         deck.push(cards);
 
         CardList graveyard = (CardList) duelFields.getGraveyardField().getItem();
-        Card usedCard = new Card("35952884", null, null, CardType.SYNC_MONSTER, false, true);
+        Card usedCard = new Card("35952884", null, null);
         graveyard.push(usedCard);
 
         CardList removed = (CardList) duelFields.getRemovedField().getItem();
-        Card removedCard = new Card("84013237", null, null, CardType.XYZ_MONSTER, false, true);
+        Card removedCard = new Card("84013237", null, null);
         removed.push(removedCard);
 
         List<Card> hands = new ArrayList<Card>();
-        hands.add(new Card("84013237", null, null, CardType.SYNC_MONSTER, false, true));
-        hands.add(new Card("35952884", null, null, CardType.SYNC_MONSTER, false, true));
-        hands.add(new Card("35952884", null, null, CardType.SYNC_MONSTER, false, true));
-        hands.add(new Card("84013237", null, null, CardType.SYNC_MONSTER, false, true));
-        hands.add(new Card("35952884", null, null, CardType.SYNC_MONSTER, false, true));
-        hands.add(new Card("84013237", null, null, CardType.SYNC_MONSTER, false, true));
-        hands.add(new Card("84013237", null, null, CardType.SYNC_MONSTER, false, true));
+        hands.add(new Card("84013237", null, null));
+        hands.add(new Card("35952884", null, null));
+        hands.add(new Card("35952884", null, null));
+        hands.add(new Card("84013237", null, null));
+        hands.add(new Card("35952884", null, null));
+        hands.add(new Card("84013237", null, null));
+        hands.add(new Card("84013237", null, null));
         duel.getHandCards().add(hands);
 
         duel.getInfoWindow().setInfo("No 39 希望皇 霍普 R4 2500/2000 光 战士");

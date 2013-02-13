@@ -1,18 +1,26 @@
 package android.ygo.core;
 
 public enum Attribute {
-    NULL(0, ""), EARTH(1, "地"), WATER(2, "水"), FIRE(4, "火"), WIND(8, "风"), LIGHT(16, "光"), DARK(32, "暗");
+    NULL(Const.NULL, ""),
+    EARTH(Const.ATTRIBUTE_EARTH, "地"),
+    WATER(Const.ATTRIBUTE_WATER, "水"),
+    FIRE(Const.ATTRIBUTE_FIRE, "火"),
+    WIND(Const.ATTRIBUTE_WATER, "风"),
+    LIGHT(Const.ATTRIBUTE_LIGHT, "光"),
+    DARK(Const.ATTRIBUTE_DARK, "暗"),
+    DIVINE(Const.ATTRIBUTE_DEVINE, "神");
 
-    Attribute(int code, String chn) {
+    Attribute(int code, String text) {
         this.code = code;
-        this.chn = chn;
+        this.text = text;
     }
-    private int code;
-    private String chn;
 
-    public Attribute getAttribute(int code) {
-        for(Attribute attr : Attribute.values()) {
-            if(attr.code == code) {
+    private int code;
+    private String text;
+
+    public static Attribute getAttribute(int code) {
+        for (Attribute attr : Attribute.values()) {
+            if (attr.code == code) {
                 return attr;
             }
         }
@@ -21,6 +29,6 @@ public enum Attribute {
 
     @Override
     public String toString() {
-        return chn;
+        return text;
     }
 }

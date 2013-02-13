@@ -3,7 +3,6 @@ package android.ygo.core;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.util.Log;
 import android.ygo.op.Drag;
 import android.ygo.utils.Utils;
 
@@ -117,21 +116,21 @@ public class Duel implements Item {
     }
 
     public boolean inCardSelector(int x, int y) {
-        if(cardSelector == null) {
+        if (cardSelector == null) {
             return false;
         }
         return true;
     }
 
     public boolean inDuelFields(int x, int y) {
-        if(cardSelector != null) {
+        if (cardSelector != null) {
             return false;
         }
         return y < Utils.unitLength() * 3 && x < Utils.unitLength() * 6;
     }
 
     public boolean inHand(int x, int y) {
-        if(cardSelector != null) {
+        if (cardSelector != null) {
             return false;
         }
         return y >= Utils.unitLength() * 3 && x < Utils.unitLength() * 6;
@@ -145,7 +144,7 @@ public class Duel implements Item {
         Canvas canvas = new Canvas(duelBmp);
         Paint paint = new Paint();
 
-        if(cardSelector == null) {
+        if (cardSelector == null) {
             Bitmap fieldBmp = duelFields.toBitmap();
             Bitmap handBmp = handCards.toBitmap();
             Utils.drawBitmapOnCanvas(canvas, fieldBmp, paint, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_FIRST);

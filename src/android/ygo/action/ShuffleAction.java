@@ -11,7 +11,7 @@ public class ShuffleAction extends BaseAction {
 
     @Override
     public void execute() {
-        Deck deck = (Deck)item;
+        Deck deck = (Deck) item;
         deck.shuffle();
         // show animation of shuffle
     }
