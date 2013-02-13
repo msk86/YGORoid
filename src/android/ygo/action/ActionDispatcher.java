@@ -31,11 +31,18 @@ public class ActionDispatcher {
     public static Action dispatch(DoubleClick dblClick) {
         Action action = new EmptyAction();
         if (dblClick.getContainer() instanceof Field) {
+            Field field = (Field) dblClick.getContainer();
             SelectableItem item = dblClick.getItem();
-            if (item instanceof Card || item instanceof Overlay) {
-                action = new FlipAction(dblClick);
-            } else if (item instanceof Deck && ((Deck) item).getName() == "DECK") {
-                action = new ShuffleAction(dblClick);
+            if(item == null) {
+                if(field.getType() == FieldType.MONSTER_ZONE) {
+                    action = new NewTokenAction(dblClick);
+                }
+            } else {
+                if (item instanceof Card || item instanceof Overlay) {
+                    action = new FlipAction(dblClick);
+                } else if (item instanceof Deck && ((Deck) item).getName() == "DECK") {
+                    action = new ShuffleAction(dblClick);
+                }
             }
         }
         return action;
