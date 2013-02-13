@@ -75,6 +75,9 @@ public class CardList implements SelectableItem {
         if (card == null) {
             return;
         }
+        if(card.getSubTypes().contains(CardSubType.TOKEN)) {
+            return;
+        }
         if (open) {
             card.open();
         } else {
