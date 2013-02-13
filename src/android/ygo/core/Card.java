@@ -117,7 +117,10 @@ public class Card implements SelectableItem {
                 return subType.getCardBmp();
             }
         }
-        return CardSubType.TOKEN.getCardBmp();
+        Bitmap bmp = Bitmap.createBitmap(Utils.cardWidth(), Utils.cardHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bmp);
+        canvas.drawColor(Color.GRAY);
+        return bmp;
     }
 
     private String longName() {

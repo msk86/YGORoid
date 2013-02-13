@@ -82,13 +82,8 @@ public class ActionDispatcher {
         Action action = new EmptyAction();
         SelectableItem item = click.getItem();
         if (item != null) {
-            if (item instanceof CardList) {
+            if (item instanceof CardList || item instanceof Overlay) {
                 action = new OpenCardSelectorAction(click);
-            } else if (item instanceof Overlay) {
-                Overlay overlay = (Overlay) item;
-                if (overlay.topCard().getSubTypes().contains(CardSubType.XYZ) && overlay.materialCount() != 0) {
-                    action = new OpenCardSelectorAction(click);
-                }
             }
         }
         return action;
