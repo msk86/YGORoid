@@ -139,12 +139,11 @@ public class DuelDiskView extends View {
     public void draw(Canvas canvas) {
         drawBackground(canvas);
         Bitmap duelBmp = duel.toBitmap();
-        int mirrorOffset = 0;
         if(Configuration.isMirror()) {
-            duelBmp = Utils.rotate(duelBmp, 180);
-            mirrorOffset = -4;
+            canvas.translate(Utils.screenWidth() ,Utils.screenHeight());
+            canvas.rotate(180);
         }
-        canvas.drawBitmap(duelBmp, 0, 0 + mirrorOffset, painter);
+        canvas.drawBitmap(duelBmp, 0, 0, painter);
         duelBmp.recycle();
     }
 

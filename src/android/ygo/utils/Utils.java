@@ -20,6 +20,10 @@ public class Utils {
         return dm.heightPixels;
     }
 
+    public static int screenWidth() {
+        return dm.widthPixels;
+    }
+
     public static int unitLength() {
         int longer = dm.widthPixels > dm.heightPixels ? dm.widthPixels : dm.heightPixels;
         int shorter = dm.widthPixels < dm.heightPixels ? dm.widthPixels : dm.heightPixels;
@@ -129,7 +133,7 @@ public class Utils {
     }
 
     public static float mirrorX(float x) {
-        return !Configuration.isMirror() ? x : totalWidth() - x;
+        return !Configuration.isMirror() ? x : screenWidth() - x;
     }
 
     public static float mirrorY(float y) {
