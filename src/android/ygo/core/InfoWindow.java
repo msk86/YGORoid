@@ -41,7 +41,7 @@ public class InfoWindow implements Item {
         canvas.drawColor(Color.BLACK);
 
         Paint paint = new Paint();
-        paint.setColor(Color.GRAY);
+        paint.setColor(Color.DKGRAY);
         paint.setStrokeWidth(5);
         canvas.drawLine(0, 0, width, 0, paint);
         canvas.drawLine(0, 0, 0, height, paint);

@@ -20,6 +20,6 @@ public class Configuration {
     }
 
     public static boolean isMirror() {
-        return true;
+        return false;
     }
 }

@@ -85,7 +85,12 @@ public class ActionDispatcher {
             SelectableItem targetItem = field.getItem();
             if (targetItem == null) {
                 if (drag.getStartDrag().getContainer() instanceof HandCards) {
-                    action = new SummonAction(drag);
+                    if(field.getType() == FieldType.MONSTER_ZONE) {
+                        action = new SummonAction(drag);
+                    } else {
+                        action = new EffectMagicTrapAction(drag);
+                    }
+
                     // set
                 } else {
                     action = new MoveAction(drag);
