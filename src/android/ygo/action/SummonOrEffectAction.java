@@ -4,8 +4,8 @@ import android.ygo.core.Card;
 import android.ygo.core.Field;
 import android.ygo.op.Operation;
 
-public class EffectMagicTrapAction extends BaseAction {
-    public EffectMagicTrapAction(Operation operation) {
+public class SummonOrEffectAction extends BaseAction {
+    public SummonOrEffectAction(Operation operation) {
         super(operation.getDuel(), operation.getContainer(), operation.getItem());
     }
 

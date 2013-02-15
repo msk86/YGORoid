@@ -75,6 +75,10 @@ public class Card implements SelectableItem {
         set = true;
     }
 
+    public boolean isOpen() {
+        return !set;
+    }
+
     public void changePosition() {
         positive = !positive;
     }

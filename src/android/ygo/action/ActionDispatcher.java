@@ -53,6 +53,11 @@ public class ActionDispatcher {
             if(cardList.getName().equals("TEMPORARY")) {
                 action = new FlipAction(dblClick);
             }
+        } else if(container instanceof HandCards) {
+            Card card = (Card)item;
+            if(card != null) {
+                action = new FlipAction(dblClick);
+            }
         }
         return action;
     }
@@ -85,13 +90,12 @@ public class ActionDispatcher {
             SelectableItem targetItem = field.getItem();
             if (targetItem == null) {
                 if (drag.getStartDrag().getContainer() instanceof HandCards) {
-                    if(field.getType() == FieldType.MONSTER_ZONE) {
-                        action = new SummonAction(drag);
+                    Card card = (Card) drag.getItem();
+                    if(card.isOpen()) {
+                        action = new SummonOrEffectAction(drag);
                     } else {
-                        action = new EffectMagicTrapAction(drag);
+                        action = new SetAction(drag);
                     }
-
-                    // set
                 } else {
                     action = new MoveAction(drag);
                 }
