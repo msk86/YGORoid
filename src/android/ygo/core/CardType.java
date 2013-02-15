@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 import android.ygo.utils.Utils;
 
 public enum CardType {
-    NULL(0, ""),
+    NULL(0, "卡片不存在，您可能需要更新数据库文件！"),
     MONSTER(Const.TYPE_MONSTER, "怪兽"),
     SPELL(Const.TYPE_SPELL, "魔法"),
     TRAP(Const.TYPE_TRAP, "陷阱");

@@ -49,40 +49,40 @@ public class DuelDiskView extends View {
         DuelFields duelFields = duel.getDuelFields();
 
         // set magic
-        Card setMagicCard = dbHelper.loadCard("35952884");
+        Card setMagicCard = dbHelper.loadById("35952884");
         Field f = duelFields.getMagicField(2);
         f.setItem(setMagicCard);
 
         // Monsters
         // set
-        Card setCard = dbHelper.loadCard("35952884");
+        Card setCard = dbHelper.loadById("35952884");
         f = duelFields.getMonsterField(0);
         f.setItem(setCard);
         // atk monster
-        Card card = dbHelper.loadCard("35952884");
+        Card card = dbHelper.loadById("35952884");
         f = duelFields.getMonsterField(1);
         f.setItem(card);
         // xyz + 2m
-        Card material1 = dbHelper.loadCard("35952884");
-        Card material2 = dbHelper.loadCard("35952884");
-        Card xyzCard = dbHelper.loadCard("84013237");
+        Card material1 = dbHelper.loadById("35952884");
+        Card material2 = dbHelper.loadById("35952884");
+        Card xyzCard = dbHelper.loadById("84013237");
         Overlay overlay = new Overlay(material1);
         overlay.overlay(material2);
         overlay.overlay(xyzCard);
         f = duelFields.getMonsterField(2);
         f.setItem(overlay);
         // xyz + 1m
-        Card material21 = dbHelper.loadCard("35952884");
-        Card material22 = dbHelper.loadCard("35952884");
-        Card xyzCard2 = dbHelper.loadCard("84013237");
+        Card material21 = dbHelper.loadById("35952884");
+        Card material22 = dbHelper.loadById("35952884");
+        Card xyzCard2 = dbHelper.loadById("84013237");
         Overlay overlay2 = new Overlay(material21);
         overlay2.overlay(material22);
         overlay2.overlay(xyzCard2);
         f = duelFields.getMonsterField(3);
         f.setItem(overlay2);
         // 2m
-        Card material31 = dbHelper.loadCard("35952884");
-        Card material32 = dbHelper.loadCard("35952884");
+        Card material31 = dbHelper.loadById("35952884");
+        Card material32 = dbHelper.loadById("35952884");
         Overlay overlay3 = new Overlay(material31);
         overlay3.overlay(material32);
         f = duelFields.getMonsterField(4);
@@ -112,26 +112,30 @@ public class DuelDiskView extends View {
         ids.add("1248895");
         ids.add("27551");
         ids.add("11593137");
-        List<Card> cards = dbHelper.loadCard(ids);
+        List<Card> cards = dbHelper.loadById(ids);
         Deck deck = (Deck) duelFields.getDeckField().getItem();
         deck.push(cards);
 
         CardList graveyard = (CardList) duelFields.getGraveyardField().getItem();
-        Card usedCard = dbHelper.loadCard("35952884");
+        Card usedCard = dbHelper.loadById("123");
+        graveyard.push(usedCard);
+        usedCard = dbHelper.loadByName("星尘龙");
+        graveyard.push(usedCard);
+        usedCard = dbHelper.loadByName("忘我画派");
         graveyard.push(usedCard);
 
         CardList removed = (CardList) duelFields.getRemovedField().getItem();
-        Card removedCard = dbHelper.loadCard("84013237");
+        Card removedCard = dbHelper.loadById("84013237");
         removed.push(removedCard);
 
         List<Card> hands = new ArrayList<Card>();
-        hands.add(dbHelper.loadCard("84013237"));
-        hands.add(dbHelper.loadCard("35952884"));
-        hands.add(dbHelper.loadCard("35952884"));
-        hands.add(dbHelper.loadCard("84013237"));
-        hands.add(dbHelper.loadCard("35952884"));
-        hands.add(dbHelper.loadCard("84013237"));
-        hands.add(dbHelper.loadCard("84013237"));
+        hands.add(dbHelper.loadById("84013237"));
+        hands.add(dbHelper.loadById("35952884"));
+        hands.add(dbHelper.loadById("35952884"));
+        hands.add(dbHelper.loadById("84013237"));
+        hands.add(dbHelper.loadById("35952884"));
+        hands.add(dbHelper.loadById("84013237"));
+        hands.add(dbHelper.loadById("84013237"));
         duel.getHandCards().add(hands);
     }
 
