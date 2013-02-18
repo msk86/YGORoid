@@ -3,11 +3,14 @@ package android.ygo.core;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.util.Log;
 import android.ygo.op.Drag;
 import android.ygo.utils.Configuration;
 import android.ygo.utils.Utils;
 
 public class Duel implements Item {
+    private LifePoint lifePoint;
+
     private DuelFields duelFields;
 
     private HandCards handCards;
@@ -21,6 +24,8 @@ public class Duel implements Item {
     private Drag drag;
 
     public Duel() {
+        lifePoint = new LifePoint();
+
         duelFields = new DuelFields();
         Deck deck = new Deck("DECK");
         Deck exDeck = new Deck("EX");
@@ -36,6 +41,10 @@ public class Duel implements Item {
         handCards = new HandCards();
 
         window = new InfoWindow();
+    }
+
+    public LifePoint getLifePoint() {
+        return lifePoint;
     }
 
     public CardSelector getCardSelector() {
@@ -83,7 +92,9 @@ public class Duel implements Item {
     }
 
     public SelectableItem itemAt(int x, int y) {
-        if (inDuelFields(x, y)) {
+        if (inLifePoint(x, y)) {
+            return lifePoint;
+        } else if (inDuelFields(x, y)) {
             return duelFields.itemOnFieldAt(x, y);
         } else if (inHand(x, y)) {
             return handCards.cardAt(x, y);
@@ -96,7 +107,9 @@ public class Duel implements Item {
     }
 
     public Item containerAt(int x, int y) {
-        if (inDuelFields(x, y)) {
+        if (inLifePoint(x, y)) {
+            return null;
+        } else if (inDuelFields(x, y)) {
             return duelFields.fieldAt(x, y);
         } else if (inHand(x, y)) {
             return handCards;
@@ -118,6 +131,18 @@ public class Duel implements Item {
 
     public Drag getDrag() {
         return drag;
+    }
+
+    public boolean inLifePoint(int x, int y) {
+        if (cardSelector != null) {
+            return false;
+        }
+        if(x >= Utils.unitLength() && x < Utils.unitLength() * 2.2) {
+            if( y < Utils.unitLength()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean inCardSelector(int x, int y) {
@@ -154,7 +179,8 @@ public class Duel implements Item {
         Canvas canvas = new Canvas(duelBmp);
         Paint paint = new Paint();
 
-        Bitmap winBmp = window.toBitmap();
+        Bitmap lpBmp = lifePoint.toBitmap();
+        Utils.drawBitmapOnCanvas(canvas, lpBmp, paint, Utils.unitLength(), (Utils.unitLength() - lpBmp.getHeight()) / 2);
 
         if (cardSelector == null) {
             Bitmap fieldBmp = duelFields.toBitmap();
@@ -171,6 +197,7 @@ public class Duel implements Item {
             Utils.drawBitmapOnCanvas(canvas, draggingItemBmp, paint, drag.x() - draggingItemBmp.getWidth() / 2, drag.y() - draggingItemBmp.getHeight() / 2);
         }
 
+        Bitmap winBmp = window.toBitmap();
         int winPosY = Utils.screenHeight() - winBmp.getHeight();
         Utils.drawBitmapOnCanvas(canvas, winBmp, paint, Utils.DRAW_POSITION_CENTER, winPosY);
         return duelBmp;
