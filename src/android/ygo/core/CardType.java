@@ -1,24 +1,26 @@
 package android.ygo.core;
 
 import android.graphics.Bitmap;
+import android.ygo.R;
 import android.ygo.utils.Utils;
 
 public enum CardType {
-    NULL(0, "卡片不存在，您可能需要更新数据库文件！"),
-    MONSTER(Const.TYPE_MONSTER, "怪兽"),
-    SPELL(Const.TYPE_SPELL, "魔法"),
-    TRAP(Const.TYPE_TRAP, "陷阱");
+    NULL(0, "卡片不存在，您可能需要更新数据库文件！", R.raw.card_unknown),
+    MONSTER(Const.TYPE_MONSTER, "怪兽", 0),
+    SPELL(Const.TYPE_SPELL, "魔法", R.raw.card_magic),
+    TRAP(Const.TYPE_TRAP, "陷阱", R.raw.card_trap);
 
     private int code;
     private String text;
+    private int resId;
     private Bitmap cardBmp;
 
-    CardType(int code, String text) {
+    CardType(int code, String text, int resId) {
         this.code = code;
         this.text = text;
-        try {
-            cardBmp = Utils.readBitmapScaleByHeight("textures/" + "card-" + code + ".jpg", Utils.cardHeight());
-        } catch (Exception e) {
+        this.resId = resId;
+        if(this.resId != 0) {
+            cardBmp = Utils.readBitmapScaleByHeight(resId, Utils.cardHeight());
         }
     }
 

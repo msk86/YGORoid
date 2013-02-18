@@ -1,5 +1,6 @@
 package android.ygo.core;
 
+import android.ygo.R;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -13,7 +14,7 @@ import android.ygo.utils.Utils;
 import java.util.List;
 
 public class Card implements SelectableItem {
-    public static final Bitmap CARD_PROTECTOR = Utils.readBitmapScaleByHeight(Configuration.cardProtector() + ".jpg", Utils.cardHeight());
+    public static final Bitmap CARD_PROTECTOR = Utils.readBitmapScaleByHeight(R.raw.cover, Utils.cardHeight());
 
     private boolean selected = false;
 

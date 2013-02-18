@@ -1,6 +1,7 @@
 package android.ygo.utils;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.*;
 import android.util.DisplayMetrics;
 import android.ygo.core.Card;
@@ -10,8 +11,10 @@ import java.util.Random;
 
 public class Utils {
     private static DisplayMetrics dm;
+    private static Context context;
 
     public static void initInstance(Activity activity) {
+        context = activity;
         dm = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
     }
@@ -43,6 +46,11 @@ public class Utils {
 
     public static int cardWidth() {
         return (int) (cardHeight() / 1.45);
+    }
+
+    public static Bitmap readBitmapScaleByHeight(int resId, int targetHeight) {
+        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), resId);
+        return scaleByHeight(bitmap, targetHeight);
     }
 
     public static Bitmap readBitmapScaleByHeight(String file, int targetHeight) {
