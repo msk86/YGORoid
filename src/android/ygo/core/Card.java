@@ -212,26 +212,31 @@ public class Card implements SelectableItem {
         StringBuilder result = new StringBuilder();
         result.append(name);
         result.append(" ");
-        result.append(type.toString());
-        for (CardSubType subType : subTypes) {
-            result.append("|" + subType.toString());
-        }
-        if (type != CardType.MONSTER) {
-            return result.toString();
-        }
-        result.append(" ");
-        if (subTypes.contains(CardSubType.XYZ)) {
-            result.append("R");
+
+        if (type == CardType.NULL) {
+            result.append(desc);
         } else {
-            result.append("L");
+            result.append(type.toString());
+            for (CardSubType subType : subTypes) {
+                result.append("|" + subType.toString());
+            }
+            if (type != CardType.MONSTER) {
+                return result.toString();
+            }
+            result.append(" ");
+            if (subTypes.contains(CardSubType.XYZ)) {
+                result.append("R");
+            } else {
+                result.append("L");
+            }
+            result.append(level);
+            result.append(" ");
+            result.append(atk + "/" + def);
+            result.append(" ");
+            result.append(attribute.toString());
+            result.append(" ");
+            result.append(race.toString());
         }
-        result.append(level);
-        result.append(" ");
-        result.append(atk + "/" + def);
-        result.append(" ");
-        result.append(attribute.toString());
-        result.append(" ");
-        result.append(race.toString());
         return result.toString();
     }
 }

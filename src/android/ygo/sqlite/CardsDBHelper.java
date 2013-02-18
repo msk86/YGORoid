@@ -39,7 +39,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
             card = new Card(c.getString(0), c.getString(1), c.getString(2), c.getInt(8),
                     c.getInt(7), c.getInt(5), c.getInt(6), c.getInt(3), c.getInt(4));
         } else {
-            card = new Card(cardID, "ID" + cardID, cardID + ": 卡片ID不存在！您可能需要更新数据库文件！", 0, 0, 0, 0, 0, 0);
+            card = new Card(cardID, "ID" + cardID, "卡片ID不存在！您可能需要更新数据库文件！", 0, 0, 0, 0, 0, 0);
         }
         return card;
     }
@@ -54,48 +54,51 @@ public class CardsDBHelper extends SQLiteOpenHelper {
             card = new Card(c.getString(0), c.getString(1), c.getString(2), c.getInt(8),
                     c.getInt(7), c.getInt(5), c.getInt(6), c.getInt(3), c.getInt(4));
         } else {
-            card = new Card("0", cardName, cardName + ": 卡片不存在！您可能需要更新数据库文件！", 0, 0, 0, 0, 0, 0);
+            card = new Card("0", cardName, "卡片不存在！您可能需要更新数据库文件！", 0, 0, 0, 0, 0, 0);
         }
         return card;
     }
 
     public Card loadById(String cardID) {
-        CardsDBHelper helper = new CardsDBHelper(context, 1);
-        SQLiteDatabase database = helper.getReadableDatabase();
-        Card card = loadById(database, cardID);
-        database.close();
+        Card card;
+        try {
+            SQLiteDatabase database = this.getReadableDatabase();
+            card = loadById(database, cardID);
+            database.close();
+        } catch (Exception e) {
+            card = new Card(cardID, "ID" + cardID, "数据库文件不存在！", 0, 0, 0, 0, 0, 0);
+        }
         return card;
     }
 
     public Card loadByName(String cardName) {
-        CardsDBHelper helper = new CardsDBHelper(context, 1);
-        SQLiteDatabase database = helper.getReadableDatabase();
-        Card card = loadByName(database, cardName);
-        database.close();
+        Card card;
+        try {
+            SQLiteDatabase database = this.getReadableDatabase();
+            card = loadByName(database, cardName);
+            database.close();
+        } catch (Exception e) {
+            card = new Card("0", cardName, "数据库文件不存在！", 0, 0, 0, 0, 0, 0);
+        }
+
         return card;
     }
 
     public List<Card> loadById(List<String> cardIDs) {
         List<Card> cards = new ArrayList<Card>();
-        CardsDBHelper helper = new CardsDBHelper(context, 1);
-        SQLiteDatabase database = helper.getReadableDatabase();
         for (String id : cardIDs) {
-            Card card = loadById(database, id);
+            Card card = loadById(id);
             cards.add(card);
         }
-        database.close();
         return cards;
     }
 
     public List<Card> loadByName(List<String> cardNames) {
         List<Card> cards = new ArrayList<Card>();
-        CardsDBHelper helper = new CardsDBHelper(context, 1);
-        SQLiteDatabase database = helper.getReadableDatabase();
         for (String name : cardNames) {
-            Card card = loadByName(database, name);
+            Card card = loadByName(name);
             cards.add(card);
         }
-        database.close();
         return cards;
     }
 }

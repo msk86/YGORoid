@@ -5,7 +5,7 @@ import android.ygo.R;
 import android.ygo.utils.Utils;
 
 public enum CardType {
-    NULL(0, "卡片不存在，您可能需要更新数据库文件！", R.raw.card_unknown),
+    NULL(0, "", R.raw.card_unknown),
     MONSTER(Const.TYPE_MONSTER, "怪兽", 0),
     SPELL(Const.TYPE_SPELL, "魔法", R.raw.card_magic),
     TRAP(Const.TYPE_TRAP, "陷阱", R.raw.card_trap);
