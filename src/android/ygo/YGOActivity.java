@@ -15,9 +15,8 @@ public class YGOActivity extends Activity {
         super.onCreate(savedInstanceState);
         Utils.initInstance(this);
 
-        DuelDiskView duelDiskView = new DuelDiskView(this);
-
-        setContentView(duelDiskView);
+        setContentView(R.layout.main);
+        DuelDiskView duelDiskView = (DuelDiskView)findViewById(R.id.duelDiskView);
         duelDiskView.resume();
         keyProcessor = new PlayOnKeyProcessor(duelDiskView);
     }

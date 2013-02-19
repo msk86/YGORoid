@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -32,8 +33,8 @@ public class DuelDiskView extends SurfaceView implements Runnable {
 
     private Duel duel;
 
-    public DuelDiskView(Context context) {
-        super(context);
+    public DuelDiskView(Context context, AttributeSet attrs) {
+        super(context, attrs);
         renderThread = new Thread(this);
         holder = getHolder();
 
@@ -47,7 +48,6 @@ public class DuelDiskView extends SurfaceView implements Runnable {
         dbHelper = new CardsDBHelper(context, 1);
 
         initDuelDiskTest();
-
     }
 
     public Duel getDuel() {

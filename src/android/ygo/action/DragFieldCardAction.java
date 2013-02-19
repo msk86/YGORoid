@@ -13,8 +13,8 @@ public class DragFieldCardAction extends BaseAction {
     public void execute() {
         Card card = (Card) item;
         Field field = (Field) container;
-        ((StartDrag) operation).setDragItem(card);
         field.removeItem();
         duel.select(card);
+        ((StartDrag) operation).setDragItem(card);
     }
 }
