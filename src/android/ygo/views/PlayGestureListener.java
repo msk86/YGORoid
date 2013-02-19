@@ -21,7 +21,6 @@ public class PlayGestureListener extends GestureDetector.SimpleOnGestureListener
             view.getDuel().setDrag(null);
             Action action = ActionDispatcher.dispatch(drag);
             action.execute();
-            view.invalidate();
         }
     }
 
@@ -35,7 +34,6 @@ public class PlayGestureListener extends GestureDetector.SimpleOnGestureListener
         Click click = new Click(view.getDuel(), Utils.mirrorX(event.getX()), Utils.mirrorY(event.getY()));
         Action action = ActionDispatcher.dispatch(click);
         action.execute();
-        view.invalidate();
         return true;
     }
 
@@ -44,7 +42,6 @@ public class PlayGestureListener extends GestureDetector.SimpleOnGestureListener
         Press press = new Press(view.getDuel(), Utils.mirrorX(event.getX()), Utils.mirrorY(event.getY()));
         Action action = ActionDispatcher.dispatch(press);
         action.execute();
-        view.invalidate();
     }
 
     @Override
@@ -52,7 +49,6 @@ public class PlayGestureListener extends GestureDetector.SimpleOnGestureListener
         DoubleClick dblClick = new DoubleClick(view.getDuel(), Utils.mirrorX(event.getX()), Utils.mirrorY(event.getY()));
         Action action = ActionDispatcher.dispatch(dblClick);
         action.execute();
-        view.invalidate();
         return super.onDoubleTap(event);
     }
 
@@ -68,7 +64,6 @@ public class PlayGestureListener extends GestureDetector.SimpleOnGestureListener
             view.getDuel().setDrag(drag);
         }
         drag.move(Utils.mirrorX(event2.getX()), Utils.mirrorY(event2.getY()));
-        view.invalidate();
         return true;
     }
 }

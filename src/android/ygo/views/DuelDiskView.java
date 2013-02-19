@@ -8,6 +8,8 @@ import android.graphics.Paint;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.view.MotionEvent;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.View;
 import android.ygo.core.*;
 import android.ygo.sqlite.CardsDBHelper;
@@ -17,7 +19,11 @@ import android.ygo.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DuelDiskView extends View {
+public class DuelDiskView extends SurfaceView implements Runnable {
+    private Thread renderThread;
+    private SurfaceHolder holder;
+    private boolean running = false;
+
     private PlayGestureDetector mGestureDetector;
     private SensorManager sensorManager;
     private CardsDBHelper dbHelper;
@@ -28,6 +34,9 @@ public class DuelDiskView extends View {
 
     public DuelDiskView(Context context) {
         super(context);
+        renderThread = new Thread(this);
+        holder = getHolder();
+
         painter = new Paint();
         duel = new Duel();
         mGestureDetector = new PlayGestureDetector(new PlayGestureListener(this));
@@ -140,7 +149,11 @@ public class DuelDiskView extends View {
     }
 
     @Override
-    public void draw(Canvas canvas) {
+    public boolean onTouchEvent(MotionEvent event) {
+        return mGestureDetector.onTouchEvent(event);
+    }
+
+    private void drawDuelDisk(Canvas canvas) {
         drawBackground(canvas);
         Bitmap duelBmp = duel.toBitmap();
         if(Configuration.isMirror()) {
@@ -151,13 +164,38 @@ public class DuelDiskView extends View {
         duelBmp.recycle();
     }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        return mGestureDetector.onTouchEvent(event);
-    }
-
     private void drawBackground(Canvas canvas) {
         canvas.drawColor(Color.BLACK);
         // IMAGE BACKGROUND
+    }
+
+    @Override
+    public void run() {
+        while (running) {
+            if(!holder.getSurface().isValid()) {
+                continue;
+            }
+            Canvas canvas = holder.lockCanvas();
+            drawDuelDisk(canvas);
+            holder.unlockCanvasAndPost(canvas);
+        }
+    }
+
+    public void resume(){
+        running = true;
+        renderThread = new Thread(this);
+        renderThread.start();
+    }
+
+    public void pause(){
+        running = false;
+        while(true){
+            try{
+                renderThread.join();
+                break;
+            }catch(InterruptedException e){
+                // retry
+            }
+        }
     }
 }
