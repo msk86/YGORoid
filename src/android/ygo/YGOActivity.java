@@ -3,6 +3,8 @@ package android.ygo;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.WindowManager;
 import android.ygo.utils.Utils;
 import android.ygo.views.DuelDiskView;
 import android.ygo.views.PlayOnKeyProcessor;
@@ -15,6 +17,8 @@ public class YGOActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Utils.initInstance(this);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         setContentView(R.layout.main);
         duelDiskView = (DuelDiskView)findViewById(R.id.duelDiskView);
