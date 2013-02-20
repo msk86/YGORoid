@@ -19,6 +19,10 @@ public class Utils {
         activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
     }
 
+    public static Context getContext() {
+        return context;
+    }
+
     public static int screenHeight() {
         return dm.heightPixels;
     }

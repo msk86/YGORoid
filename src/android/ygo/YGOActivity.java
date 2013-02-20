@@ -9,6 +9,7 @@ import android.ygo.views.PlayOnKeyProcessor;
 
 public class YGOActivity extends Activity {
     private PlayOnKeyProcessor keyProcessor;
+    private DuelDiskView duelDiskView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -16,14 +17,30 @@ public class YGOActivity extends Activity {
         Utils.initInstance(this);
 
         setContentView(R.layout.main);
-        DuelDiskView duelDiskView = (DuelDiskView)findViewById(R.id.duelDiskView);
-        duelDiskView.resume();
+        duelDiskView = (DuelDiskView)findViewById(R.id.duelDiskView);
+
         keyProcessor = new PlayOnKeyProcessor(duelDiskView);
     }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         return keyProcessor.onKey(keyCode, event);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (duelDiskView != null) {
+            duelDiskView.pause();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (duelDiskView != null) {
+            duelDiskView.resume();
+        }
     }
 }
 
