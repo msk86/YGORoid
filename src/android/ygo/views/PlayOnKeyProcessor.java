@@ -16,6 +16,7 @@ public class PlayOnKeyProcessor {
 
     public boolean onKey(int keyCode, KeyEvent event) {
         Action action = new EmptyAction();
+        boolean returnValue = true;
         switch (keyCode) {
             case KeyEvent.KEYCODE_BACK:
                 ReturnClick returnClick = new ReturnClick(view.getDuel());
@@ -24,11 +25,12 @@ public class PlayOnKeyProcessor {
             case KeyEvent.KEYCODE_MENU:
                 MenuClick menuClick = new MenuClick(view.getDuel());
                 action = ActionDispatcher.dispatch(menuClick);
+                returnValue = false;
                 break;
         }
         action.execute();
         view.invalidate();
 
-        return true;
+        return returnValue;
     }
 }

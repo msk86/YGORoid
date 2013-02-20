@@ -27,6 +27,19 @@ public class YGOActivity extends Activity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.clear();
+        menu.add("菜单项1");
+        menu.add("菜单项2");
+        menu.add("菜单项3");
+        menu.add("菜单项4");
+        menu.add("菜单项5");
+        menu.add("菜单项6");
+        menu.add("菜单项7");
+        return true;
+    }
+
+    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         return keyProcessor.onKey(keyCode, event);
     }
