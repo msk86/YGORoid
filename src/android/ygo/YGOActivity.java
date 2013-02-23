@@ -4,13 +4,16 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.WindowManager;
 import android.ygo.utils.Utils;
 import android.ygo.views.DuelDiskView;
+import android.ygo.views.PlayMenuProcessor;
 import android.ygo.views.PlayOnKeyProcessor;
 
 public class YGOActivity extends Activity {
     private PlayOnKeyProcessor keyProcessor;
+    private PlayMenuProcessor menuProcessor;
     private DuelDiskView duelDiskView;
 
     @Override
@@ -24,20 +27,20 @@ public class YGOActivity extends Activity {
         duelDiskView = (DuelDiskView)findViewById(R.id.duelDiskView);
 
         keyProcessor = new PlayOnKeyProcessor(duelDiskView);
+        menuProcessor = new PlayMenuProcessor(duelDiskView);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onPrepareOptionsMenu(Menu menu) {
         menu.clear();
-        menu.add("菜单项1");
-        menu.add("菜单项2");
-        menu.add("菜单项3");
-        menu.add("菜单项4");
-        menu.add("菜单项5");
-        menu.add("菜单项6");
-        menu.add("菜单项7");
-        return true;
+        return menuProcessor.onMenuPrepare(menu);
     }
+
+    @Override
+    public boolean onMenuItemSelected(int id, MenuItem menuItem) {
+        return menuProcessor.onMenuClick(id, menuItem);
+    }
+
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
