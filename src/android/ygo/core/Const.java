@@ -63,4 +63,15 @@ public class Const {
     public static final int RACE_DEVINE = 0x200000;
     public static final int RACE_CREATORGOD = 0x400000;
 
+    // menu group
+    public static final int MENU_GROUP_DECK = 0x01;
+    public static final int MENU_GROUP_CARD = 0x02;
+
+    // menu id
+    public static final int MENU_DECK_SHUFFLE = 0x01;
+    public static final int MENU_DECK_REVERSE = 0x02;
+    public static final int MENU_DECK_RESTART = 0x1024;
+    public static final int MENU_DECK_CHANGE_DECK = 0x2048;
+
+    public static final int MENU_CARD_BACK_TO_BOTTOM_OF_DECK = 0x01;
 }

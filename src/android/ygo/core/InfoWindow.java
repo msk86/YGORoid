@@ -8,27 +8,32 @@ import android.ygo.utils.Utils;
 
 public class InfoWindow implements Item {
 
-    String info = "";
+    SelectableItem infoItem;
 
     public void setInfo(SelectableItem item) {
-        String info = "";
-        if (item instanceof Card) {
-            info = ((Card) item).toString();
-        } else if (item instanceof Overlay) {
-            info = ((Overlay) item).topCard().toString();
-        } else if (item instanceof CardList) {
-            CardList cardList = (CardList) item;
-            info = cardList.getName() + "[" + cardList.size() + "]";
-        }
-        setInfo(info);
+        infoItem = item;
     }
 
-    public void setInfo(String info) {
-        this.info = info == null ? "" : info;
+    private String info() {
+        String info = "";
+        if(infoItem != null) {
+            if (infoItem instanceof Card) {
+                info = infoItem.toString();
+            } else if (infoItem instanceof Overlay) {
+                info = ((Overlay) infoItem).topCard().toString();
+            } else if (infoItem instanceof CardList) {
+                CardList cardList = (CardList) infoItem;
+                info = cardList.getName() + "[" + cardList.size() + "]";
+                if(cardList.isOpen() && cardList.size() > 0) {
+                    info += " / " + cardList.topCard().toString();
+                }
+            }
+        }
+        return info;
     }
 
     public void clearInfo() {
-        this.info = "";
+        this.infoItem = null;
     }
 
     @Override
@@ -51,7 +56,7 @@ public class InfoWindow implements Item {
         paint.setColor(Color.WHITE);
         paint.setStrokeWidth(1);
         paint.setTextSize(height);
-        canvas.drawText(info, 5, height - 2, paint);
+        canvas.drawText(info(), 5, height - 2, paint);
 
         return winBmp;
     }

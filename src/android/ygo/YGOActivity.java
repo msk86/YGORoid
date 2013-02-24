@@ -32,13 +32,12 @@ public class YGOActivity extends Activity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        menu.clear();
         return menuProcessor.onMenuPrepare(menu);
     }
 
     @Override
     public boolean onMenuItemSelected(int id, MenuItem menuItem) {
-        return menuProcessor.onMenuClick(id, menuItem);
+        return menuProcessor.onMenuClick(menuItem);
     }
 
 
