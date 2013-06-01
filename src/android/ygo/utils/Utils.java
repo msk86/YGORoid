@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.*;
 import android.util.DisplayMetrics;
 import android.ygo.core.Card;
+import android.ygo.sqlite.CardsDBHelper;
 
 import java.util.List;
 import java.util.Random;
@@ -12,15 +13,21 @@ import java.util.Random;
 public class Utils {
     private static DisplayMetrics dm;
     private static Context context;
+    private static CardsDBHelper dbHelper;
 
     public static void initInstance(Activity activity) {
         context = activity;
         dm = new DisplayMetrics();
+        dbHelper = new CardsDBHelper(activity, 1);
         activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
     }
 
     public static Context getContext() {
         return context;
+    }
+
+    public static CardsDBHelper getDbHelper() {
+        return dbHelper;
     }
 
     public static int screenHeight() {

@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.ygo.core.Card;
 import android.ygo.utils.Configuration;
 
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,17 +32,18 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         // NOTHING
     }
 
-    private Card loadById(SQLiteDatabase database, String cardID) {
+    private Card loadById(SQLiteDatabase database, int cardID) {
+        String idStr = String.valueOf(cardID);
         Cursor c = database.query("texts t, datas d",
                 new String[]{"t.id", "t.name", "t.desc", "d.atk", "d.def", "d.race", "d.level", "d.attribute", "d.type"},
-                "t.id = d.id and t.id = ?", new String[]{cardID}, null, null, null);
+                "t.id = d.id and t.id = ?", new String[]{idStr}, null, null, null);
         Card card;
         if (c.getCount() == 1) {
             c.moveToFirst();
             card = new Card(c.getString(0), c.getString(1), c.getString(2), c.getInt(8),
                     c.getInt(7), c.getInt(5), c.getInt(6), c.getInt(3), c.getInt(4));
         } else {
-            card = new Card(cardID, "ID" + cardID, "卡片ID不存在！您可能需要更新数据库文件！", 0, 0, 0, 0, 0, 0);
+            card = new Card(idStr, "ID" + idStr, "卡片ID不存在！您可能需要更新数据库文件！", 0, 0, 0, 0, 0, 0);
         }
         return card;
     }
@@ -59,14 +63,14 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         return card;
     }
 
-    public Card loadById(String cardID) {
+    public Card loadById(int cardID) {
         Card card;
         try {
             SQLiteDatabase database = this.getReadableDatabase();
             card = loadById(database, cardID);
             database.close();
         } catch (Exception e) {
-            card = new Card(cardID, "ID" + cardID, "数据库文件不存在！", 0, 0, 0, 0, 0, 0);
+            card = new Card(String.valueOf(cardID), "ID" + cardID, "数据库文件不存在！", 0, 0, 0, 0, 0, 0);
         }
         return card;
     }
@@ -84,9 +88,9 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         return card;
     }
 
-    public List<Card> loadById(List<String> cardIDs) {
+    public List<Card> loadById(List<Integer> cardIDs) {
         List<Card> cards = new ArrayList<Card>();
-        for (String id : cardIDs) {
+        for (int id : cardIDs) {
             Card card = loadById(id);
             cards.add(card);
         }
@@ -100,5 +104,56 @@ public class CardsDBHelper extends SQLiteOpenHelper {
             cards.add(card);
         }
         return cards;
+    }
+
+
+    private static final int IN_MAIN = 1;
+    private static final int IN_EX = 2;
+    private static final int IN_SIDE = 3;
+
+    public List<List<Card>> loadFromFile(String fileName) {
+        File deckFile = new File(Configuration.deckPath() + fileName);
+        List<Card> mainCardList = new ArrayList<Card>();
+        List<Card> exCardList = new ArrayList<Card>();
+        try {
+            DataInputStream is = new DataInputStream(new FileInputStream(deckFile));
+            String line = "";
+            int cardIn = 0;
+            do {
+                line = is.readLine();
+                if (line.startsWith("#") || line.startsWith("!")) {
+                    if (line.startsWith("#main")) {
+                        cardIn = IN_MAIN;
+                    } else if (line.startsWith("#ex")) {
+                        cardIn = IN_EX;
+                    } else if (line.startsWith("!side")) {
+                        cardIn = IN_SIDE;
+                    }
+                } else {
+                    Card card;
+                    try {
+                        int id = Integer.parseInt(line);
+                        card = loadById(id);
+                    } catch (Exception e) {
+                        card = loadByName(line);
+                    }
+                    switch (cardIn) {
+                        case IN_MAIN:
+                            mainCardList.add(card);
+                            break;
+                        case IN_EX:
+                            exCardList.add(card);
+                            break;
+                    }
+                }
+
+            } while (line != null);
+            is.readLine();
+        } catch (Exception e) {
+        }
+        List<List<Card>> cardsLists = new ArrayList<List<Card>>();
+        cardsLists.add(mainCardList);
+        cardsLists.add(exCardList);
+        return cardsLists;
     }
 }

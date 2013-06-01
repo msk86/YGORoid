@@ -70,6 +70,17 @@ public class CardList implements SelectableItem {
         return null;
     }
 
+    public List<Card> pop(int size) {
+        List<Card> cards = new ArrayList<Card>();
+        for(int i=0;i<size;i++) {
+            Card card = pop();
+            if(card != null) {
+                cards.add(card);
+            }
+        }
+        return cards;
+    }
+
     public Card remove(Card card) {
         if (cards.remove(card)) {
             return card;

@@ -3,10 +3,11 @@ package android.ygo.core;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.util.Log;
 import android.ygo.op.Drag;
-import android.ygo.utils.Configuration;
 import android.ygo.utils.Utils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Duel implements Item {
     private LifePoint lifePoint;
@@ -24,6 +25,23 @@ public class Duel implements Item {
     private Drag drag;
 
     public Duel() {
+        initDuelField();
+    }
+
+    public void start(List<Card> mainDeckCards, List<Card> exDeckCards) {
+        if(mainDeckCards == null) {
+            mainDeckCards = new ArrayList<Card>();
+        }
+        if(exDeckCards == null) {
+            exDeckCards = new ArrayList<Card>();
+        }
+        newDeck(mainDeckCards, exDeckCards);
+        Deck deck = (Deck) duelFields.getDeckField().getItem();
+        deck.shuffle();
+        initHandCards();
+    }
+
+    public void initDuelField() {
         lifePoint = new LifePoint();
 
         duelFields = new DuelFields();
@@ -41,6 +59,19 @@ public class Duel implements Item {
         handCards = new HandCards();
 
         window = new InfoWindow();
+    }
+
+    private void newDeck(List<Card> mainDeckCards, List<Card> exDeckCards) {
+        Deck deck = (Deck) duelFields.getDeckField().getItem();
+        deck.push(mainDeckCards);
+
+        Deck exDeck = (Deck) duelFields.getExDeckField().getItem();
+        exDeck.push(exDeckCards);
+    }
+
+    private void initHandCards() {
+        Deck deck = (Deck) duelFields.getDeckField().getItem();
+        handCards.add(deck.pop(5));
     }
 
     public LifePoint getLifePoint() {

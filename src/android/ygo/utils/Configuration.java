@@ -15,6 +15,10 @@ public class Configuration {
         return "/Device/bluetooth/images/ygo/";
     }
 
+    public static String deckPath() {
+        return baseDir() + "deck/";
+    }
+
     public static String cardProtector() {
         return "cover";
     }

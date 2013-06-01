@@ -2,10 +2,7 @@ package android.ygo.views;
 
 import android.view.Menu;
 import android.view.MenuItem;
-import android.ygo.action.Action;
-import android.ygo.action.EmptyAction;
-import android.ygo.action.ReserveDeckAction;
-import android.ygo.action.ShuffleAction;
+import android.ygo.action.*;
 import android.ygo.core.*;
 import android.ygo.op.MenuClick;
 
@@ -55,6 +52,7 @@ public class PlayMenuProcessor {
                     case Const.MENU_DECK_RESTART :
                         break;
                     case Const.MENU_DECK_CHANGE_DECK :
+                        action = new DeckChangeAction(menuClick);
                 }
                 break;
             case Const.MENU_GROUP_CARD :
