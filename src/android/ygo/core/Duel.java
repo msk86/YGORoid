@@ -23,6 +23,8 @@ public class Duel implements Item {
     private SelectableItem currentSelectItem;
 
     private Drag drag;
+    private List<Card> mainDeckCards;
+    private List<Card> exDeckCards;
 
     public Duel() {
         initDuelField();
@@ -35,10 +37,16 @@ public class Duel implements Item {
         if(exDeckCards == null) {
             exDeckCards = new ArrayList<Card>();
         }
-        newDeck(mainDeckCards, exDeckCards);
+        this.mainDeckCards = mainDeckCards;
+        this.exDeckCards = exDeckCards;
+        initDeck();
         Deck deck = (Deck) duelFields.getDeckField().getItem();
         deck.shuffle();
         initHandCards();
+    }
+
+    public void restart() {
+        start(this.mainDeckCards, this.exDeckCards);
     }
 
     public void initDuelField() {
@@ -61,7 +69,7 @@ public class Duel implements Item {
         window = new InfoWindow();
     }
 
-    private void newDeck(List<Card> mainDeckCards, List<Card> exDeckCards) {
+    private void initDeck() {
         Deck deck = (Deck) duelFields.getDeckField().getItem();
         deck.push(mainDeckCards);
 
