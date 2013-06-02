@@ -7,7 +7,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.ygo.core.Card;
 import android.ygo.utils.Configuration;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,7 +59,22 @@ public class CardsDBHelper extends SQLiteOpenHelper {
             card = new Card(c.getString(0), c.getString(1), c.getString(2), c.getInt(8),
                     c.getInt(7), c.getInt(5), c.getInt(6), c.getInt(3), c.getInt(4));
         } else {
-            card = new Card("0", cardName, "卡片不存在！您可能需要更新数据库文件！", 0, 0, 0, 0, 0, 0);
+            card = fuzzyLoadByName(database, cardName);
+        }
+        return card;
+    }
+
+    private Card fuzzyLoadByName(SQLiteDatabase database, String name) {
+        Cursor c = database.query("texts t, datas d",
+                new String[]{"t.id", "t.name", "t.desc", "d.atk", "d.def", "d.race", "d.level", "d.attribute", "d.type"},
+                "t.id = d.id and t.name like ?", new String[]{"%"+name+"%"}, null, null, null);
+        Card card;
+        if (c.getCount() > 0) {
+            c.moveToFirst();
+            card = new Card(c.getString(0), c.getString(1), c.getString(2), c.getInt(8),
+                    c.getInt(7), c.getInt(5), c.getInt(6), c.getInt(3), c.getInt(4));
+        } else {
+            card = new Card("0", name, "卡片不存在！您可能需要更新数据库文件！", 0, 0, 0, 0, 0, 0);
         }
         return card;
     }
