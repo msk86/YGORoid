@@ -151,6 +151,9 @@ public class ActionDispatcher {
                     case Const.MENU_DECK_CHANGE_DECK :
                         action = new DeckChangeAction(menuClick);
                         break;
+                    case Const.MENU_MIRROR_DISPLAY :
+                        action = new MirrorDisplayAction(menuClick);
+                        break;
                 }
                 break;
             case Const.MENU_GROUP_CARD :

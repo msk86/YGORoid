@@ -30,8 +30,4 @@ public class Configuration {
     public static String cardImgPath() {
         return baseDir() + "img/";
     }
-
-    public static boolean isMirror() {
-        return false;
-    }
 }

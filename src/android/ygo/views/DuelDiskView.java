@@ -165,10 +165,6 @@ public class DuelDiskView extends SurfaceView implements Runnable {
     private void drawDuelDisk(Canvas canvas) {
         drawBackground(canvas);
         Bitmap duelBmp = duel.toBitmap();
-        if(Configuration.isMirror()) {
-            canvas.translate(Utils.screenWidth() ,Utils.screenHeight());
-            canvas.rotate(180);
-        }
         canvas.drawBitmap(duelBmp, 0, 0, painter);
         duelBmp.recycle();
     }

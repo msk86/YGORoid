@@ -5,7 +5,6 @@ import android.view.MotionEvent;
 import android.ygo.action.Action;
 import android.ygo.action.ActionDispatcher;
 import android.ygo.op.*;
-import android.ygo.utils.Utils;
 
 public class PlayGestureListener extends GestureDetector.SimpleOnGestureListener {
     DuelDiskView view;
@@ -17,7 +16,7 @@ public class PlayGestureListener extends GestureDetector.SimpleOnGestureListener
     public void onUp(MotionEvent event) {
         Drag drag = view.getDuel().getDrag();
         if (drag != null) {
-            drag.dropTo(Utils.mirrorX(event.getX()) , Utils.mirrorY(event.getY()));
+            drag.dropTo(event.getX(), event.getY());
             view.getDuel().setDrag(null);
             Action action = ActionDispatcher.dispatch(drag);
             action.execute();
@@ -31,7 +30,7 @@ public class PlayGestureListener extends GestureDetector.SimpleOnGestureListener
 
     @Override
     public boolean onSingleTapConfirmed(MotionEvent event) {
-        Click click = new Click(view.getDuel(), Utils.mirrorX(event.getX()), Utils.mirrorY(event.getY()));
+        Click click = new Click(view.getDuel(), event.getX(), event.getY());
         Action action = ActionDispatcher.dispatch(click);
         action.execute();
         return true;
@@ -39,14 +38,14 @@ public class PlayGestureListener extends GestureDetector.SimpleOnGestureListener
 
     @Override
     public void onLongPress(MotionEvent event) {
-        Press press = new Press(view.getDuel(), Utils.mirrorX(event.getX()), Utils.mirrorY(event.getY()));
+        Press press = new Press(view.getDuel(), event.getX(), event.getY());
         Action action = ActionDispatcher.dispatch(press);
         action.execute();
     }
 
     @Override
     public boolean onDoubleTap(MotionEvent event) {
-        DoubleClick dblClick = new DoubleClick(view.getDuel(), Utils.mirrorX(event.getX()), Utils.mirrorY(event.getY()));
+        DoubleClick dblClick = new DoubleClick(view.getDuel(), event.getX(), event.getY());
         Action action = ActionDispatcher.dispatch(dblClick);
         action.execute();
         return super.onDoubleTap(event);
@@ -56,14 +55,14 @@ public class PlayGestureListener extends GestureDetector.SimpleOnGestureListener
     public boolean onScroll(MotionEvent event1, MotionEvent event2, float dx, float dy) {
         Drag drag = view.getDuel().getDrag();
         if (drag == null) {
-            StartDrag startDrag = new StartDrag(view.getDuel(), Utils.mirrorX(event1.getX()), Utils.mirrorY(event1.getY()));
+            StartDrag startDrag = new StartDrag(view.getDuel(), event1.getX(), event1.getY());
             Action action = ActionDispatcher.dispatch(startDrag);
             action.execute();
 
-            drag = new Drag(startDrag, view.getDuel(), Utils.mirrorX(event1.getX()), Utils.mirrorY(event1.getY()));
+            drag = new Drag(startDrag, view.getDuel(), event1.getX(), event1.getY());
             view.getDuel().setDrag(drag);
         }
-        drag.move(Utils.mirrorX(event2.getX()), Utils.mirrorY(event2.getY()));
+        drag.move(event2.getX(), event2.getY());
         return true;
     }
 }

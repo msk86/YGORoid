@@ -12,7 +12,7 @@ import java.util.Random;
 
 public class Utils {
     private static DisplayMetrics dm;
-    private static Context context;
+    private static Activity context;
     private static CardsDBHelper dbHelper;
 
     public static void initInstance(Activity activity) {
@@ -22,7 +22,7 @@ public class Utils {
         activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
     }
 
-    public static Context getContext() {
+    public static Activity getContext() {
         return context;
     }
 
@@ -150,11 +150,4 @@ public class Utils {
         return 2;
     }
 
-    public static float mirrorX(float x) {
-        return !Configuration.isMirror() ? x : screenWidth() - x;
-    }
-
-    public static float mirrorY(float y) {
-        return !Configuration.isMirror() ? y : screenHeight() - y;
-    }
 }
