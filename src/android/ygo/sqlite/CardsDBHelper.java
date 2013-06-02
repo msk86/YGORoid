@@ -41,8 +41,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         Card card;
         if (c.getCount() > 0) {
             c.moveToFirst();
-            card = new Card(c.getString(0), c.getString(1), c.getString(2), c.getInt(8),
-                    c.getInt(7), c.getInt(5), c.getInt(6), c.getInt(3), c.getInt(4));
+            card = createCard(c);
         } else {
             card = new Card(idStr, "ID" + idStr, "卡片ID不存在！您可能需要更新数据库文件！", 0, 0, 0, 0, 0, 0);
         }
@@ -56,8 +55,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         Card card;
         if (c.getCount() > 0) {
             c.moveToFirst();
-            card = new Card(c.getString(0), c.getString(1), c.getString(2), c.getInt(8),
-                    c.getInt(7), c.getInt(5), c.getInt(6), c.getInt(3), c.getInt(4));
+            card = createCard(c);
         } else {
             card = fuzzyLoadByName(database, cardName);
         }
@@ -67,12 +65,42 @@ public class CardsDBHelper extends SQLiteOpenHelper {
     private Card fuzzyLoadByName(SQLiteDatabase database, String name) {
         Cursor c = database.query("texts t, datas d",
                 new String[]{"t.id", "t.name", "t.desc", "d.atk", "d.def", "d.race", "d.level", "d.attribute", "d.type"},
-                "t.id = d.id and t.name like ?", new String[]{"%"+name+"%"}, null, null, null);
+                "t.id = d.id and t.name like ?", new String[] {"%" + name + "%"}, null, null, null);
+        Card card = null;
+        if (c.getCount() > 0) {
+            for(int i=1;i<=c.getCount();i++) {
+                c.move(i);
+                String cardName = c.getString(1);
+                if(cardName.startsWith(name) || cardName.endsWith(name)) {
+                    card = createCard(c);
+                    break;
+                }
+            }
+            if(card == null) {
+                c.moveToFirst();
+                card = createCard(c);
+            }
+        } else {
+            card = fuzzyLoadByWord(database, name);
+        }
+        return card;
+    }
+
+    private Card fuzzyLoadByWord(SQLiteDatabase database, String name) {
+        String[] parts = new String[name.length()];
+        String sqlNamePart = "";
+        for (int i = 0; i < parts.length; i++) {
+            sqlNamePart += " and t.name like ?";
+            parts[i] = "%" + name.charAt(i) + "%";
+        }
+
+        Cursor c = database.query("texts t, datas d",
+                new String[]{"t.id", "t.name", "t.desc", "d.atk", "d.def", "d.race", "d.level", "d.attribute", "d.type"},
+                "t.id = d.id" + sqlNamePart, parts, null, null, null);
         Card card;
         if (c.getCount() > 0) {
             c.moveToFirst();
-            card = new Card(c.getString(0), c.getString(1), c.getString(2), c.getInt(8),
-                    c.getInt(7), c.getInt(5), c.getInt(6), c.getInt(3), c.getInt(4));
+            card = createCard(c);
         } else {
             card = new Card("0", name, "卡片不存在！您可能需要更新数据库文件！", 0, 0, 0, 0, 0, 0);
         }
@@ -122,6 +150,11 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         return cards;
     }
 
+    private Card createCard(Cursor c) {
+        return new Card(c.getString(0), c.getString(1), c.getString(2), c.getInt(8),
+                c.getInt(7), c.getInt(5), c.getInt(6), c.getInt(3), c.getInt(4));
+    }
+
 
     private static final int IN_MAIN = 1;
     private static final int IN_EX = 2;
@@ -137,7 +170,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
             int cardIn = 0;
             do {
                 line = reader.readLine();
-                if(line.length() == 0) {
+                if (line.length() == 0) {
                     continue;
                 }
                 if (line.startsWith("#") || line.startsWith("!")) {
