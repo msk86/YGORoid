@@ -164,6 +164,7 @@ public class ActionDispatcher {
                     case Const.MENU_CARD_BACK_TO_BOTTOM_OF_DECK :
                         break;
                     case Const.MENU_CARD_CLOSE_REMOVE :
+                        action = new CloseRemoveCardAction(menuClick);
                         break;
                 }
                 break;

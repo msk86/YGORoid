@@ -13,6 +13,6 @@ public class AddHandCardAction extends BaseAction {
     public void execute() {
         HandCards hc = (HandCards) container;
         hc.add((Card) item);
-        duel.select(item);
+        duel.select(item, container);
     }
 }

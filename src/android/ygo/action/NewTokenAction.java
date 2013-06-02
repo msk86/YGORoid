@@ -16,6 +16,6 @@ public class NewTokenAction extends BaseAction {
         token.negative();
         Field field = (Field) container;
         field.setItem(token);
-        duel.select(token);
+        duel.select(token, container);
     }
 }

@@ -14,7 +14,7 @@ public class DragHandCardAction extends BaseAction {
         Card card = (Card) item;
         HandCards handCards = (HandCards) container;
         handCards.remove(card);
-        duel.select(card);
+        duel.select(card, container);
         ((StartDrag) operation).setDragItem(card);
     }
 }

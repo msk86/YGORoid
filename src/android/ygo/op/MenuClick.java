@@ -11,11 +11,14 @@ public class MenuClick implements Operation {
 
     private MenuItem menuItem;
 
+    private Item container;
+
     SelectableItem item;
     public MenuClick(Duel duel, MenuItem menuItem) {
         this.duel = duel;
         this.menuItem = menuItem;
         item = duel.getCurrentSelectItem();
+        container = duel.getCurrentSelectItemContainer();
     }
 
     @Override
@@ -34,7 +37,7 @@ public class MenuClick implements Operation {
 
     @Override
     public Item getContainer() {
-        return null;
+        return container;
     }
 
     @Override

@@ -24,6 +24,6 @@ public class CloseCardSelectorAction extends BaseAction {
         }
 
         duel.setCardSelector(null);
-        duel.select(selector.getSourceItem());
+        duel.select(selector.getSourceItem(), container);
     }
 }

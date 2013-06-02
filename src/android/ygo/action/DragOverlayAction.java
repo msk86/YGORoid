@@ -30,6 +30,6 @@ public class DragOverlayAction extends BaseAction {
             field.removeItem();
             ((StartDrag) operation).setDragItem(overlay);
         }
-        duel.select(selectableItem);
+        duel.select(selectableItem, container);
     }
 }

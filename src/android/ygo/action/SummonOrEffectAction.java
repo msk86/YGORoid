@@ -15,6 +15,6 @@ public class SummonOrEffectAction extends BaseAction {
         card.open();
         card.positive();
         ((Field) container).setItem(card);
-        duel.select(card);
+        duel.select(card, container);
     }
 }

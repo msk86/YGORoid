@@ -25,6 +25,7 @@ public class Duel implements Item {
     private Drag drag;
     private List<Card> mainDeckCards;
     private List<Card> exDeckCards;
+    private Item currentSelectItemContainer;
 
     public Duel() {
         initDuelField();
@@ -110,15 +111,17 @@ public class Duel implements Item {
         if (currentSelectItem != null) {
             currentSelectItem.unSelect();
             currentSelectItem = null;
+            currentSelectItemContainer = null;
         }
         window.clearInfo();
     }
 
-    public void select(SelectableItem item) {
+    public void select(SelectableItem item, Item container) {
         if (item != null) {
             if (item != currentSelectItem) {
                 unSelect();
                 currentSelectItem = item;
+                currentSelectItemContainer = container;
             }
             currentSelectItem.select();
         } else {
@@ -245,5 +248,9 @@ public class Duel implements Item {
 
     public SelectableItem getCurrentSelectItem() {
         return currentSelectItem;
+    }
+
+    public Item getCurrentSelectItemContainer() {
+        return currentSelectItemContainer;
     }
 }

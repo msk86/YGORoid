@@ -14,7 +14,7 @@ public class DragFieldCardAction extends BaseAction {
         Card card = (Card) item;
         Field field = (Field) container;
         field.removeItem();
-        duel.select(card);
+        duel.select(card, container);
         ((StartDrag) operation).setDragItem(card);
     }
 }

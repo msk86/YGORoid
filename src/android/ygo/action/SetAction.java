@@ -20,6 +20,6 @@ public class SetAction extends BaseAction {
         }
         card.set();
         field.setItem(item);
-        duel.select(card);
+        duel.select(card, container);
     }
 }

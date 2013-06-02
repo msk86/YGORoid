@@ -26,6 +26,6 @@ public class OverlayAction extends BaseAction {
             overlay.overlay(card);
             field.setItem(overlay);
         }
-        duel.select(field.getItem());
+        duel.select(field.getItem(), container);
     }
 }

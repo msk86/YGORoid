@@ -18,6 +18,6 @@ public class DragCardSelectorAction extends CloseCardSelectorAction {
 
         super.execute();
 
-        duel.select(card);
+        duel.select(card, container);
     }
 }

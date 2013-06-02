@@ -19,7 +19,7 @@ public class FlipAction extends BaseAction {
         }
         if (card != null) {
             card.flip();
-            duel.select(card);
+            duel.select(item, container);
         }
     }
 }

@@ -20,7 +20,7 @@ public class MonsterPositionAction extends BaseAction {
         }
         if (card != null) {
             card.changePosition();
-            duel.select(card);
+            duel.select(card, container);
         }
     }
 }
