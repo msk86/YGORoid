@@ -1,5 +1,6 @@
 package android.ygo.op;
 
+import android.view.MenuItem;
 import android.ygo.core.Duel;
 import android.ygo.core.Item;
 import android.ygo.core.SelectableItem;
@@ -7,16 +8,23 @@ import android.ygo.core.SelectableItem;
 public class MenuClick implements Operation {
 
     Duel duel;
-    SelectableItem item;
 
-    public MenuClick(Duel duel) {
+    private MenuItem menuItem;
+
+    SelectableItem item;
+    public MenuClick(Duel duel, MenuItem menuItem) {
         this.duel = duel;
+        this.menuItem = menuItem;
         item = duel.getCurrentSelectItem();
     }
 
     @Override
     public Duel getDuel() {
         return duel;
+    }
+
+    public MenuItem getMenuItem() {
+        return menuItem;
     }
 
     @Override

@@ -69,9 +69,11 @@ public class Const {
 
     // menu id
     public static final int MENU_DECK_SHUFFLE = 0x01;
-    public static final int MENU_DECK_REVERSE = 0x02;
+    public static final int MENU_DECK_CLOSE_REMOVE_TOP = 0x02;
+    public static final int MENU_DECK_REVERSE = 0x04;
     public static final int MENU_DECK_RESTART = 0x1024;
     public static final int MENU_DECK_CHANGE_DECK = 0x2048;
 
     public static final int MENU_CARD_BACK_TO_BOTTOM_OF_DECK = 0x01;
+    public static final int MENU_CARD_CLOSE_REMOVE = 0x02;
 }

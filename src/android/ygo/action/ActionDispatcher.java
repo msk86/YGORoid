@@ -134,8 +134,31 @@ public class ActionDispatcher {
         return action;
     }
 
-    public static Action dispatch(MenuClick click) {
+    public static Action dispatch(MenuClick menuClick) {
         Action action = new EmptyAction();
+        switch (menuClick.getMenuItem().getGroupId()) {
+            case Const.MENU_GROUP_DECK :
+                switch (menuClick.getMenuItem().getItemId()) {
+                    case Const.MENU_DECK_SHUFFLE :
+                        action = new ShuffleAction(menuClick);
+                        break;
+                    case Const.MENU_DECK_REVERSE :
+                        action = new ReserveDeckAction(menuClick);
+                        break;
+                    case Const.MENU_DECK_RESTART :
+                        break;
+                    case Const.MENU_DECK_CHANGE_DECK :
+                        action = new DeckChangeAction(menuClick);
+                        break;
+                }
+                break;
+            case Const.MENU_GROUP_CARD :
+                switch (menuClick.getMenuItem().getItemId()) {
+                    case Const.MENU_CARD_BACK_TO_BOTTOM_OF_DECK :
+                }
+                break;
+
+        }
         return action;
     }
 }
