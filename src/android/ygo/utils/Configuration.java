@@ -14,7 +14,7 @@ public class Configuration {
 
     public static String device() {
         if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            return Environment.getExternalStorageDirectory().getAbsolutePath();
+            return Environment.getExternalStorageDirectory().getAbsolutePath() + "/";
         }
         return "/Device/";
     }

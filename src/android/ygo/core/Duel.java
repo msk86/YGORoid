@@ -231,9 +231,10 @@ public class Duel implements Item {
             Utils.drawBitmapOnCanvas(canvas, selectorBmp, paint, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_CENTER);
         }
 
-        if (drag != null && drag.getItem() != null) {
-            Bitmap draggingItemBmp = drag.getItem().toBitmap();
-            Utils.drawBitmapOnCanvas(canvas, draggingItemBmp, paint, drag.x() - draggingItemBmp.getWidth() / 2, drag.y() - draggingItemBmp.getHeight() / 2);
+        Drag dragged = drag;
+        if (dragged != null && dragged.getItem() != null) {
+            Bitmap draggingItemBmp = dragged.getItem().toBitmap();
+            Utils.drawBitmapOnCanvas(canvas, draggingItemBmp, paint, dragged.x() - draggingItemBmp.getWidth() / 2, dragged.y() - draggingItemBmp.getHeight() / 2);
         }
 
         Bitmap winBmp = window.toBitmap();
