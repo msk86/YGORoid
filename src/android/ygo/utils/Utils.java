@@ -65,7 +65,6 @@ public class Utils {
     }
 
     public static Bitmap readBitmapScaleByHeight(String file, int targetHeight) {
-        file = Configuration.baseDir() + file;
         Bitmap bitmap = BitmapFactory.decodeFile(file);
         return scaleByHeight(bitmap, targetHeight);
     }

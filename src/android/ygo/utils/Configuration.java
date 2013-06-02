@@ -1,6 +1,7 @@
 package android.ygo.utils;
 
 import android.graphics.Color;
+import android.os.Environment;
 
 public class Configuration {
     public static int highlightColor() {
@@ -11,16 +12,23 @@ public class Configuration {
         return Color.WHITE;
     }
 
+    public static String device() {
+        if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+            return Environment.getExternalStorageDirectory().getAbsolutePath();
+        }
+        return "/Device/";
+    }
+
     public static String baseDir() {
-        return "/Device/bluetooth/images/ygo/";
+        return device() + ".YGORoid/";
     }
 
     public static String deckPath() {
         return baseDir() + "deck/";
     }
 
-    public static String cardProtector() {
-        return "cover";
+    public static String cardImgPath() {
+        return baseDir() + "img/";
     }
 
     public static boolean isMirror() {
