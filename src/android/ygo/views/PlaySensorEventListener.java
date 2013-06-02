@@ -16,18 +16,19 @@ public class PlaySensorEventListener implements SensorEventListener {
 
     @Override
     public void onSensorChanged(SensorEvent e) {
+        float zLimit = 8f;
         float z = e.values[SensorManager.DATA_Z];
         boolean changed = false;
         HandCards handCards = view.getDuel().getHandCards();
-        if (z >= 7) {
-            if (z >= 7.3) {
+        if (z >= zLimit) {
+            if (z >= zLimit + 0.2) {
                 if (!handCards.isSet()) {
                     handCards.setAll();
                     changed = true;
                 }
             }
         } else {
-            if (z <= 6.7) {
+            if (z <= zLimit - 0.2) {
                 if (handCards.isSet()) {
                     handCards.openAll();
                     changed = true;

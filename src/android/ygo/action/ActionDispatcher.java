@@ -146,6 +146,7 @@ public class ActionDispatcher {
                         action = new ReserveDeckAction(menuClick);
                         break;
                     case Const.MENU_DECK_RESTART :
+                        action = new RestartAction(menuClick);
                         break;
                     case Const.MENU_DECK_CHANGE_DECK :
                         action = new DeckChangeAction(menuClick);

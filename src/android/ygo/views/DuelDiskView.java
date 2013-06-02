@@ -58,6 +58,12 @@ public class DuelDiskView extends SurfaceView implements Runnable {
         Card setMagicCard = Utils.getDbHelper().loadById(35952884);
         Field f = duelFields.getMagicField(2);
         f.setItem(setMagicCard);
+        Card monsterRebornI = Utils.getDbHelper().loadById(83764718);
+        f = duelFields.getMagicField(1);
+        f.setItem(monsterRebornI);
+        Card monsterRebornT = Utils.getDbHelper().loadByName("死者苏生");
+        f = duelFields.getMagicField(3);
+        f.setItem(monsterRebornT);
 
         // Monsters
         // set
@@ -118,6 +124,12 @@ public class DuelDiskView extends SurfaceView implements Runnable {
         ids.add(1248895);
         ids.add(27551);
         ids.add(11593137);
+        ids.add(89631139);
+        ids.add(89631140);
+        ids.add(89631141);
+        ids.add(89631142);
+        ids.add(89631143);
+        ids.add(89631144);
         List<Card> cards = Utils.getDbHelper().loadById(ids);
         Deck deck = (Deck) duelFields.getDeckField().getItem();
         deck.push(cards);

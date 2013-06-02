@@ -7,9 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.ygo.core.Card;
 import android.ygo.utils.Configuration;
 
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +36,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
                 new String[]{"t.id", "t.name", "t.desc", "d.atk", "d.def", "d.race", "d.level", "d.attribute", "d.type"},
                 "t.id = d.id and t.id = ?", new String[]{idStr}, null, null, null);
         Card card;
-        if (c.getCount() == 1) {
+        if (c.getCount() > 0) {
             c.moveToFirst();
             card = new Card(c.getString(0), c.getString(1), c.getString(2), c.getInt(8),
                     c.getInt(7), c.getInt(5), c.getInt(6), c.getInt(3), c.getInt(4));
@@ -53,7 +51,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
                 new String[]{"t.id", "t.name", "t.desc", "d.atk", "d.def", "d.race", "d.level", "d.attribute", "d.type"},
                 "t.id = d.id and t.name = ?", new String[]{cardName}, null, null, null);
         Card card;
-        if (c.getCount() == 1) {
+        if (c.getCount() > 0) {
             c.moveToFirst();
             card = new Card(c.getString(0), c.getString(1), c.getString(2), c.getInt(8),
                     c.getInt(7), c.getInt(5), c.getInt(6), c.getInt(3), c.getInt(4));
@@ -116,11 +114,14 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         List<Card> mainCardList = new ArrayList<Card>();
         List<Card> exCardList = new ArrayList<Card>();
         try {
-            DataInputStream is = new DataInputStream(new FileInputStream(deckFile));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(deckFile), "UTF-8"));
             String line = "";
             int cardIn = 0;
             do {
-                line = is.readLine();
+                line = reader.readLine();
+                if(line.length() == 0) {
+                    continue;
+                }
                 if (line.startsWith("#") || line.startsWith("!")) {
                     if (line.startsWith("#main")) {
                         cardIn = IN_MAIN;
@@ -148,7 +149,6 @@ public class CardsDBHelper extends SQLiteOpenHelper {
                 }
 
             } while (line != null);
-            is.readLine();
         } catch (Exception e) {
         }
         List<List<Card>> cardsLists = new ArrayList<List<Card>>();
