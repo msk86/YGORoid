@@ -11,9 +11,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
 import android.ygo.core.*;
-import android.ygo.utils.Configuration;
 import android.ygo.utils.Utils;
 
 import java.util.ArrayList;
@@ -78,27 +76,27 @@ public class DuelDiskView extends SurfaceView implements Runnable {
         Card material1 = Utils.getDbHelper().loadById(35952884);
         Card material2 = Utils.getDbHelper().loadById(35952884);
         Card xyzCard = Utils.getDbHelper().loadById(84013237);
-        Overlay overlay = new Overlay(material1);
-        overlay.overlay(material2);
-        overlay.overlay(xyzCard);
+        OverRay overRay = new OverRay(material1);
+        overRay.overRay(material2);
+        overRay.overRay(xyzCard);
         f = duelFields.getMonsterField(2);
-        f.setItem(overlay);
+        f.setItem(overRay);
         // xyz + 1m
         Card material21 = Utils.getDbHelper().loadById(35952884);
         Card material22 = Utils.getDbHelper().loadById(35952884);
         Card xyzCard2 = Utils.getDbHelper().loadById(84013237);
-        Overlay overlay2 = new Overlay(material21);
-        overlay2.overlay(material22);
-        overlay2.overlay(xyzCard2);
+        OverRay overRay2 = new OverRay(material21);
+        overRay2.overRay(material22);
+        overRay2.overRay(xyzCard2);
         f = duelFields.getMonsterField(3);
-        f.setItem(overlay2);
+        f.setItem(overRay2);
         // 2m
         Card material31 = Utils.getDbHelper().loadById(35952884);
         Card material32 = Utils.getDbHelper().loadById(35952884);
-        Overlay overlay3 = new Overlay(material31);
-        overlay3.overlay(material32);
+        OverRay overRay3 = new OverRay(material31);
+        overRay3.overRay(material32);
         f = duelFields.getMonsterField(4);
-        f.setItem(overlay3);
+        f.setItem(overRay3);
 
 
         List<Integer> ids = new ArrayList<Integer>();

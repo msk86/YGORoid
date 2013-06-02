@@ -6,41 +6,37 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.ygo.utils.Utils;
 
-public class Overlay implements SelectableItem {
+public class OverRay implements SelectableItem {
     private boolean selected = false;
 
     Card topCard;
-    CardList materials;
+    CardList overRayUnits;
 
-    public Overlay(Card card) {
-        materials = new CardList("OVERLAY");
-        overlay(card);
+    public OverRay(Card card) {
+        overRayUnits = new CardList("OVERRAY");
+        overRay(card);
     }
 
-    public CardList getMaterials() {
-        return materials;
+    public CardList getOverRayUnits() {
+        return overRayUnits;
     }
 
-    public void overlay(Card card) {
+    public void overRay(Card card) {
         if (topCard == null) {
             topCard = card;
         } else {
             if (topCard.getSubTypes().contains(CardSubType.XYZ)
                     && !card.getSubTypes().contains(CardSubType.XYZ)) {
-                materials.push(card);
+                overRayUnits.push(card);
             } else {
-                materials.push(topCard);
+                overRayUnits.push(topCard);
                 topCard = card;
             }
         }
     }
 
-    public int materialCount() {
-        return materials.cards.size();
-    }
-
     public int totalCard() {
-        int count = materials.cards.size();
+        int count = overRayUnits.cards.size();
         if (topCard != null) {
             count++;
         }
@@ -53,44 +49,44 @@ public class Overlay implements SelectableItem {
 
     public Card removeTopCard() {
         Card top = topCard;
-        Card card = materials.pop();
+        Card card = overRayUnits.pop();
         topCard = card;
         return top;
 
     }
 
     private Bitmap materialsBmp() {
-        int materialOffset = materials.cards.size() - 1;
-        int overlayOffset = Utils.cardWidth() / 15;
-        int materialWidth = Utils.cardWidth() + materialOffset * overlayOffset;
+        int materialOffset = overRayUnits.cards.size() - 1;
+        int overRayOffset = Utils.cardWidth() / 15;
+        int materialWidth = Utils.cardWidth() + materialOffset * overRayOffset;
         int height = Utils.cardHeight();
         Bitmap materialsBmp = Bitmap.createBitmap(materialWidth, height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(materialsBmp);
         canvas.drawColor(Color.TRANSPARENT);
         Paint paint = new Paint();
-        canvas.translate(materialOffset * overlayOffset, 0);
-        for (int i = materials.getCards().size() - 1; i >= 0; i--) {
-            Card card = materials.getCards().get(i);
+        canvas.translate(materialOffset * overRayOffset, 0);
+        for (int i = overRayUnits.getCards().size() - 1; i >= 0; i--) {
+            Card card = overRayUnits.getCards().get(i);
             Utils.drawBitmapOnCanvas(canvas, card.toBitmap(), paint, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_CENTER);
-            canvas.translate(-overlayOffset, 0);
+            canvas.translate(-overRayOffset, 0);
         }
         return materialsBmp;
     }
 
     @Override
     public Bitmap toBitmap() {
-        int overlayOffset = Utils.cardWidth() / 15;
+        int overRayOffset = Utils.cardWidth() / 15;
         int height = Utils.cardHeight();
         int width = height;
-        Bitmap overlayBmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(overlayBmp);
+        Bitmap overRayBmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(overRayBmp);
         canvas.drawColor(Color.TRANSPARENT);
         Paint paint = new Paint();
         Bitmap materialsBmp = materialsBmp();
 
         int materialX = (width - Utils.cardWidth()) / 2;
         if (topCard != null) {
-            materialX += overlayOffset;
+            materialX += overRayOffset;
         }
         Utils.drawBitmapOnCanvas(canvas, materialsBmp, paint, materialX, Utils.DRAW_POSITION_CENTER);
         materialsBmp.recycle();
@@ -98,7 +94,7 @@ public class Overlay implements SelectableItem {
         if (topCard != null) {
             Utils.drawBitmapOnCanvas(canvas, topCard.toBitmap(), paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_CENTER);
         }
-        return overlayBmp;
+        return overRayBmp;
     }
 
     @Override

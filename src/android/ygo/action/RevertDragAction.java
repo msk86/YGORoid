@@ -26,8 +26,8 @@ public class RevertDragAction extends BaseAction {
             if (fieldItem != null) {
                 if (fieldItem instanceof CardList) {
                     ((CardList) fieldItem).push((Card) item);
-                } else if (fieldItem instanceof Overlay) {
-                    ((Overlay) fieldItem).overlay((Card) item);
+                } else if (fieldItem instanceof OverRay) {
+                    ((OverRay) fieldItem).overRay((Card) item);
                 }
             } else {
                 ((Field) from).setItem(item);

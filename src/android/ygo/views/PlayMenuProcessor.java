@@ -19,7 +19,7 @@ public class PlayMenuProcessor {
         Duel duel = view.getDuel();
         SelectableItem item = duel.getCurrentSelectItem();
         if(duel.getCardSelector() == null) {
-            if(item instanceof Card || item instanceof Overlay) {
+            if(item instanceof Card || item instanceof OverRay) {
                 menu.add(Const.MENU_GROUP_CARD, Const.MENU_CARD_BACK_TO_BOTTOM_OF_DECK, 0,"回卡组底");
                 menu.add(Const.MENU_GROUP_CARD, Const.MENU_CARD_CLOSE_REMOVE, 0,"里侧除外");
             } else if(item instanceof Deck) {

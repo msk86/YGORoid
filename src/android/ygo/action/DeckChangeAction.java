@@ -1,21 +1,11 @@
 package android.ygo.action;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.util.Log;
-import android.ygo.YGOActivity;
 import android.ygo.core.Card;
-import android.ygo.core.CardList;
-import android.ygo.core.Field;
-import android.ygo.core.Overlay;
 import android.ygo.op.Operation;
-import android.ygo.sqlite.CardsDBHelper;
 import android.ygo.utils.Configuration;
 import android.ygo.utils.Utils;
-import android.ygo.views.DuelDiskView;
 
 import java.io.File;
 import java.util.List;

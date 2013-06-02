@@ -12,7 +12,7 @@ public class ActionDispatcher {
             Log.e("YGO", "LP");
         }
         if (click.getContainer() instanceof InfoWindow) {
-            if (click.getItem() instanceof Card || click.getItem() instanceof Overlay)
+            if (click.getItem() instanceof Card || click.getItem() instanceof OverRay)
                 action = new OpenInfoAction(click);
         }
         return action;
@@ -24,7 +24,7 @@ public class ActionDispatcher {
             Field field = (Field) press.getContainer();
             if (field.getType() == FieldType.MONSTER_ZONE) {
                 SelectableItem item = press.getItem();
-                if (item instanceof Card || item instanceof Overlay) {
+                if (item instanceof Card || item instanceof OverRay) {
                     action = new MonsterPositionAction(press);
                 }
             }
@@ -43,7 +43,7 @@ public class ActionDispatcher {
                     action = new NewTokenAction(dblClick);
                 }
             } else {
-                if (item instanceof Card || item instanceof Overlay) {
+                if (item instanceof Card || item instanceof OverRay) {
                     action = new FlipAction(dblClick);
                 } else if (item instanceof CardList) {
                     CardList cardList = (CardList) item;
@@ -73,8 +73,8 @@ public class ActionDispatcher {
         } else if (startDrag.getContainer() instanceof Field) {
             SelectableItem item = startDrag.getItem();
             if (item != null) {
-                if (item instanceof Overlay) {
-                    action = new DragOverlayAction(startDrag);
+                if (item instanceof OverRay) {
+                    action = new DragOverRayAction(startDrag);
                 } else if (item instanceof Card) {
                     action = new DragFieldCardAction(startDrag);
                 } else if (item instanceof CardList) {
@@ -104,10 +104,10 @@ public class ActionDispatcher {
                     action = new MoveAction(drag);
                 }
             }
-            if (drag.getItem() instanceof Card && (targetItem instanceof Card || targetItem instanceof Overlay)) {
-                action = new OverlayAction(drag);
+            if (drag.getItem() instanceof Card && (targetItem instanceof Card || targetItem instanceof OverRay)) {
+                action = new OverRayAction(drag);
             }
-            if ((drag.getItem() instanceof Card || drag.getItem() instanceof Overlay) && targetItem instanceof CardList) {
+            if ((drag.getItem() instanceof Card || drag.getItem() instanceof OverRay) && targetItem instanceof CardList) {
                 action = new AddCardListAction(drag);
             }
         }
@@ -126,7 +126,7 @@ public class ActionDispatcher {
         } else {
             SelectableItem item = click.getItem();
             if (item != null) {
-                if (item instanceof CardList || item instanceof Overlay) {
+                if (item instanceof CardList || item instanceof OverRay) {
                     action = new OpenCardSelectorAction(click);
                 }
             }

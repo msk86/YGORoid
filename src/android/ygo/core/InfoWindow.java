@@ -19,8 +19,8 @@ public class InfoWindow implements Item {
         if(infoItem != null) {
             if (infoItem instanceof Card) {
                 info = infoItem.toString();
-            } else if (infoItem instanceof Overlay) {
-                info = ((Overlay) infoItem).topCard().toString();
+            } else if (infoItem instanceof OverRay) {
+                info = ((OverRay) infoItem).topCard().toString();
             } else if (infoItem instanceof CardList) {
                 CardList cardList = (CardList) infoItem;
                 info = cardList.getName() + "[" + cardList.size() + "]";

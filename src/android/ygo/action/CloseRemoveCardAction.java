@@ -15,8 +15,8 @@ public class CloseRemoveCardAction extends BaseAction {
             if(item instanceof Card) {
                 card = (Card) item;
                 ((Field) container).removeItem();
-            } else if(item instanceof Overlay) {
-                card = ((Overlay)item).removeTopCard();
+            } else if(item instanceof OverRay) {
+                card = ((OverRay)item).removeTopCard();
             }
 
         } else if(container instanceof HandCards) {

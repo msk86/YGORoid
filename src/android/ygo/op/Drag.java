@@ -20,51 +20,6 @@ public class Drag implements Operation {
         dragging = true;
 
         item = startDrag.getDragItem();
-
-
-//        if (duel.inDuelFields(fromX, fromY)) {
-//            Field field = duel.fieldAt(fromX, fromY);
-//            from = field;
-//            if (field != null) {
-//                item = field.getItem();
-//                if (item instanceof CardList) {
-//                    if(item instanceof Deck) {
-//                        canSelect = false;
-//                    }
-//                    from = item;
-//                    item = ((CardList) item).pop();
-//                } else if (item instanceof Overlay) {
-//                    Overlay overlay = (Overlay) item;
-//                    if (overlay.topCard().isSelect() || overlay.totalCard() == 1) {
-//                        item = overlay.removeTopCard();
-//                        if (overlay.totalCard() > 0) {
-//                            from = overlay;
-//                        } else {
-//                            field.removeItem();
-//                        }
-//                    } else {
-//                        field.removeItem();
-//                    }
-//                } else {
-//                    field.removeItem();
-//                }
-//            }
-//        } else if (duel.inHand(fromX, fromY)) {
-//            from = duel.getHandCards();
-//            item = duel.itemAt(fromX, fromY);
-//            duel.getHandCards().remove((Card) item);
-//        } else if (duel.inCardSelector(fromX, fromY)) {
-//            from = duel.getCardSelector().getCardList();
-//            Card card = duel.getCardSelector().cardAt(fromX, fromY);
-//            if (card != null) {
-//                card.open();
-//                item = duel.getCardSelector().remove(card);
-//                new CloseCardSelectorAction(this).execute();
-//            }
-//        }
-//        if (item != null && !item.isSelect() && canSelect) {
-//            duel.select(item);
-//        }
     }
 
     public void move(float fx, float fy) {

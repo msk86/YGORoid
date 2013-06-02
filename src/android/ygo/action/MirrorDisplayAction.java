@@ -2,13 +2,7 @@ package android.ygo.action;
 
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
-import android.view.WindowManager;
-import android.ygo.core.Card;
-import android.ygo.core.CardList;
-import android.ygo.core.Field;
-import android.ygo.core.Overlay;
 import android.ygo.op.Operation;
-import android.ygo.utils.Configuration;
 import android.ygo.utils.Utils;
 
 public class MirrorDisplayAction extends BaseAction {
