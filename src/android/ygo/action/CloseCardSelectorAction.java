@@ -14,7 +14,8 @@ public class CloseCardSelectorAction extends BaseAction {
         CardSelector selector = duel.getCardSelector();
         CardList list = selector.getCardList();
 
-        if(!list.getName().equals("TEMPORARY")) {
+        String listName = list.getName();
+        if(!listName.equals("TEMPORARY") && !listName.equals("REMOVED")) {
             if(list.isOpen()) {
                 list.openAll();
             } else {

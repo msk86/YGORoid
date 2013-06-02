@@ -95,7 +95,7 @@ public class ActionDispatcher {
             if (targetItem == null) {
                 if (drag.getStartDrag().getContainer() instanceof HandCards) {
                     Card card = (Card) drag.getItem();
-                    if(card.isOpen()) {
+                    if(card != null && card.isOpen()) {
                         action = new SummonOrEffectAction(drag);
                     } else {
                         action = new SetAction(drag);
@@ -142,6 +142,9 @@ public class ActionDispatcher {
                     case Const.MENU_DECK_SHUFFLE :
                         action = new ShuffleAction(menuClick);
                         break;
+                    case Const.MENU_DECK_CLOSE_REMOVE_TOP :
+                        action = new CloseRemoveTopAction(menuClick);
+                        break;
                     case Const.MENU_DECK_REVERSE :
                         action = new ReserveDeckAction(menuClick);
                         break;
@@ -159,6 +162,9 @@ public class ActionDispatcher {
             case Const.MENU_GROUP_CARD :
                 switch (menuClick.getMenuItem().getItemId()) {
                     case Const.MENU_CARD_BACK_TO_BOTTOM_OF_DECK :
+                        break;
+                    case Const.MENU_CARD_CLOSE_REMOVE :
+                        break;
                 }
                 break;
 

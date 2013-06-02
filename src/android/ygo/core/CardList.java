@@ -89,13 +89,17 @@ public class CardList implements SelectableItem {
     }
 
     public void push(Card card) {
+        push(card, false);
+    }
+
+    public void push(Card card, boolean forceSet) {
         if (card == null) {
             return;
         }
         if (card.getSubTypes().contains(CardSubType.TOKEN)) {
             return;
         }
-        if (open) {
+        if (!forceSet && open) {
             card.open();
         } else {
             card.set();
