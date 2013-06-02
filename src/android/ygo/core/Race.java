@@ -23,7 +23,7 @@ public enum Race {
     SEA_SERPENT(Const.RACE_SEASERPENT, "海龙"),
     REPTILE(Const.RACE_REPTILE, "爬虫"),
     PSYCHO(Const.RACE_PSYCHO, "念动力"),
-    DEVINE(Const.RACE_DEVINE, "换神兽"),
+    DEVINE(Const.RACE_DEVINE, "幻神兽"),
     CREATOR_GOD(Const.RACE_CREATORGOD, "创世神");
 
     Race(int code, String text) {

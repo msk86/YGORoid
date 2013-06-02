@@ -27,8 +27,8 @@ public class Card implements SelectableItem {
     Attribute attribute;
     Race race;
     int level;
-    int atk;
-    int def;
+    String atk;
+    String def;
     boolean set = false;
     boolean positive = true;
 
@@ -49,8 +49,8 @@ public class Card implements SelectableItem {
         this.attribute = Attribute.getAttribute(attrCode);
         this.race = Race.getRace(raceCode);
         this.level = level;
-        this.atk = atk;
-        this.def = def;
+        this.atk = atk >= 0 ? String.valueOf(atk) : "?";
+        this.def = def >= 0 ? String.valueOf(def) : "?";
         this.positive = true;
         this.set = false;
         initCardPic();
