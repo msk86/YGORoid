@@ -33,6 +33,7 @@ public class OverRay implements SelectableItem {
                 topCard = card;
             }
         }
+        topCard.open();
     }
 
     public int totalCard() {
@@ -52,7 +53,13 @@ public class OverRay implements SelectableItem {
         Card card = overRayUnits.pop();
         topCard = card;
         return top;
+    }
 
+    public void adjust(Field field) {
+        if(totalCard() == 1) {
+            field.removeItem();
+            field.setItem(topCard);
+        }
     }
 
     private Bitmap materialsBmp() {

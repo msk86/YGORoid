@@ -120,9 +120,9 @@ public class Duel implements Item {
         if (item != null) {
             if (item != currentSelectItem) {
                 unSelect();
-                currentSelectItem = item;
-                currentSelectItemContainer = container;
             }
+            currentSelectItem = item;
+            currentSelectItemContainer = container;
             currentSelectItem.select();
         } else {
             unSelect();

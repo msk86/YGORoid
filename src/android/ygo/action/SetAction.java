@@ -17,6 +17,8 @@ public class SetAction extends BaseAction {
         Card card = (Card) item;
         if (field.getType() == FieldType.MONSTER_ZONE) {
             card.negative();
+        } else if (field.getType() == FieldType.MAGIC_ZONE) {
+            card.positive();
         }
         card.set();
         field.setItem(item);

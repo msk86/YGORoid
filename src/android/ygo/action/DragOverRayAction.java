@@ -16,15 +16,11 @@ public class DragOverRayAction extends BaseAction {
         OverRay overRay = (OverRay) item;
         Field field = (Field) container;
         SelectableItem selectableItem;
-        if (overRay.topCard().isSelect() && overRay.totalCard() != 1) {
+        if (overRay.topCard().isSelect()) {
             Card overRayTopCard = overRay.removeTopCard();
             selectableItem = overRayTopCard;
             ((StartDrag) operation).setDragItem(overRayTopCard);
-            if (overRay.totalCard() == 1) {
-                Card lastCard = overRay.removeTopCard();
-                field.removeItem();
-                field.setItem(lastCard);
-            }
+            overRay.adjust(field);
         } else {
             selectableItem = overRay;
             field.removeItem();

@@ -11,17 +11,20 @@ public class CloseRemoveCardAction extends BaseAction {
     @Override
     public void execute() {
         Card card = null;
-        if(container instanceof Field) {
-            if(item instanceof Card) {
+        if (container instanceof Field) {
+            Field field = (Field) container;
+            if (item instanceof Card) {
                 card = (Card) item;
-                ((Field) container).removeItem();
-            } else if(item instanceof OverRay) {
-                card = ((OverRay)item).removeTopCard();
+                field.removeItem();
+            } else if (item instanceof OverRay) {
+                OverRay overRay = (OverRay) item;
+                card = overRay.removeTopCard();
+                overRay.adjust(field);
             }
 
-        } else if(container instanceof HandCards) {
+        } else if (container instanceof HandCards) {
             card = (Card) item;
-            ((HandCards)container).remove(card);
+            ((HandCards) container).remove(card);
         }
 
         CardList removed = (CardList) duel.getDuelFields().getRemovedField().getItem();
