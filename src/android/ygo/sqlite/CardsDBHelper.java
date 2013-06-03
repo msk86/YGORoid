@@ -49,15 +49,27 @@ public class CardsDBHelper extends SQLiteOpenHelper {
     }
 
     private Card loadByName(SQLiteDatabase database, String cardName) {
+        Card card = loadByWholeName(database, cardName);
+        if(card == null) {
+            card = fuzzyLoadByName(database, cardName);
+        }
+        if(card == null) {
+            card = fuzzyLoadByWord(database, cardName);
+        }
+        if(card == null) {
+            card = new Card("0", cardName, "卡片不存在！您可能需要更新数据库文件！", 0, 0, 0, 0, 0, 0);
+        }
+        return card;
+    }
+
+    private Card loadByWholeName(SQLiteDatabase database, String cardName) {
         Cursor c = database.query("texts t, datas d",
                 new String[]{"t.id", "t.name", "t.desc", "d.atk", "d.def", "d.race", "d.level", "d.attribute", "d.type"},
                 "t.id = d.id and t.name = ?", new String[]{cardName}, null, null, null);
-        Card card;
+        Card card = null;
         if (c.getCount() > 0) {
             c.moveToFirst();
             card = createCard(c);
-        } else {
-            card = fuzzyLoadByName(database, cardName);
         }
         return card;
     }
@@ -80,8 +92,6 @@ public class CardsDBHelper extends SQLiteOpenHelper {
                 c.moveToFirst();
                 card = createCard(c);
             }
-        } else {
-            card = fuzzyLoadByWord(database, name);
         }
         return card;
     }
@@ -97,12 +107,10 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         Cursor c = database.query("texts t, datas d",
                 new String[]{"t.id", "t.name", "t.desc", "d.atk", "d.def", "d.race", "d.level", "d.attribute", "d.type"},
                 "t.id = d.id" + sqlNamePart, parts, null, null, null);
-        Card card;
+        Card card = null;
         if (c.getCount() > 0) {
             c.moveToFirst();
             card = createCard(c);
-        } else {
-            card = new Card("0", name, "卡片不存在！您可能需要更新数据库文件！", 0, 0, 0, 0, 0, 0);
         }
         return card;
     }
