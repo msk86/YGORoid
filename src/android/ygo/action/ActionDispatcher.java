@@ -9,7 +9,7 @@ public class ActionDispatcher {
     public static Action dispatch(Click click) {
         Action action = new SelectAction(click);
         if(click.getItem() instanceof LifePoint) {
-            Log.e("YGO", "LP");
+            action = new LifePointAction(click);
         }
         if (click.getContainer() instanceof InfoWindow) {
             if (click.getItem() instanceof Card || click.getItem() instanceof OverRay)
