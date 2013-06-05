@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.ygo.layout.GridLayout;
+import android.ygo.utils.Configuration;
 import android.ygo.utils.Utils;
 
 public class CardSelector implements Item {
@@ -54,7 +55,7 @@ public class CardSelector implements Item {
         int height = Utils.screenHeight();
         Bitmap background = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(background);
-        canvas.drawColor(Color.GRAY);
+        canvas.drawColor(Configuration.cardSelectorBackgroundColor());
         return background;
     }
 }

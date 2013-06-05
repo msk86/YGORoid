@@ -12,8 +12,16 @@ public class Configuration {
         return Color.WHITE;
     }
 
+    public static int textShadowColor() {
+        return Color.BLACK;
+    }
+
     public static int lineColor() {
         return Color.WHITE;
+    }
+
+    public static int cardSelectorBackgroundColor() {
+        return Color.GRAY;
     }
 
     public static String device() {

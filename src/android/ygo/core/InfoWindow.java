@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.ygo.utils.Configuration;
 import android.ygo.utils.Utils;
 
 public class InfoWindow implements Item {
@@ -53,7 +54,7 @@ public class InfoWindow implements Item {
         canvas.drawLine(width, 0, width, height, paint);
 
 
-        paint.setColor(Color.WHITE);
+        paint.setColor(Configuration.fontColor());
         paint.setStrokeWidth(1);
         paint.setTextSize(height);
         canvas.drawText(info(), 5, height - 2, paint);

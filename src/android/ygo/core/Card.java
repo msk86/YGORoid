@@ -106,7 +106,7 @@ public class Card implements SelectableItem {
             TextPaint textPaint = new TextPaint();
             textPaint.setTextSize(Utils.unitLength() / 10);
             textPaint.setColor(Configuration.fontColor());
-            textPaint.setShadowLayer(1, 0, 0, Color.BLACK);
+            textPaint.setShadowLayer(1, 0, 0, Configuration.textShadowColor());
             StaticLayout layout = new StaticLayout(cs, textPaint, Utils.cardWidth(), Layout.Alignment.ALIGN_CENTER, 0, 0, true);
             canvas.translate(0, Utils.cardHeight() / 20);
             layout.draw(canvas);

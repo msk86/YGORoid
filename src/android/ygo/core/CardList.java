@@ -184,7 +184,7 @@ public class CardList implements SelectableItem {
         TextPaint textPaint = new TextPaint();
         textPaint.setTextSize(Utils.unitLength() / 10);
         textPaint.setColor(Configuration.fontColor());
-        textPaint.setShadowLayer(1, 0, 0, Color.BLACK);
+        textPaint.setShadowLayer(1, 0, 0, Configuration.textShadowColor());
         textPaint.setUnderlineText(true);
 
         canvas.translate(0, 5);
