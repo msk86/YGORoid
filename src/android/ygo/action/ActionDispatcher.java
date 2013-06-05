@@ -11,6 +11,9 @@ public class ActionDispatcher {
         if(click.getItem() instanceof LifePoint) {
             action = new LifePointAction(click);
         }
+        if(click.getItem() instanceof Dice) {
+            action = new DiceAction(click);
+        }
         if (click.getContainer() instanceof InfoWindow) {
             if (click.getItem() instanceof Card || click.getItem() instanceof OverRay)
                 action = new OpenInfoAction(click);

@@ -27,6 +27,8 @@ public class Duel implements Item {
     private List<Card> exDeckCards;
     private Item currentSelectItemContainer;
 
+    private Dice dice;
+
     public Duel() {
         initDuelField();
     }
@@ -68,6 +70,8 @@ public class Duel implements Item {
         handCards = new HandCards();
 
         window = new InfoWindow();
+
+        dice = new Dice();
     }
 
     private void initDeck() {
@@ -136,6 +140,8 @@ public class Duel implements Item {
     public SelectableItem itemAt(int x, int y) {
         if (inLifePoint(x, y)) {
             return lifePoint;
+        } else if(inDice(x, y)) {
+            return dice;
         } else if (inDuelFields(x, y)) {
             return duelFields.itemOnFieldAt(x, y);
         } else if (inHand(x, y)) {
@@ -150,6 +156,8 @@ public class Duel implements Item {
 
     public Item containerAt(int x, int y) {
         if (inLifePoint(x, y)) {
+            return null;
+        } else if (inDice(x, y)) {
             return null;
         } else if (inDuelFields(x, y)) {
             return duelFields.fieldAt(x, y);
@@ -173,6 +181,18 @@ public class Duel implements Item {
 
     public Drag getDrag() {
         return drag;
+    }
+
+    public boolean inDice(int x, int y) {
+        if(cardSelector != null) {
+            return false;
+        }
+        if(x >= Utils.unitLength() * 2.4 && x < Utils.unitLength() * 2.9) {
+            if( y < Utils.unitLength() / 2) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean inLifePoint(int x, int y) {
@@ -224,6 +244,9 @@ public class Duel implements Item {
         Bitmap lpBmp = lifePoint.toBitmap();
         Utils.drawBitmapOnCanvas(canvas, lpBmp, paint, Utils.unitLength(), (Utils.unitLength() - lpBmp.getHeight()) / 2);
 
+        Bitmap diceBmp = dice.toBitmap();
+        Utils.drawBitmapOnCanvas(canvas, diceBmp, paint, (int)(Utils.unitLength() * 2.4), 0);
+
         if (cardSelector == null) {
             Bitmap fieldBmp = duelFields.toBitmap();
             Bitmap handBmp = handCards.toBitmap();
@@ -252,5 +275,9 @@ public class Duel implements Item {
 
     public Item getCurrentSelectItemContainer() {
         return currentSelectItemContainer;
+    }
+
+    public Dice getDice() {
+        return dice;
     }
 }
