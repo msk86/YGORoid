@@ -1,7 +1,7 @@
 package android.ygo.action;
 
-import android.util.Log;
-import android.ygo.core.*;
+import android.ygo.core.Card;
+import android.ygo.core.HandCards;
 import android.ygo.op.Operation;
 
 public class ShowHandCardAction extends BaseAction {

@@ -37,10 +37,10 @@ public class Duel implements Item {
     }
 
     public void start(List<Card> mainDeckCards, List<Card> exDeckCards) {
-        if(mainDeckCards == null) {
+        if (mainDeckCards == null) {
             mainDeckCards = new ArrayList<Card>();
         }
-        if(exDeckCards == null) {
+        if (exDeckCards == null) {
             exDeckCards = new ArrayList<Card>();
         }
         this.mainDeckCards = mainDeckCards;
@@ -144,7 +144,7 @@ public class Duel implements Item {
     public SelectableItem itemAt(int x, int y) {
         if (inLifePoint(x, y)) {
             return lifePoint;
-        } else if(inDice(x, y)) {
+        } else if (inDice(x, y)) {
             return dice;
         } else if (inCoin(x, y)) {
             return coin;
@@ -192,11 +192,11 @@ public class Duel implements Item {
     }
 
     public boolean inDice(int x, int y) {
-        if(cardSelector != null) {
+        if (cardSelector != null) {
             return false;
         }
-        if(x >= Utils.unitLength() * 2.4 && x < Utils.unitLength() * 2.9) {
-            if( y < Utils.unitLength() / 2) {
+        if (x >= Utils.unitLength() * 2.4 && x < Utils.unitLength() * 2.9) {
+            if (y < Utils.unitLength() / 2) {
                 return true;
             }
         }
@@ -204,11 +204,11 @@ public class Duel implements Item {
     }
 
     public boolean inCoin(int x, int y) {
-        if(cardSelector != null) {
+        if (cardSelector != null) {
             return false;
         }
-        if(x >= Utils.unitLength() * 2.4 && x < Utils.unitLength() * 2.9) {
-            if( y >= Utils.unitLength() / 2 && y < Utils.unitLength()) {
+        if (x >= Utils.unitLength() * 2.4 && x < Utils.unitLength() * 2.9) {
+            if (y >= Utils.unitLength() / 2 && y < Utils.unitLength()) {
                 return true;
             }
         }
@@ -219,8 +219,8 @@ public class Duel implements Item {
         if (cardSelector != null) {
             return false;
         }
-        if(x >= Utils.unitLength() && x < Utils.unitLength() * 2.2) {
-            if( y < Utils.unitLength()) {
+        if (x >= Utils.unitLength() && x < Utils.unitLength() * 2.2) {
+            if (y < Utils.unitLength()) {
                 return true;
             }
         }
@@ -265,10 +265,10 @@ public class Duel implements Item {
         Utils.drawBitmapOnCanvas(canvas, lpBmp, paint, Utils.unitLength(), (Utils.unitLength() - lpBmp.getHeight()) / 2);
 
         Bitmap diceBmp = dice.toBitmap();
-        Utils.drawBitmapOnCanvas(canvas, diceBmp, paint, (int)(Utils.unitLength() * 2.4), 0);
+        Utils.drawBitmapOnCanvas(canvas, diceBmp, paint, (int) (Utils.unitLength() * 2.4), 0);
 
         Bitmap coinBmp = coin.toBitmap();
-        Utils.drawBitmapOnCanvas(canvas, coinBmp, paint, (int)(Utils.unitLength() * 2.4), Utils.unitLength() / 2);
+        Utils.drawBitmapOnCanvas(canvas, coinBmp, paint, (int) (Utils.unitLength() * 2.4), Utils.unitLength() / 2);
 
         if (cardSelector == null) {
             Bitmap fieldBmp = duelFields.toBitmap();

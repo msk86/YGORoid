@@ -11,11 +11,10 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.ygo.core.*;
-import android.ygo.utils.Utils;
-
-import java.util.ArrayList;
-import java.util.List;
+import android.ygo.core.Duel;
+import android.ygo.core.DuelFields;
+import android.ygo.core.Field;
+import android.ygo.core.SpCard;
 
 public class DuelDiskView extends SurfaceView implements Runnable {
     private Thread renderThread;
@@ -77,7 +76,7 @@ public class DuelDiskView extends SurfaceView implements Runnable {
     @Override
     public void run() {
         while (running) {
-            if(!holder.getSurface().isValid()) {
+            if (!holder.getSurface().isValid()) {
                 continue;
             }
             Canvas canvas = holder.lockCanvas();
@@ -86,19 +85,19 @@ public class DuelDiskView extends SurfaceView implements Runnable {
         }
     }
 
-    public void resume(){
+    public void resume() {
         running = true;
         renderThread = new Thread(this);
         renderThread.start();
     }
 
-    public void pause(){
+    public void pause() {
         running = false;
-        while(true){
-            try{
+        while (true) {
+            try {
                 renderThread.join();
                 break;
-            }catch(InterruptedException e){
+            } catch (InterruptedException e) {
                 // retry
             }
         }

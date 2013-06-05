@@ -1,7 +1,5 @@
 package android.ygo.action;
 
-import android.ygo.core.Card;
-import android.ygo.core.HandCards;
 import android.ygo.op.Operation;
 
 public class LifePointAction extends BaseAction {

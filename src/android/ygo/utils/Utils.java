@@ -31,7 +31,7 @@ public class Utils {
 
     private static void checkFolder(String path) {
         File folder = new File(path);
-        if(!folder.exists()) {
+        if (!folder.exists()) {
             folder.mkdir();
             folder.setExecutable(true);
             folder.setReadable(true);

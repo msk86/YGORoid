@@ -15,8 +15,8 @@ public class CloseCardSelectorAction extends BaseAction {
         CardList list = selector.getCardList();
 
         String listName = list.getName();
-        if(!listName.equals("TEMPORARY") && !listName.equals("REMOVED")) {
-            if(list.isOpen()) {
+        if (!listName.equals("TEMPORARY") && !listName.equals("REMOVED")) {
+            if (list.isOpen()) {
                 list.openAll();
             } else {
                 list.setAll();

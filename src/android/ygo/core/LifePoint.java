@@ -35,14 +35,14 @@ public class LifePoint implements SelectableItem {
     }
 
     private void createDialog() {
-        layout.addView(edit,new FrameLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
+        layout.addView(edit, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
 
         dialog = new AlertDialog.Builder(Utils.getContext())
-            .setTitle("Input new LP")
-            .setPositiveButton("OK", new OnLPClickListener(this, "OK"))
-            .setNegativeButton("Cancel", new OnLPClickListener(this, "Cancel"))
-            .create();
+                .setTitle("Input new LP")
+                .setPositiveButton("OK", new OnLPClickListener(this, "OK"))
+                .setNegativeButton("Cancel", new OnLPClickListener(this, "Cancel"))
+                .create();
         dialog.setView(layout);
     }
 
@@ -55,7 +55,7 @@ public class LifePoint implements SelectableItem {
         edit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean focused) {
-                if(focused) {
+                if (focused) {
                     dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
                 }
             }
@@ -69,7 +69,7 @@ public class LifePoint implements SelectableItem {
 
     @Override
     public Bitmap toBitmap() {
-        Bitmap lpBmp = Bitmap.createBitmap((int)(Utils.unitLength() * 1.2), Utils.unitLength() / 4, Bitmap.Config.ARGB_8888);
+        Bitmap lpBmp = Bitmap.createBitmap((int) (Utils.unitLength() * 1.2), Utils.unitLength() / 4, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(lpBmp);
         TextPaint textPaint = new TextPaint();
         textPaint.setTextSize(Utils.unitLength() / 4);
@@ -108,7 +108,7 @@ public class LifePoint implements SelectableItem {
 
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
-            if("OK".equals(button)) {
+            if ("OK".equals(button)) {
                 lifePoint.syncLP();
             }
             lifePoint.dialog.hide();
@@ -138,6 +138,7 @@ public class LifePoint implements SelectableItem {
     private void syncLP() {
         try {
             lp = Integer.parseInt(edit.getText().toString());
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
     }
 }

@@ -1,6 +1,9 @@
 package android.ygo.core.tool;
 
-import android.graphics.*;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.ygo.R;
 import android.ygo.core.SelectableItem;
 import android.ygo.utils.Configuration;
@@ -42,7 +45,7 @@ public class Coin implements SelectableItem {
 
     @Override
     public Bitmap toBitmap() {
-        Bitmap bitmap = Bitmap.createBitmap(COIN_RADIUS*2, COIN_RADIUS*2, Bitmap.Config.ARGB_8888);
+        Bitmap bitmap = Bitmap.createBitmap(COIN_RADIUS * 2, COIN_RADIUS * 2, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         canvas.drawColor(Color.TRANSPARENT);
         Paint paint = new Paint();
@@ -68,17 +71,17 @@ public class Coin implements SelectableItem {
         paint.setAntiAlias(true);
 
         canvas.drawLine(COIN_RADIUS / 3, COIN_RADIUS, COIN_RADIUS * 5 / 3, COIN_RADIUS, paint);
-        if(coin == 1) {
+        if (coin == 1) {
             canvas.drawLine(COIN_RADIUS, COIN_RADIUS / 3, COIN_RADIUS, COIN_RADIUS * 5 / 3, paint);
         }
         return bitmap;
     }
 
     private void drawMask(Canvas canvas, Paint paint) {
-        if(throwing <= MAX_THROWING) {
-            int stepWidth = (int)Math.ceil(COIN_RADIUS * 4.0 / MAX_THROWING);
-            Utils.drawBitmapOnCanvas(canvas, MASK, paint, - COIN_RADIUS * 2 + stepWidth * throwing, Utils.DRAW_POSITION_FIRST);
-            throwing ++;
+        if (throwing <= MAX_THROWING) {
+            int stepWidth = (int) Math.ceil(COIN_RADIUS * 4.0 / MAX_THROWING);
+            Utils.drawBitmapOnCanvas(canvas, MASK, paint, -COIN_RADIUS * 2 + stepWidth * throwing, Utils.DRAW_POSITION_FIRST);
+            throwing++;
         }
     }
 

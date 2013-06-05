@@ -50,13 +50,13 @@ public class CardsDBHelper extends SQLiteOpenHelper {
 
     private Card loadByName(SQLiteDatabase database, String cardName) {
         Card card = loadByWholeName(database, cardName);
-        if(card == null) {
+        if (card == null) {
             card = fuzzyLoadByName(database, cardName);
         }
-        if(card == null) {
+        if (card == null) {
             card = fuzzyLoadByWord(database, cardName);
         }
-        if(card == null) {
+        if (card == null) {
             card = new Card("0", cardName, "卡片不存在！您可能需要更新数据库文件！", 0, 0, 0, 0, 0, 0);
         }
         return card;
@@ -77,18 +77,18 @@ public class CardsDBHelper extends SQLiteOpenHelper {
     private Card fuzzyLoadByName(SQLiteDatabase database, String name) {
         Cursor c = database.query("texts t, datas d",
                 new String[]{"t.id", "t.name", "t.desc", "d.atk", "d.def", "d.race", "d.level", "d.attribute", "d.type"},
-                "t.id = d.id and t.name like ?", new String[] {"%" + name + "%"}, null, null, null);
+                "t.id = d.id and t.name like ?", new String[]{"%" + name + "%"}, null, null, null);
         Card card = null;
         if (c.getCount() > 0) {
-            for(int i=1;i<=c.getCount();i++) {
+            for (int i = 1; i <= c.getCount(); i++) {
                 c.move(i);
                 String cardName = c.getString(1);
-                if(cardName.startsWith(name) || cardName.endsWith(name)) {
+                if (cardName.startsWith(name) || cardName.endsWith(name)) {
                     card = createCard(c);
                     break;
                 }
             }
-            if(card == null) {
+            if (card == null) {
                 c.moveToFirst();
                 card = createCard(c);
             }

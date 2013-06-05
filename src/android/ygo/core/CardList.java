@@ -72,9 +72,9 @@ public class CardList implements SelectableItem {
 
     public List<Card> pop(int size) {
         List<Card> cards = new ArrayList<Card>();
-        for(int i=0;i<size;i++) {
+        for (int i = 0; i < size; i++) {
             Card card = pop();
-            if(card != null) {
+            if (card != null) {
                 cards.add(card);
             }
         }

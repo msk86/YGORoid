@@ -2,7 +2,6 @@ package android.ygo.core;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.ygo.layout.GridLayout;
 import android.ygo.utils.Configuration;

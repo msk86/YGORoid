@@ -19,7 +19,7 @@ public enum CardType {
         this.code = code;
         this.text = text;
         this.resId = resId;
-        if(this.resId != 0) {
+        if (this.resId != 0) {
             cardBmp = Utils.readBitmapScaleByHeight(resId, Utils.cardHeight());
         }
     }

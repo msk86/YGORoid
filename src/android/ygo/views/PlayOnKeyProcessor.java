@@ -4,7 +4,6 @@ import android.view.KeyEvent;
 import android.ygo.action.Action;
 import android.ygo.action.ActionDispatcher;
 import android.ygo.action.EmptyAction;
-import android.ygo.op.MenuClick;
 import android.ygo.op.ReturnClick;
 
 public class PlayOnKeyProcessor {

@@ -9,13 +9,13 @@ public class ActionDispatcher {
 
     public static Action dispatch(Click click) {
         Action action = new SelectAction(click);
-        if(click.getItem() instanceof LifePoint) {
+        if (click.getItem() instanceof LifePoint) {
             action = new LifePointAction(click);
         }
-        if(click.getItem() instanceof Dice) {
+        if (click.getItem() instanceof Dice) {
             action = new DiceAction(click);
         }
-        if(click.getItem() instanceof Coin) {
+        if (click.getItem() instanceof Coin) {
             action = new CoinAction(click);
         }
         if (click.getContainer() instanceof InfoWindow) {
@@ -59,14 +59,14 @@ public class ActionDispatcher {
                     }
                 }
             }
-        } else if(container instanceof CardList) {
+        } else if (container instanceof CardList) {
             CardList cardList = (CardList) container;
-            if(cardList.getName().equals("TEMPORARY")) {
+            if (cardList.getName().equals("TEMPORARY")) {
                 action = new FlipAction(dblClick);
             }
-        } else if(container instanceof HandCards) {
-            Card card = (Card)item;
-            if(card != null) {
+        } else if (container instanceof HandCards) {
+            Card card = (Card) item;
+            if (card != null) {
                 action = new FlipAction(dblClick);
             }
         }
@@ -102,7 +102,7 @@ public class ActionDispatcher {
             if (targetItem == null) {
                 if (drag.getStartDrag().getContainer() instanceof HandCards) {
                     Card card = (Card) drag.getItem();
-                    if(card != null && card.isOpen()) {
+                    if (card != null && card.isOpen()) {
                         action = new SummonOrEffectAction(drag);
                     } else {
                         action = new SetAction(drag);
@@ -144,53 +144,53 @@ public class ActionDispatcher {
     public static Action dispatch(MenuClick menuClick) {
         Action action = new EmptyAction();
         switch (menuClick.getMenuItem().getGroupId()) {
-            case Const.MENU_GROUP_DECK :
+            case Const.MENU_GROUP_DECK:
                 switch (menuClick.getMenuItem().getItemId()) {
-                    case Const.MENU_DECK_SHUFFLE :
+                    case Const.MENU_DECK_SHUFFLE:
                         action = new ShuffleAction(menuClick);
                         break;
-                    case Const.MENU_DECK_CLOSE_REMOVE_TOP :
+                    case Const.MENU_DECK_CLOSE_REMOVE_TOP:
                         action = new CloseRemoveTopAction(menuClick);
                         break;
-                    case Const.MENU_DECK_REVERSE :
+                    case Const.MENU_DECK_REVERSE:
                         action = new ReserveDeckAction(menuClick);
                         break;
-                    case Const.MENU_DECK_RESTART :
+                    case Const.MENU_DECK_RESTART:
                         action = new RestartAction(menuClick);
                         break;
-                    case Const.MENU_DECK_CHANGE_DECK :
+                    case Const.MENU_DECK_CHANGE_DECK:
                         action = new DeckChangeAction(menuClick);
                         break;
-                    case Const.MENU_MIRROR_DISPLAY :
+                    case Const.MENU_MIRROR_DISPLAY:
                         action = new MirrorDisplayAction(menuClick);
                         break;
-                    case Const.MENU_EXIT :
+                    case Const.MENU_EXIT:
                         action = new ExitAction(menuClick);
                         break;
                 }
                 break;
             case Const.MENU_GROUP_FIELD_CARD:
                 switch (menuClick.getMenuItem().getItemId()) {
-                    case Const.MENU_CARD_BACK_TO_BOTTOM_OF_DECK :
+                    case Const.MENU_CARD_BACK_TO_BOTTOM_OF_DECK:
                         action = new ToDeckBottomAction(menuClick);
                         break;
-                    case Const.MENU_CARD_CLOSE_REMOVE :
+                    case Const.MENU_CARD_CLOSE_REMOVE:
                         action = new CloseRemoveCardAction(menuClick);
                         break;
                 }
                 break;
-            case Const.MENU_GROUP_HAND_CARD :
+            case Const.MENU_GROUP_HAND_CARD:
                 switch (menuClick.getMenuItem().getItemId()) {
-                    case Const.MENU_CARD_BACK_TO_BOTTOM_OF_DECK :
+                    case Const.MENU_CARD_BACK_TO_BOTTOM_OF_DECK:
                         action = new ToDeckBottomAction(menuClick);
                         break;
-                    case Const.MENU_CARD_CLOSE_REMOVE :
+                    case Const.MENU_CARD_CLOSE_REMOVE:
                         action = new CloseRemoveCardAction(menuClick);
                         break;
-                    case Const.MENU_SHOW_HAND :
+                    case Const.MENU_SHOW_HAND:
                         action = new ShowHandCardAction(menuClick);
                         break;
-                    case Const.MENU_HIDE_HAND :
+                    case Const.MENU_HIDE_HAND:
                         action = new HideHandCardAction(menuClick);
                         break;
                 }

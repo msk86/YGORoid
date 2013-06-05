@@ -14,6 +14,7 @@ public class MenuClick implements Operation {
     private Item container;
 
     SelectableItem item;
+
     public MenuClick(Duel duel, MenuItem menuItem) {
         this.duel = duel;
         this.menuItem = menuItem;

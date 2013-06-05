@@ -56,7 +56,7 @@ public class OverRay implements SelectableItem {
     }
 
     public void adjust(Field field) {
-        if(totalCard() == 1) {
+        if (totalCard() == 1) {
             field.removeItem();
             field.setItem(topCard);
         }

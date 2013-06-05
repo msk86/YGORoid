@@ -9,6 +9,7 @@ import android.ygo.utils.Utils;
 
 public class Field implements Item {
     private static Bitmap FRAME;
+
     static {
         FRAME = fieldFrameBmp();
     }
@@ -63,7 +64,7 @@ public class Field implements Item {
         paint.setColor(Configuration.lineColor());
         paint.setStrokeWidth(2);
         paint.setStyle(Paint.Style.STROKE);
-        canvas.drawRect(padding, padding, width- padding, width - padding, paint);
+        canvas.drawRect(padding, padding, width - padding, width - padding, paint);
 
         return bitmap;
     }

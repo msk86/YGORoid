@@ -29,7 +29,7 @@ public class YGOActivity extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         setContentView(R.layout.main);
-        duelDiskView = (DuelDiskView)findViewById(R.id.duelDiskView);
+        duelDiskView = (DuelDiskView) findViewById(R.id.duelDiskView);
 
         keyProcessor = new PlayOnKeyProcessor(duelDiskView);
         menuProcessor = new PlayMenuProcessor(duelDiskView);

@@ -17,7 +17,7 @@ public class InfoWindow implements Item {
 
     private String info() {
         String info = "";
-        if(infoItem != null) {
+        if (infoItem != null) {
             if (infoItem instanceof Card) {
                 info = infoItem.toString();
             } else if (infoItem instanceof OverRay) {
@@ -25,7 +25,7 @@ public class InfoWindow implements Item {
             } else if (infoItem instanceof CardList) {
                 CardList cardList = (CardList) infoItem;
                 info = cardList.getName() + "[" + cardList.size() + "]";
-                if(cardList.size() > 0 && cardList.topCard().isOpen()) {
+                if (cardList.size() > 0 && cardList.topCard().isOpen()) {
                     info += " / " + cardList.topCard().toString();
                 }
             }
