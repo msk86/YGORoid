@@ -1,7 +1,7 @@
 package android.ygo.action;
 
-import android.util.Log;
 import android.ygo.core.*;
+import android.ygo.core.tool.Dice;
 import android.ygo.op.*;
 
 public class ActionDispatcher {

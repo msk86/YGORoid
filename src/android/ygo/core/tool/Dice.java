@@ -1,9 +1,11 @@
-package android.ygo.core;
+package android.ygo.core.tool;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.ygo.R;
+import android.ygo.core.SelectableItem;
 import android.ygo.utils.Configuration;
 import android.ygo.utils.Utils;
 
@@ -13,31 +15,29 @@ public class Dice implements SelectableItem {
     private static int DICE_WIDTH = Utils.unitLength() / 2;
     private static Bitmap[] DICE_BMPS = new Bitmap[6];
     private static Bitmap DICE_FRAME;
-    private static long MAX_DICE_TIME = 1000;
+    private static Bitmap MASK;
+    private static int MAX_THROWING = 8;
 
     static {
         for (int i = 0; i < DICE_BMPS.length; i++) {
             DICE_BMPS[i] = dicePoint(i);
         }
         DICE_FRAME = diceFrame();
+        MASK = Utils.readBitmapScaleByHeight(R.raw.mask, DICE_WIDTH);
     }
 
     private int diceNumber;
 
     private int throwing;
-    private long startDiceTime;
-
-
 
     public Dice() {
         diceNumber = 5;
+        throwing = MAX_THROWING + 1;
     }
 
     public void throwDice() {
-        throwing = diceNumber;
+        throwing = 1;
         diceNumber = new Random().nextInt(6);
-        startDiceTime = System.currentTimeMillis();
-
     }
 
     @Override
@@ -49,14 +49,19 @@ public class Dice implements SelectableItem {
 
         Utils.drawBitmapOnCanvas(canvas, DICE_FRAME, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_CENTER);
 
-        int diceIndex = diceNumber;
-        if(startDiceTime + MAX_DICE_TIME >= System.currentTimeMillis()) {
-            diceIndex = throwing++ % 6;
-        }
+        Utils.drawBitmapOnCanvas(canvas, DICE_BMPS[diceNumber], paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_CENTER);
 
-        Utils.drawBitmapOnCanvas(canvas, DICE_BMPS[diceIndex], paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_CENTER);
+        drawMask(canvas, paint);
 
         return bitmap;
+    }
+
+    private void drawMask(Canvas canvas, Paint paint) {
+        if(throwing <= MAX_THROWING) {
+            int stepWidth = (int)Math.ceil(DICE_WIDTH * 2.0 / MAX_THROWING);
+            Utils.drawBitmapOnCanvas(canvas, MASK, paint, - DICE_WIDTH + stepWidth * throwing, Utils.DRAW_POSITION_FIRST);
+            throwing ++;
+        }
     }
 
     private static Bitmap diceFrame() {
