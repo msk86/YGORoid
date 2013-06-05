@@ -39,9 +39,9 @@ public class LifePoint implements SelectableItem {
                 ViewGroup.LayoutParams.WRAP_CONTENT));
 
         dialog = new AlertDialog.Builder(Utils.getContext())
-                .setTitle("Input new LP")
-                .setPositiveButton("OK", new OnLPClickListener(this, "OK"))
-                .setNegativeButton("Cancel", new OnLPClickListener(this, "Cancel"))
+                .setTitle("请输入LP")
+                .setPositiveButton("确定", new OnLPClickListener(this, "OK"))
+                .setNegativeButton("取消", new OnLPClickListener(this, "Cancel"))
                 .create();
         dialog.setView(layout);
     }

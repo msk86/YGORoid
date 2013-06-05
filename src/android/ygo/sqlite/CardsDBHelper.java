@@ -175,7 +175,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(deckFile), "UTF-8"));
             String line = "";
-            int cardIn = 0;
+            int cardIn = IN_MAIN;
             do {
                 line = reader.readLine();
                 if (line.length() == 0) {
