@@ -1,6 +1,7 @@
 package android.ygo.action;
 
 import android.ygo.core.*;
+import android.ygo.core.tool.Coin;
 import android.ygo.core.tool.Dice;
 import android.ygo.op.*;
 
@@ -13,6 +14,9 @@ public class ActionDispatcher {
         }
         if(click.getItem() instanceof Dice) {
             action = new DiceAction(click);
+        }
+        if(click.getItem() instanceof Coin) {
+            action = new CoinAction(click);
         }
         if (click.getContainer() instanceof InfoWindow) {
             if (click.getItem() instanceof Card || click.getItem() instanceof OverRay)

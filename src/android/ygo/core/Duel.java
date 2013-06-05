@@ -3,6 +3,7 @@ package android.ygo.core;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.ygo.core.tool.Coin;
 import android.ygo.core.tool.Dice;
 import android.ygo.op.Drag;
 import android.ygo.utils.Utils;
@@ -29,6 +30,7 @@ public class Duel implements Item {
     private Item currentSelectItemContainer;
 
     private Dice dice;
+    private Coin coin;
 
     public Duel() {
         initDuelField();
@@ -73,6 +75,7 @@ public class Duel implements Item {
         window = new InfoWindow();
 
         dice = new Dice();
+        coin = new Coin();
     }
 
     private void initDeck() {
@@ -143,6 +146,8 @@ public class Duel implements Item {
             return lifePoint;
         } else if(inDice(x, y)) {
             return dice;
+        } else if (inCoin(x, y)) {
+            return coin;
         } else if (inDuelFields(x, y)) {
             return duelFields.itemOnFieldAt(x, y);
         } else if (inHand(x, y)) {
@@ -159,6 +164,8 @@ public class Duel implements Item {
         if (inLifePoint(x, y)) {
             return null;
         } else if (inDice(x, y)) {
+            return null;
+        } else if (inCoin(x, y)) {
             return null;
         } else if (inDuelFields(x, y)) {
             return duelFields.fieldAt(x, y);
@@ -190,6 +197,18 @@ public class Duel implements Item {
         }
         if(x >= Utils.unitLength() * 2.4 && x < Utils.unitLength() * 2.9) {
             if( y < Utils.unitLength() / 2) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean inCoin(int x, int y) {
+        if(cardSelector != null) {
+            return false;
+        }
+        if(x >= Utils.unitLength() * 2.4 && x < Utils.unitLength() * 2.9) {
+            if( y >= Utils.unitLength() / 2 && y < Utils.unitLength()) {
                 return true;
             }
         }
@@ -248,6 +267,9 @@ public class Duel implements Item {
         Bitmap diceBmp = dice.toBitmap();
         Utils.drawBitmapOnCanvas(canvas, diceBmp, paint, (int)(Utils.unitLength() * 2.4), 0);
 
+        Bitmap coinBmp = coin.toBitmap();
+        Utils.drawBitmapOnCanvas(canvas, coinBmp, paint, (int)(Utils.unitLength() * 2.4), Utils.unitLength() / 2);
+
         if (cardSelector == null) {
             Bitmap fieldBmp = duelFields.toBitmap();
             Bitmap handBmp = handCards.toBitmap();
@@ -280,5 +302,9 @@ public class Duel implements Item {
 
     public Dice getDice() {
         return dice;
+    }
+
+    public Coin getCoin() {
+        return coin;
     }
 }

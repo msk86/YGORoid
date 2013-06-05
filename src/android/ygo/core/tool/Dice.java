@@ -17,7 +17,7 @@ public class Dice implements SelectableItem {
 
     static {
         for (int i = 0; i < DICE_BMPS.length; i++) {
-            DICE_BMPS[i] = dicePoint(i);
+            DICE_BMPS[i] = diceBmp(i);
         }
         DICE_FRAME = diceFrame();
         MASK = Utils.readBitmapScaleByHeight(R.raw.mask, DICE_WIDTH);
@@ -80,7 +80,7 @@ public class Dice implements SelectableItem {
         return bitmap;
     }
 
-    private static Bitmap dicePoint(int point) {
+    private static Bitmap diceBmp(int point) {
         Bitmap bitmap = Bitmap.createBitmap(DICE_WIDTH, DICE_WIDTH, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         canvas.drawColor(Color.TRANSPARENT);
