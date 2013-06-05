@@ -187,19 +187,19 @@ public class CardList implements SelectableItem {
         textPaint.setShadowLayer(1, 0, 0, Configuration.textShadowColor());
         textPaint.setUnderlineText(true);
 
-        canvas.translate(0, 5);
+        canvas.translate(0, Utils.cardHeight() - Utils.unitLength() / 4);
         CharSequence cs = name;
         StaticLayout layout = new StaticLayout(cs, textPaint, Utils.cardWidth(), Layout.Alignment.ALIGN_CENTER, 0, 0, false);
         layout.draw(canvas);
-        canvas.translate(0, -5);
+        canvas.translate(0, Utils.unitLength() / 4 - Utils.cardHeight());
 
         textPaint.setUnderlineText(false);
-        canvas.translate(0, Utils.cardHeight() - 20);
+        canvas.translate(0, Utils.cardHeight() - Utils.unitLength() / 8);
         cs = "" + cards.size();
         layout = new StaticLayout(cs, textPaint, Utils.cardWidth(), Layout.Alignment.ALIGN_CENTER, 0, 0, false);
         layout.draw(canvas);
 
-        canvas.translate(0, 20 - Utils.cardHeight());
+        canvas.translate(0, Utils.unitLength() / 8 - Utils.cardHeight());
 
         if (selected) {
             Bitmap highLight = highLight();
