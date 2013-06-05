@@ -32,7 +32,7 @@ public class Utils {
     private static void checkFolder(String path) {
         File folder = new File(path);
         if (!folder.exists()) {
-            folder.mkdir();
+            folder.mkdirs();
             folder.setExecutable(true);
             folder.setReadable(true);
             folder.setWritable(true);
