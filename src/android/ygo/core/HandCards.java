@@ -105,30 +105,8 @@ public class HandCards implements Item {
         }
     }
 
-    private Bitmap cardsBmp() {
-        int wPadding = cardPadding();
-        int hPadding = Utils.cardHeight() / 10;
-
-        int width = cardsWidth();
-        int height = Utils.cardHeight() + hPadding;
-
-        Bitmap handCardBmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(handCardBmp);
-        Paint paint = new Paint();
-
-        int posX = 0;
-        int posY = 0;
-        for (int i = 0; i < cards.size(); i++) {
-            posY = hPadding;
-            Card card = cards.get(i);
-            if (card.isSelect()) {
-                posY = 0;
-            }
-            Utils.drawBitmapOnCanvas(canvas, card.toBitmap(), paint, posX, posY);
-            posX += Utils.cardWidth() + wPadding;
-        }
-
-        return handCardBmp;
+    public List<Card> getCards() {
+        return cards;
     }
 
     @Override

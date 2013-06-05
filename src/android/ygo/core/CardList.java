@@ -88,6 +88,23 @@ public class CardList implements SelectableItem {
         return null;
     }
 
+    public void unshift(Card card) {
+        if (card == null) {
+            return;
+        }
+        if (card.getSubTypes().contains(CardSubType.TOKEN)) {
+            return;
+        }
+        if (open) {
+            card.open();
+        } else {
+            card.set();
+        }
+        card.positive();
+        card.unSelect();
+        cards.add(card);
+    }
+
     public void push(Card card) {
         push(card, false);
     }

@@ -166,12 +166,29 @@ public class ActionDispatcher {
                         break;
                 }
                 break;
-            case Const.MENU_GROUP_CARD :
+            case Const.MENU_GROUP_FIELD_CARD:
                 switch (menuClick.getMenuItem().getItemId()) {
                     case Const.MENU_CARD_BACK_TO_BOTTOM_OF_DECK :
+                        action = new ToDeckBottomAction(menuClick);
                         break;
                     case Const.MENU_CARD_CLOSE_REMOVE :
                         action = new CloseRemoveCardAction(menuClick);
+                        break;
+                }
+                break;
+            case Const.MENU_GROUP_HAND_CARD :
+                switch (menuClick.getMenuItem().getItemId()) {
+                    case Const.MENU_CARD_BACK_TO_BOTTOM_OF_DECK :
+                        action = new ToDeckBottomAction(menuClick);
+                        break;
+                    case Const.MENU_CARD_CLOSE_REMOVE :
+                        action = new CloseRemoveCardAction(menuClick);
+                        break;
+                    case Const.MENU_SHOW_HAND :
+                        action = new ShowHandCardAction(menuClick);
+                        break;
+                    case Const.MENU_HIDE_HAND :
+                        action = new HideHandCardAction(menuClick);
                         break;
                 }
                 break;
