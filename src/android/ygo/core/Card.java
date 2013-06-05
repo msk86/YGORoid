@@ -1,6 +1,5 @@
 package android.ygo.core;
 
-import android.ygo.R;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -8,6 +7,7 @@ import android.graphics.Paint;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
+import android.ygo.R;
 import android.ygo.utils.Configuration;
 import android.ygo.utils.Utils;
 
@@ -94,22 +94,24 @@ public class Card implements SelectableItem {
 
     private void initCardPic() {
         int height = Utils.cardHeight();
-        try {
-            cardPic = Utils.readBitmapScaleByHeight(Configuration.cardImgPath() + id + ".jpg", height);
-        } catch (Exception e) {
-            cardPic = Bitmap.createBitmap(Utils.cardWidth(), Utils.cardHeight(), Bitmap.Config.ARGB_8888);
-            Canvas canvas = new Canvas(cardPic);
-            Paint paint = new Paint();
-            Bitmap cardTypeBmp = cardTypeBmp();
-            Utils.drawBitmapOnCanvas(canvas, cardTypeBmp, paint, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_FIRST);
-            CharSequence cs = longName();
-            TextPaint textPaint = new TextPaint();
-            textPaint.setTextSize(Utils.unitLength() / 10);
-            textPaint.setColor(Configuration.fontColor());
-            textPaint.setShadowLayer(1, 0, 0, Configuration.textShadowColor());
-            StaticLayout layout = new StaticLayout(cs, textPaint, Utils.cardWidth(), Layout.Alignment.ALIGN_CENTER, 0, 0, true);
-            canvas.translate(0, Utils.cardHeight() / 20);
-            layout.draw(canvas);
+        if (cardPic == null) {
+            try {
+                cardPic = Utils.readBitmapScaleByHeight(Configuration.cardImgPath() + id + ".jpg", height);
+            } catch (Exception e) {
+                cardPic = Bitmap.createBitmap(Utils.cardWidth(), Utils.cardHeight(), Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(cardPic);
+                Paint paint = new Paint();
+                Bitmap cardTypeBmp = cardTypeBmp();
+                Utils.drawBitmapOnCanvas(canvas, cardTypeBmp, paint, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_FIRST);
+                CharSequence cs = longName();
+                TextPaint textPaint = new TextPaint();
+                textPaint.setTextSize(Utils.unitLength() / 10);
+                textPaint.setColor(Configuration.fontColor());
+                textPaint.setShadowLayer(1, 0, 0, Configuration.textShadowColor());
+                StaticLayout layout = new StaticLayout(cs, textPaint, Utils.cardWidth(), Layout.Alignment.ALIGN_CENTER, 0, 0, true);
+                canvas.translate(0, Utils.cardHeight() / 20);
+                layout.draw(canvas);
+            }
         }
         highLight = highLight();
     }

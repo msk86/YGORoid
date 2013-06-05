@@ -42,117 +42,19 @@ public class DuelDiskView extends SurfaceView implements Runnable {
         sensorManager.registerListener(new PlaySensorEventListener(this), sensor, SensorManager.SENSOR_DELAY_GAME);
         this.setLongClickable(true);
 
-        initDuelDiskTest();
+        initAbout();
     }
 
     public Duel getDuel() {
         return duel;
     }
 
-    private void initDuelDiskTest() {
+    private void initAbout() {
         DuelFields duelFields = duel.getDuelFields();
-
-        // set magic
-        Card setMagicCard = Utils.getDbHelper().loadById(35952884);
-        Field f = duelFields.getMagicField(2);
-        f.setItem(setMagicCard);
-        Card monsterRebornI = Utils.getDbHelper().loadById(83764718);
-        f = duelFields.getMagicField(1);
-        f.setItem(monsterRebornI);
-        Card monsterRebornT = Utils.getDbHelper().loadByName("死者苏生");
-        f = duelFields.getMagicField(3);
-        f.setItem(monsterRebornT);
-
-        // Monsters
-        // set
-        Card setCard = Utils.getDbHelper().loadById(35952884);
-        f = duelFields.getMonsterField(0);
-        f.setItem(setCard);
-        // atk monster
-        Card card = Utils.getDbHelper().loadById(35952884);
-        f = duelFields.getMonsterField(1);
-        f.setItem(card);
-        // xyz + 2m
-        Card material1 = Utils.getDbHelper().loadById(35952884);
-        Card material2 = Utils.getDbHelper().loadById(35952884);
-        Card xyzCard = Utils.getDbHelper().loadById(84013237);
-        OverRay overRay = new OverRay(material1);
-        overRay.overRay(material2);
-        overRay.overRay(xyzCard);
-        f = duelFields.getMonsterField(2);
-        f.setItem(overRay);
-        // xyz + 1m
-        Card material21 = Utils.getDbHelper().loadById(35952884);
-        Card material22 = Utils.getDbHelper().loadById(35952884);
-        Card xyzCard2 = Utils.getDbHelper().loadById(84013237);
-        OverRay overRay2 = new OverRay(material21);
-        overRay2.overRay(material22);
-        overRay2.overRay(xyzCard2);
-        f = duelFields.getMonsterField(3);
-        f.setItem(overRay2);
-        // 2m
-        Card material31 = Utils.getDbHelper().loadById(35952884);
-        Card material32 = Utils.getDbHelper().loadById(35952884);
-        OverRay overRay3 = new OverRay(material31);
-        overRay3.overRay(material32);
-        f = duelFields.getMonsterField(4);
-        f.setItem(overRay3);
-
-
-        List<Integer> ids = new ArrayList<Integer>();
-        ids.add(32864);
-        ids.add(11549357);
-        ids.add(62121);
-        ids.add(11548522);
-        ids.add(359563);
-        ids.add(12014404);
-        ids.add(1412158);
-        ids.add(11901678);
-        ids.add(2203790);
-        ids.add(9012916);
-        ids.add(3627449);
-        ids.add(10789972);
-        ids.add(42685062);
-        ids.add(69488544);
-        ids.add(213326);
-        ids.add(295517);
-        ids.add(242146);
-        ids.add(5318639);
-        ids.add(403847);
-        ids.add(1248895);
-        ids.add(27551);
-        ids.add(11593137);
-        ids.add(89631139);
-        ids.add(89631140);
-        ids.add(89631141);
-        ids.add(89631142);
-        ids.add(89631143);
-        ids.add(89631144);
-        List<Card> cards = Utils.getDbHelper().loadById(ids);
-        Deck deck = (Deck) duelFields.getDeckField().getItem();
-        deck.push(cards);
-
-        CardList graveyard = (CardList) duelFields.getGraveyardField().getItem();
-        Card usedCard = Utils.getDbHelper().loadById(123);
-        graveyard.push(usedCard);
-        usedCard = Utils.getDbHelper().loadByName("星尘龙");
-        graveyard.push(usedCard);
-        usedCard = Utils.getDbHelper().loadByName("忘我画派");
-        graveyard.push(usedCard);
-
-        CardList removed = (CardList) duelFields.getRemovedField().getItem();
-        Card removedCard = Utils.getDbHelper().loadById(84013237);
-        removed.push(removedCard);
-
-        List<Card> hands = new ArrayList<Card>();
-        hands.add(Utils.getDbHelper().loadById(84013237));
-        hands.add(Utils.getDbHelper().loadById(35952884));
-        hands.add(Utils.getDbHelper().loadById(35952884));
-        hands.add(Utils.getDbHelper().loadById(84013237));
-        hands.add(Utils.getDbHelper().loadById(35952884));
-        hands.add(Utils.getDbHelper().loadById(84013237));
-        hands.add(Utils.getDbHelper().loadById(84013237));
-        duel.getHandCards().add(hands);
+        Field f = duelFields.getMonsterField(2);
+        SpCard msk86 = SpCard.createDeveloper();
+        f.setItem(msk86);
+        duel.select(msk86, f);
     }
 
     @Override
