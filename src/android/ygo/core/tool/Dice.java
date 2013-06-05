@@ -1,9 +1,6 @@
 package android.ygo.core.tool;
 
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
+import android.graphics.*;
 import android.ygo.R;
 import android.ygo.core.SelectableItem;
 import android.ygo.utils.Configuration;
@@ -29,15 +26,17 @@ public class Dice implements SelectableItem {
     private int diceNumber;
 
     private int throwing;
+    private Random random;
 
     public Dice() {
+        random = new Random();
         diceNumber = 5;
         throwing = MAX_THROWING + 1;
     }
 
     public void throwDice() {
         throwing = 1;
-        diceNumber = new Random().nextInt(6);
+        diceNumber = random.nextInt(6);
     }
 
     @Override
@@ -57,10 +56,10 @@ public class Dice implements SelectableItem {
     }
 
     private void drawMask(Canvas canvas, Paint paint) {
-        if(throwing <= MAX_THROWING) {
-            int stepWidth = (int)Math.ceil(DICE_WIDTH * 2.0 / MAX_THROWING);
-            Utils.drawBitmapOnCanvas(canvas, MASK, paint, - DICE_WIDTH + stepWidth * throwing, Utils.DRAW_POSITION_FIRST);
-            throwing ++;
+        if (throwing <= MAX_THROWING) {
+            int stepWidth = (int) Math.ceil(DICE_WIDTH * 2.0 / MAX_THROWING);
+            Utils.drawBitmapOnCanvas(canvas, MASK, paint, -DICE_WIDTH + stepWidth * throwing, Utils.DRAW_POSITION_FIRST);
+            throwing++;
         }
     }
 
@@ -71,12 +70,12 @@ public class Dice implements SelectableItem {
 
         Paint paint = new Paint();
         paint.setColor(Configuration.fontColor());
-        paint.setShadowLayer(1, 0, 0, Color.BLACK);
         paint.setStrokeWidth(2);
-        canvas.drawLine(0, 0, DICE_WIDTH, 0, paint);
-        canvas.drawLine(DICE_WIDTH, 0, DICE_WIDTH, DICE_WIDTH, paint);
-        canvas.drawLine(DICE_WIDTH, DICE_WIDTH, 0, DICE_WIDTH, paint);
-        canvas.drawLine(0, DICE_WIDTH, 0, 0, paint);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setAntiAlias(true);
+        int padding = 2;
+        canvas.drawRoundRect(new RectF(padding, padding, DICE_WIDTH - padding, DICE_WIDTH - padding),
+                7, 7, paint);
 
         return bitmap;
     }
@@ -88,6 +87,7 @@ public class Dice implements SelectableItem {
 
         Paint paint = new Paint();
         paint.setColor(Configuration.fontColor());
+        paint.setAntiAlias(true);
 
         int radius = pointRadius(point);
 

@@ -90,9 +90,9 @@ public class Utils {
         return newBitmap;
     }
 
-    public static final int DRAW_POSITION_FIRST = -1;
-    public static final int DRAW_POSITION_CENTER = -2;
-    public static final int DRAW_POSITION_LAST = -3;
+    public static final int DRAW_POSITION_FIRST = -0x1000;
+    public static final int DRAW_POSITION_CENTER = -0x2000;
+    public static final int DRAW_POSITION_LAST = -0x3000;
 
     public static void drawBitmapOnCanvas(Canvas canvas, Bitmap bitmap, Paint paint, int positionX, int positionY) {
         int posX = 0;
