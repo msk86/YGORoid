@@ -23,4 +23,7 @@
             android:largeScreens="true"
             android:resizeable="true"
             android:anyDensity="true" />
-</manifest> 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.SET_ORIENTATION"></uses-permission>
+    <uses-permission android:name="android.permission.WAKE_LOCK"></uses-permission>
+</manifest>

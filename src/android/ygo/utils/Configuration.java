@@ -32,7 +32,7 @@ public class Configuration {
     }
 
     public static String baseDir() {
-        return device() + ".YGORoid/";
+        return device() + "YGORoid/";
     }
 
     public static String deckPath() {
@@ -40,6 +40,6 @@ public class Configuration {
     }
 
     public static String cardImgPath() {
-        return baseDir() + "img/";
+        return baseDir() + "pics/";
     }
 }

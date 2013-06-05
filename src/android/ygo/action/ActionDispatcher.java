@@ -164,6 +164,9 @@ public class ActionDispatcher {
                     case Const.MENU_MIRROR_DISPLAY :
                         action = new MirrorDisplayAction(menuClick);
                         break;
+                    case Const.MENU_EXIT :
+                        action = new ExitAction(menuClick);
+                        break;
                 }
                 break;
             case Const.MENU_GROUP_FIELD_CARD:

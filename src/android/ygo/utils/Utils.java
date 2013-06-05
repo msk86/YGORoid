@@ -1,12 +1,12 @@
 package android.ygo.utils;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.*;
 import android.util.DisplayMetrics;
 import android.ygo.core.Card;
 import android.ygo.sqlite.CardsDBHelper;
 
+import java.io.File;
 import java.util.List;
 import java.util.Random;
 
@@ -20,6 +20,23 @@ public class Utils {
         dm = new DisplayMetrics();
         dbHelper = new CardsDBHelper(activity, 1);
         activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+        checkFolders();
+    }
+
+    private static void checkFolders() {
+        checkFolder(Configuration.baseDir());
+        checkFolder(Configuration.deckPath());
+        checkFolder(Configuration.cardImgPath());
+    }
+
+    private static void checkFolder(String path) {
+        File folder = new File(path);
+        if(!folder.exists()) {
+            folder.mkdir();
+            folder.setExecutable(true);
+            folder.setReadable(true);
+            folder.setWritable(true);
+        }
     }
 
     public static Activity getContext() {
