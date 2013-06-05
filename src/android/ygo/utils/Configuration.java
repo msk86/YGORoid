@@ -12,6 +12,10 @@ public class Configuration {
         return Color.WHITE;
     }
 
+    public static int lineColor() {
+        return Color.WHITE;
+    }
+
     public static String device() {
         if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             return Environment.getExternalStorageDirectory().getAbsolutePath() + "/";

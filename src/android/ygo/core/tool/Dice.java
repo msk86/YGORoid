@@ -69,7 +69,7 @@ public class Dice implements SelectableItem {
         canvas.drawColor(Color.TRANSPARENT);
 
         Paint paint = new Paint();
-        paint.setColor(Configuration.fontColor());
+        paint.setColor(Configuration.lineColor());
         paint.setStrokeWidth(2);
         paint.setStyle(Paint.Style.STROKE);
         paint.setAntiAlias(true);
@@ -86,7 +86,7 @@ public class Dice implements SelectableItem {
         canvas.drawColor(Color.TRANSPARENT);
 
         Paint paint = new Paint();
-        paint.setColor(Configuration.fontColor());
+        paint.setColor(Configuration.lineColor());
         paint.setAntiAlias(true);
 
         int radius = pointRadius(point);

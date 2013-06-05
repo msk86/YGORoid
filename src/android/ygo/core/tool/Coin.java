@@ -62,7 +62,7 @@ public class Coin implements SelectableItem {
         canvas.drawColor(Color.TRANSPARENT);
 
         Paint paint = new Paint();
-        paint.setColor(Configuration.fontColor());
+        paint.setColor(Configuration.lineColor());
         paint.setStrokeWidth(COIN_RADIUS / 3);
         paint.setStyle(Paint.Style.STROKE);
         paint.setAntiAlias(true);
@@ -88,7 +88,7 @@ public class Coin implements SelectableItem {
         canvas.drawColor(Color.TRANSPARENT);
 
         Paint paint = new Paint();
-        paint.setColor(Configuration.fontColor());
+        paint.setColor(Configuration.lineColor());
         paint.setStrokeWidth(3);
         paint.setStyle(Paint.Style.STROKE);
         paint.setAntiAlias(true);
