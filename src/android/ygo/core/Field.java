@@ -49,6 +49,7 @@ public class Field implements Item {
         if (setItem != null) {
             Bitmap itemBmp = setItem.toBitmap();
             Utils.drawBitmapOnCanvas(canvas, itemBmp, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_CENTER);
+            itemBmp.recycle();
         }
 
         return bitmap;

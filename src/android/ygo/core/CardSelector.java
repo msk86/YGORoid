@@ -45,6 +45,7 @@ public class CardSelector implements Item {
 
         Bitmap cardsBmp = layout.toBitmap();
         Utils.drawBitmapOnCanvas(canvas, cardsBmp, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_CENTER);
+        cardsBmp.recycle();
 
         return bmp;
     }

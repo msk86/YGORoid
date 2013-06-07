@@ -263,6 +263,7 @@ public class Duel implements Item {
 
         Bitmap lpBmp = lifePoint.toBitmap();
         Utils.drawBitmapOnCanvas(canvas, lpBmp, paint, Utils.unitLength(), (Utils.unitLength() - lpBmp.getHeight()) / 2);
+        lpBmp.recycle();
 
         Bitmap diceBmp = dice.toBitmap();
         Utils.drawBitmapOnCanvas(canvas, diceBmp, paint, (int) (Utils.unitLength() * 2.4), 0);
@@ -289,6 +290,7 @@ public class Duel implements Item {
         Bitmap winBmp = window.toBitmap();
         int winPosY = Utils.screenHeight() - winBmp.getHeight();
         Utils.drawBitmapOnCanvas(canvas, winBmp, paint, Utils.DRAW_POSITION_CENTER, winPosY);
+        winBmp.recycle();
         return duelBmp;
     }
 

@@ -51,8 +51,9 @@ public class GridLayout {
             for (int c = 0; c < col; c++) {
                 int index = r * col + c;
                 if (index < cards.size()) {
-                    Card card = cards.get(index);
-                    Utils.drawBitmapOnCanvas(canvas, card.toBitmap(), paint, posX, posY);
+                    Bitmap cardBmp = cards.get(index).toBitmap();
+                    Utils.drawBitmapOnCanvas(canvas, cardBmp, paint, posX, posY);
+                    cardBmp.recycle();
                     posX += Utils.cardWidth() + cardPaddingW;
                 }
             }

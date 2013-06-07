@@ -62,22 +62,23 @@ public class OverRay implements SelectableItem {
         }
     }
 
-    private Bitmap materialsBmp() {
-        int materialOffset = overRayUnits.cards.size() - 1;
+    private Bitmap unitsBmp() {
+        int unitOffset = overRayUnits.cards.size() - 1;
         int overRayOffset = Utils.cardWidth() / 15;
-        int materialWidth = Utils.cardWidth() + materialOffset * overRayOffset;
+        int unitWidth = Utils.cardWidth() + unitOffset * overRayOffset;
         int height = Utils.cardHeight();
-        Bitmap materialsBmp = Bitmap.createBitmap(materialWidth, height, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(materialsBmp);
+        Bitmap unitsBmp = Bitmap.createBitmap(unitWidth, height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(unitsBmp);
         canvas.drawColor(Color.TRANSPARENT);
         Paint paint = new Paint();
-        canvas.translate(materialOffset * overRayOffset, 0);
+        canvas.translate(unitOffset * overRayOffset, 0);
         for (int i = overRayUnits.getCards().size() - 1; i >= 0; i--) {
-            Card card = overRayUnits.getCards().get(i);
-            Utils.drawBitmapOnCanvas(canvas, card.toBitmap(), paint, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_CENTER);
+            Bitmap bitmap = overRayUnits.getCards().get(i).toBitmap();
+            Utils.drawBitmapOnCanvas(canvas, bitmap, paint, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_CENTER);
+            bitmap.recycle();
             canvas.translate(-overRayOffset, 0);
         }
-        return materialsBmp;
+        return unitsBmp;
     }
 
     @Override
@@ -89,17 +90,19 @@ public class OverRay implements SelectableItem {
         Canvas canvas = new Canvas(overRayBmp);
         canvas.drawColor(Color.TRANSPARENT);
         Paint paint = new Paint();
-        Bitmap materialsBmp = materialsBmp();
+        Bitmap unitsBmp = unitsBmp();
 
-        int materialX = (width - Utils.cardWidth()) / 2;
+        int unitX = (width - Utils.cardWidth()) / 2;
         if (topCard != null) {
-            materialX += overRayOffset;
+            unitX += overRayOffset;
         }
-        Utils.drawBitmapOnCanvas(canvas, materialsBmp, paint, materialX, Utils.DRAW_POSITION_CENTER);
-        materialsBmp.recycle();
+        Utils.drawBitmapOnCanvas(canvas, unitsBmp, paint, unitX, Utils.DRAW_POSITION_CENTER);
+        unitsBmp.recycle();
 
         if (topCard != null) {
-            Utils.drawBitmapOnCanvas(canvas, topCard.toBitmap(), paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_CENTER);
+            Bitmap topCardBmp = topCard.toBitmap();
+            Utils.drawBitmapOnCanvas(canvas, topCardBmp, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_CENTER);
+            topCardBmp.recycle();
         }
         return overRayBmp;
     }

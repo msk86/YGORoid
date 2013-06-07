@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CardList implements SelectableItem {
+    private static final Bitmap HIGH_LIGHT = highLight();
+
     private boolean selected = false;
 
     String name;
@@ -171,7 +173,7 @@ public class CardList implements SelectableItem {
         return cards;
     }
 
-    private Bitmap highLight() {
+    private static Bitmap highLight() {
         int width = Utils.cardWidth();
         int height = Utils.cardHeight();
         Bitmap highLightBmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
@@ -219,9 +221,7 @@ public class CardList implements SelectableItem {
         canvas.translate(0, Utils.unitLength() / 8 - Utils.cardHeight());
 
         if (selected) {
-            Bitmap highLight = highLight();
-            Utils.drawBitmapOnCanvas(canvas, highLight, null, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_FIRST);
-            highLight.recycle();
+            Utils.drawBitmapOnCanvas(canvas, HIGH_LIGHT, null, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_FIRST);
         }
 
         return deckBmp;

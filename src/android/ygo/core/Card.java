@@ -15,6 +15,7 @@ import java.util.List;
 
 public class Card implements SelectableItem {
     public static final Bitmap CARD_PROTECTOR = Utils.readBitmapScaleByHeight(R.raw.cover, Utils.cardHeight());
+    public static final Bitmap HIGH_LIGHT = highLight();
 
     private boolean selected = false;
 
@@ -33,7 +34,6 @@ public class Card implements SelectableItem {
     boolean positive = true;
 
     Bitmap cardPic;
-    Bitmap highLight;
 
     public Card(String id, String name, String desc) {
         this(id, name, desc, 0, 0, 0, 0, 0, 0);
@@ -54,10 +54,6 @@ public class Card implements SelectableItem {
         this.positive = true;
         this.set = false;
         initCardPic();
-    }
-
-    public CardType getType() {
-        return type;
     }
 
     public List<CardSubType> getSubTypes() {
@@ -113,7 +109,6 @@ public class Card implements SelectableItem {
                 layout.draw(canvas);
             }
         }
-        highLight = highLight();
     }
 
     private Bitmap cardTypeBmp() {
@@ -168,7 +163,7 @@ public class Card implements SelectableItem {
         }
 
         if (selected) {
-            Utils.drawBitmapOnCanvas(canvas, highLight, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_FIRST);
+            Utils.drawBitmapOnCanvas(canvas, HIGH_LIGHT, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_FIRST);
         }
 
         if (!positive) {
@@ -177,7 +172,7 @@ public class Card implements SelectableItem {
         return cardBmp;
     }
 
-    private Bitmap highLight() {
+    private static Bitmap highLight() {
         int height = Utils.cardHeight();
         int width = Utils.cardWidth();
         Bitmap highLightBmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);

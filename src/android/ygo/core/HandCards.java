@@ -97,14 +97,6 @@ public class HandCards implements Item {
         set = false;
     }
 
-    public void flipAll() {
-        if (set) {
-            openAll();
-        } else {
-            setAll();
-        }
-    }
-
     public List<Card> getCards() {
         return cards;
     }

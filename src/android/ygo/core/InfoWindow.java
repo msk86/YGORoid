@@ -9,6 +9,8 @@ import android.ygo.utils.Utils;
 
 public class InfoWindow implements Item {
 
+    private static final Bitmap BACKGROUND = background();
+
     SelectableItem infoItem;
 
     public void setInfo(SelectableItem item) {
@@ -37,13 +39,12 @@ public class InfoWindow implements Item {
         this.infoItem = null;
     }
 
-    @Override
-    public Bitmap toBitmap() {
+    private static Bitmap background() {
         int width = Utils.totalWidth();
         int height = Utils.cardHeight() / 6 + 3;
-        Bitmap winBmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Bitmap background = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 
-        Canvas canvas = new Canvas(winBmp);
+        Canvas canvas = new Canvas(background);
         canvas.drawColor(Color.BLACK);
 
         Paint paint = new Paint();
@@ -52,7 +53,19 @@ public class InfoWindow implements Item {
         canvas.drawLine(0, 0, width, 0, paint);
         canvas.drawLine(0, 0, 0, height, paint);
         canvas.drawLine(width, 0, width, height, paint);
+        return background;
+    }
 
+    @Override
+    public Bitmap toBitmap() {
+        int width = Utils.totalWidth();
+        int height = Utils.cardHeight() / 6 + 3;
+        Bitmap winBmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+
+        Canvas canvas = new Canvas(winBmp);
+        Paint paint = new Paint();
+
+        Utils.drawBitmapOnCanvas(canvas, BACKGROUND, paint, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_FIRST);
 
         paint.setColor(Configuration.fontColor());
         paint.setStrokeWidth(1);
