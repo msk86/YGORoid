@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.ygo.core.Card;
 import android.ygo.utils.Configuration;
+import android.ygo.utils.Utils;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -173,7 +174,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         List<Card> mainCardList = new ArrayList<Card>();
         List<Card> exCardList = new ArrayList<Card>();
         try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(deckFile), "UTF-8"));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(deckFile), Utils.codeString(deckFile)));
             String line = "";
             int cardIn = IN_MAIN;
             do {
@@ -195,7 +196,9 @@ public class CardsDBHelper extends SQLiteOpenHelper {
                         int id = Integer.parseInt(line);
                         card = loadById(id);
                     } catch (Exception e) {
-                        card = loadByName(line);
+                        String cardName = line.replaceAll("\\[", "").replaceAll("\\]", "");
+                        cardName = cardName.substring(0, cardName.indexOf("#"));
+                        card = loadByName(cardName);
                     }
                     switch (cardIn) {
                         case IN_MAIN:
