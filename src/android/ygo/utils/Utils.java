@@ -9,7 +9,6 @@ import android.ygo.sqlite.CardsDBHelper;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.List;
 import java.util.Random;
 
@@ -170,15 +169,15 @@ public class Utils {
         return 2;
     }
 
-    public static String codeString(File file) throws Exception{
+    public static String codeString(File file) throws Exception {
         BufferedInputStream bin = new BufferedInputStream(
                 new FileInputStream(file));
         int p = (bin.read() << 8) + bin.read();
         String code = null;
 
         switch (p) {
-            case 0xefbb:
-                code = "UTF-8";
+            case 0x5bb3:
+                code = "GBK";
                 break;
             case 0xfffe:
                 code = "Unicode";
@@ -187,8 +186,9 @@ public class Utils {
                 code = "UTF-16BE";
                 break;
             default:
-                code = "GBK";
+                code = "UTF-8";
         }
+        bin.close();
 
         return code;
     }

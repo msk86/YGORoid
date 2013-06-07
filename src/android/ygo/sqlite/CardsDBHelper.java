@@ -198,7 +198,9 @@ public class CardsDBHelper extends SQLiteOpenHelper {
                         card = loadById(id);
                     } catch (Exception e) {
                         String cardName = line.replaceAll("\\[", "").replaceAll("\\]", "");
-                        cardName = cardName.substring(0, cardName.indexOf("#"));
+                        if(cardName.indexOf("#") > 0) {
+                            cardName = cardName.substring(0, cardName.indexOf("#"));
+                        }
                         card = loadByName(cardName);
                     }
                     switch (cardIn) {
@@ -212,8 +214,10 @@ public class CardsDBHelper extends SQLiteOpenHelper {
                 }
 
             } while (line != null);
+            reader.close();
         } catch (Exception e) {
         }
+
         List<List<Card>> cardsLists = new ArrayList<List<Card>>();
         cardsLists.add(mainCardList);
         cardsLists.add(exCardList);
