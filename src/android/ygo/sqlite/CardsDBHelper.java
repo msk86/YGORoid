@@ -182,12 +182,13 @@ public class CardsDBHelper extends SQLiteOpenHelper {
                 if (line.length() == 0) {
                     continue;
                 }
-                if (line.startsWith("#") || line.startsWith("!")) {
-                    if (line.startsWith("#main")) {
+                if (line.startsWith("#") || line.startsWith("!")
+                        || line.startsWith("=") || line.startsWith("$")) {
+                    if (isMain(line)) {
                         cardIn = IN_MAIN;
-                    } else if (line.startsWith("#ex")) {
+                    } else if (isEx(line)) {
                         cardIn = IN_EX;
-                    } else if (line.startsWith("!side")) {
+                    } else if (isSide(line)) {
                         cardIn = IN_SIDE;
                     }
                 } else {
@@ -217,5 +218,17 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         cardsLists.add(mainCardList);
         cardsLists.add(exCardList);
         return cardsLists;
+    }
+
+    private boolean isSide(String line) {
+        return line.startsWith("!side") || line.startsWith("##");
+    }
+
+    private boolean isEx(String line) {
+        return line.startsWith("#ex") || line.startsWith("==");
+    }
+
+    private boolean isMain(String line) {
+        return line.startsWith("#main");
     }
 }
