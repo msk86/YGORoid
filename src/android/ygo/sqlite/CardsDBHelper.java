@@ -46,6 +46,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         } else {
             card = new Card(idStr, "ID" + idStr, "卡片ID不存在！您可能需要更新数据库文件！", 0, 0, 0, 0, 0, 0);
         }
+        c.close();
         return card;
     }
 
@@ -72,6 +73,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
             c.moveToFirst();
             card = createCard(c);
         }
+        c.close();
         return card;
     }
 
@@ -94,6 +96,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
                 card = createCard(c);
             }
         }
+        c.close();
         return card;
     }
 
@@ -113,6 +116,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
             c.moveToFirst();
             card = createCard(c);
         }
+        c.close();
         return card;
     }
 
@@ -137,26 +141,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         } catch (Exception e) {
             card = new Card("0", cardName, "数据库文件不存在！", 0, 0, 0, 0, 0, 0);
         }
-
         return card;
-    }
-
-    public List<Card> loadById(List<Integer> cardIDs) {
-        List<Card> cards = new ArrayList<Card>();
-        for (int id : cardIDs) {
-            Card card = loadById(id);
-            cards.add(card);
-        }
-        return cards;
-    }
-
-    public List<Card> loadByName(List<String> cardNames) {
-        List<Card> cards = new ArrayList<Card>();
-        for (String name : cardNames) {
-            Card card = loadByName(name);
-            cards.add(card);
-        }
-        return cards;
     }
 
     private Card createCard(Cursor c) {
