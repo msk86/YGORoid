@@ -3,6 +3,7 @@ package android.ygo.views;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.util.AttributeSet;
@@ -14,11 +15,15 @@ import android.ygo.core.Duel;
 import android.ygo.core.DuelFields;
 import android.ygo.core.Field;
 import android.ygo.core.SpCard;
+import android.ygo.utils.Configuration;
+import android.ygo.utils.FPSMaker;
+import android.ygo.utils.Utils;
 
 public class DuelDiskView extends SurfaceView implements Runnable {
     private Thread renderThread;
     private SurfaceHolder holder;
     private boolean running = false;
+    private FPSMaker fpsMaker;
 
     private PlayGestureDetector mGestureDetector;
     private SensorManager sensorManager;
@@ -36,6 +41,8 @@ public class DuelDiskView extends SurfaceView implements Runnable {
         Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         sensorManager.registerListener(new PlaySensorEventListener(this), sensor, SensorManager.SENSOR_DELAY_GAME);
         this.setLongClickable(true);
+
+        fpsMaker = new FPSMaker();
 
         initAbout();
     }
@@ -60,6 +67,12 @@ public class DuelDiskView extends SurfaceView implements Runnable {
     private void drawDuelDisk(Canvas canvas) {
         drawBackground(canvas);
         duel.draw(canvas, 0, 0);
+        if(Configuration.showFPS()) {
+            Paint paint = new Paint();
+            paint.setColor(Configuration.fontColor());
+            paint.setTextSize(20);
+            canvas.drawText("FPS: "+fpsMaker.getFPS(), Utils.unitLength(), 20, paint);
+        }
     }
 
     private void drawBackground(Canvas canvas) {
@@ -69,13 +82,19 @@ public class DuelDiskView extends SurfaceView implements Runnable {
 
     @Override
     public void run() {
+        fpsMaker.setTime(System.nanoTime());
         while (running) {
+            fpsMaker.setLimitTime(System.currentTimeMillis());
+
             if (!holder.getSurface().isValid()) {
                 continue;
             }
             Canvas canvas = holder.lockCanvas();
             drawDuelDisk(canvas);
             holder.unlockCanvasAndPost(canvas);
+
+            fpsMaker.limitFPS();
+            fpsMaker.makeFPS();
         }
     }
 

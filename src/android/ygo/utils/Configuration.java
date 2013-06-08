@@ -42,4 +42,8 @@ public class Configuration {
     public static String cardImgPath() {
         return baseDir() + "pics/";
     }
+
+    public static boolean showFPS() {
+        return false;
+    }
 }
