@@ -8,7 +8,7 @@ import android.ygo.core.Drawable;
 import android.ygo.utils.Utils;
 
 public class Mask implements Drawable {
-    private static int MAX_THROWING = 8;
+    private static int MAX_THROWING = 30;
     private static Bitmap[] MASKS;
     private int throwing;
 

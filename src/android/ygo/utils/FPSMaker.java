@@ -84,41 +84,6 @@ public class FPSMaker
         }
     }
 
-    public long getFrameCount()
-    {
-        return frameCount;
-    }
-
-    public void setFrameCount(long frameCount)
-    {
-        this.frameCount = frameCount;
-    }
-
-    public long getInterval()
-    {
-        return interval;
-    }
-
-    public void setInterval(long interval)
-    {
-        this.interval = interval;
-    }
-
-    public double getNowFPS()
-    {
-        return nowFPS;
-    }
-
-    public void setNowFPS(double nowFPS)
-    {
-        this.nowFPS = nowFPS;
-    }
-
-    public long getTime()
-    {
-        return time;
-    }
-
     public void setTime(long time)
     {
         this.time = time;
