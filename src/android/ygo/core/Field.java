@@ -1,19 +1,12 @@
 package android.ygo.core;
 
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.ygo.utils.Configuration;
 import android.ygo.utils.Utils;
 
-public class Field implements Item {
-    private static Bitmap FRAME;
-
-    static {
-        FRAME = fieldFrameBmp();
-    }
-
+public class Field implements Item, Drawable {
     private FieldType type;
     private SelectableItem setItem;
 
@@ -39,34 +32,37 @@ public class Field implements Item {
         return item;
     }
 
-    public Bitmap toBitmap() {
-        int width = Utils.unitLength();
-        Bitmap bitmap = Bitmap.createBitmap(width, width, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        canvas.drawColor(Color.TRANSPARENT);
-        Paint paint = new Paint();
-        Utils.drawBitmapOnCanvas(canvas, FRAME, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_CENTER);
+    @Override
+    public void draw(Canvas canvas, int x, int y) {
+        Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
+        drawFrame(canvas, x, y);
         if (setItem != null) {
-            Bitmap itemBmp = setItem.toBitmap();
-            Utils.drawBitmapOnCanvas(canvas, itemBmp, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_CENTER);
-            itemBmp.recycle();
+            Drawable drawable = (Drawable) setItem;
+            helper.drawDrawable(canvas, drawable, helper.center(width(), drawable.width()), padding());
         }
-
-        return bitmap;
     }
 
-    private static Bitmap fieldFrameBmp() {
-        int width = Utils.unitLength();
-        int padding = 2;
-        Bitmap bitmap = Bitmap.createBitmap(width, width, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        canvas.drawColor(Color.TRANSPARENT);
+    private void drawFrame(Canvas canvas, int x, int y) {
         Paint paint = new Paint();
         paint.setColor(Configuration.lineColor());
         paint.setStrokeWidth(2);
         paint.setStyle(Paint.Style.STROKE);
-        canvas.drawRect(padding, padding, width - padding, width - padding, paint);
+        Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
+        helper.drawRect(canvas, new Rect(padding(), padding(), width() - padding(), height() - padding()),
+                paint);
+    }
 
-        return bitmap;
+    @Override
+    public int width() {
+        return Utils.unitLength();
+    }
+
+    @Override
+    public int height() {
+        return Utils.unitLength();
+    }
+
+    public int padding() {
+        return 2;
     }
 }

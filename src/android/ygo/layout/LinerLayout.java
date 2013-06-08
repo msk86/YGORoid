@@ -1,19 +1,17 @@
 package android.ygo.layout;
 
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.ygo.core.Card;
+import android.ygo.core.Drawable;
 import android.ygo.utils.Utils;
 
 import java.util.List;
 
-public class LinerLayout {
+public class LinerLayout implements Drawable {
     List<Card> cards;
 
     int maxWidth;
     int cardPadding;
-    int realWidth;
 
     public LinerLayout(List<Card> cards, int maxWidth) {
         this.maxWidth = maxWidth;
@@ -23,42 +21,46 @@ public class LinerLayout {
     public void fixPosition() {
         int maxPadding = Utils.cardWidth() / 10;
         if (cards.size() > 1) {
-            cardPadding = (maxWidth - Utils.cardWidth()) / (cards.size() - 1) - Utils.cardWidth();
+            cardPadding = (maxWidth - Utils.cardWidth() + 1) / (cards.size() - 1) - Utils.cardWidth();
             cardPadding = cardPadding < maxPadding ? cardPadding : maxPadding;
         } else if (cards.size() == 1) {
             cardPadding = maxPadding;
         } else {
             cardPadding = 0;
         }
-
-        realWidth = cards.size() * Utils.cardWidth() + (cards.size() - 1) * cardPadding + 1;
     }
 
-    public Bitmap toBitmap() {
+    @Override
+    public void draw(Canvas canvas, int x, int y) {
         fixPosition();
-        Bitmap bmp = Bitmap.createBitmap(realWidth, Utils.cardHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bmp);
-        Paint paint = new Paint();
 
-        int posX = 0;
+        int posX = - (Utils.cardHeight() - Utils.cardWidth()) / 2 + 1;
         int posY;
+        Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
         for (int i = 0; i < cards.size(); i++) {
             Card card = cards.get(i);
             posY = Utils.cardHeight() / 7;
             if (card.isSelect()) {
                 posY = 0;
             }
-            Bitmap cardBmp = card.toBitmap();
-            Utils.drawBitmapOnCanvas(canvas, cardBmp, paint, posX, posY);
-            cardBmp.recycle();
+            helper.drawDrawable(canvas, card, posX, posY);
             posX += Utils.cardWidth() + cardPadding;
         }
-        return bmp;
+    }
+
+    @Override
+    public int width() {
+        return cards.size() * Utils.cardWidth() + (cards.size() - 1) * cardPadding + 1;
+    }
+
+    @Override
+    public int height() {
+        return Utils.cardHeight();
     }
 
     public Card cardAt(int x, int y) {
         fixPosition();
-        if (x < 0 || x >= realWidth) {
+        if (x < 0 || x >= width()) {
             return null;
         }
 

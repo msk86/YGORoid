@@ -1,9 +1,9 @@
 package android.ygo.core;
 
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
@@ -13,9 +13,7 @@ import android.ygo.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CardList implements SelectableItem {
-    private static final Bitmap HIGH_LIGHT = highLight();
-
+public class CardList implements SelectableItem, Drawable {
     private boolean selected = false;
 
     String name;
@@ -90,23 +88,6 @@ public class CardList implements SelectableItem {
         return null;
     }
 
-    public void unshift(Card card) {
-        if (card == null) {
-            return;
-        }
-        if (card.getSubTypes().contains(CardSubType.TOKEN)) {
-            return;
-        }
-        if (open) {
-            card.open();
-        } else {
-            card.set();
-        }
-        card.positive();
-        card.unSelect();
-        cards.add(card);
-    }
-
     public void push(Card card) {
         push(card, false);
     }
@@ -173,32 +154,23 @@ public class CardList implements SelectableItem {
         return cards;
     }
 
-    private static Bitmap highLight() {
-        int width = Utils.cardWidth();
-        int height = Utils.cardHeight();
-        Bitmap highLightBmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+    @Override
+    public void draw(Canvas canvas, int x, int y) {
+        Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
+        if (cards.size() > 0) {
+            Card card = cards.get(0);
+            helper.drawDrawable(canvas, card, helper.center(width(), card.width()), 0);
+        }
 
-        Canvas canvas = new Canvas(highLightBmp);
-        Paint paint = new Paint();
-        canvas.drawColor(Color.TRANSPARENT);
-        paint.setColor(Configuration.highlightColor());
-        paint.setStrokeWidth(4);
-        canvas.drawLine(0, 0, width, 0, paint);
-        canvas.drawLine(width, 0, width, height, paint);
-        canvas.drawLine(width, height, 0, height, paint);
-        canvas.drawLine(0, height, 0, 0, paint);
-        return highLightBmp;
+        drawText(canvas, x, y);
+
+        if (selected) {
+            drawHighLight(canvas, x, y);
+        }
     }
 
-    @Override
-    public Bitmap toBitmap() {
-        Bitmap deckBmp;
-        if (cards.size() > 0) {
-            deckBmp = cards.get(0).toBitmap();
-        } else {
-            deckBmp = Bitmap.createBitmap(Utils.cardWidth(), Utils.cardHeight(), Bitmap.Config.ARGB_8888);
-        }
-        Canvas canvas = new Canvas(deckBmp);
+    private void drawText(Canvas canvas, int x, int y) {
+        Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
 
         TextPaint textPaint = new TextPaint();
         textPaint.setTextSize(Utils.unitLength() / 10);
@@ -206,25 +178,34 @@ public class CardList implements SelectableItem {
         textPaint.setShadowLayer(1, 0, 0, Configuration.textShadowColor());
         textPaint.setUnderlineText(true);
 
-        canvas.translate(0, Utils.cardHeight() - Utils.unitLength() / 4);
-        CharSequence cs = name;
-        StaticLayout layout = new StaticLayout(cs, textPaint, Utils.cardWidth(), Layout.Alignment.ALIGN_CENTER, 0, 0, false);
-        layout.draw(canvas);
-        canvas.translate(0, Utils.unitLength() / 4 - Utils.cardHeight());
+        StaticLayout layout = new StaticLayout(name, textPaint, Utils.cardWidth(), Layout.Alignment.ALIGN_CENTER, 0, 0, false);
+        helper.drawLayout(canvas, layout, 0, Utils.cardHeight() * 3 / 4);
 
+        layout = new StaticLayout(String.valueOf(cards.size()), textPaint, Utils.cardWidth(), Layout.Alignment.ALIGN_CENTER, 0, 0, false);
         textPaint.setUnderlineText(false);
-        canvas.translate(0, Utils.cardHeight() - Utils.unitLength() / 8);
-        cs = "" + cards.size();
-        layout = new StaticLayout(cs, textPaint, Utils.cardWidth(), Layout.Alignment.ALIGN_CENTER, 0, 0, false);
-        layout.draw(canvas);
+        helper.drawLayout(canvas, layout, 0, Utils.cardHeight() * 7 / 8);
+    }
 
-        canvas.translate(0, Utils.unitLength() / 8 - Utils.cardHeight());
+    private void drawHighLight(Canvas canvas, int x, int y) {
+        Paint paint = new Paint();
+        canvas.drawColor(Color.TRANSPARENT);
+        paint.setColor(Configuration.highlightColor());
+        paint.setStrokeWidth(2);
+        paint.setStyle(Paint.Style.STROKE);
 
-        if (selected) {
-            Utils.drawBitmapOnCanvas(canvas, HIGH_LIGHT, null, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_FIRST);
-        }
+        Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
 
-        return deckBmp;
+        helper.drawRect(canvas, new Rect(0, 0, width(), height()), paint);
+    }
+
+    @Override
+    public int width() {
+        return Utils.cardWidth();
+    }
+
+    @Override
+    public int height() {
+        return Utils.cardHeight();
     }
 
     @Override

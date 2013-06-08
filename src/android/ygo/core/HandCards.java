@@ -1,15 +1,13 @@
 package android.ygo.core;
 
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.ygo.layout.LinerLayout;
 import android.ygo.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HandCards implements Item {
+public class HandCards implements Item, Drawable {
 
     private List<Card> cards;
     private boolean set;
@@ -102,19 +100,22 @@ public class HandCards implements Item {
     }
 
     @Override
-    public Bitmap toBitmap() {
-        int width = Utils.totalWidth();
-        int hPadding = Utils.cardHeight() / 10;
-        int height = Utils.cardHeight() + hPadding;
+    public void draw(Canvas canvas, int x, int y) {
+        Utils.DrawHelper drawHelper = new Utils.DrawHelper(x, y);
+        drawHelper.drawDrawable(canvas, layout, drawHelper.center(width(), layout.width()), 0);
+    }
 
-        Bitmap handCardBmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(handCardBmp);
-        Paint paint = new Paint();
+    @Override
+    public int width() {
+        return Utils.totalWidth();
+    }
 
-        Bitmap cardsBmp = layout.toBitmap();
-        Utils.drawBitmapOnCanvas(canvas, cardsBmp, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_FIRST);
-        cardsBmp.recycle();
+    @Override
+    public int height() {
+        return Utils.cardHeight() + hPadding();
+    }
 
-        return handCardBmp;
+    private int hPadding() {
+        return Utils.cardHeight() / 10;
     }
 }

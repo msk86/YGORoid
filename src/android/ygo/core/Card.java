@@ -1,9 +1,6 @@
 package android.ygo.core;
 
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
+import android.graphics.*;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
@@ -13,9 +10,8 @@ import android.ygo.utils.Utils;
 
 import java.util.List;
 
-public class Card implements SelectableItem {
+public class Card implements SelectableItem, Drawable {
     public static final Bitmap CARD_PROTECTOR = Utils.readBitmapScaleByHeight(R.raw.cover, Utils.cardHeight());
-    public static final Bitmap HIGH_LIGHT = highLight();
 
     private boolean selected = false;
 
@@ -104,6 +100,7 @@ public class Card implements SelectableItem {
                 textPaint.setTextSize(Utils.unitLength() / 10);
                 textPaint.setColor(Configuration.fontColor());
                 textPaint.setShadowLayer(1, 0, 0, Configuration.textShadowColor());
+                textPaint.setAntiAlias(true);
                 StaticLayout layout = new StaticLayout(cs, textPaint, Utils.cardWidth(), Layout.Alignment.ALIGN_CENTER, 0, 0, true);
                 canvas.translate(0, Utils.cardHeight() / 20);
                 layout.draw(canvas);
@@ -150,43 +147,52 @@ public class Card implements SelectableItem {
     }
 
     @Override
-    public Bitmap toBitmap() {
-        int height = Utils.cardHeight();
-        int width = Utils.cardWidth();
-        Bitmap cardBmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(cardBmp);
-        Paint paint = new Paint();
-        if (set) {
-            Utils.drawBitmapOnCanvas(canvas, CARD_PROTECTOR, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_FIRST);
-        } else {
-            Utils.drawBitmapOnCanvas(canvas, cardPic, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_FIRST);
-        }
+    public void draw(Canvas canvas, int x, int y) {
+        Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
 
-        if (selected) {
-            Utils.drawBitmapOnCanvas(canvas, HIGH_LIGHT, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_FIRST);
+        Bitmap cardBmp = cardPic;
+        if(set) {
+            cardBmp = CARD_PROTECTOR;
         }
-
-        if (!positive) {
+        if(!positive) {
             cardBmp = Utils.rotate(cardBmp, 90);
         }
-        return cardBmp;
+
+        helper.drawBitmap(canvas, cardBmp, helper.center(width(), cardBmp.getWidth()),
+                helper.center(height(), cardBmp.getHeight()), new Paint());
+
+        if(selected) {
+            drawHighLight(canvas, x, y);
+        }
     }
 
-    private static Bitmap highLight() {
-        int height = Utils.cardHeight();
-        int width = Utils.cardWidth();
-        Bitmap highLightBmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-
-        Canvas canvas = new Canvas(highLightBmp);
+    private void drawHighLight(Canvas canvas, int x, int y) {
+        Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
         Paint paint = new Paint();
-        canvas.drawColor(Color.TRANSPARENT);
         paint.setColor(Configuration.highlightColor());
-        paint.setStrokeWidth(4);
-        canvas.drawLine(0, 0, width, 0, paint);
-        canvas.drawLine(width, 0, width, height, paint);
-        canvas.drawLine(width, height, 0, height, paint);
-        canvas.drawLine(0, height, 0, 0, paint);
-        return highLightBmp;
+        paint.setStrokeWidth(2);
+        paint.setStyle(Paint.Style.STROKE);
+
+        Rect highLightRect;
+        if (positive) {
+            highLightRect = new Rect(0, 0, Utils.cardWidth(), Utils.cardHeight());
+            highLightRect.offset(helper.center(width(), Utils.cardWidth()), 0);
+        } else {
+            highLightRect = new Rect(0, 0, Utils.cardHeight(), Utils.cardWidth());
+            highLightRect.offset(0, helper.center(width(), Utils.cardWidth()));
+        }
+        helper.drawRect(canvas, highLightRect, paint);
+    }
+
+
+    @Override
+    public int width() {
+        return Utils.cardHeight();
+    }
+
+    @Override
+    public int height() {
+        return Utils.cardHeight();
     }
 
     @Override

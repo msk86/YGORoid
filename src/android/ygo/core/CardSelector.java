@@ -1,13 +1,13 @@
 package android.ygo.core;
 
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.ygo.layout.GridLayout;
 import android.ygo.utils.Configuration;
 import android.ygo.utils.Utils;
 
-public class CardSelector implements Item {
+public class CardSelector implements Item, Drawable {
     SelectableItem sourceItem;
     CardList cardList;
     GridLayout layout;
@@ -35,27 +35,28 @@ public class CardSelector implements Item {
     }
 
     @Override
-    public Bitmap toBitmap() {
-        Bitmap background = background();
+    public void draw(Canvas canvas, int x, int y) {
+        drawBackground(canvas, x, y);
 
-        Bitmap bmp = Bitmap.createBitmap(background.getWidth(), background.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bmp);
-        Paint paint = new Paint();
-        Utils.drawBitmapOnCanvas(canvas, background, paint, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_FIRST);
+        Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
 
-        Bitmap cardsBmp = layout.toBitmap();
-        Utils.drawBitmapOnCanvas(canvas, cardsBmp, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_CENTER);
-        cardsBmp.recycle();
-
-        return bmp;
+        helper.drawDrawable(canvas, layout, x, y);
     }
 
-    public Bitmap background() {
-        int width = Utils.totalWidth();
-        int height = Utils.screenHeight();
-        Bitmap background = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(background);
-        canvas.drawColor(Configuration.cardSelectorBackgroundColor());
-        return background;
+    public void drawBackground(Canvas canvas, int x, int y) {
+        Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
+        Paint paint = new Paint();
+        paint.setColor(Configuration.cardSelectorBackgroundColor());
+        helper.drawRect(canvas, new Rect(0, 0, width(), height()), paint);
+    }
+
+    @Override
+    public int width() {
+        return Utils.totalWidth();
+    }
+
+    @Override
+    public int height() {
+        return Utils.screenHeight();
     }
 }

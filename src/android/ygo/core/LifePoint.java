@@ -2,7 +2,6 @@ package android.ygo.core;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.text.InputType;
 import android.text.TextPaint;
@@ -14,7 +13,7 @@ import android.widget.TextView;
 import android.ygo.utils.Configuration;
 import android.ygo.utils.Utils;
 
-public class LifePoint implements SelectableItem {
+public class LifePoint implements SelectableItem, Drawable {
     int lp;
 
     EditText edit;
@@ -68,14 +67,22 @@ public class LifePoint implements SelectableItem {
     }
 
     @Override
-    public Bitmap toBitmap() {
-        Bitmap lpBmp = Bitmap.createBitmap((int) (Utils.unitLength() * 1.2), Utils.unitLength() / 4, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(lpBmp);
+    public void draw(Canvas canvas, int x, int y) {
         TextPaint textPaint = new TextPaint();
+        textPaint.setAntiAlias(true);
         textPaint.setTextSize(Utils.unitLength() / 4);
         textPaint.setColor(Configuration.fontColor());
-        canvas.drawText(toString(), 8, Utils.unitLength() / 4, textPaint);
-        return lpBmp;
+        canvas.drawText(toString(), x + 8, y + Utils.unitLength() / 4, textPaint);
+    }
+
+    @Override
+    public int width() {
+        return (int) (Utils.unitLength() * 1.2);
+    }
+
+    @Override
+    public int height() {
+        return Utils.unitLength() / 4;
     }
 
     @Override

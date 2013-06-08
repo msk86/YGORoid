@@ -1,13 +1,12 @@
 package android.ygo.views;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -24,8 +23,6 @@ public class DuelDiskView extends SurfaceView implements Runnable {
     private PlayGestureDetector mGestureDetector;
     private SensorManager sensorManager;
 
-    private Paint painter;
-
     private Duel duel;
 
     public DuelDiskView(Context context, AttributeSet attrs) {
@@ -33,7 +30,6 @@ public class DuelDiskView extends SurfaceView implements Runnable {
         renderThread = new Thread(this);
         holder = getHolder();
 
-        painter = new Paint();
         duel = new Duel();
         mGestureDetector = new PlayGestureDetector(new PlayGestureListener(this));
         sensorManager = ((SensorManager) context.getSystemService(Context.SENSOR_SERVICE));
@@ -63,9 +59,7 @@ public class DuelDiskView extends SurfaceView implements Runnable {
 
     private void drawDuelDisk(Canvas canvas) {
         drawBackground(canvas);
-        Bitmap duelBmp = duel.toBitmap();
-        canvas.drawBitmap(duelBmp, 0, 0, painter);
-        duelBmp.recycle();
+        duel.draw(canvas, 0, 0);
     }
 
     private void drawBackground(Canvas canvas) {

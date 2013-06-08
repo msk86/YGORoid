@@ -1,12 +1,9 @@
 package android.ygo.core;
 
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.ygo.utils.Utils;
 
-public class OverRay implements SelectableItem {
+public class OverRay implements SelectableItem, Drawable {
     private boolean selected = false;
 
     Card topCard;
@@ -62,49 +59,37 @@ public class OverRay implements SelectableItem {
         }
     }
 
-    private Bitmap unitsBmp() {
-        int unitOffset = overRayUnits.cards.size() - 1;
-        int overRayOffset = Utils.cardWidth() / 15;
-        int unitWidth = Utils.cardWidth() + unitOffset * overRayOffset;
-        int height = Utils.cardHeight();
-        Bitmap unitsBmp = Bitmap.createBitmap(unitWidth, height, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(unitsBmp);
-        canvas.drawColor(Color.TRANSPARENT);
-        Paint paint = new Paint();
-        canvas.translate(unitOffset * overRayOffset, 0);
-        for (int i = overRayUnits.getCards().size() - 1; i >= 0; i--) {
-            Bitmap bitmap = overRayUnits.getCards().get(i).toBitmap();
-            Utils.drawBitmapOnCanvas(canvas, bitmap, paint, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_CENTER);
-            bitmap.recycle();
-            canvas.translate(-overRayOffset, 0);
-        }
-        return unitsBmp;
+    private int overRayOffset() {
+        return Utils.cardWidth() / 15;
     }
 
     @Override
-    public Bitmap toBitmap() {
-        int overRayOffset = Utils.cardWidth() / 15;
-        int height = Utils.cardHeight();
-        int width = height;
-        Bitmap overRayBmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(overRayBmp);
-        canvas.drawColor(Color.TRANSPARENT);
-        Paint paint = new Paint();
-        Bitmap unitsBmp = unitsBmp();
+    public void draw(Canvas canvas, int x, int y) {
+        Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
 
-        int unitX = (width - Utils.cardWidth()) / 2;
-        if (topCard != null) {
-            unitX += overRayOffset;
-        }
-        Utils.drawBitmapOnCanvas(canvas, unitsBmp, paint, unitX, Utils.DRAW_POSITION_CENTER);
-        unitsBmp.recycle();
+        drawUnits(canvas, x + overRayOffset(), y);
 
-        if (topCard != null) {
-            Bitmap topCardBmp = topCard.toBitmap();
-            Utils.drawBitmapOnCanvas(canvas, topCardBmp, paint, Utils.DRAW_POSITION_CENTER, Utils.DRAW_POSITION_CENTER);
-            topCardBmp.recycle();
+        helper.drawDrawable(canvas, topCard, helper.center(width(), topCard.width()), 0);
+    }
+
+    private void drawUnits(Canvas canvas, int x, int y) {
+        Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
+        int startShowIndex = overRayUnits.cards.size() - 1;
+        startShowIndex = startShowIndex > 3 ? 3 : startShowIndex;
+        for (int i = startShowIndex; i >= 0; i--) {
+            Card card = overRayUnits.getCards().get(i);
+            helper.drawDrawable(canvas, card, i * overRayOffset(), 0);
         }
-        return overRayBmp;
+    }
+
+    @Override
+    public int width() {
+        return Utils.cardHeight();
+    }
+
+    @Override
+    public int height() {
+        return Utils.cardHeight();
     }
 
     @Override

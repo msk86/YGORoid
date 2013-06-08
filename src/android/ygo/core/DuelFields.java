@@ -1,15 +1,12 @@
 package android.ygo.core;
 
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.ygo.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DuelFields implements Item {
+public class DuelFields implements Item, Drawable {
     private List<List<Field>> fieldMatrix;
 
     List<Field> monsterZoneFields;
@@ -80,26 +77,29 @@ public class DuelFields implements Item {
     }
 
     @Override
-    public Bitmap toBitmap() {
-        int width = Utils.totalWidth();
-        int height = Utils.unitLength() * 3;
-        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        canvas.drawColor(Color.TRANSPARENT);
-        Paint paint = new Paint();
-        int ul = Utils.unitLength();
+    public void draw(Canvas canvas, int x, int y) {
+        Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
 
-        for (int y = 0; y < fieldMatrix.size(); y++) {
-            List<Field> fieldLine = fieldMatrix.get(y);
-            for (int x = 0; x < fieldLine.size(); x++) {
-                Field field = fieldLine.get(x);
+        int ul = Utils.unitLength();
+        for (int dy = 0; dy < fieldMatrix.size(); dy++) {
+            List<Field> fieldLine = fieldMatrix.get(dy);
+            for (int dx = 0; dx < fieldLine.size(); dx++) {
+                Field field = fieldLine.get(dx);
                 if (field != null) {
-                    Utils.drawBitmapOnCanvas(canvas, field.toBitmap(), paint, ul * x, ul * y);
+                    helper.drawDrawable(canvas, field, ul * dx, ul * dy);
                 }
             }
         }
+    }
 
-        return bitmap;
+    @Override
+    public int width() {
+        return Utils.totalWidth();
+    }
+
+    @Override
+    public int height() {
+        return Utils.unitLength() * 3;
     }
 
     public Field getMonsterField(int i) {

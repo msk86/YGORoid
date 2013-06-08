@@ -1,6 +1,5 @@
 package android.ygo.core;
 
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.ygo.core.tool.Coin;
@@ -11,7 +10,7 @@ import android.ygo.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Duel implements Item {
+public class Duel implements Item, Drawable {
     private LifePoint lifePoint;
 
     private DuelFields duelFields;
@@ -256,42 +255,39 @@ public class Duel implements Item {
     }
 
     @Override
-    public Bitmap toBitmap() {
-        Bitmap duelBmp = Bitmap.createBitmap(Utils.totalWidth(), Utils.unitLength() * 4, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(duelBmp);
-        Paint paint = new Paint();
+    public int width() {
+        return Utils.totalWidth();
+    }
 
-        Bitmap lpBmp = lifePoint.toBitmap();
-        Utils.drawBitmapOnCanvas(canvas, lpBmp, paint, Utils.unitLength(), (Utils.unitLength() - lpBmp.getHeight()) / 2);
-        lpBmp.recycle();
+    @Override
+    public int height() {
+        return Utils.unitLength() * 4;
+    }
 
-        Bitmap diceBmp = dice.toBitmap();
-        Utils.drawBitmapOnCanvas(canvas, diceBmp, paint, (int) (Utils.unitLength() * 2.4), 0);
 
-        Bitmap coinBmp = coin.toBitmap();
-        Utils.drawBitmapOnCanvas(canvas, coinBmp, paint, (int) (Utils.unitLength() * 2.4), Utils.unitLength() / 2);
+    @Override
+    public void draw(Canvas canvas, int x, int y) {
+        Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
 
         if (cardSelector == null) {
-            Bitmap fieldBmp = duelFields.toBitmap();
-            Bitmap handBmp = handCards.toBitmap();
-            Utils.drawBitmapOnCanvas(canvas, fieldBmp, paint, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_FIRST);
-            Utils.drawBitmapOnCanvas(canvas, handBmp, paint, Utils.DRAW_POSITION_FIRST, fieldBmp.getHeight() + 1);
+            helper.drawDrawable(canvas, lifePoint, Utils.unitLength(), (Utils.unitLength() - lifePoint.height()) / 2);
+            helper.drawDrawable(canvas, dice, (int) (Utils.unitLength() * 2.4), 0);
+            helper.drawDrawable(canvas, coin, (int) (Utils.unitLength() * 2.4), Utils.unitLength() / 2);
+            helper.drawDrawable(canvas, duelFields, 0 , 0);
+            helper.drawDrawable(canvas, handCards, 0, duelFields.height() + 1);
         } else {
-            Bitmap selectorBmp = cardSelector.toBitmap();
-            Utils.drawBitmapOnCanvas(canvas, selectorBmp, paint, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_CENTER);
+            helper.drawDrawable(canvas, cardSelector, 0, 0);
         }
 
         Drag dragged = drag;
         if (dragged != null && dragged.getItem() != null) {
-            Bitmap draggingItemBmp = dragged.getItem().toBitmap();
-            Utils.drawBitmapOnCanvas(canvas, draggingItemBmp, paint, dragged.x() - draggingItemBmp.getWidth() / 2, dragged.y() - draggingItemBmp.getHeight() / 2);
+            if(dragged.getItem() instanceof Drawable) {
+                Drawable drawable = (Drawable) dragged.getItem();
+                helper.drawDrawable(canvas, drawable, dragged.x() - drawable.width() / 2, dragged.y() - drawable.height() / 2);
+            }
         }
 
-        Bitmap winBmp = window.toBitmap();
-        int winPosY = Utils.screenHeight() - winBmp.getHeight();
-        Utils.drawBitmapOnCanvas(canvas, winBmp, paint, Utils.DRAW_POSITION_CENTER, winPosY);
-        winBmp.recycle();
-        return duelBmp;
+        helper.drawDrawable(canvas, window, helper.center(width(), window.width()), helper.bottom(Utils.screenHeight(), window.height()));
     }
 
     public SelectableItem getCurrentSelectItem() {

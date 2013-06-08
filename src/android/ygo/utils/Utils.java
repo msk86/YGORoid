@@ -2,8 +2,10 @@ package android.ygo.utils;
 
 import android.app.Activity;
 import android.graphics.*;
+import android.text.Layout;
 import android.util.DisplayMetrics;
 import android.ygo.core.Card;
+import android.ygo.core.Drawable;
 import android.ygo.sqlite.CardsDBHelper;
 
 import java.io.BufferedInputStream;
@@ -17,9 +19,12 @@ public class Utils {
     private static Activity context;
     private static CardsDBHelper dbHelper;
 
+    private static int unitLength;
+
     public static void initInstance(Activity activity) {
         context = activity;
         dm = new DisplayMetrics();
+        unitLength = -1;
         dbHelper = new CardsDBHelper(activity, 1);
         activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
         checkFolders();
@@ -105,7 +110,6 @@ public class Utils {
         matrix.postRotate(degree);
         Bitmap newBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
                 bitmap.getHeight(), matrix, true);
-        bitmap.recycle();
         return newBitmap;
     }
 
@@ -143,6 +147,77 @@ public class Utils {
                 posY = positionY;
         }
         canvas.drawBitmap(bitmap, posX, posY, paint);
+    }
+
+    public static int center(Drawable drawable, int x, int innerWidth) {
+        return x + (drawable.width() - innerWidth) / 2;
+    }
+
+    public static class DrawHelper {
+        private int x;
+        private int y;
+
+        public DrawHelper(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        public int center(int frameSize, int size) {
+            return (frameSize - size) / 2;
+        }
+
+        public int bottom(int frameSize, int size) {
+            return frameSize - size;
+        }
+
+        public void drawText(Canvas canvas, String str, int left, int top, Paint paint) {
+            canvas.drawText(str, x + left, y + top, paint);
+        }
+
+        public void drawLine(Canvas canvas, int startX, int startY, int stopX, int stopY, Paint paint) {
+            canvas.drawLine(x + startX, y + startY, x + stopX, y + stopY, paint);
+        }
+
+        public void drawCircle(Canvas canvas, int left, int top, int radius, Paint paint) {
+            canvas.drawCircle(x + left, y + top, radius, paint);
+        }
+
+        public void drawRect(Canvas canvas, Rect r, Paint paint) {
+            r.offset(x, y);
+            canvas.drawRect(r, paint);
+        }
+
+        public void drawRoundRect(Canvas canvas, RectF rect, int rx, int ry, Paint paint) {
+            rect.offset(x, y);
+            canvas.drawRoundRect(rect, rx, ry, paint);
+        }
+
+        public void drawBitmap(Canvas canvas, Bitmap bitmap, int left, int top, Paint paint) {
+            canvas.drawBitmap(bitmap, x + left, y + top, paint);
+        }
+
+        public void drawBitmap(Canvas canvas, Bitmap bitmap, int left, int top, Paint paint, boolean rotate) {
+            Bitmap drawBitmap = bitmap;
+            if (rotate) {
+                Matrix matrix = new Matrix();
+                matrix.postScale(1f, 1f);
+                matrix.postRotate(90);
+                drawBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
+                        bitmap.getHeight(), matrix, true);
+                canvas.drawBitmap(bitmap, matrix, paint);
+            }
+            canvas.drawBitmap(drawBitmap, x + left, y + top, paint);
+        }
+
+        public void drawDrawable(Canvas canvas, Drawable drawable, int left, int top) {
+            drawable.draw(canvas, x + left, y + top);
+        }
+
+        public void drawLayout(Canvas canvas, Layout layout, int left, int top) {
+            canvas.translate(x + left, y + top);
+            layout.draw(canvas);
+            canvas.translate(-x - left, -y - top);
+        }
     }
 
 

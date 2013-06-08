@@ -1,16 +1,10 @@
 package android.ygo.core;
 
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
+import android.graphics.*;
 import android.ygo.utils.Configuration;
 import android.ygo.utils.Utils;
 
-public class InfoWindow implements Item {
-
-    private static final Bitmap BACKGROUND = background();
-
+public class InfoWindow implements Item, Drawable {
     SelectableItem infoItem;
 
     public void setInfo(SelectableItem item) {
@@ -57,21 +51,40 @@ public class InfoWindow implements Item {
     }
 
     @Override
-    public Bitmap toBitmap() {
-        int width = Utils.totalWidth();
-        int height = Utils.cardHeight() / 6 + 3;
-        Bitmap winBmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+    public void draw(Canvas canvas, int x, int y) {
+        drawFrame(canvas, x, y);
 
-        Canvas canvas = new Canvas(winBmp);
         Paint paint = new Paint();
-
-        Utils.drawBitmapOnCanvas(canvas, BACKGROUND, paint, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_FIRST);
 
         paint.setColor(Configuration.fontColor());
         paint.setStrokeWidth(1);
-        paint.setTextSize(height);
-        canvas.drawText(info(), 5, height - 2, paint);
+        paint.setTextSize(height());
+        paint.setAntiAlias(true);
 
-        return winBmp;
+        Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
+        helper.drawText(canvas, info(), 5, height() - 2, paint);
+    }
+
+    private void drawFrame(Canvas canvas, int x, int y) {
+        Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
+        Paint paint = new Paint();
+        paint.setColor(Color.BLACK);
+        helper.drawRect(canvas, new Rect(0, 0, width(), height()), paint);
+
+        paint.setColor(Color.DKGRAY);
+        paint.setStrokeWidth(5);
+        helper.drawLine(canvas, 0, 0, width(), 0, paint);
+        helper.drawLine(canvas, 0, 0, 0, height(), paint);
+        helper.drawLine(canvas, width(), 0, width(), height(), paint);
+    }
+
+    @Override
+    public int width() {
+        return Utils.totalWidth();
+    }
+
+    @Override
+    public int height() {
+        return Utils.cardHeight() / 6 + 3;
     }
 }
