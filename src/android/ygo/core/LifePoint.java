@@ -145,6 +145,7 @@ public class LifePoint implements SelectableItem, Drawable {
     private void syncLP() {
         try {
             lp = Integer.parseInt(edit.getText().toString());
+            Utils.getContext().getDuelDiskView().updateActionTime();
         } catch (Exception e) {
         }
     }
