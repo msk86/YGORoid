@@ -53,6 +53,7 @@ public class PlayMenuProcessor {
         MenuClick menuClick = new MenuClick(duel, menuItem);
         Action action = ActionDispatcher.dispatch(menuClick);
         action.execute();
+        view.updateActionTime();
         return true;
     }
 }

@@ -24,7 +24,7 @@ public class PlayOnKeyProcessor {
                 return false;
         }
         action.execute();
-        view.invalidate();
+        view.updateActionTime();
 
         return true;
     }

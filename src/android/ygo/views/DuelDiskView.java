@@ -7,7 +7,6 @@ import android.graphics.Paint;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -20,10 +19,12 @@ import android.ygo.utils.FPSMaker;
 import android.ygo.utils.Utils;
 
 public class DuelDiskView extends SurfaceView implements Runnable {
+    private static final int ACTIVE_DRAW_DURATION = 1500;
     private Thread renderThread;
     private SurfaceHolder holder;
     private boolean running = false;
     private FPSMaker fpsMaker;
+    private long actionTime;
 
     private PlayGestureDetector mGestureDetector;
     private SensorManager sensorManager;
@@ -89,13 +90,14 @@ public class DuelDiskView extends SurfaceView implements Runnable {
         fpsMaker.setTime(System.nanoTime());
         while (running) {
             fpsMaker.setLimitTime(System.currentTimeMillis());
-
-            if (!holder.getSurface().isValid()) {
-                continue;
+            if(actionTime + ACTIVE_DRAW_DURATION >= System.currentTimeMillis()) {
+                if (!holder.getSurface().isValid()) {
+                    continue;
+                }
+                Canvas canvas = holder.lockCanvas();
+                drawDuelDisk(canvas);
+                holder.unlockCanvasAndPost(canvas);
             }
-            Canvas canvas = holder.lockCanvas();
-            drawDuelDisk(canvas);
-            holder.unlockCanvasAndPost(canvas);
 
             fpsMaker.limitFPS();
             fpsMaker.makeFPS();
@@ -118,5 +120,9 @@ public class DuelDiskView extends SurfaceView implements Runnable {
                 // retry
             }
         }
+    }
+
+    public void updateActionTime() {
+        actionTime = System.currentTimeMillis();
     }
 }

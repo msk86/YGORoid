@@ -36,7 +36,7 @@ public class PlaySensorEventListener implements SensorEventListener {
             }
         }
         if (changed) {
-            view.invalidate();
+            view.updateActionTime();
         }
     }
 
