@@ -30,7 +30,6 @@ public class YGOActivity extends Activity {
 
         setContentView(R.layout.main);
         duelDiskView = (DuelDiskView) findViewById(R.id.duelDiskView);
-        duelDiskView.setDrawingCacheEnabled(true);
 
         keyProcessor = new PlayOnKeyProcessor(duelDiskView);
         menuProcessor = new PlayMenuProcessor(duelDiskView);

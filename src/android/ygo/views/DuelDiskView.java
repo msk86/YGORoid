@@ -68,7 +68,7 @@ public class DuelDiskView extends SurfaceView implements Runnable {
     private void drawDuelDisk(Canvas canvas) {
         drawBackground(canvas);
         duel.draw(canvas, 0, 0);
-        if(Configuration.showFPS()) {
+        if (Configuration.showFPS()) {
             drawFPS(canvas);
         }
     }
@@ -77,7 +77,7 @@ public class DuelDiskView extends SurfaceView implements Runnable {
         Paint paint = new Paint();
         paint.setColor(Configuration.fontColor());
         paint.setTextSize(20);
-        canvas.drawText("FPS: "+fpsMaker.getFPS(), Utils.unitLength(), 20, paint);
+        canvas.drawText("FPS: " + fpsMaker.getFPS(), Utils.unitLength(), 20, paint);
     }
 
     private void drawBackground(Canvas canvas) {
@@ -90,13 +90,23 @@ public class DuelDiskView extends SurfaceView implements Runnable {
         fpsMaker.setTime(System.nanoTime());
         while (running) {
             fpsMaker.setLimitTime(System.currentTimeMillis());
-            if(actionTime + ACTIVE_DRAW_DURATION >= System.currentTimeMillis()) {
+            if (actionTime + ACTIVE_DRAW_DURATION >= System.currentTimeMillis()) {
                 if (!holder.getSurface().isValid()) {
                     continue;
                 }
-                Canvas canvas = holder.lockCanvas();
-                drawDuelDisk(canvas);
-                holder.unlockCanvasAndPost(canvas);
+                Canvas canvas = null;
+                try {
+                    canvas = holder.lockCanvas();
+                    synchronized (holder) {
+                        drawDuelDisk(canvas);
+                    }
+                } catch (Exception e) {
+                } finally {
+                    if (canvas != null) {
+                        holder.unlockCanvasAndPost(canvas);
+                    }
+                }
+
             }
 
             fpsMaker.limitFPS();
@@ -106,20 +116,13 @@ public class DuelDiskView extends SurfaceView implements Runnable {
 
     public void resume() {
         running = true;
+        updateActionTime();
         renderThread = new Thread(this);
         renderThread.start();
     }
 
     public void pause() {
         running = false;
-        while (true) {
-            try {
-                renderThread.join();
-                break;
-            } catch (InterruptedException e) {
-                // retry
-            }
-        }
     }
 
     public void updateActionTime() {
