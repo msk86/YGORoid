@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.ygo.core.Card;
+import android.ygo.core.UserDefinedCard;
 import android.ygo.utils.Configuration;
 import android.ygo.utils.Utils;
 
@@ -186,7 +187,11 @@ public class CardsDBHelper extends SQLiteOpenHelper {
                         if(cardName.indexOf("#") > 0) {
                             cardName = cardName.substring(0, cardName.indexOf("#"));
                         }
-                        card = loadByName(cardName);
+                        if(cardName.startsWith("?")) {
+                            card = new UserDefinedCard(cardName.substring(1));
+                        } else {
+                            card = loadByName(cardName);
+                        }
                     }
                     switch (cardIn) {
                         case IN_MAIN:

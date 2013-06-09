@@ -43,6 +43,14 @@ public class Configuration {
         return baseDir() + "pics/";
     }
 
+    public static String userDefinedCardImgPath() {
+        return baseDir() + "userDefined/";
+    }
+
+    public static String cardImageSuffix() {
+        return ".jpg";
+    }
+
     public static boolean showFPS() {
         return false;
     }

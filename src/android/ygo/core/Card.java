@@ -88,7 +88,7 @@ public class Card implements SelectableItem, Drawable {
         int height = Utils.cardHeight();
         if (cardPic == null) {
             try {
-                cardPic = Utils.readBitmapScaleByHeight(Configuration.cardImgPath() + id + ".jpg", height);
+                cardPic = Utils.readBitmapScaleByHeight(Configuration.cardImgPath() + id + Configuration.cardImageSuffix(), height);
             } catch (Exception e) {
                 cardPic = Bitmap.createBitmap(Utils.cardWidth(), Utils.cardHeight(), Bitmap.Config.ARGB_8888);
                 Canvas canvas = new Canvas(cardPic);

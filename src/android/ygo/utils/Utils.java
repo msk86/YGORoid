@@ -19,12 +19,9 @@ public class Utils {
     private static Activity context;
     private static CardsDBHelper dbHelper;
 
-    private static int unitLength;
-
     public static void initInstance(Activity activity) {
         context = activity;
         dm = new DisplayMetrics();
-        unitLength = -1;
         dbHelper = new CardsDBHelper(activity, 1);
         activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
         checkFolders();
@@ -34,6 +31,7 @@ public class Utils {
         checkFolder(Configuration.baseDir());
         checkFolder(Configuration.deckPath());
         checkFolder(Configuration.cardImgPath());
+        checkFolder(Configuration.userDefinedCardImgPath());
     }
 
     private static void checkFolder(String path) {
@@ -149,10 +147,6 @@ public class Utils {
         canvas.drawBitmap(bitmap, posX, posY, paint);
     }
 
-    public static int center(Drawable drawable, int x, int innerWidth) {
-        return x + (drawable.width() - innerWidth) / 2;
-    }
-
     public static class DrawHelper {
         private int x;
         private int y;
@@ -194,19 +188,6 @@ public class Utils {
 
         public void drawBitmap(Canvas canvas, Bitmap bitmap, int left, int top, Paint paint) {
             canvas.drawBitmap(bitmap, x + left, y + top, paint);
-        }
-
-        public void drawBitmap(Canvas canvas, Bitmap bitmap, int left, int top, Paint paint, boolean rotate) {
-            Bitmap drawBitmap = bitmap;
-            if (rotate) {
-                Matrix matrix = new Matrix();
-                matrix.postScale(1f, 1f);
-                matrix.postRotate(90);
-                drawBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
-                        bitmap.getHeight(), matrix, true);
-                canvas.drawBitmap(bitmap, matrix, paint);
-            }
-            canvas.drawBitmap(drawBitmap, x + left, y + top, paint);
         }
 
         public void drawDrawable(Canvas canvas, Drawable drawable, int left, int top) {
