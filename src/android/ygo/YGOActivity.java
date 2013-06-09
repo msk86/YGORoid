@@ -66,5 +66,9 @@ public class YGOActivity extends Activity {
             duelDiskView.resume();
         }
     }
+
+    public DuelDiskView getDuelDiskView() {
+        return duelDiskView;
+    }
 }
 

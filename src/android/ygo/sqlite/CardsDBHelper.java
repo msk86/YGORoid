@@ -18,6 +18,8 @@ import java.util.List;
 
 public class CardsDBHelper extends SQLiteOpenHelper {
 
+    public static final String QUERY_TABLES = "texts t, datas d";
+    public static final String[] QUERY_FIELDS = new String[]{"t.id", "t.name", "t.desc", "d.atk", "d.def", "d.race", "d.level", "d.attribute", "d.type", "d.alias"};
     Context context;
 
     public CardsDBHelper(Context context, int version) {
@@ -35,13 +37,41 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         // NOTHING
     }
 
+    public List<String> loadNamesByIds(List<Integer> ids) {
+        List<String> names = new ArrayList<String>();
+        try {
+            SQLiteDatabase database = this.getReadableDatabase();
+            for (int id : ids) {
+                String name = loadNameById(database, id);
+                if(name != null) {
+                    names.add(name);
+                }
+            }
+            database.close();
+        } catch (Exception e) {
+        }
+        return names;
+    }
+
+    public String loadNameById(SQLiteDatabase database, int cardID) {
+        String idStr = String.valueOf(cardID);
+        Cursor c = database.query("texts", new String[] {"name"},
+                "id = ?", new String[]{idStr}, null, null, null);
+        if (c.getCount() == 1) {
+            c.moveToFirst();
+            return c.getString(0);
+        }
+        c.close();
+        return null;
+
+    }
+
     private Card loadById(SQLiteDatabase database, int cardID) {
         String idStr = String.valueOf(cardID);
-        Cursor c = database.query("texts t, datas d",
-                new String[]{"t.id", "t.name", "t.desc", "d.atk", "d.def", "d.race", "d.level", "d.attribute", "d.type"},
+        Cursor c = database.query(QUERY_TABLES, QUERY_FIELDS,
                 "t.id = d.id and t.id = ?", new String[]{idStr}, null, null, null);
         Card card;
-        if (c.getCount() > 0) {
+        if (c.getCount() == 1) {
             c.moveToFirst();
             card = createCard(c);
         } else {
@@ -66,8 +96,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
     }
 
     private Card loadByWholeName(SQLiteDatabase database, String cardName) {
-        Cursor c = database.query("texts t, datas d",
-                new String[]{"t.id", "t.name", "t.desc", "d.atk", "d.def", "d.race", "d.level", "d.attribute", "d.type"},
+        Cursor c = database.query(QUERY_TABLES, QUERY_FIELDS,
                 "t.id = d.id and t.name = ?", new String[]{cardName}, null, null, null);
         Card card = null;
         if (c.getCount() > 0) {
@@ -79,8 +108,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
     }
 
     private Card fuzzyLoadByName(SQLiteDatabase database, String name) {
-        Cursor c = database.query("texts t, datas d",
-                new String[]{"t.id", "t.name", "t.desc", "d.atk", "d.def", "d.race", "d.level", "d.attribute", "d.type"},
+        Cursor c = database.query(QUERY_TABLES, QUERY_FIELDS,
                 "t.id = d.id and t.name like ?", new String[]{"%" + name + "%"}, null, null, null);
         Card card = null;
         if (c.getCount() > 0) {
@@ -109,8 +137,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
             parts[i] = "%" + name.charAt(i) + "%";
         }
 
-        Cursor c = database.query("texts t, datas d",
-                new String[]{"t.id", "t.name", "t.desc", "d.atk", "d.def", "d.race", "d.level", "d.attribute", "d.type"},
+        Cursor c = database.query(QUERY_TABLES, QUERY_FIELDS,
                 "t.id = d.id" + sqlNamePart, parts, null, null, null);
         Card card = null;
         if (c.getCount() > 0) {
@@ -147,7 +174,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
 
     private Card createCard(Cursor c) {
         return new Card(c.getString(0), c.getString(1), c.getString(2), c.getInt(8),
-                c.getInt(7), c.getInt(5), c.getInt(6), c.getInt(3), c.getInt(4));
+                c.getInt(7), c.getInt(5), c.getInt(6), c.getInt(3), c.getInt(4), c.getString(9));
     }
 
 
@@ -184,10 +211,10 @@ public class CardsDBHelper extends SQLiteOpenHelper {
                         card = loadById(id);
                     } catch (Exception e) {
                         String cardName = line.replaceAll("\\[", "").replaceAll("\\]", "");
-                        if(cardName.indexOf("#") > 0) {
+                        if (cardName.indexOf("#") > 0) {
                             cardName = cardName.substring(0, cardName.indexOf("#"));
                         }
-                        if(cardName.startsWith("?")) {
+                        if (cardName.startsWith("?")) {
                             card = new UserDefinedCard(cardName.substring(1));
                         } else {
                             card = loadByName(cardName);

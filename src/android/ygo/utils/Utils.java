@@ -1,9 +1,9 @@
 package android.ygo.utils;
 
-import android.app.Activity;
 import android.graphics.*;
 import android.text.Layout;
 import android.util.DisplayMetrics;
+import android.ygo.YGOActivity;
 import android.ygo.core.Card;
 import android.ygo.core.Drawable;
 import android.ygo.sqlite.CardsDBHelper;
@@ -16,10 +16,10 @@ import java.util.Random;
 
 public class Utils {
     private static DisplayMetrics dm;
-    private static Activity context;
+    private static YGOActivity context;
     private static CardsDBHelper dbHelper;
 
-    public static void initInstance(Activity activity) {
+    public static void initInstance(YGOActivity activity) {
         context = activity;
         dm = new DisplayMetrics();
         dbHelper = new CardsDBHelper(activity, 1);
@@ -44,7 +44,7 @@ public class Utils {
         }
     }
 
-    public static Activity getContext() {
+    public static YGOActivity getContext() {
         return context;
     }
 

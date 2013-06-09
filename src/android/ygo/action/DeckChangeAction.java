@@ -18,7 +18,7 @@ public class DeckChangeAction extends BaseAction {
     @Override
     public void execute() {
         AlertDialog.Builder builder = new AlertDialog.Builder(Utils.getContext());
-        builder.setTitle("Choose Deck");
+        builder.setTitle("请选择卡组");
         final String[] decks = listAllDecks();
         builder.setItems(decks, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
@@ -26,8 +26,8 @@ public class DeckChangeAction extends BaseAction {
                 List<List<Card>> cards = Utils.getDbHelper().loadFromFile(deck);
                 List<Card> mainCards = cards.get(0);
                 List<Card> exCards = cards.get(1);
-                duel.initDuelField();
                 duel.start(mainCards, exCards);
+                Utils.getContext().getDuelDiskView().updateActionTime();
             }
         });
         builder.create().show();

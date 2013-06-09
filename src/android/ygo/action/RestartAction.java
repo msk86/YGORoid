@@ -9,7 +9,6 @@ public class RestartAction extends BaseAction {
 
     @Override
     public void execute() {
-        duel.initDuelField();
         duel.restart();
     }
 }

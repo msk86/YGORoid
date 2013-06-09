@@ -16,6 +16,7 @@ public class Card implements SelectableItem, Drawable {
     private boolean selected = false;
 
     String id;
+    String aliasId;
     String name;
     String desc;
     CardType type;
@@ -37,7 +38,12 @@ public class Card implements SelectableItem, Drawable {
 
 
     public Card(String id, String name, String desc, int typeCode, int attrCode, int raceCode, int level, int atk, int def) {
+        this(id, name, desc, typeCode, attrCode, raceCode, level, atk, def, "0");
+    }
+
+    public Card(String id, String name, String desc, int typeCode, int attrCode, int raceCode, int level, int atk, int def, String aliasId) {
         this.id = id;
+        this.aliasId = aliasId;
         this.name = name;
         this.desc = desc;
         this.type = CardType.getCardType(typeCode);
@@ -50,6 +56,10 @@ public class Card implements SelectableItem, Drawable {
         this.positive = true;
         this.set = false;
         initCardPic();
+    }
+
+    public String getRealId() {
+        return "0".equals(aliasId) ? id : aliasId;
     }
 
     public List<CardSubType> getSubTypes() {
@@ -151,17 +161,17 @@ public class Card implements SelectableItem, Drawable {
         Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
 
         Bitmap cardBmp = cardPic;
-        if(set) {
+        if (set) {
             cardBmp = CARD_PROTECTOR;
         }
-        if(!positive) {
+        if (!positive) {
             cardBmp = Utils.rotate(cardBmp, 90);
         }
 
         helper.drawBitmap(canvas, cardBmp, helper.center(width(), cardBmp.getWidth()),
                 helper.center(height(), cardBmp.getHeight()), new Paint());
 
-        if(selected) {
+        if (selected) {
             drawHighLight(canvas, x, y);
         }
     }

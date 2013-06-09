@@ -6,9 +6,16 @@ import android.ygo.utils.Utils;
 
 public class InfoWindow implements Item, Drawable {
     SelectableItem infoItem;
+    private String info;
 
     public void setInfo(SelectableItem item) {
         infoItem = item;
+        info = null;
+    }
+
+    public void setInfo(String info) {
+        infoItem = null;
+        this.info = info;
     }
 
     private String info() {
@@ -25,6 +32,8 @@ public class InfoWindow implements Item, Drawable {
                     info += " / " + cardList.topCard().toString();
                 }
             }
+        } else if(this.info != null) {
+            info = this.info;
         }
         return info;
     }

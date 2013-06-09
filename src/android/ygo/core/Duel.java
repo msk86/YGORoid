@@ -1,7 +1,7 @@
 package android.ygo.core;
 
 import android.graphics.Canvas;
-import android.graphics.Paint;
+import android.widget.Toast;
 import android.ygo.core.tool.Coin;
 import android.ygo.core.tool.Dice;
 import android.ygo.op.Drag;
@@ -9,6 +9,8 @@ import android.ygo.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class Duel implements Item, Drawable {
     private LifePoint lifePoint;
@@ -32,7 +34,7 @@ public class Duel implements Item, Drawable {
     private Coin coin;
 
     public Duel() {
-        initDuelField();
+       start(null ,null);
     }
 
     public void start(List<Card> mainDeckCards, List<Card> exDeckCards) {
@@ -42,8 +44,16 @@ public class Duel implements Item, Drawable {
         if (exDeckCards == null) {
             exDeckCards = new ArrayList<Card>();
         }
+
+        if(!deckCheck(mainDeckCards, exDeckCards)) {
+            return;
+        }
+
+        initDuelField();
+
         this.mainDeckCards = mainDeckCards;
         this.exDeckCards = exDeckCards;
+
         initDeck();
         Deck deck = (Deck) duelFields.getDeckField().getItem();
         deck.shuffle();
@@ -52,6 +62,61 @@ public class Duel implements Item, Drawable {
 
     public void restart() {
         start(this.mainDeckCards, this.exDeckCards);
+    }
+
+    public boolean deckCheck(List<Card> mainDeckCards, List<Card> exDeckCards) {
+        if (!deckCardCountCheck(mainDeckCards, exDeckCards)) return false;
+        if (!singleCardCountCheck(mainDeckCards, exDeckCards)) return false;
+        return true;
+
+    }
+
+    private boolean deckCardCountCheck(List<Card> mainDeckCards, List<Card> exDeckCards) {
+        if(mainDeckCards.size() == 0 && exDeckCards.size() == 0) {
+            return true;
+        }
+        String info = null;
+        if(mainDeckCards.size() < 40 || mainDeckCards.size() > 60) {
+            info = "主卡组卡片数量不符合要求";
+        } else if(exDeckCards.size() > 15) {
+            info = "额外卡组卡片数量不符合要求";
+        }
+        if(info != null) {
+            Toast.makeText(Utils.getContext(), info, Toast.LENGTH_LONG).show();
+            window.setInfo(info);
+            return false;
+        }
+        return true;
+    }
+
+    private boolean singleCardCountCheck(List<Card> mainDeckCards, List<Card> exDeckCards) {
+        List<Integer> invalidCardIds = new ArrayList<Integer>();
+        List<Card> allCards = new ArrayList<Card>();
+        allCards.addAll(mainDeckCards);
+        allCards.addAll(exDeckCards);
+        Map<String, Integer> cardCount = new TreeMap<String, Integer>();
+        for (Card card : allCards) {
+            if (!cardCount.containsKey(card.getRealId())) {
+                cardCount.put(card.getRealId(), 0);
+            }
+            cardCount.put(card.getRealId(), cardCount.get(card.getRealId()) + 1);
+        }
+
+        for(Map.Entry<String, Integer> entry : cardCount.entrySet()) {
+            if(entry.getValue() > 3) {
+                invalidCardIds.add(Integer.parseInt(entry.getKey()));
+            }
+        }
+
+        if(invalidCardIds.size() == 0) {
+            return true;
+        }
+
+        List<String> invalidCardNames = Utils.getDbHelper().loadNamesByIds(invalidCardIds);
+        String info = "卡片" + invalidCardNames.toString() + "数量不符合要求";
+        Toast.makeText(Utils.getContext(), info, Toast.LENGTH_LONG).show();
+        window.setInfo(info);
+        return false;
     }
 
     public void initDuelField() {
@@ -273,7 +338,7 @@ public class Duel implements Item, Drawable {
             helper.drawDrawable(canvas, lifePoint, Utils.unitLength(), (Utils.unitLength() - lifePoint.height()) / 2);
             helper.drawDrawable(canvas, dice, (int) (Utils.unitLength() * 2.4), 0);
             helper.drawDrawable(canvas, coin, (int) (Utils.unitLength() * 2.4), Utils.unitLength() / 2);
-            helper.drawDrawable(canvas, duelFields, 0 , 0);
+            helper.drawDrawable(canvas, duelFields, 0, 0);
             helper.drawDrawable(canvas, handCards, 0, duelFields.height() + 1);
         } else {
             helper.drawDrawable(canvas, cardSelector, 0, 0);
@@ -281,7 +346,7 @@ public class Duel implements Item, Drawable {
 
         Drag dragged = drag;
         if (dragged != null && dragged.getItem() != null) {
-            if(dragged.getItem() instanceof Drawable) {
+            if (dragged.getItem() instanceof Drawable) {
                 Drawable drawable = (Drawable) dragged.getItem();
                 helper.drawDrawable(canvas, drawable, dragged.x() - drawable.width() / 2, dragged.y() - drawable.height() / 2);
             }
