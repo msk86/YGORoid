@@ -95,6 +95,9 @@ public class ActionDispatcher {
     }
 
     public static Action dispatch(Drag drag) {
+        if (drag.getItem() == null) {
+            return new EmptyAction();
+        }
         Action action = new RevertDragAction(drag);
         if (drag.getContainer() instanceof Field) {
             Field field = (Field) drag.getContainer();
@@ -102,7 +105,7 @@ public class ActionDispatcher {
             if (targetItem == null) {
                 if (drag.getStartDrag().getContainer() instanceof HandCards) {
                     Card card = (Card) drag.getItem();
-                    if (card != null && card.isOpen()) {
+                    if (card.isOpen()) {
                         action = new SummonOrEffectAction(drag);
                     } else {
                         action = new SetAction(drag);
