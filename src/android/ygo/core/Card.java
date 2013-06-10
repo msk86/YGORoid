@@ -62,6 +62,10 @@ public class Card implements SelectableItem, Drawable {
         return "0".equals(aliasId) ? id : aliasId;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public List<CardSubType> getSubTypes() {
         return subTypes;
     }

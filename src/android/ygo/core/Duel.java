@@ -91,15 +91,26 @@ public class Duel implements Item, Drawable {
 
     private boolean singleCardCountCheck(List<Card> mainDeckCards, List<Card> exDeckCards) {
         List<Integer> invalidCardIds = new ArrayList<Integer>();
+        List<String> invalidUDCardNames = new ArrayList<String>();
+
         List<Card> allCards = new ArrayList<Card>();
         allCards.addAll(mainDeckCards);
         allCards.addAll(exDeckCards);
+
         Map<String, Integer> cardCount = new TreeMap<String, Integer>();
+        Map<String, Integer> uDCardCount = new TreeMap<String, Integer>();
         for (Card card : allCards) {
-            if (!cardCount.containsKey(card.getRealId())) {
-                cardCount.put(card.getRealId(), 0);
+            if(!(card instanceof UserDefinedCard)) {
+                if (!cardCount.containsKey(card.getRealId())) {
+                    cardCount.put(card.getRealId(), 0);
+                }
+                cardCount.put(card.getRealId(), cardCount.get(card.getRealId()) + 1);
+            } else {
+                if (!uDCardCount.containsKey(card.getName())) {
+                    uDCardCount.put(card.getName(), 0);
+                }
+                uDCardCount.put(card.getName(), uDCardCount.get(card.getName()) + 1);
             }
-            cardCount.put(card.getRealId(), cardCount.get(card.getRealId()) + 1);
         }
 
         for(Map.Entry<String, Integer> entry : cardCount.entrySet()) {
@@ -108,11 +119,18 @@ public class Duel implements Item, Drawable {
             }
         }
 
-        if(invalidCardIds.size() == 0) {
+        for(Map.Entry<String, Integer> entry : uDCardCount.entrySet()) {
+            if(entry.getValue() > 3) {
+                invalidUDCardNames.add(entry.getKey());
+            }
+        }
+
+        if(invalidCardIds.size() == 0 && invalidUDCardNames.size() == 0) {
             return true;
         }
 
         List<String> invalidCardNames = Utils.getDbHelper().loadNamesByIds(invalidCardIds);
+        invalidCardNames.addAll(invalidUDCardNames);
         String info = "卡片" + invalidCardNames.toString() + "数量不符合要求";
         Toast.makeText(Utils.getContext(), info, Toast.LENGTH_LONG).show();
         window.setInfo(info);
