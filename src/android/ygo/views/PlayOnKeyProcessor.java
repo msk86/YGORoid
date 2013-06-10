@@ -1,10 +1,9 @@
 package android.ygo.views;
 
 import android.view.KeyEvent;
-import android.ygo.action.Action;
-import android.ygo.action.ActionDispatcher;
-import android.ygo.action.EmptyAction;
+import android.ygo.action.*;
 import android.ygo.op.ReturnClick;
+import android.ygo.op.VolClick;
 
 public class PlayOnKeyProcessor {
     DuelDiskView view;
@@ -22,6 +21,14 @@ public class PlayOnKeyProcessor {
                 break;
             case KeyEvent.KEYCODE_MENU:
                 return false;
+            case KeyEvent.KEYCODE_VOLUME_UP :
+                VolClick vuClick = new VolClick(view.getDuel(), VolClick.VOL_UP);
+                action = ActionDispatcher.dispatch(vuClick);
+                break;
+            case KeyEvent.KEYCODE_VOLUME_DOWN :
+                VolClick vdClick = new VolClick(view.getDuel(), VolClick.VOL_DOWN);
+                action = ActionDispatcher.dispatch(vdClick);
+                break;
         }
         action.execute();
         view.updateActionTime();

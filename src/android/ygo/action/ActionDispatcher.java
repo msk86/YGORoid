@@ -202,4 +202,21 @@ public class ActionDispatcher {
         }
         return action;
     }
+
+    public static Action dispatch(VolClick volClick) {
+        Action action = new EmptyAction();
+        if (volClick.getItem() == null) {
+            return action;
+        }
+        Item container = volClick.getContainer();
+        if (container instanceof Field) {
+            Field field = (Field) container;
+            if (field.getType() == FieldType.MONSTER_ZONE ||
+                    field.getType() == FieldType.MAGIC_ZONE ||
+                    field.getType() == FieldType.FIELD_MAGIC_ZONE) {
+                action = new IndicatorAction(volClick);
+            }
+        }
+        return action;
+    }
 }

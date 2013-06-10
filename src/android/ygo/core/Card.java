@@ -30,6 +30,8 @@ public class Card implements SelectableItem, Drawable {
     boolean set = false;
     boolean positive = true;
 
+    int indicator = 0;
+
     Bitmap cardPic;
 
     public Card(String id, String name, String desc) {
@@ -72,6 +74,9 @@ public class Card implements SelectableItem, Drawable {
 
     public void flip() {
         set = !set;
+        if(set) {
+            clearIndicator();
+        }
     }
 
     public void open() {
@@ -79,6 +84,7 @@ public class Card implements SelectableItem, Drawable {
     }
 
     public void set() {
+        clearIndicator();
         set = true;
     }
 
@@ -175,9 +181,41 @@ public class Card implements SelectableItem, Drawable {
         helper.drawBitmap(canvas, cardBmp, helper.center(width(), cardBmp.getWidth()),
                 helper.center(height(), cardBmp.getHeight()), new Paint());
 
+        drawIndicator(canvas, x, y);
+
         if (selected) {
             drawHighLight(canvas, x, y);
         }
+    }
+
+    private void drawIndicator(Canvas canvas, int x, int y) {
+        if (indicator == 0) {
+            return;
+        }
+        Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
+
+        int width = Utils.unitLength() / 6;
+
+        Paint paint = new Paint();
+        paint.setColor(Configuration.lineColor());
+        paint.setStrokeWidth(2);
+        paint.setStyle(Paint.Style.STROKE);
+
+        Rect indicatorRect = new Rect(0, 0, width, width);
+        int offsetX = Utils.unitLength() - width - 4;
+        indicatorRect.offset(offsetX, 0);
+
+        helper.drawRect(canvas, indicatorRect, paint);
+
+        TextPaint textPaint = new TextPaint();
+        textPaint.setTextSize(Utils.unitLength() / 10);
+        textPaint.setColor(Configuration.fontColor());
+        textPaint.setShadowLayer(1, 0, 0, Configuration.textShadowColor());
+        textPaint.setAntiAlias(true);
+        StaticLayout layout = new StaticLayout(String.valueOf(indicator), textPaint, width, Layout.Alignment.ALIGN_CENTER, 0, 0, true);
+        helper.drawLayout(canvas, layout, offsetX, 0);
+
+
     }
 
     private void drawHighLight(Canvas canvas, int x, int y) {
@@ -196,6 +234,21 @@ public class Card implements SelectableItem, Drawable {
             highLightRect.offset(0, helper.center(width(), Utils.cardWidth()));
         }
         helper.drawRect(canvas, highLightRect, paint);
+    }
+
+    public void addIndicator() {
+        indicator++;
+    }
+
+    public void removeIndicator() {
+        if(indicator == 0) {
+            return;
+        }
+        indicator--;
+    }
+
+    public void clearIndicator() {
+        indicator = 0;
     }
 
 

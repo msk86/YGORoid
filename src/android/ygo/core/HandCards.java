@@ -36,6 +36,7 @@ public class HandCards implements Item, Drawable {
             card.set();
         }
         card.positive();
+        card.clearIndicator();
         cards.add(card);
     }
 

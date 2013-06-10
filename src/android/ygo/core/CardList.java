@@ -106,6 +106,7 @@ public class CardList implements SelectableItem, Drawable {
         }
         card.positive();
         card.unSelect();
+        card.clearIndicator();
         cards.add(0, card);
     }
 
@@ -127,6 +128,7 @@ public class CardList implements SelectableItem, Drawable {
         }
         card.positive();
         card.unSelect();
+        card.clearIndicator();
         cards.add(card);
     }
 
