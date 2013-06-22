@@ -28,17 +28,23 @@ public class Utils {
     }
 
     private static void checkFolders() {
-        checkFolder(Configuration.baseDir());
-        checkFolder(Configuration.deckPath());
-        checkFolder(Configuration.cardImgPath());
-        checkFolder(Configuration.userDefinedCardImgPath());
-        checkFolder(Configuration.texturePath());
+        checkFolder(Configuration.baseDir(), false);
+        checkFolder(Configuration.deckPath(), false);
+        checkFolder(Configuration.cardImgPath(), true);
+        checkFolder(Configuration.userDefinedCardImgPath(), true);
+        checkFolder(Configuration.texturePath(), true);
     }
 
-    private static void checkFolder(String path) {
+    private static void checkFolder(String path, boolean noMedia) {
         File folder = new File(path);
         if (!folder.exists()) {
             folder.mkdirs();
+        }
+        if(noMedia) {
+            File noMediaDir = new File(path + ".nomedia");
+            if(!noMediaDir.exists()) {
+                noMediaDir.mkdirs();
+            }
         }
     }
 
