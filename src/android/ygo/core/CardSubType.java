@@ -35,6 +35,7 @@ public enum CardSubType {
     private int code;
     private String text;
     private Bitmap cardBmp;
+    private Bitmap bigCardBmp;
 
     CardSubType(int code, String text, int resId) {
         this.code = code;
@@ -42,6 +43,7 @@ public enum CardSubType {
         this.resId = resId;
         if (this.resId != 0) {
             cardBmp = Utils.readBitmapScaleByHeight(resId, Utils.cardHeight());
+            bigCardBmp = Utils.readBitmapScaleByHeight(resId, Utils.screenHeight());
         }
     }
 
@@ -62,5 +64,9 @@ public enum CardSubType {
     @Override
     public String toString() {
         return text;
+    }
+
+    public Bitmap getBigCardBmp() {
+        return bigCardBmp;
     }
 }

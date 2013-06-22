@@ -20,7 +20,7 @@ public class ActionDispatcher {
         }
         if (click.getContainer() instanceof InfoWindow) {
             if (click.getItem() instanceof Card || click.getItem() instanceof OverRay)
-                action = new OpenInfoAction(click);
+                action = new OpenCardWindowAction(click);
         }
         return action;
     }
@@ -131,7 +131,9 @@ public class ActionDispatcher {
 
     public static Action dispatch(ReturnClick click) {
         Action action = new EmptyAction();
-        if (click.getDuel().getCardSelector() != null) {
+        if(click.getDuel().getCardWindow() != null) {
+            action = new CloseCardWindowAction(click);
+        } else if (click.getDuel().getCardSelector() != null) {
             action = new CloseCardSelectorAction(click);
         } else {
             SelectableItem item = click.getItem();

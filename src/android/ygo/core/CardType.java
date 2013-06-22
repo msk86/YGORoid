@@ -14,6 +14,7 @@ public enum CardType {
     private String text;
     private int resId;
     private Bitmap cardBmp;
+    private Bitmap bigCardBmp;
 
     CardType(int code, String text, int resId) {
         this.code = code;
@@ -21,6 +22,7 @@ public enum CardType {
         this.resId = resId;
         if (this.resId != 0) {
             cardBmp = Utils.readBitmapScaleByHeight(resId, Utils.cardHeight());
+            bigCardBmp = Utils.readBitmapScaleByHeight(resId, Utils.screenHeight());
         }
     }
 
@@ -38,6 +40,10 @@ public enum CardType {
 
     public Bitmap getCardBmp() {
         return cardBmp;
+    }
+
+    public Bitmap getBigCardBmp() {
+        return bigCardBmp;
     }
 
     @Override

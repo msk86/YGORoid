@@ -62,4 +62,8 @@ public class Configuration {
     public static int fieldColor() {
         return Color.BLACK;
     }
+
+    public static int showCardWindowBackgroundColor() {
+        return Color.GRAY;
+    }
 }

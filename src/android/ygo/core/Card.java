@@ -16,7 +16,8 @@ public class Card implements SelectableItem, Drawable {
     static {
         try {
             CARD_PROTECTOR = Utils.readBitmapScaleByHeight(Configuration.texturePath() + "cover" + Configuration.cardImageSuffix(), Utils.cardHeight());
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
     }
 
     private boolean selected = false;
@@ -80,7 +81,7 @@ public class Card implements SelectableItem, Drawable {
 
     public void flip() {
         set = !set;
-        if(set) {
+        if (set) {
             clearIndicator();
         }
     }
@@ -108,6 +109,25 @@ public class Card implements SelectableItem, Drawable {
 
     public void negative() {
         positive = false;
+    }
+
+    public Bitmap bigCardPic() {
+        Bitmap bigCardPic = null;
+        try {
+            bigCardPic = Utils.readBitmapScaleByHeight(Configuration.cardImgPath() + id + Configuration.cardImageSuffix(), Utils.screenHeight());
+        } catch (Exception e) {
+            if (type.getBigCardBmp() != null) {
+                bigCardPic = type.getBigCardBmp();
+            } else {
+                for (int i = subTypes.size() - 1; i >= 0; i--) {
+                    CardSubType subType = subTypes.get(i);
+                    if (subType.getBigCardBmp() != null) {
+                        bigCardPic = subType.getBigCardBmp();
+                    }
+                }
+            }
+        }
+        return bigCardPic;
     }
 
     private void initCardPic() {
@@ -247,7 +267,7 @@ public class Card implements SelectableItem, Drawable {
     }
 
     public void removeIndicator() {
-        if(indicator == 0) {
+        if (indicator == 0) {
             return;
         }
         indicator--;

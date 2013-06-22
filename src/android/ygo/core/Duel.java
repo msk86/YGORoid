@@ -22,6 +22,7 @@ public class Duel implements Item, Drawable {
     private CardSelector cardSelector;
 
     private InfoWindow window;
+    private ShowCardWindow cardWindow;
 
     private SelectableItem currentSelectItem;
 
@@ -183,6 +184,10 @@ public class Duel implements Item, Drawable {
 
     public void setCardSelector(CardSelector cardSelector) {
         this.cardSelector = cardSelector;
+    }
+
+    public void setCardWindow(ShowCardWindow cardWindow) {
+        this.cardWindow = cardWindow;
     }
 
     public DuelFields getDuelFields() {
@@ -352,13 +357,14 @@ public class Duel implements Item, Drawable {
     public void draw(Canvas canvas, int x, int y) {
         Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
 
-        if (cardSelector == null) {
+        if (cardSelector == null && cardWindow == null) {
             helper.drawDrawable(canvas, lifePoint, Utils.unitLength(), (Utils.unitLength() - lifePoint.height()) / 2);
             helper.drawDrawable(canvas, dice, (int) (Utils.unitLength() * 2.4), 0);
             helper.drawDrawable(canvas, coin, (int) (Utils.unitLength() * 2.4), Utils.unitLength() / 2);
             helper.drawDrawable(canvas, duelFields, 0, 0);
             helper.drawDrawable(canvas, handCards, 0, duelFields.height() + 1);
-        } else {
+        }
+        if(cardSelector != null) {
             helper.drawDrawable(canvas, cardSelector, 0, 0);
         }
 
@@ -371,6 +377,10 @@ public class Duel implements Item, Drawable {
         }
 
         helper.drawDrawable(canvas, window, helper.center(width(), window.width()), helper.bottom(Utils.screenHeight(), window.height()));
+
+        if(cardWindow != null) {
+            helper.drawDrawable(canvas, cardWindow, 0, 0);
+        }
     }
 
     public SelectableItem getCurrentSelectItem() {
@@ -387,5 +397,9 @@ public class Duel implements Item, Drawable {
 
     public Coin getCoin() {
         return coin;
+    }
+
+    public ShowCardWindow getCardWindow() {
+        return cardWindow;
     }
 }
