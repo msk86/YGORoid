@@ -8,10 +8,13 @@ public class ReturnClick implements Operation {
 
     Duel duel;
     SelectableItem item;
+    Item container;
 
     public ReturnClick(Duel duel) {
         this.duel = duel;
         item = duel.getCurrentSelectItem();
+        container = duel.getCurrentSelectItemContainer();
+
     }
 
     @Override
@@ -26,7 +29,7 @@ public class ReturnClick implements Operation {
 
     @Override
     public Item getContainer() {
-        return null;
+        return container;
     }
 
     @Override
