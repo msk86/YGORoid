@@ -29,5 +29,7 @@ public class ToDeckBottomAction extends BaseAction {
 
         Deck deck = (Deck) duel.getDuelFields().getDeckField().getItem();
         deck.unShift(card);
+
+        duel.unSelect();
     }
 }
