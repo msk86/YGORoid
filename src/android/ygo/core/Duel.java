@@ -29,24 +29,28 @@ public class Duel implements Item, Drawable {
     private Drag drag;
     private List<Card> mainDeckCards;
     private List<Card> exDeckCards;
+    private List<Card> sideDeckCards;
     private Item currentSelectItemContainer;
 
     private Dice dice;
     private Coin coin;
 
     public Duel() {
-       start(null ,null);
+       start(null ,null, null);
     }
 
-    public void start(List<Card> mainDeckCards, List<Card> exDeckCards) {
+    public void start(List<Card> mainDeckCards, List<Card> exDeckCards, List<Card> sideDeckCards) {
         if (mainDeckCards == null) {
             mainDeckCards = new ArrayList<Card>();
         }
         if (exDeckCards == null) {
             exDeckCards = new ArrayList<Card>();
         }
+        if (sideDeckCards == null) {
+            sideDeckCards = new ArrayList<Card>();
+        }
 
-        if(!deckCheck(mainDeckCards, exDeckCards)) {
+        if(!deckCheck(mainDeckCards, exDeckCards, sideDeckCards)) {
             return;
         }
 
@@ -54,6 +58,7 @@ public class Duel implements Item, Drawable {
 
         this.mainDeckCards = mainDeckCards;
         this.exDeckCards = exDeckCards;
+        this.sideDeckCards = sideDeckCards;
 
         initDeck();
         Deck deck = (Deck) duelFields.getDeckField().getItem();
@@ -62,17 +67,17 @@ public class Duel implements Item, Drawable {
     }
 
     public void restart() {
-        start(this.mainDeckCards, this.exDeckCards);
+        start(this.mainDeckCards, this.exDeckCards, this.sideDeckCards);
     }
 
-    public boolean deckCheck(List<Card> mainDeckCards, List<Card> exDeckCards) {
-        if (!deckCardCountCheck(mainDeckCards, exDeckCards)) return false;
-        if (!singleCardCountCheck(mainDeckCards, exDeckCards)) return false;
+    public boolean deckCheck(List<Card> mainDeckCards, List<Card> exDeckCards, List<Card> sideDeckCards) {
+        if (!deckCardCountCheck(mainDeckCards, exDeckCards, sideDeckCards)) return false;
+        if (!singleCardCountCheck(mainDeckCards, exDeckCards, sideDeckCards)) return false;
         return true;
 
     }
 
-    private boolean deckCardCountCheck(List<Card> mainDeckCards, List<Card> exDeckCards) {
+    private boolean deckCardCountCheck(List<Card> mainDeckCards, List<Card> exDeckCards, List<Card> sideDeckCards) {
         if(mainDeckCards.size() == 0 && exDeckCards.size() == 0) {
             return true;
         }
@@ -81,6 +86,8 @@ public class Duel implements Item, Drawable {
             info = "主卡组卡片数量不符合要求";
         } else if(exDeckCards.size() > 15) {
             info = "额外卡组卡片数量不符合要求";
+        } else if(sideDeckCards.size() > 15) {
+            info = "副卡组卡片数量不符合要求";
         }
         if(info != null) {
             Toast.makeText(Utils.getContext(), info, Toast.LENGTH_LONG).show();
@@ -90,13 +97,14 @@ public class Duel implements Item, Drawable {
         return true;
     }
 
-    private boolean singleCardCountCheck(List<Card> mainDeckCards, List<Card> exDeckCards) {
+    private boolean singleCardCountCheck(List<Card> mainDeckCards, List<Card> exDeckCards, List<Card> sideDeckCards) {
         List<Integer> invalidCardIds = new ArrayList<Integer>();
         List<String> invalidUDCardNames = new ArrayList<String>();
 
         List<Card> allCards = new ArrayList<Card>();
         allCards.addAll(mainDeckCards);
         allCards.addAll(exDeckCards);
+        allCards.addAll(sideDeckCards);
 
         Map<String, Integer> cardCount = new TreeMap<String, Integer>();
         Map<String, Integer> uDCardCount = new TreeMap<String, Integer>();

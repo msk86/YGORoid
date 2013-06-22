@@ -186,6 +186,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         File deckFile = new File(Configuration.deckPath() + fileName);
         List<Card> mainCardList = new ArrayList<Card>();
         List<Card> exCardList = new ArrayList<Card>();
+        List<Card> sideCardList = new ArrayList<Card>();
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(deckFile), Utils.codeString(deckFile)));
             String line = "";
@@ -227,6 +228,9 @@ public class CardsDBHelper extends SQLiteOpenHelper {
                         case IN_EX:
                             exCardList.add(card);
                             break;
+                        case IN_SIDE:
+                            sideCardList.add(card);
+                            break;
                     }
                 }
 
@@ -238,6 +242,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         List<List<Card>> cardsLists = new ArrayList<List<Card>>();
         cardsLists.add(mainCardList);
         cardsLists.add(exCardList);
+        cardsLists.add(sideCardList);
         return cardsLists;
     }
 

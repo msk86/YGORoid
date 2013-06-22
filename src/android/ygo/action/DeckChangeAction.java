@@ -26,7 +26,8 @@ public class DeckChangeAction extends BaseAction {
                 List<List<Card>> cards = Utils.getDbHelper().loadFromFile(deck);
                 List<Card> mainCards = cards.get(0);
                 List<Card> exCards = cards.get(1);
-                duel.start(mainCards, exCards);
+                List<Card> sideCards = cards.get(2);
+                duel.start(mainCards, exCards, sideCards);
                 Utils.getContext().getDuelDiskView().updateActionTime();
             }
         });
