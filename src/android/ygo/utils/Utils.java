@@ -39,9 +39,6 @@ public class Utils {
         File folder = new File(path);
         if (!folder.exists()) {
             folder.mkdirs();
-            folder.setExecutable(true);
-            folder.setReadable(true);
-            folder.setWritable(true);
         }
     }
 
