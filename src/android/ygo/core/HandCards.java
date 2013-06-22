@@ -16,7 +16,7 @@ public class HandCards implements Item, Drawable {
     public HandCards() {
         cards = new ArrayList<Card>();
         set = false;
-        layout = new LinerLayout(cards, Utils.totalWidth());
+        layout = new LinerLayout(cards, Utils.totalWidth(), Utils.cardHeight() / 7);
     }
 
     public void shuffle() {

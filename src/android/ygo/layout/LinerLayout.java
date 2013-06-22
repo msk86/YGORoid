@@ -13,9 +13,12 @@ public class LinerLayout implements Drawable {
     int maxWidth;
     int cardPadding;
 
-    public LinerLayout(List<Card> cards, int maxWidth) {
+    int paddingY = 0;
+
+    public LinerLayout(List<Card> cards, int maxWidth, int paddingY) {
         this.maxWidth = maxWidth;
         this.cards = cards;
+        this.paddingY = paddingY;
     }
 
     public void fixPosition() {
@@ -39,7 +42,7 @@ public class LinerLayout implements Drawable {
         Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
         for (int i = 0; i < cards.size(); i++) {
             Card card = cards.get(i);
-            posY = Utils.cardHeight() / 7;
+            posY = paddingY;
             if (card.isSelect()) {
                 posY = 0;
             }

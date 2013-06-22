@@ -137,6 +137,8 @@ public class ActionDispatcher {
             action = new CloseCardWindowAction(click);
         } else if (click.getDuel().getCardSelector() != null) {
             action = new CloseCardSelectorAction(click);
+        } else if (click.getDuel().getSideWindow() != null) {
+            action = new CloseSideWindowAction(click);
         } else {
             SelectableItem item = click.getItem();
             if (item != null) {
@@ -167,6 +169,9 @@ public class ActionDispatcher {
                         break;
                     case Const.MENU_DECK_CHANGE_DECK:
                         action = new DeckChangeAction(menuClick);
+                        break;
+                    case Const.MENU_DECK_SIDE:
+                        action = new OpenSideWindowAction(menuClick);
                         break;
                     case Const.MENU_MIRROR_DISPLAY:
                         action = new MirrorDisplayAction(menuClick);

@@ -23,6 +23,7 @@ public class Duel implements Item, Drawable {
 
     private InfoWindow window;
     private ShowCardWindow cardWindow;
+    private SideWindow sideWindow;
 
     private SelectableItem currentSelectItem;
 
@@ -198,6 +199,10 @@ public class Duel implements Item, Drawable {
         this.cardWindow = cardWindow;
     }
 
+    public void setSideWindow(SideWindow sideWindow) {
+        this.sideWindow = sideWindow;
+    }
+
     public DuelFields getDuelFields() {
         return duelFields;
     }
@@ -249,6 +254,8 @@ public class Duel implements Item, Drawable {
             return handCards.cardAt(x, y);
         } else if (inCardSelector(x, y)) {
             return cardSelector.cardAt(x, y);
+        } else if (inSideWindow(x, y)) {
+            return sideWindow.cardAt(x, y);
         } else if (inInfo(x, y)) {
             return currentSelectItem;
         }
@@ -287,7 +294,7 @@ public class Duel implements Item, Drawable {
     }
 
     public boolean inDice(int x, int y) {
-        if (cardSelector != null || cardWindow != null) {
+        if (cardSelector != null || cardWindow != null || sideWindow != null) {
             return false;
         }
         if (x >= Utils.unitLength() * 2.4 && x < Utils.unitLength() * 2.9) {
@@ -299,7 +306,7 @@ public class Duel implements Item, Drawable {
     }
 
     public boolean inCoin(int x, int y) {
-        if (cardSelector != null || cardWindow != null) {
+        if (cardSelector != null || cardWindow != null || sideWindow != null) {
             return false;
         }
         if (x >= Utils.unitLength() * 2.4 && x < Utils.unitLength() * 2.9) {
@@ -311,7 +318,7 @@ public class Duel implements Item, Drawable {
     }
 
     public boolean inLifePoint(int x, int y) {
-        if (cardSelector != null || cardWindow != null) {
+        if (cardSelector != null || cardWindow != null || sideWindow != null) {
             return false;
         }
         if (x >= Utils.unitLength() && x < Utils.unitLength() * 2.2) {
@@ -323,7 +330,7 @@ public class Duel implements Item, Drawable {
     }
 
     public boolean inCardSelector(int x, int y) {
-        if (cardSelector == null || cardWindow != null) {
+        if (cardSelector == null || cardWindow != null || sideWindow != null) {
             return false;
         }
         if (y >= Utils.screenHeight() - Utils.cardHeight() / 6) {
@@ -333,14 +340,14 @@ public class Duel implements Item, Drawable {
     }
 
     public boolean inDuelFields(int x, int y) {
-        if (cardSelector != null || cardWindow != null) {
+        if (cardSelector != null || cardWindow != null || sideWindow != null) {
             return false;
         }
         return y < Utils.unitLength() * 3 && x < Utils.totalWidth();
     }
 
     public boolean inHand(int x, int y) {
-        if (cardSelector != null || cardWindow != null) {
+        if (cardSelector != null || cardWindow != null || sideWindow != null) {
             return false;
         }
         return y >= Utils.unitLength() * 3 && y < Utils.screenHeight() - Utils.cardHeight() / 6;
@@ -351,6 +358,13 @@ public class Duel implements Item, Drawable {
             return false;
         }
         return y >= Utils.screenHeight() - Utils.cardHeight() / 6;
+    }
+
+    public boolean inSideWindow(int x, int y) {
+        if(sideWindow == null || cardWindow != null) {
+            return false;
+        }
+        return y < Utils.screenHeight() - Utils.cardHeight() / 6;
     }
 
     @Override
@@ -377,6 +391,9 @@ public class Duel implements Item, Drawable {
         }
         if(cardSelector != null) {
             helper.drawDrawable(canvas, cardSelector, 0, 0);
+        }
+        if(sideWindow != null) {
+            helper.drawDrawable(canvas, sideWindow, 0, 0);
         }
 
         Drag dragged = drag;
@@ -412,5 +429,21 @@ public class Duel implements Item, Drawable {
 
     public ShowCardWindow getCardWindow() {
         return cardWindow;
+    }
+
+    public SideWindow getSideWindow() {
+        return sideWindow;
+    }
+
+    public List<Card> getMainDeckCards() {
+        return mainDeckCards;
+    }
+
+    public List<Card> getExDeckCards() {
+        return exDeckCards;
+    }
+
+    public List<Card> getSideDeckCards() {
+        return sideDeckCards;
     }
 }

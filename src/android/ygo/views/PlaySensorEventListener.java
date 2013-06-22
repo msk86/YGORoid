@@ -16,6 +16,9 @@ public class PlaySensorEventListener implements SensorEventListener {
 
     @Override
     public void onSensorChanged(SensorEvent e) {
+        if(view.getDuel().getSideWindow() != null) {
+            return;
+        }
         float zLimit = 8f;
         float z = e.values[SensorManager.DATA_Z];
         boolean changed = false;
