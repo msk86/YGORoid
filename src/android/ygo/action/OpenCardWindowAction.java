@@ -1,6 +1,7 @@
 package android.ygo.action;
 
 import android.ygo.core.Card;
+import android.ygo.core.CardSubType;
 import android.ygo.core.OverRay;
 import android.ygo.core.ShowCardWindow;
 import android.ygo.op.Operation;
@@ -19,7 +20,9 @@ public class OpenCardWindowAction extends BaseAction {
             card = (Card) item;
         }
 
-        ShowCardWindow cardWindow = new ShowCardWindow(card);
-        duel.setCardWindow(cardWindow);
+        if(!card.getSubTypes().contains(CardSubType.TOKEN)) {
+            ShowCardWindow cardWindow = new ShowCardWindow(card);
+            duel.setCardWindow(cardWindow);
+        }
     }
 }
