@@ -29,5 +29,7 @@ public class CloseRemoveCardAction extends BaseAction {
 
         CardList removed = (CardList) duel.getDuelFields().getRemovedField().getItem();
         removed.push(card, true);
+
+        duel.unSelect();
     }
 }
