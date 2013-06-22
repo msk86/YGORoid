@@ -34,14 +34,14 @@ public class DuelFields implements Item, Drawable {
         fieldLine0.add(null);
         fieldLine0.add(null);
 
-        graveyardField = new Field(FieldType.GRAVEYARD);
-        fieldLine0.add(graveyardField);
+        tempField = new Field(FieldType.TEMP);
+        fieldLine0.add(tempField);
 
         removedField = new Field(FieldType.REMOVED);
         fieldLine0.add(removedField);
 
-        tempField = new Field(FieldType.TEMP);
-        fieldLine0.add(tempField);
+        graveyardField = new Field(FieldType.GRAVEYARD);
+        fieldLine0.add(graveyardField);
 
         monsterZoneFields = new ArrayList<Field>();
         magicZoneFields = new ArrayList<Field>();
