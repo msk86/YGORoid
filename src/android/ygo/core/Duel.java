@@ -151,11 +151,11 @@ public class Duel implements Item, Drawable {
         lifePoint = new LifePoint();
 
         duelFields = new DuelFields();
-        Deck deck = new Deck("DECK");
-        Deck exDeck = new Deck("EX");
-        CardList graveyard = new CardList("GRAVEYARD");
-        CardList removed = new CardList("REMOVED");
-        CardList temp = new CardList("TEMPORARY");
+        Deck deck = new Deck(CardList.DECK);
+        Deck exDeck = new Deck(CardList.EX);
+        CardList graveyard = new CardList(CardList.GRAVEYARD);
+        CardList removed = new CardList(CardList.REMOVED);
+        CardList temp = new CardList(CardList.TEMPORARY);
         duelFields.getDeckField().setItem(deck);
         duelFields.getExDeckField().setItem(exDeck);
         duelFields.getGraveyardField().setItem(graveyard);

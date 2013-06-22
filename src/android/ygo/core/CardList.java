@@ -14,6 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CardList implements SelectableItem, Drawable {
+    public static final String DECK = "卡组";
+    public static final String EX = "额外";
+    public static final String GRAVEYARD = "墓地";
+    public static final String REMOVED = "除外";
+    public static final String TEMPORARY = "临时";
+
     private boolean selected = false;
 
     String name;
@@ -175,7 +181,8 @@ public class CardList implements SelectableItem, Drawable {
         Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
 
         TextPaint textPaint = new TextPaint();
-        textPaint.setTextSize(Utils.unitLength() / 10);
+        textPaint.setAntiAlias(true);
+        textPaint.setTextSize(Utils.unitLength() / 9);
         textPaint.setColor(Configuration.fontColor());
         textPaint.setShadowLayer(1, 0, 0, Configuration.textShadowColor());
         textPaint.setUnderlineText(true);

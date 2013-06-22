@@ -26,7 +26,7 @@ public class PlayMenuProcessor {
                     menu.add(Const.MENU_GROUP_FIELD_CARD, Const.MENU_CARD_BACK_TO_BOTTOM_OF_DECK, 0, "回卡组底");
                     menu.add(Const.MENU_GROUP_FIELD_CARD, Const.MENU_CARD_CLOSE_REMOVE, 0, "里侧除外");
                 } else if (item instanceof Deck) {
-                    if (((Deck) item).getName().equals("DECK")) {
+                    if (((Deck) item).getName().equals(CardList.DECK)) {
                         menu.add(Const.MENU_GROUP_DECK, Const.MENU_DECK_SHUFFLE, 0, "卡组洗切");
                         menu.add(Const.MENU_GROUP_DECK, Const.MENU_DECK_CLOSE_REMOVE_TOP, 0, "卡组顶端里侧除外");
                         menu.add(Const.MENU_GROUP_DECK, Const.MENU_DECK_REVERSE, 0, "卡组翻转");

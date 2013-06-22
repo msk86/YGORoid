@@ -26,8 +26,8 @@ public class OpenCardSelectorAction extends BaseAction {
             return;
         }
 
-        if (list.getName().equals("DECK") ||
-                list.getName().equals("EX")) {
+        if (list.getName().equals(CardList.DECK) ||
+                list.getName().equals(CardList.EX)) {
             list.openAll();
         }
 

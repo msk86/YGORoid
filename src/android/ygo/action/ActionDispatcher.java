@@ -60,14 +60,14 @@ public class ActionDispatcher {
                     action = new FlipAction(dblClick);
                 } else if (item instanceof CardList) {
                     CardList cardList = (CardList) item;
-                    if (cardList.getName().equals("TEMPORARY") || cardList.getName().equals("DECK")) {
+                    if (cardList.getName().equals(CardList.TEMPORARY) || cardList.getName().equals(CardList.DECK)) {
                         action = new ShuffleAction(dblClick);
                     }
                 }
             }
         } else if (container instanceof CardList) {
             CardList cardList = (CardList) container;
-            if (cardList.getName().equals("TEMPORARY")) {
+            if (cardList.getName().equals(CardList.TEMPORARY)) {
                 action = new FlipAction(dblClick);
             }
         } else if (container instanceof HandCards) {
