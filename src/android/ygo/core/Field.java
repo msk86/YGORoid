@@ -43,11 +43,18 @@ public class Field implements Item, Drawable {
     }
 
     private void drawFrame(Canvas canvas, int x, int y) {
+        Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
         Paint paint = new Paint();
+        paint.setColor(Configuration.fieldColor());
+        paint.setAlpha(80);
+        helper.drawRect(canvas, new Rect(padding(), padding(), width() - padding(), height() - padding()),
+                paint);
+
         paint.setColor(Configuration.lineColor());
         paint.setStrokeWidth(2);
         paint.setStyle(Paint.Style.STROKE);
-        Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
+        paint.setAlpha(255);
+
         helper.drawRect(canvas, new Rect(padding(), padding(), width() - padding(), height() - padding()),
                 paint);
     }

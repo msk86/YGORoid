@@ -32,6 +32,7 @@ public class Utils {
         checkFolder(Configuration.deckPath());
         checkFolder(Configuration.cardImgPath());
         checkFolder(Configuration.userDefinedCardImgPath());
+        checkFolder(Configuration.texturePath());
     }
 
     private static void checkFolder(String path) {

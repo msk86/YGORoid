@@ -1,6 +1,7 @@
 package android.ygo.views;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -19,6 +20,17 @@ import android.ygo.utils.FPSMaker;
 import android.ygo.utils.Utils;
 
 public class DuelDiskView extends SurfaceView implements Runnable {
+    private static Bitmap BACKGROUND_BMP;
+
+    static {
+        try {
+            BACKGROUND_BMP = Utils.readBitmapScaleByHeight(Configuration.texturePath() + "background" + Configuration.cardImageSuffix(),
+                    Utils.screenHeight());
+        } catch (Exception e) {
+            BACKGROUND_BMP = null;
+        }
+    }
+
     private static final int ACTIVE_DRAW_DURATION = 1500;
     private Thread renderThread;
     private SurfaceHolder holder;
@@ -82,7 +94,9 @@ public class DuelDiskView extends SurfaceView implements Runnable {
 
     private void drawBackground(Canvas canvas) {
         canvas.drawColor(Color.BLACK);
-        // IMAGE BACKGROUND
+        if(BACKGROUND_BMP != null) {
+            canvas.drawBitmap(BACKGROUND_BMP, 0, 0, new Paint());
+        }
     }
 
     @Override

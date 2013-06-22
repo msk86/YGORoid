@@ -47,11 +47,19 @@ public class Configuration {
         return baseDir() + "userDefined/";
     }
 
+    public static String texturePath() {
+        return baseDir() + "texture/";
+    }
+
     public static String cardImageSuffix() {
         return ".jpg";
     }
 
     public static boolean showFPS() {
         return false;
+    }
+
+    public static int fieldColor() {
+        return Color.BLACK;
     }
 }
