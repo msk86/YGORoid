@@ -11,7 +11,13 @@ import android.ygo.utils.Utils;
 import java.util.List;
 
 public class Card implements SelectableItem, Drawable {
-    public static final Bitmap CARD_PROTECTOR = Utils.readBitmapScaleByHeight(R.raw.cover, Utils.cardHeight());
+    public static Bitmap CARD_PROTECTOR = Utils.readBitmapScaleByHeight(R.raw.cover, Utils.cardHeight());
+
+    static {
+        try {
+            CARD_PROTECTOR = Utils.readBitmapScaleByHeight(Configuration.texturePath() + "cover" + Configuration.cardImageSuffix(), Utils.cardHeight());
+        } catch (Exception e) {}
+    }
 
     private boolean selected = false;
 
