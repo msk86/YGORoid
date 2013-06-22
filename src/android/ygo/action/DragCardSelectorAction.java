@@ -2,6 +2,7 @@ package android.ygo.action;
 
 import android.ygo.core.Card;
 import android.ygo.core.CardList;
+import android.ygo.core.Field;
 import android.ygo.op.StartDrag;
 
 public class DragCardSelectorAction extends CloseCardSelectorAction {
@@ -12,7 +13,7 @@ public class DragCardSelectorAction extends CloseCardSelectorAction {
     @Override
     public void execute() {
         Card card = (Card) item;
-        CardList cardList = (CardList) container;
+        CardList cardList = duel.getCardSelector().getCardList();
         cardList.remove(card);
         ((StartDrag) operation).setDragItem(card);
 

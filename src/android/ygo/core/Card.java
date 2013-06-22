@@ -303,6 +303,40 @@ public class Card implements SelectableItem, Drawable {
         return selected;
     }
 
+    public String cardTypeDesc() {
+        StringBuilder result = new StringBuilder();
+        result.append(type.toString());
+        for (CardSubType subType : subTypes) {
+            result.append("|" + subType.toString());
+        }
+        if(result.length() > 0) {
+            result.insert(0, "[");
+            result.append("]");
+        }
+        return result.toString();
+    }
+
+    public String levelAndADDesc() {
+        StringBuilder result = new StringBuilder();
+        if (subTypes.contains(CardSubType.XYZ)) {
+            result.append("R");
+        } else {
+            result.append("L");
+        }
+        result.append(level);
+        result.append(" ");
+        result.append(atk + "/" + def);
+        return result.toString();
+    }
+
+    public String attrAndRaceDesc() {
+        StringBuilder result = new StringBuilder();
+        result.append(attribute.toString());
+        result.append(" ");
+        result.append(race.toString());
+        return result.toString();
+    }
+
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
@@ -312,26 +346,14 @@ public class Card implements SelectableItem, Drawable {
         if (type == CardType.NULL) {
             result.append(desc);
         } else {
-            result.append(type.toString());
-            for (CardSubType subType : subTypes) {
-                result.append("|" + subType.toString());
-            }
+            result.append(cardTypeDesc());
             if (type != CardType.MONSTER) {
                 return result.toString();
             }
             result.append(" ");
-            if (subTypes.contains(CardSubType.XYZ)) {
-                result.append("R");
-            } else {
-                result.append("L");
-            }
-            result.append(level);
+            result.append(levelAndADDesc());
             result.append(" ");
-            result.append(atk + "/" + def);
-            result.append(" ");
-            result.append(attribute.toString());
-            result.append(" ");
-            result.append(race.toString());
+            result.append(attrAndRaceDesc());
         }
         return result.toString();
     }

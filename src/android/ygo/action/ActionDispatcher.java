@@ -83,13 +83,15 @@ public class ActionDispatcher {
                 if (item instanceof OverRay) {
                     action = new DragOverRayAction(startDrag);
                 } else if (item instanceof Card) {
-                    action = new DragFieldCardAction(startDrag);
+                    if(startDrag.getDuel().getCardSelector() == null) {
+                        action = new DragFieldCardAction(startDrag);
+                    } else {
+                        action = new DragCardSelectorAction(startDrag);
+                    }
                 } else if (item instanceof CardList) {
                     action = new DragCardListAction(startDrag);
                 }
             }
-        } else if (startDrag.getContainer() instanceof CardList) {
-            action = new DragCardSelectorAction(startDrag);
         }
         return action;
     }
