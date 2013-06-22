@@ -32,7 +32,9 @@ public class PlayMenuProcessor {
                         menu.add(Const.MENU_GROUP_DECK, Const.MENU_DECK_REVERSE, 0, "卡组翻转");
                         menu.add(Const.MENU_GROUP_DECK, Const.MENU_DECK_RESTART, 0, "重新开始");
                         menu.add(Const.MENU_GROUP_DECK, Const.MENU_DECK_CHANGE_DECK, 0, "更换卡组");
-                        menu.add(Const.MENU_GROUP_DECK, Const.MENU_MIRROR_DISPLAY, 0, "镜像显示");
+                        if(android.os.Build.VERSION.SDK_INT >= 10) {
+                            menu.add(Const.MENU_GROUP_DECK, Const.MENU_MIRROR_DISPLAY, 0, "镜像显示");
+                        }
                         menu.add(Const.MENU_GROUP_DECK, Const.MENU_EXIT, 0, "退出");
                     }
                 }
