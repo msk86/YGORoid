@@ -231,6 +231,7 @@ public class Utils {
 
         switch (p) {
             case 0x5bb3:
+            case 0x5bc8:
                 code = "GBK";
                 break;
             case 0xfffe:
