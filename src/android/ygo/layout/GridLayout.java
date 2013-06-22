@@ -3,11 +3,12 @@ package android.ygo.layout;
 import android.graphics.Canvas;
 import android.ygo.core.Card;
 import android.ygo.core.Drawable;
+import android.ygo.core.Item;
 import android.ygo.utils.Utils;
 
 import java.util.List;
 
-public class GridLayout implements Drawable {
+public class GridLayout implements Layout, Drawable {
     List<Card> cards;
 
     int row;
@@ -62,6 +63,7 @@ public class GridLayout implements Drawable {
         return row * Utils.cardHeight() + (row - 1) * cardPaddingH + 1;
     }
 
+    @Override
     public Card cardAt(int x, int y) {
         fixPosition();
         if (x < 0 || x >= width() || y < 0 || y >= height()) {
@@ -79,5 +81,10 @@ public class GridLayout implements Drawable {
             return cards.get(index);
         }
         return null;
+    }
+
+    @Override
+    public List<Card> cards() {
+        return cards;
     }
 }

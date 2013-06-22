@@ -18,6 +18,9 @@ public class ActionDispatcher {
         if (click.getItem() instanceof Coin) {
             action = new CoinAction(click);
         }
+        if(click.getDuel().getSideWindow() != null) {
+            action = new SelectSideAction(click);
+        }
         if (click.getContainer() instanceof InfoWindow) {
             if (click.getItem() instanceof Card || click.getItem() instanceof OverRay)
                 action = new OpenCardWindowAction(click);
@@ -35,6 +38,9 @@ public class ActionDispatcher {
                     action = new MonsterPositionAction(press);
                 }
             }
+        }
+        if(press.getDuel().getSideWindow() != null) {
+            action = new SideWindowFlipAction(press);
         }
         return action;
     }
@@ -69,6 +75,10 @@ public class ActionDispatcher {
             if (card != null) {
                 action = new FlipAction(dblClick);
             }
+        }
+
+        if(dblClick.getDuel().getSideWindow() != null) {
+            action = new ChangeSideAction(dblClick);
         }
         return action;
     }

@@ -275,6 +275,8 @@ public class Duel implements Item, Drawable {
             return handCards;
         } else if (inCardSelector(x, y)) {
             return currentSelectItemContainer;
+        } else if (inSideWindow(x, y)) {
+            return sideWindow.layoutAt(x, y);
         } else if (inInfo(x, y)) {
             return window;
         }

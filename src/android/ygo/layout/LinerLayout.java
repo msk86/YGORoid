@@ -3,11 +3,12 @@ package android.ygo.layout;
 import android.graphics.Canvas;
 import android.ygo.core.Card;
 import android.ygo.core.Drawable;
+import android.ygo.core.Item;
 import android.ygo.utils.Utils;
 
 import java.util.List;
 
-public class LinerLayout implements Drawable {
+public class LinerLayout implements Layout, Drawable {
     List<Card> cards;
 
     int maxWidth;
@@ -61,6 +62,7 @@ public class LinerLayout implements Drawable {
         return Utils.cardHeight();
     }
 
+    @Override
     public Card cardAt(int x, int y) {
         fixPosition();
         if (x < 0 || x >= width()) {
@@ -70,5 +72,10 @@ public class LinerLayout implements Drawable {
         int index = x / (Utils.cardWidth() + cardPadding);
         index = index < cards.size() ? index : cards.size() - 1;
         return cards.get(index);
+    }
+
+    @Override
+    public List<Card> cards() {
+        return cards;
     }
 }

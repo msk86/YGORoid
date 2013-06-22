@@ -361,4 +361,13 @@ public class Card implements SelectableItem, Drawable {
         }
         return result.toString();
     }
+
+    public boolean isEx() {
+        if(subTypes.contains(CardSubType.XYZ)
+                || subTypes.contains(CardSubType.SYNC)
+                || subTypes.contains(CardSubType.FUSION)) {
+            return true;
+        }
+        return false;
+    }
 }
