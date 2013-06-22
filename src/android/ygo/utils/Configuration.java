@@ -12,6 +12,10 @@ public class Configuration {
         return Color.WHITE;
     }
 
+    public static int syncFontColor() {
+        return Color.BLACK;
+    }
+
     public static int textShadowColor() {
         return Color.BLACK;
     }
