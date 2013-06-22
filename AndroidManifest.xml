@@ -16,6 +16,12 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <service android:name="android.ygo.service.PersistencyService"
+                 android:enabled="true">
+            <intent-filter>
+                <action android:name="android.ygo.service.persistencyService" />
+            </intent-filter>
+        </service>
     </application>
     <supports-screens
             android:smallScreens="true"

@@ -1,12 +1,18 @@
 package android.ygo;
 
 import android.app.Activity;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
 import android.ygo.exception.CrashHandler;
+import android.ygo.service.PersistencyService;
 import android.ygo.utils.Utils;
 import android.ygo.views.DuelDiskView;
 import android.ygo.views.PlayMenuProcessor;
@@ -16,6 +22,10 @@ public class YGOActivity extends Activity {
     private PlayOnKeyProcessor keyProcessor;
     private PlayMenuProcessor menuProcessor;
     private DuelDiskView duelDiskView;
+
+    private PersistencyService service;
+    private ServiceConnection sConn;
+    private Intent serviceIntent;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,6 +43,8 @@ public class YGOActivity extends Activity {
 
         keyProcessor = new PlayOnKeyProcessor(duelDiskView);
         menuProcessor = new PlayMenuProcessor(duelDiskView);
+
+        startService();
     }
 
     @Override
@@ -67,8 +79,39 @@ public class YGOActivity extends Activity {
         }
     }
 
+    public void startService() {
+        serviceIntent = new Intent(this, PersistencyService.class);
+        sConn = new PersistencyConnection();
+        bindService(serviceIntent, sConn, Context.BIND_AUTO_CREATE);
+    }
+
+    public void stopService() {
+        if (serviceIntent != null) {
+            unbindService(sConn);
+        }
+    }
+
     public DuelDiskView getDuelDiskView() {
         return duelDiskView;
+    }
+
+    public class PersistencyConnection implements ServiceConnection {
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+            service = ((PersistencyService.MyBinder) iBinder).getService();
+            if(service != null) {
+                if(service.getDuel() != null) {
+                    duelDiskView.setDuel(service.getDuel());
+                } else {
+                    service.setDuel(duelDiskView.getDuel());
+                }
+            }
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName componentName) {
+            service = null;
+        }
     }
 }
 

@@ -11,7 +11,10 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.ygo.core.*;
+import android.ygo.core.Duel;
+import android.ygo.core.DuelFields;
+import android.ygo.core.Field;
+import android.ygo.core.SpCard;
 import android.ygo.utils.Configuration;
 import android.ygo.utils.FPSMaker;
 import android.ygo.utils.Utils;
@@ -59,6 +62,10 @@ public class DuelDiskView extends SurfaceView implements Runnable {
 
     public Duel getDuel() {
         return duel;
+    }
+
+    public void setDuel(Duel duel) {
+        this.duel = duel;
     }
 
     private void initAbout() {
