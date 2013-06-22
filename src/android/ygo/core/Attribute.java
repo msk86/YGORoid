@@ -5,7 +5,7 @@ public enum Attribute {
     EARTH(Const.ATTRIBUTE_EARTH, "地"),
     WATER(Const.ATTRIBUTE_WATER, "水"),
     FIRE(Const.ATTRIBUTE_FIRE, "火"),
-    WIND(Const.ATTRIBUTE_WATER, "风"),
+    WIND(Const.ATTRIBUTE_WIND, "风"),
     LIGHT(Const.ATTRIBUTE_LIGHT, "光"),
     DARK(Const.ATTRIBUTE_DARK, "暗"),
     DIVINE(Const.ATTRIBUTE_DEVINE, "神");
