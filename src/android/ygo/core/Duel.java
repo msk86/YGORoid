@@ -110,7 +110,7 @@ public class Duel implements Item, Drawable {
         Map<String, Integer> cardCount = new TreeMap<String, Integer>();
         Map<String, Integer> uDCardCount = new TreeMap<String, Integer>();
         for (Card card : allCards) {
-            if(!(card instanceof UserDefinedCard)) {
+            if(!(card instanceof UserDefinedCard || card.getRealId().equals("0"))) {
                 if (!cardCount.containsKey(card.getRealId())) {
                     cardCount.put(card.getRealId(), 0);
                 }

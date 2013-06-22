@@ -40,10 +40,6 @@ public class Utils {
         if (!folder.exists()) {
             folder.mkdirs();
         }
-        File noMedia = new File(path + ".nomedia");
-        if(!noMedia.exists()) {
-            noMedia.mkdirs();
-        }
     }
 
     public static YGOActivity getContext() {
