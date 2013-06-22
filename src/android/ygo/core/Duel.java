@@ -279,7 +279,7 @@ public class Duel implements Item, Drawable {
     }
 
     public boolean inDice(int x, int y) {
-        if (cardSelector != null) {
+        if (cardSelector != null || cardWindow != null) {
             return false;
         }
         if (x >= Utils.unitLength() * 2.4 && x < Utils.unitLength() * 2.9) {
@@ -291,7 +291,7 @@ public class Duel implements Item, Drawable {
     }
 
     public boolean inCoin(int x, int y) {
-        if (cardSelector != null) {
+        if (cardSelector != null || cardWindow != null) {
             return false;
         }
         if (x >= Utils.unitLength() * 2.4 && x < Utils.unitLength() * 2.9) {
@@ -303,7 +303,7 @@ public class Duel implements Item, Drawable {
     }
 
     public boolean inLifePoint(int x, int y) {
-        if (cardSelector != null) {
+        if (cardSelector != null || cardWindow != null) {
             return false;
         }
         if (x >= Utils.unitLength() && x < Utils.unitLength() * 2.2) {
@@ -315,7 +315,7 @@ public class Duel implements Item, Drawable {
     }
 
     public boolean inCardSelector(int x, int y) {
-        if (cardSelector == null) {
+        if (cardSelector == null || cardWindow != null) {
             return false;
         }
         if (y >= Utils.screenHeight() - Utils.cardHeight() / 6) {
@@ -325,20 +325,23 @@ public class Duel implements Item, Drawable {
     }
 
     public boolean inDuelFields(int x, int y) {
-        if (cardSelector != null) {
+        if (cardSelector != null || cardWindow != null) {
             return false;
         }
         return y < Utils.unitLength() * 3 && x < Utils.totalWidth();
     }
 
     public boolean inHand(int x, int y) {
-        if (cardSelector != null) {
+        if (cardSelector != null || cardWindow != null) {
             return false;
         }
         return y >= Utils.unitLength() * 3 && y < Utils.screenHeight() - Utils.cardHeight() / 6;
     }
 
     public boolean inInfo(int x, int y) {
+        if(cardWindow != null) {
+            return false;
+        }
         return y >= Utils.screenHeight() - Utils.cardHeight() / 6;
     }
 
