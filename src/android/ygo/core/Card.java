@@ -224,11 +224,15 @@ public class Card implements SelectableItem, Drawable {
         helper.drawRect(canvas, indicatorRect, paint);
 
         TextPaint textPaint = new TextPaint();
-        textPaint.setTextSize(Utils.unitLength() / 10);
+        textPaint.setTextSize(Utils.unitLength() / 8);
         textPaint.setColor(Configuration.fontColor());
         textPaint.setShadowLayer(1, 0, 0, Configuration.textShadowColor());
         textPaint.setAntiAlias(true);
-        StaticLayout layout = new StaticLayout(String.valueOf(indicator), textPaint, width, Layout.Alignment.ALIGN_CENTER, 0, 0, true);
+        StaticLayout layout = new StaticLayout(String.valueOf(indicator), textPaint, width, Layout.Alignment.ALIGN_CENTER, 1, 0, true);
+        while(layout.getLineCount() > 1) {
+            textPaint.setTextSize(textPaint.getTextSize() * 0.9f);
+            layout = new StaticLayout(String.valueOf(indicator), textPaint, width, Layout.Alignment.ALIGN_CENTER, 1, 0, true);
+        }
         helper.drawLayout(canvas, layout, offsetX, 0);
 
 
