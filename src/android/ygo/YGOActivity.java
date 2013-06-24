@@ -27,6 +27,8 @@ public class YGOActivity extends Activity {
     private ServiceConnection sConn;
     private Intent serviceIntent;
 
+    private boolean mirror = false;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +47,14 @@ public class YGOActivity extends Activity {
         menuProcessor = new PlayMenuProcessor(duelDiskView);
 
         startService();
+    }
+
+    public boolean isMirror() {
+        return mirror;
+    }
+
+    public void setMirror(boolean mirror) {
+        this.mirror = mirror;
     }
 
     @Override

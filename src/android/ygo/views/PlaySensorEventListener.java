@@ -4,7 +4,9 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.ygo.YGOActivity;
 import android.ygo.core.HandCards;
+import android.ygo.utils.Utils;
 
 public class PlaySensorEventListener implements SensorEventListener {
 
@@ -21,6 +23,8 @@ public class PlaySensorEventListener implements SensorEventListener {
         }
         float zLimit = 8f;
         float z = e.values[SensorManager.DATA_Z];
+        float x = e.values[SensorManager.DATA_X];
+
         boolean changed = false;
         HandCards handCards = view.getDuel().getHandCards();
         if (z >= zLimit) {
@@ -32,9 +36,11 @@ public class PlaySensorEventListener implements SensorEventListener {
             }
         } else {
             if (z <= zLimit - 0.3) {
-                if (handCards.isSet()) {
-                    handCards.openAll();
-                    changed = true;
+                if(Utils.getContext().isMirror() != x >= 0) {
+                    if (handCards.isSet()) {
+                        handCards.openAll();
+                        changed = true;
+                    }
                 }
             }
         }
