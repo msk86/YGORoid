@@ -26,6 +26,8 @@ public class OverRayAction extends BaseAction {
             overRay.overRay(card);
             field.setItem(overRay);
         }
+        OverRay overRay = (OverRay) field.getItem();
+        overRay.adjust(field);
         duel.select(field.getItem(), container);
     }
 }
