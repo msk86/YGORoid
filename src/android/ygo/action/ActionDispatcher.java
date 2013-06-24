@@ -57,18 +57,21 @@ public class ActionDispatcher {
                 }
             } else {
                 if (item instanceof Card || item instanceof OverRay) {
-                    action = new FlipAction(dblClick);
+                    SelectableItem fieldItem = field.getItem();
+                    if(fieldItem instanceof CardList) {
+                        CardList cardList = (CardList) fieldItem;
+                        if (cardList.getName().equals(CardList.TEMPORARY)) {
+                            action = new FlipAction(dblClick);
+                        }
+                    } else {
+                        action = new FlipAction(dblClick);
+                    }
                 } else if (item instanceof CardList) {
                     CardList cardList = (CardList) item;
                     if (cardList.getName().equals(CardList.TEMPORARY) || cardList.getName().equals(CardList.DECK)) {
                         action = new ShuffleAction(dblClick);
                     }
                 }
-            }
-        } else if (container instanceof CardList) {
-            CardList cardList = (CardList) container;
-            if (cardList.getName().equals(CardList.TEMPORARY)) {
-                action = new FlipAction(dblClick);
             }
         } else if (container instanceof HandCards) {
             Card card = (Card) item;
