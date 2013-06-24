@@ -190,6 +190,9 @@ public class ActionDispatcher {
                     case Const.MENU_MIRROR_DISPLAY:
                         action = new MirrorDisplayAction(menuClick);
                         break;
+                    case Const.MENU_SCREEN_SHOT:
+                        action = new ScreenShotAction(menuClick);
+                        break;
                     case Const.MENU_EXIT:
                         action = new ExitAction(menuClick);
                         break;

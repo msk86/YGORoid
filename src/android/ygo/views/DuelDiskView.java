@@ -81,7 +81,7 @@ public class DuelDiskView extends SurfaceView implements Runnable {
         return mGestureDetector.onTouchEvent(event);
     }
 
-    private void drawDuelDisk(Canvas canvas) {
+    public void drawDuelDisk(Canvas canvas) {
         drawBackground(canvas);
         duel.draw(canvas, 0, 0);
         if (Configuration.showFPS()) {

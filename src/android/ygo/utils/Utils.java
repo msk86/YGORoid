@@ -3,14 +3,14 @@ package android.ygo.utils;
 import android.graphics.*;
 import android.text.Layout;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.ygo.YGOActivity;
 import android.ygo.core.Card;
 import android.ygo.core.Drawable;
 import android.ygo.sqlite.CardsDBHelper;
+import android.ygo.views.DuelDiskView;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
+import java.io.*;
 import java.util.List;
 import java.util.Random;
 
@@ -33,6 +33,7 @@ public class Utils {
         checkFolder(Configuration.cardImgPath(), true);
         checkFolder(Configuration.userDefinedCardImgPath(), true);
         checkFolder(Configuration.texturePath(), true);
+        checkFolder(Configuration.screenShotPath(), false);
     }
 
     private static void checkFolder(String path, boolean noMedia) {
@@ -40,9 +41,9 @@ public class Utils {
         if (!folder.exists()) {
             folder.mkdirs();
         }
-        if(noMedia) {
+        if (noMedia) {
             File noMediaDir = new File(path + ".nomedia");
-            if(!noMediaDir.exists()) {
+            if (!noMediaDir.exists()) {
                 noMediaDir.mkdirs();
             }
         }
@@ -253,4 +254,26 @@ public class Utils {
 
         return code;
     }
+
+    public static String screenShot() {
+        DuelDiskView v = context.getDuelDiskView();
+        Bitmap bitmap = Bitmap.createBitmap(Utils.screenWidth(), Utils.screenHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        v.drawDuelDisk(canvas);
+
+        String fileName = System.currentTimeMillis() + ".jpg";
+        String filePath = Configuration.screenShotPath() + fileName;
+
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(filePath);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+            fos.close();
+            return fileName;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
 }

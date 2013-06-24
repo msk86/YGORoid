@@ -81,4 +81,5 @@ public class Const {
     public static final int MENU_HIDE_HAND = 0x10;
     public static final int MENU_EXIT = 0x100;
     public static final int MENU_DECK_SIDE = 0x11;
+    public static final int MENU_SCREEN_SHOT = 0x12;
 }
