@@ -11,6 +11,7 @@ public class OverRay implements SelectableItem, Drawable {
 
     public OverRay(Card card) {
         overRayUnits = new CardList("OVERRAY");
+        overRayUnits.setStoreToken(true);
         overRay(card);
     }
 

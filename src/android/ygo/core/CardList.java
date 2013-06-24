@@ -22,6 +22,8 @@ public class CardList implements SelectableItem, Drawable {
 
     private boolean selected = false;
 
+    private boolean storeToken = false;
+
     String name;
 
     List<Card> cards = new ArrayList<Card>();
@@ -102,7 +104,7 @@ public class CardList implements SelectableItem, Drawable {
         if (card == null) {
             return;
         }
-        if (card.getSubTypes().contains(CardSubType.TOKEN)) {
+        if (!storeToken && card.getSubTypes().contains(CardSubType.TOKEN)) {
             return;
         }
         if (!forceSet && open) {
@@ -230,5 +232,9 @@ public class CardList implements SelectableItem, Drawable {
     @Override
     public boolean isSelect() {
         return selected;
+    }
+
+    public void setStoreToken(boolean storeToken) {
+        this.storeToken = storeToken;
     }
 }
