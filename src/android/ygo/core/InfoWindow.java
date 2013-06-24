@@ -4,7 +4,7 @@ import android.graphics.*;
 import android.ygo.utils.Configuration;
 import android.ygo.utils.Utils;
 
-public class InfoWindow implements Item, Drawable {
+public class InfoWindow implements SelectableItem, Drawable {
     SelectableItem infoItem;
     private String info;
 
@@ -40,23 +40,6 @@ public class InfoWindow implements Item, Drawable {
 
     public void clearInfo() {
         this.infoItem = null;
-    }
-
-    private static Bitmap background() {
-        int width = Utils.totalWidth();
-        int height = Utils.cardHeight() / 6 + 3;
-        Bitmap background = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-
-        Canvas canvas = new Canvas(background);
-        canvas.drawColor(Color.BLACK);
-
-        Paint paint = new Paint();
-        paint.setColor(Color.DKGRAY);
-        paint.setStrokeWidth(5);
-        canvas.drawLine(0, 0, width, 0, paint);
-        canvas.drawLine(0, 0, 0, height, paint);
-        canvas.drawLine(width, 0, width, height, paint);
-        return background;
     }
 
     @Override
@@ -95,5 +78,24 @@ public class InfoWindow implements Item, Drawable {
     @Override
     public int height() {
         return Utils.cardHeight() / 6 + 3;
+    }
+
+    @Override
+    public void select() {
+
+    }
+
+    @Override
+    public void unSelect() {
+
+    }
+
+    @Override
+    public boolean isSelect() {
+        return false;
+    }
+
+    public SelectableItem getInfoItem() {
+        return infoItem;
     }
 }

@@ -1,9 +1,6 @@
 package android.ygo.action;
 
-import android.ygo.core.Card;
-import android.ygo.core.CardSubType;
-import android.ygo.core.OverRay;
-import android.ygo.core.ShowCardWindow;
+import android.ygo.core.*;
 import android.ygo.op.Operation;
 
 public class OpenCardWindowAction extends BaseAction {
@@ -14,10 +11,12 @@ public class OpenCardWindowAction extends BaseAction {
     @Override
     public void execute() {
         Card card;
-        if (item instanceof OverRay) {
-            card = ((OverRay) item).topCard();
+        InfoWindow window = (InfoWindow) item;
+        SelectableItem infoItem = window.getInfoItem();
+        if (infoItem instanceof OverRay) {
+            card = ((OverRay) infoItem).topCard();
         } else {
-            card = (Card) item;
+            card = (Card) infoItem;
         }
 
         if(!card.getSubTypes().contains(CardSubType.TOKEN)) {

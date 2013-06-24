@@ -21,8 +21,9 @@ public class ActionDispatcher {
         if(click.getDuel().getSideWindow() != null) {
             action = new SelectSideAction(click);
         }
-        if (click.getContainer() instanceof InfoWindow) {
-            if (click.getItem() instanceof Card || click.getItem() instanceof OverRay)
+        if (click.getItem() instanceof InfoWindow) {
+            InfoWindow infoWindow = (InfoWindow) click.getItem();
+            if (infoWindow.getInfoItem() instanceof Card || infoWindow.getInfoItem() instanceof OverRay)
                 action = new OpenCardWindowAction(click);
         }
         return action;

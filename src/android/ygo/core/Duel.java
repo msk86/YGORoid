@@ -257,7 +257,7 @@ public class Duel implements Item, Drawable {
         } else if (inSideWindow(x, y)) {
             return sideWindow.cardAt(x, y);
         } else if (inInfo(x, y)) {
-            return currentSelectItem;
+            return window;
         }
         return null;
     }
@@ -278,7 +278,7 @@ public class Duel implements Item, Drawable {
         } else if (inSideWindow(x, y)) {
             return sideWindow.layoutAt(x, y);
         } else if (inInfo(x, y)) {
-            return window;
+            return currentSelectItemContainer;
         }
         return null;
     }
