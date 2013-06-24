@@ -141,7 +141,7 @@ public class Card implements SelectableItem, Drawable {
                 Paint paint = new Paint();
                 Bitmap cardTypeBmp = cardTypeBmp();
                 Utils.drawBitmapOnCanvas(canvas, cardTypeBmp, paint, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_FIRST);
-                CharSequence cs = longName();
+
                 TextPaint textPaint = new TextPaint();
                 textPaint.setTextSize(Utils.unitLength() / 10);
                 if(!subTypes.contains(CardSubType.SYNC)) {
@@ -151,7 +151,13 @@ public class Card implements SelectableItem, Drawable {
                     textPaint.setColor(Configuration.syncFontColor());
                 }
                 textPaint.setAntiAlias(true);
-                StaticLayout layout = new StaticLayout(cs, textPaint, Utils.cardWidth(), Layout.Alignment.ALIGN_CENTER, 0, 0, true);
+                CharSequence cs = name;
+                StaticLayout layout = new StaticLayout(cs, textPaint, Utils.cardWidth(), Layout.Alignment.ALIGN_CENTER, 1, 0, true);
+                if(layout.getLineCount() > 1) {
+                    cs = name.substring(0, layout.getLineEnd(0)).trim();
+                    layout = new StaticLayout(cs, textPaint, Utils.cardWidth(), Layout.Alignment.ALIGN_CENTER, 1, 0, true);
+                }
+
                 canvas.translate(0, Utils.cardHeight() / 20);
                 layout.draw(canvas);
             }
@@ -174,26 +180,6 @@ public class Card implements SelectableItem, Drawable {
         Canvas canvas = new Canvas(bmp);
         canvas.drawColor(Color.GRAY);
         return bmp;
-    }
-
-    private String longName() {
-        char[] cs = name.toCharArray();
-        int charLen = 0;
-        int maxCutFlag = 11;
-        int cutIndex = cs.length;
-        for (int i = 0; i < cs.length; i++) {
-            int newLen = charLen + Utils.textPlace(cs[i]);
-            if (newLen > maxCutFlag) {
-                cutIndex = i;
-                break;
-            }
-            charLen = newLen;
-        }
-        String nName = name.substring(0, cutIndex);
-        if (cutIndex != name.length()) {
-            nName += "...";
-        }
-        return nName;
     }
 
     @Override
