@@ -19,7 +19,7 @@ import java.util.List;
 public class CardsDBHelper extends SQLiteOpenHelper {
 
     public static final String QUERY_TABLES = "texts t, datas d";
-    public static final String[] QUERY_FIELDS = new String[]{"t.id", "t.name", "t.desc", "d.atk", "d.def", "d.race", "d.level", "d.attribute", "d.type", "d.alias"};
+    public static final String[] QUERY_FIELDS = new String[]{"t.id", "t.name", "t.desc", "d.atk", "d.def", "d.race", "d.level", "d.attribute", "d.type", "d.alias", "d.category"};
     Context context;
 
     public CardsDBHelper(Context context, int version) {
@@ -174,7 +174,8 @@ public class CardsDBHelper extends SQLiteOpenHelper {
 
     private Card createCard(Cursor c) {
         return new Card(c.getString(0), c.getString(1), c.getString(2), c.getInt(8),
-                c.getInt(7), c.getInt(5), c.getInt(6), c.getInt(3), c.getInt(4), c.getString(9));
+                c.getInt(7), c.getInt(5), c.getInt(6), c.getInt(3), c.getInt(4), c.getString(9),
+                c.getInt(10));
     }
 
 

@@ -34,6 +34,7 @@ public class Card implements SelectableItem, Drawable {
     int level;
     String atk;
     String def;
+    int category;
     boolean set = false;
     boolean positive = true;
 
@@ -47,10 +48,10 @@ public class Card implements SelectableItem, Drawable {
 
 
     public Card(String id, String name, String desc, int typeCode, int attrCode, int raceCode, int level, int atk, int def) {
-        this(id, name, desc, typeCode, attrCode, raceCode, level, atk, def, "0");
+        this(id, name, desc, typeCode, attrCode, raceCode, level, atk, def, "0", 0);
     }
 
-    public Card(String id, String name, String desc, int typeCode, int attrCode, int raceCode, int level, int atk, int def, String aliasId) {
+    public Card(String id, String name, String desc, int typeCode, int attrCode, int raceCode, int level, int atk, int def, String aliasId, int category) {
         this.id = id;
         this.aliasId = aliasId;
         this.name = name;
@@ -62,10 +63,13 @@ public class Card implements SelectableItem, Drawable {
         this.level = level;
         this.atk = atk >= 0 ? String.valueOf(atk) : "?";
         this.def = def >= 0 ? String.valueOf(def) : "?";
+        this.category = category;
         this.positive = true;
         this.set = false;
         initCardPic();
     }
+
+
 
     public String getRealId() {
         return "0".equals(aliasId) ? id : aliasId;
@@ -290,6 +294,7 @@ public class Card implements SelectableItem, Drawable {
     @Override
     public void unSelect() {
         selected = false;
+        tokenSerial = 0;
     }
 
     @Override
@@ -359,5 +364,18 @@ public class Card implements SelectableItem, Drawable {
             return true;
         }
         return false;
+    }
+
+    public boolean isTokenable() {
+        return (category & Const.CATEGORY_TOKEN) == Const.CATEGORY_TOKEN;
+    }
+
+
+    private int tokenSerial = 0;
+    public String nextTokenId() {
+        if(isTokenable()) {
+            tokenSerial ++;
+        }
+        return String.valueOf(Integer.valueOf(id) + tokenSerial);
     }
 }

@@ -227,6 +227,9 @@ public class CardList implements SelectableItem, Drawable {
     @Override
     public void unSelect() {
         selected = false;
+        if(topCard() != null) {
+            topCard().unSelect();
+        }
     }
 
     @Override
