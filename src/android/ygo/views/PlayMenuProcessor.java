@@ -36,7 +36,6 @@ public class PlayMenuProcessor {
                         if(android.os.Build.VERSION.SDK_INT >= 10) {
                             menu.add(Const.MENU_GROUP_DECK, Const.MENU_MIRROR_DISPLAY, 0, "镜像显示");
                         }
-                        menu.add(Const.MENU_GROUP_DECK, Const.MENU_SCREEN_SHOT, 0, "截图");
                         menu.add(Const.MENU_GROUP_DECK, Const.MENU_EXIT, 0, "退出");
                     }
                 }
