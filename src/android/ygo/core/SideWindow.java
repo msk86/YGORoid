@@ -86,6 +86,9 @@ public class SideWindow implements Item, Drawable {
     }
 
     public Layout layoutAt(int x, int y) {
+        if(x > Utils.unitLength() * 6) {
+            return null;
+        }
         if (showMain) {
             if (y < mainLayout.height()) {
                 return mainLayout;
