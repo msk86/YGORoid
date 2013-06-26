@@ -14,6 +14,7 @@ import java.util.TreeMap;
 
 public class Duel implements Item, Drawable {
     private LifePoint lifePoint;
+	private ExitConfirm exitConfirm;
 
     private DuelFields duelFields;
 
@@ -35,6 +36,7 @@ public class Duel implements Item, Drawable {
 
     private Dice dice;
     private Coin coin;
+
 
     public Duel() {
        start(null ,null, null);
@@ -149,7 +151,8 @@ public class Duel implements Item, Drawable {
 
     public void initDuelField() {
         lifePoint = new LifePoint();
-
+        exitConfirm = new ExitConfirm();
+        
         duelFields = new DuelFields();
         Deck deck = new Deck(CardList.DECK);
         Deck exDeck = new Deck(CardList.EX);
@@ -187,6 +190,9 @@ public class Duel implements Item, Drawable {
         return lifePoint;
     }
 
+    public ExitConfirm getExitConfirm(){
+    	return exitConfirm;
+    }
     public CardSelector getCardSelector() {
         return cardSelector;
     }
