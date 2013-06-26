@@ -163,6 +163,9 @@ public class ActionDispatcher {
                     action = new OpenCardSelectorAction(click);
                 }
             }
+            else {
+            	action = new ExitConfirmAction(click);
+            }
         }
         return action;
     }
@@ -194,7 +197,7 @@ public class ActionDispatcher {
                         action = new MirrorDisplayAction(menuClick);
                         break;
                     case Const.MENU_EXIT:
-                        action = new ExitAction(menuClick);
+                        action = new ExitConfirmAction(menuClick);
                         break;
                 }
                 break;
