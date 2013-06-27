@@ -32,6 +32,19 @@ public class Field implements Item, Drawable {
         return item;
     }
 
+    public Card getTopCard() {
+        if (setItem != null) {
+            if (setItem instanceof Card) {
+                return (Card) setItem;
+            } else if (setItem instanceof OverRay) {
+                return ((OverRay) setItem).topCard();
+            } else if (setItem instanceof CardList) {
+                return ((CardList) setItem).topCard();
+            }
+        }
+        return null;
+    }
+
     @Override
     public void draw(Canvas canvas, int x, int y) {
         Utils.DrawHelper helper = new Utils.DrawHelper(x, y);

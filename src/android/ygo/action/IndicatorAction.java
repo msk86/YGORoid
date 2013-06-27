@@ -1,6 +1,7 @@
 package android.ygo.action;
 
 import android.ygo.core.Card;
+import android.ygo.core.Field;
 import android.ygo.core.OverRay;
 import android.ygo.op.VolClick;
 
@@ -14,12 +15,8 @@ public class IndicatorAction extends BaseAction {
 
     @Override
     public void execute() {
-        Card card = null;
-        if(item instanceof Card) {
-            card = (Card) item;
-        } else if(item instanceof OverRay) {
-            card = ((OverRay) item).topCard();
-        }
+        Field field = (Field) container;
+        Card card = field.getTopCard();
 
         if(card != null && card.isOpen()) {
             if(vol == VolClick.VOL_UP) {
