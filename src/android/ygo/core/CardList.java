@@ -101,6 +101,24 @@ public class CardList implements SelectableItem, Drawable {
     }
 
     public void push(Card card, boolean forceSet) {
+        add(card, 0, forceSet);
+    }
+
+    public void push(List<Card> cards) {
+        for (Card card : cards) {
+            this.push(card);
+        }
+    }
+
+    public void push(CardList list) {
+        this.push(list.cards);
+    }
+
+    public void unShift(Card card) {
+        add(card, cards.size(), false);
+    }
+
+    private void add(Card card, int index, boolean forceSet) {
         if (card == null) {
             return;
         }
@@ -115,29 +133,7 @@ public class CardList implements SelectableItem, Drawable {
         card.positive();
         card.unSelect();
         card.clearIndicator();
-        cards.add(0, card);
-    }
-
-    public void push(List<Card> cards) {
-        for (Card card : cards) {
-            this.push(card);
-        }
-    }
-
-    public void push(CardList list) {
-        this.push(list.cards);
-    }
-
-    public void unShift(Card card) {
-        if (open) {
-            card.open();
-        } else {
-            card.set();
-        }
-        card.positive();
-        card.unSelect();
-        card.clearIndicator();
-        cards.add(card);
+        cards.add(index, card);
     }
 
     public boolean isOpen() {
