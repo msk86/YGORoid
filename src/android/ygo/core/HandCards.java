@@ -27,7 +27,7 @@ public class HandCards implements Item, Drawable {
         if (card == null) {
             return;
         }
-        if (card.getSubTypes().contains(CardSubType.TOKEN)) {
+        if (card.isToken()) {
             return;
         }
         if (!set) {

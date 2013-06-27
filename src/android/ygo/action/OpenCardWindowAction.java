@@ -19,7 +19,7 @@ public class OpenCardWindowAction extends BaseAction {
             card = (Card) infoItem;
         }
 
-        if(!card.getSubTypes().contains(CardSubType.TOKEN)) {
+        if(!card.isToken()) {
             ShowCardWindow cardWindow = new ShowCardWindow(card);
             duel.setCardWindow(cardWindow);
         }

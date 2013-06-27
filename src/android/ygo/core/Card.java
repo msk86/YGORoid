@@ -366,6 +366,10 @@ public class Card implements SelectableItem, Drawable {
         return false;
     }
 
+    public boolean isToken() {
+        return subTypes.contains(CardSubType.TOKEN);
+    }
+
     public boolean isTokenable() {
         return (category & Const.CATEGORY_TOKEN) == Const.CATEGORY_TOKEN;
     }

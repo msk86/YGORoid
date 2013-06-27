@@ -122,7 +122,7 @@ public class CardList implements SelectableItem, Drawable {
         if (card == null) {
             return;
         }
-        if (!storeToken && card.getSubTypes().contains(CardSubType.TOKEN)) {
+        if (!storeToken && card.isToken()) {
             return;
         }
         if (!forceSet && open) {

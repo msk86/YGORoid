@@ -20,15 +20,20 @@ public class PlayMenuProcessor {
         Duel duel = view.getDuel();
         SelectableItem item = duel.getCurrentSelectItem();
         Item container = duel.getCurrentSelectItemContainer();
+
         if (duel.getCardSelector() == null) {
             if (container instanceof Field) {
-                if (item instanceof OverRay && !((OverRay)item).topCard().getSubTypes().contains(CardSubType.TOKEN)) {
-                	menu.add(Const.MENU_GROUP_FIELD_CARD, Const.MENU_CARD_BACK_TO_BOTTOM_OF_DECK, 0, "回卡组底");
-                	menu.add(Const.MENU_GROUP_FIELD_CARD, Const.MENU_CARD_CLOSE_REMOVE, 0, "里侧除外");
-                }
-                if (item instanceof Card && !((Card)item).getSubTypes().contains(CardSubType.TOKEN)) {
-                    menu.add(Const.MENU_GROUP_FIELD_CARD, Const.MENU_CARD_BACK_TO_BOTTOM_OF_DECK, 0, "回卡组底");
-                    menu.add(Const.MENU_GROUP_FIELD_CARD, Const.MENU_CARD_CLOSE_REMOVE, 0, "里侧除外");
+                if(item instanceof OverRay || item instanceof Card) {
+                    Card card;
+                    if(item instanceof OverRay) {
+                        card = ((OverRay) item).topCard();
+                    } else {
+                        card = (Card) item;
+                    }
+                    if(!card.isToken()) {
+                        menu.add(Const.MENU_GROUP_FIELD_CARD, Const.MENU_CARD_BACK_TO_BOTTOM_OF_DECK, 0, "回卡组底");
+                        menu.add(Const.MENU_GROUP_FIELD_CARD, Const.MENU_CARD_CLOSE_REMOVE, 0, "里侧除外");
+                    }
                 } else if (item instanceof Deck) {
                     if (((Deck) item).getName().equals(CardList.DECK)) {
                         menu.add(Const.MENU_GROUP_DECK, Const.MENU_DECK_SHUFFLE, 0, "卡组洗切");
@@ -43,12 +48,11 @@ public class PlayMenuProcessor {
                     menu.add(Const.MENU_GROUP_HAND_CARD, Const.MENU_SHOW_HAND, 0, "展示手牌");
                     menu.add(Const.MENU_GROUP_HAND_CARD, Const.MENU_HIDE_HAND, 0, "覆盖手牌");
                 }
-            }
-            else {
+            } else {
                 menu.add(Const.MENU_GROUP_DECK, Const.MENU_DECK_RESTART, 0, "重新开始");
                 menu.add(Const.MENU_GROUP_DECK, Const.MENU_DECK_CHANGE_DECK, 0, "更换卡组");
                 menu.add(Const.MENU_GROUP_DECK, Const.MENU_DECK_SIDE, 0, "换副卡组");
-                if(android.os.Build.VERSION.SDK_INT >= 10) {
+                if (android.os.Build.VERSION.SDK_INT >= 10) {
                     menu.add(Const.MENU_GROUP_DECK, Const.MENU_MIRROR_DISPLAY, 0, "镜像显示");
                 }
                 menu.add(Const.MENU_GROUP_DECK, Const.MENU_EXIT, 0, "退出");
