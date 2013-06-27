@@ -185,10 +185,10 @@ public class CardList implements SelectableItem, Drawable {
         textPaint.setShadowLayer(1, 0, 0, Configuration.textShadowColor());
         textPaint.setUnderlineText(true);
 
-        StaticLayout layout = new StaticLayout(name, textPaint, Utils.cardWidth(), Layout.Alignment.ALIGN_CENTER, 0, 0, false);
+        StaticLayout layout = new StaticLayout(name, textPaint, Utils.cardWidth(), Layout.Alignment.ALIGN_CENTER, 1, 0, false);
         helper.drawLayout(canvas, layout, 0, Utils.cardHeight() * 3 / 4);
 
-        layout = new StaticLayout(String.valueOf(cards.size()), textPaint, Utils.cardWidth(), Layout.Alignment.ALIGN_CENTER, 0, 0, false);
+        layout = new StaticLayout(String.valueOf(cards.size()), textPaint, Utils.cardWidth(), Layout.Alignment.ALIGN_CENTER, 1, 0, false);
         textPaint.setUnderlineText(false);
         helper.drawLayout(canvas, layout, 0, Utils.cardHeight() * 7 / 8);
     }
