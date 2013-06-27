@@ -7,6 +7,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.text.Layout;
+import android.text.StaticLayout;
+import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -94,12 +97,14 @@ public class DuelDiskView extends SurfaceView implements Runnable {
     }
 
     private void drawVersion(Canvas canvas) {
-        Paint paint = new Paint();
+        TextPaint paint = new TextPaint();
         paint.setColor(Configuration.fontColor());
         int fontSize = Utils.unitLength() / 7;
         paint.setTextSize(fontSize);
         paint.setAntiAlias(true);
-        canvas.drawText("V" + Utils.getVersion(), Utils.unitLength() * 11 / 10, fontSize, paint);
+        StaticLayout layout = new StaticLayout("V" + Utils.getVersion(), paint, Utils.unitLength() / 2, Layout.Alignment.ALIGN_OPPOSITE, 1, 0, false);
+        Utils.DrawHelper helper = new Utils.DrawHelper(0, 0);
+        helper.drawLayout(canvas, layout, Utils.unitLength() * 11 / 2, Utils.screenHeight() - fontSize - 2);
     }
 
     private void drawFPS(Canvas canvas) {
@@ -108,7 +113,7 @@ public class DuelDiskView extends SurfaceView implements Runnable {
         int fontSize = Utils.unitLength() / 7;
         paint.setTextSize(fontSize);
         paint.setAntiAlias(true);
-        canvas.drawText("FPS:" + fpsMaker.getFPS(), Utils.unitLength() * 9 / 5, fontSize, paint);
+        canvas.drawText("FPS:" + fpsMaker.getFPS(), Utils.unitLength() / 10, fontSize, paint);
     }
 
     private void drawBackground(Canvas canvas) {
