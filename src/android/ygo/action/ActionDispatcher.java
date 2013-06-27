@@ -3,26 +3,28 @@ package android.ygo.action;
 import android.ygo.core.*;
 import android.ygo.core.tool.Coin;
 import android.ygo.core.tool.Dice;
+import android.ygo.layout.Layout;
 import android.ygo.op.*;
 
 public class ActionDispatcher {
 
     public static Action dispatch(Click click) {
         Action action = new SelectAction(click);
-        if (click.getItem() instanceof LifePoint) {
+        SelectableItem item = click.getItem();
+        if (item instanceof LifePoint) {
             action = new LifePointAction(click);
         }
-        if (click.getItem() instanceof Dice) {
+        if (item instanceof Dice) {
             action = new DiceAction(click);
         }
-        if (click.getItem() instanceof Coin) {
+        if (item instanceof Coin) {
             action = new CoinAction(click);
         }
-        if(click.getDuel().getSideWindow() != null) {
+        if(click.getDuel().getSideWindow() != null && item instanceof Card && click.getContainer() instanceof Layout) {
             action = new SelectSideAction(click);
         }
-        if (click.getItem() instanceof InfoWindow) {
-            InfoWindow infoWindow = (InfoWindow) click.getItem();
+        if (item instanceof InfoWindow) {
+            InfoWindow infoWindow = (InfoWindow) item;
             if (infoWindow.getInfoItem() instanceof Card || infoWindow.getInfoItem() instanceof OverRay)
                 action = new OpenCardWindowAction(click);
         }
@@ -84,7 +86,7 @@ public class ActionDispatcher {
             }
         }
 
-        if(dblClick.getDuel().getSideWindow() != null) {
+        if(dblClick.getDuel().getSideWindow() != null && item instanceof Card && container instanceof Layout) {
             action = new ChangeSideAction(dblClick);
         }
         return action;

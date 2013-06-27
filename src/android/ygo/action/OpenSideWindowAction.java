@@ -18,6 +18,7 @@ public class OpenSideWindowAction extends BaseAction {
         SideWindow sideWindow = new SideWindow(duel.getMainDeckCards(), duel.getExDeckCards(), duel.getSideDeckCards());
 
         duel.setSideWindow(sideWindow);
+        duel.unSelect();
     }
 
     private void openAll(List<Card> cards) {
