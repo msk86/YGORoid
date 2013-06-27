@@ -1,6 +1,9 @@
 package android.ygo.core;
 
 import android.graphics.*;
+import android.text.Layout;
+import android.text.StaticLayout;
+import android.text.TextPaint;
 import android.ygo.utils.Configuration;
 import android.ygo.utils.Utils;
 
@@ -46,7 +49,7 @@ public class InfoWindow implements SelectableItem, Drawable {
     public void draw(Canvas canvas, int x, int y) {
         drawFrame(canvas, x, y);
 
-        Paint paint = new Paint();
+        TextPaint paint = new TextPaint();
 
         paint.setColor(Configuration.fontColor());
         paint.setStrokeWidth(1);
@@ -54,7 +57,10 @@ public class InfoWindow implements SelectableItem, Drawable {
         paint.setAntiAlias(true);
 
         Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
-        helper.drawText(canvas, info(), 5, height() - 2, paint);
+
+        String infoText = Utils.cutOneLine(info(), paint, width());
+        StaticLayout layout = new StaticLayout(infoText, paint, width(), Layout.Alignment.ALIGN_NORMAL, 1, 0 ,false);
+        helper.drawLayout(canvas, layout, 5, 1);
     }
 
     private void drawFrame(Canvas canvas, int x, int y) {

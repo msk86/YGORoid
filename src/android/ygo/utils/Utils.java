@@ -4,6 +4,8 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.*;
 import android.text.Layout;
+import android.text.StaticLayout;
+import android.text.TextPaint;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.ygo.YGOActivity;
@@ -287,5 +289,13 @@ public class Utils {
         } catch (Exception e) {
             return "0";
         }
+    }
+
+    public static String cutOneLine(String str, TextPaint textPaint, int width) {
+        StaticLayout layout = new StaticLayout(str, textPaint, width, Layout.Alignment.ALIGN_NORMAL, 1, 0, true);
+        if(layout.getLineCount() > 1) {
+            str = str.substring(0, layout.getLineEnd(0)).trim();
+        }
+        return str;
     }
 }

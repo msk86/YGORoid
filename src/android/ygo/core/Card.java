@@ -155,12 +155,8 @@ public class Card implements SelectableItem, Drawable {
                     textPaint.setColor(Configuration.syncFontColor());
                 }
                 textPaint.setAntiAlias(true);
-                CharSequence cs = name;
+                CharSequence cs = Utils.cutOneLine(name, textPaint, Utils.cardWidth());
                 StaticLayout layout = new StaticLayout(cs, textPaint, Utils.cardWidth(), Layout.Alignment.ALIGN_CENTER, 1, 0, true);
-                if(layout.getLineCount() > 1) {
-                    cs = name.substring(0, layout.getLineEnd(0)).trim();
-                    layout = new StaticLayout(cs, textPaint, Utils.cardWidth(), Layout.Alignment.ALIGN_CENTER, 1, 0, true);
-                }
 
                 canvas.translate(0, Utils.cardHeight() / 20);
                 layout.draw(canvas);
