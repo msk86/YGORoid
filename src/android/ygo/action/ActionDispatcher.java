@@ -227,6 +227,9 @@ public class ActionDispatcher {
                     case Const.MENU_HIDE_HAND:
                         action = new HideHandCardAction(menuClick);
                         break;
+                    case Const.MENU_SHUFFLE_HAND:
+                        action = new ShuffleHandCardAction(menuClick);
+                        break;
                 }
                 break;
 

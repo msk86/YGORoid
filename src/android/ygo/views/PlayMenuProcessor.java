@@ -47,6 +47,7 @@ public class PlayMenuProcessor {
                     menu.add(Const.MENU_GROUP_HAND_CARD, Const.MENU_CARD_CLOSE_REMOVE, 0, "里侧除外");
                     menu.add(Const.MENU_GROUP_HAND_CARD, Const.MENU_SHOW_HAND, 0, "展示手牌");
                     menu.add(Const.MENU_GROUP_HAND_CARD, Const.MENU_HIDE_HAND, 0, "覆盖手牌");
+                    menu.add(Const.MENU_GROUP_HAND_CARD, Const.MENU_SHUFFLE_HAND, 0, "切洗手牌");
                 }
             } else {
                 menu.add(Const.MENU_GROUP_DECK, Const.MENU_DECK_RESTART, 0, "重新开始");
