@@ -13,8 +13,12 @@ public class SpCard extends Card {
 
     }
 
-    public static SpCard createDeveloper() {
+    public static SpCard createMsk86() {
         return new SpCard("-1000", "About", "Developer: Msk86, Email: msk86.kaiser@gmail.com", R.raw.dev_msk86);
+    }
+
+    public static SpCard createHeaven() {
+        return new SpCard("-1000", "About", "Op: Heaven, Email: 20650688@qq.com", R.raw.op_heaven);
     }
 
     @Override

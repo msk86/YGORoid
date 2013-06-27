@@ -71,8 +71,11 @@ public class DuelDiskView extends SurfaceView implements Runnable {
     private void initAbout() {
         DuelFields duelFields = duel.getDuelFields();
         Field f = duelFields.getMonsterField(2);
-        SpCard msk86 = SpCard.createDeveloper();
+        SpCard msk86 = SpCard.createMsk86();
         f.setItem(msk86);
+        f = duelFields.getMagicField(2);
+        SpCard heaven = SpCard.createHeaven();
+        f.setItem(heaven);
         duel.select(msk86, f);
     }
 
