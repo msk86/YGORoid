@@ -1,5 +1,7 @@
 package android.ygo.utils;
 
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.*;
 import android.text.Layout;
 import android.util.DisplayMetrics;
@@ -277,4 +279,13 @@ public class Utils {
         }
     }
 
+    public static String getVersion() {
+        try {
+            PackageManager manager = context.getPackageManager();
+            PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
+            return info.versionName;
+        } catch (Exception e) {
+            return "0";
+        }
+    }
 }

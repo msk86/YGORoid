@@ -84,16 +84,28 @@ public class DuelDiskView extends SurfaceView implements Runnable {
     public void drawDuelDisk(Canvas canvas) {
         drawBackground(canvas);
         duel.draw(canvas, 0, 0);
+        drawVersion(canvas);
         if (Configuration.showFPS()) {
             drawFPS(canvas);
         }
     }
 
+    private void drawVersion(Canvas canvas) {
+        Paint paint = new Paint();
+        paint.setColor(Configuration.fontColor());
+        int fontSize = Utils.unitLength() / 7;
+        paint.setTextSize(fontSize);
+        paint.setAntiAlias(true);
+        canvas.drawText("V" + Utils.getVersion(), Utils.unitLength() * 11 / 10, fontSize, paint);
+    }
+
     private void drawFPS(Canvas canvas) {
         Paint paint = new Paint();
         paint.setColor(Configuration.fontColor());
-        paint.setTextSize(20);
-        canvas.drawText("FPS: " + fpsMaker.getFPS(), Utils.unitLength(), 20, paint);
+        int fontSize = Utils.unitLength() / 7;
+        paint.setTextSize(fontSize);
+        paint.setAntiAlias(true);
+        canvas.drawText("FPS:" + fpsMaker.getFPS(), Utils.unitLength() * 9 / 5, fontSize, paint);
     }
 
     private void drawBackground(Canvas canvas) {
