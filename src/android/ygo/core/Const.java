@@ -82,7 +82,7 @@ public class Const {
     public static final int MENU_CARD_CLOSE_REMOVE = 0x08;
     public static final int MENU_SHOW_HAND = 0x09;
     public static final int MENU_HIDE_HAND = 0x10;
-    public static final int  MENU_SHUFFLE_HAND = 0x11;
+    public static final int MENU_SHUFFLE_HAND = 0x11;
+    public static final int MENU_DECK_SIDE = 0x12;
     public static final int MENU_EXIT = 0x100;
-    public static final int MENU_DECK_SIDE = 0x11;
 }
