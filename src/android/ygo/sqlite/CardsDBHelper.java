@@ -20,10 +20,11 @@ public class CardsDBHelper extends SQLiteOpenHelper {
 
     public static final String QUERY_TABLES = "texts t, datas d";
     public static final String[] QUERY_FIELDS = new String[]{"t.id", "t.name", "t.desc", "d.atk", "d.def", "d.race", "d.level", "d.attribute", "d.type", "d.alias", "d.category"};
+    private static final String DB_PATH = Configuration.baseDir() + "cards.cdb";
     Context context;
 
     public CardsDBHelper(Context context, int version) {
-        super(context, Configuration.baseDir() + "cards.cdb", null, version);
+        super(context, DB_PATH, null, version);
         this.context = context;
     }
 
@@ -155,7 +156,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
             card = loadById(database, cardID);
             database.close();
         } catch (Exception e) {
-            card = new Card(String.valueOf(cardID), "ID" + cardID, "数据库文件不存在！", 0, 0, 0, 0, 0, 0);
+            card = new Card(String.valueOf(cardID), "ID" + cardID, "数据库["+DB_PATH+"]文件不存在！", 0, 0, 0, 0, 0, 0);
         }
         return card;
     }
@@ -167,7 +168,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
             card = loadByName(database, cardName);
             database.close();
         } catch (Exception e) {
-            card = new Card("0", cardName, "数据库文件不存在！", 0, 0, 0, 0, 0, 0);
+            card = new Card("0", cardName, "数据库["+DB_PATH+"]文件不存在！", 0, 0, 0, 0, 0, 0);
         }
         return card;
     }
