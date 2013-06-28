@@ -76,7 +76,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
             c.moveToFirst();
             card = createCard(c);
         } else {
-            card = new Card(idStr, "ID" + idStr, "卡片ID不存在！您可能需要更新数据库文件！", 0, 0, 0, 0, 0, 0);
+            card = new Card(idStr, "ID" + idStr, "卡片不存在！您可能需要更新数据库文件！", 0, 0, 0, 0, 0, 0);
         }
         c.close();
         return card;
@@ -156,7 +156,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
             card = loadById(database, cardID);
             database.close();
         } catch (Exception e) {
-            card = new Card(String.valueOf(cardID), "ID" + cardID, "数据库["+DB_PATH+"]文件不存在！", 0, 0, 0, 0, 0, 0);
+            card = new Card(String.valueOf(cardID), "ID" + cardID, "数据库["+DB_PATH.replace("mnt/", "")+"]错误或不存在！", 0, 0, 0, 0, 0, 0);
         }
         return card;
     }
@@ -168,7 +168,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
             card = loadByName(database, cardName);
             database.close();
         } catch (Exception e) {
-            card = new Card("0", cardName, "数据库["+DB_PATH+"]文件不存在！", 0, 0, 0, 0, 0, 0);
+            card = new Card("0", cardName, "数据库["+DB_PATH.replace("mnt/", "")+"]错误或不存在！", 0, 0, 0, 0, 0, 0);
         }
         return card;
     }
