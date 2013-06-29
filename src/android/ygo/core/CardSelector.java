@@ -46,7 +46,8 @@ public class CardSelector implements Item, Drawable {
     public void drawBackground(Canvas canvas, int x, int y) {
         Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
         Paint paint = new Paint();
-        paint.setColor(Configuration.cardSelectorBackgroundColor());
+        paint.setColor(Configuration.windowBackgroundColor());
+        paint.setAlpha(150);
         helper.drawRect(canvas, new Rect(0, 0, width(), height()), paint);
     }
 

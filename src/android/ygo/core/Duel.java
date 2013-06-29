@@ -37,7 +37,7 @@ public class Duel implements Item, Drawable {
     private Coin coin;
 
     public Duel() {
-       start(null ,null, null);
+        start(null, null, null);
     }
 
     public void start(List<Card> mainDeckCards, List<Card> exDeckCards, List<Card> sideDeckCards) {
@@ -51,7 +51,7 @@ public class Duel implements Item, Drawable {
             sideDeckCards = new ArrayList<Card>();
         }
 
-        if(!deckCheck(mainDeckCards, exDeckCards, sideDeckCards)) {
+        if (!deckCheck(mainDeckCards, exDeckCards, sideDeckCards)) {
             return;
         }
 
@@ -79,18 +79,18 @@ public class Duel implements Item, Drawable {
     }
 
     private boolean deckCardCountCheck(List<Card> mainDeckCards, List<Card> exDeckCards, List<Card> sideDeckCards) {
-        if(mainDeckCards.size() == 0 && exDeckCards.size() == 0) {
+        if (mainDeckCards.size() == 0 && exDeckCards.size() == 0) {
             return true;
         }
         String info = null;
-        if(mainDeckCards.size() < 40 || mainDeckCards.size() > 60) {
+        if (mainDeckCards.size() < 40 || mainDeckCards.size() > 60) {
             info = "主卡组卡片数量不符合要求";
-        } else if(exDeckCards.size() > 15) {
+        } else if (exDeckCards.size() > 15) {
             info = "额外卡组卡片数量不符合要求";
-        } else if(sideDeckCards.size() > 15) {
+        } else if (sideDeckCards.size() > 15) {
             info = "副卡组卡片数量不符合要求";
         }
-        if(info != null) {
+        if (info != null) {
             Toast.makeText(Utils.getContext(), info, Toast.LENGTH_LONG).show();
             window.setInfo(info);
             return false;
@@ -110,7 +110,7 @@ public class Duel implements Item, Drawable {
         Map<String, Integer> cardCount = new TreeMap<String, Integer>();
         Map<String, Integer> uDCardCount = new TreeMap<String, Integer>();
         for (Card card : allCards) {
-            if(!(card instanceof UserDefinedCard || card.getRealId().equals("0"))) {
+            if (!(card instanceof UserDefinedCard || card.getRealId().equals("0"))) {
                 if (!cardCount.containsKey(card.getRealId())) {
                     cardCount.put(card.getRealId(), 0);
                 }
@@ -123,19 +123,19 @@ public class Duel implements Item, Drawable {
             }
         }
 
-        for(Map.Entry<String, Integer> entry : cardCount.entrySet()) {
-            if(entry.getValue() > 3) {
+        for (Map.Entry<String, Integer> entry : cardCount.entrySet()) {
+            if (entry.getValue() > 3) {
                 invalidCardIds.add(Integer.parseInt(entry.getKey()));
             }
         }
 
-        for(Map.Entry<String, Integer> entry : uDCardCount.entrySet()) {
-            if(entry.getValue() > 3) {
+        for (Map.Entry<String, Integer> entry : uDCardCount.entrySet()) {
+            if (entry.getValue() > 3) {
                 invalidUDCardNames.add(entry.getKey());
             }
         }
 
-        if(invalidCardIds.size() == 0 && invalidUDCardNames.size() == 0) {
+        if (invalidCardIds.size() == 0 && invalidUDCardNames.size() == 0) {
             return true;
         }
 
@@ -356,14 +356,14 @@ public class Duel implements Item, Drawable {
     }
 
     public boolean inInfo(int x, int y) {
-        if(cardWindow != null) {
+        if (cardWindow != null) {
             return false;
         }
         return y >= Utils.screenHeight() - Utils.cardHeight() / 6;
     }
 
     public boolean inSideWindow(int x, int y) {
-        if(sideWindow == null || cardWindow != null) {
+        if (sideWindow == null || cardWindow != null) {
             return false;
         }
         return y < Utils.screenHeight() - Utils.cardHeight() / 6;
@@ -384,17 +384,16 @@ public class Duel implements Item, Drawable {
     public void draw(Canvas canvas, int x, int y) {
         Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
 
-        if (cardSelector == null && cardWindow == null) {
-            helper.drawDrawable(canvas, lifePoint, Utils.unitLength(), (Utils.unitLength() - lifePoint.height()) / 2);
-            helper.drawDrawable(canvas, dice, (int) (Utils.unitLength() * 2.4), 0);
-            helper.drawDrawable(canvas, coin, (int) (Utils.unitLength() * 2.4), Utils.unitLength() / 2);
-            helper.drawDrawable(canvas, duelFields, 0, 0);
-            helper.drawDrawable(canvas, handCards, 0, duelFields.height() + 1);
-        }
-        if(cardSelector != null) {
+        helper.drawDrawable(canvas, lifePoint, Utils.unitLength(), (Utils.unitLength() - lifePoint.height()) / 2);
+        helper.drawDrawable(canvas, dice, (int) (Utils.unitLength() * 2.4), 0);
+        helper.drawDrawable(canvas, coin, (int) (Utils.unitLength() * 2.4), Utils.unitLength() / 2);
+        helper.drawDrawable(canvas, duelFields, 0, 0);
+        helper.drawDrawable(canvas, handCards, 0, duelFields.height() + 1);
+
+        if (cardSelector != null) {
             helper.drawDrawable(canvas, cardSelector, 0, 0);
         }
-        if(sideWindow != null) {
+        if (sideWindow != null) {
             helper.drawDrawable(canvas, sideWindow, 0, 0);
         }
 
@@ -408,7 +407,7 @@ public class Duel implements Item, Drawable {
 
         helper.drawDrawable(canvas, window, helper.center(width(), window.width()), helper.bottom(Utils.screenHeight(), window.height()));
 
-        if(cardWindow != null) {
+        if (cardWindow != null) {
             helper.drawDrawable(canvas, cardWindow, 0, 0);
         }
     }

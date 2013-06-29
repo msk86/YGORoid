@@ -27,7 +27,7 @@ public class ShowCardWindow implements Item, Drawable {
 
         int fontSize = cardHeight / 25;
         Paint paint = new Paint();
-        paint.setColor(Color.BLACK);
+        paint.setColor(Configuration.fontColor());
         paint.setTextSize(fontSize);
         paint.setAntiAlias(true);
 
@@ -56,7 +56,8 @@ public class ShowCardWindow implements Item, Drawable {
     public void drawBackground(Canvas canvas, int x, int y) {
         Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
         Paint paint = new Paint();
-        paint.setColor(Configuration.showCardWindowBackgroundColor());
+        paint.setColor(Configuration.windowBackgroundColor());
+        paint.setAlpha(150);
         helper.drawRect(canvas, new Rect(0, 0, width(), height()), paint);
     }
 

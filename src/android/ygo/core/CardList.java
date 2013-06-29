@@ -164,8 +164,12 @@ public class CardList implements SelectableItem, Drawable {
     public void draw(Canvas canvas, int x, int y) {
         Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
         if (cards.size() > 0) {
-            Card card = cards.get(0);
-            helper.drawDrawable(canvas, card, helper.center(width(), card.width()), 0);
+            if(!open) {
+                helper.drawBitmap(canvas, Card.CARD_PROTECTOR, 0, 0, new Paint());
+            } else {
+                Card card = cards.get(0);
+                helper.drawDrawable(canvas, card, helper.center(width(), card.width()), 0);
+            }
         }
 
         drawText(canvas, x, y);

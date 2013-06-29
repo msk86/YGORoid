@@ -24,8 +24,8 @@ public class Configuration {
         return Color.WHITE;
     }
 
-    public static int cardSelectorBackgroundColor() {
-        return Color.GRAY;
+    public static int windowBackgroundColor() {
+        return Color.BLACK;
     }
 
     public static String device() {
@@ -69,9 +69,5 @@ public class Configuration {
 
     public static int fieldColor() {
         return Color.BLACK;
-    }
-
-    public static int showCardWindowBackgroundColor() {
-        return Color.GRAY;
     }
 }
