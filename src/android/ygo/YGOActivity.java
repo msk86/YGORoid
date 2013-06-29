@@ -11,6 +11,8 @@ import android.view.*;
 import android.webkit.WebView;
 import android.ygo.exception.CrashHandler;
 import android.ygo.service.PersistencyService;
+import android.ygo.upgrade.UpgradeHelper;
+import android.ygo.upgrade.UpgradeMsgHandler;
 import android.ygo.utils.Utils;
 import android.ygo.views.DuelDiskView;
 import android.ygo.views.PlayMenuProcessor;
@@ -28,6 +30,9 @@ public class YGOActivity extends Activity {
     private Intent serviceIntent;
 
     private boolean mirror = false;
+
+    private UpgradeMsgHandler upgradeMsgHandler;
+    private UpgradeHelper upgradeHelper;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,6 +55,10 @@ public class YGOActivity extends Activity {
         menuProcessor = new PlayMenuProcessor(duelDiskView);
 
         startService();
+
+        upgradeMsgHandler = new UpgradeMsgHandler(this);
+        upgradeHelper = new UpgradeHelper(this);
+        upgradeHelper.startDetect();
     }
 
     @Override
@@ -138,6 +147,14 @@ public class YGOActivity extends Activity {
 
     public DuelDiskView getDuelDiskView() {
         return duelDiskView;
+    }
+
+    public UpgradeHelper getUpgradeHelper() {
+        return upgradeHelper;
+    }
+
+    public UpgradeMsgHandler getUpgradeMsgHandler() {
+        return upgradeMsgHandler;
     }
 
     private class PersistencyConnection implements ServiceConnection {

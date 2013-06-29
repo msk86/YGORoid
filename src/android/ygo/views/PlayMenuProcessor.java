@@ -6,6 +6,7 @@ import android.ygo.action.Action;
 import android.ygo.action.ActionDispatcher;
 import android.ygo.core.*;
 import android.ygo.op.MenuClick;
+import android.ygo.utils.Utils;
 
 public class PlayMenuProcessor {
 
@@ -53,7 +54,7 @@ public class PlayMenuProcessor {
                 menu.add(Const.MENU_GROUP_DECK, Const.MENU_DECK_RESTART, 0, "重新开始");
                 menu.add(Const.MENU_GROUP_DECK, Const.MENU_DECK_CHANGE_DECK, 0, "更换卡组");
                 menu.add(Const.MENU_GROUP_DECK, Const.MENU_DECK_SIDE, 0, "换副卡组");
-                if (android.os.Build.VERSION.SDK_INT >= 10) {
+                if (Utils.getSDK() >= 10) {
                     menu.add(Const.MENU_GROUP_DECK, Const.MENU_MIRROR_DISPLAY, 0, "镜像显示");
                 }
                 menu.add(Const.MENU_GROUP_DECK, Const.MENU_EXIT, 0, "退出");

@@ -281,6 +281,10 @@ public class Utils {
         }
     }
 
+    public static int getSDK() {
+        return android.os.Build.VERSION.SDK_INT;
+    }
+
     public static String getVersion() {
         try {
             PackageManager manager = context.getPackageManager();
