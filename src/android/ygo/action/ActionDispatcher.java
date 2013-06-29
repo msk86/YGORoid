@@ -162,9 +162,6 @@ public class ActionDispatcher {
                     action = new OpenCardSelectorAction(click);
                 }
             }
-            else {
-            	action = new ExitConfirmAction(click);
-            }
         }
         return action;
     }
