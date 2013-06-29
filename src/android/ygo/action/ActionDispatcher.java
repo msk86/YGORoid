@@ -73,10 +73,7 @@ public class ActionDispatcher {
                         action = new FlipAction(dblClick);
                     }
                 } else if (item instanceof CardList) {
-                    CardList cardList = (CardList) item;
-                    if (cardList.getName().equals(CardList.TEMPORARY) || cardList.getName().equals(CardList.DECK)) {
-                        action = new ShuffleAction(dblClick);
-                    }
+                    action = new OpenCardSelectorAction(dblClick);
                 }
             }
         } else if (container instanceof HandCards) {
