@@ -42,7 +42,7 @@ public class YGOActivity extends Activity {
 
         duelDiskView = new DuelDiskView(this, null);
         tipView = new WebView(this);
-        tipView.loadUrl("http://www.baidu.com");
+        tipView.loadUrl("https://www.evernote.com/shard/s315/sh/68b02cba-e935-494a-861a-0bd815fcc80a/17027b528b04fd1fa1fd6789952a01d9");
 
         setContentView(duelDiskView);
 
@@ -64,6 +64,7 @@ public class YGOActivity extends Activity {
 
     public void showDuel() {
         setContentView(duelDiskView);
+        duelDiskView.updateActionTime();
     }
 
     public boolean isMirror() {
