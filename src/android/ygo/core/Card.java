@@ -70,7 +70,6 @@ public class Card implements SelectableItem, Drawable {
     }
 
 
-
     public String getRealId() {
         return "0".equals(aliasId) ? id : aliasId;
     }
@@ -122,11 +121,13 @@ public class Card implements SelectableItem, Drawable {
         } catch (Exception e) {
             if (type.getBigCardBmp() != null) {
                 bigCardPic = type.getBigCardBmp();
-            } else {
+            }
+            if (bigCardPic == null) {
                 for (int i = subTypes.size() - 1; i >= 0; i--) {
                     CardSubType subType = subTypes.get(i);
                     if (subType.getBigCardBmp() != null) {
                         bigCardPic = subType.getBigCardBmp();
+                        break;
                     }
                 }
             }
@@ -148,7 +149,7 @@ public class Card implements SelectableItem, Drawable {
 
                 TextPaint textPaint = new TextPaint();
                 textPaint.setTextSize(Utils.unitLength() / 10);
-                if(!subTypes.contains(CardSubType.SYNC)) {
+                if (!subTypes.contains(CardSubType.SYNC)) {
                     textPaint.setColor(Configuration.fontColor());
                     textPaint.setShadowLayer(1, 0, 0, Configuration.textShadowColor());
                 } else {
@@ -229,7 +230,7 @@ public class Card implements SelectableItem, Drawable {
         textPaint.setShadowLayer(1, 0, 0, Configuration.textShadowColor());
         textPaint.setAntiAlias(true);
         StaticLayout layout = new StaticLayout(String.valueOf(indicator), textPaint, width, Layout.Alignment.ALIGN_CENTER, 1, 0, true);
-        while(layout.getLineCount() > 1) {
+        while (layout.getLineCount() > 1) {
             textPaint.setTextSize(textPaint.getTextSize() * 0.9f);
             layout = new StaticLayout(String.valueOf(indicator), textPaint, width, Layout.Alignment.ALIGN_CENTER, 1, 0, true);
         }
@@ -304,7 +305,7 @@ public class Card implements SelectableItem, Drawable {
         for (CardSubType subType : subTypes) {
             result.append("|" + subType.toString());
         }
-        if(result.length() > 0) {
+        if (result.length() > 0) {
             result.insert(0, "[");
             result.append("]");
         }
@@ -354,7 +355,7 @@ public class Card implements SelectableItem, Drawable {
     }
 
     public boolean isEx() {
-        if(subTypes.contains(CardSubType.XYZ)
+        if (subTypes.contains(CardSubType.XYZ)
                 || subTypes.contains(CardSubType.SYNC)
                 || subTypes.contains(CardSubType.FUSION)) {
             return true;
@@ -372,9 +373,10 @@ public class Card implements SelectableItem, Drawable {
 
 
     private int tokenSerial = 0;
+
     public String nextTokenId() {
-        if(isTokenable()) {
-            tokenSerial ++;
+        if (isTokenable()) {
+            tokenSerial++;
         }
         return String.valueOf(Integer.valueOf(id) + tokenSerial);
     }
