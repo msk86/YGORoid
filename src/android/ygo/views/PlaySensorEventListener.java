@@ -18,7 +18,11 @@ public class PlaySensorEventListener implements SensorEventListener {
 
     @Override
     public void onSensorChanged(SensorEvent e) {
-        if(view.getDuel().getSideWindow() != null) {
+        HandCards handCards = view.getDuel().getHandCards();
+        if(view.getDuel().getSideWindow() != null || view.getDuel().getCardWindow() != null
+                || view.getDuel().getCardSelector() != null) {
+            handCards.setAll();
+            view.updateActionTime();
             return;
         }
         float zLimit = 8f;
@@ -26,7 +30,6 @@ public class PlaySensorEventListener implements SensorEventListener {
         float x = e.values[SensorManager.DATA_X];
 
         boolean changed = false;
-        HandCards handCards = view.getDuel().getHandCards();
         if (z >= zLimit) {
             if (z >= zLimit + 0.3) {
                 if (!handCards.isSet()) {
