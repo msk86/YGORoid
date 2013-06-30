@@ -23,7 +23,7 @@ public class YGOActivity extends Activity {
     private PlayMenuProcessor menuProcessor;
     private View currentView;
     private DuelDiskView duelDiskView;
-    private WebView tipView;
+    private WebView webView;
 
     private PersistencyService service;
     private ServiceConnection sConn;
@@ -46,8 +46,7 @@ public class YGOActivity extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         duelDiskView = new DuelDiskView(this, null);
-        tipView = new WebView(this);
-        tipView.loadUrl("https://www.evernote.com/shard/s315/sh/68b02cba-e935-494a-861a-0bd815fcc80a/17027b528b04fd1fa1fd6789952a01d9");
+        webView = new WebView(this);
 
         setContentView(duelDiskView);
 
@@ -68,7 +67,13 @@ public class YGOActivity extends Activity {
     }
 
     public void showTips() {
-        setContentView(tipView);
+        webView.loadUrl(Utils.s(R.string.tips));
+        setContentView(webView);
+    }
+
+    public void showFeedback() {
+        webView.loadUrl(Utils.s(R.string.feedback));
+        setContentView(webView);
     }
 
     public void showDuel() {
@@ -86,7 +91,7 @@ public class YGOActivity extends Activity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        if(currentView == tipView) {
+        if(currentView == webView) {
             return super.onPrepareOptionsMenu(menu);
         } else {
             return menuProcessor.onMenuPrepare(menu);
@@ -95,7 +100,7 @@ public class YGOActivity extends Activity {
 
     @Override
     public boolean onMenuItemSelected(int id, MenuItem menuItem) {
-        if(currentView == tipView) {
+        if(currentView == webView) {
             return super.onMenuItemSelected(id, menuItem);
         } else {
             return menuProcessor.onMenuClick(menuItem);
@@ -105,7 +110,7 @@ public class YGOActivity extends Activity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(currentView == tipView) {
+        if(currentView == webView) {
             if(keyCode == KeyEvent.KEYCODE_BACK) {
                 showDuel();
                 return true;

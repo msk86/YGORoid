@@ -295,6 +295,10 @@ public class Utils {
         }
     }
 
+    public static String s(int id) {
+        return context.getResources().getString(id);
+    }
+
     public static String cutOneLine(String str, TextPaint textPaint, int width) {
         StaticLayout layout = new StaticLayout(str, textPaint, width, Layout.Alignment.ALIGN_NORMAL, 1, 0, true);
         if(layout.getLineCount() > 1) {
