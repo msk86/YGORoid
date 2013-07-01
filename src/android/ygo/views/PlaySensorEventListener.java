@@ -5,6 +5,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.ygo.YGOActivity;
+import android.ygo.core.Duel;
 import android.ygo.core.HandCards;
 import android.ygo.utils.Utils;
 
@@ -19,12 +20,20 @@ public class PlaySensorEventListener implements SensorEventListener {
     @Override
     public void onSensorChanged(SensorEvent e) {
         HandCards handCards = view.getDuel().getHandCards();
-        if(view.getDuel().getSideWindow() != null || view.getDuel().getCardWindow() != null
-                || view.getDuel().getCardSelector() != null) {
-            handCards.setAll();
+        Duel duel = view.getDuel();
+        if(duel.getSideWindow() == null) {
+            if(view.getDuel().getCardWindow() != null
+                    || view.getDuel().getCardSelector() != null) {
+                handCards.setAll();
+                view.updateActionTime();
+                return;
+            }
+        } else {
+            handCards.openAll();
             view.updateActionTime();
             return;
         }
+
         float zLimit = 8f;
         float z = e.values[SensorManager.DATA_Z];
         float x = e.values[SensorManager.DATA_X];
