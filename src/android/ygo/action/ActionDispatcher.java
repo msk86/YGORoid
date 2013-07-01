@@ -20,7 +20,7 @@ public class ActionDispatcher {
         if (item instanceof Coin) {
             action = new CoinAction(click);
         }
-        if(click.getDuel().getSideWindow() != null && item instanceof Card && click.getContainer() instanceof Layout) {
+        if (click.getDuel().getSideWindow() != null && item instanceof Card && click.getContainer() instanceof Layout) {
             action = new SelectSideAction(click);
         }
         if (item instanceof InfoWindow) {
@@ -42,7 +42,7 @@ public class ActionDispatcher {
                 }
             }
         }
-        if(press.getDuel().getSideWindow() != null) {
+        if (press.getDuel().getSideWindow() != null) {
             action = new SideWindowFlipAction(press);
         }
 //        if (press.getItem() == null && press.getContainer() == null) {
@@ -55,35 +55,38 @@ public class ActionDispatcher {
         Action action = new EmptyAction();
         SelectableItem item = dblClick.getItem();
         Item container = dblClick.getContainer();
-        if (container instanceof Field) {
-            Field field = (Field) container;
-            if (item == null) {
-                if (field.getType() == FieldType.MONSTER_ZONE) {
-                    action = new NewTokenAction(dblClick);
-                }
-            } else {
-                if (item instanceof Card || item instanceof OverRay) {
-                    SelectableItem fieldItem = field.getItem();
-                    if(fieldItem instanceof CardList) {
-                        CardList cardList = (CardList) fieldItem;
-                        if (cardList.getName().equals(CardList.TEMPORARY)) {
-                            action = new FlipAction(dblClick);
-                        }
-                    } else {
-                        action = new FlipAction(dblClick);
+        Duel duel = dblClick.getDuel();
+        if (duel.isDuelDisk()) {
+            if (container instanceof Field) {
+                Field field = (Field) container;
+                if (item == null) {
+                    if (field.getType() == FieldType.MONSTER_ZONE) {
+                        action = new NewTokenAction(dblClick);
                     }
-                } else if (item instanceof CardList) {
-                    action = new OpenCardSelectorAction(dblClick);
+                } else {
+                    if (item instanceof Card || item instanceof OverRay) {
+                        action = new FlipAction(dblClick);
+                    } else if (item instanceof CardList) {
+                        action = new OpenCardSelectorAction(dblClick);
+                    }
                 }
-            }
-        } else if (container instanceof HandCards) {
-            Card card = (Card) item;
-            if (card != null) {
+            } else if (container instanceof HandCards && item instanceof Card) {
                 action = new FlipAction(dblClick);
             }
         }
 
-        if(dblClick.getDuel().getSideWindow() != null && item instanceof Card && container instanceof Layout) {
+        if (duel.isCardSelector()) {
+            CardSelector cardSelector = duel.getCardSelector();
+            if (item instanceof Card) {
+                if (cardSelector.getCardList().getName().equals(CardList.TEMPORARY)) {
+                    action = new FlipAction(dblClick);
+                } else {
+                    action = new CardSelectorToTempAction(dblClick);
+                }
+            }
+        }
+
+        if (duel.isSideWindow() && item instanceof Card && container instanceof Layout) {
             action = new ChangeSideAction(dblClick);
         }
         return action;
@@ -99,7 +102,7 @@ public class ActionDispatcher {
                 if (item instanceof OverRay) {
                     action = new DragOverRayAction(startDrag);
                 } else if (item instanceof Card) {
-                    if(startDrag.getDuel().getCardSelector() == null) {
+                    if (startDrag.getDuel().getCardSelector() == null) {
                         action = new DragFieldCardAction(startDrag);
                     } else {
                         action = new DragCardSelectorAction(startDrag);
@@ -149,7 +152,7 @@ public class ActionDispatcher {
 
     public static Action dispatch(ReturnClick click) {
         Action action = new EmptyAction();
-        if(click.getDuel().getCardWindow() != null) {
+        if (click.getDuel().getCardWindow() != null) {
             action = new CloseCardWindowAction(click);
         } else if (click.getDuel().getCardSelector() != null) {
             action = new CloseCardSelectorAction(click);

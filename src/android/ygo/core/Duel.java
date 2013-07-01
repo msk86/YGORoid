@@ -447,4 +447,20 @@ public class Duel implements Item, Drawable {
     public List<Card> getSideDeckCards() {
         return sideDeckCards;
     }
+
+    public boolean isSideWindow() {
+        return sideWindow != null && cardWindow == null;
+    }
+
+    public boolean isCardSelector() {
+        return cardSelector != null && cardWindow == null;
+    }
+
+    public boolean isDuelDisk() {
+        return cardSelector == null && cardWindow == null && sideWindow == null;
+    }
+
+    public boolean isCardInfo() {
+        return cardWindow != null;
+    }
 }
