@@ -19,6 +19,10 @@ public class CardSelectorToTempAction extends BaseAction {
             cardList.remove(card);
             CardList tempList = (CardList) duel.getDuelFields().getTempField().getItem();
             tempList.push(card);
+            if(cardList.size() == 0) {
+                duel.setCardSelector(null);
+                duel.select(cardSelector.getSourceItem(), container);
+            }
         }
     }
 }
