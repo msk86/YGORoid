@@ -186,6 +186,9 @@ public class ActionDispatcher {
                     case Const.MENU_MIRROR_DISPLAY:
                         action = new MirrorDisplayAction(menuClick);
                         break;
+                    case Const.MENU_FEEDBACK:
+                        action = new FeedbackAction(menuClick);
+                        break;
                     case Const.MENU_EXIT:
                         action = new ExitConfirmAction(menuClick);
                         break;

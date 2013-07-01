@@ -57,6 +57,7 @@ public class PlayMenuProcessor {
                 if (Utils.getSDK() >= 10) {
                     menu.add(Const.MENU_GROUP_MAIN, Const.MENU_MIRROR_DISPLAY, 0, "镜像显示");
                 }
+                menu.add(Const.MENU_GROUP_MAIN, Const.MENU_FEEDBACK, 0, "问题反馈");
                 menu.add(Const.MENU_GROUP_MAIN, Const.MENU_EXIT, 0, "退出");
             }
         }

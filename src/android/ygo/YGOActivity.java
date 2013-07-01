@@ -5,10 +5,12 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.view.*;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.ygo.exception.CrashHandler;
 import android.ygo.service.PersistencyService;
 import android.ygo.upgrade.UpgradeHelper;
@@ -46,7 +48,7 @@ public class YGOActivity extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         duelDiskView = new DuelDiskView(this, null);
-        webView = new WebView(this);
+        initWebView();
 
         setContentView(duelDiskView);
 
@@ -58,6 +60,17 @@ public class YGOActivity extends Activity {
         upgradeMsgHandler = new UpgradeMsgHandler(this);
         upgradeHelper = new UpgradeHelper(this);
         upgradeHelper.startDetect();
+    }
+
+    private void initWebView() {
+        webView = new WebView(this);
+        webView.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+        });
     }
 
     @Override
