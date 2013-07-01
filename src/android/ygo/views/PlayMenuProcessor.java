@@ -51,13 +51,13 @@ public class PlayMenuProcessor {
                     menu.add(Const.MENU_GROUP_HAND_CARD, Const.MENU_SHUFFLE_HAND, 0, "切洗手牌");
                 }
             } else {
-                menu.add(Const.MENU_GROUP_DECK, Const.MENU_DECK_RESTART, 0, "重新开始");
-                menu.add(Const.MENU_GROUP_DECK, Const.MENU_DECK_CHANGE_DECK, 0, "更换卡组");
-                menu.add(Const.MENU_GROUP_DECK, Const.MENU_DECK_SIDE, 0, "换副卡组");
+                menu.add(Const.MENU_GROUP_MAIN, Const.MENU_RESTART, 0, "重新开始");
+                menu.add(Const.MENU_GROUP_MAIN, Const.MENU_CHANGE_DECK, 0, "更换卡组");
+                menu.add(Const.MENU_GROUP_MAIN, Const.MENU_SIDE, 0, "换副卡组");
                 if (Utils.getSDK() >= 10) {
-                    menu.add(Const.MENU_GROUP_DECK, Const.MENU_MIRROR_DISPLAY, 0, "镜像显示");
+                    menu.add(Const.MENU_GROUP_MAIN, Const.MENU_MIRROR_DISPLAY, 0, "镜像显示");
                 }
-                menu.add(Const.MENU_GROUP_DECK, Const.MENU_EXIT, 0, "退出");
+                menu.add(Const.MENU_GROUP_MAIN, Const.MENU_EXIT, 0, "退出");
             }
         }
         return true;

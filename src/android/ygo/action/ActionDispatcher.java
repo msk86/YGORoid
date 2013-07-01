@@ -172,6 +172,25 @@ public class ActionDispatcher {
     public static Action dispatch(MenuClick menuClick) {
         Action action = new EmptyAction();
         switch (menuClick.getMenuItem().getGroupId()) {
+            case Const.MENU_GROUP_MAIN:
+                switch (menuClick.getMenuItem().getItemId()) {
+                    case Const.MENU_RESTART:
+                        action = new RestartAction(menuClick);
+                        break;
+                    case Const.MENU_CHANGE_DECK:
+                        action = new DeckChangeAction(menuClick);
+                        break;
+                    case Const.MENU_SIDE:
+                        action = new OpenSideWindowAction(menuClick);
+                        break;
+                    case Const.MENU_MIRROR_DISPLAY:
+                        action = new MirrorDisplayAction(menuClick);
+                        break;
+                    case Const.MENU_EXIT:
+                        action = new ExitConfirmAction(menuClick);
+                        break;
+                }
+                break;
             case Const.MENU_GROUP_DECK:
                 switch (menuClick.getMenuItem().getItemId()) {
                     case Const.MENU_DECK_SHUFFLE:
@@ -182,21 +201,6 @@ public class ActionDispatcher {
                         break;
                     case Const.MENU_DECK_REVERSE:
                         action = new ReserveDeckAction(menuClick);
-                        break;
-                    case Const.MENU_DECK_RESTART:
-                        action = new RestartAction(menuClick);
-                        break;
-                    case Const.MENU_DECK_CHANGE_DECK:
-                        action = new DeckChangeAction(menuClick);
-                        break;
-                    case Const.MENU_DECK_SIDE:
-                        action = new OpenSideWindowAction(menuClick);
-                        break;
-                    case Const.MENU_MIRROR_DISPLAY:
-                        action = new MirrorDisplayAction(menuClick);
-                        break;
-                    case Const.MENU_EXIT:
-                        action = new ExitConfirmAction(menuClick);
                         break;
                 }
                 break;

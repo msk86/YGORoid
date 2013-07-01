@@ -67,6 +67,7 @@ public class Const {
     public static final int CATEGORY_TOKEN = 0x40000;
 
     // menu group
+    public static final int MENU_GROUP_MAIN = 0x00;
     public static final int MENU_GROUP_DECK = 0x01;
     public static final int MENU_GROUP_FIELD_CARD = 0x02;
     public static final int MENU_GROUP_HAND_CARD = 0x03;
@@ -75,14 +76,14 @@ public class Const {
     public static final int MENU_DECK_SHUFFLE = 0x01;
     public static final int MENU_DECK_CLOSE_REMOVE_TOP = 0x02;
     public static final int MENU_DECK_REVERSE = 0x03;
-    public static final int MENU_DECK_RESTART = 0x04;
-    public static final int MENU_DECK_CHANGE_DECK = 0x05;
+    public static final int MENU_RESTART = 0x04;
+    public static final int MENU_CHANGE_DECK = 0x05;
     public static final int MENU_MIRROR_DISPLAY = 0x06;
     public static final int MENU_CARD_BACK_TO_BOTTOM_OF_DECK = 0x07;
     public static final int MENU_CARD_CLOSE_REMOVE = 0x08;
     public static final int MENU_SHOW_HAND = 0x09;
     public static final int MENU_HIDE_HAND = 0x10;
     public static final int MENU_SHUFFLE_HAND = 0x11;
-    public static final int MENU_DECK_SIDE = 0x12;
+    public static final int MENU_SIDE = 0x12;
     public static final int MENU_EXIT = 0x100;
 }
