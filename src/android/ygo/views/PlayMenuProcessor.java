@@ -22,7 +22,7 @@ public class PlayMenuProcessor {
         SelectableItem item = duel.getCurrentSelectItem();
         Item container = duel.getCurrentSelectItemContainer();
 
-        if (duel.getCardSelector() == null) {
+        if (duel.isDuelDisk()) {
             if (container instanceof Field) {
                 if(item instanceof OverRay || item instanceof Card) {
                     Card card;
