@@ -224,42 +224,6 @@ public class Utils {
         cards.set(indexB, temp);
     }
 
-    public static int textPlace(char c) {
-        if (c < 32) {
-            return 0;
-        }
-        if (c < 256) {
-            return 1;
-        }
-        return 2;
-    }
-
-    public static String codeString(File file) throws Exception {
-        BufferedInputStream bin = new BufferedInputStream(
-                new FileInputStream(file));
-        int p = (bin.read() << 8) + bin.read();
-        String code = null;
-
-        switch (p) {
-            case 0x5bb3:
-            case 0x5bc8:
-            case 0x5bd7:
-                code = "GBK";
-                break;
-            case 0xfffe:
-                code = "Unicode";
-                break;
-            case 0xfeff:
-                code = "UTF-16BE";
-                break;
-            default:
-                code = "UTF-8";
-        }
-        bin.close();
-
-        return code;
-    }
-
     public static String screenShot() {
         DuelDiskView v = context.getDuelDiskView();
         Bitmap bitmap = Bitmap.createBitmap(Utils.screenWidth(), Utils.screenHeight(), Bitmap.Config.ARGB_8888);
