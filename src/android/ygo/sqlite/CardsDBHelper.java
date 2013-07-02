@@ -6,13 +6,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.ygo.core.Card;
 import android.ygo.core.UserDefinedCard;
+import android.ygo.utils.CharSet;
 import android.ygo.utils.Configuration;
-import android.ygo.utils.Utils;
+import android.ygo.utils.UnicodeReader;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -190,7 +190,9 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         List<Card> exCardList = new ArrayList<Card>();
         List<Card> sideCardList = new ArrayList<Card>();
         try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(deckFile), Utils.codeString(deckFile)));
+            // TODO 重构此处代码，不要重复再读取一次文件内容
+            String code = CharSet.detect(deckFile);
+            BufferedReader reader = new BufferedReader(new UnicodeReader(new FileInputStream(deckFile), code));
             String line = "";
             int cardIn = IN_MAIN;
             do {
