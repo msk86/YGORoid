@@ -37,10 +37,13 @@ public class UpgradeHelper {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                String versionHtml = versionHtml();
+                if(versionHtml == null) {
+                    return;
+                }
+                newVersion = findVersion(versionHtml);
                 String myVersionStr = Utils.getVersion();
                 myVersion = new Version(myVersionStr);
-                String versionHtml = versionHtml();
-                newVersion = findVersion(versionHtml);
                 upgradeUrl = findUpgradeUrl(versionHtml);
 
                 if(myVersion.version < newVersion.version) {
@@ -86,6 +89,9 @@ public class UpgradeHelper {
                 reader.close();
             }
         } catch (Exception e) {}
+        if(remoteHtml.length() == 0) {
+            return null;
+        }
         String html = remoteHtml.toString();
         return html.substring(html.indexOf("</head>") + 7);
     }
