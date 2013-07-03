@@ -94,22 +94,22 @@ public class ActionDispatcher {
 
     public static Action dispatch(StartDrag startDrag) {
         Action action = new EmptyAction();
-        if (startDrag.getContainer() instanceof HandCards) {
+        Item container = startDrag.getContainer();
+        SelectableItem item = startDrag.getItem();
+        if (container instanceof HandCards && item instanceof Card) {
             action = new DragHandCardAction(startDrag);
-        } else if (startDrag.getContainer() instanceof Field) {
-            SelectableItem item = startDrag.getItem();
-            if (item != null) {
-                if (item instanceof OverRay) {
-                    action = new DragOverRayAction(startDrag);
-                } else if (item instanceof Card) {
-                    if (startDrag.getDuel().getCardSelector() == null) {
-                        action = new DragFieldCardAction(startDrag);
-                    } else {
-                        action = new DragCardSelectorAction(startDrag);
-                    }
-                } else if (item instanceof CardList) {
-                    action = new DragCardListAction(startDrag);
+        }
+        if (container instanceof Field) {
+            if (item instanceof OverRay) {
+                action = new DragOverRayAction(startDrag);
+            } else if (item instanceof Card) {
+                if (startDrag.getDuel().getCardSelector() == null) {
+                    action = new DragFieldCardAction(startDrag);
+                } else {
+                    action = new DragCardSelectorAction(startDrag);
                 }
+            } else if (item instanceof CardList) {
+                action = new DragCardListAction(startDrag);
             }
         }
         return action;
