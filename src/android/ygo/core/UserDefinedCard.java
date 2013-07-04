@@ -5,10 +5,8 @@ import android.ygo.utils.Utils;
 
 public class UserDefinedCard extends Card {
     public UserDefinedCard(String name) {
-        super("-1", name, "");
+        super("0", name, "");
         String fileName = Configuration.userDefinedCardImgPath() + name + Configuration.cardImageSuffix();
-        try {
-            super.cardPic = Utils.readBitmapScaleByHeight(fileName, Utils.cardHeight());
-        } catch (Exception e) {}
+        super.cardPic = Utils.readBitmapScaleByHeight(fileName, Utils.cardHeight());
     }
 }

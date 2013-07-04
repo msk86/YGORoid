@@ -91,13 +91,31 @@ public class Utils {
     }
 
     public static Bitmap readBitmapScaleByHeight(int resId, int targetHeight) {
-        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), resId);
-        return scaleByHeight(bitmap, targetHeight);
+        try {
+            Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), resId);
+            return scaleByHeight(bitmap, targetHeight);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public static Bitmap readBitmapScaleByHeight(String file, int targetHeight) {
-        Bitmap bitmap = BitmapFactory.decodeFile(file);
-        return scaleByHeight(bitmap, targetHeight);
+        try {
+            Bitmap bitmap = BitmapFactory.decodeFile(file);
+            return scaleByHeight(bitmap, targetHeight);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static Bitmap readBitmapScaleByHeight(String zip, String file, int targetHeight) {
+        try {
+            InputStream is = ZipReader.readZipFile(zip, file);
+            Bitmap bitmap = BitmapFactory.decodeStream(is);
+            return scaleByHeight(bitmap, targetHeight);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public static Bitmap scaleByHeight(Bitmap bitmap, int targetHeight) {
@@ -265,7 +283,7 @@ public class Utils {
 
     public static String cutOneLine(String str, TextPaint textPaint, int width) {
         StaticLayout layout = new StaticLayout(str, textPaint, width, Layout.Alignment.ALIGN_NORMAL, 1, 0, true);
-        if(layout.getLineCount() > 1) {
+        if (layout.getLineCount() > 1) {
             str = str.substring(0, layout.getLineEnd(0)).trim();
         }
         return str;

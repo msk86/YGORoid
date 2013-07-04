@@ -26,12 +26,8 @@ public class DuelDiskView extends SurfaceView implements Runnable {
     private static Bitmap BACKGROUND_BMP;
 
     static {
-        try {
-            BACKGROUND_BMP = Utils.readBitmapScaleByHeight(Configuration.texturePath() + "bg" + Configuration.cardImageSuffix(),
-                    Utils.screenHeight());
-        } catch (Exception e) {
-            BACKGROUND_BMP = null;
-        }
+        BACKGROUND_BMP = Utils.readBitmapScaleByHeight(Configuration.texturePath() + "bg" + Configuration.cardImageSuffix(),
+                Utils.screenHeight());
     }
 
     private static final int ACTIVE_DRAW_DURATION = 1500;

@@ -11,12 +11,12 @@ import android.ygo.utils.Utils;
 import java.util.List;
 
 public class Card implements SelectableItem, Drawable {
-    public static Bitmap CARD_PROTECTOR = Utils.readBitmapScaleByHeight(R.raw.cover, Utils.cardHeight());
+    public static Bitmap CARD_PROTECTOR = null;
 
     static {
-        try {
-            CARD_PROTECTOR = Utils.readBitmapScaleByHeight(Configuration.texturePath() + "cover" + Configuration.cardImageSuffix(), Utils.cardHeight());
-        } catch (Exception e) {
+        CARD_PROTECTOR = Utils.readBitmapScaleByHeight(Configuration.texturePath() + "cover" + Configuration.cardImageSuffix(), Utils.cardHeight());
+        if(CARD_PROTECTOR == null) {
+            CARD_PROTECTOR = Utils.readBitmapScaleByHeight(R.raw.cover, Utils.cardHeight());
         }
     }
 
@@ -138,9 +138,11 @@ public class Card implements SelectableItem, Drawable {
     private void initCardPic() {
         int height = Utils.cardHeight();
         if (cardPic == null) {
-            try {
-                cardPic = Utils.readBitmapScaleByHeight(Configuration.cardImgPath() + id + Configuration.cardImageSuffix(), height);
-            } catch (Exception e) {
+            cardPic = Utils.readBitmapScaleByHeight(Configuration.cardImgPath() + id + Configuration.cardImageSuffix(), height);
+            if (cardPic == null) {
+                cardPic = Utils.readBitmapScaleByHeight(Configuration.cardImgPath() + Configuration.cardImgZipFile(), Configuration.zipInnerPicPath() + id + Configuration.cardImageSuffix(), height);
+            }
+            if (cardPic == null) {
                 cardPic = Bitmap.createBitmap(Utils.cardWidth(), Utils.cardHeight(), Bitmap.Config.ARGB_8888);
                 Canvas canvas = new Canvas(cardPic);
                 Paint paint = new Paint();

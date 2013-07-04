@@ -70,4 +70,12 @@ public class Configuration {
     public static int fieldColor() {
         return Color.BLACK;
     }
+
+    public static String cardImgZipFile() {
+        return "pics.zip";
+    }
+
+    public static String zipInnerPicPath() {
+        return "pics/";
+    }
 }
