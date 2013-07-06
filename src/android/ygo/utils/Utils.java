@@ -108,11 +108,10 @@ public class Utils {
         }
     }
 
-    public static Bitmap readBitmapScaleByHeight(String zip, String file, int targetHeight) {
+    public static Bitmap readBitmapScaleByHeight(String zip, String innerFile, String extractFile, int targetHeight) {
         try {
-            InputStream is = ZipReader.readZipFile(zip, file);
-            Bitmap bitmap = BitmapFactory.decodeStream(is);
-            return scaleByHeight(bitmap, targetHeight);
+            ZipReader.extractZipFile(zip, innerFile, extractFile);
+            return readBitmapScaleByHeight(extractFile, targetHeight);
         } catch (Exception e) {
             return null;
         }

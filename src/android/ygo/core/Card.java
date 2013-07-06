@@ -140,7 +140,9 @@ public class Card implements SelectableItem, Drawable {
         if (cardPic == null) {
             cardPic = Utils.readBitmapScaleByHeight(Configuration.cardImgPath() + id + Configuration.cardImageSuffix(), height);
             if (cardPic == null) {
-                cardPic = Utils.readBitmapScaleByHeight(Configuration.cardImgPath() + Configuration.cardImgZipFile(), Configuration.zipInnerPicPath() + id + Configuration.cardImageSuffix(), height);
+                cardPic = Utils.readBitmapScaleByHeight(Configuration.cardImgPath() + Configuration.cardImgZipFile(),
+                        Configuration.zipInnerPicPath() + id + Configuration.cardImageSuffix(),
+                        Configuration.cardImgPath() + id + Configuration.cardImageSuffix(), height);
             }
             if (cardPic == null) {
                 cardPic = Bitmap.createBitmap(Utils.cardWidth(), Utils.cardHeight(), Bitmap.Config.ARGB_8888);
