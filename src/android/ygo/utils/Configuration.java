@@ -55,10 +55,6 @@ public class Configuration {
         return baseDir() + "texture/";
     }
 
-    public static String screenShotPath() {
-        return baseDir() + "screenShot/";
-    }
-
     public static String cardImageSuffix() {
         return ".jpg";
     }

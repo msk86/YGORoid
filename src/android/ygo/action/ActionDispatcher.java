@@ -45,9 +45,6 @@ public class ActionDispatcher {
         if (press.getDuel().getSideWindow() != null) {
             action = new SideWindowFlipAction(press);
         }
-//        if (press.getItem() == null && press.getContainer() == null) {
-//            action = new ScreenShotAction(press);
-//        }
         return action;
     }
 

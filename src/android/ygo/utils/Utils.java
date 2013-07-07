@@ -37,7 +37,6 @@ public class Utils {
         checkFolder(Configuration.cardImgPath(), true);
         checkFolder(Configuration.userDefinedCardImgPath(), true);
         checkFolder(Configuration.texturePath(), true);
-        checkFolder(Configuration.screenShotPath(), false);
     }
 
     private static void checkFolder(String path, boolean noMedia) {
@@ -239,27 +238,6 @@ public class Utils {
         Card temp = cards.get(indexA);
         cards.set(indexA, cards.get(indexB));
         cards.set(indexB, temp);
-    }
-
-    public static String screenShot() {
-        DuelDiskView v = context.getDuelDiskView();
-        Bitmap bitmap = Bitmap.createBitmap(Utils.screenWidth(), Utils.screenHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        v.drawDuelDisk(canvas);
-
-        String fileName = System.currentTimeMillis() + ".jpg";
-        String filePath = Configuration.screenShotPath() + fileName;
-
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream(filePath);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-            fos.flush();
-            fos.close();
-            return fileName;
-        } catch (Exception e) {
-            return null;
-        }
     }
 
     public static int getSDK() {
