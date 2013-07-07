@@ -87,7 +87,7 @@ public class DuelDiskView extends SurfaceView implements Runnable {
         drawBackground(canvas);
         duel.draw(canvas, 0, 0);
         drawVersion(canvas);
-        if (Configuration.showFPS()) {
+        if (Configuration.configProperties(Configuration.PROPERTY_FPS_ENABLE)) {
             drawFPS(canvas);
         }
     }

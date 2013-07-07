@@ -7,6 +7,7 @@ import android.hardware.SensorManager;
 import android.ygo.YGOActivity;
 import android.ygo.core.Duel;
 import android.ygo.core.HandCards;
+import android.ygo.utils.Configuration;
 import android.ygo.utils.Utils;
 
 public class PlaySensorEventListener implements SensorEventListener {
@@ -19,6 +20,9 @@ public class PlaySensorEventListener implements SensorEventListener {
 
     @Override
     public void onSensorChanged(SensorEvent e) {
+        if(!Configuration.configProperties(Configuration.PROPERTY_GRAVITY_ENABLE)) {
+            return;
+        }
         HandCards handCards = view.getDuel().getHandCards();
         Duel duel = view.getDuel();
         if(duel.getSideWindow() == null) {
