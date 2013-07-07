@@ -137,7 +137,10 @@ public class LifePoint implements SelectableItem, Drawable {
         public boolean onEditorAction(TextView textView, int actionId, KeyEvent event) {
             if (actionId == EditorInfo.IME_ACTION_DONE
                     || actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
-                lifePoint.syncLP();
+                try {
+                    lifePoint.syncLP();
+                } catch (Exception e) {
+                }
             }
             lifePoint.dialog.hide();
             Utils.getContext().getDuelDiskView().updateActionTime();
@@ -151,30 +154,30 @@ public class LifePoint implements SelectableItem, Drawable {
     private void syncLP() {
         String exp = edit.getText().toString();
         Matcher matcher = LP_PATTERN.matcher(exp);
-        if(matcher.find()) {
+        if (matcher.find()) {
             String op = matcher.group(1);
             int number = Integer.parseInt(matcher.group(2));
-            if(op == null || op.length() == 0) {
+            if (op == null || op.length() == 0) {
                 op = "-";
             }
 
             char opc = op.charAt(0);
             switch (opc) {
-                case '+' :
+                case '+':
                     lp += number;
                     break;
-                case '-' :
+                case '-':
                     lp -= number;
                     break;
-                case '=' :
-                case '.' :
+                case '=':
+                case '.':
                     lp = number;
                     break;
-                case '*' :
+                case '*':
                     lp *= number;
                     break;
-                case '/' :
-                case '#' :
+                case '/':
+                case '#':
                     lp /= number;
                     break;
             }
