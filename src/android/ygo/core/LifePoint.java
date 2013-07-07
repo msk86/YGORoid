@@ -13,6 +13,9 @@ import android.widget.TextView;
 import android.ygo.utils.Configuration;
 import android.ygo.utils.Utils;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class LifePoint implements SelectableItem, Drawable {
     int lp;
 
@@ -48,7 +51,7 @@ public class LifePoint implements SelectableItem, Drawable {
     private void createEdit() {
         edit = new EditText(Utils.getContext());
         edit.setGravity(Gravity.CENTER);
-        edit.setInputType(InputType.TYPE_CLASS_NUMBER);
+        edit.setInputType(InputType.TYPE_CLASS_PHONE);
         edit.setSingleLine();
         edit.setOnEditorActionListener(new OnLPEditorActionListener(this));
         edit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -137,16 +140,44 @@ public class LifePoint implements SelectableItem, Drawable {
                 lifePoint.syncLP();
             }
             lifePoint.dialog.hide();
+            Utils.getContext().getDuelDiskView().updateActionTime();
 
             return false;
         }
     }
 
+    private static final Pattern LP_PATTERN = Pattern.compile("^([\\+\\-=#\\*/\\.]?)(\\d+)$");
+
     private void syncLP() {
-        try {
-            lp = Integer.parseInt(edit.getText().toString());
-            Utils.getContext().getDuelDiskView().updateActionTime();
-        } catch (Exception e) {
+        String exp = edit.getText().toString();
+        Matcher matcher = LP_PATTERN.matcher(exp);
+        if(matcher.find()) {
+            String op = matcher.group(1);
+            int number = Integer.parseInt(matcher.group(2));
+            if(op == null || op.length() == 0) {
+                op = "-";
+            }
+
+            char opc = op.charAt(0);
+            switch (opc) {
+                case '+' :
+                    lp += number;
+                    break;
+                case '-' :
+                    lp -= number;
+                    break;
+                case '=' :
+                case '.' :
+                    lp = number;
+                    break;
+                case '*' :
+                    lp *= number;
+                    break;
+                case '/' :
+                case '#' :
+                    lp /= number;
+                    break;
+            }
         }
     }
 }

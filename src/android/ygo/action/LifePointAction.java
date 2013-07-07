@@ -1,6 +1,7 @@
 package android.ygo.action;
 
 import android.ygo.op.Operation;
+import android.ygo.utils.Utils;
 
 public class LifePointAction extends BaseAction {
     public LifePointAction(Operation operation) {
