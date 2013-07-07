@@ -22,7 +22,6 @@ public enum CardType {
         this.resId = resId;
         if (this.resId != 0) {
             cardBmp = Utils.readBitmapScaleByHeight(resId, Utils.cardHeight());
-            bigCardBmp = Utils.readBitmapScaleByHeight(resId, Utils.screenHeight());
         }
     }
 
@@ -43,7 +42,7 @@ public enum CardType {
     }
 
     public Bitmap getBigCardBmp() {
-        return bigCardBmp;
+        return Utils.readBitmapScaleByHeight(resId, Utils.screenHeight());
     }
 
     @Override

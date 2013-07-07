@@ -89,6 +89,14 @@ public class Utils {
         return (int) (cardHeight() / 1.45);
     }
 
+    public static int bigCardHeight() {
+        return screenHeight();
+    }
+
+    public static int bigCardWidth() {
+        return (int) (bigCardHeight() / 1.45);
+    }
+
     public static Bitmap readBitmapScaleByHeight(int resId, int targetHeight) {
         try {
             Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), resId);

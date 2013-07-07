@@ -15,7 +15,7 @@ public class Card implements SelectableItem, Drawable {
 
     static {
         CARD_PROTECTOR = Utils.readBitmapScaleByHeight(Configuration.texturePath() + "cover" + Configuration.cardImageSuffix(), Utils.cardHeight());
-        if(CARD_PROTECTOR == null) {
+        if (CARD_PROTECTOR == null) {
             CARD_PROTECTOR = Utils.readBitmapScaleByHeight(R.raw.cover, Utils.cardHeight());
         }
     }
@@ -115,24 +115,20 @@ public class Card implements SelectableItem, Drawable {
     }
 
     public Bitmap bigCardPic() {
-        Bitmap bigCardPic = null;
-        try {
-            bigCardPic = Utils.readBitmapScaleByHeight(Configuration.cardImgPath() + id + Configuration.cardImageSuffix(), Utils.screenHeight());
-        } catch (Exception e) {
-            if (type.getBigCardBmp() != null) {
-                bigCardPic = type.getBigCardBmp();
-            }
-            if (bigCardPic == null) {
-                for (int i = subTypes.size() - 1; i >= 0; i--) {
-                    CardSubType subType = subTypes.get(i);
-                    if (subType.getBigCardBmp() != null) {
-                        bigCardPic = subType.getBigCardBmp();
-                        break;
-                    }
-                }
+        Bitmap bitmap = Utils.readBitmapScaleByHeight(Configuration.cardImgPath() + id + Configuration.cardImageSuffix(), Utils.screenHeight());
+        if (bitmap != null) {
+            return bitmap;
+        }
+        for (int i = subTypes.size() - 1; i >= 0; i--) {
+            CardSubType subType = subTypes.get(i);
+            if (subType.getBigCardBmp() != null) {
+                return subType.getBigCardBmp();
             }
         }
-        return bigCardPic;
+        if (type.getBigCardBmp() != null) {
+            return type.getBigCardBmp();
+        }
+        return null;
     }
 
     private void initCardPic() {

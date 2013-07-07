@@ -19,11 +19,20 @@ public class ShowCardWindow implements Item, Drawable {
     @Override
     public void draw(Canvas canvas, int x, int y) {
         drawBackground(canvas, x, y);
+        drawText(canvas, x, y);
+        drawBigPic(canvas, x, y);
+    }
 
+    private void drawBigPic(Canvas canvas, int x, int y) {
         Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
-        int cardWidth = cardBigBmp.getWidth();
-        int cardHeight = cardBigBmp.getHeight();
         helper.drawBitmap(canvas, cardBigBmp, 0, 0, new Paint());
+    }
+
+    private void drawText(Canvas canvas, int x, int y) {
+        Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
+
+        int cardWidth = Utils.bigCardWidth();
+        int cardHeight = Utils.bigCardHeight();
 
         int fontSize = cardHeight / 25;
         Paint paint = new Paint();
@@ -49,16 +58,16 @@ public class ShowCardWindow implements Item, Drawable {
         helper.drawLayout(canvas, layout, left, top);
     }
 
-    public void destroy() {
-        cardBigBmp.recycle();
-    }
-
     public void drawBackground(Canvas canvas, int x, int y) {
         Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
         Paint paint = new Paint();
         paint.setColor(Configuration.windowBackgroundColor());
         paint.setAlpha(150);
         helper.drawRect(canvas, new Rect(0, 0, width(), height()), paint);
+    }
+
+    public void destroy() {
+        cardBigBmp.recycle();
     }
 
     @Override
