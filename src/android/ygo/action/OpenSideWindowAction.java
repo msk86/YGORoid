@@ -24,6 +24,7 @@ public class OpenSideWindowAction extends BaseAction {
     private void openAll(List<Card> cards) {
         for(Card card : cards) {
             card.open();
+            card.positive();
         }
     }
 }
