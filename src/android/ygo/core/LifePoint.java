@@ -158,7 +158,7 @@ public class LifePoint implements SelectableItem, Drawable {
             String op = matcher.group(1);
             int number = Integer.parseInt(matcher.group(2));
             if (op == null || op.length() == 0) {
-                op = "-";
+                op = "=";
             }
 
             char opc = op.charAt(0);
@@ -170,7 +170,6 @@ public class LifePoint implements SelectableItem, Drawable {
                     lp -= number;
                     break;
                 case '=':
-                case '.':
                     lp = number;
                     break;
                 case '*':
