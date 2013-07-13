@@ -115,10 +115,31 @@ public class Utils {
         }
     }
 
-    public static Bitmap readBitmapScaleByHeight(String zip, String innerFile, String extractFile, int targetHeight) {
+    private static Bitmap readBitmapScaleByHeight(String zip, String innerFile, String extractFile, int targetHeight) {
         try {
             ZipReader.extractZipFile(zip, innerFile, extractFile);
             return readBitmapScaleByHeight(extractFile, targetHeight);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static Bitmap readBitmapScaleByHeight(String innerFile, String extractFile, int targetHeight) {
+        try {
+            File picsDir = new File(Configuration.cardImgPath());
+            File[] zips = picsDir.listFiles(new FileFilter() {
+                @Override
+                public boolean accept(File file) {
+                    return file.getName().startsWith("pics") && file.getName().endsWith(".zip");
+                }
+            });
+            for(File zip : zips) {
+                Bitmap bmp = readBitmapScaleByHeight(Configuration.cardImgPath() + zip.getName(), innerFile, extractFile, targetHeight);
+                if(bmp != null) {
+                    return bmp;
+                }
+            }
+            return null;
         } catch (Exception e) {
             return null;
         }
