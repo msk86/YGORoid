@@ -214,7 +214,9 @@ public class Utils {
             default:
                 posY = positionY;
         }
-        canvas.drawBitmap(bitmap, posX, posY, paint);
+        if(!bitmap.isRecycled()) {
+            canvas.drawBitmap(bitmap, posX, posY, paint);
+        }
     }
 
     public static class DrawHelper {
@@ -257,7 +259,9 @@ public class Utils {
         }
 
         public void drawBitmap(Canvas canvas, Bitmap bitmap, int left, int top, Paint paint) {
-            canvas.drawBitmap(bitmap, x + left, y + top, paint);
+            if (!bitmap.isRecycled()) {
+                canvas.drawBitmap(bitmap, x + left, y + top, paint);
+            }
         }
 
         public void drawDrawable(Canvas canvas, Drawable drawable, int left, int top) {
