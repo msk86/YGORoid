@@ -64,7 +64,7 @@ public class Const {
     public static final int RACE_CREATORGOD = 0x400000;
 
     // category
-    public static final int CATEGORY_TOKEN = 0x40000;
+    public static final int CATEGORY_TOKEN = 0x80000;
 
     // menu group
     public static final int MENU_GROUP_MAIN = 0x00;
