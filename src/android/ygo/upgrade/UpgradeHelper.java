@@ -14,20 +14,29 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStreamReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class UpgradeHelper {
 
+    public static final int UPGRADE = 0;
+    public static final int NEW_CARDS = 1;
+
     private static final String REMOTE_URL =
             "https://www.evernote.com/shard/s315/sh/403e5aba-86cd-4975-9854-6170bf12934f/5d4939bbe181fb8be46be192f74bd266";
 
     private YGOActivity context;
 
+    private String upgradeInfo = null;
+
     private Version myVersion;
     private Version newVersion;
     private String upgradeUrl;
+
+    private String newCardsFile;
+    private String newCardsUrl;
 
     public UpgradeHelper(YGOActivity context) {
         this.context = context;
@@ -37,26 +46,34 @@ public class UpgradeHelper {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String versionHtml = versionHtml();
-                if(versionHtml == null) {
+                fetchUpgradeInfo();
+                if (upgradeInfo == null) {
                     return;
                 }
-                newVersion = findVersion(versionHtml);
+
+                newVersion = findVersion();
                 String myVersionStr = Utils.getVersion();
                 myVersion = new Version(myVersionStr);
-                upgradeUrl = findUpgradeUrl(versionHtml);
+                upgradeUrl = findUpgradeUrl();
 
-                if(myVersion.version < newVersion.version) {
-                    context.getUpgradeMsgHandler().sendEmptyMessage(0);
+                if (myVersion.version < newVersion.version) {
+                    context.getUpgradeMsgHandler().sendEmptyMessage(UPGRADE);
+                    return;
                 }
+
+                newCardsFile = getInfo("RoidNewCardFile");
+                String totalPicCount = getInfo("RoidTotalCardPics");
+                newCardsUrl = findNewCardsUrl();
+
+                if(!detectFile(newCardsFile, totalPicCount)) {
+                    context.getUpgradeMsgHandler().sendEmptyMessage(NEW_CARDS);
+                }
+
             }
         }).start();
     }
 
     public void alertUpgrade() {
-        if(newVersion == null) {
-            return;
-        }
         String title = "发现新版本程序[V" + newVersion.ver + "]，是否更新？";
         AlertDialog dialog = new AlertDialog.Builder(Utils.getContext())
                 .setTitle(title)
@@ -66,13 +83,24 @@ public class UpgradeHelper {
         dialog.show();
     }
 
-    public void download() {
-        Uri uri = Uri.parse(upgradeUrl);
+    public void alertNewCards() {
+        String title = "新卡更新[" + newCardsFile + "]，是否更新？别忘记同时更新数据库文件哦！";
+
+        AlertDialog dialog = new AlertDialog.Builder(Utils.getContext())
+                .setTitle(title)
+                .setPositiveButton("确定", new OnNewCardsClickListener("OK", this))
+                .setNegativeButton("取消", new OnNewCardsClickListener("Cancel", this))
+                .create();
+        dialog.show();
+    }
+
+    public void download(String url) {
+        Uri uri = Uri.parse(url);
         Intent it = new Intent(Intent.ACTION_VIEW, uri);
         context.startActivity(it);
     }
 
-    private static String versionHtml() {
+    private void fetchUpgradeInfo() {
         StringBuilder remoteHtml = new StringBuilder();
         BufferedReader reader;
         try {
@@ -88,31 +116,78 @@ public class UpgradeHelper {
                 }
                 reader.close();
             }
-        } catch (Exception e) {}
-        if(remoteHtml.length() == 0) {
-            return null;
+        } catch (Exception e) {
         }
-        String html = remoteHtml.toString();
-        return html.substring(html.indexOf("</head>") + 7);
+        if (remoteHtml.length() == 0) {
+            return;
+        }
+        upgradeInfo = remoteHtml.toString();
+        upgradeInfo = upgradeInfo.substring(upgradeInfo.indexOf("</head>") + 7);
     }
 
-    private static Version findVersion(String str) {
-        Pattern pattern = Pattern.compile("RoidVersion:\\[(.*?)\\]");
-        Matcher matcher = pattern.matcher(str);
-        if(matcher.find()) {
-            return new Version(matcher.group(1));
+    private String getInfo(String key) {
+        Pattern pattern = Pattern.compile(key + ":\\[(.*?)\\]");
+        Matcher matcher = pattern.matcher(upgradeInfo);
+        if (matcher.find()) {
+            return matcher.group(1);
         } else {
-            return new Version("0");
+            return null;
         }
     }
 
-    private static String findUpgradeUrl(String str) {
-        Pattern pattern = Pattern.compile("RoidUpgradeUrl:\\[(.*?)\\]");
-        Matcher matcher = pattern.matcher(str);
-        if(matcher.find()) {
-            return matcher.group(1).replace("&amp;", "&");
+    private Version findVersion() {
+        String version = getInfo("RoidVersion");
+        if (version != null) {
+            return new Version(version);
+        }
+        return new Version("0");
+    }
+
+    private String findUpgradeUrl() {
+        String url = getInfo("RoidUpgradeUrl");
+        if (url != null) {
+            return url.replace("&amp;", "&");
+        }
+        return null;
+    }
+
+    private String findNewCardsUrl() {
+        String url = getInfo("RoidNewCardUrl");
+        if (url != null) {
+            return url.replace("&amp;", "&");
+        }
+        return null;
+    }
+
+    private boolean detectFile(String file, String picTotalCount) {
+        String[] zips = Utils.cardPicZips();
+        if (zips.length == 0) {
+            int picCount = Utils.countPics();
+            int totalCount = Integer.parseInt(picTotalCount);
+            return picCount >= totalCount;
         } else {
-            return null;
+            for (String zip : zips) {
+                if (zip.equals(file)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
+    public static class OnNewCardsClickListener implements DialogInterface.OnClickListener {
+        private String button;
+        private UpgradeHelper helper;
+        private OnNewCardsClickListener(String button, UpgradeHelper helper) {
+            this.button = button;
+            this.helper = helper;
+        }
+
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i) {
+            if (button.equals("OK")) {
+                helper.download(helper.newCardsUrl);
+            }
         }
     }
 
@@ -127,8 +202,8 @@ public class UpgradeHelper {
 
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
-            if(button.equals("OK")) {
-                helper.download();
+            if (button.equals("OK")) {
+                helper.download(helper.upgradeUrl);
             }
         }
     }
@@ -141,7 +216,7 @@ public class UpgradeHelper {
         private Version(String ver) {
             Pattern pattern = Pattern.compile("([0-9.]+)(.*?)");
             Matcher matcher = pattern.matcher(ver);
-            if(matcher.find()) {
+            if (matcher.find()) {
                 version = Float.parseFloat(matcher.group(1));
                 suffix = matcher.group(2);
             } else {

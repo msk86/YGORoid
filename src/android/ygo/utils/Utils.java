@@ -126,16 +126,10 @@ public class Utils {
 
     public static Bitmap readBitmapScaleByHeight(String innerFile, String extractFile, int targetHeight) {
         try {
-            File picsDir = new File(Configuration.cardImgPath());
-            File[] zips = picsDir.listFiles(new FileFilter() {
-                @Override
-                public boolean accept(File file) {
-                    return file.getName().startsWith("pics") && file.getName().endsWith(".zip");
-                }
-            });
-            for(File zip : zips) {
-                Bitmap bmp = readBitmapScaleByHeight(Configuration.cardImgPath() + zip.getName(), innerFile, extractFile, targetHeight);
-                if(bmp != null) {
+            String[] zips = cardPicZips();
+            for (String zip : zips) {
+                Bitmap bmp = readBitmapScaleByHeight(Configuration.cardImgPath() + zip, innerFile, extractFile, targetHeight);
+                if (bmp != null) {
                     return bmp;
                 }
             }
@@ -143,6 +137,28 @@ public class Utils {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    public static String[] cardPicZips() {
+        File picsDir = new File(Configuration.cardImgPath());
+        String[] zips = picsDir.list(new FilenameFilter() {
+            @Override
+            public boolean accept(File file, String name) {
+                return name.startsWith("pics") && name.endsWith(".zip");
+            }
+        });
+        return zips;
+    }
+
+    public static int countPics() {
+        File picsDir = new File(Configuration.cardImgPath());
+        String[] zips = picsDir.list(new FilenameFilter() {
+            @Override
+            public boolean accept(File file, String name) {
+                return name.endsWith(".jpg");
+            }
+        });
+        return zips.length;
     }
 
     public static Bitmap scaleByHeight(Bitmap bitmap, int targetHeight) {

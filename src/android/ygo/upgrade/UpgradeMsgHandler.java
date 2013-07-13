@@ -14,7 +14,15 @@ public class UpgradeMsgHandler extends Handler {
 
     @Override
     public void handleMessage(Message msg) {
-        context.getUpgradeHelper().alertUpgrade();
+        switch (msg.what) {
+            case UpgradeHelper.UPGRADE:
+                context.getUpgradeHelper().alertUpgrade();
+                break;
+            case UpgradeHelper.NEW_CARDS:
+                context.getUpgradeHelper().alertNewCards();
+                break;
+        }
+
         super.handleMessage(msg);
     }
 }
