@@ -36,7 +36,7 @@ public class RevertDragAction extends BaseAction {
             ((HandCards) from).add((Card) item);
         } else if (from instanceof CardList) {
             ((CardList) from).push((Card) item);
-
         }
+        duel.unSelect();
     }
 }
