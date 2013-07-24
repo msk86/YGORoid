@@ -114,6 +114,9 @@ public class ActionDispatcher {
 
     public static Action dispatch(Drag drag) {
         if (drag.getItem() == null) {
+            if(drag.getStartDrag().getItem() instanceof InfoWindow) {
+                return new OpenMenuAction(drag);
+            }
             return new EmptyAction();
         }
         Action action = new RevertDragAction(drag);
