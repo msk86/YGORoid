@@ -5,6 +5,7 @@ import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.ygo.R;
+import android.ygo.core.tool.QuickFix;
 import android.ygo.utils.Configuration;
 import android.ygo.utils.Utils;
 
@@ -67,6 +68,8 @@ public class Card implements SelectableItem, Drawable {
         this.positive = true;
         this.set = false;
         initCardPic();
+
+        QuickFix.fix(this);
     }
 
 
@@ -378,5 +381,9 @@ public class Card implements SelectableItem, Drawable {
             tokenSerial++;
         }
         return String.valueOf(Integer.valueOf(id) + tokenSerial);
+    }
+
+    public void setCategory(int category) {
+        this.category = category;
     }
 }
