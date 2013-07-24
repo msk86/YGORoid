@@ -1,9 +1,6 @@
 package android.ygo.action;
 
-import android.ygo.core.CardList;
-import android.ygo.core.CardSelector;
-import android.ygo.core.OverRay;
-import android.ygo.core.SelectableItem;
+import android.ygo.core.*;
 import android.ygo.op.Operation;
 
 public class OpenCardSelectorAction extends BaseAction {
@@ -15,6 +12,11 @@ public class OpenCardSelectorAction extends BaseAction {
     public void execute() {
         CardList list;
         SelectableItem source;
+        Field field = (Field) container;
+        if(item instanceof InfoWindow) {
+            item = field.getItem();
+        }
+
         if (item instanceof OverRay) {
             list = ((OverRay) item).getOverRayUnits();
             source = item;

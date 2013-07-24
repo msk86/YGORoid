@@ -65,6 +65,9 @@ public class ActionDispatcher {
                         action = new FlipAction(dblClick);
                     } else if (item instanceof CardList) {
                         action = new OpenCardSelectorAction(dblClick);
+                    } else if (item instanceof InfoWindow) {
+                        if(field.getItem() instanceof OverRay || field.getItem() instanceof CardList)
+                        action = new OpenCardSelectorAction(dblClick);
                     }
                 }
             } else if (container instanceof HandCards && item instanceof Card) {
@@ -114,7 +117,7 @@ public class ActionDispatcher {
 
     public static Action dispatch(Drag drag) {
         if (drag.getItem() == null) {
-            if(drag.getStartDrag().getItem() instanceof InfoWindow) {
+            if (drag.getStartDrag().getItem() instanceof InfoWindow) {
                 return new OpenMenuAction(drag);
             }
             return new EmptyAction();
