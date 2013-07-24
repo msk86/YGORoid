@@ -335,7 +335,7 @@ public class Duel implements Item, Drawable {
         if (cardSelector == null || cardWindow != null || sideWindow != null) {
             return false;
         }
-        if (y >= Utils.screenHeight() - Utils.cardHeight() / 6) {
+        if (y >= Utils.screenHeight() - window.height()) {
             return false;
         }
         return true;
@@ -352,21 +352,21 @@ public class Duel implements Item, Drawable {
         if (cardSelector != null || cardWindow != null || sideWindow != null) {
             return false;
         }
-        return y >= Utils.unitLength() * 3 && y < Utils.screenHeight() - Utils.cardHeight() / 6;
+        return y >= Utils.unitLength() * 3 && y < Utils.screenHeight() - window.height();
     }
 
     public boolean inInfo(int x, int y) {
         if (cardWindow != null) {
             return false;
         }
-        return y >= Utils.screenHeight() - Utils.cardHeight() / 6;
+        return y >= Utils.screenHeight() - window.height();
     }
 
     public boolean inSideWindow(int x, int y) {
         if (sideWindow == null || cardWindow != null) {
             return false;
         }
-        return y < Utils.screenHeight() - Utils.cardHeight() / 6;
+        return y < Utils.screenHeight() - window.height();
     }
 
     @Override

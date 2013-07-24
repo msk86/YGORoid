@@ -53,7 +53,7 @@ public class InfoWindow implements SelectableItem, Drawable {
 
         paint.setColor(Configuration.fontColor());
         paint.setStrokeWidth(1);
-        paint.setTextSize(height());
+        paint.setTextSize((int)(height() / 1.2));
         paint.setAntiAlias(true);
 
         Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
@@ -70,7 +70,7 @@ public class InfoWindow implements SelectableItem, Drawable {
         helper.drawRect(canvas, new Rect(0, 0, width(), height()), paint);
 
         paint.setColor(Color.DKGRAY);
-        paint.setStrokeWidth(5);
+        paint.setStrokeWidth(4);
         helper.drawLine(canvas, 0, 0, width(), 0, paint);
         helper.drawLine(canvas, 0, 0, 0, height(), paint);
         helper.drawLine(canvas, width(), 0, width(), height(), paint);
@@ -83,7 +83,7 @@ public class InfoWindow implements SelectableItem, Drawable {
 
     @Override
     public int height() {
-        return Utils.cardHeight() / 6 + 3;
+        return (int)(Utils.cardHeight() / 5.5) + 3;
     }
 
     @Override
