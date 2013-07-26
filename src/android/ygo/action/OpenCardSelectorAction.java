@@ -10,6 +10,8 @@ public class OpenCardSelectorAction extends BaseAction {
 
     @Override
     public void execute() {
+        duel.select(item, container);
+
         CardList list;
         SelectableItem source;
         Field field = (Field) container;
