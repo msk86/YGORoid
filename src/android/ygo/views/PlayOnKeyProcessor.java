@@ -6,6 +6,7 @@ import android.ygo.action.ActionDispatcher;
 import android.ygo.action.EmptyAction;
 import android.ygo.op.ReturnClick;
 import android.ygo.op.VolClick;
+import android.ygo.views.dueldisk.DuelDiskView;
 
 public class PlayOnKeyProcessor {
     DuelDiskView view;

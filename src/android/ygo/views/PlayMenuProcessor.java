@@ -7,6 +7,7 @@ import android.ygo.action.ActionDispatcher;
 import android.ygo.core.*;
 import android.ygo.op.MenuClick;
 import android.ygo.utils.Utils;
+import android.ygo.views.dueldisk.DuelDiskView;
 
 public class PlayMenuProcessor {
 

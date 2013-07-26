@@ -1,4 +1,4 @@
-package android.ygo.views;
+package android.ygo.views.dueldisk;
 
 import android.view.GestureDetector;
 import android.view.MotionEvent;

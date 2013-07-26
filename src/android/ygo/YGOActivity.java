@@ -5,7 +5,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.view.*;
@@ -16,7 +15,7 @@ import android.ygo.service.PersistencyService;
 import android.ygo.upgrade.UpgradeHelper;
 import android.ygo.upgrade.UpgradeMsgHandler;
 import android.ygo.utils.Utils;
-import android.ygo.views.DuelDiskView;
+import android.ygo.views.dueldisk.DuelDiskView;
 import android.ygo.views.PlayMenuProcessor;
 import android.ygo.views.PlayOnKeyProcessor;
 

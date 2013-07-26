@@ -1,10 +1,9 @@
-package android.ygo.views;
+package android.ygo.views.dueldisk;
 
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.ygo.YGOActivity;
 import android.ygo.core.Duel;
 import android.ygo.core.HandCards;
 import android.ygo.utils.Configuration;

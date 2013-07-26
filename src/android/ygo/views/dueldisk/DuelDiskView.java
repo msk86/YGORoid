@@ -1,4 +1,4 @@
-package android.ygo.views;
+package android.ygo.views.dueldisk;
 
 import android.content.Context;
 import android.graphics.Bitmap;

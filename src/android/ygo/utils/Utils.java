@@ -7,12 +7,10 @@ import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.util.DisplayMetrics;
-import android.view.View;
 import android.ygo.YGOActivity;
 import android.ygo.core.Card;
 import android.ygo.core.Drawable;
 import android.ygo.sqlite.CardsDBHelper;
-import android.ygo.views.DuelDiskView;
 
 import java.io.*;
 import java.util.List;
