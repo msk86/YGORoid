@@ -21,6 +21,9 @@ public class UpgradeMsgHandler extends Handler {
             case UpgradeHelper.NEW_CARDS:
                 context.getUpgradeHelper().alertNewCards();
                 break;
+            case UpgradeHelper.ALL_RESOURCES:
+                context.getUpgradeHelper().alertAllResources();
+                break;
         }
 
         super.handleMessage(msg);

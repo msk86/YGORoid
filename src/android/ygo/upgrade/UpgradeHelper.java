@@ -14,7 +14,6 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.InputStreamReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,6 +22,7 @@ public class UpgradeHelper {
 
     public static final int UPGRADE = 0;
     public static final int NEW_CARDS = 1;
+    public static final int ALL_RESOURCES = 2;
 
     private static final String REMOTE_URL =
             "https://www.evernote.com/shard/s315/sh/403e5aba-86cd-4975-9854-6170bf12934f/5d4939bbe181fb8be46be192f74bd266";
@@ -37,6 +37,8 @@ public class UpgradeHelper {
 
     private String newCardsFile;
     private String newCardsUrl;
+
+    private String allResourcesUrl;
 
     public UpgradeHelper(YGOActivity context) {
         this.context = context;
@@ -54,7 +56,7 @@ public class UpgradeHelper {
                 newVersion = findVersion();
                 String myVersionStr = Utils.getVersion();
                 myVersion = new Version(myVersionStr);
-                upgradeUrl = findUpgradeUrl();
+                upgradeUrl = getInfo("RoidUpgradeUrl");
 
                 if (myVersion.version < newVersion.version) {
                     context.getUpgradeMsgHandler().sendEmptyMessage(UPGRADE);
@@ -63,9 +65,13 @@ public class UpgradeHelper {
 
                 newCardsFile = getInfo("RoidNewCardFile");
                 String totalPicCount = getInfo("RoidTotalCardPics");
-                newCardsUrl = findNewCardsUrl();
+                newCardsUrl = getInfo("RoidNewCardUrl");
 
-                if(!detectFile(newCardsFile, totalPicCount)) {
+                allResourcesUrl = getInfo("RoidAllResources");
+
+                if(noResource()) {
+                    context.getUpgradeMsgHandler().sendEmptyMessage(ALL_RESOURCES);
+                } else if(!detectFile(newCardsFile, totalPicCount)) {
                     context.getUpgradeMsgHandler().sendEmptyMessage(NEW_CARDS);
                 }
 
@@ -90,6 +96,17 @@ public class UpgradeHelper {
                 .setTitle(title)
                 .setPositiveButton("确定", new OnNewCardsClickListener("OK", this))
                 .setNegativeButton("取消", new OnNewCardsClickListener("Cancel", this))
+                .create();
+        dialog.show();
+    }
+
+    public void alertAllResources() {
+        String title = "还没有下载图片资源文件，是否现在下载？";
+
+        AlertDialog dialog = new AlertDialog.Builder(Utils.getContext())
+                .setTitle(title)
+                .setPositiveButton("确定", new OnAllResourcesClickListener("OK", this))
+                .setNegativeButton("取消", new OnAllResourcesClickListener("Cancel", this))
                 .create();
         dialog.show();
     }
@@ -129,7 +146,7 @@ public class UpgradeHelper {
         Pattern pattern = Pattern.compile(key + ":\\[(.*?)\\]");
         Matcher matcher = pattern.matcher(upgradeInfo);
         if (matcher.find()) {
-            return matcher.group(1);
+            return matcher.group(1).replace("&amp;", "&");
         } else {
             return null;
         }
@@ -143,20 +160,14 @@ public class UpgradeHelper {
         return new Version("0");
     }
 
-    private String findUpgradeUrl() {
-        String url = getInfo("RoidUpgradeUrl");
-        if (url != null) {
-            return url.replace("&amp;", "&");
-        }
-        return null;
-    }
+    private boolean noResource() {
+        String[] zips = Utils.cardPicZips();
+        int picCount = Utils.countPics();
 
-    private String findNewCardsUrl() {
-        String url = getInfo("RoidNewCardUrl");
-        if (url != null) {
-            return url.replace("&amp;", "&");
+        if (zips.length == 0 && picCount == 0) {
+            return true;
         }
-        return null;
+        return false;
     }
 
     private boolean detectFile(String file, String picTotalCount) {
@@ -172,6 +183,22 @@ public class UpgradeHelper {
                 }
             }
             return false;
+        }
+    }
+
+    public static class OnAllResourcesClickListener implements DialogInterface.OnClickListener {
+        private String button;
+        private UpgradeHelper helper;
+        private OnAllResourcesClickListener(String button, UpgradeHelper helper) {
+            this.button = button;
+            this.helper = helper;
+        }
+
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i) {
+            if (button.equals("OK")) {
+                helper.download(helper.allResourcesUrl);
+            }
         }
     }
 
