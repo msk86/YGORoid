@@ -63,6 +63,7 @@ public class PlayMenuProcessor {
                 SubMenu toggleMenu = menu.addSubMenu(Const.MENU_GROUP_MAIN, Const.MENU_TOGGLE, 0, "开关设置");
                 toggleMenu.add(Const.MENU_GROUP_MAIN, Const.MENU_GRAVITY_TOGGLE, 0, toggleMenuTxt("重力", Configuration.PROPERTY_GRAVITY_ENABLE));
                 toggleMenu.add(Const.MENU_GROUP_MAIN, Const.MENU_FPS_TOGGLE, 0, toggleMenuTxt("FPS", Configuration.PROPERTY_FPS_ENABLE));
+                toggleMenu.add(Const.MENU_GROUP_MAIN, Const.MENU_AUTO_SHUFFLE_TOGGLE, 0, toggleMenuTxt("卡组自动切洗", Configuration.PROPERTY_AUTO_SHUFFLE_ENABLE));
                 if (Utils.getSDK() >= 10) {
                     menu.add(Const.MENU_GROUP_MAIN, Const.MENU_MIRROR_DISPLAY, 0, "镜像显示");
                 }

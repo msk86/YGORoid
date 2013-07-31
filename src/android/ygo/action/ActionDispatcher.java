@@ -193,6 +193,9 @@ public class ActionDispatcher {
                     case Const.MENU_FPS_TOGGLE:
                         action = new ToggleAction(menuClick, Configuration.PROPERTY_FPS_ENABLE);
                         break;
+                    case Const.MENU_AUTO_SHUFFLE_TOGGLE:
+                        action = new ToggleAction(menuClick, Configuration.PROPERTY_AUTO_SHUFFLE_ENABLE);
+                        break;
                     case Const.MENU_MIRROR_DISPLAY:
                         action = new MirrorDisplayAction(menuClick);
                         break;

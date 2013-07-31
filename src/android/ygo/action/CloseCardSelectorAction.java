@@ -3,6 +3,7 @@ package android.ygo.action;
 import android.ygo.core.CardList;
 import android.ygo.core.CardSelector;
 import android.ygo.op.Operation;
+import android.ygo.utils.Configuration;
 
 public class CloseCardSelectorAction extends BaseAction {
     public CloseCardSelectorAction(Operation operation) {
@@ -21,6 +22,10 @@ public class CloseCardSelectorAction extends BaseAction {
             } else {
                 list.setAll();
             }
+        }
+
+        if(listName.equals(CardList.DECK) && Configuration.configProperties(Configuration.PROPERTY_AUTO_SHUFFLE_ENABLE)) {
+            list.shuffle();
         }
 
         duel.setCardSelector(null);

@@ -89,11 +89,13 @@ public class Configuration {
 
     public static final String PROPERTY_FPS_ENABLE = "FPS";
     public static final String PROPERTY_GRAVITY_ENABLE = "GRAVITY";
+    public static final String PROPERTY_AUTO_SHUFFLE_ENABLE = "AUTO_SHUFFLE";
 
     private static Properties defaultProperties() {
         Properties properties = new Properties();
         properties.setProperty(PROPERTY_FPS_ENABLE, "0");
         properties.setProperty(PROPERTY_GRAVITY_ENABLE, "1");
+        properties.setProperty(PROPERTY_AUTO_SHUFFLE_ENABLE, "0");
         return properties;
     }
 
