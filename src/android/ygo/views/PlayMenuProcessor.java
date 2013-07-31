@@ -61,9 +61,9 @@ public class PlayMenuProcessor {
                 menu.add(Const.MENU_GROUP_MAIN, Const.MENU_CHANGE_DECK, 0, "更换卡组");
                 menu.add(Const.MENU_GROUP_MAIN, Const.MENU_SIDE, 0, "换副卡组");
                 SubMenu toggleMenu = menu.addSubMenu(Const.MENU_GROUP_MAIN, Const.MENU_TOGGLE, 0, "开关设置");
-                toggleMenu.add(Const.MENU_GROUP_MAIN, Const.MENU_GRAVITY_TOGGLE, 0, toggleMenuTxt("重力", Configuration.PROPERTY_GRAVITY_ENABLE));
-                toggleMenu.add(Const.MENU_GROUP_MAIN, Const.MENU_FPS_TOGGLE, 0, toggleMenuTxt("FPS", Configuration.PROPERTY_FPS_ENABLE));
+                toggleMenu.add(Const.MENU_GROUP_MAIN, Const.MENU_GRAVITY_TOGGLE, 0, toggleMenuTxt("重力感应", Configuration.PROPERTY_GRAVITY_ENABLE));
                 toggleMenu.add(Const.MENU_GROUP_MAIN, Const.MENU_AUTO_SHUFFLE_TOGGLE, 0, toggleMenuTxt("卡组自动切洗", Configuration.PROPERTY_AUTO_SHUFFLE_ENABLE));
+                toggleMenu.add(Const.MENU_GROUP_MAIN, Const.MENU_FPS_TOGGLE, 0, toggleMenuTxt("显示FPS", Configuration.PROPERTY_FPS_ENABLE));
                 if (Utils.getSDK() >= 10) {
                     menu.add(Const.MENU_GROUP_MAIN, Const.MENU_MIRROR_DISPLAY, 0, "镜像显示");
                 }
