@@ -86,6 +86,10 @@ public class Const {
     public static final int MENU_SHUFFLE_HAND = 0x11;
     public static final int MENU_SIDE = 0x12;
     public static final int MENU_FEEDBACK = 0x13;
+    public static final int MENU_TOGGLE = 0x14;
+
+    public static final int MENU_GRAVITY_TOGGLE = 0x15;
+    public static final int MENU_FPS_TOGGLE = 0x16;
 
     public static final int MENU_EXIT = 0x100;
 }

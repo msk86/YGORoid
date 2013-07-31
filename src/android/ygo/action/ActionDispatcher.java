@@ -5,6 +5,7 @@ import android.ygo.core.tool.Coin;
 import android.ygo.core.tool.Dice;
 import android.ygo.layout.Layout;
 import android.ygo.op.*;
+import android.ygo.utils.Configuration;
 
 public class ActionDispatcher {
 
@@ -185,6 +186,12 @@ public class ActionDispatcher {
                         break;
                     case Const.MENU_SIDE:
                         action = new OpenSideWindowAction(menuClick);
+                        break;
+                    case Const.MENU_GRAVITY_TOGGLE:
+                        action = new ToggleAction(menuClick, Configuration.PROPERTY_GRAVITY_ENABLE);
+                        break;
+                    case Const.MENU_FPS_TOGGLE:
+                        action = new ToggleAction(menuClick, Configuration.PROPERTY_FPS_ENABLE);
                         break;
                     case Const.MENU_MIRROR_DISPLAY:
                         action = new MirrorDisplayAction(menuClick);

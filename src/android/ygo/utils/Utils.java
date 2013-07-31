@@ -12,7 +12,8 @@ import android.ygo.core.Card;
 import android.ygo.core.Drawable;
 import android.ygo.sqlite.CardsDBHelper;
 
-import java.io.*;
+import java.io.File;
+import java.io.FilenameFilter;
 import java.util.List;
 import java.util.Random;
 
