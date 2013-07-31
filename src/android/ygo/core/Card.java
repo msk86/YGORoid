@@ -118,64 +118,76 @@ public class Card implements SelectableItem, Drawable {
     }
 
     public Bitmap bigCardPic() {
-        Bitmap bitmap = Utils.readBitmapScaleByHeight(Configuration.cardImgPath() + id + Configuration.cardImageSuffix(), Utils.screenHeight());
-        if (bitmap != null) {
-            return bitmap;
-        }
-        for (int i = subTypes.size() - 1; i >= 0; i--) {
-            CardSubType subType = subTypes.get(i);
-            if (subType.getBigCardBmp() != null) {
-                return subType.getBigCardBmp();
-            }
-        }
-        if (type.getBigCardBmp() != null) {
-            return type.getBigCardBmp();
-        }
-        return null;
+        return initCardPic(Utils.cardScreenWidth(), Utils.cardScreenHeight());
     }
 
     private void initCardPic() {
-        int height = Utils.cardHeight();
         if (cardPic == null) {
-            cardPic = Utils.readBitmapScaleByHeight(Configuration.cardImgPath() + id + Configuration.cardImageSuffix(), height);
-            if (cardPic == null) {
-                cardPic = Utils.readBitmapScaleByHeight(Configuration.zipInnerPicPath() + id + Configuration.cardImageSuffix(),
-                        Configuration.cardImgPath() + id + Configuration.cardImageSuffix(), height);
-            }
-            if (cardPic == null) {
-                cardPic = Bitmap.createBitmap(Utils.cardWidth(), Utils.cardHeight(), Bitmap.Config.ARGB_8888);
-                Canvas canvas = new Canvas(cardPic);
-                Paint paint = new Paint();
-                Bitmap cardTypeBmp = cardTypeBmp();
-                Utils.drawBitmapOnCanvas(canvas, cardTypeBmp, paint, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_FIRST);
-
-                TextPaint textPaint = new TextPaint();
-                textPaint.setTextSize(Utils.unitLength() / 10);
-                if (!subTypes.contains(CardSubType.SYNC)) {
-                    textPaint.setColor(Configuration.fontColor());
-                    textPaint.setShadowLayer(1, 0, 0, Configuration.textShadowColor());
-                } else {
-                    textPaint.setColor(Configuration.syncFontColor());
-                }
-                textPaint.setAntiAlias(true);
-                CharSequence cs = Utils.cutOneLine(name, textPaint, Utils.cardWidth());
-                StaticLayout layout = new StaticLayout(cs, textPaint, Utils.cardWidth(), Layout.Alignment.ALIGN_CENTER, 1, 0, true);
-
-                canvas.translate(0, Utils.cardHeight() / 20);
-                layout.draw(canvas);
-            }
+            cardPic = initCardPic(Utils.cardWidth(), Utils.cardHeight());
         }
     }
 
-    private Bitmap cardTypeBmp() {
+    private Bitmap initCardPic(int width, int height) {
+        Bitmap cardPic = Utils.readBitmapScaleByHeight(Configuration.cardImgPath() + id + Configuration.cardImageSuffix(), height);
+        if (cardPic == null) {
+            cardPic = Utils.readBitmapScaleByHeight(Configuration.zipInnerPicPath() + id + Configuration.cardImageSuffix(),
+                    Configuration.cardImgPath() + id + Configuration.cardImageSuffix(), height);
+        }
+        if (cardPic == null) {
+            cardPic = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(cardPic);
+            Paint paint = new Paint();
+
+            Bitmap cardTypeBmp = cardTypeBmp(height);
+            Utils.drawBitmapOnCanvas(canvas, cardTypeBmp, paint, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_FIRST);
+            if(!Utils.isNormalCardSize(height)) {
+                cardTypeBmp.recycle();
+            }
+
+            TextPaint textPaint = new TextPaint();
+            textPaint.setTextSize(cardNameFontSize(height));
+
+            if (!subTypes.contains(CardSubType.SYNC)) {
+                textPaint.setColor(Configuration.fontColor());
+                textPaint.setShadowLayer(1, 0, 0, Configuration.textShadowColor());
+            } else {
+                textPaint.setColor(Configuration.syncFontColor());
+            }
+            textPaint.setAntiAlias(true);
+            CharSequence cs = Utils.cutOneLine(name, textPaint, width);
+            StaticLayout layout = new StaticLayout(cs, textPaint, width, Layout.Alignment.ALIGN_CENTER, 1, 0, true);
+
+            canvas.translate(0, height / 20);
+            layout.draw(canvas);
+        }
+        return cardPic;
+    }
+
+    private int cardNameFontSize(int height) {
+        if(height <= Utils.cardHeight()) {
+            return height / 10;
+        } else {
+            return height / 15;
+        }
+    }
+
+    private Bitmap cardTypeBmp(int height) {
         if (type.getCardBmp() != null) {
-            return type.getCardBmp();
+            if(Utils.isNormalCardSize(height)) {
+                return type.getCardBmp();
+            } else {
+                return type.initCardPic(height);
+            }
         }
 
         for (int i = subTypes.size() - 1; i >= 0; i--) {
             CardSubType subType = subTypes.get(i);
             if (subType.getCardBmp() != null) {
-                return subType.getCardBmp();
+                if(Utils.isNormalCardSize(height)) {
+                    return subType.getCardBmp();
+                } else {
+                    return subType.initCardPic(height);
+                }
             }
         }
 

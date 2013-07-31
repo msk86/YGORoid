@@ -79,13 +79,29 @@ public class Utils {
         return unitLength() * 6;
     }
 
+    public static int cardScreenHeight() {
+        return screenHeight();
+    }
+
     public static int cardHeight() {
         int padding = 2;
         return unitLength() - padding * 2;
     }
 
+    public static int cardSnapshotHeight() {
+        return cardHeight() * 3 / 4;
+    }
+
+    public static int cardScreenWidth() {
+        return (int)(screenHeight() / 1.45);
+    }
+
     public static int cardWidth() {
         return (int) (cardHeight() / 1.45);
+    }
+
+    public static int cardSnapshotWidth() {
+        return cardWidth() * 3 / 4;
     }
 
     public static int bigCardHeight() {
@@ -94,6 +110,10 @@ public class Utils {
 
     public static int bigCardWidth() {
         return (int) (bigCardHeight() / 1.45);
+    }
+
+    public static boolean isNormalCardSize(int height) {
+        return cardHeight() == height;
     }
 
     public static Bitmap readBitmapScaleByHeight(int resId, int targetHeight) {
