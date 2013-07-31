@@ -9,7 +9,6 @@ public class SpCard extends Card {
     public SpCard(String id, String name, String desc, int resId) {
         super(id, name, desc);
         this.resId = resId;
-        super.cardPic = Utils.readBitmapScaleByHeight(resId, Utils.cardHeight());
 
     }
 
@@ -22,7 +21,7 @@ public class SpCard extends Card {
     }
 
     @Override
-    public Bitmap bigCardPic() {
-        return  Utils.readBitmapScaleByHeight(resId, Utils.screenHeight());
+    public Bitmap bmp(int width, int height) {
+        return Utils.readBitmapScaleByHeight(resId, height);
     }
 }

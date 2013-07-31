@@ -28,9 +28,9 @@ public class Duel implements Item, Drawable {
     private SelectableItem currentSelectItem;
 
     private Drag drag;
-    private List<Card> mainDeckCards;
-    private List<Card> exDeckCards;
-    private List<Card> sideDeckCards;
+    private List<Card> mainDeckCards = new ArrayList<Card>();
+    private List<Card> exDeckCards = new ArrayList<Card>();
+    private List<Card> sideDeckCards = new ArrayList<Card>();
     private Item currentSelectItemContainer;
 
     private Dice dice;
@@ -55,6 +55,8 @@ public class Duel implements Item, Drawable {
             return;
         }
 
+        clearPreviousDuel();
+
         initDuelField();
 
         this.mainDeckCards = mainDeckCards;
@@ -69,6 +71,16 @@ public class Duel implements Item, Drawable {
 
     public void restart() {
         start(this.mainDeckCards, this.exDeckCards, this.sideDeckCards);
+    }
+
+    public void clearPreviousDuel() {
+        List<Card> allCard = new ArrayList<Card>();
+        allCard.addAll(mainDeckCards);
+        allCard.addAll(exDeckCards);
+        allCard.addAll(sideDeckCards);
+        for (Card card : allCard) {
+            card.destroyBmp();
+        }
     }
 
     public boolean deckCheck(List<Card> mainDeckCards, List<Card> exDeckCards, List<Card> sideDeckCards) {

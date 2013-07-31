@@ -1,6 +1,8 @@
 package android.ygo.core;
 
-import android.graphics.*;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
@@ -9,11 +11,9 @@ import android.ygo.utils.Utils;
 
 public class ShowCardWindow implements Item, Drawable {
     Card card;
-    Bitmap cardBigBmp;
 
     public ShowCardWindow(Card card) {
         this.card = card;
-        cardBigBmp = card.bigCardPic();
     }
 
     @Override
@@ -25,7 +25,7 @@ public class ShowCardWindow implements Item, Drawable {
 
     private void drawBigPic(Canvas canvas, int x, int y) {
         Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
-        helper.drawBitmap(canvas, cardBigBmp, 0, 0, new Paint());
+        helper.drawBitmap(canvas, card.bmpCache.get(Utils.cardScreenWidth(), Utils.cardScreenHeight()), 0, 0, new Paint());
     }
 
     private void drawText(Canvas canvas, int x, int y) {
@@ -48,7 +48,7 @@ public class ShowCardWindow implements Item, Drawable {
         top += lineHeight;
         helper.drawText(canvas, card.cardTypeDesc() + " " + card.attrAndRaceDesc(),
                 left, top, paint);
-        if(card.type == CardType.MONSTER) {
+        if (card.type == CardType.MONSTER) {
             top += lineHeight;
             helper.drawText(canvas, card.levelAndADDesc(), left, top, paint);
         }
@@ -64,10 +64,6 @@ public class ShowCardWindow implements Item, Drawable {
         paint.setColor(Configuration.windowBackgroundColor());
         paint.setAlpha(150);
         helper.drawRect(canvas, new Rect(0, 0, width(), height()), paint);
-    }
-
-    public void destroy() {
-        cardBigBmp.recycle();
     }
 
     @Override

@@ -5,13 +5,14 @@ import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.ygo.R;
+import android.ygo.core.tool.BmpCache;
 import android.ygo.core.tool.QuickFix;
 import android.ygo.utils.Configuration;
 import android.ygo.utils.Utils;
 
 import java.util.List;
 
-public class Card implements SelectableItem, Drawable {
+public class Card implements SelectableItem, Drawable, Bmpable {
     public static Bitmap CARD_PROTECTOR = null;
 
     static {
@@ -41,7 +42,7 @@ public class Card implements SelectableItem, Drawable {
 
     int indicator = 0;
 
-    Bitmap cardPic;
+    BmpCache bmpCache;
 
     public Card(String id, String name, String desc) {
         this(id, name, desc, 0, 0, 0, 0, 0, 0);
@@ -67,7 +68,7 @@ public class Card implements SelectableItem, Drawable {
         this.category = category;
         this.positive = true;
         this.set = false;
-        initCardPic();
+        bmpCache = new BmpCache(this);
 
         QuickFix.fix(this);
     }
@@ -117,17 +118,7 @@ public class Card implements SelectableItem, Drawable {
         positive = false;
     }
 
-    public Bitmap bigCardPic() {
-        return initCardPic(Utils.cardScreenWidth(), Utils.cardScreenHeight());
-    }
-
-    private void initCardPic() {
-        if (cardPic == null) {
-            cardPic = initCardPic(Utils.cardWidth(), Utils.cardHeight());
-        }
-    }
-
-    private Bitmap initCardPic(int width, int height) {
+    public Bitmap bmp(int width, int height) {
         Bitmap cardPic = Utils.readBitmapScaleByHeight(Configuration.cardImgPath() + id + Configuration.cardImageSuffix(), height);
         if (cardPic == null) {
             cardPic = Utils.readBitmapScaleByHeight(Configuration.zipInnerPicPath() + id + Configuration.cardImageSuffix(),
@@ -138,11 +129,8 @@ public class Card implements SelectableItem, Drawable {
             Canvas canvas = new Canvas(cardPic);
             Paint paint = new Paint();
 
-            Bitmap cardTypeBmp = cardTypeBmp(height);
+            Bitmap cardTypeBmp = cardTypeBmp(width, height);
             Utils.drawBitmapOnCanvas(canvas, cardTypeBmp, paint, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_FIRST);
-            if(!Utils.isNormalCardSize(height)) {
-                cardTypeBmp.recycle();
-            }
 
             TextPaint textPaint = new TextPaint();
             textPaint.setTextSize(cardNameFontSize(height));
@@ -163,6 +151,11 @@ public class Card implements SelectableItem, Drawable {
         return cardPic;
     }
 
+    @Override
+    public void destroyBmp() {
+        bmpCache.clear();
+    }
+
     private int cardNameFontSize(int height) {
         if(height <= Utils.cardHeight()) {
             return height / 10;
@@ -171,23 +164,17 @@ public class Card implements SelectableItem, Drawable {
         }
     }
 
-    private Bitmap cardTypeBmp(int height) {
-        if (type.getCardBmp() != null) {
-            if(Utils.isNormalCardSize(height)) {
-                return type.getCardBmp();
-            } else {
-                return type.initCardPic(height);
-            }
+    private Bitmap cardTypeBmp(int width, int height) {
+        Bitmap typeBmp = type.bmpCache.get(width, height);
+        if (typeBmp != null) {
+            return typeBmp;
         }
 
         for (int i = subTypes.size() - 1; i >= 0; i--) {
             CardSubType subType = subTypes.get(i);
-            if (subType.getCardBmp() != null) {
-                if(Utils.isNormalCardSize(height)) {
-                    return subType.getCardBmp();
-                } else {
-                    return subType.initCardPic(height);
-                }
+            Bitmap subTypeBmp = subType.bmpCache.get(width, height);
+            if (subTypeBmp != null) {
+                return subTypeBmp;
             }
         }
 
@@ -201,7 +188,7 @@ public class Card implements SelectableItem, Drawable {
     public void draw(Canvas canvas, int x, int y) {
         Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
 
-        Bitmap cardBmp = cardPic;
+        Bitmap cardBmp = bmpCache.get(Utils.cardWidth(), Utils.cardHeight());
         if (set) {
             cardBmp = CARD_PROTECTOR;
         }

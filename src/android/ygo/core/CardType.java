@@ -2,9 +2,10 @@ package android.ygo.core;
 
 import android.graphics.Bitmap;
 import android.ygo.R;
+import android.ygo.core.tool.BmpCache;
 import android.ygo.utils.Utils;
 
-public enum CardType {
+public enum CardType implements Bmpable {
     NULL(0, "", R.raw.card_unknown),
     MONSTER(Const.TYPE_MONSTER, "怪兽", 0),
     SPELL(Const.TYPE_SPELL, "魔法", R.raw.card_magic),
@@ -13,23 +14,22 @@ public enum CardType {
     private int code;
     private String text;
     private int resId;
-    private Bitmap cardBmp;
+
+    BmpCache bmpCache;
 
     CardType(int code, String text, int resId) {
         this.code = code;
         this.text = text;
         this.resId = resId;
-        if (this.resId != 0) {
-            initCardPic();
-        }
+        bmpCache = new BmpCache(this);
     }
 
-    private void initCardPic() {
-        cardBmp = initCardPic(Utils.cardHeight());
-    }
-
-    public Bitmap initCardPic(int height) {
+    public Bitmap bmp(int width, int height) {
         return Utils.readBitmapScaleByHeight(resId, height);
+    }
+
+    public void destroyBmp() {
+        bmpCache.clear();
     }
 
     public static CardType getCardType(int code) {
@@ -42,10 +42,6 @@ public enum CardType {
             }
         }
         return NULL;
-    }
-
-    public Bitmap getCardBmp() {
-        return cardBmp;
     }
 
     @Override

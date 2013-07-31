@@ -9,7 +9,6 @@ public class CloseCardWindowAction extends BaseAction {
 
     @Override
     public void execute() {
-        duel.getCardWindow().destroy();
         duel.setCardWindow(null);
     }
 }

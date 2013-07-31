@@ -2,12 +2,13 @@ package android.ygo.core;
 
 import android.graphics.Bitmap;
 import android.ygo.R;
+import android.ygo.core.tool.BmpCache;
 import android.ygo.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public enum CardSubType {
+public enum CardSubType implements Bmpable {
     NORMAL(Const.TYPE_NORMAL, "通常", R.raw.card_normal_monster),
     EFFECT(Const.TYPE_EFFECT, "效果", R.raw.card_effect_monster),
     FUSION(Const.TYPE_FUSION, "融合", R.raw.card_fusion_monster),
@@ -34,23 +35,23 @@ public enum CardSubType {
     private int resId;
     private int code;
     private String text;
-    private Bitmap cardBmp;
+    BmpCache bmpCache;
 
     CardSubType(int code, String text, int resId) {
         this.code = code;
         this.text = text;
         this.resId = resId;
-        if (this.resId != 0) {
-            initCardPic();
-        }
+        bmpCache = new BmpCache(this);
     }
 
-    private void initCardPic() {
-        cardBmp = initCardPic(Utils.cardHeight());
-    }
-
-    public Bitmap initCardPic(int height) {
+    @Override
+    public Bitmap bmp(int width, int height) {
         return Utils.readBitmapScaleByHeight(resId, height);
+    }
+
+    @Override
+    public void destroyBmp() {
+        bmpCache.clear();
     }
 
     public static List<CardSubType> getCardSubType(int code) {
@@ -61,10 +62,6 @@ public enum CardSubType {
             }
         }
         return types;
-    }
-
-    public Bitmap getCardBmp() {
-        return cardBmp;
     }
 
     @Override
