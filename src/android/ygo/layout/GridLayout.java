@@ -17,19 +17,27 @@ public class GridLayout implements Layout, Drawable {
     int cardPaddingW;
     int cardPaddingH;
     int maxWidth;
+    private int unitWidth;
+    private int unitHeight;
 
     public GridLayout(List<Card> cards, int maxWidth, int row) {
+        this(cards, maxWidth, row, Utils.cardWidth(), Utils.cardHeight());
+    }
+
+    public GridLayout(List<Card> cards, int maxWidth, int row, int unitWidth, int unitHeight) {
         this.cards = cards;
         this.maxWidth = maxWidth;
         this.row = row;
+        this.unitWidth = unitWidth;
+        this.unitHeight = unitHeight;
     }
 
     public void fixPosition() {
-        int maxPadding = Utils.cardWidth() / 10;
-        int minCol = (maxWidth + maxPadding) / (Utils.cardWidth() + maxPadding);
+        int maxPadding = unitWidth / 10;
+        int minCol = (maxWidth + maxPadding) / (unitWidth + maxPadding);
         col = (int) Math.ceil(1.0 * cards.size() / row);
         this.col = col > minCol ? col : minCol;
-        cardPaddingW = (maxWidth - Utils.cardWidth() - 1) / (col - 1) - Utils.cardWidth();
+        cardPaddingW = (maxWidth - unitWidth - 1) / (col - 1) - unitWidth;
         cardPaddingH = 3;
     }
 
@@ -41,26 +49,26 @@ public class GridLayout implements Layout, Drawable {
         int posX = 0;
         int posY = 0;
         for (int r = 0; r < row; r++) {
-            posX =  - (Utils.cardHeight() - Utils.cardWidth()) / 2 + 1;
+            posX =  - (unitHeight - unitWidth) / 2 + 1;
             for (int c = 0; c < col; c++) {
                 int index = r * col + c;
                 if (index < cards.size()) {
                     helper.drawDrawable(canvas, cards.get(index), posX, posY);
-                    posX += Utils.cardWidth() + cardPaddingW;
+                    posX += unitWidth + cardPaddingW;
                 }
             }
-            posY += Utils.cardHeight() + cardPaddingH;
+            posY += unitHeight + cardPaddingH;
         }
     }
 
     @Override
     public int width() {
-        return col * Utils.cardWidth() + (col - 1) * cardPaddingW + 1;
+        return col * unitWidth + (col - 1) * cardPaddingW + 1;
     }
 
     @Override
     public int height() {
-        return row * Utils.cardHeight() + (row - 1) * cardPaddingH + 1;
+        return row * unitHeight + (row - 1) * cardPaddingH + 1;
     }
 
     @Override
@@ -70,11 +78,11 @@ public class GridLayout implements Layout, Drawable {
             return null;
         }
 
-        int indexX = x / (Utils.cardWidth() + cardPaddingW);
+        int indexX = x / (unitWidth + cardPaddingW);
         if (indexX >= cards.size()) {
             return null;
         }
-        int indexY = y / (Utils.cardHeight() + cardPaddingH);
+        int indexY = y / (unitHeight + cardPaddingH);
 
         int index = indexY * col + indexX;
         if (index < cards.size()) {
