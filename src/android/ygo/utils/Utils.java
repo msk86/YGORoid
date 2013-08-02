@@ -167,13 +167,13 @@ public class Utils {
 
     public static int countPics() {
         File picsDir = new File(Configuration.cardImgPath());
-        String[] zips = picsDir.list(new FilenameFilter() {
+        String[] pics = picsDir.list(new FilenameFilter() {
             @Override
             public boolean accept(File file, String name) {
                 return name.endsWith(".jpg");
             }
         });
-        return zips.length;
+        return pics.length;
     }
 
     public static Bitmap scaleByHeight(Bitmap bitmap, int targetHeight) {
@@ -191,9 +191,8 @@ public class Utils {
         Matrix matrix = new Matrix();
         matrix.postScale(1f, 1f);
         matrix.postRotate(degree);
-        Bitmap newBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
+        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
                 bitmap.getHeight(), matrix, true);
-        return newBitmap;
     }
 
     public static final int DRAW_POSITION_FIRST = -0x1000;

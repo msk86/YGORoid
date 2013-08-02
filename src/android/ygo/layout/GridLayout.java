@@ -1,9 +1,12 @@
 package android.ygo.layout;
 
 import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.ygo.core.Card;
 import android.ygo.core.Drawable;
 import android.ygo.core.Item;
+import android.ygo.utils.Configuration;
 import android.ygo.utils.Utils;
 
 import java.util.List;
@@ -46,19 +49,32 @@ public class GridLayout implements Layout, Drawable {
         fixPosition();
         Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
 
-        int posX = 0;
-        int posY = 0;
-        for (int r = 0; r < row; r++) {
-            posX =  - (unitHeight - unitWidth) / 2 + 1;
+        for (int r =0, posY = 0, posX; r < row; r++) {
+            posX = 1;
             for (int c = 0; c < col; c++) {
                 int index = r * col + c;
                 if (index < cards.size()) {
-                    helper.drawDrawable(canvas, cards.get(index), posX, posY);
+                    Card card = cards().get(index);
+                    helper.drawBitmap(canvas, card.getBmpCache().get(unitWidth, unitHeight), posX, posY, new Paint());
+                    if(card.isSelect()) {
+                        drawHighLight(canvas, x + posX, y + posY);
+                    }
                     posX += unitWidth + cardPaddingW;
                 }
             }
             posY += unitHeight + cardPaddingH;
         }
+    }
+
+    private void drawHighLight(Canvas canvas, int x, int y) {
+        Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
+        Paint paint = new Paint();
+        paint.setColor(Configuration.highlightColor());
+        paint.setStrokeWidth(2);
+        paint.setStyle(Paint.Style.STROKE);
+
+        Rect highLightRect = new Rect(0, 0, unitWidth, unitHeight);
+        helper.drawRect(canvas, highLightRect, paint);
     }
 
     @Override

@@ -118,6 +118,10 @@ public class Card implements SelectableItem, Drawable, Bmpable {
         positive = false;
     }
 
+    public BmpCache getBmpCache() {
+        return bmpCache;
+    }
+
     public Bitmap bmp(int width, int height) {
         Bitmap cardPic = Utils.readBitmapScaleByHeight(Configuration.cardImgPath() + id + Configuration.cardImageSuffix(), height);
         if (cardPic == null) {

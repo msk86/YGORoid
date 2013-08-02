@@ -43,9 +43,6 @@ public class ActionDispatcher {
                 }
             }
         }
-        if (press.getDuel().getSideWindow() != null) {
-            action = new SideWindowFlipAction(press);
-        }
         return action;
     }
 

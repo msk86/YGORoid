@@ -12,29 +12,34 @@ public class ChangeSideAction extends BaseAction {
 
     @Override
     public void execute() {
-        duel.select(item, container);
         SideWindow sideWindow = duel.getSideWindow();
 
-        sideWindow.setSelectCard((Card) item, (Layout) container);
+        Card card1 = sideWindow.getSelectCard();
+        Layout layout1 = sideWindow.getSelectLayout();
 
-        Card card1 = sideWindow.getSelectCardMain();
-        Layout layout1 = sideWindow.getSelectLayoutMain();
+        Card card2 = (Card) item;
+        Layout layout2 = (Layout) container;
 
-        Card card2 = sideWindow.getSelectCardSide();
-        Layout layout2 = sideWindow.getSelectLayoutSide();
+        if (layout1 == layout2) {
+            return;
+        }
+        if (layout1 != sideWindow.getSideLayout() && layout2 != sideWindow.getSideLayout()) {
+            return;
+        }
 
-        if(card1 != null && card2 != null) {
+        if (card1 != null && card2 != null) {
+            if (card1.isEx() != card2.isEx()) {
+                return;
+            }
+
             layout1.cards().remove(card1);
             layout2.cards().remove(card2);
 
-            if(card2.isEx()) {
-                sideWindow.getExLayout().cards().add(card2);
-            } else {
-                sideWindow.getMainLayout().cards().add(card2);
-            }
+            layout1.cards().add(card2);
             layout2.cards().add(card1);
 
             sideWindow.clearSelect();
+            duel.unSelect();
         }
     }
 }
