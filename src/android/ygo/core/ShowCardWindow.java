@@ -68,7 +68,7 @@ public class ShowCardWindow implements Item, Drawable {
 
     @Override
     public int width() {
-        return Utils.unitLength() * 6;
+        return Utils.totalWidth();
     }
 
     @Override

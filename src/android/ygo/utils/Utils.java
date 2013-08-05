@@ -93,7 +93,7 @@ public class Utils {
     }
 
     public static int cardScreenWidth() {
-        return (int)(screenHeight() / 1.45);
+        return (int) (screenHeight() / 1.45);
     }
 
     public static int cardWidth() {
@@ -228,7 +228,7 @@ public class Utils {
             default:
                 posY = positionY;
         }
-        if(!bitmap.isRecycled()) {
+        if (!bitmap.isRecycled()) {
             canvas.drawBitmap(bitmap, posX, posY, paint);
         }
     }

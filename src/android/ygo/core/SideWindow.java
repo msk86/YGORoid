@@ -47,7 +47,7 @@ public class SideWindow implements Item, Drawable {
 
     @Override
     public int width() {
-        return Utils.unitLength() * 6;
+        return Utils.totalWidth();
     }
 
     @Override
@@ -71,7 +71,7 @@ public class SideWindow implements Item, Drawable {
     }
 
     public Layout layoutAt(int x, int y) {
-        if (x > Utils.unitLength() * 6) {
+        if (x > Utils.totalWidth()) {
             return null;
         }
         if (y < mainLayout.height()) {
