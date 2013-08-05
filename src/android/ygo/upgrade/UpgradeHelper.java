@@ -34,6 +34,7 @@ public class UpgradeHelper {
     private Version myVersion;
     private Version newVersion;
     private String upgradeUrl;
+    private String upgradeTip;
 
     private String newCardsFile;
     private String newCardsUrl;
@@ -57,6 +58,7 @@ public class UpgradeHelper {
                 String myVersionStr = Utils.getVersion();
                 myVersion = new Version(myVersionStr);
                 upgradeUrl = getInfo("RoidUpgradeUrl");
+                upgradeTip = getInfo("RoidUpgradeTip").replace("\\n", "\n");
 
                 if (myVersion.version < newVersion.version) {
                     context.getUpgradeMsgHandler().sendEmptyMessage(UPGRADE);
@@ -83,6 +85,7 @@ public class UpgradeHelper {
         String title = "发现新版本程序[V" + newVersion.ver + "]，是否更新？";
         AlertDialog dialog = new AlertDialog.Builder(Utils.getContext())
                 .setTitle(title)
+                .setMessage(upgradeTip)
                 .setPositiveButton("确定", new OnUpgradeClickListener("OK", this))
                 .setNegativeButton("取消", new OnUpgradeClickListener("Cancel", this))
                 .create();
