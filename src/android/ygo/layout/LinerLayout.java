@@ -61,7 +61,11 @@ public class LinerLayout implements Layout, Drawable {
             if (card.isSelect()) {
                 posY = 0;
             }
-            helper.drawBitmap(canvas, card.getBmpCache().get(unitWidth, unitHeight), posX, posY, new Paint());
+            if (card.isOpen()) {
+                helper.drawBitmap(canvas, card.getBmpCache().get(unitWidth, unitHeight), posX, posY, new Paint());
+            } else {
+                helper.drawBitmap(canvas, Card.CARD_PROTECTOR, posX, posY, new Paint());
+            }
             if(card.isSelect()) {
                 drawHighLight(canvas, x + posX, y + posY);
             }

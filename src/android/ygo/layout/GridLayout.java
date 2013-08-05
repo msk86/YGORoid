@@ -49,14 +49,18 @@ public class GridLayout implements Layout, Drawable {
         fixPosition();
         Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
 
-        for (int r =0, posY = 0, posX; r < row; r++) {
+        for (int r = 0, posY = 0, posX; r < row; r++) {
             posX = 1;
             for (int c = 0; c < col; c++) {
                 int index = r * col + c;
                 if (index < cards.size()) {
                     Card card = cards().get(index);
-                    helper.drawBitmap(canvas, card.getBmpCache().get(unitWidth, unitHeight), posX, posY, new Paint());
-                    if(card.isSelect()) {
+                    if (card.isOpen()) {
+                        helper.drawBitmap(canvas, card.getBmpCache().get(unitWidth, unitHeight), posX, posY, new Paint());
+                    } else {
+                        helper.drawBitmap(canvas, Card.CARD_PROTECTOR, posX, posY, new Paint());
+                    }
+                    if (card.isSelect()) {
                         drawHighLight(canvas, x + posX, y + posY);
                     }
                     posX += unitWidth + cardPaddingW;
