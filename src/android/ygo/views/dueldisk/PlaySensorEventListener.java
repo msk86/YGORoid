@@ -28,12 +28,10 @@ public class PlaySensorEventListener implements SensorEventListener {
             if(view.getDuel().getCardWindow() != null
                     || view.getDuel().getCardSelector() != null) {
                 handCards.setAll();
-                view.updateActionTime();
                 return;
             }
         } else {
             handCards.openAll();
-            view.updateActionTime();
             return;
         }
 
