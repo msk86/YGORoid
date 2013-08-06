@@ -10,6 +10,7 @@ import android.os.IBinder;
 import android.view.*;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.ygo.core.Card;
 import android.ygo.exception.CrashHandler;
 import android.ygo.service.PersistencyService;
 import android.ygo.upgrade.UpgradeHelper;
@@ -68,7 +69,7 @@ public class YGOActivity extends Activity {
 
     private void initWebView() {
         webView = new WebView(this);
-        webView.setWebViewClient(new WebViewClient(){
+        webView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);
@@ -102,6 +103,17 @@ public class YGOActivity extends Activity {
         currentView = deckBuilderView;
         deckBuilderView.updateActionTime();
         deckBuilderView.loadDeck("sample.ydk");
+
+        deckBuilderView.getCardNameList().add(new Card("0", "xxxxxxxx", "xxxxxxxx"));
+        deckBuilderView.getCardNameList().add(new Card("0", "aaaaaaaaaaa", "aaaaaaaaaaa"));
+        deckBuilderView.getCardNameList().add(new Card("0", "jewlkf1294", "jewlkf1294"));
+        deckBuilderView.getCardNameList().add(new Card("0", "vvvvvvvvvvvvvvv", "vvvvvvvvvvvvvvv"));
+        deckBuilderView.getCardNameList().add(new Card("0", "ajskldf", "xxxxxxxx"));
+        deckBuilderView.getCardNameList().add(new Card("0", "80121-902-la", "xxxxxxxx"));
+        deckBuilderView.getCardNameList().add(new Card("0", "kalsdjfl-la", "xxxxxxxx"));
+        deckBuilderView.getCardNameList().add(new Card("0", "AAAAAA", "xxxxxxxx"));
+        deckBuilderView.getCardNameList().add(new Card("0", "ilkdfl124", "xxxxxxxx"));
+
     }
 
     public boolean isMirror() {

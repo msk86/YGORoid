@@ -23,8 +23,11 @@ public class DeckBuilderView extends YGOView {
     private GridLayout exLayout;
     private GridLayout sideLayout;
 
+    private CardNameList cardNameList;
+
     public DeckBuilderView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        cardNameList = new CardNameList(this);
         mGestureDetector = new DeckGestureDetector(new DeckGestureListener(this));
         mainLayout = new GridLayout(null, Utils.deckBuilderWidth(), 3, Utils.cardSnapshotWidth(), Utils.cardSnapshotHeight());
         exLayout = new GridLayout(null, Utils.deckBuilderWidth(), 1, Utils.cardSnapshotWidth(), Utils.cardSnapshotHeight());
@@ -86,5 +89,9 @@ public class DeckBuilderView extends YGOView {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         return mGestureDetector.onTouchEvent(event);
+    }
+
+    public CardNameList getCardNameList() {
+        return cardNameList;
     }
 }
