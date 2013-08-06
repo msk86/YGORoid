@@ -6,6 +6,8 @@ import android.ygo.R;
 import android.ygo.core.Card;
 import android.ygo.utils.Utils;
 
+import java.util.List;
+
 public class CardNameList {
 
     DeckBuilderView deckBuilderView;
@@ -26,6 +28,12 @@ public class CardNameList {
         CardNameView cv = new CardNameView(Utils.getContext(), card);
         cv.setOnClickListener(new OnClickCardNameListener());
         cardList.addView(cv);
+    }
+
+    public void addAll(List<Card> cards) {
+        for(Card card : cards) {
+            add(card);
+        }
     }
 
     private class OnClickCardNameListener implements View.OnClickListener {

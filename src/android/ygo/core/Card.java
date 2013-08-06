@@ -10,6 +10,7 @@ import android.ygo.core.tool.QuickFix;
 import android.ygo.utils.Configuration;
 import android.ygo.utils.Utils;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class Card implements SelectableItem, Drawable, Bmpable {
@@ -407,5 +408,13 @@ public class Card implements SelectableItem, Drawable, Bmpable {
     @Override
     public Card clone() {
         return new Card(id, name, desc, typeCode, attrCode, raceCode, level, atkInt, defInt, aliasId, category);
+    }
+
+    public static class CardComparator implements Comparator<Card> {
+        @Override
+        public int compare(Card card1, Card card2) {
+            // todo
+            return Integer.parseInt(card1.getId()) - Integer.parseInt(card2.getId());
+        }
     }
 }

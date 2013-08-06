@@ -11,9 +11,7 @@ import android.ygo.utils.Configuration;
 import android.ygo.utils.UnicodeReader;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 public class CardsDBHelper extends SQLiteOpenHelper {
 
@@ -140,6 +138,14 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         return card;
     }
 
+    private List<Card> fuzzyQueryByName(SQLiteDatabase database, String name) {
+        Cursor c = database.query(QUERY_TABLES, QUERY_FIELDS,
+                "t.id = d.id and t.name like ?", new String[]{"%" + name + "%"}, null, null, null);
+        List<Card> results = createCards(c);
+        c.close();
+        return results;
+    }
+
     private Card fuzzyLoadByWord(SQLiteDatabase database, String name) {
         String[] parts = new String[name.length()];
         String sqlNamePart = "";
@@ -157,6 +163,28 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         }
         c.close();
         return card;
+    }
+
+    private List<Card> fuzzyQueryByWord(SQLiteDatabase database, String name) {
+        String[] parts = new String[name.length()];
+        String sqlNamePart = "";
+        for (int i = 0; i < parts.length; i++) {
+            sqlNamePart += " and t.name like ?";
+            parts[i] = "%" + name.charAt(i) + "%";
+        }
+
+        Cursor c = database.query(QUERY_TABLES, QUERY_FIELDS,
+                "t.id = d.id" + sqlNamePart, parts, null, null, null);
+
+        return createCards(c);
+    }
+
+    private List<Card> fuzzyQueryByDesc(SQLiteDatabase database, String desc) {
+        Cursor c = database.query(QUERY_TABLES, QUERY_FIELDS,
+                "t.id = d.id and t.desc like ?", new String[]{"%" + desc + "%"}, null, null, null);
+        List<Card> results = createCards(c);
+        c.close();
+        return results;
     }
 
     public Card loadById(int cardID) {
@@ -183,10 +211,60 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         return card;
     }
 
+    public List<Card> queryByText(String text) {
+        List<Card> cards = new ArrayList<Card>();
+
+        try {
+            SQLiteDatabase database = this.getReadableDatabase();
+            Card card = loadByWholeName(database, text);
+            if(card != null) {
+                cards.add(card);
+            }
+
+            List<Card> results = fuzzyQueryByName(database, text);
+            combineCards(cards, results);
+
+            results = fuzzyQueryByWord(database, text);
+            combineCards(cards, results);
+
+            results = fuzzyQueryByDesc(database, text);
+            combineCards(cards, results);
+
+            database.close();
+        } catch (Exception e) {
+        }
+
+        Collections.sort(cards, new Card.CardComparator());
+        return cards;
+    }
+
+    private void combineCards(List<Card> cards1, List<Card> cards2) {
+        for(Card card2 : cards2) {
+            boolean newCard = true;
+            for(Card card1 : cards1) {
+                if(card2.getId().equals(card1.getId())) {
+                    newCard = false;
+                    break;
+                }
+            }
+            if(newCard) {
+                cards1.add(card2);
+            }
+        }
+    }
+
     private Card createCard(Cursor c) {
         return new Card(c.getString(0), c.getString(1), c.getString(2), c.getInt(8),
                 c.getInt(7), c.getInt(5), c.getInt(6), c.getInt(3), c.getInt(4), c.getString(9),
                 c.getInt(10));
+    }
+
+    private List<Card> createCards(Cursor c) {
+        List<Card> cards = new ArrayList<Card>();
+        while (c.moveToNext()) {
+            cards.add(createCard(c));
+        }
+        return cards;
     }
 
 

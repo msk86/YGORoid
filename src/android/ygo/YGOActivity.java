@@ -11,7 +11,6 @@ import android.view.*;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.ygo.core.Card;
-import android.ygo.core.UserDefinedCard;
 import android.ygo.exception.CrashHandler;
 import android.ygo.service.PersistencyService;
 import android.ygo.upgrade.UpgradeHelper;
@@ -22,6 +21,8 @@ import android.ygo.views.PlayOnKeyProcessor;
 import android.ygo.views.YGOView;
 import android.ygo.views.deckbuilder.DeckBuilderView;
 import android.ygo.views.dueldisk.DuelDiskView;
+
+import java.util.List;
 
 public class YGOActivity extends Activity {
     private PlayOnKeyProcessor keyProcessor;
@@ -105,14 +106,9 @@ public class YGOActivity extends Activity {
         deckBuilderView.updateActionTime();
         deckBuilderView.loadDeck("sample.ydk");
 
-        deckBuilderView.getCardNameList().add(Utils.getDbHelper().loadByName("青眼白龙"));
-        deckBuilderView.getCardNameList().add(Utils.getDbHelper().loadByName("传说的白石"));
-        deckBuilderView.getCardNameList().add(Utils.getDbHelper().loadByName("青眼究极龙"));
-        deckBuilderView.getCardNameList().add(Utils.getDbHelper().loadByName("白龙骑士"));
-        deckBuilderView.getCardNameList().add(Utils.getDbHelper().loadByName("青眼少女"));
-        deckBuilderView.getCardNameList().add(Utils.getDbHelper().loadByName("青眼光龙"));
-        deckBuilderView.getCardNameList().add(Utils.getDbHelper().loadByName("疾风弹"));
-        deckBuilderView.getCardNameList().add(new UserDefinedCard("哈哈哈"));
+        List<Card> cards = Utils.getDbHelper().queryByText("青眼");
+
+        deckBuilderView.getCardNameList().addAll(cards);
 
     }
 
