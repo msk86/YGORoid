@@ -7,6 +7,7 @@ import android.util.TypedValue;
 import android.widget.TextView;
 import android.ygo.R;
 import android.ygo.core.Card;
+import android.ygo.core.UserDefinedCard;
 
 public class CardNameView extends TextView {
     private Card card;
@@ -28,7 +29,11 @@ public class CardNameView extends TextView {
     public CardNameView(Context context, Card card) {
         this(context);
         this.card = card;
-        this.setText(card.getName());
+        String name = card.getName();
+        if(card instanceof UserDefinedCard) {
+            name = "?" + name;
+        }
+        this.setText(name);
     }
 
     public Card getCard() {

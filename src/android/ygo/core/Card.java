@@ -28,12 +28,18 @@ public class Card implements SelectableItem, Drawable, Bmpable {
     String aliasId;
     String name;
     String desc;
-    CardType type;
 
+    private int typeCode;
+    private int attrCode;
+    private int raceCode;
+
+    CardType type;
     List<CardSubType> subTypes;
     Attribute attribute;
     Race race;
     int level;
+    private int atkInt;
+    private int defInt;
     String atk;
     String def;
     int category;
@@ -58,11 +64,16 @@ public class Card implements SelectableItem, Drawable, Bmpable {
         this.aliasId = aliasId;
         this.name = name;
         this.desc = desc;
+        this.typeCode = typeCode;
         this.type = CardType.getCardType(typeCode);
         this.subTypes = CardSubType.getCardSubType(typeCode);
+        this.attrCode = attrCode;
         this.attribute = Attribute.getAttribute(attrCode);
+        this.raceCode = raceCode;
         this.race = Race.getRace(raceCode);
         this.level = level;
+        this.atkInt = atk;
+        this.defInt = def;
         this.atk = atk >= 0 ? String.valueOf(atk) : "?";
         this.def = def >= 0 ? String.valueOf(def) : "?";
         this.category = category;
@@ -391,5 +402,10 @@ public class Card implements SelectableItem, Drawable, Bmpable {
 
     public void setCategory(int category) {
         this.category = category;
+    }
+
+    @Override
+    public Card clone() {
+        return new Card(id, name, desc, typeCode, attrCode, raceCode, level, atkInt, defInt, aliasId, category);
     }
 }

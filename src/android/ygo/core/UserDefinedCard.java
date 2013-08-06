@@ -19,4 +19,11 @@ public class UserDefinedCard extends Card {
         }
         return bmp;
     }
+
+    @Override
+    public UserDefinedCard clone() {
+        UserDefinedCard userDefinedCard = new UserDefinedCard(name);
+        userDefinedCard.fileName = fileName;
+        return userDefinedCard;
+    }
 }

@@ -11,6 +11,7 @@ import android.view.*;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.ygo.core.Card;
+import android.ygo.core.UserDefinedCard;
 import android.ygo.exception.CrashHandler;
 import android.ygo.service.PersistencyService;
 import android.ygo.upgrade.UpgradeHelper;
@@ -111,6 +112,7 @@ public class YGOActivity extends Activity {
         deckBuilderView.getCardNameList().add(Utils.getDbHelper().loadByName("青眼少女"));
         deckBuilderView.getCardNameList().add(Utils.getDbHelper().loadByName("青眼光龙"));
         deckBuilderView.getCardNameList().add(Utils.getDbHelper().loadByName("疾风弹"));
+        deckBuilderView.getCardNameList().add(new UserDefinedCard("哈哈哈"));
 
     }
 

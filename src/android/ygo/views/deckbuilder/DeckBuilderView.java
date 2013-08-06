@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import android.widget.Toast;
 import android.ygo.core.Card;
 import android.ygo.core.DeckChecker;
+import android.ygo.core.UserDefinedCard;
 import android.ygo.layout.GridLayout;
 import android.ygo.layout.Layout;
 import android.ygo.utils.Configuration;
@@ -75,7 +76,9 @@ public class DeckBuilderView extends YGOView {
             layout = sideLayout;
         }
 
-        layout.cards().add(card);
+
+        Card clone = card.clone();
+        layout.cards().add(clone);
         updateActionTime();
     }
 
