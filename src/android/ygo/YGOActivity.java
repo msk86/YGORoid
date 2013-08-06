@@ -104,15 +104,13 @@ public class YGOActivity extends Activity {
         deckBuilderView.updateActionTime();
         deckBuilderView.loadDeck("sample.ydk");
 
-        deckBuilderView.getCardNameList().add(new Card("0", "xxxxxxxx", "xxxxxxxx"));
-        deckBuilderView.getCardNameList().add(new Card("0", "aaaaaaaaaaa", "aaaaaaaaaaa"));
-        deckBuilderView.getCardNameList().add(new Card("0", "jewlkf1294", "jewlkf1294"));
-        deckBuilderView.getCardNameList().add(new Card("0", "vvvvvvvvvvvvvvv", "vvvvvvvvvvvvvvv"));
-        deckBuilderView.getCardNameList().add(new Card("0", "ajskldf", "xxxxxxxx"));
-        deckBuilderView.getCardNameList().add(new Card("0", "80121-902-la", "xxxxxxxx"));
-        deckBuilderView.getCardNameList().add(new Card("0", "kalsdjfl-la", "xxxxxxxx"));
-        deckBuilderView.getCardNameList().add(new Card("0", "AAAAAA", "xxxxxxxx"));
-        deckBuilderView.getCardNameList().add(new Card("0", "ilkdfl124", "xxxxxxxx"));
+        deckBuilderView.getCardNameList().add(Utils.getDbHelper().loadByName("青眼白龙"));
+        deckBuilderView.getCardNameList().add(Utils.getDbHelper().loadByName("传说的白石"));
+        deckBuilderView.getCardNameList().add(Utils.getDbHelper().loadByName("青眼究极龙"));
+        deckBuilderView.getCardNameList().add(Utils.getDbHelper().loadByName("白龙骑士"));
+        deckBuilderView.getCardNameList().add(Utils.getDbHelper().loadByName("青眼少女"));
+        deckBuilderView.getCardNameList().add(Utils.getDbHelper().loadByName("青眼光龙"));
+        deckBuilderView.getCardNameList().add(Utils.getDbHelper().loadByName("疾风弹"));
 
     }
 

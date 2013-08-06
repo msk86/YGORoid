@@ -1,11 +1,7 @@
 package android.ygo.views.deckbuilder;
 
-import android.content.DialogInterface;
-import android.util.Log;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.ygo.R;
 import android.ygo.core.Card;
 import android.ygo.utils.Utils;
@@ -37,7 +33,10 @@ public class CardNameList {
         @Override
         public void onClick(View view) {
             CardNameView cardNameView = (CardNameView) view;
-            if(view.isSelected()) {
+            if(cardNameView.isSelected()) {
+                if(selectedCard != null) {
+                    deckBuilderView.addToDeck(selectedCard);
+                }
                 return;
             }
 

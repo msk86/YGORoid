@@ -13,6 +13,10 @@ public class UserDefinedCard extends Card {
 
     @Override
     public Bitmap bmp(int width, int height) {
-        return Utils.readBitmapScaleByHeight(fileName, height);
+        Bitmap bmp = Utils.readBitmapScaleByHeight(fileName, height);
+        if(bmp == null) {
+            bmp = super.bmp(width, height);
+        }
+        return bmp;
     }
 }

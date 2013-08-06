@@ -7,10 +7,7 @@ import android.ygo.core.tool.Dice;
 import android.ygo.op.Drag;
 import android.ygo.utils.Utils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class Duel implements Item, Drawable {
     private LifePoint lifePoint;
@@ -95,12 +92,12 @@ public class Duel implements Item, Drawable {
             return true;
         }
         String info = null;
-        if (mainDeckCards.size() < 40 || mainDeckCards.size() > 60) {
-            info = "主卡组卡片数量不符合要求";
-        } else if (exDeckCards.size() > 15) {
-            info = "额外卡组卡片数量不符合要求";
-        } else if (sideDeckCards.size() > 15) {
-            info = "副卡组卡片数量不符合要求";
+        if (!DeckChecker.checkMain(mainDeckCards)) {
+            info = DeckChecker.ERROR_MAIN;
+        } else if (!DeckChecker.checkEx(exDeckCards)) {
+            info = DeckChecker.ERROR_EX;
+        } else if (!DeckChecker.checkSide(sideDeckCards)) {
+            info = DeckChecker.ERROR_SIDE;
         }
         if (info != null) {
             Toast.makeText(Utils.getContext(), info, Toast.LENGTH_LONG).show();
@@ -111,39 +108,21 @@ public class Duel implements Item, Drawable {
     }
 
     private boolean singleCardCountCheck(List<Card> mainDeckCards, List<Card> exDeckCards, List<Card> sideDeckCards) {
-        List<Integer> invalidCardIds = new ArrayList<Integer>();
-        List<String> invalidUDCardNames = new ArrayList<String>();
+        Set<Integer> invalidCardIds = new TreeSet<Integer>();
+        Set<String> invalidUDCardNames = new TreeSet<String>();
 
         List<Card> allCards = new ArrayList<Card>();
         allCards.addAll(mainDeckCards);
         allCards.addAll(exDeckCards);
         allCards.addAll(sideDeckCards);
 
-        Map<String, Integer> cardCount = new TreeMap<String, Integer>();
-        Map<String, Integer> uDCardCount = new TreeMap<String, Integer>();
         for (Card card : allCards) {
-            if (!(card instanceof UserDefinedCard || card.getRealId().equals("0"))) {
-                if (!cardCount.containsKey(card.getRealId())) {
-                    cardCount.put(card.getRealId(), 0);
+            if(!DeckChecker.checkSingleCard(allCards, card)) {
+                if(card instanceof UserDefinedCard || card.getRealId().equals("0")) {
+                    invalidUDCardNames.add(card.getName());
+                } else {
+                    invalidCardIds.add(Integer.parseInt(card.getRealId()));
                 }
-                cardCount.put(card.getRealId(), cardCount.get(card.getRealId()) + 1);
-            } else {
-                if (!uDCardCount.containsKey(card.getName())) {
-                    uDCardCount.put(card.getName(), 0);
-                }
-                uDCardCount.put(card.getName(), uDCardCount.get(card.getName()) + 1);
-            }
-        }
-
-        for (Map.Entry<String, Integer> entry : cardCount.entrySet()) {
-            if (entry.getValue() > 3) {
-                invalidCardIds.add(Integer.parseInt(entry.getKey()));
-            }
-        }
-
-        for (Map.Entry<String, Integer> entry : uDCardCount.entrySet()) {
-            if (entry.getValue() > 3) {
-                invalidUDCardNames.add(entry.getKey());
             }
         }
 
@@ -153,7 +132,7 @@ public class Duel implements Item, Drawable {
 
         List<String> invalidCardNames = Utils.getDbHelper().loadNamesByIds(invalidCardIds);
         invalidCardNames.addAll(invalidUDCardNames);
-        String info = "卡片" + invalidCardNames.toString() + "数量不符合要求";
+        String info = String.format(DeckChecker.ERROR_CARD, invalidCardNames.toString());
         Toast.makeText(Utils.getContext(), info, Toast.LENGTH_LONG).show();
         window.setInfo(info);
         return false;

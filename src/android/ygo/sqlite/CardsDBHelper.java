@@ -12,6 +12,7 @@ import android.ygo.utils.UnicodeReader;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class CardsDBHelper extends SQLiteOpenHelper {
@@ -36,7 +37,18 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         // NOTHING
     }
 
-    public List<String> loadNamesByIds(List<Integer> ids) {
+    public String loadNameById(Integer id) {
+        String name = "";
+        try {
+            SQLiteDatabase database = this.getReadableDatabase();
+            name = loadNameById(database, id);
+            database.close();
+        } catch (Exception e) {
+        }
+        return name;
+    }
+
+    public List<String> loadNamesByIds(Collection<Integer> ids) {
         List<String> names = new ArrayList<String>();
         try {
             SQLiteDatabase database = this.getReadableDatabase();

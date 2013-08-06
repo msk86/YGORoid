@@ -8,11 +8,14 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.Toast;
 import android.ygo.core.Card;
+import android.ygo.core.DeckChecker;
 import android.ygo.layout.GridLayout;
+import android.ygo.layout.Layout;
 import android.ygo.utils.Configuration;
 import android.ygo.utils.Utils;
 import android.ygo.views.YGOView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DeckBuilderView extends YGOView {
@@ -22,6 +25,8 @@ public class DeckBuilderView extends YGOView {
     private GridLayout mainLayout;
     private GridLayout exLayout;
     private GridLayout sideLayout;
+
+    private boolean isMain = true;
 
     private CardNameList cardNameList;
 
@@ -51,6 +56,65 @@ public class DeckBuilderView extends YGOView {
             info = "保存["+deck+"]失败.";
         }
         Toast.makeText(Utils.getContext(), info, Toast.LENGTH_LONG).show();
+    }
+
+    public void addToDeck(Card card) {
+        if(!checkCard(card)) {
+            return;
+        }
+
+        Layout layout;
+
+        if(isMain) {
+            if(!card.isEx()) {
+                layout = mainLayout;
+            } else {
+                layout = exLayout;
+            }
+        } else {
+            layout = sideLayout;
+        }
+
+        layout.cards().add(card);
+        updateActionTime();
+    }
+
+    private boolean checkCard(Card card) {
+        String info = null;
+
+        if(isMain) {
+            if(!card.isEx()) {
+                if(!DeckChecker.checkMainMax(mainLayout.cards(), true)) {
+                   info = DeckChecker.ERROR_MAIN;
+                }
+            } else {
+                if(!DeckChecker.checkEx(exLayout.cards(), true)) {
+                    info = DeckChecker.ERROR_EX;
+                }
+            }
+        } else {
+            if(!DeckChecker.checkSide(sideLayout.cards(), true)) {
+                info = DeckChecker.ERROR_SIDE;
+            }
+        }
+
+        if(info == null) {
+            List<Card> allCards = new ArrayList<Card>();
+            allCards.addAll(mainLayout.cards());
+            allCards.addAll(exLayout.cards());
+            allCards.addAll(sideLayout.cards());
+
+            if(!DeckChecker.checkSingleCard(allCards, card, true)) {
+                String name = Utils.getDbHelper().loadNameById(Integer.parseInt(card.getRealId()));
+                info = String.format(DeckChecker.ERROR_CARD, "[" +name + "]");
+            }
+        }
+
+        if(info != null) {
+            Toast.makeText(Utils.getContext(), info, Toast.LENGTH_LONG).show();
+        }
+
+        return info == null;
     }
 
     @Override
