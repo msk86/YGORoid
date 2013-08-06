@@ -1,6 +1,5 @@
 package android.ygo.action;
 
-import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.ygo.YGOActivity;
 import android.ygo.op.Operation;

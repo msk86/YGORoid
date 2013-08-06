@@ -5,10 +5,10 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.ygo.core.Card;
 import android.ygo.core.Drawable;
-import android.ygo.core.Item;
 import android.ygo.utils.Configuration;
 import android.ygo.utils.Utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GridLayout implements Layout, Drawable {
@@ -28,7 +28,11 @@ public class GridLayout implements Layout, Drawable {
     }
 
     public GridLayout(List<Card> cards, int maxWidth, int row, int unitWidth, int unitHeight) {
-        this.cards = cards;
+        if (cards != null) {
+            this.cards = cards;
+        } else {
+            this.cards = new ArrayList<Card>();
+        }
         this.maxWidth = maxWidth;
         this.row = row;
         this.unitWidth = unitWidth;
@@ -114,5 +118,9 @@ public class GridLayout implements Layout, Drawable {
     @Override
     public List<Card> cards() {
         return cards;
+    }
+
+    public void setCards(List<Card> cards) {
+        this.cards = cards;
     }
 }

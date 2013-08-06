@@ -10,9 +10,7 @@ import android.ygo.utils.CharSet;
 import android.ygo.utils.Configuration;
 import android.ygo.utils.UnicodeReader;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -248,6 +246,37 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         cardsLists.add(exCardList);
         cardsLists.add(sideCardList);
         return cardsLists;
+    }
+
+    public boolean saveToFile(String deck, List<Card> main, List<Card> ex, List<Card> side) {
+        StringBuilder txt = new StringBuilder();
+
+        txt.append(cardListTxt("#main", main));
+        txt.append(cardListTxt("#ex", ex));
+        txt.append(cardListTxt("!side", side));
+
+        if(deck.indexOf('.') < 0) {
+            deck += ".ydk";
+        }
+        String deckPath = Configuration.deckPath() + deck;
+
+        try {
+            DataOutputStream dos = new DataOutputStream(new FileOutputStream(deckPath));
+            dos.writeBytes(txt.toString());
+            dos.close();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    private String cardListTxt(String listName, List<Card> side) {
+        StringBuilder txt = new StringBuilder();
+        txt.append(listName).append("\r\n");
+        for (Card card : side) {
+            txt.append(card.getId()).append("\r\n");
+        }
+        return txt.toString();
     }
 
     private boolean isSide(String line) {

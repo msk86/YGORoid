@@ -1,8 +1,6 @@
 package android.ygo.action;
 
 import android.ygo.YGOActivity;
-import android.ygo.core.Card;
-import android.ygo.core.HandCards;
 import android.ygo.op.Operation;
 import android.ygo.utils.Utils;
 

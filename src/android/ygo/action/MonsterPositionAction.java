@@ -2,7 +2,6 @@ package android.ygo.action;
 
 import android.ygo.core.Card;
 import android.ygo.core.Field;
-import android.ygo.core.OverRay;
 import android.ygo.op.Operation;
 
 public class MonsterPositionAction extends BaseAction {

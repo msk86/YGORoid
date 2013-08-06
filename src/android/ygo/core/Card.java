@@ -73,6 +73,9 @@ public class Card implements SelectableItem, Drawable, Bmpable {
         QuickFix.fix(this);
     }
 
+    public String getId() {
+        return id;
+    }
 
     public String getRealId() {
         return "0".equals(aliasId) ? id : aliasId;

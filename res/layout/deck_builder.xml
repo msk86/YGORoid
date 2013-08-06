@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:id="@+id/mainLayout"
+             android:layout_width="fill_parent"
+             android:layout_height="fill_parent">
+    <android.ygo.views.deckbuilder.DeckBuilderView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/deck_builder">
+    </android.ygo.views.deckbuilder.DeckBuilderView>
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            >
+        <TextView
+                android:layout_width="0dip"
+                android:layout_height="0dip"
+                android:layout_weight="3"/>
+        <RelativeLayout
+                android:layout_width="0dip"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+            <EditText
+                    android:id="@+id/search_text"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:singleLine="true"
+                    android:cursorVisible="false"
+                    android:hint="关键字"
+                    />
+            <LinearLayout
+                    android:id="@+id/buttons"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:paddingBottom="6sp"
+                    >
+                <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="打开"
+                        android:textSize="9sp"/>
+                <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="保存"
+                        android:textSize="9sp"/>
+                <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="另存"
+                        android:textSize="9sp"/>
+            </LinearLayout>
+            <ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent"
+                        android:layout_below="@id/search_text"
+                        android:layout_above="@id/buttons"
+                        android:gravity="top">
+            <LinearLayout android:layout_height="fill_parent"
+                          android:layout_width="fill_parent"
+                          android:orientation="vertical">
+                <TextView android:layout_height="wrap_content" android:layout_width="wrap_content"
+                          android:text="1"></TextView>
+                <TextView android:layout_height="wrap_content" android:layout_width="wrap_content"
+                          android:text="2"></TextView>
+                <TextView android:layout_height="wrap_content" android:layout_width="wrap_content"
+                          android:text="3"></TextView>
+                <TextView android:layout_height="wrap_content" android:layout_width="wrap_content"
+                          android:text="4"></TextView>
+                <TextView android:layout_height="wrap_content" android:layout_width="wrap_content"
+                          android:text="5"></TextView>
+                <TextView android:layout_height="wrap_content" android:layout_width="wrap_content"
+                          android:text="6"></TextView>
+                <TextView android:layout_height="wrap_content" android:layout_width="wrap_content"
+                          android:text="7"></TextView>
+                <TextView android:layout_height="wrap_content" android:layout_width="wrap_content"
+                          android:text="8"></TextView>
+                <TextView android:layout_height="wrap_content" android:layout_width="wrap_content"
+                          android:text="9"></TextView>
+                <TextView android:layout_height="wrap_content" android:layout_width="wrap_content"
+                          android:text="0"></TextView>
+                <TextView android:layout_height="wrap_content" android:layout_width="wrap_content"
+                          android:text="1"></TextView>
+                <TextView android:layout_height="wrap_content" android:layout_width="wrap_content"
+                          android:text="2"></TextView>
+                <TextView android:layout_height="wrap_content" android:layout_width="wrap_content"
+                          android:text="3"></TextView>
+                <TextView android:layout_height="wrap_content" android:layout_width="wrap_content"
+                          android:text="4"></TextView>
+                <TextView android:layout_height="wrap_content" android:layout_width="wrap_content"
+                          android:text="5"></TextView>
+                <TextView android:layout_height="wrap_content" android:layout_width="wrap_content"
+                          android:text="6"></TextView>
+            </LinearLayout>
+            </ScrollView>
+
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</FrameLayout>
+

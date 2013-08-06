@@ -4,13 +4,10 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     >
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
-        <DuelDiskView android:id="@+id/duelDiskView"
+    <android.ygo.views.dueldisk.DuelDiskView
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"/>
-    </RelativeLayout>
+            android:layout_height="fill_parent"
+            android:id="@+id/duelDiskView"
+            ></android.ygo.views.dueldisk.DuelDiskView>
 </LinearLayout>
 

@@ -1,6 +1,7 @@
 package android.ygo.action;
 
-import android.ygo.core.*;
+import android.ygo.core.Card;
+import android.ygo.core.SideWindow;
 import android.ygo.op.Operation;
 
 import java.util.List;

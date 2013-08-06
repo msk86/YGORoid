@@ -3,7 +3,6 @@ package android.ygo.layout;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.ygo.YGOActivity;
 import android.ygo.core.Card;
 import android.ygo.core.Drawable;
 import android.ygo.utils.Configuration;

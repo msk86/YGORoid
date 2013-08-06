@@ -79,6 +79,10 @@ public class Utils {
         return unitLength() * 6;
     }
 
+    public static int deckBuilderWidth() {
+        return screenWidth() * 3 / 4;
+    }
+
     public static int cardScreenHeight() {
         return screenHeight();
     }

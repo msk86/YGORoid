@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.ygo.core.Card;
 import android.ygo.core.Duel;
-import android.ygo.core.SideWindow;
 import android.ygo.op.Operation;
 import android.ygo.utils.Utils;
 
