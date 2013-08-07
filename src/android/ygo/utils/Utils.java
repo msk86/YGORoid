@@ -242,6 +242,13 @@ public class Utils {
         }
     }
 
+    public static void deleteDeck(String deckName) {
+        File deckFile = new File(Configuration.deckPath() + deckName);
+        if(deckFile.isFile() && deckFile.exists()) {
+            deckFile.delete();
+        }
+    }
+
     public static class DrawHelper {
         private int x;
         private int y;

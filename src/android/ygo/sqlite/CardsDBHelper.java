@@ -238,7 +238,9 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         } catch (Exception e) {
         }
 
+        // todo sort
         Collections.sort(cards, new Card.CardComparator());
+
         return cards;
     }
 
@@ -247,6 +249,10 @@ public class CardsDBHelper extends SQLiteOpenHelper {
             boolean newCard = true;
             for(Card card1 : cards1) {
                 if(card2.getId().equals(card1.getId())) {
+                    newCard = false;
+                    break;
+                }
+                if(card2.isToken()) {
                     newCard = false;
                     break;
                 }
@@ -349,9 +355,6 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         txt.append(cardListTxt("#ex", ex));
         txt.append(cardListTxt("!side", side));
 
-        if(deck.indexOf('.') < 0) {
-            deck += ".ydk";
-        }
         String deckPath = Configuration.deckPath() + deck;
 
         try {
@@ -364,11 +367,20 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         }
     }
 
-    private String cardListTxt(String listName, List<Card> side) {
+    private String cardListTxt(String listName, List<Card> cards) {
         StringBuilder txt = new StringBuilder();
         txt.append(listName).append("\r\n");
-        for (Card card : side) {
-            txt.append(card.getId()).append("\r\n");
+        for (Card card : cards) {
+            if(card instanceof UserDefinedCard) {
+                txt.append("?").append(card.getName());
+            } else {
+                if(card.getId().equals("0")) {
+                    txt.append(card.getName());
+                } else {
+                    txt.append(card.getId());
+                }
+            }
+            txt.append("\r\n");
         }
         return txt.toString();
     }

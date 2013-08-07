@@ -6,19 +6,14 @@ import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.text.InputType;
 import android.util.AttributeSet;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
-import android.view.View;
+import android.view.*;
 import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import android.ygo.R;
 import android.ygo.core.Card;
 import android.ygo.core.DeckChecker;
-import android.ygo.core.UserDefinedCard;
 import android.ygo.layout.GridLayout;
 import android.ygo.layout.Layout;
 import android.ygo.utils.Configuration;
@@ -26,7 +21,6 @@ import android.ygo.utils.Utils;
 import android.ygo.views.YGOView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class DeckBuilderView extends YGOView {
@@ -41,26 +35,50 @@ public class DeckBuilderView extends YGOView {
 
     private CardNameList cardNameList;
 
+    private String orgDeckName;
     private String currentDeckName;
+
+    private EditText saveAsEdit;
+    private AlertDialog saveAsDialog;
+    private FrameLayout frameLayout;
 
     public DeckBuilderView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        orgDeckName = null;
         currentDeckName = null;
         cardNameList = new CardNameList(this);
         mGestureDetector = new DeckGestureDetector(new DeckGestureListener(this));
         mainLayout = new GridLayout(null, Utils.deckBuilderWidth(), 3, Utils.cardSnapshotWidth(), Utils.cardSnapshotHeight());
         exLayout = new GridLayout(null, Utils.deckBuilderWidth(), 1, Utils.cardSnapshotWidth(), Utils.cardSnapshotHeight());
         sideLayout = new GridLayout(null, Utils.deckBuilderWidth(), 1, Utils.cardSnapshotWidth(), Utils.cardSnapshotHeight());
+        initSaveAsDialog();
     }
 
     public void newDeck() {
         mainLayout.setCards(new ArrayList<Card>());
         exLayout.setCards(new ArrayList<Card>());
         sideLayout.setCards(new ArrayList<Card>());
-        currentDeckName = null;
+        setCurrentDeckName(null);
+    }
+
+    private void setCurrentDeckName(String name) {
+        if (name == null) {
+            currentDeckName = null;
+            return;
+        }
+        orgDeckName = name;
+        currentDeckName = name.substring(0, name.lastIndexOf('.'));
+    }
+
+    private String getCurrentDeckName() {
+        if (currentDeckName == null) {
+            return null;
+        }
+        return currentDeckName + ".ydk";
     }
 
     public void loadDeck(String deck) {
+        newDeck();
         List<List<Card>> cards = Utils.getDbHelper().loadFromFile(deck);
         List<Card> mainCards = cards.get(0);
         List<Card> exCards = cards.get(1);
@@ -68,26 +86,34 @@ public class DeckBuilderView extends YGOView {
         mainLayout.setCards(mainCards);
         exLayout.setCards(exCards);
         sideLayout.setCards(sideCards);
-        currentDeckName = deck;
+        setCurrentDeckName(deck);
     }
 
     public void saveAs() {
-
+        if (currentDeckName == null) {
+            saveAsEdit.setText("");
+        } else {
+            saveAsEdit.setText(currentDeckName);
+        }
+        saveAsDialog.show();
     }
 
     public void save() {
-        if(currentDeckName != null) {
-            saveToDeck(currentDeckName);
+        String deckName = getCurrentDeckName();
+        if (deckName != null) {
+            saveToDeck(deckName, true);
         } else {
             saveAs();
         }
     }
 
-    private void saveToDeck(String deck) {
+    private void saveToDeck(String deck, boolean autoRemove) {
         boolean saved = Utils.getDbHelper().saveToFile(deck, mainLayout.cards(), exLayout.cards(), sideLayout.cards());
         String info = "已保存[" + deck + "].";
         if (!saved) {
             info = "保存[" + deck + "]失败.";
+        } else if (autoRemove && orgDeckName != null && !orgDeckName.equals(deck)) {
+            Utils.deleteDeck(orgDeckName);
         }
         Toast.makeText(Utils.getContext(), info, Toast.LENGTH_LONG).show();
     }
@@ -205,7 +231,7 @@ public class DeckBuilderView extends YGOView {
         builder.setItems(deckList, new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int which) {
-                if(which == 0) {
+                if (which == 0) {
                     newDeck();
                 } else {
                     String deck = deckList[which];
@@ -246,6 +272,66 @@ public class DeckBuilderView extends YGOView {
         saveAsBtn.setOnClickListener(new OnButtonClickListener(OnButtonClickListener.SAVE_AS_BTN));
     }
 
+    private void initSaveAsDialog() {
+        saveAsEdit = new EditText(Utils.getContext());
+        saveAsEdit.setGravity(Gravity.CENTER);
+        saveAsEdit.setInputType(InputType.TYPE_CLASS_TEXT);
+        saveAsEdit.setSingleLine();
+
+        frameLayout = new FrameLayout(Utils.getContext());
+        frameLayout.addView(saveAsEdit, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT));
+
+        saveAsDialog = new AlertDialog.Builder(Utils.getContext())
+                .setTitle("请输入卡组名")
+                .setPositiveButton("保存", new OnSaveAsClickListener("OK"))
+                .setNegativeButton("取消", new OnSaveAsClickListener("Cancel"))
+                .create();
+        saveAsDialog.setView(frameLayout);
+
+
+        saveAsEdit.setOnEditorActionListener(new OnSaveAsEditorActionListener());
+        saveAsEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean focused) {
+                if (focused) {
+                    saveAsDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+                }
+            }
+        });
+    }
+
+    private class OnSaveAsClickListener implements DialogInterface.OnClickListener {
+
+        private String button;
+
+        public OnSaveAsClickListener(String button) {
+            this.button = button;
+        }
+
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i) {
+            if ("OK".equals(button)) {
+                currentDeckName = saveAsEdit.getText().toString();
+                saveToDeck(getCurrentDeckName(), false);
+            }
+        }
+    }
+
+    private class OnSaveAsEditorActionListener implements TextView.OnEditorActionListener {
+        @Override
+        public boolean onEditorAction(TextView textView, int actionId, KeyEvent event) {
+            if (actionId == EditorInfo.IME_ACTION_DONE
+                    || actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
+                currentDeckName = textView.getText().toString();
+                saveToDeck(getCurrentDeckName(), false);
+                saveAsDialog.hide();
+            }
+
+            return false;
+        }
+    }
+
     private class OnSearchTextEditorActionListener implements TextView.OnEditorActionListener {
         @Override
         public boolean onEditorAction(TextView textView, int actionId, KeyEvent event) {
@@ -272,13 +358,15 @@ public class DeckBuilderView extends YGOView {
 
         @Override
         public void onClick(View view) {
-            switch(button){
-                case OPEN_BTN :
+            switch (button) {
+                case OPEN_BTN:
                     changeDeck();
                     break;
-                case SAVE_BTN :
+                case SAVE_BTN:
+                    save();
                     break;
-                case SAVE_AS_BTN :
+                case SAVE_AS_BTN:
+                    saveAs();
                     break;
             }
         }
