@@ -23,14 +23,20 @@ public class CardNameList {
         selectedCard = null;
     }
 
-    public void add(Card card) {
+    public void search(String text) {
+        List<Card> cards = Utils.getDbHelper().queryByText(text);
+        clearList();
+        addAll(cards);
+    }
+
+    private void add(Card card) {
         LinearLayout cardList = (LinearLayout)Utils.getContext().findViewById(R.id.card_list);
         CardNameView cv = new CardNameView(Utils.getContext(), card);
         cv.setOnClickListener(new OnClickCardNameListener());
         cardList.addView(cv);
     }
 
-    public void addAll(List<Card> cards) {
+    private void addAll(List<Card> cards) {
         for(Card card : cards) {
             add(card);
         }

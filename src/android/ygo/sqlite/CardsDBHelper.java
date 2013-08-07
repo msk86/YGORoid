@@ -214,6 +214,10 @@ public class CardsDBHelper extends SQLiteOpenHelper {
     public List<Card> queryByText(String text) {
         List<Card> cards = new ArrayList<Card>();
 
+        if(text == null || text.length() == 0) {
+            return cards;
+        }
+
         try {
             SQLiteDatabase database = this.getReadableDatabase();
             Card card = loadByWholeName(database, text);

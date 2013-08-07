@@ -105,11 +105,6 @@ public class YGOActivity extends Activity {
         currentView = deckBuilderView;
         deckBuilderView.updateActionTime();
         deckBuilderView.loadDeck("sample.ydk");
-
-        List<Card> cards = Utils.getDbHelper().queryByText("青眼");
-
-        deckBuilderView.getCardNameList().addAll(cards);
-
     }
 
     public boolean isMirror() {

@@ -5,8 +5,14 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
+import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.ygo.R;
 import android.ygo.core.Card;
 import android.ygo.core.DeckChecker;
 import android.ygo.core.UserDefinedCard;
@@ -52,22 +58,22 @@ public class DeckBuilderView extends YGOView {
 
     public void saveToDeck(String deck) {
         boolean saved = Utils.getDbHelper().saveToFile(deck, mainLayout.cards(), exLayout.cards(), sideLayout.cards());
-        String info = "已保存["+deck+"].";
-        if(!saved) {
-            info = "保存["+deck+"]失败.";
+        String info = "已保存[" + deck + "].";
+        if (!saved) {
+            info = "保存[" + deck + "]失败.";
         }
         Toast.makeText(Utils.getContext(), info, Toast.LENGTH_LONG).show();
     }
 
     public void addToDeck(Card card) {
-        if(!checkCard(card)) {
+        if (!checkCard(card)) {
             return;
         }
 
         Layout layout;
 
-        if(isMain) {
-            if(!card.isEx()) {
+        if (isMain) {
+            if (!card.isEx()) {
                 layout = mainLayout;
             } else {
                 layout = exLayout;
@@ -85,35 +91,35 @@ public class DeckBuilderView extends YGOView {
     private boolean checkCard(Card card) {
         String info = null;
 
-        if(isMain) {
-            if(!card.isEx()) {
-                if(!DeckChecker.checkMainMax(mainLayout.cards(), true)) {
-                   info = DeckChecker.ERROR_MAIN;
+        if (isMain) {
+            if (!card.isEx()) {
+                if (!DeckChecker.checkMainMax(mainLayout.cards(), true)) {
+                    info = DeckChecker.ERROR_MAIN;
                 }
             } else {
-                if(!DeckChecker.checkEx(exLayout.cards(), true)) {
+                if (!DeckChecker.checkEx(exLayout.cards(), true)) {
                     info = DeckChecker.ERROR_EX;
                 }
             }
         } else {
-            if(!DeckChecker.checkSide(sideLayout.cards(), true)) {
+            if (!DeckChecker.checkSide(sideLayout.cards(), true)) {
                 info = DeckChecker.ERROR_SIDE;
             }
         }
 
-        if(info == null) {
+        if (info == null) {
             List<Card> allCards = new ArrayList<Card>();
             allCards.addAll(mainLayout.cards());
             allCards.addAll(exLayout.cards());
             allCards.addAll(sideLayout.cards());
 
-            if(!DeckChecker.checkSingleCard(allCards, card, true)) {
+            if (!DeckChecker.checkSingleCard(allCards, card, true)) {
                 String name = Utils.getDbHelper().loadNameById(Integer.parseInt(card.getRealId()));
-                info = String.format(DeckChecker.ERROR_CARD, "[" +name + "]");
+                info = String.format(DeckChecker.ERROR_CARD, "[" + name + "]");
             }
         }
 
-        if(info != null) {
+        if (info != null) {
             Toast.makeText(Utils.getContext(), info, Toast.LENGTH_LONG).show();
         }
 
@@ -160,5 +166,30 @@ public class DeckBuilderView extends YGOView {
 
     public CardNameList getCardNameList() {
         return cardNameList;
+    }
+
+    @Override
+    public void resume() {
+        super.resume();
+        registerSearchTextEvent();
+    }
+
+    private void registerSearchTextEvent() {
+        EditText searchTextView = (EditText) Utils.getContext().findViewById(R.id.search_text);
+        searchTextView.setOnEditorActionListener(new OnSearchTextEditorActionListener());
+    }
+
+    private class OnSearchTextEditorActionListener implements TextView.OnEditorActionListener {
+
+        @Override
+        public boolean onEditorAction(TextView textView, int actionId, KeyEvent event) {
+            if (actionId == EditorInfo.IME_ACTION_DONE
+                    || actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
+                String text = textView.getText().toString();
+                cardNameList.search(text);
+            }
+
+            return false;
+        }
     }
 }
