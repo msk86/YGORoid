@@ -25,7 +25,9 @@ import java.util.List;
 
 public class DeckBuilderView extends YGOView {
 
-    private DeckGestureDetector mGestureDetector;
+    private static final int PADDING = 3;
+
+    private GestureDetector mGestureDetector;
 
     private GridLayout mainLayout;
     private GridLayout exLayout;
@@ -41,13 +43,14 @@ public class DeckBuilderView extends YGOView {
     private EditText saveAsEdit;
     private AlertDialog saveAsDialog;
     private FrameLayout frameLayout;
+    private Card currentSelectCard;
 
     public DeckBuilderView(Context context, AttributeSet attrs) {
         super(context, attrs);
         orgDeckName = null;
         currentDeckName = null;
         cardNameList = new CardNameList(this);
-        mGestureDetector = new DeckGestureDetector(new DeckGestureListener(this));
+        mGestureDetector = new GestureDetector(new DeckGestureListener(this));
         mainLayout = new GridLayout(null, Utils.deckBuilderWidth(), 3, Utils.cardSnapshotWidth(), Utils.cardSnapshotHeight());
         exLayout = new GridLayout(null, Utils.deckBuilderWidth(), 1, Utils.cardSnapshotWidth(), Utils.cardSnapshotHeight());
         sideLayout = new GridLayout(null, Utils.deckBuilderWidth(), 1, Utils.cardSnapshotWidth(), Utils.cardSnapshotHeight());
@@ -183,11 +186,26 @@ public class DeckBuilderView extends YGOView {
     protected void doDraw(Canvas canvas) {
         drawBackground(canvas);
         drawShadow(canvas);
+        drawBorder(canvas);
         drawDeck(canvas);
 
         drawVersion(canvas);
         if (Configuration.configProperties(Configuration.PROPERTY_FPS_ENABLE)) {
             drawFPS(canvas);
+        }
+    }
+
+    private void drawBorder(Canvas canvas) {
+        Paint paint = new Paint();
+        paint.setColor(Configuration.fontColor());
+        paint.setAlpha(80);
+
+        if(isMain) {
+            Utils.DrawHelper helper = new Utils.DrawHelper(0, 0);
+            helper.drawRect(canvas, new Rect(0,0,Utils.deckBuilderWidth(), mainLayout.height() + exLayout.height() + PADDING), paint);
+        } else {
+            Utils.DrawHelper helper = new Utils.DrawHelper(0, mainLayout.height() + exLayout.height() + PADDING * 3);
+            helper.drawRect(canvas, new Rect(0,0,Utils.deckBuilderWidth(), sideLayout.height()), paint);
         }
     }
 
@@ -205,20 +223,15 @@ public class DeckBuilderView extends YGOView {
     }
 
     private void drawDeck(Canvas canvas) {
-        int padding = 3;
         Utils.DrawHelper helper = new Utils.DrawHelper(0, 0);
         helper.drawDrawable(canvas, mainLayout, 0, 0);
-        helper.drawDrawable(canvas, exLayout, 0, mainLayout.height() + padding);
-        helper.drawDrawable(canvas, sideLayout, 0, mainLayout.height() + exLayout.height() + padding * 3);
+        helper.drawDrawable(canvas, exLayout, 0, mainLayout.height() + PADDING);
+        helper.drawDrawable(canvas, sideLayout, 0, mainLayout.height() + exLayout.height() + PADDING * 3);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         return mGestureDetector.onTouchEvent(event);
-    }
-
-    public CardNameList getCardNameList() {
-        return cardNameList;
     }
 
     private void changeDeck() {
@@ -372,4 +385,52 @@ public class DeckBuilderView extends YGOView {
         }
     }
 
+
+    public Card cardAt(int x, int y) {
+        if (isInMain(x, y)) {
+            return mainLayout.cardAt(x, y);
+        } else if (isInEx(x, y)) {
+            return exLayout.cardAt(x, y - mainLayout.height() - PADDING);
+        } else if (isInSide(x, y)) {
+            return sideLayout.cardAt(x, y - mainLayout.height() - exLayout.height() - PADDING * 3);
+        }
+        return null;
+    }
+    public Layout layoutAt(int x, int y) {
+        if (isInMain(x, y)) {
+            return mainLayout;
+        } else if (isInEx(x, y)) {
+            return exLayout;
+        } else if (isInSide(x, y)) {
+            return sideLayout;
+        }
+        return null;
+    }
+
+    public boolean isInMain(int x, int y) {
+        return x < mainLayout.width() && y < mainLayout.height();
+    }
+
+    public boolean isInEx(int x, int y) {
+        return x < exLayout.width() && y >= mainLayout.height() + PADDING && y < mainLayout.height() + exLayout.height() + PADDING;
+    }
+
+    public boolean isInSide(int x, int y) {
+        return x < sideLayout.width() && y >= mainLayout.height() + exLayout.height() + PADDING * 3;
+    }
+
+    public void setIsMain(boolean isMain) {
+        this.isMain = isMain;
+    }
+
+    public void select(Card card) {
+        if(card == null) {
+            return;
+        }
+        if(currentSelectCard != null) {
+            currentSelectCard.unSelect();
+        }
+        currentSelectCard = card;
+        currentSelectCard.select();
+    }
 }
