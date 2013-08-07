@@ -26,6 +26,7 @@ import android.ygo.utils.Utils;
 import android.ygo.views.YGOView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class DeckBuilderView extends YGOView {
@@ -52,6 +53,13 @@ public class DeckBuilderView extends YGOView {
         sideLayout = new GridLayout(null, Utils.deckBuilderWidth(), 1, Utils.cardSnapshotWidth(), Utils.cardSnapshotHeight());
     }
 
+    public void newDeck() {
+        mainLayout.setCards(new ArrayList<Card>());
+        exLayout.setCards(new ArrayList<Card>());
+        sideLayout.setCards(new ArrayList<Card>());
+        currentDeckName = null;
+    }
+
     public void loadDeck(String deck) {
         List<List<Card>> cards = Utils.getDbHelper().loadFromFile(deck);
         List<Card> mainCards = cards.get(0);
@@ -68,7 +76,11 @@ public class DeckBuilderView extends YGOView {
     }
 
     public void save() {
-        saveToDeck(currentDeckName);
+        if(currentDeckName != null) {
+            saveToDeck(currentDeckName);
+        } else {
+            saveAs();
+        }
     }
 
     private void saveToDeck(String deck) {
@@ -186,11 +198,19 @@ public class DeckBuilderView extends YGOView {
     private void changeDeck() {
         AlertDialog.Builder builder = new AlertDialog.Builder(Utils.getContext());
         builder.setTitle("请选择卡组");
-        final String[] decks = Utils.decks();
-        builder.setItems(decks, new DialogInterface.OnClickListener() {
+        String[] decks = Utils.decks();
+        final String[] deckList = new String[decks.length + 1];
+        deckList[0] = "新卡组...";
+        System.arraycopy(decks, 0, deckList, 1, decks.length);
+        builder.setItems(deckList, new DialogInterface.OnClickListener() {
+
             public void onClick(DialogInterface dialog, int which) {
-                String deck = decks[which];
-                loadDeck(deck);
+                if(which == 0) {
+                    newDeck();
+                } else {
+                    String deck = deckList[which];
+                    loadDeck(deck);
+                }
                 updateActionTime();
                 clearQueryText();
             }
