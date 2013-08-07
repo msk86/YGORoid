@@ -92,5 +92,7 @@ public class Const {
     public static final int MENU_FPS_TOGGLE = 0x16;
     public static final int MENU_AUTO_SHUFFLE_TOGGLE = 0x17;
 
+    public static final int MENU_DECK_BUILDER = 0x18;
+
     public static final int MENU_EXIT = 0x100;
 }

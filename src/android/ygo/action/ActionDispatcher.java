@@ -184,6 +184,9 @@ public class ActionDispatcher {
                     case Const.MENU_SIDE:
                         action = new OpenSideWindowAction(menuClick);
                         break;
+                    case Const.MENU_DECK_BUILDER:
+                        action = new DeckBuilderAction(menuClick);
+                        break;
                     case Const.MENU_GRAVITY_TOGGLE:
                         action = new ToggleAction(menuClick, Configuration.PROPERTY_GRAVITY_ENABLE);
                         break;

@@ -108,6 +108,10 @@ public abstract class YGOView extends SurfaceView implements Runnable {
         running = false;
     }
 
+    public boolean isRunning() {
+        return running;
+    }
+
     public void updateActionTime() {
         actionTime = System.currentTimeMillis();
     }

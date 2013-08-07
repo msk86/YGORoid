@@ -73,7 +73,7 @@ public class DeckBuilderView extends YGOView {
         currentDeckName = name.substring(0, name.lastIndexOf('.'));
     }
 
-    private String getCurrentDeckName() {
+    public String getCurrentDeckName() {
         if (currentDeckName == null) {
             return null;
         }
@@ -82,14 +82,13 @@ public class DeckBuilderView extends YGOView {
 
     public void loadDeck(String deck) {
         newDeck();
+        updateActionTime();
         List<List<Card>> cards = Utils.getDbHelper().loadFromFile(deck);
-        List<Card> mainCards = cards.get(0);
-        List<Card> exCards = cards.get(1);
-        List<Card> sideCards = cards.get(2);
-        mainLayout.setCards(mainCards);
-        exLayout.setCards(exCards);
-        sideLayout.setCards(sideCards);
+        mainLayout.setCards(cards.get(0));
+        exLayout.setCards(cards.get(1));
+        sideLayout.setCards(cards.get(2));
         setCurrentDeckName(deck);
+        updateActionTime();
     }
 
     public void saveAs() {
@@ -186,8 +185,8 @@ public class DeckBuilderView extends YGOView {
     protected void doDraw(Canvas canvas) {
         drawBackground(canvas);
         drawShadow(canvas);
-        drawBorder(canvas);
         drawDeck(canvas);
+        drawHighLightMask(canvas);
 
         drawVersion(canvas);
         if (Configuration.configProperties(Configuration.PROPERTY_FPS_ENABLE)) {
@@ -195,10 +194,10 @@ public class DeckBuilderView extends YGOView {
         }
     }
 
-    private void drawBorder(Canvas canvas) {
+    private void drawHighLightMask(Canvas canvas) {
         Paint paint = new Paint();
         paint.setColor(Configuration.fontColor());
-        paint.setAlpha(80);
+        paint.setAlpha(40);
 
         if(isMain) {
             Utils.DrawHelper helper = new Utils.DrawHelper(0, 0);

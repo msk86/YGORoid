@@ -48,7 +48,6 @@ public class DuelDiskView extends YGOView {
         Field f2 = duelFields.getMagicField(2);
         SpCard heaven = SpCard.createHeaven();
         f2.setItem(heaven);
-        duel.select(msk86, f1);
     }
 
     @Override

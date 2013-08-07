@@ -10,22 +10,21 @@ import android.os.IBinder;
 import android.view.*;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.ygo.core.Card;
 import android.ygo.exception.CrashHandler;
 import android.ygo.service.PersistencyService;
 import android.ygo.upgrade.UpgradeHelper;
 import android.ygo.upgrade.UpgradeMsgHandler;
 import android.ygo.utils.Utils;
+import android.ygo.views.DeckOnKeyProcessor;
 import android.ygo.views.PlayMenuProcessor;
 import android.ygo.views.PlayOnKeyProcessor;
 import android.ygo.views.YGOView;
 import android.ygo.views.deckbuilder.DeckBuilderView;
 import android.ygo.views.dueldisk.DuelDiskView;
 
-import java.util.List;
-
 public class YGOActivity extends Activity {
-    private PlayOnKeyProcessor keyProcessor;
+    private PlayOnKeyProcessor duelKeyProcessor;
+    private DeckOnKeyProcessor deckKeyProcessor;
     private PlayMenuProcessor menuProcessor;
     private View currentView;
     private DuelDiskView duelDiskView;
@@ -52,15 +51,9 @@ public class YGOActivity extends Activity {
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        duelDiskView = new DuelDiskView(this, null);
-        deckBuilderView = new DeckBuilderView(this, null);
         initWebView();
 
         showDuel();
-//        showDeckBuilder();
-
-        keyProcessor = new PlayOnKeyProcessor(duelDiskView);
-        menuProcessor = new PlayMenuProcessor(duelDiskView);
 
         startService();
 
@@ -95,16 +88,36 @@ public class YGOActivity extends Activity {
     public void showDuel() {
         super.setContentView(R.layout.duel_disk);
         duelDiskView = (DuelDiskView) findViewById(R.id.duelDiskView);
+        if(!duelDiskView.isRunning()) {
+            duelDiskView.resume();
+        }
         currentView = duelDiskView;
-        deckBuilderView.updateActionTime();
+
+        duelKeyProcessor = new PlayOnKeyProcessor(duelDiskView);
+        menuProcessor = new PlayMenuProcessor(duelDiskView);
+
+        duelDiskView.updateActionTime();
     }
 
-    public void showDeckBuilder() {
+    public void showDuelWithDeck(String deck) {
+        showDuel();
+        if(deck != null) {
+            duelDiskView.getDuel().start(deck);
+        }
+        duelDiskView.updateActionTime();
+    }
+
+    public void showDeckBuilderWithDeck(String deck) {
         super.setContentView(R.layout.deck_builder);
         deckBuilderView = (DeckBuilderView) findViewById(R.id.deck_builder);
+        if(!deckBuilderView.isRunning()) {
+            deckBuilderView.resume();
+        }
         currentView = deckBuilderView;
-        deckBuilderView.updateActionTime();
-        deckBuilderView.loadDeck("sample.ydk");
+        deckKeyProcessor = new DeckOnKeyProcessor(deckBuilderView);
+        if(deck != null) {
+            deckBuilderView.loadDeck(deck);
+        }
     }
 
     public boolean isMirror() {
@@ -144,12 +157,17 @@ public class YGOActivity extends Activity {
             if(keyCode == KeyEvent.KEYCODE_BACK) {
                 showDuel();
                 return true;
-            } else {
-                return super.onKeyDown(keyCode, event);
             }
-        } else {
-            return keyProcessor.onKey(keyCode, event);
+        } else if(currentView == duelDiskView) {
+            if(duelKeyProcessor != null) {
+                return duelKeyProcessor.onKey(keyCode, event);
+            }
+        } else if(currentView == deckBuilderView) {
+            if(deckKeyProcessor != null) {
+                return deckKeyProcessor.onKey(keyCode, event);
+            }
         }
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override
@@ -164,7 +182,10 @@ public class YGOActivity extends Activity {
     public void onResume() {
         super.onResume();
         if (currentView instanceof YGOView) {
-            ((YGOView)currentView).resume();
+            YGOView ygoView = (YGOView) currentView;
+            if(!ygoView.isRunning()) {
+                ygoView.resume();
+            }
         }
     }
 
@@ -199,7 +220,7 @@ public class YGOActivity extends Activity {
             if(service != null) {
                 if(service.getDuel() != null) {
                     duelDiskView.setDuel(service.getDuel());
-                } else {
+                } else if(duelDiskView != null){
                     service.setDuel(duelDiskView.getDuel());
                 }
             }

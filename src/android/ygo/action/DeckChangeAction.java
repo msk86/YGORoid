@@ -23,11 +23,7 @@ public class DeckChangeAction extends BaseAction {
         builder.setItems(decks, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 String deck = decks[which];
-                List<List<Card>> cards = Utils.getDbHelper().loadFromFile(deck);
-                List<Card> mainCards = cards.get(0);
-                List<Card> exCards = cards.get(1);
-                List<Card> sideCards = cards.get(2);
-                duel.start(mainCards, exCards, sideCards);
+                duel.start(deck);
                 Utils.getContext().getDuelDiskView().updateActionTime();
             }
         });

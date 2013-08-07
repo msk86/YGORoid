@@ -60,6 +60,7 @@ public class PlayMenuProcessor {
                 menu.add(Const.MENU_GROUP_MAIN, Const.MENU_RESTART, 0, "重新开始");
                 menu.add(Const.MENU_GROUP_MAIN, Const.MENU_CHANGE_DECK, 0, "更换卡组");
                 menu.add(Const.MENU_GROUP_MAIN, Const.MENU_SIDE, 0, "换副卡组");
+                menu.add(Const.MENU_GROUP_MAIN, Const.MENU_DECK_BUILDER, 0, "组卡器");
                 SubMenu toggleMenu = menu.addSubMenu(Const.MENU_GROUP_MAIN, Const.MENU_TOGGLE, 0, "开关设置");
                 toggleMenu.add(Const.MENU_GROUP_MAIN, Const.MENU_GRAVITY_TOGGLE, 0, toggleMenuTxt("重力感应", Configuration.PROPERTY_GRAVITY_ENABLE));
                 toggleMenu.add(Const.MENU_GROUP_MAIN, Const.MENU_AUTO_SHUFFLE_TOGGLE, 0, toggleMenuTxt("卡组自动切洗", Configuration.PROPERTY_AUTO_SHUFFLE_ENABLE));

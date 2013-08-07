@@ -33,11 +33,19 @@ public class Duel implements Item, Drawable {
     private Dice dice;
     private Coin coin;
 
+    private String deckName;
+
     public Duel() {
         start(null, null, null);
     }
 
-    public void start(List<Card> mainDeckCards, List<Card> exDeckCards, List<Card> sideDeckCards) {
+    public void start(String deck) {
+        List<List<Card>> lists = Utils.getDbHelper().loadFromFile(deck);
+        start(lists.get(0), lists.get(1), lists.get(2));
+        deckName = deck;
+    }
+
+    private void start(List<Card> mainDeckCards, List<Card> exDeckCards, List<Card> sideDeckCards) {
         if (mainDeckCards == null) {
             mainDeckCards = new ArrayList<Card>();
         }
@@ -64,6 +72,7 @@ public class Duel implements Item, Drawable {
         Deck deck = (Deck) duelFields.getDeckField().getItem();
         deck.shuffle();
         initHandCards();
+
     }
 
     public void restart() {
@@ -453,5 +462,9 @@ public class Duel implements Item, Drawable {
 
     public boolean isCardInfo() {
         return cardWindow != null;
+    }
+
+    public String getDeckName() {
+        return deckName;
     }
 }
