@@ -358,9 +358,11 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         String deckPath = Configuration.deckPath() + deck;
 
         try {
-            DataOutputStream dos = new DataOutputStream(new FileOutputStream(deckPath));
-            dos.writeBytes(txt.toString());
-            dos.close();
+            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(deckPath));
+            Writer out = new OutputStreamWriter(bos, "UTF-8");
+            out.write(txt.toString());
+            out.close();
+            bos.close();
             return true;
         } catch (Exception e) {
             return false;

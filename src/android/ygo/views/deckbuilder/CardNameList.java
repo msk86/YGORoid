@@ -77,6 +77,7 @@ public class CardNameList {
 
             cardNameView.setSelected(true);
             selectedCard = cardNameView.getCard();
+            deckBuilderView.select(selectedCard);
         }
     }
 }
