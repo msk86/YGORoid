@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.ygo.R;
 import android.ygo.core.Card;
+import android.ygo.core.UserDefinedCard;
 import android.ygo.utils.Utils;
 
 import java.util.List;
@@ -25,8 +26,22 @@ public class CardNameList {
 
     public void search(String text) {
         List<Card> cards = Utils.getDbHelper().queryByText(text);
+        if (!checkExactQuery(cards, text)) {
+            cards.add(new UserDefinedCard(text));
+        }
         clearList();
         addAll(cards);
+    }
+
+    private boolean checkExactQuery(List<Card> cards, String text) {
+        boolean exact = false;
+        for(Card card : cards) {
+            if (card.getName().equals(text)) {
+                exact = true;
+                break;
+            }
+        }
+        return exact;
     }
 
     private void add(Card card) {
