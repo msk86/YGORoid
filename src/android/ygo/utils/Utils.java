@@ -158,6 +158,11 @@ public class Utils {
         }
     }
 
+    public static String[] decks() {
+        File deckPath = new File(Configuration.deckPath());
+        return deckPath.list();
+    }
+
     public static String[] cardPicZips() {
         File picsDir = new File(Configuration.cardImgPath());
         String[] zips = picsDir.list(new FilenameFilter() {

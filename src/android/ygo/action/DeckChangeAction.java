@@ -19,7 +19,7 @@ public class DeckChangeAction extends BaseAction {
     public void execute() {
         AlertDialog.Builder builder = new AlertDialog.Builder(Utils.getContext());
         builder.setTitle("请选择卡组");
-        final String[] decks = listAllDecks();
+        final String[] decks = Utils.decks();
         builder.setItems(decks, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 String deck = decks[which];
@@ -32,10 +32,5 @@ public class DeckChangeAction extends BaseAction {
             }
         });
         builder.create().show();
-    }
-
-    private String[] listAllDecks() {
-        File deckPath = new File(Configuration.deckPath());
-        return deckPath.list();
     }
 }

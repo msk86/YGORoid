@@ -1,6 +1,8 @@
 package android.ygo.views.deckbuilder;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -9,6 +11,7 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,8 +40,11 @@ public class DeckBuilderView extends YGOView {
 
     private CardNameList cardNameList;
 
+    private String currentDeckName;
+
     public DeckBuilderView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        currentDeckName = null;
         cardNameList = new CardNameList(this);
         mGestureDetector = new DeckGestureDetector(new DeckGestureListener(this));
         mainLayout = new GridLayout(null, Utils.deckBuilderWidth(), 3, Utils.cardSnapshotWidth(), Utils.cardSnapshotHeight());
@@ -54,9 +60,18 @@ public class DeckBuilderView extends YGOView {
         mainLayout.setCards(mainCards);
         exLayout.setCards(exCards);
         sideLayout.setCards(sideCards);
+        currentDeckName = deck;
     }
 
-    public void saveToDeck(String deck) {
+    public void saveAs() {
+
+    }
+
+    public void save() {
+        saveToDeck(currentDeckName);
+    }
+
+    private void saveToDeck(String deck) {
         boolean saved = Utils.getDbHelper().saveToFile(deck, mainLayout.cards(), exLayout.cards(), sideLayout.cards());
         String info = "已保存[" + deck + "].";
         if (!saved) {
@@ -168,10 +183,33 @@ public class DeckBuilderView extends YGOView {
         return cardNameList;
     }
 
+    private void changeDeck() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(Utils.getContext());
+        builder.setTitle("请选择卡组");
+        final String[] decks = Utils.decks();
+        builder.setItems(decks, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                String deck = decks[which];
+                loadDeck(deck);
+                updateActionTime();
+                clearQueryText();
+            }
+        });
+        builder.create().show();
+    }
+
+
     @Override
     public void resume() {
         super.resume();
         registerSearchTextEvent();
+        registerButtonEvent();
+    }
+
+    private void clearQueryText() {
+        EditText searchTextView = (EditText) Utils.getContext().findViewById(R.id.search_text);
+        searchTextView.setText("");
+        cardNameList.clearList();
     }
 
     private void registerSearchTextEvent() {
@@ -179,8 +217,16 @@ public class DeckBuilderView extends YGOView {
         searchTextView.setOnEditorActionListener(new OnSearchTextEditorActionListener());
     }
 
-    private class OnSearchTextEditorActionListener implements TextView.OnEditorActionListener {
+    private void registerButtonEvent() {
+        Button openBtn = (Button) Utils.getContext().findViewById(R.id.open_btn);
+        openBtn.setOnClickListener(new OnButtonClickListener(OnButtonClickListener.OPEN_BTN));
+        Button saveBtn = (Button) Utils.getContext().findViewById(R.id.save_btn);
+        saveBtn.setOnClickListener(new OnButtonClickListener(OnButtonClickListener.SAVE_BTN));
+        Button saveAsBtn = (Button) Utils.getContext().findViewById(R.id.save_as_btn);
+        saveAsBtn.setOnClickListener(new OnButtonClickListener(OnButtonClickListener.SAVE_AS_BTN));
+    }
 
+    private class OnSearchTextEditorActionListener implements TextView.OnEditorActionListener {
         @Override
         public boolean onEditorAction(TextView textView, int actionId, KeyEvent event) {
             if (actionId == EditorInfo.IME_ACTION_DONE
@@ -192,4 +238,30 @@ public class DeckBuilderView extends YGOView {
             return false;
         }
     }
+
+    private class OnButtonClickListener implements OnClickListener {
+        public static final int OPEN_BTN = 0;
+        public static final int SAVE_BTN = 1;
+        public static final int SAVE_AS_BTN = 2;
+
+        private int button;
+
+        private OnButtonClickListener(int button) {
+            this.button = button;
+        }
+
+        @Override
+        public void onClick(View view) {
+            switch(button){
+                case OPEN_BTN :
+                    changeDeck();
+                    break;
+                case SAVE_BTN :
+                    break;
+                case SAVE_AS_BTN :
+                    break;
+            }
+        }
+    }
+
 }

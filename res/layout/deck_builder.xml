@@ -38,11 +38,11 @@
                     android:layout_centerHorizontal="true"
                     android:paddingBottom="6sp"
                     >
-                <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="打开"
+                <Button android:id="@+id/open_btn" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="打开"
                         android:textSize="9sp"/>
-                <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="保存"
+                <Button android:id="@+id/save_btn" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="保存"
                         android:textSize="9sp"/>
-                <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="另存"
+                <Button android:id="@+id/save_as_btn" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="另存"
                         android:textSize="9sp"/>
             </LinearLayout>
             <ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent"
