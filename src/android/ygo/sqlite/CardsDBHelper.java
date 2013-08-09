@@ -238,7 +238,6 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         } catch (Exception e) {
         }
 
-        // todo sort
         Collections.sort(cards, new Card.CardComparator());
 
         return cards;

@@ -28,9 +28,15 @@ public class CardNameList {
         LinearLayout cardList = (LinearLayout)Utils.getContext().findViewById(R.id.card_list);
         cardList.removeAllViews();
         selectedCard = null;
+        ScrollView scrollList = (ScrollView) Utils.getContext().findViewById(R.id.scroll_list);
+        scrollList.setBackgroundDrawable(null);
     }
 
     public void search(String text) {
+        if(text == null || text.length() == 0) {
+            clearList();
+            return;
+        }
         List<Card> cards = Utils.getDbHelper().queryByText(text);
         if (!checkExactQuery(cards, text)) {
             cards.add(new UserDefinedCard(text));
@@ -87,13 +93,17 @@ public class CardNameList {
 
             ScrollView scrollList = (ScrollView) Utils.getContext().findViewById(R.id.scroll_list);
 
-            scrollList.setBackgroundDrawable(getCardPicDrawable(selectedCard));
+            scrollList.setBackgroundDrawable(getCardPicDrawable(selectedCard, scrollList.getWidth(), scrollList.getHeight()));
         }
 
-        private Drawable getCardPicDrawable(Card card) {
-            Bitmap bmp = card.bmp(Utils.cardPreviewWidth(), Utils.cardPreviewHeight());
+        private Drawable getCardPicDrawable(Card card, int w, int h) {
+            Bitmap bmp = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
             Canvas canvas = new Canvas(bmp);
+            Utils.DrawHelper helper = new Utils.DrawHelper(0, 0);
+            Bitmap cardBmp = card.bmp(Utils.cardPreviewWidth(), Utils.cardPreviewHeight());
+            helper.drawBitmap(canvas, cardBmp, 0, helper.center(h, Utils.cardPreviewHeight()), new Paint());
             canvas.drawARGB(60, 0, 0, 0);
+            cardBmp.recycle();
             return new BitmapDrawable(bmp);
         }
     }
