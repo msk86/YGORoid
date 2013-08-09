@@ -217,19 +217,24 @@ public class YGOActivity extends Activity {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
             service = ((PersistencyService.MyBinder) iBinder).getService();
-            if(service != null) {
-                if(service.getDuel() != null) {
-                    duelDiskView.setDuel(service.getDuel());
-                } else if(duelDiskView != null){
-                    service.setDuel(duelDiskView.getDuel());
-                }
-            }
+            persistentDuel();
         }
 
         @Override
         public void onServiceDisconnected(ComponentName componentName) {
             service = null;
         }
+
+        private void persistentDuel() {
+            if(service != null) {
+                if(service.getDuel() != null) {
+                    duelDiskView.setDuel(service.getDuel());
+                } else {
+                    service.setDuel(duelDiskView.getDuel());
+                }
+            }
+        }
     }
+
 }
 
