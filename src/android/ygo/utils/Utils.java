@@ -96,6 +96,10 @@ public class Utils {
         return cardHeight() * 3 / 4;
     }
 
+    public static int cardPreviewHeight() {
+        return (int)(cardPreviewWidth() * 1.45);
+    }
+
     public static int cardScreenWidth() {
         return (int) (screenHeight() / 1.45);
     }
@@ -106,6 +110,10 @@ public class Utils {
 
     public static int cardSnapshotWidth() {
         return cardWidth() * 3 / 4;
+    }
+
+    public static int cardPreviewWidth() {
+        return screenWidth() / 4;
     }
 
     public static int bigCardHeight() {

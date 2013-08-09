@@ -1,10 +1,16 @@
 package android.ygo.views.deckbuilder;
 
+import android.graphics.*;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.PictureDrawable;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.ygo.R;
 import android.ygo.core.Card;
 import android.ygo.core.UserDefinedCard;
+import android.ygo.utils.Configuration;
 import android.ygo.utils.Utils;
 
 import java.util.List;
@@ -78,6 +84,17 @@ public class CardNameList {
             cardNameView.setSelected(true);
             selectedCard = cardNameView.getCard();
             deckBuilderView.select(selectedCard);
+
+            ScrollView scrollList = (ScrollView) Utils.getContext().findViewById(R.id.scroll_list);
+
+            scrollList.setBackgroundDrawable(getCardPicDrawable(selectedCard));
+        }
+
+        private Drawable getCardPicDrawable(Card card) {
+            Bitmap bmp = card.bmp(Utils.cardPreviewWidth(), Utils.cardPreviewHeight());
+            Canvas canvas = new Canvas(bmp);
+            canvas.drawARGB(60, 0, 0, 0);
+            return new BitmapDrawable(bmp);
         }
     }
 }
