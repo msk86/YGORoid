@@ -413,8 +413,55 @@ public class Card implements SelectableItem, Drawable, Bmpable {
     public static class CardComparator implements Comparator<Card> {
         @Override
         public int compare(Card card1, Card card2) {
-            // todo
-            return Integer.parseInt(card1.getId()) - Integer.parseInt(card2.getId());
+            // 怪 -> 魔 -> 陷
+            if(card1.type.getCode() != card2.type.getCode()) {
+                return card1.type.getCode() - card2.type.getCode();
+            }
+
+            // subtype 普 -> 效 -> 仪 -> 融 -> 同 -> 超; 速 -> 永 -> 装 -> 场 -> 反
+            int card1SortType = sortSubTypeCode(card1);
+            int card2SortType = sortSubTypeCode(card2);
+            if(card1SortType != card2SortType) {
+                return card1SortType - card2SortType;
+            }
+
+            // level 12 -> 1
+            if(card1.level != card2.level) {
+                return card2.level - card1.level;
+            }
+            // ATK MAX -> ?
+            if(card1.atkInt != card2.atkInt) {
+                return card2.atkInt - card1.atkInt;
+            }
+            // DEF MAX -> ?
+            if(card1.defInt != card2.defInt) {
+                return card2.defInt - card1.defInt;
+            }
+            // 地水火风光暗
+            if(card1.attrCode != card2.attrCode) {
+                return card1.attrCode - card2.attrCode;
+            }
+            // 种族
+            if(card1.raceCode != card2.raceCode) {
+                return card1.raceCode - card2.raceCode;
+            }
+            // 同名
+            if(card1.getName().equals(card2.getName())) {
+                return 0;
+            }
+            // ID
+            return Integer.parseInt(card1.getRealId()) - Integer.parseInt(card2.getRealId());
+        }
+
+        public static int sortSubTypeCode(Card card) {
+            CardSubType[] sortableSubTypes = {CardSubType.NORMAL, CardSubType.FUSION, CardSubType.RITUAL, CardSubType.SYNC, CardSubType.XYZ,
+                    CardSubType.QUICK_PLAY, CardSubType.CONTINUOUS, CardSubType.EQUIP, CardSubType.FIELD, CardSubType.COUNTER,  CardSubType.EFFECT};
+            for(CardSubType subType : sortableSubTypes) {
+                if(card.getSubTypes().contains(subType)) {
+                    return subType.getCode();
+                }
+            }
+            return 0;
         }
     }
 }

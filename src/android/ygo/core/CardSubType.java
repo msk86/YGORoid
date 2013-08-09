@@ -68,4 +68,8 @@ public enum CardSubType implements Bmpable {
     public String toString() {
         return text;
     }
+
+    public int getCode() {
+        return code;
+    }
 }

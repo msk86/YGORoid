@@ -16,7 +16,7 @@ public class CardNameView extends TextView {
         super(context);
         this.setSingleLine();
         this.setPadding(3, 3, 3, 3);
-        this.setTextSize(TypedValue.COMPLEX_UNIT_SP, 17);
+        this.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
 
         XmlResourceParser xrp = getResources().getXml(R.color.card_name_view);
         try {
