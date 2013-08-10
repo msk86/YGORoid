@@ -26,7 +26,6 @@ import java.util.List;
 public class DeckBuilderView extends YGOView {
 
     private static final int PADDING = 3;
-    public static final String TEMP_YDK = "_temp_.ydk";
 
     private GestureDetector mGestureDetector;
 
@@ -88,7 +87,7 @@ public class DeckBuilderView extends YGOView {
         mainLayout.setCards(cards.get(0));
         exLayout.setCards(cards.get(1));
         sideLayout.setCards(cards.get(2));
-        setCurrentDeckName(deck);
+        setCurrentDeckName(Utils.untempifyDeck(deck));
         updateActionTime();
     }
 
@@ -272,9 +271,12 @@ public class DeckBuilderView extends YGOView {
 
     @Override
     public void pause() {
-        saveToDeck(TEMP_YDK, false, false);
+        Utils.clearAllTempDeck();
+        saveToDeck(Utils.tempifyDeck(orgDeckName), false, false);
         super.pause();
     }
+
+
 
     private void clearQueryText() {
         EditText searchTextView = (EditText) Utils.getContext().findViewById(R.id.search_text);

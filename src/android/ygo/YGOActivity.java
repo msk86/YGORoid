@@ -58,7 +58,7 @@ public class YGOActivity extends Activity {
 
         if(savedInstanceState != null) {
             if(DUEL_STATE_DECK.equals(savedInstanceState.getString(DUEL_STATE))) {
-                showDeckBuilderWithDeck(DeckBuilderView.TEMP_YDK);
+                showDeckBuilderWithDeck(Utils.findTempDeck());
             } else {
                 showDuel();
             }

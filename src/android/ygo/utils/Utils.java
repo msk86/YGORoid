@@ -166,12 +166,50 @@ public class Utils {
         }
     }
 
+    public static String tempifyDeck(String deck) {
+        return deck + "._tmp";
+    }
+
+    public static boolean isTempDeck(String deck) {
+        return deck.endsWith("._tmp");
+    }
+
+    public static String untempifyDeck(String tempDeck) {
+        if(isTempDeck(tempDeck)) {
+            return tempDeck.substring(0, tempDeck.length() - 5);
+        }
+        return tempDeck;
+    }
+
+    public static void clearAllTempDeck() {
+        File deckPath = new File(Configuration.deckPath());
+        File[] tempDecks = deckPath.listFiles(new FilenameFilter() {
+            @Override
+            public boolean accept(File file, String name) {
+                return isTempDeck(name);
+            }
+        });
+        for(File tempDeck : tempDecks) {
+            tempDeck.delete();
+        }
+    }
+    public static String findTempDeck() {
+        File deckPath = new File(Configuration.deckPath());
+        String[] tempDecks = deckPath.list(new FilenameFilter() {
+            @Override
+            public boolean accept(File file, String name) {
+                return isTempDeck(name);
+            }
+        });
+        return tempDecks.length == 1 ? tempDecks[0] : null;
+    }
+
     public static String[] decks() {
         File deckPath = new File(Configuration.deckPath());
         return deckPath.list(new FilenameFilter() {
             @Override
             public boolean accept(File file, String name) {
-                return !name.equals("_temp_.ydk");
+                return !isTempDeck(name);
             }
         });
     }
