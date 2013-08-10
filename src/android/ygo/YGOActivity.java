@@ -39,6 +39,9 @@ public class YGOActivity extends Activity {
 
     private UpgradeMsgHandler upgradeMsgHandler;
     private UpgradeHelper upgradeHelper;
+    private static final String DUEL_STATE = "DUEL_STATE";
+    private static final String DUEL_STATE_DUEL = "DUEL_STATE_DUEL";
+    private static final String DUEL_STATE_DECK = "DUEL_STATE_DECK";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,7 +56,15 @@ public class YGOActivity extends Activity {
 
         initWebView();
 
-        showDuel();
+        if(savedInstanceState != null) {
+            if(DUEL_STATE_DECK.equals(savedInstanceState.getString(DUEL_STATE))) {
+                showDeckBuilderWithDeck(DeckBuilderView.TEMP_YDK);
+            } else {
+                showDuel();
+            }
+        } else {
+            showDuel();
+        }
 
         startService();
 
@@ -213,6 +224,17 @@ public class YGOActivity extends Activity {
         return upgradeMsgHandler;
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        if(currentView == deckBuilderView) {
+            outState.putString(DUEL_STATE, DUEL_STATE_DECK);
+        } else {
+            outState.putString(DUEL_STATE, DUEL_STATE_DUEL);
+        }
+
+        super.onSaveInstanceState(outState);
+    }
+
     private class PersistencyConnection implements ServiceConnection {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
@@ -226,7 +248,7 @@ public class YGOActivity extends Activity {
         }
 
         private void persistentDuel() {
-            if(service != null) {
+            if(service != null && duelDiskView != null) {
                 if(service.getDuel() != null) {
                     duelDiskView.setDuel(service.getDuel());
                 } else {

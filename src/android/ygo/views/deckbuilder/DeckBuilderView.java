@@ -26,6 +26,7 @@ import java.util.List;
 public class DeckBuilderView extends YGOView {
 
     private static final int PADDING = 3;
+    public static final String TEMP_YDK = "_temp_.ydk";
 
     private GestureDetector mGestureDetector;
 
@@ -110,6 +111,9 @@ public class DeckBuilderView extends YGOView {
     }
 
     private void saveToDeck(String deck, boolean autoRemove) {
+        saveToDeck(deck, autoRemove, true);
+    }
+    private void saveToDeck(String deck, boolean autoRemove, boolean showTip) {
         boolean saved = Utils.getDbHelper().saveToFile(deck, mainLayout.cards(), exLayout.cards(), sideLayout.cards());
         String info = "已保存[" + deck + "].";
         if (!saved) {
@@ -117,7 +121,9 @@ public class DeckBuilderView extends YGOView {
         } else if (autoRemove && orgDeckName != null && !orgDeckName.equals(deck)) {
             Utils.deleteDeck(orgDeckName);
         }
-        Toast.makeText(Utils.getContext(), info, Toast.LENGTH_LONG).show();
+        if(showTip) {
+            Toast.makeText(Utils.getContext(), info, Toast.LENGTH_LONG).show();
+        }
     }
 
     public void addToDeck(Card card) {
@@ -262,6 +268,12 @@ public class DeckBuilderView extends YGOView {
         super.resume();
         registerSearchTextEvent();
         registerButtonEvent();
+    }
+
+    @Override
+    public void pause() {
+        saveToDeck(TEMP_YDK, false, false);
+        super.pause();
     }
 
     private void clearQueryText() {

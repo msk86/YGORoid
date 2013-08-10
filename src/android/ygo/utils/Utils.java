@@ -168,7 +168,12 @@ public class Utils {
 
     public static String[] decks() {
         File deckPath = new File(Configuration.deckPath());
-        return deckPath.list();
+        return deckPath.list(new FilenameFilter() {
+            @Override
+            public boolean accept(File file, String name) {
+                return !name.equals("_temp_.ydk");
+            }
+        });
     }
 
     public static String[] cardPicZips() {

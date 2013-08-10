@@ -52,7 +52,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
             SQLiteDatabase database = this.getReadableDatabase();
             for (int id : ids) {
                 String name = loadNameById(database, id);
-                if(name != null) {
+                if (name != null) {
                     names.add(name);
                 }
             }
@@ -64,7 +64,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
 
     public String loadNameById(SQLiteDatabase database, int cardID) {
         String idStr = String.valueOf(cardID);
-        Cursor c = database.query("texts", new String[] {"name"},
+        Cursor c = database.query("texts", new String[]{"name"},
                 "id = ?", new String[]{idStr}, null, null, null);
         if (c.getCount() == 1) {
             c.moveToFirst();
@@ -194,7 +194,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
             card = loadById(database, cardID);
             database.close();
         } catch (Exception e) {
-            card = new Card(String.valueOf(cardID), "ID" + cardID, "数据库["+DB_PATH.replace("mnt/", "")+"]错误或不存在！", 0, 0, 0, 0, 0, 0);
+            card = new Card(String.valueOf(cardID), "ID" + cardID, "数据库[" + DB_PATH.replace("mnt/", "") + "]错误或不存在！", 0, 0, 0, 0, 0, 0);
         }
         return card;
     }
@@ -206,7 +206,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
             card = loadByName(database, cardName);
             database.close();
         } catch (Exception e) {
-            card = new Card("0", cardName, "数据库["+DB_PATH.replace("mnt/", "")+"]错误或不存在！", 0, 0, 0, 0, 0, 0);
+            card = new Card("0", cardName, "数据库[" + DB_PATH.replace("mnt/", "") + "]错误或不存在！", 0, 0, 0, 0, 0, 0);
         }
         return card;
     }
@@ -214,14 +214,14 @@ public class CardsDBHelper extends SQLiteOpenHelper {
     public List<Card> queryByText(String text) {
         List<Card> cards = new ArrayList<Card>();
 
-        if(text == null || text.length() == 0) {
+        if (text == null || text.length() == 0) {
             return cards;
         }
 
         try {
             SQLiteDatabase database = this.getReadableDatabase();
             Card card = loadByWholeName(database, text);
-            if(card != null) {
+            if (card != null) {
                 cards.add(card);
             }
 
@@ -244,19 +244,19 @@ public class CardsDBHelper extends SQLiteOpenHelper {
     }
 
     private void combineCards(List<Card> cards1, List<Card> cards2) {
-        for(Card card2 : cards2) {
+        for (Card card2 : cards2) {
             boolean newCard = true;
-            for(Card card1 : cards1) {
-                if(card2.getId().equals(card1.getId())) {
+            for (Card card1 : cards1) {
+                if (card2.getId().equals(card1.getId())) {
                     newCard = false;
                     break;
                 }
-                if(card2.isToken()) {
+                if (card2.isToken()) {
                     newCard = false;
                     break;
                 }
             }
-            if(newCard) {
+            if (newCard) {
                 cards1.add(card2);
             }
         }
@@ -286,58 +286,61 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         List<Card> mainCardList = new ArrayList<Card>();
         List<Card> exCardList = new ArrayList<Card>();
         List<Card> sideCardList = new ArrayList<Card>();
-        try {
-            // TODO 重构此处代码，不要重复再读取一次文件内容
-            String code = CharSet.detect(deckFile);
-            BufferedReader reader = new BufferedReader(new UnicodeReader(new FileInputStream(deckFile), code));
-            String line = "";
-            int cardIn = IN_MAIN;
-            do {
-                line = reader.readLine();
-                if (line.length() == 0) {
-                    continue;
-                }
-                if (line.startsWith("#") || line.startsWith("!")
-                        || line.startsWith("=") || line.startsWith("$")) {
-                    if (isMain(line)) {
-                        cardIn = IN_MAIN;
-                    } else if (isEx(line)) {
-                        cardIn = IN_EX;
-                    } else if (isSide(line)) {
-                        cardIn = IN_SIDE;
-                    }
-                } else {
-                    Card card;
-                    try {
-                        int id = Integer.parseInt(line);
-                        card = loadById(id);
-                    } catch (Exception e) {
-                        String cardName = line.replaceAll("\\[", "").replaceAll("\\]", "");
-                        if (cardName.indexOf("#") > 0) {
-                            cardName = cardName.substring(0, cardName.indexOf("#"));
-                        }
-                        if (cardName.startsWith("?")) {
-                            card = new UserDefinedCard(cardName.substring(1));
-                        } else {
-                            card = loadByName(cardName);
-                        }
-                    }
-                    switch (cardIn) {
-                        case IN_MAIN:
-                            mainCardList.add(card);
-                            break;
-                        case IN_EX:
-                            exCardList.add(card);
-                            break;
-                        case IN_SIDE:
-                            sideCardList.add(card);
-                            break;
-                    }
-                }
 
-            } while (line != null);
-            reader.close();
-        } catch (Exception e) {
+        if (deckFile.exists()) {
+            try {
+                // TODO 重构此处代码，不要重复再读取一次文件内容
+                String code = CharSet.detect(deckFile);
+                BufferedReader reader = new BufferedReader(new UnicodeReader(new FileInputStream(deckFile), code));
+                String line = "";
+                int cardIn = IN_MAIN;
+                do {
+                    line = reader.readLine();
+                    if (line.length() == 0) {
+                        continue;
+                    }
+                    if (line.startsWith("#") || line.startsWith("!")
+                            || line.startsWith("=") || line.startsWith("$")) {
+                        if (isMain(line)) {
+                            cardIn = IN_MAIN;
+                        } else if (isEx(line)) {
+                            cardIn = IN_EX;
+                        } else if (isSide(line)) {
+                            cardIn = IN_SIDE;
+                        }
+                    } else {
+                        Card card;
+                        try {
+                            int id = Integer.parseInt(line);
+                            card = loadById(id);
+                        } catch (Exception e) {
+                            String cardName = line.replaceAll("\\[", "").replaceAll("\\]", "");
+                            if (cardName.indexOf("#") > 0) {
+                                cardName = cardName.substring(0, cardName.indexOf("#"));
+                            }
+                            if (cardName.startsWith("?")) {
+                                card = new UserDefinedCard(cardName.substring(1));
+                            } else {
+                                card = loadByName(cardName);
+                            }
+                        }
+                        switch (cardIn) {
+                            case IN_MAIN:
+                                mainCardList.add(card);
+                                break;
+                            case IN_EX:
+                                exCardList.add(card);
+                                break;
+                            case IN_SIDE:
+                                sideCardList.add(card);
+                                break;
+                        }
+                    }
+
+                } while (line != null);
+                reader.close();
+            } catch (Exception e) {
+            }
         }
 
         List<List<Card>> cardsLists = new ArrayList<List<Card>>();
@@ -372,10 +375,10 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         StringBuilder txt = new StringBuilder();
         txt.append(listName).append("\r\n");
         for (Card card : cards) {
-            if(card instanceof UserDefinedCard) {
+            if (card instanceof UserDefinedCard) {
                 txt.append("?").append(card.getName());
             } else {
-                if(card.getId().equals("0")) {
+                if (card.getId().equals("0")) {
                     txt.append(card.getName());
                 } else {
                     txt.append(card.getId());
