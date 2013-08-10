@@ -90,6 +90,7 @@ public class CardNameList {
             cardNameView.setSelected(true);
             selectedCard = cardNameView.getCard();
             deckBuilderView.select(selectedCard);
+            deckBuilderView.updateActionTime();
 
             ScrollView scrollList = (ScrollView) Utils.getContext().findViewById(R.id.scroll_list);
 

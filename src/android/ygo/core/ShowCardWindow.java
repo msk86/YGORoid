@@ -11,10 +11,18 @@ import android.ygo.utils.Utils;
 
 public class ShowCardWindow implements Item, Drawable {
     Card card;
+    private int specificWidth;
 
     public ShowCardWindow(Card card) {
-        this.card = card;
+        this(card, Utils.totalWidth());
     }
+
+    public ShowCardWindow(Card card, int width) {
+        this.card = card;
+        this.specificWidth = width;
+    }
+
+
 
     @Override
     public void draw(Canvas canvas, int x, int y) {
@@ -68,7 +76,7 @@ public class ShowCardWindow implements Item, Drawable {
 
     @Override
     public int width() {
-        return Utils.totalWidth();
+        return specificWidth;
     }
 
     @Override

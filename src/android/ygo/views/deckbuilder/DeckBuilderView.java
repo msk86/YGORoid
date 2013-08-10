@@ -14,6 +14,8 @@ import android.widget.*;
 import android.ygo.R;
 import android.ygo.core.Card;
 import android.ygo.core.DeckChecker;
+import android.ygo.core.InfoWindow;
+import android.ygo.core.ShowCardWindow;
 import android.ygo.layout.GridLayout;
 import android.ygo.layout.Layout;
 import android.ygo.utils.Configuration;
@@ -45,6 +47,9 @@ public class DeckBuilderView extends YGOView {
     private FrameLayout frameLayout;
     private Card currentSelectCard;
 
+    private InfoWindow infoWindow;
+    private ShowCardWindow cardWindow;
+
     public DeckBuilderView(Context context, AttributeSet attrs) {
         super(context, attrs);
         orgDeckName = null;
@@ -55,6 +60,8 @@ public class DeckBuilderView extends YGOView {
         exLayout = new GridLayout(null, Utils.deckBuilderWidth(), 1, Utils.cardSnapshotWidth(), Utils.cardSnapshotHeight());
         sideLayout = new GridLayout(null, Utils.deckBuilderWidth(), 1, Utils.cardSnapshotWidth(), Utils.cardSnapshotHeight());
         initSaveAsDialog();
+
+        infoWindow = new InfoWindow(Utils.deckBuilderWidth());
     }
 
     public void newDeck() {
@@ -62,6 +69,8 @@ public class DeckBuilderView extends YGOView {
         exLayout.setCards(new ArrayList<Card>());
         sideLayout.setCards(new ArrayList<Card>());
         setCurrentDeckName(null);
+        infoWindow.clearInfo();
+        cardWindow = null;
     }
 
     private void setCurrentDeckName(String name) {
@@ -192,6 +201,13 @@ public class DeckBuilderView extends YGOView {
         drawShadow(canvas);
         drawDeck(canvas);
         drawHighLightMask(canvas);
+
+        Utils.DrawHelper helper = new Utils.DrawHelper(0, 0);
+        helper.drawDrawable(canvas, infoWindow, helper.center(Utils.deckBuilderWidth(), infoWindow.width()), helper.bottom(Utils.screenHeight(), infoWindow.height()));
+
+        if (cardWindow != null) {
+            helper.drawDrawable(canvas, cardWindow, 0, 0);
+        }
 
         drawVersion(canvas);
         if (Configuration.configProperties(Configuration.PROPERTY_FPS_ENABLE)) {
@@ -429,7 +445,11 @@ public class DeckBuilderView extends YGOView {
     }
 
     public boolean isInSide(int x, int y) {
-        return x < sideLayout.width() && y >= mainLayout.height() + exLayout.height() + PADDING * 3;
+        return x < sideLayout.width() && y >= mainLayout.height() + exLayout.height() + PADDING * 3 && y < Utils.screenHeight() - infoWindow.height();
+    }
+
+    public boolean isInInfo(int x, int y) {
+        return y >= Utils.screenHeight() - infoWindow.height();
     }
 
     public void setIsMain(boolean isMain) {
@@ -445,5 +465,28 @@ public class DeckBuilderView extends YGOView {
         }
         currentSelectCard = card;
         currentSelectCard.select();
+
+        infoWindow.setInfo(currentSelectCard);
+
+        if(cardWindow != null) {
+            showCard(currentSelectCard);
+        }
+    }
+
+    public InfoWindow getInfoWindow() {
+        return infoWindow;
+    }
+
+    public void setCardWindow(ShowCardWindow cardWindow) {
+        this.cardWindow = cardWindow;
+    }
+
+    public ShowCardWindow getCardWindow() {
+        return cardWindow;
+    }
+
+    public void showCard(Card card) {
+        ShowCardWindow cardWindow = new ShowCardWindow(card, Utils.deckBuilderWidth());
+        setCardWindow(cardWindow);
     }
 }

@@ -14,6 +14,16 @@ public class InfoWindow implements SelectableItem, Drawable {
     SelectableItem infoItem;
     private String info;
 
+    private int specificWidth;
+
+    public InfoWindow() {
+        this(Utils.totalWidth());
+    }
+
+    public InfoWindow(int width) {
+        specificWidth = width;
+    }
+
     public void setInfo(SelectableItem item) {
         infoItem = item;
         info = null;
@@ -81,7 +91,7 @@ public class InfoWindow implements SelectableItem, Drawable {
 
     @Override
     public int width() {
-        return Utils.totalWidth();
+        return specificWidth;
     }
 
     @Override
