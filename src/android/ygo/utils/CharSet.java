@@ -7,7 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CharSet {
-    public static final String[] CODE_NAME = {"GBK", "UTF-8", "UTF-16"};
+    public static final String[] CODE_NAME = {"UTF-8", "GBK", "UTF-16"};
 
 
     public static String detect(File file) {
