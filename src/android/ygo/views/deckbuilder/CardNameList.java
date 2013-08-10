@@ -81,11 +81,7 @@ public class CardNameList {
                 return;
             }
 
-            LinearLayout cardList = (LinearLayout)Utils.getContext().findViewById(R.id.card_list);
-            for(int i=0;i<cardList.getChildCount();i++) {
-                View cv = cardList.getChildAt(i);
-                cv.setSelected(false);
-            }
+            clearSelect();
 
             cardNameView.setSelected(true);
             selectedCard = cardNameView.getCard();
@@ -106,6 +102,14 @@ public class CardNameList {
             canvas.drawARGB(60, 0, 0, 0);
             cardBmp.recycle();
             return new BitmapDrawable(bmp);
+        }
+    }
+
+    public void clearSelect() {
+        LinearLayout cardList = (LinearLayout)Utils.getContext().findViewById(R.id.card_list);
+        for(int i=0;i<cardList.getChildCount();i++) {
+            View cv = cardList.getChildAt(i);
+            cv.setSelected(false);
         }
     }
 }
