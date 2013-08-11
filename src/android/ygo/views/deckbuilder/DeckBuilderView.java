@@ -23,6 +23,7 @@ import android.ygo.utils.Utils;
 import android.ygo.views.YGOView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DeckBuilderView extends YGOView {
@@ -341,6 +342,18 @@ public class DeckBuilderView extends YGOView {
                 }
             }
         });
+    }
+
+    public void sortAllCards() {
+        Collections.sort(mainLayout.cards(), new Card.CardComparator());
+        Collections.sort(exLayout.cards(), new Card.CardComparator());
+        Collections.sort(sideLayout.cards(), new Card.CardComparator());
+        updateActionTime();
+    }
+
+    public void shuffleAllCards() {
+        Collections.shuffle(mainLayout.cards());
+        updateActionTime();
     }
 
     private class OnSaveAsClickListener implements DialogInterface.OnClickListener {

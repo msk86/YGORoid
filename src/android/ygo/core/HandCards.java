@@ -5,6 +5,7 @@ import android.ygo.layout.LinerLayout;
 import android.ygo.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class HandCards implements Item, Drawable {
@@ -20,7 +21,7 @@ public class HandCards implements Item, Drawable {
     }
 
     public void shuffle() {
-        Utils.shuffle(cards);
+        Collections.shuffle(cards);
     }
 
     public void add(Card card) {

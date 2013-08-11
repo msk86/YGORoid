@@ -356,20 +356,6 @@ public class Utils {
         }
     }
 
-
-    public static void shuffle(List<Card> cards) {
-        Random random = new Random();
-        for (int i = 1; i < cards.size(); i++) {
-            swapCard(cards, i, random.nextInt(i));
-        }
-    }
-
-    private static void swapCard(List<Card> cards, int indexA, int indexB) {
-        Card temp = cards.get(indexA);
-        cards.set(indexA, cards.get(indexB));
-        cards.set(indexB, temp);
-    }
-
     public static int getSDK() {
         return android.os.Build.VERSION.SDK_INT;
     }

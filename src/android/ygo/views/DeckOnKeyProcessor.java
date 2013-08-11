@@ -21,13 +21,21 @@ public class DeckOnKeyProcessor {
 
     public boolean onKey(int keyCode, KeyEvent event) {
         if (view.getCardWindow() == null) {
-            if (keyCode == KeyEvent.KEYCODE_BACK) {
-                AlertDialog dialog = new AlertDialog.Builder(Utils.getContext())
-                        .setTitle("确定退出组卡，开始决斗吗？")
-                        .setPositiveButton("确定", new OnExitClickListener("OK"))
-                        .setNegativeButton("取消", new OnExitClickListener("Cancel"))
-                        .create();
-                dialog.show();
+            switch (keyCode) {
+                case KeyEvent.KEYCODE_BACK:
+                    AlertDialog dialog = new AlertDialog.Builder(Utils.getContext())
+                            .setTitle("确定退出组卡，开始决斗吗？")
+                            .setPositiveButton("确定", new OnExitClickListener("OK"))
+                            .setNegativeButton("取消", new OnExitClickListener("Cancel"))
+                            .create();
+                    dialog.show();
+                    break;
+                case KeyEvent.KEYCODE_VOLUME_UP :
+                    view.sortAllCards();
+                    break;
+                case KeyEvent.KEYCODE_VOLUME_DOWN :
+                    view.shuffleAllCards();
+                    break;
             }
         } else {
             view.setCardWindow(null);

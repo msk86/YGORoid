@@ -11,6 +11,7 @@ import android.ygo.utils.Configuration;
 import android.ygo.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class CardList implements SelectableItem, Drawable {
@@ -153,7 +154,7 @@ public class CardList implements SelectableItem, Drawable {
     }
 
     public void shuffle() {
-        Utils.shuffle(cards);
+        Collections.shuffle(cards);
     }
 
     public List<Card> getCards() {
