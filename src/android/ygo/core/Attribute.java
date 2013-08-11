@@ -4,7 +4,7 @@ public enum Attribute {
     NULL(Const.NULL, ""),
     EARTH(Const.ATTRIBUTE_EARTH, "地"),
     WATER(Const.ATTRIBUTE_WATER, "水"),
-    FIRE(Const.ATTRIBUTE_FIRE, "火"),
+    FIRE(Const.ATTRIBUTE_FIRE, "炎"),
     WIND(Const.ATTRIBUTE_WIND, "风"),
     LIGHT(Const.ATTRIBUTE_LIGHT, "光"),
     DARK(Const.ATTRIBUTE_DARK, "暗"),
