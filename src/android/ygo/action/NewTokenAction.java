@@ -2,6 +2,7 @@ package android.ygo.action;
 
 import android.ygo.core.*;
 import android.ygo.op.Operation;
+import android.ygo.utils.Utils;
 
 public class NewTokenAction extends BaseAction {
     public NewTokenAction(Operation operation) {
@@ -25,14 +26,18 @@ public class NewTokenAction extends BaseAction {
             }
         }
 
-        String tokenId = "0";
-        String tokenName = "TOKEN";
+        Card token = null;
         if(tokenParent != null && tokenParent.isTokenable()) {
-            tokenId = tokenParent.nextTokenId();
-            tokenName = tokenParent.getName() + tokenName;
+            String tokenId = tokenParent.nextTokenId();
+            token = Utils.getDbHelper().loadByIdWithNull(Integer.parseInt(tokenId));
         }
 
-        Card token = new Card(tokenId, tokenName, "TOKEN", Const.TYPE_TOKEN + Const.TYPE_MONSTER, Const.NULL, Const.NULL, 0, 0, 0);
+        if(token == null) {
+            String tokenId = "0";
+            String tokenName = "TOKEN";
+            token = new Card(tokenId, tokenName, "TOKEN", Const.TYPE_TOKEN + Const.TYPE_MONSTER, Const.NULL, Const.NULL, 0, 0, 0);
+        }
+
         token.negative();
         Field field = (Field) container;
         field.setItem(token);

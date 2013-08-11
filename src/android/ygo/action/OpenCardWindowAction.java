@@ -19,7 +19,7 @@ public class OpenCardWindowAction extends BaseAction {
             card = (Card) infoItem;
         }
 
-        if(!card.isToken()) {
+        if(!(card.isToken() && card.getId().equals("0"))) {
             ShowCardWindow cardWindow = new ShowCardWindow(card);
             duel.setCardWindow(cardWindow);
         }

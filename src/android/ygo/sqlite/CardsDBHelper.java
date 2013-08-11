@@ -90,6 +90,21 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         return card;
     }
 
+    private Card loadByIdWithNull(SQLiteDatabase database, int cardID) {
+        String idStr = String.valueOf(cardID);
+        Cursor c = database.query(QUERY_TABLES, QUERY_FIELDS,
+                "t.id = d.id and t.id = ?", new String[]{idStr}, null, null, null);
+        Card card;
+        if (c.getCount() == 1) {
+            c.moveToFirst();
+            card = createCard(c);
+        } else {
+            card = null;
+        }
+        c.close();
+        return card;
+    }
+
     private Card loadByName(SQLiteDatabase database, String cardName) {
         Card card = loadByWholeName(database, cardName);
         if (card == null) {
@@ -192,6 +207,18 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         try {
             SQLiteDatabase database = this.getReadableDatabase();
             card = loadById(database, cardID);
+            database.close();
+        } catch (Exception e) {
+            card = new Card(String.valueOf(cardID), "ID" + cardID, "数据库[" + DB_PATH.replace("mnt/", "") + "]错误或不存在！", 0, 0, 0, 0, 0, 0);
+        }
+        return card;
+    }
+
+    public Card loadByIdWithNull(int cardID) {
+        Card card;
+        try {
+            SQLiteDatabase database = this.getReadableDatabase();
+            card = loadByIdWithNull(database, cardID);
             database.close();
         } catch (Exception e) {
             card = new Card(String.valueOf(cardID), "ID" + cardID, "数据库[" + DB_PATH.replace("mnt/", "") + "]错误或不存在！", 0, 0, 0, 0, 0, 0);
