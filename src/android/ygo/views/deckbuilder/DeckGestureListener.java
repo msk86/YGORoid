@@ -48,7 +48,7 @@ public class DeckGestureListener extends GestureDetector.SimpleOnGestureListener
     public boolean onDoubleTap(MotionEvent event) {
         int x = (int) event.getX();
         int y = (int) event.getY();
-        if (view.getCardWindow() != null) {
+        if (view.getCardWindow() == null) {
             Card card = view.cardAt(x, y);
             Layout layout = view.layoutAt(x, y);
             if (layout != null && card != null) {

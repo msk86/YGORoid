@@ -93,6 +93,7 @@ public class Const {
     public static final int MENU_AUTO_SHUFFLE_TOGGLE = 0x17;
 
     public static final int MENU_DECK_BUILDER = 0x18;
+    public static final int MENU_CARD_SEARCH = 0x19;
 
     public static final int MENU_EXIT = 0x100;
 }

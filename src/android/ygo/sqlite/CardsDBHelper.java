@@ -137,7 +137,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         Card card = null;
         if (c.getCount() > 0) {
             for (int i = 1; i <= c.getCount(); i++) {
-                c.move(i);
+                c.move(1);
                 String cardName = c.getString(1);
                 if (cardName.startsWith(name) || cardName.endsWith(name)) {
                     card = createCard(c);
