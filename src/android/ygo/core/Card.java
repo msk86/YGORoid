@@ -410,6 +410,10 @@ public class Card implements SelectableItem, Drawable, Bmpable {
         return new Card(id, name, desc, typeCode, attrCode, raceCode, level, atkInt, defInt, aliasId, category);
     }
 
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
     public static class CardComparator implements Comparator<Card> {
         @Override
         public int compare(Card card1, Card card2) {
