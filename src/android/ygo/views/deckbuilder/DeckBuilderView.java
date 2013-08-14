@@ -124,7 +124,8 @@ public class DeckBuilderView extends YGOView {
     }
     private void saveToDeck(String deck, boolean autoRemove, boolean showTip) {
         boolean saved = Utils.getDbHelper().saveToFile(deck, mainLayout.cards(), exLayout.cards(), sideLayout.cards());
-        String info = "已保存[" + deck + "].";
+        String info = String.format("已保存[%s]。主卡组:%d，额外:%d，副卡组:%d。",
+                deck, mainLayout.cards().size(), exLayout.cards().size(), sideLayout.cards().size());
         if (!saved) {
             info = "保存[" + deck + "]失败.";
         } else if (autoRemove && orgDeckName != null && !orgDeckName.equals(deck)) {
