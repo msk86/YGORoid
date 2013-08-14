@@ -165,16 +165,16 @@ public class DeckBuilderView extends YGOView {
         if (isMain) {
             if (!card.isEx()) {
                 if (!DeckChecker.checkMainMax(mainLayout.cards(), true)) {
-                    info = DeckChecker.ERROR_MAIN;
+                    info = String.format(DeckChecker.ERROR_MAIN, mainLayout.cards().size());
                 }
             } else {
                 if (!DeckChecker.checkEx(exLayout.cards(), true)) {
-                    info = DeckChecker.ERROR_EX;
+                    info = String.format(DeckChecker.ERROR_EX, exLayout.cards().size());
                 }
             }
         } else {
             if (!DeckChecker.checkSide(sideLayout.cards(), true)) {
-                info = DeckChecker.ERROR_SIDE;
+                info = String.format(DeckChecker.ERROR_SIDE, sideLayout.cards().size());
             }
         }
 

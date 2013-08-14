@@ -102,11 +102,11 @@ public class Duel implements Item, Drawable {
         }
         String info = null;
         if (!DeckChecker.checkMain(mainDeckCards)) {
-            info = DeckChecker.ERROR_MAIN;
+            info = String.format(DeckChecker.ERROR_MAIN, mainDeckCards.size());
         } else if (!DeckChecker.checkEx(exDeckCards)) {
-            info = DeckChecker.ERROR_EX;
+            info = String.format(DeckChecker.ERROR_EX, exDeckCards.size());
         } else if (!DeckChecker.checkSide(sideDeckCards)) {
-            info = DeckChecker.ERROR_SIDE;
+            info = String.format(DeckChecker.ERROR_SIDE, sideDeckCards.size());
         }
         if (info != null) {
             Toast.makeText(Utils.getContext(), info, Toast.LENGTH_LONG).show();
@@ -209,10 +209,6 @@ public class Duel implements Item, Drawable {
 
     public HandCards getHandCards() {
         return handCards;
-    }
-
-    public InfoWindow getInfoWindow() {
-        return window;
     }
 
     public void unSelect() {
