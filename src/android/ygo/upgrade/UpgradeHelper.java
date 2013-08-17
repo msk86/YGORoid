@@ -38,6 +38,7 @@ public class UpgradeHelper {
 
     private String newCardsFile;
     private String newCardsUrl;
+    private String newCardsGroup;
 
     private String allResourcesUrl;
 
@@ -68,12 +69,13 @@ public class UpgradeHelper {
                 newCardsFile = getInfo("RoidNewCardFile");
                 String totalPicCount = getInfo("RoidTotalCardPics");
                 newCardsUrl = getInfo("RoidNewCardUrl");
+                newCardsGroup = getInfo("RoidNewCardGroup");
 
                 allResourcesUrl = getInfo("RoidAllResources");
 
-                if(noResource()) {
+                if (noResource()) {
                     context.getUpgradeMsgHandler().sendEmptyMessage(ALL_RESOURCES);
-                } else if(!detectFile(newCardsFile, totalPicCount)) {
+                } else if (!detectFile(newCardsFile, totalPicCount)) {
                     context.getUpgradeMsgHandler().sendEmptyMessage(NEW_CARDS);
                 }
 
@@ -93,7 +95,7 @@ public class UpgradeHelper {
     }
 
     public void alertNewCards() {
-        String title = "新卡更新[" + newCardsFile + "]，是否更新？别忘记同时更新数据库文件哦！";
+        String title = "[" + newCardsGroup + "][" + newCardsFile + "]更新，\n别忘记更新数据库文件哦！";
 
         AlertDialog dialog = new AlertDialog.Builder(Utils.getContext())
                 .setTitle(title)
@@ -192,6 +194,7 @@ public class UpgradeHelper {
     public static class OnAllResourcesClickListener implements DialogInterface.OnClickListener {
         private String button;
         private UpgradeHelper helper;
+
         private OnAllResourcesClickListener(String button, UpgradeHelper helper) {
             this.button = button;
             this.helper = helper;
@@ -208,6 +211,7 @@ public class UpgradeHelper {
     public static class OnNewCardsClickListener implements DialogInterface.OnClickListener {
         private String button;
         private UpgradeHelper helper;
+
         private OnNewCardsClickListener(String button, UpgradeHelper helper) {
             this.button = button;
             this.helper = helper;
