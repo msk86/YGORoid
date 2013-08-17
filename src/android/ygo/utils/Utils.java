@@ -8,14 +8,13 @@ import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.util.DisplayMetrics;
 import android.ygo.YGOActivity;
-import android.ygo.core.Card;
 import android.ygo.core.Drawable;
 import android.ygo.sqlite.CardsDBHelper;
 
 import java.io.File;
 import java.io.FilenameFilter;
-import java.util.List;
-import java.util.Random;
+import java.util.Arrays;
+import java.util.Comparator;
 
 public class Utils {
     private static DisplayMetrics dm;
@@ -97,7 +96,7 @@ public class Utils {
     }
 
     public static int cardPreviewHeight() {
-        return (int)(cardPreviewWidth() * 1.45);
+        return (int) (cardPreviewWidth() * 1.45);
     }
 
     public static int cardScreenWidth() {
@@ -175,7 +174,7 @@ public class Utils {
     }
 
     public static String untempifyDeck(String tempDeck) {
-        if(isTempDeck(tempDeck)) {
+        if (isTempDeck(tempDeck)) {
             return tempDeck.substring(0, tempDeck.length() - 5);
         }
         return tempDeck;
@@ -189,10 +188,11 @@ public class Utils {
                 return isTempDeck(name);
             }
         });
-        for(File tempDeck : tempDecks) {
+        for (File tempDeck : tempDecks) {
             tempDeck.delete();
         }
     }
+
     public static String findTempDeck() {
         File deckPath = new File(Configuration.deckPath());
         String[] tempDecks = deckPath.list(new FilenameFilter() {
@@ -220,6 +220,20 @@ public class Utils {
             @Override
             public boolean accept(File file, String name) {
                 return name.startsWith("pics") && name.endsWith(".zip");
+            }
+        });
+        Arrays.sort(zips, new Comparator<String>() {
+            @Override
+            public int compare(String zip1, String zip2) {
+                if (zip1.length() != zip2.length()) {
+                    return zip2.length() - zip1.length();
+                }
+                for (int i = 0; i < zip1.length(); i++) {
+                    if (zip1.charAt(i) != zip2.charAt(i)) {
+                        return zip2.charAt(i) - zip1.charAt(i);
+                    }
+                }
+                return 0;
             }
         });
         return zips;
@@ -295,7 +309,7 @@ public class Utils {
 
     public static void deleteDeck(String deckName) {
         File deckFile = new File(Configuration.deckPath() + deckName);
-        if(deckFile.isFile() && deckFile.exists()) {
+        if (deckFile.isFile() && deckFile.exists()) {
             deckFile.delete();
         }
     }
