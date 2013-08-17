@@ -3,9 +3,7 @@ package android.ygo.views.deckbuilder;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.ygo.core.Card;
-import android.ygo.core.ShowCardWindow;
 import android.ygo.layout.Layout;
-import android.ygo.utils.Utils;
 
 public class DeckGestureListener extends GestureDetector.SimpleOnGestureListener {
     DeckBuilderView view;
@@ -29,13 +27,13 @@ public class DeckGestureListener extends GestureDetector.SimpleOnGestureListener
                 if (card != null) {
                     view.showCard(card);
                 }
-            } else {
-                if (view.isInMain(x, y) || view.isInEx(x, y)) {
-                    view.setIsMain(true);
-                } else if (view.isInSide(x, y)) {
-                    view.setIsMain(false);
+            } else if(view.isInDeckBuilder(x, y)) {
+                if (view.getDeckBuilder().isInMain(x, y) || view.getDeckBuilder().isInEx(x, y)) {
+                    view.getDeckBuilder().setIsMain(true);
+                } else if (view.getDeckBuilder().isInSide(x, y)) {
+                    view.getDeckBuilder().setIsMain(false);
                 }
-                Card card = view.cardAt(x, y);
+                Card card = view.getDeckBuilder().cardAt(x, y);
 
                 view.select(card);
             }
@@ -49,8 +47,8 @@ public class DeckGestureListener extends GestureDetector.SimpleOnGestureListener
         int x = (int) event.getX();
         int y = (int) event.getY();
         if (view.getCardWindow() == null) {
-            Card card = view.cardAt(x, y);
-            Layout layout = view.layoutAt(x, y);
+            Card card = view.getDeckBuilder().cardAt(x, y);
+            Layout layout = view.getDeckBuilder().layoutAt(x, y);
             if (layout != null && card != null) {
                 layout.cards().remove(card);
             }

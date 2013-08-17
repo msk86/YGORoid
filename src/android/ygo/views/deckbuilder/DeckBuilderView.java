@@ -10,38 +10,26 @@ import android.text.InputType;
 import android.util.AttributeSet;
 import android.view.*;
 import android.view.inputmethod.EditorInfo;
-import android.widget.*;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.ygo.R;
 import android.ygo.core.Card;
-import android.ygo.core.DeckChecker;
+import android.ygo.core.DeckBuilder;
 import android.ygo.core.InfoWindow;
 import android.ygo.core.ShowCardWindow;
-import android.ygo.layout.GridLayout;
-import android.ygo.layout.Layout;
 import android.ygo.utils.Configuration;
 import android.ygo.utils.Utils;
 import android.ygo.views.YGOView;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 public class DeckBuilderView extends YGOView {
-
-    private static final int PADDING = 3;
 
     private GestureDetector mGestureDetector;
 
-    private GridLayout mainLayout;
-    private GridLayout exLayout;
-    private GridLayout sideLayout;
-
-    private boolean isMain = true;
-
     private CardNameList cardNameList;
 
-    private String orgDeckName;
-    private String currentDeckName;
+    private DeckBuilder deckBuilder;
 
     private EditText saveAsEdit;
     private AlertDialog saveAsDialog;
@@ -53,156 +41,60 @@ public class DeckBuilderView extends YGOView {
 
     public DeckBuilderView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        orgDeckName = null;
-        currentDeckName = null;
+
+        deckBuilder = new DeckBuilder();
         cardNameList = new CardNameList(this);
         mGestureDetector = new GestureDetector(new DeckGestureListener(this));
-        mainLayout = new GridLayout(null, Utils.deckBuilderWidth(), 3, Utils.cardSnapshotWidth(), Utils.cardSnapshotHeight());
-        exLayout = new GridLayout(null, Utils.deckBuilderWidth(), 1, Utils.cardSnapshotWidth(), Utils.cardSnapshotHeight());
-        sideLayout = new GridLayout(null, Utils.deckBuilderWidth(), 1, Utils.cardSnapshotWidth(), Utils.cardSnapshotHeight());
         initSaveAsDialog();
 
         infoWindow = new InfoWindow(Utils.deckBuilderWidth());
     }
 
     public void newDeck() {
-        mainLayout.setCards(new ArrayList<Card>());
-        exLayout.setCards(new ArrayList<Card>());
-        sideLayout.setCards(new ArrayList<Card>());
-        setCurrentDeckName(null);
+        deckBuilder.newDeck();
         infoWindow.clearInfo();
         cardWindow = null;
     }
 
-    private void setCurrentDeckName(String name) {
-        if (name == null) {
-            currentDeckName = null;
-            return;
-        }
-        orgDeckName = name;
-        currentDeckName = name.substring(0, name.lastIndexOf('.'));
-    }
 
-    public String getCurrentDeckName() {
-        if (currentDeckName == null) {
-            return null;
-        }
-        return currentDeckName + ".ydk";
-    }
 
     public void loadDeck(String deck) {
         newDeck();
         updateActionTime();
-        List<List<Card>> cards = Utils.getDbHelper().loadFromFile(deck);
-        mainLayout.setCards(cards.get(0));
-        exLayout.setCards(cards.get(1));
-        sideLayout.setCards(cards.get(2));
-        setCurrentDeckName(Utils.untempifyDeck(deck));
+        deckBuilder.loadDeck(deck);
         updateActionTime();
     }
 
     public void saveAs() {
-        if (currentDeckName == null) {
+        if (deckBuilder.getCurrentDeckName() == null) {
             saveAsEdit.setText("");
         } else {
-            saveAsEdit.setText(currentDeckName);
+            saveAsEdit.setText(deckBuilder.getCurrentDeckName());
         }
         saveAsDialog.show();
     }
 
     public void save() {
-        String deckName = getCurrentDeckName();
+        String deckName = deckBuilder.getFullCurrentDeckName();
         if (deckName != null) {
-            saveToDeck(deckName, true);
+            deckBuilder.saveToDeck(deckName, true, true);
         } else {
             saveAs();
         }
     }
 
-    private void saveToDeck(String deck, boolean autoRemove) {
-        saveToDeck(deck, autoRemove, true);
-    }
-    private void saveToDeck(String deck, boolean autoRemove, boolean showTip) {
-        boolean saved = Utils.getDbHelper().saveToFile(deck, mainLayout.cards(), exLayout.cards(), sideLayout.cards());
-        String info = String.format("已保存[%s]。主卡组:%d，额外:%d，副卡组:%d。",
-                deck, mainLayout.cards().size(), exLayout.cards().size(), sideLayout.cards().size());
-        if (!saved) {
-            info = "保存[" + deck + "]失败.";
-        } else if (autoRemove && orgDeckName != null && !orgDeckName.equals(deck)) {
-            Utils.deleteDeck(orgDeckName);
-        }
-        if(showTip) {
-            Toast.makeText(Utils.getContext(), info, Toast.LENGTH_LONG).show();
-        }
-    }
-
     public void addToDeck(Card card) {
-        if (!checkCard(card)) {
-            return;
-        }
-
-        Layout layout;
-
-        if (isMain) {
-            if (!card.isEx()) {
-                layout = mainLayout;
-            } else {
-                layout = exLayout;
-            }
-        } else {
-            layout = sideLayout;
-        }
-
-
-        Card clone = card.clone();
-        layout.cards().add(clone);
+        deckBuilder.addToDeck(card);
         updateActionTime();
     }
 
-    private boolean checkCard(Card card) {
-        String info = null;
 
-        if (isMain) {
-            if (!card.isEx()) {
-                if (!DeckChecker.checkMainMax(mainLayout.cards(), true)) {
-                    info = String.format(DeckChecker.ERROR_MAIN, mainLayout.cards().size());
-                }
-            } else {
-                if (!DeckChecker.checkEx(exLayout.cards(), true)) {
-                    info = String.format(DeckChecker.ERROR_EX, exLayout.cards().size());
-                }
-            }
-        } else {
-            if (!DeckChecker.checkSide(sideLayout.cards(), true)) {
-                info = String.format(DeckChecker.ERROR_SIDE, sideLayout.cards().size());
-            }
-        }
-
-        if (info == null) {
-            List<Card> allCards = new ArrayList<Card>();
-            allCards.addAll(mainLayout.cards());
-            allCards.addAll(exLayout.cards());
-            allCards.addAll(sideLayout.cards());
-
-            if (!DeckChecker.checkSingleCard(allCards, card, true)) {
-                String name = Utils.getDbHelper().loadNameById(Integer.parseInt(card.getRealId()));
-                info = String.format(DeckChecker.ERROR_CARD, "[" + name + "]");
-            }
-        }
-
-        if (info != null) {
-            Toast.makeText(Utils.getContext(), info, Toast.LENGTH_LONG).show();
-        }
-
-        return info == null;
-    }
 
     @Override
     protected void doDraw(Canvas canvas) {
         drawBackground(canvas);
         drawShadow(canvas);
-        drawDeck(canvas);
-        drawHighLightMask(canvas);
+        deckBuilder.draw(canvas, 0, 0);
 
         Utils.DrawHelper helper = new Utils.DrawHelper(0, 0);
         helper.drawDrawable(canvas, infoWindow, helper.center(Utils.deckBuilderWidth(), infoWindow.width()), helper.bottom(Utils.screenHeight(), infoWindow.height()));
@@ -217,20 +109,6 @@ public class DeckBuilderView extends YGOView {
         }
     }
 
-    private void drawHighLightMask(Canvas canvas) {
-        Paint paint = new Paint();
-        paint.setColor(Configuration.fontColor());
-        paint.setAlpha(40);
-
-        if(isMain) {
-            Utils.DrawHelper helper = new Utils.DrawHelper(0, 0);
-            helper.drawRect(canvas, new Rect(0,0,Utils.deckBuilderWidth(), mainLayout.height() + exLayout.height() + PADDING), paint);
-        } else {
-            Utils.DrawHelper helper = new Utils.DrawHelper(0, mainLayout.height() + exLayout.height() + PADDING * 3);
-            helper.drawRect(canvas, new Rect(0,0,Utils.deckBuilderWidth(), sideLayout.height()), paint);
-        }
-    }
-
     private void drawShadow(Canvas canvas) {
         Utils.DrawHelper helper = new Utils.DrawHelper(Utils.deckBuilderWidth(), 0);
         Paint paint = new Paint();
@@ -242,13 +120,6 @@ public class DeckBuilderView extends YGOView {
         paint.setColor(Configuration.fontColor());
         helper.drawLine(canvas, 0, 5, 0, Utils.screenHeight() - 5, paint);
 
-    }
-
-    private void drawDeck(Canvas canvas) {
-        Utils.DrawHelper helper = new Utils.DrawHelper(0, 0);
-        helper.drawDrawable(canvas, mainLayout, 0, 0);
-        helper.drawDrawable(canvas, exLayout, 0, mainLayout.height() + PADDING);
-        helper.drawDrawable(canvas, sideLayout, 0, mainLayout.height() + exLayout.height() + PADDING * 3);
     }
 
     @Override
@@ -289,8 +160,7 @@ public class DeckBuilderView extends YGOView {
 
     @Override
     public void pause() {
-        Utils.clearAllTempDeck();
-        saveToDeck(Utils.tempifyDeck(orgDeckName), false, false);
+        deckBuilder.saveTempDeck();
         super.pause();
     }
 
@@ -346,14 +216,12 @@ public class DeckBuilderView extends YGOView {
     }
 
     public void sortAllCards() {
-        Collections.sort(mainLayout.cards(), new Card.CardComparator());
-        Collections.sort(exLayout.cards(), new Card.CardComparator());
-        Collections.sort(sideLayout.cards(), new Card.CardComparator());
+        deckBuilder.sortAllCards();
         updateActionTime();
     }
 
     public void shuffleAllCards() {
-        Collections.shuffle(mainLayout.cards());
+        deckBuilder.shuffleAllCards();
         updateActionTime();
     }
 
@@ -368,8 +236,7 @@ public class DeckBuilderView extends YGOView {
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
             if ("OK".equals(button)) {
-                currentDeckName = saveAsEdit.getText().toString();
-                saveToDeck(getCurrentDeckName(), false);
+                deckBuilder.saveToDeck(saveAsEdit.getText().toString()+".ydk", false, true);
             }
         }
     }
@@ -379,8 +246,7 @@ public class DeckBuilderView extends YGOView {
         public boolean onEditorAction(TextView textView, int actionId, KeyEvent event) {
             if (actionId == EditorInfo.IME_ACTION_DONE
                     || actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
-                currentDeckName = textView.getText().toString();
-                saveToDeck(getCurrentDeckName(), false);
+                deckBuilder.saveToDeck(textView.getText().toString()+".ydk", false, true);
                 saveAsDialog.hide();
             }
 
@@ -428,47 +294,14 @@ public class DeckBuilderView extends YGOView {
         }
     }
 
-
-    public Card cardAt(int x, int y) {
-        if (isInMain(x, y)) {
-            return mainLayout.cardAt(x, y);
-        } else if (isInEx(x, y)) {
-            return exLayout.cardAt(x, y - mainLayout.height() - PADDING);
-        } else if (isInSide(x, y)) {
-            return sideLayout.cardAt(x, y - mainLayout.height() - exLayout.height() - PADDING * 3);
-        }
-        return null;
-    }
-    public Layout layoutAt(int x, int y) {
-        if (isInMain(x, y)) {
-            return mainLayout;
-        } else if (isInEx(x, y)) {
-            return exLayout;
-        } else if (isInSide(x, y)) {
-            return sideLayout;
-        }
-        return null;
-    }
-
-    public boolean isInMain(int x, int y) {
-        return x < mainLayout.width() && y < mainLayout.height();
-    }
-
-    public boolean isInEx(int x, int y) {
-        return x < exLayout.width() && y >= mainLayout.height() + PADDING && y < mainLayout.height() + exLayout.height() + PADDING;
-    }
-
-    public boolean isInSide(int x, int y) {
-        return x < sideLayout.width() && y >= mainLayout.height() + exLayout.height() + PADDING * 3 && y < Utils.screenHeight() - infoWindow.height();
+    public boolean isInDeckBuilder(int x, int y) {
+        return y < deckBuilder.height();
     }
 
     public boolean isInInfo(int x, int y) {
         return y >= Utils.screenHeight() - infoWindow.height();
     }
 
-    public void setIsMain(boolean isMain) {
-        this.isMain = isMain;
-    }
 
     public void select(Card card) {
         if(card == null) {
@@ -497,6 +330,10 @@ public class DeckBuilderView extends YGOView {
 
     public ShowCardWindow getCardWindow() {
         return cardWindow;
+    }
+
+    public DeckBuilder getDeckBuilder() {
+        return deckBuilder;
     }
 
     public void showCard(Card card) {
