@@ -1,11 +1,13 @@
 package android.ygo.action;
 
+import android.ygo.R;
 import android.ygo.core.*;
 import android.ygo.core.tool.Coin;
 import android.ygo.core.tool.Dice;
 import android.ygo.layout.Layout;
 import android.ygo.op.*;
 import android.ygo.utils.Configuration;
+import android.ygo.utils.Utils;
 
 public class ActionDispatcher {
 
@@ -76,7 +78,7 @@ public class ActionDispatcher {
         if (duel.isCardSelector()) {
             CardSelector cardSelector = duel.getCardSelector();
             if (item instanceof Card) {
-                if (cardSelector.getCardList().getName().equals(CardList.TEMPORARY)) {
+                if (cardSelector.getCardList().getName().equals(Utils.s(R.string.TEMPORARY))) {
                     action = new FlipAction(dblClick);
                 } else {
                     action = new CardSelectorToTempAction(dblClick);

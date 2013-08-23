@@ -2,6 +2,7 @@ package android.ygo.core;
 
 import android.graphics.Canvas;
 import android.widget.Toast;
+import android.ygo.R;
 import android.ygo.core.tool.Coin;
 import android.ygo.core.tool.Dice;
 import android.ygo.op.Drag;
@@ -102,11 +103,11 @@ public class Duel implements Item, Drawable {
         }
         String info = null;
         if (!DeckChecker.checkMain(mainDeckCards)) {
-            info = String.format(DeckChecker.ERROR_MAIN, mainDeckCards.size());
+            info = String.format(Utils.s(R.string.ERROR_MAIN), mainDeckCards.size());
         } else if (!DeckChecker.checkEx(exDeckCards)) {
-            info = String.format(DeckChecker.ERROR_EX, exDeckCards.size());
+            info = String.format(Utils.s(R.string.ERROR_EX), exDeckCards.size());
         } else if (!DeckChecker.checkSide(sideDeckCards)) {
-            info = String.format(DeckChecker.ERROR_SIDE, sideDeckCards.size());
+            info = String.format(Utils.s(R.string.ERROR_SIDE), sideDeckCards.size());
         }
         if (info != null) {
             Toast.makeText(Utils.getContext(), info, Toast.LENGTH_LONG).show();
@@ -141,7 +142,7 @@ public class Duel implements Item, Drawable {
 
         List<String> invalidCardNames = Utils.getDbHelper().loadNamesByIds(invalidCardIds);
         invalidCardNames.addAll(invalidUDCardNames);
-        String info = String.format(DeckChecker.ERROR_CARD, invalidCardNames.toString());
+        String info = String.format(Utils.s(R.string.ERROR_CARD), invalidCardNames.toString());
         Toast.makeText(Utils.getContext(), info, Toast.LENGTH_LONG).show();
         window.setInfo(info);
         return false;
@@ -151,11 +152,11 @@ public class Duel implements Item, Drawable {
         lifePoint = new LifePoint();
 
         duelFields = new DuelFields();
-        Deck deck = new Deck(CardList.DECK);
-        Deck exDeck = new Deck(CardList.EX);
-        CardList graveyard = new CardList(CardList.GRAVEYARD);
-        CardList removed = new CardList(CardList.REMOVED);
-        CardList temp = new CardList(CardList.TEMPORARY);
+        Deck deck = new Deck(Utils.s(R.string.DECK));
+        Deck exDeck = new Deck(Utils.s(R.string.EX));
+        CardList graveyard = new CardList(Utils.s(R.string.GRAVEYARD));
+        CardList removed = new CardList(Utils.s(R.string.REMOVED));
+        CardList temp = new CardList(Utils.s(R.string.TEMPORARY));
         duelFields.getDeckField().setItem(deck);
         duelFields.getExDeckField().setItem(exDeck);
         duelFields.getGraveyardField().setItem(graveyard);

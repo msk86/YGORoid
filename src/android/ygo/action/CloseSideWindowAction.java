@@ -2,6 +2,7 @@ package android.ygo.action;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.ygo.R;
 import android.ygo.core.Card;
 import android.ygo.core.Duel;
 import android.ygo.op.Operation;
@@ -17,9 +18,9 @@ public class CloseSideWindowAction extends BaseAction {
     @Override
     public void execute() {
         AlertDialog dialog = new AlertDialog.Builder(Utils.getContext())
-                .setTitle("副卡组更换完成？")
-                .setPositiveButton("确定", new OnSideClickListener(duel, "OK"))
-                .setNegativeButton("取消", new OnSideClickListener(duel, "Cancel"))
+                .setTitle(Utils.s(R.string.CHANGE_SIDE))
+                .setPositiveButton(Utils.s(R.string.CONFIRM_YES), new OnSideClickListener(duel, "OK"))
+                .setNegativeButton(Utils.s(R.string.CONFIRM_NO), new OnSideClickListener(duel, "Cancel"))
                 .create();
         dialog.show();
 

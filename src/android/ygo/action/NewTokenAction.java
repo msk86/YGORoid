@@ -1,5 +1,6 @@
 package android.ygo.action;
 
+import android.ygo.R;
 import android.ygo.core.*;
 import android.ygo.op.Operation;
 import android.ygo.utils.Utils;
@@ -21,7 +22,7 @@ public class NewTokenAction extends BaseAction {
         }
         if (selectItem instanceof CardList) {
             CardList cardList = (CardList) selectItem;
-            if(!cardList.getName().equals(CardList.DECK) && !cardList.getName().equals(CardList.EX)) {
+            if(!cardList.getName().equals(Utils.s(R.string.DECK)) && !cardList.getName().equals(Utils.s(R.string.EX))) {
                 tokenParent = cardList.topCard();
             }
         }

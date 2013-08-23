@@ -1,14 +1,17 @@
 package android.ygo.core;
 
+import android.ygo.R;
+import android.ygo.utils.Utils;
+
 public enum Attribute {
     NULL(Const.NULL, ""),
-    EARTH(Const.ATTRIBUTE_EARTH, "地"),
-    WATER(Const.ATTRIBUTE_WATER, "水"),
-    FIRE(Const.ATTRIBUTE_FIRE, "炎"),
-    WIND(Const.ATTRIBUTE_WIND, "风"),
-    LIGHT(Const.ATTRIBUTE_LIGHT, "光"),
-    DARK(Const.ATTRIBUTE_DARK, "暗"),
-    DIVINE(Const.ATTRIBUTE_DEVINE, "神");
+    EARTH(Const.ATTRIBUTE_EARTH, Utils.s(R.string.ATTRIBUTE_EARTH)),
+    WATER(Const.ATTRIBUTE_WATER, Utils.s(R.string.ATTRIBUTE_WATER)),
+    FIRE(Const.ATTRIBUTE_FIRE, Utils.s(R.string.ATTRIBUTE_FIRE)),
+    WIND(Const.ATTRIBUTE_WIND, Utils.s(R.string.ATTRIBUTE_WIND)),
+    LIGHT(Const.ATTRIBUTE_LIGHT, Utils.s(R.string.ATTRIBUTE_LIGHT)),
+    DARK(Const.ATTRIBUTE_DARK, Utils.s(R.string.ATTRIBUTE_DARK)),
+    DIVINE(Const.ATTRIBUTE_DEVINE, Utils.s(R.string.ATTRIBUTE_DEVINE));
 
     Attribute(int code, String text) {
         this.code = code;

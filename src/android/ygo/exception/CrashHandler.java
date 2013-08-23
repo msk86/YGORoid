@@ -7,7 +7,9 @@ import android.os.Build;
 import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
+import android.ygo.R;
 import android.ygo.utils.Configuration;
+import android.ygo.utils.Utils;
 
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
@@ -66,7 +68,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             @Override
             public void run() {
                 Looper.prepare();
-                Toast.makeText(context, "很抱歉,程序出现异常,即将退出.如有可能,请发送错误日志给作者.", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, Utils.s(R.string.CRASH_WARNING), Toast.LENGTH_LONG).show();
                 Looper.loop();
             }
         }.start();

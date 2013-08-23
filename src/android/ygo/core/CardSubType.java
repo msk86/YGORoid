@@ -9,27 +9,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum CardSubType implements Bmpable {
-    NORMAL(Const.TYPE_NORMAL, "通常", R.raw.card_normal_monster),
-    EFFECT(Const.TYPE_EFFECT, "效果", R.raw.card_effect_monster),
-    FUSION(Const.TYPE_FUSION, "融合", R.raw.card_fusion_monster),
-    RITUAL(Const.TYPE_RITUAL, "仪式", R.raw.card_ritual_monster),
+    NORMAL(Const.TYPE_NORMAL, Utils.s(R.string.TYPE_NORMAL), R.raw.card_normal_monster),
+    EFFECT(Const.TYPE_EFFECT, Utils.s(R.string.TYPE_EFFECT), R.raw.card_effect_monster),
+    FUSION(Const.TYPE_FUSION, Utils.s(R.string.TYPE_FUSION), R.raw.card_fusion_monster),
+    RITUAL(Const.TYPE_RITUAL, Utils.s(R.string.TYPE_RITUAL), R.raw.card_ritual_monster),
     TRAP_MONSTER(Const.TYPE_TRAPMONSTER, "", 0),
-    SPIRIT(Const.TYPE_SPIRIT, "灵魂", 0),
-    UNION(Const.TYPE_UNION, "联合", 0),
-    DUAL(Const.TYPE_DUAL, "二重", 0),
-    TUNER(Const.TYPE_TUNER, "调整", 0),
-    SYNC(Const.TYPE_SYNCHRO, "同调", R.raw.card_sync_monster),
-    TOKEN(Const.TYPE_TOKEN, "衍生物", R.raw.card_token),
+    SPIRIT(Const.TYPE_SPIRIT, Utils.s(R.string.TYPE_SPIRIT), 0),
+    UNION(Const.TYPE_UNION, Utils.s(R.string.TYPE_UNION), 0),
+    DUAL(Const.TYPE_DUAL, Utils.s(R.string.TYPE_DUAL), 0),
+    TUNER(Const.TYPE_TUNER, Utils.s(R.string.TYPE_TUNER), 0),
+    SYNC(Const.TYPE_SYNCHRO, Utils.s(R.string.TYPE_SYNCHRO), R.raw.card_sync_monster),
+    TOKEN(Const.TYPE_TOKEN, Utils.s(R.string.TYPE_TOKEN), R.raw.card_token),
 
-    QUICK_PLAY(Const.TYPE_QUICKPLAY, "速攻", 0),
-    CONTINUOUS(Const.TYPE_CONTINUOUS, "永续", 0),
-    EQUIP(Const.TYPE_EQUIP, "装备", 0),
-    FIELD(Const.TYPE_FIELD, "场地", 0),
-    COUNTER(Const.TYPE_COUNTER, "反击", 0),
+    QUICK_PLAY(Const.TYPE_QUICKPLAY, Utils.s(R.string.TYPE_QUICKPLAY), 0),
+    CONTINUOUS(Const.TYPE_CONTINUOUS, Utils.s(R.string.TYPE_CONTINUOUS), 0),
+    EQUIP(Const.TYPE_EQUIP, Utils.s(R.string.TYPE_EQUIP), 0),
+    FIELD(Const.TYPE_FIELD, Utils.s(R.string.TYPE_FIELD), 0),
+    COUNTER(Const.TYPE_COUNTER, Utils.s(R.string.TYPE_COUNTER), 0),
 
-    FLIP(Const.TYPE_FLIP, "翻转", 0),
-    TOON(Const.TYPE_TOON, "卡通", 0),
-    XYZ(Const.TYPE_XYZ, "XYZ", R.raw.card_xyz_monster);
+    FLIP(Const.TYPE_FLIP, Utils.s(R.string.TYPE_FLIP), 0),
+    TOON(Const.TYPE_TOON, Utils.s(R.string.TYPE_TOON), 0),
+    XYZ(Const.TYPE_XYZ, Utils.s(R.string.TYPE_XYZ), R.raw.card_xyz_monster);
 
 
     private int resId;

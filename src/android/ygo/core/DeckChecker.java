@@ -11,11 +11,11 @@ public class DeckChecker {
     public static final int MAX_SAME_CARD_COUNT = 3;
 
 
-    public static final String ERROR_MAIN = "主卡组卡片数量[%d]不符合要求";
-    public static final String ERROR_EX = "额外卡组卡片数量[%d]不符合要求";
-    public static final String ERROR_SIDE = "副卡组卡片数量[%d]不符合要求";
+//    public static final String ERROR_MAIN = "主卡组卡片数量[%d]不符合要求";
+//    public static final String ERROR_EX = "额外卡组卡片数量[%d]不符合要求";
+//    public static final String ERROR_SIDE = "副卡组卡片数量[%d]不符合要求";
 
-    public static final String ERROR_CARD = "卡片%s数量不符合要求";
+//    public static final String ERROR_CARD = "卡片%s数量不符合要求";
 
     public static boolean checkMainMax(List<Card> main, boolean oneMore) {
         return main.size() + (oneMore ? 1 : 0) <= MAX_MAIN_CARD_COUNT;

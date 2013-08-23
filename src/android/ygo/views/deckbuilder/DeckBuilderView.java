@@ -129,10 +129,10 @@ public class DeckBuilderView extends YGOView {
 
     private void changeDeck() {
         AlertDialog.Builder builder = new AlertDialog.Builder(Utils.getContext());
-        builder.setTitle("请选择卡组");
+        builder.setTitle(Utils.s(R.string.CHOOSE_DECK));
         String[] decks = Utils.decks();
         final String[] deckList = new String[decks.length + 1];
-        deckList[0] = "新卡组...";
+        deckList[0] = Utils.s(R.string.NEW_DECK);
         System.arraycopy(decks, 0, deckList, 1, decks.length);
         builder.setItems(deckList, new DialogInterface.OnClickListener() {
 
@@ -197,9 +197,9 @@ public class DeckBuilderView extends YGOView {
                 ViewGroup.LayoutParams.WRAP_CONTENT));
 
         saveAsDialog = new AlertDialog.Builder(Utils.getContext())
-                .setTitle("请输入卡组名")
-                .setPositiveButton("保存", new OnSaveAsClickListener("OK"))
-                .setNegativeButton("取消", new OnSaveAsClickListener("Cancel"))
+                .setTitle(Utils.s(R.string.DECK_NAME))
+                .setPositiveButton(Utils.s(R.string.CONFIRM_SAVE), new OnSaveAsClickListener("OK"))
+                .setNegativeButton(Utils.s(R.string.CONFIRM_NO), new OnSaveAsClickListener("Cancel"))
                 .create();
         saveAsDialog.setView(frameLayout);
 

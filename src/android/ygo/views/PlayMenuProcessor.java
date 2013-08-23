@@ -3,6 +3,7 @@ package android.ygo.views;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
+import android.ygo.R;
 import android.ygo.action.Action;
 import android.ygo.action.ActionDispatcher;
 import android.ygo.core.*;
@@ -35,42 +36,42 @@ public class PlayMenuProcessor {
                         card = (Card) item;
                     }
                     if (!card.isToken()) {
-                        menu.add(Const.MENU_GROUP_FIELD_CARD, Const.MENU_CARD_BACK_TO_BOTTOM_OF_DECK, 0, "回卡组底");
-                        menu.add(Const.MENU_GROUP_FIELD_CARD, Const.MENU_CARD_CLOSE_REMOVE, 0, "里侧除外");
+                        menu.add(Const.MENU_GROUP_FIELD_CARD, Const.MENU_CARD_BACK_TO_BOTTOM_OF_DECK, 0, Utils.s(R.string.MENU_CARD_BACK_TO_BOTTOM_OF_DECK));
+                        menu.add(Const.MENU_GROUP_FIELD_CARD, Const.MENU_CARD_CLOSE_REMOVE, 0, Utils.s(R.string.MENU_CARD_CLOSE_REMOVE));
                     }
                 } else if (item instanceof CardList) {
                     CardList cardList = (CardList) item;
-                    if (cardList.getName().equals(CardList.DECK)) {
-                        menu.add(Const.MENU_GROUP_DECK, Const.MENU_DECK_SHUFFLE, 0, "卡组洗切");
-                        menu.add(Const.MENU_GROUP_DECK, Const.MENU_DECK_CLOSE_REMOVE_TOP, 0, "卡组顶端里侧除外");
-                        menu.add(Const.MENU_GROUP_DECK, Const.MENU_DECK_REVERSE, 0, "卡组翻转");
-                    } else if (cardList.getName().equals(CardList.TEMPORARY)) {
-                        menu.add(Const.MENU_GROUP_DECK, Const.MENU_DECK_SHUFFLE, 0, "洗切");
+                    if (cardList.getName().equals(Utils.s(R.string.DECK))) {
+                        menu.add(Const.MENU_GROUP_DECK, Const.MENU_DECK_SHUFFLE, 0, Utils.s(R.string.MENU_DECK_SHUFFLE));
+                        menu.add(Const.MENU_GROUP_DECK, Const.MENU_DECK_CLOSE_REMOVE_TOP, 0, Utils.s(R.string.MENU_DECK_CLOSE_REMOVE_TOP));
+                        menu.add(Const.MENU_GROUP_DECK, Const.MENU_DECK_REVERSE, 0, Utils.s(R.string.MENU_DECK_REVERSE));
+                    } else if (cardList.getName().equals(Utils.s(R.string.TEMPORARY))) {
+                        menu.add(Const.MENU_GROUP_DECK, Const.MENU_DECK_SHUFFLE, 0, Utils.s(R.string.MENU_DECK_SHUFFLE));
                     }
                 }
             } else if (container instanceof HandCards) {
                 if (item instanceof Card) {
-                    menu.add(Const.MENU_GROUP_HAND_CARD, Const.MENU_CARD_BACK_TO_BOTTOM_OF_DECK, 0, "回卡组底");
-                    menu.add(Const.MENU_GROUP_HAND_CARD, Const.MENU_CARD_CLOSE_REMOVE, 0, "里侧除外");
-                    menu.add(Const.MENU_GROUP_HAND_CARD, Const.MENU_SHOW_HAND, 0, "展示手牌");
-                    menu.add(Const.MENU_GROUP_HAND_CARD, Const.MENU_HIDE_HAND, 0, "覆盖手牌");
-                    menu.add(Const.MENU_GROUP_HAND_CARD, Const.MENU_SHUFFLE_HAND, 0, "切洗手牌");
+                    menu.add(Const.MENU_GROUP_HAND_CARD, Const.MENU_CARD_BACK_TO_BOTTOM_OF_DECK, 0, Utils.s(R.string.MENU_CARD_BACK_TO_BOTTOM_OF_DECK));
+                    menu.add(Const.MENU_GROUP_HAND_CARD, Const.MENU_CARD_CLOSE_REMOVE, 0, Utils.s(R.string.MENU_CARD_CLOSE_REMOVE));
+                    menu.add(Const.MENU_GROUP_HAND_CARD, Const.MENU_SHOW_HAND, 0, Utils.s(R.string.MENU_SHOW_HAND));
+                    menu.add(Const.MENU_GROUP_HAND_CARD, Const.MENU_HIDE_HAND, 0, Utils.s(R.string.MENU_HIDE_HAND));
+                    menu.add(Const.MENU_GROUP_HAND_CARD, Const.MENU_SHUFFLE_HAND, 0, Utils.s(R.string.MENU_SHUFFLE_HAND));
                 }
             } else {
-                menu.add(Const.MENU_GROUP_MAIN, Const.MENU_RESTART, 0, "重新开始");
-                menu.add(Const.MENU_GROUP_MAIN, Const.MENU_CHANGE_DECK, 0, "更换卡组");
-                menu.add(Const.MENU_GROUP_MAIN, Const.MENU_SIDE, 0, "换副卡组");
-                menu.add(Const.MENU_GROUP_MAIN, Const.MENU_CARD_SEARCH, 0, "快速卡查");
-                menu.add(Const.MENU_GROUP_MAIN, Const.MENU_DECK_BUILDER, 0, "组卡器");
-                SubMenu toggleMenu = menu.addSubMenu(Const.MENU_GROUP_MAIN, Const.MENU_TOGGLE, 0, "开关设置");
-                toggleMenu.add(Const.MENU_GROUP_MAIN, Const.MENU_GRAVITY_TOGGLE, 0, toggleMenuTxt("重力感应", Configuration.PROPERTY_GRAVITY_ENABLE));
-                toggleMenu.add(Const.MENU_GROUP_MAIN, Const.MENU_AUTO_SHUFFLE_TOGGLE, 0, toggleMenuTxt("卡组自动切洗", Configuration.PROPERTY_AUTO_SHUFFLE_ENABLE));
-                toggleMenu.add(Const.MENU_GROUP_MAIN, Const.MENU_FPS_TOGGLE, 0, toggleMenuTxt("显示FPS", Configuration.PROPERTY_FPS_ENABLE));
+                menu.add(Const.MENU_GROUP_MAIN, Const.MENU_RESTART, 0, Utils.s(R.string.MENU_RESTART));
+                menu.add(Const.MENU_GROUP_MAIN, Const.MENU_CHANGE_DECK, 0, Utils.s(R.string.MENU_CHANGE_DECK));
+                menu.add(Const.MENU_GROUP_MAIN, Const.MENU_SIDE, 0, Utils.s(R.string.MENU_SIDE));
+                menu.add(Const.MENU_GROUP_MAIN, Const.MENU_CARD_SEARCH, 0, Utils.s(R.string.MENU_CARD_SEARCH));
+                menu.add(Const.MENU_GROUP_MAIN, Const.MENU_DECK_BUILDER, 0, Utils.s(R.string.MENU_DECK_BUILDER));
+                SubMenu toggleMenu = menu.addSubMenu(Const.MENU_GROUP_MAIN, Const.MENU_TOGGLE, 0, Utils.s(R.string.MENU_TOGGLE));
+                toggleMenu.add(Const.MENU_GROUP_MAIN, Const.MENU_GRAVITY_TOGGLE, 0, toggleMenuTxt(Utils.s(R.string.MENU_GRAVITY_TOGGLE), Configuration.PROPERTY_GRAVITY_ENABLE));
+                toggleMenu.add(Const.MENU_GROUP_MAIN, Const.MENU_AUTO_SHUFFLE_TOGGLE, 0, toggleMenuTxt(Utils.s(R.string.MENU_AUTO_SHUFFLE_TOGGLE), Configuration.PROPERTY_AUTO_SHUFFLE_ENABLE));
+                toggleMenu.add(Const.MENU_GROUP_MAIN, Const.MENU_FPS_TOGGLE, 0, toggleMenuTxt(Utils.s(R.string.MENU_FPS_TOGGLE), Configuration.PROPERTY_FPS_ENABLE));
                 if (Utils.getSDK() >= 10) {
-                    menu.add(Const.MENU_GROUP_MAIN, Const.MENU_MIRROR_DISPLAY, 0, "镜像显示");
+                    menu.add(Const.MENU_GROUP_MAIN, Const.MENU_MIRROR_DISPLAY, 0, Utils.s(R.string.MENU_MIRROR_DISPLAY));
                 }
-                menu.add(Const.MENU_GROUP_MAIN, Const.MENU_FEEDBACK, 0, "问题反馈");
-                menu.add(Const.MENU_GROUP_MAIN, Const.MENU_EXIT, 0, "退出");
+                menu.add(Const.MENU_GROUP_MAIN, Const.MENU_FEEDBACK, 0, Utils.s(R.string.MENU_FEEDBACK));
+                menu.add(Const.MENU_GROUP_MAIN, Const.MENU_EXIT, 0, Utils.s(R.string.MENU_EXIT));
             }
         }
         return true;
@@ -78,7 +79,7 @@ public class PlayMenuProcessor {
 
     private String toggleMenuTxt(String txt, String toggle) {
         boolean toggleTxt = Configuration.configProperties(toggle);
-        return txt + "(" + (toggleTxt ? "开" : "关") + ")";
+        return txt + "(" + (toggleTxt ? Utils.s(R.string.MENU_TOGGLE_ON) : Utils.s(R.string.MENU_TOGGLE_OFF)) + ")";
     }
 
     public boolean onMenuClick(MenuItem menuItem) {

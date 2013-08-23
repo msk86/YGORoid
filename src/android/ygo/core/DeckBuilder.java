@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.widget.Toast;
+import android.ygo.R;
 import android.ygo.layout.GridLayout;
 import android.ygo.utils.Configuration;
 import android.ygo.utils.Utils;
@@ -74,10 +75,10 @@ public class DeckBuilder implements Drawable {
 
     public void saveToDeck(String deckWithPostfix, boolean autoRemove, boolean showTip) {
         boolean saved = Utils.getDbHelper().saveToFile(deckWithPostfix, mainLayout.cards(), exLayout.cards(), sideLayout.cards());
-        String info = String.format("已保存[%s]。主卡组:%d，额外:%d，副卡组:%d。",
+        String info = String.format(Utils.s(R.string.SAVE_SUCCESS),
                 deckWithPostfix, mainLayout.cards().size(), exLayout.cards().size(), sideLayout.cards().size());
         if (!saved) {
-            info = "保存[" + deckWithPostfix + "]失败.";
+            info = String.format(Utils.s(R.string.SAVE_FAIL), deckWithPostfix);
         } else if (autoRemove && orgDeckName != null && !orgDeckName.equals(deckWithPostfix)) {
             Utils.deleteDeck(orgDeckName);
             orgDeckName = deckWithPostfix;
@@ -120,16 +121,16 @@ public class DeckBuilder implements Drawable {
         if (isMain) {
             if (!card.isEx()) {
                 if (!DeckChecker.checkMainMax(mainLayout.cards(), true)) {
-                    info = String.format(DeckChecker.ERROR_MAIN, mainLayout.cards().size());
+                    info = String.format(Utils.s(R.string.ERROR_MAIN), mainLayout.cards().size());
                 }
             } else {
                 if (!DeckChecker.checkEx(exLayout.cards(), true)) {
-                    info = String.format(DeckChecker.ERROR_EX, exLayout.cards().size());
+                    info = String.format(Utils.s(R.string.ERROR_EX), exLayout.cards().size());
                 }
             }
         } else {
             if (!DeckChecker.checkSide(sideLayout.cards(), true)) {
-                info = String.format(DeckChecker.ERROR_SIDE, sideLayout.cards().size());
+                info = String.format(Utils.s(R.string.ERROR_SIDE), sideLayout.cards().size());
             }
         }
 
@@ -141,7 +142,7 @@ public class DeckBuilder implements Drawable {
 
             if (!DeckChecker.checkSingleCard(allCards, card, true)) {
                 String name = Utils.getDbHelper().loadNameById(Integer.parseInt(card.getRealId()));
-                info = String.format(DeckChecker.ERROR_CARD, "[" + name + "]");
+                info = String.format(Utils.s(R.string.ERROR_CARD), "[" + name + "]");
             }
         }
 

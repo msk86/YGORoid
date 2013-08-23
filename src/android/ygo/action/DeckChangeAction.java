@@ -2,6 +2,7 @@ package android.ygo.action;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.ygo.R;
 import android.ygo.core.Card;
 import android.ygo.op.Operation;
 import android.ygo.utils.Configuration;
@@ -18,7 +19,7 @@ public class DeckChangeAction extends BaseAction {
     @Override
     public void execute() {
         AlertDialog.Builder builder = new AlertDialog.Builder(Utils.getContext());
-        builder.setTitle("请选择卡组");
+        builder.setTitle(Utils.s(R.string.CHOOSE_DECK));
         final String[] decks = Utils.decks();
         builder.setItems(decks, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {

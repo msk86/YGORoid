@@ -1,30 +1,33 @@
 package android.ygo.core;
 
+import android.ygo.R;
+import android.ygo.utils.Utils;
+
 public enum Race {
     NULL(Const.NULL, ""),
-    WARRIOR(Const.RACE_WARRIOR, "战士"),
-    SPELL_CASTER(Const.RACE_SPELLCASTER, "魔法师"),
-    FAIRY(Const.RACE_FAIRY, "天使"),
-    FIEND(Const.RACE_FIEND, "恶魔"),
-    ZOMBIE(Const.RACE_ZOMBIE, "不死"),
-    MACHINE(Const.RACE_MACHINE, "机械"),
-    AQUA(Const.RACE_AQUA, "水"),
-    PYRO(Const.RACE_PYRO, "炎"),
-    ROCK(Const.RACE_ROCK, "岩石"),
-    WIND_BEAST(Const.RACE_WINDBEAST, "鸟兽"),
-    PLANT(Const.RACE_PLANT, "植物"),
-    INSECT(Const.RACE_INSECT, "昆虫"),
-    THUNDER(Const.RACE_THUNDER, "雷"),
-    DRAGON(Const.RACE_DRAGON, "龙"),
-    BEAST(Const.RACE_BEAST, "兽"),
-    BEAST_WARRIOR(Const.RACE_BEASTWARRIOR, "兽战士"),
-    DINOSAUR(Const.RACE_DINOSAUR, "恐龙"),
-    FISH(Const.RACE_FISH, "鱼"),
-    SEA_SERPENT(Const.RACE_SEASERPENT, "海龙"),
-    REPTILE(Const.RACE_REPTILE, "爬虫"),
-    PSYCHO(Const.RACE_PSYCHO, "念动力"),
-    DEVINE(Const.RACE_DEVINE, "幻神兽"),
-    CREATOR_GOD(Const.RACE_CREATORGOD, "创世神");
+    WARRIOR(Const.RACE_WARRIOR, Utils.s(R.string.RACE_WARRIOR)),
+    SPELL_CASTER(Const.RACE_SPELLCASTER, Utils.s(R.string.RACE_SPELLCASTER)),
+    FAIRY(Const.RACE_FAIRY, Utils.s(R.string.RACE_FAIRY)),
+    FIEND(Const.RACE_FIEND, Utils.s(R.string.RACE_FIEND)),
+    ZOMBIE(Const.RACE_ZOMBIE, Utils.s(R.string.RACE_ZOMBIE)),
+    MACHINE(Const.RACE_MACHINE, Utils.s(R.string.RACE_MACHINE)),
+    AQUA(Const.RACE_AQUA, Utils.s(R.string.RACE_AQUA)),
+    PYRO(Const.RACE_PYRO, Utils.s(R.string.RACE_PYRO)),
+    ROCK(Const.RACE_ROCK, Utils.s(R.string.RACE_ROCK)),
+    WIND_BEAST(Const.RACE_WINDBEAST, Utils.s(R.string.RACE_WINDBEAST)),
+    PLANT(Const.RACE_PLANT, Utils.s(R.string.RACE_PLANT)),
+    INSECT(Const.RACE_INSECT, Utils.s(R.string.RACE_INSECT)),
+    THUNDER(Const.RACE_THUNDER, Utils.s(R.string.RACE_THUNDER)),
+    DRAGON(Const.RACE_DRAGON, Utils.s(R.string.RACE_DRAGON)),
+    BEAST(Const.RACE_BEAST, Utils.s(R.string.RACE_BEAST)),
+    BEAST_WARRIOR(Const.RACE_BEASTWARRIOR, Utils.s(R.string.RACE_BEASTWARRIOR)),
+    DINOSAUR(Const.RACE_DINOSAUR, Utils.s(R.string.RACE_DINOSAUR)),
+    FISH(Const.RACE_FISH, Utils.s(R.string.RACE_FISH)),
+    SEA_SERPENT(Const.RACE_SEASERPENT, Utils.s(R.string.RACE_SEASERPENT)),
+    REPTILE(Const.RACE_REPTILE, Utils.s(R.string.RACE_REPTILE)),
+    PSYCHO(Const.RACE_PSYCHO, Utils.s(R.string.RACE_PSYCHO)),
+    DEVINE(Const.RACE_DEVINE, Utils.s(R.string.RACE_DEVINE)),
+    CREATOR_GOD(Const.RACE_CREATORGOD, Utils.s(R.string.RACE_CREATORGOD));
 
     Race(int code, String text) {
         this.code = code;

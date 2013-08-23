@@ -3,6 +3,7 @@ package android.ygo.views;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.view.KeyEvent;
+import android.ygo.R;
 import android.ygo.utils.Utils;
 import android.ygo.views.deckbuilder.DeckBuilderView;
 
@@ -18,9 +19,9 @@ public class DeckOnKeyProcessor {
             switch (keyCode) {
                 case KeyEvent.KEYCODE_BACK:
                     AlertDialog dialog = new AlertDialog.Builder(Utils.getContext())
-                            .setTitle("确定退出组卡，开始决斗吗？")
-                            .setPositiveButton("确定", new OnExitClickListener("OK"))
-                            .setNegativeButton("取消", new OnExitClickListener("Cancel"))
+                            .setTitle(Utils.s(R.string.QUIT_DECK_BUILDER))
+                            .setPositiveButton(Utils.s(R.string.CONFIRM_YES), new OnExitClickListener("OK"))
+                            .setNegativeButton(Utils.s(R.string.CONFIRM_NO), new OnExitClickListener("Cancel"))
                             .create();
                     dialog.show();
                     break;

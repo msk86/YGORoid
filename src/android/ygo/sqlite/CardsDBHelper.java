@@ -4,11 +4,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.ygo.R;
 import android.ygo.core.Card;
 import android.ygo.core.UserDefinedCard;
 import android.ygo.utils.CharSet;
 import android.ygo.utils.Configuration;
 import android.ygo.utils.UnicodeReader;
+import android.ygo.utils.Utils;
 
 import java.io.*;
 import java.util.*;
@@ -84,7 +86,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
             c.moveToFirst();
             card = createCard(c);
         } else {
-            card = new Card(idStr, "ID" + idStr, "卡片不存在！您可能需要更新数据库文件！", 0, 0, 0, 0, 0, 0);
+            card = new Card(idStr, "ID" + idStr, Utils.s(R.string.CARD_NOT_EXIST), 0, 0, 0, 0, 0, 0);
         }
         c.close();
         return card;
@@ -114,7 +116,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
             card = fuzzyLoadByWord(database, cardName);
         }
         if (card == null) {
-            card = new Card("0", cardName, "卡片不存在！您可能需要更新数据库文件！", 0, 0, 0, 0, 0, 0);
+            card = new Card("0", cardName, Utils.s(R.string.CARD_NOT_EXIST), 0, 0, 0, 0, 0, 0);
         }
         return card;
     }
@@ -209,7 +211,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
             card = loadById(database, cardID);
             database.close();
         } catch (Exception e) {
-            card = new Card(String.valueOf(cardID), "ID" + cardID, "数据库[" + DB_PATH.replace("mnt/", "") + "]错误或不存在！", 0, 0, 0, 0, 0, 0);
+            card = new Card(String.valueOf(cardID), "ID" + cardID, String.format(Utils.s(R.string.DB_NOT_EXIST), DB_PATH.replace("mnt/", "")), 0, 0, 0, 0, 0, 0);
         }
         return card;
     }
@@ -221,7 +223,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
             card = loadByIdWithNull(database, cardID);
             database.close();
         } catch (Exception e) {
-            card = new Card(String.valueOf(cardID), "ID" + cardID, "数据库[" + DB_PATH.replace("mnt/", "") + "]错误或不存在！", 0, 0, 0, 0, 0, 0);
+            card = new Card(String.valueOf(cardID), "ID" + cardID, String.format(Utils.s(R.string.DB_NOT_EXIST), DB_PATH.replace("mnt/", "")), 0, 0, 0, 0, 0, 0);
         }
         return card;
     }
@@ -233,7 +235,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
             card = loadByName(database, cardName);
             database.close();
         } catch (Exception e) {
-            card = new Card("0", cardName, "数据库[" + DB_PATH.replace("mnt/", "") + "]错误或不存在！", 0, 0, 0, 0, 0, 0);
+            card = new Card("0", cardName, String.format(Utils.s(R.string.DB_NOT_EXIST), DB_PATH.replace("mnt/", "")), 0, 0, 0, 0, 0, 0);
         }
         return card;
     }

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.ygo.R;
 import android.ygo.YGOActivity;
 import android.ygo.utils.Utils;
 import org.apache.http.HttpResponse;
@@ -84,34 +85,34 @@ public class UpgradeHelper {
     }
 
     public void alertUpgrade() {
-        String title = "发现新版本程序[V" + newVersion.ver + "]，是否更新？";
+        String title = String.format(Utils.s(R.string.NEW_VERSION), newVersion.ver);
         AlertDialog dialog = new AlertDialog.Builder(Utils.getContext())
                 .setTitle(title)
                 .setMessage(upgradeTip)
-                .setPositiveButton("确定", new OnUpgradeClickListener("OK", this))
-                .setNegativeButton("取消", new OnUpgradeClickListener("Cancel", this))
+                .setPositiveButton(Utils.s(R.string.CONFIRM_YES), new OnUpgradeClickListener("OK", this))
+                .setNegativeButton(Utils.s(R.string.CONFIRM_NO), new OnUpgradeClickListener("Cancel", this))
                 .create();
         dialog.show();
     }
 
     public void alertNewCards() {
-        String title = "[" + newCardsGroup + "][" + newCardsFile + "]更新，\n别忘记更新数据库文件哦！";
+        String title = String.format(Utils.s(R.string.NEW_CARDS), newCardsGroup, newCardsFile);
 
         AlertDialog dialog = new AlertDialog.Builder(Utils.getContext())
                 .setTitle(title)
-                .setPositiveButton("确定", new OnNewCardsClickListener("OK", this))
-                .setNegativeButton("取消", new OnNewCardsClickListener("Cancel", this))
+                .setPositiveButton(Utils.s(R.string.CONFIRM_YES), new OnNewCardsClickListener("OK", this))
+                .setNegativeButton(Utils.s(R.string.CONFIRM_NO), new OnNewCardsClickListener("Cancel", this))
                 .create();
         dialog.show();
     }
 
     public void alertAllResources() {
-        String title = "还没有下载图片资源文件，是否现在下载？";
+        String title = Utils.s(R.string.ALL_RESOURCE);
 
         AlertDialog dialog = new AlertDialog.Builder(Utils.getContext())
                 .setTitle(title)
-                .setPositiveButton("确定", new OnAllResourcesClickListener("OK", this))
-                .setNegativeButton("取消", new OnAllResourcesClickListener("Cancel", this))
+                .setPositiveButton(Utils.s(R.string.CONFIRM_YES), new OnAllResourcesClickListener("OK", this))
+                .setNegativeButton(Utils.s(R.string.CONFIRM_NO), new OnAllResourcesClickListener("Cancel", this))
                 .create();
         dialog.show();
     }

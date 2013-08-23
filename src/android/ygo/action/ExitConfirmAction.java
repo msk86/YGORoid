@@ -2,6 +2,7 @@ package android.ygo.action;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.ygo.R;
 import android.ygo.op.Operation;
 import android.ygo.utils.Utils;
 
@@ -13,9 +14,9 @@ public class ExitConfirmAction extends BaseAction {
     @Override
     public void execute() {
         AlertDialog dialog = new AlertDialog.Builder(Utils.getContext())
-                .setTitle("确定要退出程序吗？")
-                .setPositiveButton("确定", new OnExitClickListener("OK"))
-                .setNegativeButton("取消", new OnExitClickListener("Cancel"))
+                .setTitle(Utils.s(R.string.QUIT))
+                .setPositiveButton(Utils.s(R.string.CONFIRM_YES), new OnExitClickListener("OK"))
+                .setNegativeButton(Utils.s(R.string.CONFIRM_NO), new OnExitClickListener("Cancel"))
                 .create();
         dialog.show();
     }

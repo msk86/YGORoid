@@ -1,7 +1,9 @@
 package android.ygo.action;
 
+import android.ygo.R;
 import android.ygo.core.*;
 import android.ygo.op.Operation;
+import android.ygo.utils.Utils;
 
 public class OpenCardSelectorAction extends BaseAction {
     public OpenCardSelectorAction(Operation operation) {
@@ -30,8 +32,8 @@ public class OpenCardSelectorAction extends BaseAction {
             return;
         }
 
-        if (list.getName().equals(CardList.DECK) ||
-                list.getName().equals(CardList.EX)) {
+        if (list.getName().equals(Utils.s(R.string.DECK)) ||
+                list.getName().equals(Utils.s(R.string.EX))) {
             list.openAll();
         }
 

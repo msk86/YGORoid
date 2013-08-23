@@ -7,6 +7,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.ygo.R;
 import android.ygo.core.Card;
 import android.ygo.core.ShowCardWindow;
 import android.ygo.op.Operation;
@@ -40,9 +41,9 @@ public class CardSearchAction extends BaseAction {
                 ViewGroup.LayoutParams.WRAP_CONTENT));
 
         dialog = new AlertDialog.Builder(Utils.getContext())
-                .setTitle("请输入卡名")
-                .setPositiveButton("确定", new OnCardSearchClickListener("OK"))
-                .setNegativeButton("取消", new OnCardSearchClickListener("Cancel"))
+                .setTitle(Utils.s(R.string.CARD_NAME))
+                .setPositiveButton(Utils.s(R.string.CONFIRM_YES), new OnCardSearchClickListener("OK"))
+                .setNegativeButton(Utils.s(R.string.CONFIRM_NO), new OnCardSearchClickListener("Cancel"))
                 .create();
         dialog.setView(layout);
     }

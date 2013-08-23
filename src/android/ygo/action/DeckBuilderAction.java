@@ -2,6 +2,7 @@ package android.ygo.action;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.ygo.R;
 import android.ygo.op.Operation;
 import android.ygo.utils.Utils;
 
@@ -14,9 +15,9 @@ public class DeckBuilderAction extends BaseAction {
     public void execute() {
         if (duel.getDeckName() != null) {
             AlertDialog dialog = new AlertDialog.Builder(Utils.getContext())
-                    .setTitle("放弃决斗开始组卡？")
-                    .setPositiveButton("确定", new OnDeckBuilderClickListener("OK"))
-                    .setNegativeButton("取消", new OnDeckBuilderClickListener("Cancel"))
+                    .setTitle(Utils.s(R.string.DECK_BUILDER))
+                    .setPositiveButton(Utils.s(R.string.CONFIRM_YES), new OnDeckBuilderClickListener("OK"))
+                    .setNegativeButton(Utils.s(R.string.CONFIRM_NO), new OnDeckBuilderClickListener("Cancel"))
                     .create();
             dialog.show();
         } else {

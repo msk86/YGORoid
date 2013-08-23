@@ -15,11 +15,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class CardList implements SelectableItem, Drawable {
-    public static final String DECK = "卡组";
-    public static final String EX = "额外";
-    public static final String GRAVEYARD = "墓地";
-    public static final String REMOVED = "除外";
-    public static final String TEMPORARY = "临时";
 
     private boolean selected = false;
 
