@@ -9,7 +9,7 @@
     <string name="MENU_CARD_BACK_TO_BOTTOM_OF_DECK">回卡组底</string>
     <string name="MENU_CARD_CLOSE_REMOVE">里侧除外</string>
     <string name="MENU_DECK_SHUFFLE">洗切</string>
-    <string name="MENU_DECK_CLOSE_REMOVE_TOP">卡组顶端里侧除外</string>
+    <string name="MENU_DECK_CLOSE_REMOVE_TOP">顶牌里侧除外</string>
     <string name="MENU_DECK_REVERSE">卡组翻转</string>
     <string name="MENU_SHOW_HAND">展示手牌</string>
     <string name="MENU_HIDE_HAND">覆盖手牌</string>
