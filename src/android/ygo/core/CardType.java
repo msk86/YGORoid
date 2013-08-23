@@ -7,9 +7,9 @@ import android.ygo.utils.Utils;
 
 public enum CardType implements Bmpable {
     NULL(0, "", R.raw.card_unknown),
-    MONSTER(Const.TYPE_MONSTER, "怪兽", 0),
-    SPELL(Const.TYPE_SPELL, "魔法", R.raw.card_magic),
-    TRAP(Const.TYPE_TRAP, "陷阱", R.raw.card_trap);
+    MONSTER(Const.TYPE_MONSTER, Utils.s(R.string.TYPE_MONSTER), 0),
+    SPELL(Const.TYPE_SPELL, Utils.s(R.string.TYPE_SPELL), R.raw.card_spell),
+    TRAP(Const.TYPE_TRAP, Utils.s(R.string.TYPE_TRAP), R.raw.card_trap);
 
     private int code;
     private String text;

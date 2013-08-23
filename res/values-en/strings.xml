@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">YGORoid</string>
+    <string name="tips">
+        https://www.evernote.com/shard/s315/sh/a80aa577-7181-4fc6-91b6-d32a2f8d770f/41672f1448fc7e3507417322ae48481a
+    </string>
+    <string name="feedback">https://jinshuju.net/f/V62e4g</string>
+
+    <string name="MENU_CARD_BACK_TO_BOTTOM_OF_DECK">To Deck Bottom</string>
+    <string name="MENU_CARD_CLOSE_REMOVE">Face-Down Banish</string>
+    <string name="MENU_DECK_SHUFFLE">Shuffle</string>
+    <string name="MENU_DECK_CLOSE_REMOVE_TOP">Face-Down Banish the Top</string>
+    <string name="MENU_DECK_REVERSE">Flip Deck</string>
+    <string name="MENU_SHOW_HAND">Show All Hand</string>
+    <string name="MENU_HIDE_HAND">Set All Hand</string>
+    <string name="MENU_SHUFFLE_HAND">Shuffle Hand</string>
+    <string name="MENU_RESTART">Restart</string>
+    <string name="MENU_CHANGE_DECK">Change Deck</string>
+    <string name="MENU_SIDE">Change Side</string>
+    <string name="MENU_CARD_SEARCH">Card Searcher</string>
+    <string name="MENU_DECK_BUILDER">Deck Builder</string>
+    <string name="MENU_TOGGLE">Feature Toggle</string>
+    <string name="MENU_GRAVITY_TOGGLE">Gravity</string>
+    <string name="MENU_AUTO_SHUFFLE_TOGGLE">Deck Auto Shuffle</string>
+    <string name="MENU_FPS_TOGGLE">Show FPS</string>
+    <string name="MENU_MIRROR_DISPLAY">Mirror-Display</string>
+    <string name="MENU_FEEDBACK">Feedback</string>
+    <string name="MENU_EXIT">Quit</string>
+    <string name="MENU_TOGGLE_ON">On</string>
+    <string name="MENU_TOGGLE_OFF">Off</string>
+
+    <string name="ATTRIBUTE_EARTH">Earth</string>
+    <string name="ATTRIBUTE_WATER">Water</string>
+    <string name="ATTRIBUTE_FIRE">Fire</string>
+    <string name="ATTRIBUTE_WIND">Wind</string>
+    <string name="ATTRIBUTE_LIGHT">Light</string>
+    <string name="ATTRIBUTE_DARK">Dark</string>
+    <string name="ATTRIBUTE_DEVINE">Devine</string>
+
+    <string name="DECK">DECK</string>
+    <string name="EX">EXTRA</string>
+    <string name="GRAVEYARD">GRAVEYARD</string>
+    <string name="REMOVED">BANISHED</string>
+    <string name="TEMPORARY">TEMPORARY</string>
+
+    <string name="TYPE_NORMAL">Normal</string>
+    <string name="TYPE_EFFECT">Effect</string>
+    <string name="TYPE_FUSION">Fusion</string>
+    <string name="TYPE_RITUAL">Ritual</string>
+    <string name="TYPE_SPIRIT">Sprite</string>
+    <string name="TYPE_UNION">Union</string>
+    <string name="TYPE_DUAL">Dual</string>
+    <string name="TYPE_TUNER">Tuner</string>
+    <string name="TYPE_SYNCHRO">Synchro</string>
+    <string name="TYPE_TOKEN">Token</string>
+    <string name="TYPE_QUICKPLAY">Quick-Play</string>
+    <string name="TYPE_CONTINUOUS">Continuous</string>
+    <string name="TYPE_EQUIP">Equip</string>
+    <string name="TYPE_FIELD">Field</string>
+    <string name="TYPE_COUNTER">Counter</string>
+    <string name="TYPE_FLIP">Flip</string>
+    <string name="TYPE_TOON">Toon</string>
+    <string name="TYPE_XYZ">XYZ</string>
+
+    <string name="SAVE_SUCCESS" formatted="false">[%s] saved. Main:%d, Extra:%d, side:%d.</string>
+    <string name="SAVE_FAIL" formatted="false">Fail to save [%s].</string>
+
+    <string name="ERROR_MAIN" formatted="false">Number of cards in main [%d] doesn\'t pass the check.</string>
+    <string name="ERROR_EX" formatted="false">Number of cards in extra [%d] doesn\'t pass the check.</string>
+    <string name="ERROR_SIDE" formatted="false">Number of cards in side [%d] doesn\'t pass the check.</string>
+    <string name="ERROR_CARD" formatted="false">Number of cards %s doesn\'t pass the check.</string>
+
+    <string name="RACE_WARRIOR">Warrior</string>
+    <string name="RACE_SPELLCASTER">SpellCaster</string>
+    <string name="RACE_FAIRY">Fairy</string>
+    <string name="RACE_FIEND">Fiend</string>
+    <string name="RACE_ZOMBIE">Zombie</string>
+    <string name="RACE_MACHINE">Machine</string>
+    <string name="RACE_AQUA">Aqua</string>
+    <string name="RACE_PYRO">Pyro</string>
+    <string name="RACE_ROCK">Rock</string>
+    <string name="RACE_WINDBEAST">WindBeast</string>
+    <string name="RACE_PLANT">Plant</string>
+    <string name="RACE_INSECT">Insect</string>
+    <string name="RACE_THUNDER">thunder</string>
+    <string name="RACE_DRAGON">Dragon</string>
+    <string name="RACE_BEAST">Beast</string>
+    <string name="RACE_BEASTWARRIOR">BeastWarrior</string>
+    <string name="RACE_DINOSAUR">Dinosaur</string>
+    <string name="RACE_FISH">Fish</string>
+    <string name="RACE_SEASERPENT">SeaSerpent</string>
+    <string name="RACE_REPTILE">Reptile</string>
+    <string name="RACE_PSYCHO">Psycho</string>
+    <string name="RACE_DEVINE">Devine</string>
+    <string name="RACE_CREATORGOD">CreatorGod</string>
+
+    <string name="TYPE_MONSTER">Monster</string>
+    <string name="TYPE_SPELL">Spell</string>
+    <string name="TYPE_TRAP">Trap</string>
+
+    <string name="CRASH_WARNING">Sorry, program is crashed. Please send the crash log file to the author.</string>
+
+    <string name="NEW_VERSION" formatted="false">A new version [V%s] of YGORoid published，update?</string>
+    <string name="NEW_CARDS" formatted="false">[%s][%s]published, \nDon\'t forget to update the database!"</string>
+    <string name="ALL_RESOURCE">No card image resources found, download now?</string>
+
+    <string name="CONFIRM_YES">YES</string>
+    <string name="CONFIRM_SAVE">SAVE</string>
+    <string name="CONFIRM_NO">NO</string>
+
+    <string name="CHOOSE_DECK">Choose deck</string>
+    <string name="NEW_DECK">New Deck…</string>
+    <string name="DECK_NAME">Please input deck name</string>
+    <string name="CARD_NAME">Please input card name</string>
+    <string name="CHANGE_SIDE">Finish to change side?</string>
+    <string name="DECK_BUILDER">Give up the duel and start to build deck?</string>
+
+    <string name="QUIT_DECK_BUILDER">Finish to build deck and start duel?</string>
+    <string name="QUIT">Really want to quit YGORoid?</string>
+
+    <string name="CARD_NOT_EXIST">Card not exist! You may need to update the database.</string>
+    <string name="DB_NOT_EXIST">"Database [%s] error or not exist!"</string>
+
+
+</resources>

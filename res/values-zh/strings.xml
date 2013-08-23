@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">YGORoid</string>
+    <string name="tips">
+        https://www.evernote.com/shard/s315/sh/68b02cba-e935-494a-861a-0bd815fcc80a/17027b528b04fd1fa1fd6789952a01d9
+    </string>
+    <string name="feedback">https://jinshuju.net/f/V62e4g</string>
+
+    <string name="MENU_CARD_BACK_TO_BOTTOM_OF_DECK">回卡组底</string>
+    <string name="MENU_CARD_CLOSE_REMOVE">里侧除外</string>
+    <string name="MENU_DECK_SHUFFLE">洗切</string>
+    <string name="MENU_DECK_CLOSE_REMOVE_TOP">卡组顶端里侧除外</string>
+    <string name="MENU_DECK_REVERSE">卡组翻转</string>
+    <string name="MENU_SHOW_HAND">展示手牌</string>
+    <string name="MENU_HIDE_HAND">覆盖手牌</string>
+    <string name="MENU_SHUFFLE_HAND">切洗手牌</string>
+    <string name="MENU_RESTART">重新开始</string>
+    <string name="MENU_CHANGE_DECK">更换卡组</string>
+    <string name="MENU_SIDE">换副卡组</string>
+    <string name="MENU_CARD_SEARCH">快速卡查</string>
+    <string name="MENU_DECK_BUILDER">组卡器</string>
+    <string name="MENU_TOGGLE">开关设置</string>
+    <string name="MENU_GRAVITY_TOGGLE">重力感应</string>
+    <string name="MENU_AUTO_SHUFFLE_TOGGLE">卡组自动切洗</string>
+    <string name="MENU_FPS_TOGGLE">显示FPS</string>
+    <string name="MENU_MIRROR_DISPLAY">镜像显示</string>
+    <string name="MENU_FEEDBACK">问题反馈</string>
+    <string name="MENU_EXIT">退出</string>
+    <string name="MENU_TOGGLE_ON">开</string>
+    <string name="MENU_TOGGLE_OFF">关</string>
+
+    <string name="ATTRIBUTE_EARTH">地</string>
+    <string name="ATTRIBUTE_WATER">水</string>
+    <string name="ATTRIBUTE_FIRE">炎</string>
+    <string name="ATTRIBUTE_WIND">风</string>
+    <string name="ATTRIBUTE_LIGHT">光</string>
+    <string name="ATTRIBUTE_DARK">暗</string>
+    <string name="ATTRIBUTE_DEVINE">神</string>
+
+    <string name="DECK">卡组</string>
+    <string name="EX">额外</string>
+    <string name="GRAVEYARD">墓地</string>
+    <string name="REMOVED">除外</string>
+    <string name="TEMPORARY">临时</string>
+
+    <string name="TYPE_NORMAL">通常</string>
+    <string name="TYPE_EFFECT">效果</string>
+    <string name="TYPE_FUSION">融合</string>
+    <string name="TYPE_RITUAL">仪式</string>
+    <string name="TYPE_SPIRIT">灵魂</string>
+    <string name="TYPE_UNION">联合</string>
+    <string name="TYPE_DUAL">二重</string>
+    <string name="TYPE_TUNER">调整</string>
+    <string name="TYPE_SYNCHRO">同调</string>
+    <string name="TYPE_TOKEN">衍生物</string>
+    <string name="TYPE_QUICKPLAY">速攻</string>
+    <string name="TYPE_CONTINUOUS">永续</string>
+    <string name="TYPE_EQUIP">装备</string>
+    <string name="TYPE_FIELD">场地</string>
+    <string name="TYPE_COUNTER">反击</string>
+    <string name="TYPE_FLIP">反转</string>
+    <string name="TYPE_TOON">卡通</string>
+    <string name="TYPE_XYZ">XYZ</string>
+
+    <string name="SAVE_SUCCESS" formatted="false">已保存[%s]。主卡组:%d，额外:%d，副卡组:%d。</string>
+    <string name="SAVE_FAIL" formatted="false">保存[%s]失败。</string>
+
+    <string name="ERROR_MAIN" formatted="false">主卡组卡片数量[%d]不符合要求。</string>
+    <string name="ERROR_EX" formatted="false">额外卡组卡片数量[%d]不符合要求。</string>
+    <string name="ERROR_SIDE" formatted="false">副卡组卡片数量[%d]不符合要求。</string>
+    <string name="ERROR_CARD" formatted="false">卡片%s数量不符合要求。</string>
+
+    <string name="RACE_WARRIOR">战士</string>
+    <string name="RACE_SPELLCASTER">魔法师</string>
+    <string name="RACE_FAIRY">天使</string>
+    <string name="RACE_FIEND">恶魔</string>
+    <string name="RACE_ZOMBIE">不死</string>
+    <string name="RACE_MACHINE">机械</string>
+    <string name="RACE_AQUA">水</string>
+    <string name="RACE_PYRO">炎</string>
+    <string name="RACE_ROCK">岩石</string>
+    <string name="RACE_WINDBEAST">鸟兽</string>
+    <string name="RACE_PLANT">植物</string>
+    <string name="RACE_INSECT">昆虫</string>
+    <string name="RACE_THUNDER">雷</string>
+    <string name="RACE_DRAGON">龙</string>
+    <string name="RACE_BEAST">兽</string>
+    <string name="RACE_BEASTWARRIOR">兽战士</string>
+    <string name="RACE_DINOSAUR">恐龙</string>
+    <string name="RACE_FISH">鱼</string>
+    <string name="RACE_SEASERPENT">海龙</string>
+    <string name="RACE_REPTILE">爬虫</string>
+    <string name="RACE_PSYCHO">念动力</string>
+    <string name="RACE_DEVINE">幻神兽</string>
+    <string name="RACE_CREATORGOD">创世神</string>
+
+    <string name="TYPE_MONSTER">怪兽</string>
+    <string name="TYPE_SPELL">魔法</string>
+    <string name="TYPE_TRAP">陷阱</string>
+
+    <string name="CRASH_WARNING">很抱歉，程序出现异常，即将退出。如有可能，请发送错误日志给作者。</string>
+
+    <string name="NEW_VERSION" formatted="false">发现新版本程序[V%s]，是否更新？</string>
+    <string name="NEW_CARDS" formatted="false">[%s][%s]更新，\n别忘记更新数据库文件哦！"</string>
+    <string name="ALL_RESOURCE">还没有下载图片资源文件，是否现在下载？</string>
+
+    <string name="CONFIRM_YES">确定</string>
+    <string name="CONFIRM_SAVE">保存</string>
+    <string name="CONFIRM_NO">取消</string>
+
+    <string name="CHOOSE_DECK">请选择卡组</string>
+    <string name="NEW_DECK">新卡组…</string>
+    <string name="DECK_NAME">请输入卡组名</string>
+    <string name="CARD_NAME">请输入卡名</string>
+    <string name="CHANGE_SIDE">副卡组更换完成？</string>
+    <string name="DECK_BUILDER">放弃决斗开始组卡？</string>
+
+    <string name="QUIT_DECK_BUILDER">确定退出组卡，开始决斗吗？</string>
+    <string name="QUIT">确定要退出程序吗？</string>
+
+    <string name="CARD_NOT_EXIST">卡片不存在！您可能需要更新数据库文件！</string>
+    <string name="DB_NOT_EXIST">"数据库[%s]错误或不存在！"</string>
+
+
+</resources>
