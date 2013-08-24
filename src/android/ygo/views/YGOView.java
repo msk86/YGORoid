@@ -11,6 +11,7 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.ygo.R;
 import android.ygo.utils.Configuration;
 import android.ygo.utils.FPSMaker;
 import android.ygo.utils.Utils;
@@ -21,6 +22,9 @@ public abstract class YGOView extends SurfaceView implements Runnable {
     static {
         BACKGROUND_BMP = Utils.readBitmapScaleByHeight(Configuration.texturePath() + "bg" + Configuration.cardImageSuffix(),
                 Utils.screenHeight());
+        if(BACKGROUND_BMP == null) {
+            BACKGROUND_BMP = Utils.readBitmapScaleByHeight(R.raw.bg, Utils.screenHeight());
+        }
     }
 
     private static final int ACTIVE_DRAW_DURATION = 1500;
