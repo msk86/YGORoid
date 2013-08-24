@@ -1,6 +1,8 @@
 package android.ygo.upgrade;
 
+import android.ygo.R;
 import android.ygo.YGOActivity;
+import android.ygo.utils.Utils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -32,7 +34,7 @@ public class Downloader {
         InputStream is = conn.getInputStream();
         long fileSize = conn.getContentLength();
         if (is == null) {
-            downloadProgress.error(context, "无法获取远端文件[" + remote + "]");
+            downloadProgress.error(context, String.format(Utils.s(R.string.remote_error), remote));
             return;
         }
 

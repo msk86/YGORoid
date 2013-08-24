@@ -8,6 +8,13 @@
     <string name="upgrade_check">http://112.124.4.110:8080/upgrade-en.json</string>
     <string name="database_check">http://112.124.4.110:8080/database-en.json</string>
 
+    <string name="database_updating" formatted="false">Updating database [%s] %.1f%%, please start duel after updated.</string>
+    <string name="database_updated" formatted="false">Database [%s] updated.</string>
+    <string name="remote_error" formatted="false">Cannot access to [%s].</string>
+    <string name="pics_api" formatted="false">http://images.my-card.in/%s.jpg</string>
+    <string name="pics_updating" formatted="false">Updating card pics [%d/%d]…</string>
+    <string name="pics_updated" formatted="false">Card pics updated.</string>
+
     <string name="MENU_CARD_BACK_TO_BOTTOM_OF_DECK">To Deck Bottom</string>
     <string name="MENU_CARD_CLOSE_REMOVE">Face-Down Banish</string>
     <string name="MENU_DECK_SHUFFLE">Shuffle</string>

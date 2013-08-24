@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MyCardRoid</string>
+    <string name="app_name">YGORoid</string>
     <string name="tips">
         https://www.evernote.com/shard/s315/sh/68b02cba-e935-494a-861a-0bd815fcc80a/17027b528b04fd1fa1fd6789952a01d9
     </string>
     <string name="feedback">https://jinshuju.net/f/V62e4g</string>
     <string name="upgrade_check">http://112.124.4.110:8080/upgrade-en.json</string>
     <string name="database_check">http://112.124.4.110:8080/database-en.json</string>
+
+    <string name="database_updating" formatted="false">Updating database [%s] %.1f%%, please start duel after updated.</string>
+    <string name="database_updated" formatted="false">Database [%s] updated.</string>
+    <string name="remote_error" formatted="false">Cannot access to [%s].</string>
+    <string name="pics_api" formatted="false">http://images.my-card.in/%s.jpg</string>
+    <string name="pics_updating" formatted="false">Updating card pics [%d/%d]…</string>
+    <string name="pics_updated" formatted="false">Card pics updated.</string>
 
     <string name="MENU_CARD_BACK_TO_BOTTOM_OF_DECK">To Deck Bottom</string>
     <string name="MENU_CARD_CLOSE_REMOVE">Face-Down Banish</string>

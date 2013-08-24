@@ -1,5 +1,6 @@
 package android.ygo.upgrade;
 
+import android.ygo.R;
 import android.ygo.YGOActivity;
 import android.ygo.utils.Configuration;
 import android.ygo.utils.Utils;
@@ -69,14 +70,14 @@ public class PicChecker implements Checker {
                 int count = 0;
                 for (String id : missingIds) {
                     count++;
-                    String url = "http://images.my-card.in/" + id + ".jpg";
-                    context.showInfo("正在更新卡图[" + count + "/" + missingIds.size() + "]...");
+                    String url = String.format(Utils.s(R.string.pics_api), id);
+                    context.showInfo(String.format(Utils.s(R.string.pics_updating), count, missingIds.size()));
                     try {
                         context.getDownloader().downFile(url, Configuration.cardImgPath(), null, null);
                     } catch (IOException e) {
                     }
                 }
-                context.showInfo("卡图更新完成.");
+                context.showInfo(Utils.s(R.string.pics_updated));
             }
 
             private void waitForDatabase() {

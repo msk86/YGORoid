@@ -54,11 +54,11 @@ public class DatabaseChecker implements Checker {
             @Override
             public void run() {
                 try {
-                    context.showInfo("正在更新数据库[" + Configuration.databaseName() + "]...");
                     context.getDownloader().downFile(databaseUpgradeUrl, Configuration.baseDir(), Configuration.databaseName(), new DownloadProgress() {
                         @Override
                         public void display(YGOActivity context, String file, long fileSize, long progress) {
-                            context.showInfo("正在更新数据库[" + file + "] " + (1000 * progress / latestDatabaseSize / 10.0) + "%...");
+                            String info = String.format(Utils.s(R.string.database_updating), file, (100.0 * progress / latestDatabaseSize));
+                            context.showInfo(info);
                         }
 
                         @Override
@@ -66,7 +66,7 @@ public class DatabaseChecker implements Checker {
                             context.showInfo(info);
                         }
                     });
-                    context.showInfo("数据库[" + Configuration.databaseName() + "]更新完成.");
+                    context.showInfo(String.format(Utils.s(R.string.database_updated), Configuration.databaseName()));
                     context.setNewestDatabase();
                 } catch (IOException e) {
                 }

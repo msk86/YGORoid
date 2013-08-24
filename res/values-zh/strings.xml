@@ -8,6 +8,13 @@
     <string name="upgrade_check">http://112.124.4.110:8080/upgrade-zh.json</string>
     <string name="database_check">http://112.124.4.110:8080/database-zh.json</string>
 
+    <string name="database_updating" formatted="false">正在更新数据库[%s] %.1f%%，请更新完成后再开始决斗。</string>
+    <string name="database_updated" formatted="false">数据库[%s]更新完成。</string>
+    <string name="remote_error" formatted="false">无法获取远端文件[%s]。</string>
+    <string name="pics_api" formatted="false">http://images.my-card.in/%s.jpg</string>
+    <string name="pics_updating" formatted="false">正在更新卡图[%d/%d]…</string>
+    <string name="pics_updated" formatted="false">卡图更新完成。</string>
+
     <string name="MENU_CARD_BACK_TO_BOTTOM_OF_DECK">回卡组底</string>
     <string name="MENU_CARD_CLOSE_REMOVE">里侧除外</string>
     <string name="MENU_DECK_SHUFFLE">洗切</string>
