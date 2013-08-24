@@ -5,6 +5,8 @@
         https://www.evernote.com/shard/s315/sh/68b02cba-e935-494a-861a-0bd815fcc80a/17027b528b04fd1fa1fd6789952a01d9
     </string>
     <string name="feedback">https://jinshuju.net/f/V62e4g</string>
+    <string name="upgrade_check">http://112.124.4.110:8080/upgrade-zh.json</string>
+    <string name="database_check">http://112.124.4.110:8080/database-zh.json</string>
 
     <string name="MENU_CARD_BACK_TO_BOTTOM_OF_DECK">回卡组底</string>
     <string name="MENU_CARD_CLOSE_REMOVE">里侧除外</string>

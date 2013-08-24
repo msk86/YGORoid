@@ -37,6 +37,23 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         // NOTHING
     }
 
+    public Set<String> getAllCardId() {
+        Set<String> ids = new HashSet<String>();
+        try {
+            SQLiteDatabase database = this.getReadableDatabase();
+            Cursor c = database.query("texts", new String[]{"id"},
+                    null, null, null, null, null);
+            while (c.moveToNext()) {
+                ids.add(c.getString(0));
+            }
+            c.close();
+            database.close();
+        } catch (Exception e) {
+        }
+        ids.remove("0");
+        return ids;
+    }
+
     public String loadNameById(Integer id) {
         String name = "";
         try {

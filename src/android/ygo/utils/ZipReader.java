@@ -1,13 +1,35 @@
 package android.ygo.utils;
 
 import java.io.FileOutputStream;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 public class ZipReader {
+
+    public static String[] listFile(String zip, FilenameFilter filenameFilter) {
+        List<String> fileList = new ArrayList<String>();
+        ZipFile innerZipFile;
+        try {
+            innerZipFile = new ZipFile(zip);
+            Enumeration entries = innerZipFile.entries();
+            while (entries.hasMoreElements()) {
+                ZipEntry entry = (ZipEntry) entries.nextElement();
+                String name = entry.getName();
+                if(filenameFilter.accept(null, name)) {
+                    fileList.add(name);
+                }
+            }
+        } catch (IOException e) {
+        }
+        String[] fileNames =new String[fileList.size()];
+        return fileList.toArray(fileNames);
+    }
 
     public static void extractZipFile(String zip, String innerFileName, String extractFileName) {
         ZipFile innerZipFile = null;

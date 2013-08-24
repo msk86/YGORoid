@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Set;
 
 public class Utils {
     private static DisplayMetrics dm;
@@ -237,6 +238,25 @@ public class Utils {
             }
         });
         return zips;
+    }
+
+    public static String[] cardPicsInZip(String zip) {
+        return ZipReader.listFile(zip, new FilenameFilter() {
+            @Override
+            public boolean accept(File file, String name) {
+                return name.endsWith(".jpg");
+            }
+        });
+    }
+
+    public static String[] cardPics() {
+        File picsDir = new File(Configuration.cardImgPath());
+        return picsDir.list(new FilenameFilter() {
+            @Override
+            public boolean accept(File file, String name) {
+                return name.endsWith(".jpg");
+            }
+        });
     }
 
     public static int countPics() {

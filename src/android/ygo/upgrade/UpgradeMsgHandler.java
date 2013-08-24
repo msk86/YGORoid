@@ -15,14 +15,14 @@ public class UpgradeMsgHandler extends Handler {
     @Override
     public void handleMessage(Message msg) {
         switch (msg.what) {
-            case UpgradeHelper.UPGRADE:
-                context.getUpgradeHelper().alertUpgrade();
+            case Checker.UPGRADE:
+                context.getUpgradeHelper().getUpgradeChecker().upgrade();
                 break;
-            case UpgradeHelper.NEW_CARDS:
-                context.getUpgradeHelper().alertNewCards();
+            case Checker.DATA_BASE:
+                context.getUpgradeHelper().getDatabaseChecker().upgrade();
                 break;
-            case UpgradeHelper.ALL_RESOURCES:
-                context.getUpgradeHelper().alertAllResources();
+            case Checker.PICS:
+                context.getUpgradeHelper().getPicChecker().upgrade();
                 break;
         }
 

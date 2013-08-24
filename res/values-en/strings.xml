@@ -2,9 +2,11 @@
 <resources>
     <string name="app_name">YGORoid</string>
     <string name="tips">
-        https://www.evernote.com/shard/s315/sh/a80aa577-7181-4fc6-91b6-d32a2f8d770f/41672f1448fc7e3507417322ae48481a
+        https://www.evernote.com/shard/s315/sh/68b02cba-e935-494a-861a-0bd815fcc80a/17027b528b04fd1fa1fd6789952a01d9
     </string>
     <string name="feedback">https://jinshuju.net/f/V62e4g</string>
+    <string name="upgrade_check">http://112.124.4.110:8080/upgrade-en.json</string>
+    <string name="database_check">http://112.124.4.110:8080/database-en.json</string>
 
     <string name="MENU_CARD_BACK_TO_BOTTOM_OF_DECK">To Deck Bottom</string>
     <string name="MENU_CARD_CLOSE_REMOVE">Face-Down Banish</string>

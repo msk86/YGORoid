@@ -65,16 +65,8 @@ public class Configuration {
         return ".jpg";
     }
 
-    public static boolean showFPS() {
-        return false;
-    }
-
     public static int fieldColor() {
         return Color.BLACK;
-    }
-
-    public static String cardImgZipFile() {
-        return "pics.zip";
     }
 
     public static String zipInnerPicPath() {
@@ -83,6 +75,10 @@ public class Configuration {
 
     public static String configPropertyFile() {
         return "config.properties";
+    }
+
+    public static String databaseName() {
+        return "cards.cdb";
     }
 
     public static final Properties PROPERTIES = loadProperties();

@@ -12,8 +12,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.ygo.exception.CrashHandler;
 import android.ygo.service.PersistencyService;
-import android.ygo.upgrade.UpgradeHelper;
-import android.ygo.upgrade.UpgradeMsgHandler;
+import android.ygo.upgrade.*;
 import android.ygo.utils.Utils;
 import android.ygo.views.DeckOnKeyProcessor;
 import android.ygo.views.PlayMenuProcessor;
@@ -37,11 +36,14 @@ public class YGOActivity extends Activity {
 
     private boolean mirror = false;
 
+    private Downloader downloader;
     private UpgradeMsgHandler upgradeMsgHandler;
     private UpgradeHelper upgradeHelper;
+
     private static final String DUEL_STATE = "DUEL_STATE";
     private static final String DUEL_STATE_DUEL = "DUEL_STATE_DUEL";
     private static final String DUEL_STATE_DECK = "DUEL_STATE_DECK";
+    private boolean newestDatabase = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,9 +70,10 @@ public class YGOActivity extends Activity {
 
         startService();
 
+        downloader = new Downloader(this);
         upgradeMsgHandler = new UpgradeMsgHandler(this);
         upgradeHelper = new UpgradeHelper(this);
-        upgradeHelper.startDetect();
+        upgradeHelper.startCheck();
     }
 
     private void initWebView() {
@@ -222,6 +225,28 @@ public class YGOActivity extends Activity {
 
     public UpgradeMsgHandler getUpgradeMsgHandler() {
         return upgradeMsgHandler;
+    }
+
+    public Downloader getDownloader() {
+        return downloader;
+    }
+
+    public void showInfo(String info) {
+        if(currentView == deckBuilderView) {
+            deckBuilderView.getInfoWindow().setInfo(info);
+            deckBuilderView.updateActionTime();
+        } if(currentView == duelDiskView) {
+            duelDiskView.getDuel().getWindow().setInfo(info);
+            duelDiskView.updateActionTime();
+        }
+    }
+
+    public void setNewestDatabase() {
+        newestDatabase = true;
+    }
+
+    public boolean isNewestDatabase() {
+        return newestDatabase;
     }
 
     @Override

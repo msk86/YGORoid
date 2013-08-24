@@ -425,6 +425,10 @@ public class Duel implements Item, Drawable {
         return coin;
     }
 
+    public InfoWindow getWindow() {
+        return window;
+    }
+
     public ShowCardWindow getCardWindow() {
         return cardWindow;
     }
