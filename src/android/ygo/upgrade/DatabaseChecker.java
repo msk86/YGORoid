@@ -17,6 +17,7 @@ public class DatabaseChecker implements Checker {
     private JSONObject databaseInfo = null;
     private String databaseUpgradeUrl;
     private long latestDatabaseSize;
+    private long latestDatabaseCount;
 
     public DatabaseChecker(YGOActivity context) {
         this.context = context;
@@ -27,6 +28,7 @@ public class DatabaseChecker implements Checker {
             databaseInfo = new JSONObject(NetClient.request(DATABASE_CHECK_URL));
             databaseUpgradeUrl = databaseInfo.getString("upgrade_url");
             latestDatabaseSize = databaseInfo.getLong("size");
+            latestDatabaseCount = databaseInfo.getLong("count");
 
             if (shouldUpgrade()) {
                 context.getUpgradeMsgHandler().sendEmptyMessage(Checker.DATA_BASE);
@@ -44,8 +46,8 @@ public class DatabaseChecker implements Checker {
         if (!db.exists()) {
             return true;
         } else {
-            long dbSize = db.length();
-            return dbSize < latestDatabaseSize;
+            int count = Utils.getDbHelper().countAll();
+            return count < latestDatabaseCount;
         }
     }
 
