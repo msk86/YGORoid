@@ -8,6 +8,7 @@
     <string name="upgrade_check">http://112.124.4.110:8080/upgrade-zh.json</string>
     <string name="database_check">http://112.124.4.110:8080/database-zh.json</string>
 
+    <string name="wifi_check" formatted="false">不是WIFI环境，是否要下载数据库和卡图？</string>
     <string name="database_updating" formatted="false">正在更新数据库[%s] %.1f%%，请更新完成后再开始决斗。</string>
     <string name="database_updated" formatted="false">数据库[%s]更新完成。</string>
     <string name="remote_error" formatted="false">无法获取远端文件[%s]。</string>
@@ -109,9 +110,7 @@
 
     <string name="CRASH_WARNING">很抱歉，程序出现异常，即将退出。如有可能，请发送错误日志给作者。</string>
 
-    <string name="NEW_VERSION" formatted="false">发现新版本程序[V%s]，是否更新？</string>
-    <string name="NEW_CARDS" formatted="false">[%s][%s]更新，\n别忘记更新数据库文件哦！"</string>
-    <string name="ALL_RESOURCE">还没有下载图片资源文件，是否现在下载？</string>
+    <string name="NEW_VERSION" formatted="false">发现新版本程序[V%s]，不更新程序就不能更新最新卡片哦！更新吗？</string>
 
     <string name="CONFIRM_YES">确定</string>
     <string name="CONFIRM_SAVE">保存</string>

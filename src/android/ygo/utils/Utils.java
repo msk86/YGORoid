@@ -1,8 +1,11 @@
 package android.ygo.utils;
 
+import android.app.Service;
+import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.*;
+import android.net.wifi.WifiManager;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
@@ -414,5 +417,10 @@ public class Utils {
             str = str.substring(0, layout.getLineEnd(0)).trim();
         }
         return str;
+    }
+
+    public static boolean isWifiEnable() {
+        WifiManager wifiManager = (WifiManager) context.getSystemService(Service.WIFI_SERVICE);
+        return wifiManager.isWifiEnabled();
     }
 }

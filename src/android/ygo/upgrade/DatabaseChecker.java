@@ -1,5 +1,7 @@
 package android.ygo.upgrade;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.ygo.R;
 import android.ygo.YGOActivity;
 import android.ygo.utils.Configuration;
@@ -14,7 +16,6 @@ public class DatabaseChecker implements Checker {
 
     private YGOActivity context;
 
-    private JSONObject databaseInfo = null;
     private String databaseUpgradeUrl;
     private long latestDatabaseSize;
     private long latestDatabaseCount;
@@ -25,7 +26,7 @@ public class DatabaseChecker implements Checker {
 
     public boolean checkUpgrade() {
         try {
-            databaseInfo = new JSONObject(NetClient.request(DATABASE_CHECK_URL));
+            JSONObject databaseInfo = new JSONObject(NetClient.request(DATABASE_CHECK_URL));
             databaseUpgradeUrl = databaseInfo.getString("upgrade_url");
             latestDatabaseSize = databaseInfo.getLong("size");
             latestDatabaseCount = databaseInfo.getLong("count");
@@ -38,6 +39,7 @@ public class DatabaseChecker implements Checker {
             }
         } catch (Exception e) {
         }
+
         return false;
     }
 
@@ -52,6 +54,14 @@ public class DatabaseChecker implements Checker {
     }
 
     public void upgrade() {
+        if(!Utils.isWifiEnable()) {
+            checkWifiDialog();
+        } else {
+            download();
+        }
+    }
+
+    private void download() {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -59,8 +69,7 @@ public class DatabaseChecker implements Checker {
                     context.getDownloader().downFile(databaseUpgradeUrl, Configuration.baseDir(), Configuration.databaseName(), new DownloadProgress() {
                         @Override
                         public void display(YGOActivity context, String file, long fileSize, long progress) {
-                            String info = String.format(Utils.s(R.string.database_updating), file, (100.0 * progress / latestDatabaseSize));
-                            context.showInfo(info);
+                            context.showInfo(String.format(Utils.s(R.string.database_updating), file, (100.0 * progress / latestDatabaseSize)));
                         }
 
                         @Override
@@ -74,7 +83,19 @@ public class DatabaseChecker implements Checker {
                 }
             }
         }).start();
+    }
 
+    private void checkWifiDialog() {
+        new AlertDialog.Builder(Utils.getContext())
+                .setTitle(Utils.s(R.string.wifi_check))
+                .setPositiveButton(Utils.s(R.string.CONFIRM_YES), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        download();
+                    }
+                })
+                .setNegativeButton(Utils.s(R.string.CONFIRM_NO), null)
+                .create().show();
     }
 
 }

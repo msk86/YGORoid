@@ -1,5 +1,7 @@
 package android.ygo.upgrade;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.ygo.R;
 import android.ygo.YGOActivity;
 import android.ygo.utils.Configuration;
@@ -61,12 +63,29 @@ public class PicChecker implements Checker {
             @Override
             public void run() {
                 waitForDatabase();
-
                 getMissingIds();
                 if (!shouldUpgrade()) {
                     return;
                 }
+                download();
+            }
+        }).start();
+    }
 
+    private void waitForDatabase() {
+        while (!context.isNewestDatabase()) {
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+            }
+        }
+    }
+
+
+    private void download() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
                 int count = 0;
                 for (String id : missingIds) {
                     count++;
@@ -78,15 +97,6 @@ public class PicChecker implements Checker {
                     }
                 }
                 context.showInfo(Utils.s(R.string.pics_updated));
-            }
-
-            private void waitForDatabase() {
-                while(!context.isNewestDatabase()) {
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException e) {
-                    }
-                }
             }
         }).start();
     }

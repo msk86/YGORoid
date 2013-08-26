@@ -8,6 +8,7 @@
     <string name="upgrade_check">http://112.124.4.110:8080/upgrade-en.json</string>
     <string name="database_check">http://112.124.4.110:8080/database-en.json</string>
 
+    <string name="wifi_check" formatted="false">Not under WIFI environment, still download the database and card pics?</string>
     <string name="database_updating" formatted="false">Updating database [%s] %.1f%%, please start duel after updated.</string>
     <string name="database_updated" formatted="false">Database [%s] updated.</string>
     <string name="remote_error" formatted="false">Cannot access to [%s].</string>
@@ -109,9 +110,7 @@
 
     <string name="CRASH_WARNING">Sorry, program is crashed. Please send the crash log file to the author.</string>
 
-    <string name="NEW_VERSION" formatted="false">A new version [V%s] of YGORoid published，update?</string>
-    <string name="NEW_CARDS" formatted="false">[%s][%s]published, \nDon\'t forget to update the database!"</string>
-    <string name="ALL_RESOURCE">No card image resources found, download now?</string>
+    <string name="NEW_VERSION" formatted="false">New version [V%s] published, you won\'t get the new cards if you don\'t upgrade. Upgrade?</string>
 
     <string name="CONFIRM_YES">YES</string>
     <string name="CONFIRM_SAVE">SAVE</string>
