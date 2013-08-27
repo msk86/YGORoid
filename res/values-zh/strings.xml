@@ -5,8 +5,8 @@
         https://www.evernote.com/shard/s315/sh/68b02cba-e935-494a-861a-0bd815fcc80a/17027b528b04fd1fa1fd6789952a01d9
     </string>
     <string name="feedback">https://jinshuju.net/f/V62e4g</string>
-    <string name="upgrade_check">http://112.124.4.110:8080/upgrade-zh.json</string>
-    <string name="database_check">http://112.124.4.110:8080/database-zh.json</string>
+    <string name="upgrade_check">http://my-card.in/roid/upgrade-zh.json</string>
+    <string name="database_check">http://my-card.in/roid/database-zh.json</string>
 
     <string name="wifi_check" formatted="false">不是WIFI环境，是否要下载数据库和卡图？</string>
     <string name="database_updating" formatted="false">正在更新数据库[%s] %.1f%%，请更新完成后再开始决斗。</string>
