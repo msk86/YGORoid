@@ -8,8 +8,8 @@ import android.ygo.utils.Utils;
 public class Logo {
 
     int resId;
-    int stayTime = 2000;
-    int intervalTime = 1500;
+    int stayTime = 1000;
+    int intervalTime = 500;
     int maskColor = Color.BLACK;
     Bitmap logo = null;
 
