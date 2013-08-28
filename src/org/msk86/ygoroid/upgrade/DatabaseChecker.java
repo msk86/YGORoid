@@ -86,6 +86,7 @@ public class DatabaseChecker implements Checker {
                 .setPositiveButton(Utils.s(R.string.CONFIRM_YES), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        context.setWifiCheck();
                         download();
                     }
                 })

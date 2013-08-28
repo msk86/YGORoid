@@ -53,17 +53,16 @@ public class LogoView extends YGOView {
 
         long now = System.currentTimeMillis();
         if (now - startTime < currentLogo.stayTime) {
-            updateActionTime();
             // do nothing
         } else if (now - startTime - currentLogo.stayTime < currentLogo.intervalTime) {
             // mask
             int alpha = 255 * (int) (now - startTime - currentLogo.stayTime) / currentLogo.intervalTime;
             canvas.drawARGB(alpha, Color.red(currentLogo.maskColor), Color.green(currentLogo.maskColor), Color.blue(currentLogo.maskColor));
-            updateActionTime();
         } else {
             canvas.drawARGB(255, Color.red(currentLogo.maskColor), Color.green(currentLogo.maskColor), Color.blue(currentLogo.maskColor));
             nextLogo();
         }
+        updateActionTime();
     }
 
     @Override

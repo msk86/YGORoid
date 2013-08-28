@@ -1,5 +1,9 @@
 package org.msk86.ygoroid.upgrade;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.os.Handler;
+import android.os.Message;
 import android.ygo.R;
 import org.msk86.ygoroid.YGOActivity;
 import org.msk86.ygoroid.utils.Configuration;
@@ -65,7 +69,11 @@ public class PicChecker implements Checker {
                 if (!shouldUpgrade()) {
                     return;
                 }
-                download();
+                if (!context.isWifiCheck() && !Utils.isWifiEnable()) {
+                    handler.sendEmptyMessage(0);
+                } else {
+                    download();
+                }
             }
         }).start();
     }
@@ -104,4 +112,24 @@ public class PicChecker implements Checker {
             }
         }).start();
     }
+
+    private void checkWifiDialog() {
+        new AlertDialog.Builder(Utils.getContext())
+                .setTitle(Utils.s(R.string.wifi_check))
+                .setPositiveButton(Utils.s(R.string.CONFIRM_YES), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        download();
+                    }
+                })
+                .setNegativeButton(Utils.s(R.string.CONFIRM_NO), null)
+                .create().show();
+    }
+
+    Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            checkWifiDialog();
+        }
+    };
 }
