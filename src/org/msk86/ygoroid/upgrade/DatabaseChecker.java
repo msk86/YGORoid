@@ -2,7 +2,7 @@ package org.msk86.ygoroid.upgrade;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.ygo.R;
+import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.YGOActivity;
 import org.msk86.ygoroid.utils.Configuration;
 import org.msk86.ygoroid.utils.Utils;
@@ -86,7 +86,7 @@ public class DatabaseChecker implements Checker {
                 .setPositiveButton(Utils.s(R.string.CONFIRM_YES), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        context.setWifiCheck();
+                        context.setWifiChecked();
                         download();
                     }
                 })

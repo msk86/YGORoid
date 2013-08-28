@@ -10,7 +10,6 @@ import android.os.IBinder;
 import android.view.*;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.ygo.R;
 import org.msk86.ygoroid.exception.CrashHandler;
 import org.msk86.ygoroid.service.PersistencyService;
 import org.msk86.ygoroid.upgrade.Downloader;
@@ -49,6 +48,7 @@ public class YGOActivity extends Activity {
     private static final String DUEL_STATE_DUEL = "DUEL_STATE_DUEL";
     private static final String DUEL_STATE_DECK = "DUEL_STATE_DECK";
     private boolean newestDatabase = false;
+    private boolean wifiChecked = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -263,6 +263,14 @@ public class YGOActivity extends Activity {
 
     public boolean isNewestDatabase() {
         return newestDatabase;
+    }
+
+    public boolean isWifiChecked() {
+        return wifiChecked;
+    }
+
+    public void setWifiChecked() {
+        this.wifiChecked = true;
     }
 
     @Override

@@ -4,7 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Message;
-import android.ygo.R;
+import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.YGOActivity;
 import org.msk86.ygoroid.utils.Configuration;
 import org.msk86.ygoroid.utils.Utils;
@@ -69,7 +69,7 @@ public class PicChecker implements Checker {
                 if (!shouldUpgrade()) {
                     return;
                 }
-                if (!context.isWifiCheck() && !Utils.isWifiEnable()) {
+                if (!context.isWifiChecked() && !Utils.isWifiEnable()) {
                     handler.sendEmptyMessage(0);
                 } else {
                     download();
