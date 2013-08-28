@@ -15,6 +15,7 @@
     <string name="pics_api" formatted="false">http://images.my-card.in/%s.jpg</string>
     <string name="pics_updating" formatted="false">Updating card pics [%d/%d]…</string>
     <string name="pics_updated" formatted="false">Card pics updated.</string>
+    <string name="pics_update_failed" formatted="false"> [%d] pics fail to download.</string>
 
     <string name="MENU_CARD_BACK_TO_BOTTOM_OF_DECK">To Deck Bottom</string>
     <string name="MENU_CARD_CLOSE_REMOVE">Face-Down Banish</string>

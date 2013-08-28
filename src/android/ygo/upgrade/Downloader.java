@@ -34,7 +34,6 @@ public class Downloader {
         InputStream is = conn.getInputStream();
         long fileSize = conn.getContentLength();
         if (is == null) {
-            downloadProgress.error(context, String.format(Utils.s(R.string.remote_error), remote));
             return;
         }
 
@@ -68,10 +67,6 @@ public class Downloader {
     private DownloadProgress defaultDownloadProgress() {
         return new DownloadProgress() {
             public void display(YGOActivity context, String file, long fileSize, long progress) {
-            }
-
-            public void error(YGOActivity context, String info) {
-                context.showInfo(info);
             }
         };
     }

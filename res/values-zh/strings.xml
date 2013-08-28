@@ -15,6 +15,7 @@
     <string name="pics_api" formatted="false">http://images.my-card.in/%s.jpg</string>
     <string name="pics_updating" formatted="false">正在更新卡图[%d/%d]…</string>
     <string name="pics_updated" formatted="false">卡图更新完成。</string>
+    <string name="pics_update_failed" formatted="false">[%d]张更新失败。</string>
 
     <string name="MENU_CARD_BACK_TO_BOTTOM_OF_DECK">回卡组底</string>
     <string name="MENU_CARD_CLOSE_REMOVE">里侧除外</string>

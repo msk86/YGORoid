@@ -87,6 +87,7 @@ public class PicChecker implements Checker {
             @Override
             public void run() {
                 int count = 0;
+                int failCount = 0;
                 for (String id : missingIds) {
                     count++;
                     String url = String.format(Utils.s(R.string.pics_api), id);
@@ -94,9 +95,14 @@ public class PicChecker implements Checker {
                     try {
                         context.getDownloader().downFile(url, Configuration.cardImgPath(), null, null);
                     } catch (IOException e) {
+                        failCount++;
                     }
                 }
-                context.showInfo(Utils.s(R.string.pics_updated));
+                String info = Utils.s(R.string.pics_updated);
+                if (failCount > 0) {
+                    info += String.format(Utils.s(R.string.pics_update_failed), failCount);
+                }
+                context.showInfo(info);
             }
         }).start();
     }

@@ -71,11 +71,6 @@ public class DatabaseChecker implements Checker {
                         public void display(YGOActivity context, String file, long fileSize, long progress) {
                             context.showInfo(String.format(Utils.s(R.string.database_updating), file, (100.0 * progress / latestDatabaseSize)));
                         }
-
-                        @Override
-                        public void error(YGOActivity context, String info) {
-                            context.showInfo(info);
-                        }
                     });
                     context.showInfo(String.format(Utils.s(R.string.database_updated), Configuration.databaseName()));
                     context.setNewestDatabase();
