@@ -132,5 +132,9 @@
     <string name="CARD_NOT_EXIST">Card not exist! You may need to update the database.</string>
     <string name="DB_NOT_EXIST">"Database [%s] error or not exist!"</string>
 
+    <string name="key_word">Key word</string>
+    <string name="btn_open">Open</string>
+    <string name="btn_save">Save</string>
+    <string name="btn_save_as">SavAs</string>
 
 </resources>

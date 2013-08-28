@@ -135,6 +135,6 @@
     <string name="key_word">Key word</string>
     <string name="btn_open">Open</string>
     <string name="btn_save">Save</string>
-    <string name="btn_save_as">SaveAs</string>
+    <string name="btn_save_as">SavAs</string>
 
 </resources>

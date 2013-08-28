@@ -41,13 +41,13 @@
                     >
                 <Button android:id="@+id/open_btn" android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:text="@string/btn_open"
-                        android:textSize="9sp"/>
+                        android:textSize="8sp"/>
                 <Button android:id="@+id/save_btn" android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:text="@string/btn_save"
-                        android:textSize="9sp"/>
+                        android:textSize="8sp"/>
                 <Button android:id="@+id/save_as_btn" android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:text="@string/btn_save_as"
-                        android:textSize="9sp"/>
+                        android:textSize="8sp"/>
             </LinearLayout>
             <ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent"
                         android:id="@+id/scroll_list"
