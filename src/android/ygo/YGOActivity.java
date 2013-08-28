@@ -20,6 +20,7 @@ import android.ygo.views.PlayOnKeyProcessor;
 import android.ygo.views.YGOView;
 import android.ygo.views.deckbuilder.DeckBuilderView;
 import android.ygo.views.dueldisk.DuelDiskView;
+import android.ygo.views.logo.LogoView;
 
 public class YGOActivity extends Activity {
     private PlayOnKeyProcessor duelKeyProcessor;
@@ -29,6 +30,7 @@ public class YGOActivity extends Activity {
     private DuelDiskView duelDiskView;
     private DeckBuilderView deckBuilderView;
     private WebView webView;
+    private LogoView logoView;
 
     private PersistencyService service;
     private ServiceConnection sConn;
@@ -66,6 +68,7 @@ public class YGOActivity extends Activity {
             }
         } else {
             showDuel();
+            showLogo();
         }
 
         startService();
@@ -97,6 +100,12 @@ public class YGOActivity extends Activity {
         webView.loadUrl(Utils.s(R.string.feedback));
         currentView = webView;
         setContentView(webView);
+    }
+
+    public void showLogo() {
+        logoView = new LogoView(this);
+        super.setContentView(logoView);
+        currentView = logoView;
     }
 
     public void showDuel() {
@@ -217,6 +226,10 @@ public class YGOActivity extends Activity {
 
     public DuelDiskView getDuelDiskView() {
         return duelDiskView;
+    }
+
+    public LogoView getLogoView() {
+        return logoView;
     }
 
     public UpgradeHelper getUpgradeHelper() {
