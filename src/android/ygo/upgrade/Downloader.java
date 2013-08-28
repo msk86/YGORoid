@@ -1,8 +1,6 @@
 package android.ygo.upgrade;
 
-import android.ygo.R;
 import android.ygo.YGOActivity;
-import android.ygo.utils.Utils;
 
 import java.io.File;
 import java.io.FileOutputStream;

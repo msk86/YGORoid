@@ -1,7 +1,6 @@
 package android.ygo.utils;
 
 import android.app.Service;
-import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.*;
@@ -18,7 +17,6 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Set;
 
 public class Utils {
     private static DisplayMetrics dm;

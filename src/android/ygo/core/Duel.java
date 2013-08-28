@@ -8,7 +8,10 @@ import android.ygo.core.tool.Dice;
 import android.ygo.op.Drag;
 import android.ygo.utils.Utils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Duel implements Item, Drawable {
     private LifePoint lifePoint;

@@ -1,16 +1,16 @@
 package android.ygo.views.deckbuilder;
 
-import android.graphics.*;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.PictureDrawable;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.ygo.R;
 import android.ygo.core.Card;
 import android.ygo.core.UserDefinedCard;
-import android.ygo.utils.Configuration;
 import android.ygo.utils.Utils;
 
 import java.util.List;

@@ -1,7 +1,5 @@
 package android.ygo.upgrade;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.ygo.R;
 import android.ygo.YGOActivity;
 import android.ygo.utils.Configuration;

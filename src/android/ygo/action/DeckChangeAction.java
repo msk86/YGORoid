@@ -3,13 +3,8 @@ package android.ygo.action;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.ygo.R;
-import android.ygo.core.Card;
 import android.ygo.op.Operation;
-import android.ygo.utils.Configuration;
 import android.ygo.utils.Utils;
-
-import java.io.File;
-import java.util.List;
 
 public class DeckChangeAction extends BaseAction {
     public DeckChangeAction(Operation operation) {

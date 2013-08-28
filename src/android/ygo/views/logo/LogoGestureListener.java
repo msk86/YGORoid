@@ -2,9 +2,6 @@ package android.ygo.views.logo;
 
 import android.view.GestureDetector;
 import android.view.MotionEvent;
-import android.ygo.core.Card;
-import android.ygo.layout.Layout;
-import android.ygo.views.deckbuilder.DeckBuilderView;
 
 public class LogoGestureListener extends GestureDetector.SimpleOnGestureListener {
     LogoView view;
