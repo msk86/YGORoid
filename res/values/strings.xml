@@ -113,6 +113,8 @@
 
     <string name="NEW_VERSION" formatted="false">New version [V%s] published, you won\'t get the new cards if you don\'t upgrade. Upgrade?</string>
 
+    <string name="INPUT_LP">Please input LP</string>
+
     <string name="CONFIRM_YES">YES</string>
     <string name="CONFIRM_SAVE">SAVE</string>
     <string name="CONFIRM_NO">NO</string>

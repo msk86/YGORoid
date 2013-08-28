@@ -113,6 +113,8 @@
 
     <string name="NEW_VERSION" formatted="false">发现新版本程序[V%s]，不更新程序就不能更新最新卡片哦！更新吗？</string>
 
+    <string name="INPUT_LP">请输入LP</string>
+
     <string name="CONFIRM_YES">确定</string>
     <string name="CONFIRM_SAVE">保存</string>
     <string name="CONFIRM_NO">取消</string>
@@ -130,5 +132,9 @@
     <string name="CARD_NOT_EXIST">卡片不存在！您可能需要更新数据库文件！</string>
     <string name="DB_NOT_EXIST">"数据库[%s]错误或不存在！"</string>
 
+    <string name="key_word">关键字</string>
+    <string name="btn_open">打开</string>
+    <string name="btn_save">保存</string>
+    <string name="btn_save_as">另存</string>
 
 </resources>

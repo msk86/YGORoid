@@ -3,11 +3,11 @@
              android:id="@+id/mainLayout"
              android:layout_width="fill_parent"
              android:layout_height="fill_parent">
-    <android.ygo.views.deckbuilder.DeckBuilderView
+    <org.msk86.ygoroid.views.deckbuilder.DeckBuilderView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:id="@+id/deck_builder">
-    </android.ygo.views.deckbuilder.DeckBuilderView>
+    </org.msk86.ygoroid.views.deckbuilder.DeckBuilderView>
     <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -29,8 +29,7 @@
                     android:textSize="16sp"
                     android:singleLine="true"
                     android:cursorVisible="false"
-                    android:hint="关键字"
-                    />
+                    android:hint="@string/key_word"/>
             <LinearLayout
                     android:id="@+id/buttons"
                     android:layout_width="fill_parent"
@@ -40,11 +39,14 @@
                     android:paddingBottom="6sp"
                     android:paddingTop="3sp"
                     >
-                <Button android:id="@+id/open_btn" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="打开"
+                <Button android:id="@+id/open_btn" android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:text="@string/btn_open"
                         android:textSize="9sp"/>
-                <Button android:id="@+id/save_btn" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="保存"
+                <Button android:id="@+id/save_btn" android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:text="@string/btn_save"
                         android:textSize="9sp"/>
-                <Button android:id="@+id/save_as_btn" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="另存"
+                <Button android:id="@+id/save_as_btn" android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:text="@string/btn_save_as"
                         android:textSize="9sp"/>
             </LinearLayout>
             <ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent"

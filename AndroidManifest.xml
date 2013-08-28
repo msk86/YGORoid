@@ -6,7 +6,7 @@
     <uses-sdk android:minSdkVersion="7"/>
     <application android:label="@string/app_name"
             android:icon="@drawable/icon">
-        <activity android:name="YGOActivity"
+        <activity android:name="org.msk86.ygoroid.YGOActivity"
                   android:label="@string/app_name"
                   android:screenOrientation="landscape"
                   android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
@@ -16,7 +16,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <service android:name="android.ygo.service.PersistencyService"
+        <service android:name="org.msk86.ygoroid.service.PersistencyService"
                  android:enabled="true">
             <intent-filter>
                 <action android:name="android.ygo.service.persistencyService" />
