@@ -1,6 +1,6 @@
 package org.msk86.ygoroid.action;
 
-import android.ygo.R;
+import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.core.tool.Coin;
 import org.msk86.ygoroid.core.tool.Dice;
 import org.msk86.ygoroid.layout.Layout;
@@ -203,6 +203,9 @@ public class ActionDispatcher {
                         break;
                     case Const.MENU_MIRROR_DISPLAY:
                         action = new MirrorDisplayAction(menuClick);
+                        break;
+                    case Const.MENU_HINT:
+                        action = new HintAction(menuClick);
                         break;
                     case Const.MENU_FEEDBACK:
                         action = new FeedbackAction(menuClick);

@@ -3,7 +3,7 @@ package org.msk86.ygoroid.core.tool;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.ygo.R;
+import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.core.Drawable;
 import org.msk86.ygoroid.utils.Utils;
 

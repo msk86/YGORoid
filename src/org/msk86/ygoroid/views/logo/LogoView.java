@@ -7,7 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
-import android.ygo.R;
+import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.YGOActivity;
 import org.msk86.ygoroid.utils.Utils;
 import org.msk86.ygoroid.views.YGOView;

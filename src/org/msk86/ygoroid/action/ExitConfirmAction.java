@@ -2,7 +2,7 @@ package org.msk86.ygoroid.action;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.ygo.R;
+import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.op.Operation;
 import org.msk86.ygoroid.utils.Utils;
 

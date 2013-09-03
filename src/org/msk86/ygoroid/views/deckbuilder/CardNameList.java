@@ -8,7 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
-import android.ygo.R;
+import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.core.Card;
 import org.msk86.ygoroid.core.UserDefinedCard;
 import org.msk86.ygoroid.utils.Utils;

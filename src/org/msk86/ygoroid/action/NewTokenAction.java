@@ -1,6 +1,6 @@
 package org.msk86.ygoroid.action;
 
-import android.ygo.R;
+import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.op.Operation;
 import org.msk86.ygoroid.utils.Utils;
 import org.msk86.ygoroid.core.*;

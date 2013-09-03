@@ -5,7 +5,7 @@ import android.content.res.ColorStateList;
 import android.content.res.XmlResourceParser;
 import android.util.TypedValue;
 import android.widget.TextView;
-import android.ygo.R;
+import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.core.Card;
 import org.msk86.ygoroid.core.UserDefinedCard;
 

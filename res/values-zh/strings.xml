@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MC YGORoid</string>
-    <string name="tips">
-        https://www.evernote.com/shard/s315/sh/68b02cba-e935-494a-861a-0bd815fcc80a/17027b528b04fd1fa1fd6789952a01d9
-    </string>
+    <string name="hint">http://my-card.in/roid/zh/hint.html</string>
     <string name="feedback">https://jinshuju.net/f/V62e4g</string>
     <string name="upgrade_check">http://my-card.in/roid/upgrade-zh.json</string>
     <string name="database_check">http://my-card.in/roid/database-zh.json</string>
@@ -35,6 +33,7 @@
     <string name="MENU_AUTO_SHUFFLE_TOGGLE">卡组自动切洗</string>
     <string name="MENU_FPS_TOGGLE">显示FPS</string>
     <string name="MENU_MIRROR_DISPLAY">镜像显示</string>
+    <string name="MENU_HINT">操作说明</string>
     <string name="MENU_FEEDBACK">问题反馈</string>
     <string name="MENU_EXIT">退出</string>
     <string name="MENU_TOGGLE_ON">开</string>

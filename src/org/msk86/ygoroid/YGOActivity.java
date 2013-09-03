@@ -93,8 +93,8 @@ public class YGOActivity extends Activity {
         });
     }
 
-    public void showTips() {
-        webView.loadUrl(Utils.s(R.string.tips));
+    public void showHint() {
+        webView.loadUrl(Utils.s(R.string.hint));
         currentView = webView;
         setContentView(webView);
     }

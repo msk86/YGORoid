@@ -3,7 +3,7 @@ package org.msk86.ygoroid.views;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
-import android.ygo.R;
+import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.action.Action;
 import org.msk86.ygoroid.action.ActionDispatcher;
 import org.msk86.ygoroid.op.MenuClick;
@@ -70,6 +70,7 @@ public class PlayMenuProcessor {
                 if (Utils.getSDK() >= 10) {
                     menu.add(Const.MENU_GROUP_MAIN, Const.MENU_MIRROR_DISPLAY, 0, Utils.s(R.string.MENU_MIRROR_DISPLAY));
                 }
+                menu.add(Const.MENU_GROUP_MAIN, Const.MENU_HINT, 0, Utils.s(R.string.MENU_HINT));
                 menu.add(Const.MENU_GROUP_MAIN, Const.MENU_FEEDBACK, 0, Utils.s(R.string.MENU_FEEDBACK));
                 menu.add(Const.MENU_GROUP_MAIN, Const.MENU_EXIT, 0, Utils.s(R.string.MENU_EXIT));
             }

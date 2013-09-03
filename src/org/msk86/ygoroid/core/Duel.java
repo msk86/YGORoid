@@ -2,7 +2,7 @@ package org.msk86.ygoroid.core;
 
 import android.graphics.Canvas;
 import android.widget.Toast;
-import android.ygo.R;
+import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.core.tool.Coin;
 import org.msk86.ygoroid.core.tool.Dice;
 import org.msk86.ygoroid.op.Drag;

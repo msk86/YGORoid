@@ -1,6 +1,6 @@
 package org.msk86.ygoroid.action;
 
-import android.ygo.R;
+import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.core.CardList;
 import org.msk86.ygoroid.core.CardSelector;
 import org.msk86.ygoroid.op.Operation;

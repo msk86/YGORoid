@@ -1,7 +1,7 @@
 package org.msk86.ygoroid.core;
 
 import android.graphics.Bitmap;
-import android.ygo.R;
+import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.utils.Utils;
 
 public class SpCard extends Card {

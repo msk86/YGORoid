@@ -4,7 +4,7 @@ import android.graphics.*;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
-import android.ygo.R;
+import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.core.tool.BmpCache;
 import org.msk86.ygoroid.core.tool.QuickFix;
 import org.msk86.ygoroid.utils.Configuration;

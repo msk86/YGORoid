@@ -3,7 +3,7 @@ package org.msk86.ygoroid.views;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.view.KeyEvent;
-import android.ygo.R;
+import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.utils.Utils;
 import org.msk86.ygoroid.views.deckbuilder.DeckBuilderView;
 
