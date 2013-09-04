@@ -49,7 +49,7 @@ public class DatabaseChecker implements Checker {
             return true;
         } else {
             int count = Utils.getDbHelper().countAll();
-            return count < latestDatabaseCount;
+            return count != latestDatabaseCount;
         }
     }
 
