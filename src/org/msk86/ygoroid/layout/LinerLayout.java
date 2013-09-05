@@ -79,7 +79,7 @@ public class LinerLayout implements Layout, Drawable {
         paint.setStrokeWidth(2);
         paint.setStyle(Paint.Style.STROKE);
 
-        Rect highLightRect = new Rect(0, 0, unitWidth, unitHeight);
+        Rect highLightRect = new Rect(1, 1, unitWidth + 1, unitHeight + 1);
         helper.drawRect(canvas, highLightRect, paint);
     }
 
