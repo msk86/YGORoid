@@ -145,7 +145,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         if (card == null) {
             card = fuzzyLoadByName(database, cardName);
         }
-        if (card == null && !UnicodeReader.isEnglish(cardName)) {
+        if (card == null) {
             card = fuzzyLoadByWord(database, cardName);
         }
         if (card == null) {
@@ -197,11 +197,19 @@ public class CardsDBHelper extends SQLiteOpenHelper {
     }
 
     private Card fuzzyLoadByWord(SQLiteDatabase database, String name) {
-        String[] parts = new String[name.length()];
+        String[] parts;
+        if(UnicodeReader.isEnglish(name)) {
+            parts = name.split(" ");
+        } else {
+            parts = new String[name.length()];
+            for (int i = 0; i < parts.length; i++) {
+                parts[i] = String.valueOf(name.charAt(i));
+            }
+        }
         String sqlNamePart = "";
         for (int i = 0; i < parts.length; i++) {
             sqlNamePart += " and t.name like ?";
-            parts[i] = "%" + name.charAt(i) + "%";
+            parts[i] = "%" + parts[i] + "%";
         }
 
         Cursor c = database.query(QUERY_TABLES, QUERY_FIELDS,
@@ -216,11 +224,19 @@ public class CardsDBHelper extends SQLiteOpenHelper {
     }
 
     private List<Card> fuzzyQueryByWord(SQLiteDatabase database, String name) {
-        String[] parts = new String[name.length()];
+        String[] parts;
+        if(UnicodeReader.isEnglish(name)) {
+            parts = name.split(" ");
+        } else {
+            parts = new String[name.length()];
+            for (int i = 0; i < parts.length; i++) {
+                parts[i] = String.valueOf(name.charAt(i));
+            }
+        }
         String sqlNamePart = "";
         for (int i = 0; i < parts.length; i++) {
             sqlNamePart += " and t.name like ?";
-            parts[i] = "%" + name.charAt(i) + "%";
+            parts[i] = "%" + parts[i] + "%";
         }
 
         Cursor c = database.query(QUERY_TABLES, QUERY_FIELDS,
@@ -290,10 +306,8 @@ public class CardsDBHelper extends SQLiteOpenHelper {
             List<Card> results = fuzzyQueryByName(database, text);
             combineCards(cards, results);
 
-            if(!UnicodeReader.isEnglish(text)) {
-                results = fuzzyQueryByWord(database, text);
-                combineCards(cards, results);
-            }
+            results = fuzzyQueryByWord(database, text);
+            combineCards(cards, results);
 
             results = fuzzyQueryByDesc(database, text);
             combineCards(cards, results);
