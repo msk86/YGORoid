@@ -41,7 +41,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         int count = 0;
         try {
             SQLiteDatabase database = this.getReadableDatabase();
-            Cursor c = database.query("texts", new String[]{"count(*)"},
+            Cursor c = database.query("datas", new String[]{"count(*)"},
                     "id != 0", null, null, null, null);
             c.moveToFirst();
             count = c.getInt(0);
@@ -57,7 +57,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         Set<String> ids = new HashSet<String>();
         try {
             SQLiteDatabase database = this.getReadableDatabase();
-            Cursor c = database.query("texts", new String[]{"id"},
+            Cursor c = database.query("datas", new String[]{"id"},
                     null, null, null, null, null);
             while (c.moveToNext()) {
                 ids.add(c.getString(0));
