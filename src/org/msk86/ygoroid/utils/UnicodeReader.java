@@ -95,4 +95,13 @@ public class UnicodeReader extends Reader {
         return internalIn2.read(cbuf, off, len);
     }
 
+    public static boolean isEnglish(String text) {
+        for(char c : text.toCharArray()) {
+            if(c > 256) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }

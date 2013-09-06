@@ -145,7 +145,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         if (card == null) {
             card = fuzzyLoadByName(database, cardName);
         }
-        if (card == null) {
+        if (card == null && !UnicodeReader.isEnglish(cardName)) {
             card = fuzzyLoadByWord(database, cardName);
         }
         if (card == null) {
@@ -290,8 +290,10 @@ public class CardsDBHelper extends SQLiteOpenHelper {
             List<Card> results = fuzzyQueryByName(database, text);
             combineCards(cards, results);
 
-            results = fuzzyQueryByWord(database, text);
-            combineCards(cards, results);
+            if(!UnicodeReader.isEnglish(text)) {
+                results = fuzzyQueryByWord(database, text);
+                combineCards(cards, results);
+            }
 
             results = fuzzyQueryByDesc(database, text);
             combineCards(cards, results);
