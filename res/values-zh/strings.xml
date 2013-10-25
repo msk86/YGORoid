@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MC YGORoid</string>
+    <string name="app_name">YGORoid</string>
     <string name="hint">http://my-card.in/roid/zh/hint.html</string>
     <string name="feedback">https://jinshuju.net/f/V62e4g</string>
     <string name="upgrade_check">http://my-card.in/roid/upgrade-zh.json</string>
