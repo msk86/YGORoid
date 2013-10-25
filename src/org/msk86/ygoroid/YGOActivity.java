@@ -304,6 +304,9 @@ public class YGOActivity extends Activity {
                     service.setDuel(duelDiskView.getDuel());
                 }
             }
+            if(service != null && downloader != null) {
+                service.setDownloader(downloader);
+            }
         }
     }
 

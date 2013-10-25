@@ -54,7 +54,7 @@ public class DatabaseChecker implements Checker {
     }
 
     public void upgrade() {
-        if(!Utils.isWifiEnable()) {
+        if (!Utils.isWifiEnable()) {
             checkWifiDialog();
         } else {
             download();
@@ -62,22 +62,24 @@ public class DatabaseChecker implements Checker {
     }
 
     private void download() {
-        new Thread(new Runnable() {
+        Downloader downloader = context.getDownloader();
+
+        downloader.clear();
+
+        downloader.addTask(databaseUpgradeUrl, Configuration.baseDir(), Configuration.databaseName(), new DownloadProgress() {
             @Override
-            public void run() {
-                try {
-                    context.getDownloader().downFile(databaseUpgradeUrl, Configuration.baseDir(), Configuration.databaseName(), new DownloadProgress() {
-                        @Override
-                        public void display(YGOActivity context, String file, long fileSize, long progress) {
-                            context.showInfo(String.format(Utils.s(R.string.database_updating), file, (100.0 * progress / latestDatabaseSize)));
-                        }
-                    });
-                    context.showInfo(String.format(Utils.s(R.string.database_updated), Configuration.databaseName()));
-                    context.setNewestDatabase();
-                } catch (IOException e) {
-                }
+            public void display(YGOActivity context, String file, long fileSize, long progress) {
+                context.showInfo(String.format(Utils.s(R.string.database_updating), file, (100.0 * progress / latestDatabaseSize)));
             }
-        }).start();
+        });
+        downloader.successCallback(new DownloaderCallback() {
+            @Override
+            public void callback(int success, int fail, int all) {
+                context.showInfo(String.format(Utils.s(R.string.database_updated), Configuration.databaseName()));
+                context.setNewestDatabase();
+            }
+        });
+        downloader.startDownload();
     }
 
     private void checkWifiDialog() {

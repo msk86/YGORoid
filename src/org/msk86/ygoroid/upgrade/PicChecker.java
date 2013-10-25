@@ -89,28 +89,24 @@ public class PicChecker implements Checker {
 
 
     private void download() {
-        new Thread(new Runnable() {
+        Downloader downloader = context.getDownloader();
+        downloader.clear();
+        for (String id : missingIds) {
+            String url = String.format(Utils.s(R.string.pics_api), id);
+            downloader.addTask(url, Configuration.cardImgPath(), null, null);
+        }
+
+        downloader.successCallback(new DownloaderCallback() {
             @Override
-            public void run() {
-                int count = 0;
-                int failCount = 0;
-                for (String id : missingIds) {
-                    count++;
-                    String url = String.format(Utils.s(R.string.pics_api), id);
-                    context.showInfo(String.format(Utils.s(R.string.pics_updating), count, missingIds.size()));
-                    try {
-                        context.getDownloader().downFile(url, Configuration.cardImgPath(), null, null);
-                    } catch (IOException e) {
-                        failCount++;
-                    }
-                }
+            public void callback(int success, int fail, int all) {
                 String info = Utils.s(R.string.pics_updated);
-                if (failCount > 0) {
-                    info += String.format(Utils.s(R.string.pics_update_failed), failCount);
+                if (fail > 0) {
+                    info += String.format(Utils.s(R.string.pics_update_failed), fail);
                 }
                 context.showInfo(info);
             }
-        }).start();
+        });
+        downloader.startDownload(Utils.s(R.string.pics_updating));
     }
 
     private void checkWifiDialog() {
@@ -126,7 +122,7 @@ public class PicChecker implements Checker {
                 .create().show();
     }
 
-    Handler handler = new Handler(){
+    Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             checkWifiDialog();
