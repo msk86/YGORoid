@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Message;
+import org.json.JSONObject;
 import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.YGOActivity;
 import org.msk86.ygoroid.utils.Configuration;
@@ -15,10 +16,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class PicChecker implements Checker {
+    private static final String PIC_API = Utils.s(R.string.pics_api);
 
     private YGOActivity context;
 
     private Set<String> missingIds;
+
+    private String picUrlTemplate;
 
     public PicChecker(YGOActivity context) {
         this.context = context;
@@ -28,6 +32,15 @@ public class PicChecker implements Checker {
     public boolean checkUpgrade() {
         context.getUpgradeMsgHandler().sendEmptyMessage(PICS);
         return true;
+    }
+
+    private void getPicUrlTemplate() {
+        try {
+            JSONObject picApiInfo = new JSONObject(NetClient.request(PIC_API));
+            picUrlTemplate = picApiInfo.getString("url").replace(":id", "%s");
+        } catch (Exception e) {
+            picUrlTemplate = Utils.s(R.string.pics_url_backup);
+        }
     }
 
     private void getMissingIds() {
@@ -89,11 +102,12 @@ public class PicChecker implements Checker {
 
 
     private void download() {
+        getPicUrlTemplate();
         Downloader downloader = context.getDownloader();
         downloader.clear();
         downloader.setThreads(5);
         for (String id : missingIds) {
-            String url = String.format(Utils.s(R.string.pics_api), id);
+            String url = String.format(picUrlTemplate, id);
             downloader.addTask(url, Configuration.cardImgPath(), null, null);
         }
 

@@ -5,12 +5,13 @@
     <string name="feedback">https://jinshuju.net/f/V62e4g</string>
     <string name="upgrade_check">http://my-card.in/roid/upgrade-zh.json</string>
     <string name="database_check">http://my-card.in/roid/database-zh.json</string>
+    <string name="pics_api" formatted="false">http://my-card.in/cards/image.json</string>
+    <string name="pics_url_backup" formatted="false">http://images.my-card.in/%s.jpg</string>
 
     <string name="wifi_check" formatted="false">不是WIFI环境，是否要下载数据库和卡图？</string>
     <string name="database_updating" formatted="false">正在更新数据库[%s] %.1f%%，请更新完成后再开始决斗。</string>
     <string name="database_updated" formatted="false">数据库[%s]更新完成。</string>
     <string name="remote_error" formatted="false">无法获取远端文件[%s]。</string>
-    <string name="pics_api" formatted="false">http://images.my-card.in/%s.jpg</string>
     <string name="pics_updating" formatted="false">正在更新卡图[%d/%d]…</string>
     <string name="pics_updated" formatted="false">卡图更新完成。</string>
     <string name="pics_update_failed" formatted="false">[%d]张更新失败。</string>
