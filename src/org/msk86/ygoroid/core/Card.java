@@ -375,12 +375,9 @@ public class Card implements SelectableItem, Drawable, Bmpable {
     }
 
     public boolean isEx() {
-        if (subTypes.contains(CardSubType.XYZ)
+        return subTypes.contains(CardSubType.XYZ)
                 || subTypes.contains(CardSubType.SYNC)
-                || subTypes.contains(CardSubType.FUSION)) {
-            return true;
-        }
-        return false;
+                || subTypes.contains(CardSubType.FUSION);
     }
 
     public boolean isToken() {

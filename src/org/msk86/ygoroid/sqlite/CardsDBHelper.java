@@ -421,6 +421,15 @@ public class CardsDBHelper extends SQLiteOpenHelper {
             }
         }
 
+        if(exCardList.isEmpty()) {
+            for(Card card : mainCardList) {
+                if(card.isEx()) {
+                    exCardList.add(card);
+                }
+            }
+            mainCardList.removeAll(exCardList);
+        }
+
         List<List<Card>> cardsLists = new ArrayList<List<Card>>();
         cardsLists.add(mainCardList);
         cardsLists.add(exCardList);
