@@ -91,6 +91,7 @@ public class PicChecker implements Checker {
     private void download() {
         Downloader downloader = context.getDownloader();
         downloader.clear();
+        downloader.setThreads(5);
         for (String id : missingIds) {
             String url = String.format(Utils.s(R.string.pics_api), id);
             downloader.addTask(url, Configuration.cardImgPath(), null, null);
@@ -106,7 +107,13 @@ public class PicChecker implements Checker {
                 context.showInfo(info);
             }
         });
-        downloader.startDownload(Utils.s(R.string.pics_updating));
+        downloader.progressCallback(new DownloaderCallback() {
+            @Override
+            public void callback(int success, int fail, int all) {
+                context.showInfo(String.format(Utils.s(R.string.pics_updating), success, all));
+            }
+        });
+        downloader.startDownload();
     }
 
     private void checkWifiDialog() {

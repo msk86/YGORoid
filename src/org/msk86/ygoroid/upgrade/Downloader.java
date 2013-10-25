@@ -1,8 +1,6 @@
 package org.msk86.ygoroid.upgrade;
 
-import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.YGOActivity;
-import org.msk86.ygoroid.utils.Utils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -17,20 +15,30 @@ public class Downloader {
 
     private YGOActivity context;
     private DownloaderCallback successCallback;
+    private DownloaderCallback progressCallback;
 
     public Downloader(YGOActivity context) {
         this.context = context;
     }
 
+    private int threads = 1;
+    private int doneCount = 0;
     private int success = 0;
     private int fail = 0;
     private List<Task> tasks = new ArrayList<Task>();
 
     public void clear() {
+        threads = 1;
         success = 0;
         fail = 0;
         tasks.clear();
         successCallback = null;
+    }
+
+    public void setThreads(int threads) {
+        if(threads > 0) {
+            this.threads = threads;
+        }
     }
 
     public void addTask(String remote, String path, String fileName, DownloadProgress downloadProgress) {
@@ -38,31 +46,20 @@ public class Downloader {
     }
 
     public void startDownload() {
-        startDownload(null);
-    }
+        List<List<Task>> subTasksList = new ArrayList<List<Task>>();
+        for(int i=0;i<threads;i++) {
+            subTasksList.add(new ArrayList<Task>());
+        }
 
-    public void startDownload(final String infoTemplate) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for (Task task : tasks) {
-                    try {
-                        downFile(task.remote, task.path, task.fileName, task.downloadProgress);
-                        success++;
-                        if (infoTemplate != null) {
-                            context.showInfo(String.format(infoTemplate, success, tasks.size()));
-                        }
-                    } catch (IOException e) {
-                        fail++;
-                    }
-                    task.clear();
-                }
-                if (successCallback != null) {
-                    successCallback.callback(success, fail, tasks.size());
-                }
-                tasks.clear();
+        for(int i=0;i<tasks.size();i++) {
+            subTasksList.get(i % threads).add(tasks.get(i));
+        }
+
+        for(List<Task> subTasks : subTasksList) {
+            if(subTasks.size() > 0) {
+                new Thread(new DownloadThread(subTasks)).start();
             }
-        }).start();
+        }
     }
 
     public void downFile(String remote, String path, String fileName, DownloadProgress downloadProgress)
@@ -121,15 +118,15 @@ public class Downloader {
         this.successCallback = downloaderCallback;
     }
 
+    public void progressCallback(DownloaderCallback progressCallback) {
+        this.progressCallback = progressCallback;
+    }
+
     private static class Task {
         private String remote;
         private String path;
         private String fileName;
         private DownloadProgress downloadProgress;
-
-        public Task(String remote, String path) {
-            this(remote, path, null, null);
-        }
 
         public Task(String remote, String path, String fileName, DownloadProgress downloadProgress) {
             this.remote = remote;
@@ -158,6 +155,34 @@ public class Downloader {
             fileName = null;
             downloadProgress = null;
         }
+    }
 
+    private class DownloadThread implements Runnable {
+        private List<Task> subTasks;
+
+        public DownloadThread(List<Task> subTasks) {
+            this.subTasks = subTasks;
+        }
+
+        @Override
+        public void run() {
+            for (Task task : subTasks) {
+                try {
+                    downFile(task.remote, task.path, task.fileName, task.downloadProgress);
+                    success++;
+                    if (progressCallback != null) {
+                        progressCallback.callback(success, fail, tasks.size());
+                    }
+                } catch (IOException e) {
+                    fail++;
+                }
+                task.clear();
+            }
+            doneCount ++;
+            if (doneCount == threads && successCallback != null) {
+                successCallback.callback(success, fail, tasks.size());
+            }
+            subTasks.clear();
+        }
     }
 }
