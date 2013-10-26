@@ -31,6 +31,11 @@ public class NewTokenAction extends BaseAction {
         if(tokenParent != null && tokenParent.isTokenable()) {
             String tokenId = tokenParent.nextTokenId();
             token = Utils.getDbHelper().loadByIdWithNull(Integer.parseInt(tokenId));
+            if(token == null) {
+                tokenParent.resetTokenId();
+                tokenId = tokenParent.nextTokenId();
+                token = Utils.getDbHelper().loadByIdWithNull(Integer.parseInt(tokenId));
+            }
         }
 
         if(token == null) {

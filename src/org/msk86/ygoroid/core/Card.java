@@ -398,6 +398,10 @@ public class Card implements SelectableItem, Drawable, Bmpable {
         return String.valueOf(Integer.valueOf(id) + tokenSerial);
     }
 
+    public void resetTokenId() {
+        tokenSerial = 0;
+    }
+
     public void setCategory(int category) {
         this.category = category;
     }
