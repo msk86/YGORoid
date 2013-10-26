@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">YGORoid</string>
+    <string name="hint">http://my-card.in/roid/zh/hint.html</string>
+    <string name="feedback">https://jinshuju.net/f/V62e4g</string>
+    <string name="upgrade_check">http://my-card.in/roid/upgrade-zh-TW.json</string>
+    <string name="database_check">http://my-card.in/roid/database-zh-TW.json</string>
+    <string name="pics_api" formatted="false">http://my-card.in/cards/image.json</string>
+    <string name="pics_url_backup" formatted="false">http://images.my-card.in/%s.jpg</string>
+
+    <string name="wifi_check" formatted="false">不是WIFI環境，是否要下載數據庫和卡圖？</string>
+    <string name="database_updating" formatted="false">正在更新數據庫[%s] %.1f%%，請更新完成後再開始決鬥。</string>
+    <string name="database_updated" formatted="false">數據庫[%s]更新完成。</string>
+    <string name="remote_error" formatted="false">無法獲取遠端文件[%s]。</string>
+    <string name="pics_updating" formatted="false">正在更新卡圖[%d/%d]…</string>
+    <string name="pics_updated" formatted="false">卡圖更新完成。</string>
+    <string name="pics_update_failed" formatted="false">[%d]張更新失敗。</string>
+
+    <string name="MENU_CARD_BACK_TO_BOTTOM_OF_DECK">回牌組底</string>
+    <string name="MENU_CARD_CLOSE_REMOVE">里側除外</string>
+    <string name="MENU_DECK_SHUFFLE">洗切</string>
+    <string name="MENU_DECK_CLOSE_REMOVE_TOP">頂牌里側除外</string>
+    <string name="MENU_DECK_REVERSE">牌組翻轉</string>
+    <string name="MENU_SHOW_HAND">展示手牌</string>
+    <string name="MENU_HIDE_HAND">覆蓋手牌</string>
+    <string name="MENU_SHUFFLE_HAND">洗切手牌</string>
+    <string name="MENU_RESTART">重新開始</string>
+    <string name="MENU_CHANGE_DECK">更換牌組</string>
+    <string name="MENU_SIDE">換副牌組</string>
+    <string name="MENU_CARD_SEARCH">快速卡查</string>
+    <string name="MENU_DECK_BUILDER">組卡器</string>
+    <string name="MENU_TOGGLE">開關設置</string>
+    <string name="MENU_GRAVITY_TOGGLE">重力感應</string>
+    <string name="MENU_AUTO_SHUFFLE_TOGGLE">牌組自動洗切</string>
+    <string name="MENU_FPS_TOGGLE">顯示FPS</string>
+    <string name="MENU_MIRROR_DISPLAY">鏡像顯示</string>
+    <string name="MENU_HINT">操作說明</string>
+    <string name="MENU_FEEDBACK">問題反饋</string>
+    <string name="MENU_EXIT">退出</string>
+    <string name="MENU_TOGGLE_ON">開</string>
+    <string name="MENU_TOGGLE_OFF">關</string>
+
+    <string name="ATTRIBUTE_EARTH">地</string>
+    <string name="ATTRIBUTE_WATER">水</string>
+    <string name="ATTRIBUTE_FIRE">炎</string>
+    <string name="ATTRIBUTE_WIND">風</string>
+    <string name="ATTRIBUTE_LIGHT">光</string>
+    <string name="ATTRIBUTE_DARK">闇</string>
+    <string name="ATTRIBUTE_DEVINE">神</string>
+
+    <string name="DECK">牌組</string>
+    <string name="EX">額外</string>
+    <string name="GRAVEYARD">墓地</string>
+    <string name="REMOVED">除外</string>
+    <string name="TEMPORARY">臨時</string>
+
+    <string name="TYPE_NORMAL">通常</string>
+    <string name="TYPE_EFFECT">效果</string>
+    <string name="TYPE_FUSION">融合</string>
+    <string name="TYPE_RITUAL">儀式</string>
+    <string name="TYPE_SPIRIT">靈魂</string>
+    <string name="TYPE_UNION">聯合</string>
+    <string name="TYPE_DUAL">二重</string>
+    <string name="TYPE_TUNER">協調</string>
+    <string name="TYPE_SYNCHRO">同調</string>
+    <string name="TYPE_TOKEN">代幣</string>
+    <string name="TYPE_QUICKPLAY">速攻</string>
+    <string name="TYPE_CONTINUOUS">永續</string>
+    <string name="TYPE_EQUIP">裝備</string>
+    <string name="TYPE_FIELD">場地</string>
+    <string name="TYPE_COUNTER">反擊</string>
+    <string name="TYPE_FLIP">反轉</string>
+    <string name="TYPE_TOON">卡通</string>
+    <string name="TYPE_XYZ">XYZ</string>
+
+    <string name="SAVE_SUCCESS" formatted="false">已保存[%s]。主牌組:%d，額外:%d，副牌組:%d。</string>
+    <string name="SAVE_FAIL" formatted="false">保存[%s]失敗。</string>
+
+    <string name="ERROR_MAIN" formatted="false">主牌組卡片數量[%d]不符合要求。</string>
+    <string name="ERROR_EX" formatted="false">额外卡组卡片數量[%d]不符合要求。</string>
+    <string name="ERROR_SIDE" formatted="false">副卡组卡片數量[%d]不符合要求。</string>
+    <string name="ERROR_CARD" formatted="false">卡片%s數量不符合要求。</string>
+
+    <string name="RACE_WARRIOR">戰士</string>
+    <string name="RACE_SPELLCASTER">魔法師</string>
+    <string name="RACE_FAIRY">天使</string>
+    <string name="RACE_FIEND">惡魔</string>
+    <string name="RACE_ZOMBIE">不死</string>
+    <string name="RACE_MACHINE">機械</string>
+    <string name="RACE_AQUA">水</string>
+    <string name="RACE_PYRO">炎</string>
+    <string name="RACE_ROCK">岩石</string>
+    <string name="RACE_WINDBEAST">鳥獸</string>
+    <string name="RACE_PLANT">植物</string>
+    <string name="RACE_INSECT">昆蟲</string>
+    <string name="RACE_THUNDER">雷</string>
+    <string name="RACE_DRAGON">龍</string>
+    <string name="RACE_BEAST">獸</string>
+    <string name="RACE_BEASTWARRIOR">獸戰士</string>
+    <string name="RACE_DINOSAUR">恐龍</string>
+    <string name="RACE_FISH">魚</string>
+    <string name="RACE_SEASERPENT">海龍</string>
+    <string name="RACE_REPTILE">爬蟲</string>
+    <string name="RACE_PSYCHO">念動力</string>
+    <string name="RACE_DEVINE">幻神獸</string>
+    <string name="RACE_CREATORGOD">創世神</string>
+
+    <string name="TYPE_MONSTER">怪獸</string>
+    <string name="TYPE_SPELL">魔法</string>
+    <string name="TYPE_TRAP">陷阱</string>
+
+    <string name="CRASH_WARNING">很抱歉，程式出現異常，即將退出。如有可能，請發送錯誤日誌給作者。</string>
+
+    <string name="NEW_VERSION" formatted="false">發現新版本程式[V%s]，不更新程式就不能更新最新卡片哦！更新嗎？</string>
+
+    <string name="INPUT_LP">請輸入LP</string>
+
+    <string name="CONFIRM_YES">確定</string>
+    <string name="CONFIRM_SAVE">保存</string>
+    <string name="CONFIRM_NO">取消</string>
+
+    <string name="CHOOSE_DECK">請選擇牌組</string>
+    <string name="NEW_DECK">新牌組…</string>
+    <string name="DECK_NAME">請輸入牌組名</string>
+    <string name="CARD_NAME">請輸入卡名</string>
+    <string name="CHANGE_SIDE">副牌組更換完成？</string>
+    <string name="DECK_BUILDER">放棄決鬥開始組卡？</string>
+
+    <string name="QUIT_DECK_BUILDER">確定退出組卡，開始決鬥嗎？</string>
+    <string name="QUIT">確定要退出程式嗎？</string>
+
+    <string name="CARD_NOT_EXIST">卡片不存在！您可能需要更新數據庫文件！</string>
+    <string name="DB_NOT_EXIST">"數據庫[%s]錯誤或不存在！"</string>
+
+    <string name="key_word">關鍵字</string>
+    <string name="btn_open">打開</string>
+    <string name="btn_save">保存</string>
+    <string name="btn_save_as">另存</string>
+
+</resources>

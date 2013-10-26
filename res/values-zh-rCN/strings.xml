@@ -23,7 +23,7 @@
     <string name="MENU_DECK_REVERSE">卡组翻转</string>
     <string name="MENU_SHOW_HAND">展示手牌</string>
     <string name="MENU_HIDE_HAND">覆盖手牌</string>
-    <string name="MENU_SHUFFLE_HAND">切洗手牌</string>
+    <string name="MENU_SHUFFLE_HAND">洗切手牌</string>
     <string name="MENU_RESTART">重新开始</string>
     <string name="MENU_CHANGE_DECK">更换卡组</string>
     <string name="MENU_SIDE">换副卡组</string>
@@ -31,7 +31,7 @@
     <string name="MENU_DECK_BUILDER">组卡器</string>
     <string name="MENU_TOGGLE">开关设置</string>
     <string name="MENU_GRAVITY_TOGGLE">重力感应</string>
-    <string name="MENU_AUTO_SHUFFLE_TOGGLE">卡组自动切洗</string>
+    <string name="MENU_AUTO_SHUFFLE_TOGGLE">卡组自动洗切</string>
     <string name="MENU_FPS_TOGGLE">显示FPS</string>
     <string name="MENU_MIRROR_DISPLAY">镜像显示</string>
     <string name="MENU_HINT">操作说明</string>
