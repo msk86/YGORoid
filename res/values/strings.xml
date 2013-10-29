@@ -8,6 +8,8 @@
     <string name="pics_api" formatted="false">http://my-card.in/cards/image.json</string>
     <string name="pics_url_backup" formatted="false">http://images.my-card.in/%s.jpg</string>
 
+    <string name="startup_hint" formatted="false">Click MENU key of mobile phone or scroll me up to start duel!</string>
+
     <string name="wifi_check" formatted="false">Not under WIFI environment, still download the database and card pics?</string>
     <string name="database_updating" formatted="false">Updating database [%s] %.1f%%, please start duel after updated.</string>
     <string name="database_updated" formatted="false">Database [%s] updated.</string>

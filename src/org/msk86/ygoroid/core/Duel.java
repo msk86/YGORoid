@@ -41,6 +41,7 @@ public class Duel implements Item, Drawable {
 
     public Duel() {
         start(null, null, null);
+        window.setInfo(Utils.s(R.string.startup_hint));
     }
 
     public void start(String deck) {

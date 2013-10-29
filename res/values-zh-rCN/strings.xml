@@ -8,6 +8,8 @@
     <string name="pics_api" formatted="false">http://my-card.in/cards/image.json</string>
     <string name="pics_url_backup" formatted="false">http://images.my-card.in/%s.jpg</string>
 
+    <string name="startup_hint" formatted="false">点击手机菜单键或向上滑动我来开始决斗！</string>
+
     <string name="wifi_check" formatted="false">不是WIFI环境，是否要下载数据库和卡图？</string>
     <string name="database_updating" formatted="false">正在更新数据库[%s] %.1f%%，请更新完成后再开始决斗。</string>
     <string name="database_updated" formatted="false">数据库[%s]更新完成。</string>
