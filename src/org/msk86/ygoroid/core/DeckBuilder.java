@@ -52,6 +52,7 @@ public class DeckBuilder implements Drawable {
 
     private void setFullCurrentDeckName(String name) {
         if (name == null) {
+            orgDeckName = null;
             currentDeckName = null;
             return;
         }
