@@ -138,5 +138,6 @@
     <string name="btn_open">Open</string>
     <string name="btn_save">Save</string>
     <string name="btn_save_as">SavAs</string>
+    <string name="btn_search_criteria">Filter</string>
 
 </resources>

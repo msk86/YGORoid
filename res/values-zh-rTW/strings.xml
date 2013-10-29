@@ -138,5 +138,6 @@
     <string name="btn_open">打開</string>
     <string name="btn_save">保存</string>
     <string name="btn_save_as">另存</string>
+    <string name="btn_search_criteria">條件</string>
 
 </resources>
