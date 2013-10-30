@@ -6,7 +6,6 @@ import android.text.StaticLayout;
 import android.text.TextPaint;
 import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.core.tool.BmpCache;
-import org.msk86.ygoroid.core.tool.QuickFix;
 import org.msk86.ygoroid.utils.Configuration;
 import org.msk86.ygoroid.utils.Utils;
 
@@ -81,8 +80,6 @@ public class Card implements SelectableItem, Drawable, Bmpable {
         this.positive = true;
         this.set = false;
         bmpCache = new BmpCache(this);
-
-        QuickFix.fix(this);
     }
 
     public String getId() {
@@ -385,7 +382,8 @@ public class Card implements SelectableItem, Drawable, Bmpable {
     }
 
     public boolean isTokenable() {
-        return (category & Const.CATEGORY_TOKEN) == Const.CATEGORY_TOKEN;
+        return (category & Const.CATEGORY_TOKEN) == Const.CATEGORY_TOKEN ||
+                ((desc.contains("衍生物」") || desc.contains("Token\"") || desc.contains("Tokens\"") || desc.contains("代幣」")));
     }
 
 
