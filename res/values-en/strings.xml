@@ -140,4 +140,12 @@
     <string name="btn_save_as">SavAs</string>
     <string name="btn_search_criteria">Filter</string>
 
+    <string name="lbl_filter">Search Filter</string>
+    <string name="lbl_type">Type:</string>
+    <string name="lbl_race">Race:</string>
+    <string name="lbl_attr">Attr:</string>
+    <string name="lbl_atk">ATK:</string>
+    <string name="lbl_def">DEF:</string>
+    <string name="lbl_effect">Effect:</string>
+
 </resources>

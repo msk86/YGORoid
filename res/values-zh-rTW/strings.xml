@@ -140,4 +140,12 @@
     <string name="btn_save_as">另存</string>
     <string name="btn_search_criteria">條件</string>
 
+    <string name="lbl_filter">查詢條件</string>
+    <string name="lbl_type">類型:</string>
+    <string name="lbl_race">種族:</string>
+    <string name="lbl_attr">屬性:</string>
+    <string name="lbl_atk">攻擊:</string>
+    <string name="lbl_def">防禦:</string>
+    <string name="lbl_effect">效果:</string>
+
 </resources>

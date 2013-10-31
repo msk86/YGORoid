@@ -13,7 +13,7 @@
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="类型:"/>
+                    android:text="@string/lbl_type"/>
             <Spinner
                     android:id="@+id/search_type"
                     android:layout_width="0dip"
@@ -33,7 +33,7 @@
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="种族:"/>
+                    android:text="@string/lbl_race"/>
             <Spinner
                     android:id="@+id/search_race"
                     android:layout_width="0dip"
@@ -48,7 +48,7 @@
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="属性:"/>
+                    android:text="@string/lbl_attr"/>
             <Spinner
                     android:id="@+id/search_attr"
                     android:layout_width="0dip"
@@ -67,7 +67,7 @@
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="攻击:"/>
+                    android:text="@string/lbl_atk"/>
             <EditText
                     android:id="@+id/search_min_atk"
                     android:layout_width="0dip"
@@ -91,7 +91,7 @@
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="防御:"/>
+                    android:text="@string/lbl_def"/>
             <EditText
                     android:id="@+id/search_min_def"
                     android:layout_width="0dip"
@@ -115,7 +115,7 @@
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="效果:"/>
+                    android:text="@string/lbl_effect"/>
             <EditText
                     android:id="@+id/search_desc"
                     android:layout_width="0dip"

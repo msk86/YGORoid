@@ -39,7 +39,7 @@ public class DeckBuilderView extends YGOView {
     private InfoWindow infoWindow;
     private ShowCardWindow cardWindow;
 
-    private SearchCriteriaFilter filter;
+    private SearchFilter filter;
 
     public DeckBuilderView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -49,7 +49,7 @@ public class DeckBuilderView extends YGOView {
         mGestureDetector = new GestureDetector(new DeckGestureListener(this));
         initSaveAsDialog();
 
-        filter = new SearchCriteriaFilter();
+        filter = new SearchFilter();
         //test
         filter.show();
 
@@ -179,8 +179,8 @@ public class DeckBuilderView extends YGOView {
         EditText searchTextView = (EditText) Utils.getContext().findViewById(R.id.search_text);
         searchTextView.setOnEditorActionListener(new OnSearchTextEditorActionListener());
 
-        Button criteriaBtn = (Button) Utils.getContext().findViewById(R.id.search_criteria_btn);
-        criteriaBtn.setOnClickListener(new OnSearchCriteriaClickListener());
+        Button filterBtn = (Button) Utils.getContext().findViewById(R.id.search_filter_btn);
+        filterBtn.setOnClickListener(new OnSearchFilterClickListener());
     }
 
     private void registerButtonEvent() {
@@ -273,7 +273,7 @@ public class DeckBuilderView extends YGOView {
         }
     }
 
-    private class OnSearchCriteriaClickListener implements OnClickListener {
+    private class OnSearchFilterClickListener implements OnClickListener {
         @Override
         public void onClick(View view) {
             filter.show();

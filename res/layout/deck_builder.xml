@@ -30,7 +30,7 @@
                     android:singleLine="true"
                     android:cursorVisible="false"
                     android:hint="@string/key_word"/>
-            <Button android:id="@+id/search_criteria_btn" android:layout_width="wrap_content"
+            <Button android:id="@+id/search_filter_btn" android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:text="@string/btn_search_criteria"
                     android:textSize="8sp" android:layout_alignRight="@id/search_text"/>
             <LinearLayout

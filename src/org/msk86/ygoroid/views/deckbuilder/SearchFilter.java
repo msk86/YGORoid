@@ -14,9 +14,9 @@ import org.msk86.ygoroid.core.CardType;
 import org.msk86.ygoroid.core.Race;
 import org.msk86.ygoroid.utils.Utils;
 
-public class SearchCriteriaFilter {
+public class SearchFilter {
 
-    View searchCriteriaView;
+    View searchFilterView;
     AlertDialog dialog;
 
     private AlertDialog getDialog() {
@@ -29,11 +29,11 @@ public class SearchCriteriaFilter {
     private void create() {
 
         LayoutInflater layoutInflater = Utils.getContext().getLayoutInflater();
-        searchCriteriaView = layoutInflater.inflate(R.layout.search_criteria, null);
+        searchFilterView = layoutInflater.inflate(R.layout.search_filter, null);
 
         this.dialog = new AlertDialog.Builder(Utils.getContext())
-                .setTitle("查询条件")
-                .setView(searchCriteriaView)
+                .setTitle(Utils.s(R.string.lbl_filter))
+                .setView(searchFilterView)
                 .setPositiveButton(Utils.s(R.string.CONFIRM_YES), null)
                 .setNegativeButton(Utils.s(R.string.CONFIRM_NO), null)
                 .create();
@@ -42,13 +42,13 @@ public class SearchCriteriaFilter {
     }
 
     private void registerInputEvent() {
-        EditText minAtk = (EditText) searchCriteriaView.findViewById(R.id.search_min_atk);
+        EditText minAtk = (EditText) searchFilterView.findViewById(R.id.search_min_atk);
         minAtk.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE
                         || actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
-                    EditText maxAtk = (EditText) searchCriteriaView.findViewById(R.id.search_max_atk);
+                    EditText maxAtk = (EditText) searchFilterView.findViewById(R.id.search_max_atk);
                     if (maxAtk.getText().length() == 0) {
                         maxAtk.setText(textView.getText());
                     }
@@ -56,13 +56,13 @@ public class SearchCriteriaFilter {
                 return false;
             }
         });
-        EditText minDef = (EditText) searchCriteriaView.findViewById(R.id.search_min_def);
+        EditText minDef = (EditText) searchFilterView.findViewById(R.id.search_min_def);
         minDef.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE
                         || actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
-                    EditText maxDef = (EditText) searchCriteriaView.findViewById(R.id.search_max_def);
+                    EditText maxDef = (EditText) searchFilterView.findViewById(R.id.search_max_def);
                     if (maxDef.getText().length() == 0) {
                         maxDef.setText(textView.getText());
                     }
@@ -80,19 +80,19 @@ public class SearchCriteriaFilter {
     }
 
     private void createSearchTypeValues() {
-        Spinner searchType = (Spinner) searchCriteriaView.findViewById(R.id.search_type);
+        Spinner searchType = (Spinner) searchFilterView.findViewById(R.id.search_type);
         ArrayAdapter<CardType> adapter = new ArrayAdapter<CardType>(Utils.getContext(), android.R.layout.simple_spinner_item, CardType.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         searchType.setAdapter(adapter);
 
-        Spinner searchSubType = (Spinner) searchCriteriaView.findViewById(R.id.search_sub_type);
+        Spinner searchSubType = (Spinner) searchFilterView.findViewById(R.id.search_sub_type);
         searchSubType.setEnabled(false);
 
         searchType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 CardType type = CardType.values()[i];
-                Spinner searchSubType = (Spinner) searchCriteriaView.findViewById(R.id.search_sub_type);
+                Spinner searchSubType = (Spinner) searchFilterView.findViewById(R.id.search_sub_type);
                 switch (type) {
                     case NULL:
                         searchSubType.setEnabled(false);
@@ -119,7 +119,7 @@ public class SearchCriteriaFilter {
     }
 
     private void createSearchSubTypeValues(CardSubType[] subTypes) {
-        Spinner searchSubType = (Spinner) searchCriteriaView.findViewById(R.id.search_sub_type);
+        Spinner searchSubType = (Spinner) searchFilterView.findViewById(R.id.search_sub_type);
 
         ArrayAdapter<CardSubType> adapter = new ArrayAdapter<CardSubType>(Utils.getContext(), android.R.layout.simple_spinner_item, subTypes);
 
@@ -128,14 +128,14 @@ public class SearchCriteriaFilter {
     }
 
     private void createSearchRaceValues() {
-        Spinner searchRace = (Spinner) searchCriteriaView.findViewById(R.id.search_race);
+        Spinner searchRace = (Spinner) searchFilterView.findViewById(R.id.search_race);
         ArrayAdapter<Race> adapter = new ArrayAdapter<Race>(Utils.getContext(), android.R.layout.simple_spinner_item, Race.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         searchRace.setAdapter(adapter);
     }
 
     private void createSearchAttrValues() {
-        Spinner searchAttr = (Spinner) searchCriteriaView.findViewById(R.id.search_attr);
+        Spinner searchAttr = (Spinner) searchFilterView.findViewById(R.id.search_attr);
         ArrayAdapter<Attribute> adapter = new ArrayAdapter<Attribute>(Utils.getContext(), android.R.layout.simple_spinner_item, Attribute.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         searchAttr.setAdapter(adapter);
@@ -151,21 +151,21 @@ public class SearchCriteriaFilter {
     }
 
     public void clear() {
-        Spinner searchType = (Spinner) searchCriteriaView.findViewById(R.id.search_type);
+        Spinner searchType = (Spinner) searchFilterView.findViewById(R.id.search_type);
         searchType.setSelection(0);
-        Spinner searchSubType = (Spinner) searchCriteriaView.findViewById(R.id.search_sub_type);
+        Spinner searchSubType = (Spinner) searchFilterView.findViewById(R.id.search_sub_type);
         searchSubType.setSelection(0);
-        Spinner searchRace = (Spinner) searchCriteriaView.findViewById(R.id.search_race);
+        Spinner searchRace = (Spinner) searchFilterView.findViewById(R.id.search_race);
         searchRace.setSelection(0);
-        Spinner searchAttr = (Spinner) searchCriteriaView.findViewById(R.id.search_attr);
+        Spinner searchAttr = (Spinner) searchFilterView.findViewById(R.id.search_attr);
         searchAttr.setSelection(0);
-        EditText minAtk = (EditText) searchCriteriaView.findViewById(R.id.search_min_atk);
+        EditText minAtk = (EditText) searchFilterView.findViewById(R.id.search_min_atk);
         minAtk.setText("");
-        EditText maxAtk = (EditText) searchCriteriaView.findViewById(R.id.search_max_atk);
+        EditText maxAtk = (EditText) searchFilterView.findViewById(R.id.search_max_atk);
         maxAtk.setText("");
-        EditText minDef = (EditText) searchCriteriaView.findViewById(R.id.search_min_def);
+        EditText minDef = (EditText) searchFilterView.findViewById(R.id.search_min_def);
         minDef.setText("");
-        EditText maxDef = (EditText) searchCriteriaView.findViewById(R.id.search_max_def);
+        EditText maxDef = (EditText) searchFilterView.findViewById(R.id.search_max_def);
         maxDef.setText("");
     }
 }
