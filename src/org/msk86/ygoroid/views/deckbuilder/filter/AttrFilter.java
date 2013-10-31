@@ -12,11 +12,6 @@ public class AttrFilter implements CardFilter {
     }
 
     @Override
-    public boolean accept(Card card) {
-        return attr == Attribute.NULL || card.getAttribute() == attr;
-    }
-
-    @Override
     public String where() {
         if(!isValid()) {
             return "";

@@ -140,10 +140,10 @@
     <string name="btn_save_as">另存</string>
     <string name="btn_search_criteria">条件</string>
 
-    <string name="lbl_filter">查询条件</string>
     <string name="lbl_type">类型:</string>
     <string name="lbl_race">种族:</string>
     <string name="lbl_attr">属性:</string>
+    <string name="lbl_level">星数:</string>
     <string name="lbl_atk">攻击:</string>
     <string name="lbl_def">防御:</string>
     <string name="lbl_effect">效果:</string>

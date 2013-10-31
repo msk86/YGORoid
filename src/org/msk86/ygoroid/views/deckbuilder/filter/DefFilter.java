@@ -13,19 +13,6 @@ public class DefFilter implements CardFilter {
     }
 
     @Override
-    public boolean accept(Card card) {
-        boolean accept = true;
-        if(min.length() != 0) {
-            accept &= card.getDef() >= Float.parseFloat(min);
-        }
-        if(max.length() != 0) {
-            accept &= card.getDef() <= Float.parseFloat(max);
-        }
-        return accept;
-    }
-
-
-    @Override
     public String where() {
         String w = "";
         if(min.length() != 0) {

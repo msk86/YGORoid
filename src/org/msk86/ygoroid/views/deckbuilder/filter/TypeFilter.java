@@ -16,11 +16,6 @@ public class TypeFilter implements CardFilter {
     }
 
     @Override
-    public boolean accept(Card card) {
-        return type == CardType.NULL || (card.getType() == type && (subType == CardSubType.NULL || card.getSubTypes().contains(subType)));
-    }
-
-    @Override
     public String where() {
         if(!isValid()) {
             return "";

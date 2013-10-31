@@ -13,15 +13,6 @@ public class EffectFilter implements CardFilter {
     }
 
     @Override
-    public boolean accept(Card card) {
-        boolean accept = true;
-        for(String effect : effects) {
-            accept &= card.getDesc().contains(effect);
-        }
-        return accept;
-    }
-
-    @Override
     public String where() {
         String w = "";
         for(String effect : effects) {

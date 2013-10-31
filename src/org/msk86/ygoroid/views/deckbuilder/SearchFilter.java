@@ -43,7 +43,6 @@ public class SearchFilter {
         searchFilterView = layoutInflater.inflate(R.layout.search_filter, null);
 
         this.dialog = new AlertDialog.Builder(Utils.getContext())
-                .setTitle(Utils.s(R.string.lbl_filter))
                 .setView(searchFilterView)
                 .setPositiveButton(Utils.s(R.string.CONFIRM_YES), new DialogInterface.OnClickListener() {
                     @Override
@@ -93,7 +92,12 @@ public class SearchFilter {
                 return false;
             }
         });
+    }
 
+    private void initEnable() {
+        Spinner searchSubType = (Spinner) searchFilterView.findViewById(R.id.search_sub_type);
+        searchSubType.setEnabled(false);
+        setMonsterRelatedEnable(false);
     }
 
     private void createSpinnerValues() {
@@ -108,9 +112,6 @@ public class SearchFilter {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         searchType.setAdapter(adapter);
 
-        Spinner searchSubType = (Spinner) searchFilterView.findViewById(R.id.search_sub_type);
-        searchSubType.setEnabled(false);
-
         searchType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -119,18 +120,22 @@ public class SearchFilter {
                 switch (type) {
                     case NULL:
                         searchSubType.setEnabled(false);
+                        setMonsterRelatedEnable(false);
                         searchSubType.setSelection(0);
                         break;
                     case MONSTER:
                         searchSubType.setEnabled(true);
+                        setMonsterRelatedEnable(true);
                         createSearchSubTypeValues(new CardSubType[]{CardSubType.NULL, CardSubType.NORMAL, CardSubType.EFFECT, CardSubType.TUNER, CardSubType.FUSION, CardSubType.RITUAL, CardSubType.SYNC, CardSubType.XYZ, CardSubType.DUAL, CardSubType.FLIP, CardSubType.SPIRIT, CardSubType.TOON, CardSubType.UNION});
                         break;
                     case SPELL:
                         searchSubType.setEnabled(true);
+                        setMonsterRelatedEnable(false);
                         createSearchSubTypeValues(new CardSubType[]{CardSubType.NULL, CardSubType.NORMAL, CardSubType.QUICK_PLAY, CardSubType.EQUIP, CardSubType.RITUAL, CardSubType.FIELD, CardSubType.CONTINUOUS});
                         break;
                     case TRAP:
                         searchSubType.setEnabled(true);
+                        setMonsterRelatedEnable(false);
                         createSearchSubTypeValues(new CardSubType[]{CardSubType.NULL, CardSubType.NORMAL, CardSubType.CONTINUOUS, CardSubType.COUNTER});
                 }
             }
@@ -139,6 +144,31 @@ public class SearchFilter {
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
+    }
+
+    private void setMonsterRelatedEnable(boolean enable) {
+        Spinner searchRace = (Spinner) searchFilterView.findViewById(R.id.search_race);
+        searchRace.setEnabled(enable);
+        searchRace.setSelection(0);
+        Spinner searchAttr = (Spinner) searchFilterView.findViewById(R.id.search_attr);
+        searchAttr.setEnabled(enable);
+        searchAttr.setSelection(0);
+        EditText level = (EditText) searchFilterView.findViewById(R.id.search_level);
+        level.setEnabled(enable);
+        level.setText("");
+        EditText minAtk = (EditText) searchFilterView.findViewById(R.id.search_min_atk);
+        minAtk.setEnabled(enable);
+        minAtk.setText("");
+        EditText maxAtk = (EditText) searchFilterView.findViewById(R.id.search_max_atk);
+        maxAtk.setEnabled(enable);
+        maxAtk.setText("");
+        EditText minDef = (EditText) searchFilterView.findViewById(R.id.search_min_def);
+        minDef.setEnabled(enable);
+        minDef.setText("");
+        EditText maxDef = (EditText) searchFilterView.findViewById(R.id.search_max_def);
+        maxDef.setEnabled(enable);
+        maxDef.setText("");
+
     }
 
     private void createSearchSubTypeValues(CardSubType[] subTypes) {
@@ -166,6 +196,7 @@ public class SearchFilter {
 
     public void show() {
         getDialogInstance();
+        initEnable();
         dialog.show();
         WindowManager.LayoutParams p = dialog.getWindow().getAttributes();
         p.width = (int) (Utils.screenWidth() * 0.95);
@@ -184,6 +215,8 @@ public class SearchFilter {
         searchRace.setSelection(0);
         Spinner searchAttr = (Spinner) searchFilterView.findViewById(R.id.search_attr);
         searchAttr.setSelection(0);
+        EditText level = (EditText) searchFilterView.findViewById(R.id.search_level);
+        level.setText("");
         EditText minAtk = (EditText) searchFilterView.findViewById(R.id.search_min_atk);
         minAtk.setText("");
         EditText maxAtk = (EditText) searchFilterView.findViewById(R.id.search_max_atk);
@@ -192,6 +225,8 @@ public class SearchFilter {
         minDef.setText("");
         EditText maxDef = (EditText) searchFilterView.findViewById(R.id.search_max_def);
         maxDef.setText("");
+        EditText effect = (EditText) searchFilterView.findViewById(R.id.search_effect);
+        effect.setText("");
     }
 
 
@@ -220,6 +255,9 @@ public class SearchFilter {
         EditText minDef = (EditText) searchFilterView.findViewById(R.id.search_min_def);
         EditText maxDef = (EditText) searchFilterView.findViewById(R.id.search_max_def);
         filters.add(new DefFilter(minDef.getText().toString(), maxDef.getText().toString()));
+
+        EditText level = (EditText) searchFilterView.findViewById(R.id.search_level);
+        filters.add(new LevelFilter(level.getText().toString()));
 
         return filters;
     }

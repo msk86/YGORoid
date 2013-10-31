@@ -13,11 +13,6 @@ public class RaceFilter implements CardFilter {
     }
 
     @Override
-    public boolean accept(Card card) {
-        return race == Race.NULL || card.getRace() == race;
-    }
-
-    @Override
     public String where() {
         if(!isValid()) {
             return "";

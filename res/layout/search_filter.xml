@@ -55,6 +55,23 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="4"/>
         </LinearLayout>
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+            <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/lbl_level"/>
+            <EditText
+                    android:id="@+id/search_level"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:inputType="number"
+                    android:imeOptions="actionDone"/>
+        </LinearLayout>
     </LinearLayout>
     <LinearLayout android:orientation="vertical" android:layout_width="0dip" android:layout_height="fill_parent"
                   android:layout_weight="1">
