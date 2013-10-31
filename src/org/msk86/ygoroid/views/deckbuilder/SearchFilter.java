@@ -196,6 +196,7 @@ public class SearchFilter {
 
     public void show() {
         getDialogInstance();
+        clear();
         initEnable();
         dialog.show();
         WindowManager.LayoutParams p = dialog.getWindow().getAttributes();
