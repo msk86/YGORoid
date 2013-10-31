@@ -1,7 +1,6 @@
 package org.msk86.ygoroid.views.deckbuilder.filter;
 
 import org.msk86.ygoroid.core.Attribute;
-import org.msk86.ygoroid.core.Card;
 
 public class AttrFilter implements CardFilter {
 
@@ -13,7 +12,7 @@ public class AttrFilter implements CardFilter {
 
     @Override
     public String where() {
-        if(!isValid()) {
+        if (!isValid()) {
             return "";
         }
         return " AND d.attribute & " + attr.getCode() + " = " + attr.getCode();

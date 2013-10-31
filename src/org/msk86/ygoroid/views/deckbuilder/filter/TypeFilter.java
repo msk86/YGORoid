@@ -1,9 +1,7 @@
 package org.msk86.ygoroid.views.deckbuilder.filter;
 
-import org.msk86.ygoroid.core.Card;
 import org.msk86.ygoroid.core.CardSubType;
 import org.msk86.ygoroid.core.CardType;
-import org.msk86.ygoroid.core.Race;
 
 public class TypeFilter implements CardFilter {
 
@@ -17,12 +15,12 @@ public class TypeFilter implements CardFilter {
 
     @Override
     public String where() {
-        if(!isValid()) {
+        if (!isValid()) {
             return "";
         }
         String w = " AND d.type & " + type.getCode() + " = " + type.getCode();
 
-        if(subType == CardSubType.NULL) {
+        if (subType == CardSubType.NULL) {
             w += "";
         } else {
             w += " AND d.type & " + subType.getCode() + " = " + subType.getCode();

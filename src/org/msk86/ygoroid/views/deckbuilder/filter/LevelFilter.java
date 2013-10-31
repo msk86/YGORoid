@@ -10,7 +10,7 @@ public class LevelFilter implements CardFilter {
 
     @Override
     public String where() {
-        if(!isValid()) {
+        if (!isValid()) {
             return "";
         }
         return " AND d.level = " + level;

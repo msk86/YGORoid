@@ -70,6 +70,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
                     android:inputType="number"
+                    android:digits="0123456789"
                     android:imeOptions="actionDone"/>
         </LinearLayout>
     </LinearLayout>
@@ -91,6 +92,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:inputType="number"
+                    android:digits="0123456789?？"
                     android:imeOptions="actionDone"/>
             <EditText
                     android:id="@+id/search_max_atk"
@@ -98,6 +100,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:inputType="number"
+                    android:digits="0123456789?？"
                     android:imeOptions="actionDone"/>
         </LinearLayout>
         <LinearLayout
@@ -115,6 +118,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:inputType="number"
+                    android:digits="0123456789?？"
                     android:imeOptions="actionDone"/>
             <EditText
                     android:id="@+id/search_max_def"
@@ -122,6 +126,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:inputType="number"
+                    android:digits="0123456789?？"
                     android:imeOptions="actionDone"/>
         </LinearLayout>
         <LinearLayout

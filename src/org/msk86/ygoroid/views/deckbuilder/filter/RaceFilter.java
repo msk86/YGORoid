@@ -1,7 +1,5 @@
 package org.msk86.ygoroid.views.deckbuilder.filter;
 
-import org.msk86.ygoroid.core.Attribute;
-import org.msk86.ygoroid.core.Card;
 import org.msk86.ygoroid.core.Race;
 
 public class RaceFilter implements CardFilter {
@@ -14,7 +12,7 @@ public class RaceFilter implements CardFilter {
 
     @Override
     public String where() {
-        if(!isValid()) {
+        if (!isValid()) {
             return "";
         }
         return " AND d.race & " + race.getCode() + " = " + race.getCode();
