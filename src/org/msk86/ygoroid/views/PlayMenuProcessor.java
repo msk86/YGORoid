@@ -6,11 +6,11 @@ import android.view.SubMenu;
 import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.action.Action;
 import org.msk86.ygoroid.action.ActionDispatcher;
+import org.msk86.ygoroid.core.*;
 import org.msk86.ygoroid.op.MenuClick;
 import org.msk86.ygoroid.utils.Configuration;
 import org.msk86.ygoroid.utils.Utils;
 import org.msk86.ygoroid.views.dueldisk.DuelDiskView;
-import org.msk86.ygoroid.core.*;
 
 public class PlayMenuProcessor {
 

@@ -2,14 +2,13 @@ package org.msk86.ygoroid.upgrade;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import org.json.JSONObject;
 import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.YGOActivity;
 import org.msk86.ygoroid.utils.Configuration;
 import org.msk86.ygoroid.utils.Utils;
-import org.json.JSONObject;
 
 import java.io.File;
-import java.io.IOException;
 
 public class DatabaseChecker implements Checker {
     private static final String DATABASE_CHECK_URL = Utils.s(R.string.database_check);

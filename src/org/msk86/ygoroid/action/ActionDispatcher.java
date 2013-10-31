@@ -1,13 +1,13 @@
 package org.msk86.ygoroid.action;
 
 import org.msk86.ygoroid.R;
+import org.msk86.ygoroid.core.*;
 import org.msk86.ygoroid.core.tool.Coin;
 import org.msk86.ygoroid.core.tool.Dice;
 import org.msk86.ygoroid.layout.Layout;
+import org.msk86.ygoroid.op.*;
 import org.msk86.ygoroid.utils.Configuration;
 import org.msk86.ygoroid.utils.Utils;
-import org.msk86.ygoroid.core.*;
-import org.msk86.ygoroid.op.*;
 
 public class ActionDispatcher {
 

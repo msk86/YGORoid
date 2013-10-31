@@ -6,9 +6,9 @@ import android.graphics.Rect;
 import android.widget.Toast;
 import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.layout.GridLayout;
+import org.msk86.ygoroid.layout.Layout;
 import org.msk86.ygoroid.utils.Configuration;
 import org.msk86.ygoroid.utils.Utils;
-import org.msk86.ygoroid.layout.Layout;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,6 +1,5 @@
 package org.msk86.ygoroid.action;
 
-import org.msk86.ygoroid.core.*;
 import org.msk86.ygoroid.op.Operation;
 
 public class NextPageDescAction extends BaseAction {

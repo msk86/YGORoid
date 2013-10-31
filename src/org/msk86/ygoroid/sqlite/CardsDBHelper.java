@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.core.Card;
 import org.msk86.ygoroid.core.UserDefinedCard;

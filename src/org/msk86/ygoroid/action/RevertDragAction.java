@@ -1,9 +1,9 @@
 package org.msk86.ygoroid.action;
 
+import org.msk86.ygoroid.core.*;
 import org.msk86.ygoroid.op.Drag;
 import org.msk86.ygoroid.op.Operation;
 import org.msk86.ygoroid.op.StartDrag;
-import org.msk86.ygoroid.core.*;
 
 public class RevertDragAction extends BaseAction {
 
