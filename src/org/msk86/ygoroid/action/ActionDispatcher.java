@@ -31,6 +31,9 @@ public class ActionDispatcher {
             if (infoWindow.getInfoItem() instanceof Card || infoWindow.getInfoItem() instanceof OverRay)
                 action = new OpenCardWindowAction(click);
         }
+        if (click.getContainer() instanceof ShowCardWindow) {
+            action = new NextPageDescAction(click);
+        }
         return action;
     }
 

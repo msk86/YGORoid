@@ -37,6 +37,8 @@ public class DeckGestureListener extends GestureDetector.SimpleOnGestureListener
 
                 view.select(card);
             }
+        } else {
+            view.getCardWindow().nextPage();
         }
         view.updateActionTime();
         return true;

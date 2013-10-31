@@ -278,6 +278,8 @@ public class Duel implements Item, Drawable {
             return currentSelectItemContainer;
         } else if (inSideWindow(x, y)) {
             return sideWindow.layoutAt(x, y);
+        } else if (inShowCardWindow(x, y)) {
+            return cardWindow;
         } else if (inInfo(x, y)) {
             return currentSelectItemContainer;
         }
@@ -354,6 +356,13 @@ public class Duel implements Item, Drawable {
             return false;
         }
         return y >= Utils.unitLength() * 3 && y < Utils.screenHeight() - window.height();
+    }
+
+    public boolean inShowCardWindow(int x, int y) {
+        if(cardWindow == null) {
+            return false;
+        }
+        return x < cardWindow.width();
     }
 
     public boolean inInfo(int x, int y) {

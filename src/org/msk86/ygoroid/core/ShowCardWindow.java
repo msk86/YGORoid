@@ -12,6 +12,7 @@ import org.msk86.ygoroid.utils.Utils;
 public class ShowCardWindow implements Item, Drawable {
     Card card;
     private int specificWidth;
+    private int page;
 
     public ShowCardWindow(Card card) {
         this(card, Utils.totalWidth());
@@ -20,9 +21,13 @@ public class ShowCardWindow implements Item, Drawable {
     public ShowCardWindow(Card card, int width) {
         this.card = card;
         this.specificWidth = width;
+        this.page = 0;
     }
 
 
+    public void nextPage() {
+        page ++;
+    }
 
     @Override
     public void draw(Canvas canvas, int x, int y) {
@@ -62,7 +67,8 @@ public class ShowCardWindow implements Item, Drawable {
         }
         top += lineHeight;
         TextPaint textPaint = new TextPaint(paint);
-        StaticLayout layout = new StaticLayout(card.desc, textPaint, width() - cardWidth - fontSize / 2, Layout.Alignment.ALIGN_NORMAL, 1, 0, true);
+        String pageText = Utils.cutPages(card.desc, page, textPaint, width() - cardWidth - fontSize / 2, height() - top);
+        StaticLayout layout = new StaticLayout(pageText, textPaint, width() - cardWidth - fontSize / 2, Layout.Alignment.ALIGN_NORMAL, 1, 0, true);
         helper.drawLayout(canvas, layout, left, top);
     }
 
