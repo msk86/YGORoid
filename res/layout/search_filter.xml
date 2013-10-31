@@ -117,7 +117,7 @@
                     android:layout_weight="1"
                     android:text="@string/lbl_effect"/>
             <EditText
-                    android:id="@+id/search_desc"
+                    android:id="@+id/search_effect"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="4"

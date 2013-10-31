@@ -46,6 +46,10 @@ public enum Race {
         return NULL;
     }
 
+    public int getCode() {
+        return code;
+    }
+
     @Override
     public String toString() {
         return text;

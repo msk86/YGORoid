@@ -12,19 +12,26 @@ import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.core.Card;
 import org.msk86.ygoroid.core.UserDefinedCard;
 import org.msk86.ygoroid.utils.Utils;
+import org.msk86.ygoroid.views.deckbuilder.filter.CardFilter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CardNameList {
 
     DeckBuilderView deckBuilderView;
     Card selectedCard;
+    List<Card> searchResult;
+    String searchText;
 
     public CardNameList(DeckBuilderView deckBuilderView) {
         this.deckBuilderView = deckBuilderView;
+        this.searchResult = new ArrayList<Card>();
+        this.searchText = "";
     }
 
     public void clearList() {
+        searchResult.clear();
         LinearLayout cardList = (LinearLayout)Utils.getContext().findViewById(R.id.card_list);
         cardList.removeAllViews();
         selectedCard = null;
@@ -33,20 +40,49 @@ public class CardNameList {
     }
 
     public void search(String text) {
-        if(text == null || text.length() == 0) {
-            clearList();
-            return;
+        search(text, new ArrayList<CardFilter>());
+    }
+
+    public void search(List<CardFilter> filters) {
+        search(searchText, filters);
+    }
+
+    public void search(String text, List<CardFilter> filters) {
+        if(text.length() == 0) {
+            boolean filtersNotValid = true;
+            for(CardFilter filter : filters) {
+                filtersNotValid &= !filter.isValid();
+            }
+            if(filtersNotValid) {
+                clearList();
+                searchText = "";
+                return;
+            }
         }
-        List<Card> cards = Utils.getDbHelper().queryByText(text);
+        this.searchText = text;
+        List<Card> cards = Utils.getDbHelper().queryByText(text, filters);
         if (!checkExactQuery(cards, text)) {
             cards.add(new UserDefinedCard(text));
         }
         clearList();
-        addAll(cards);
+        searchResult.addAll(cards);
+        show();
+    }
+
+    private void show() {
+        LinearLayout cardList = (LinearLayout) Utils.getContext().findViewById(R.id.card_list);
+        for(Card card : searchResult) {
+            CardNameView cv = new CardNameView(Utils.getContext(), card);
+            cv.setOnClickListener(new OnClickCardNameListener());
+            cardList.addView(cv);
+        }
     }
 
     private boolean checkExactQuery(List<Card> cards, String text) {
         boolean exact = false;
+        if(text.length() == 0 ){
+            exact = true;
+        }
         for(Card card : cards) {
             if (card.getName().equals(text)) {
                 exact = true;
@@ -54,19 +90,6 @@ public class CardNameList {
             }
         }
         return exact;
-    }
-
-    private void add(Card card) {
-        LinearLayout cardList = (LinearLayout)Utils.getContext().findViewById(R.id.card_list);
-        CardNameView cv = new CardNameView(Utils.getContext(), card);
-        cv.setOnClickListener(new OnClickCardNameListener());
-        cardList.addView(cv);
-    }
-
-    private void addAll(List<Card> cards) {
-        for(Card card : cards) {
-            add(card);
-        }
     }
 
     private class OnClickCardNameListener implements View.OnClickListener {

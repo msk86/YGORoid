@@ -316,6 +316,10 @@ public class Card implements SelectableItem, Drawable, Bmpable {
         return selected;
     }
 
+    public CardType getType() {
+        return type;
+    }
+
     public String cardTypeDesc() {
         StringBuilder result = new StringBuilder();
         result.append(type.toString());
@@ -400,8 +404,24 @@ public class Card implements SelectableItem, Drawable, Bmpable {
         tokenSerial = 0;
     }
 
-    public void setCategory(int category) {
-        this.category = category;
+    public Race getRace() {
+        return race;
+    }
+
+    public Attribute getAttribute() {
+        return attribute;
+    }
+
+    public int getAtk() {
+        return atkInt;
+    }
+
+    public int getDef() {
+        return defInt;
+    }
+
+    public String getDesc() {
+        return desc;
     }
 
     @Override

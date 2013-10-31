@@ -1,6 +1,7 @@
 package org.msk86.ygoroid.views.deckbuilder;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,29 +14,51 @@ import org.msk86.ygoroid.core.CardSubType;
 import org.msk86.ygoroid.core.CardType;
 import org.msk86.ygoroid.core.Race;
 import org.msk86.ygoroid.utils.Utils;
+import org.msk86.ygoroid.views.deckbuilder.filter.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SearchFilter {
 
     View searchFilterView;
     AlertDialog dialog;
+    CardNameList cardNameList;
+    boolean created;
 
-    private AlertDialog getDialog() {
+    public SearchFilter(CardNameList cardNameList) {
+        this.cardNameList = cardNameList;
+        this.created = false;
+    }
+
+    private void getDialogInstance() {
         if (dialog == null) {
             create();
         }
-        return dialog;
     }
 
     private void create() {
-
+        created = true;
         LayoutInflater layoutInflater = Utils.getContext().getLayoutInflater();
         searchFilterView = layoutInflater.inflate(R.layout.search_filter, null);
 
         this.dialog = new AlertDialog.Builder(Utils.getContext())
                 .setTitle(Utils.s(R.string.lbl_filter))
                 .setView(searchFilterView)
-                .setPositiveButton(Utils.s(R.string.CONFIRM_YES), null)
-                .setNegativeButton(Utils.s(R.string.CONFIRM_NO), null)
+                .setPositiveButton(Utils.s(R.string.CONFIRM_YES), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        cardNameList.search(genFilters());
+                        dialog.dismiss();
+                    }
+                })
+                .setNegativeButton(Utils.s(R.string.CONFIRM_NO), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        clear();
+                        dialog.dismiss();
+                    }
+                })
                 .create();
         createSpinnerValues();
         registerInputEvent();
@@ -142,8 +165,7 @@ public class SearchFilter {
     }
 
     public void show() {
-        getDialog();
-
+        getDialogInstance();
         dialog.show();
         WindowManager.LayoutParams p = dialog.getWindow().getAttributes();
         p.width = (int) (Utils.screenWidth() * 0.95);
@@ -151,6 +173,9 @@ public class SearchFilter {
     }
 
     public void clear() {
+        if(!created) {
+            return;
+        }
         Spinner searchType = (Spinner) searchFilterView.findViewById(R.id.search_type);
         searchType.setSelection(0);
         Spinner searchSubType = (Spinner) searchFilterView.findViewById(R.id.search_sub_type);
@@ -167,5 +192,35 @@ public class SearchFilter {
         minDef.setText("");
         EditText maxDef = (EditText) searchFilterView.findViewById(R.id.search_max_def);
         maxDef.setText("");
+    }
+
+
+    public List<CardFilter> genFilters() {
+        if(!created) {
+            return new ArrayList<CardFilter>();
+        }
+        List<CardFilter> filters = new ArrayList<CardFilter>();
+        Spinner searchType = (Spinner) searchFilterView.findViewById(R.id.search_type);
+        Spinner searchSubType = (Spinner) searchFilterView.findViewById(R.id.search_sub_type);
+        filters.add(new TypeFilter((CardType)searchType.getSelectedItem(), (CardSubType)searchSubType.getSelectedItem()));
+
+        Spinner searchRace = (Spinner) searchFilterView.findViewById(R.id.search_race);
+        filters.add(new RaceFilter((Race) searchRace.getSelectedItem()));
+
+        Spinner searchAttr = (Spinner) searchFilterView.findViewById(R.id.search_attr);
+        filters.add(new AttrFilter((Attribute) searchAttr.getSelectedItem()));
+
+        EditText effect = (EditText) searchFilterView.findViewById(R.id.search_effect);
+        filters.add(new EffectFilter(effect.getText().toString()));
+
+        EditText minAtk = (EditText) searchFilterView.findViewById(R.id.search_min_atk);
+        EditText maxAtk = (EditText) searchFilterView.findViewById(R.id.search_max_atk);
+        filters.add(new AtkFilter(minAtk.getText().toString(), maxAtk.getText().toString()));
+
+        EditText minDef = (EditText) searchFilterView.findViewById(R.id.search_min_def);
+        EditText maxDef = (EditText) searchFilterView.findViewById(R.id.search_max_def);
+        filters.add(new DefFilter(minDef.getText().toString(), maxDef.getText().toString()));
+
+        return filters;
     }
 }

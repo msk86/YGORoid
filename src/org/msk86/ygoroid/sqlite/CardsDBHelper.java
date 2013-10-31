@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.core.Card;
 import org.msk86.ygoroid.core.UserDefinedCard;
@@ -11,6 +12,7 @@ import org.msk86.ygoroid.utils.CharSet;
 import org.msk86.ygoroid.utils.Configuration;
 import org.msk86.ygoroid.utils.UnicodeReader;
 import org.msk86.ygoroid.utils.Utils;
+import org.msk86.ygoroid.views.deckbuilder.filter.CardFilter;
 
 import java.io.*;
 import java.util.*;
@@ -141,7 +143,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
     }
 
     private Card loadByName(SQLiteDatabase database, String cardName) {
-        Card card = loadByWholeName(database, cardName);
+        Card card = loadByWholeName(database, cardName, new ArrayList<CardFilter>());
         if (card == null) {
             card = fuzzyLoadByName(database, cardName);
         }
@@ -154,9 +156,13 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         return card;
     }
 
-    private Card loadByWholeName(SQLiteDatabase database, String cardName) {
+    private Card loadByWholeName(SQLiteDatabase database, String cardName, List<CardFilter> filters) {
+        String filterText = "";
+        for(CardFilter filter:filters) {
+            filterText += filter.where();
+        }
         Cursor c = database.query(QUERY_TABLES, QUERY_FIELDS,
-                "t.id = d.id and t.name = ?", new String[]{cardName}, null, null, null);
+                "t.id = d.id and t.name = ?" + filterText, new String[]{cardName}, null, null, null);
         Card card = null;
         if (c.getCount() > 0) {
             c.moveToFirst();
@@ -188,9 +194,13 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         return card;
     }
 
-    private List<Card> fuzzyQueryByName(SQLiteDatabase database, String name) {
+    private List<Card> fuzzyQueryByName(SQLiteDatabase database, String name, List<CardFilter> filters) {
+        String filterText = "";
+        for(CardFilter filter:filters) {
+            filterText += filter.where();
+        }
         Cursor c = database.query(QUERY_TABLES, QUERY_FIELDS,
-                "t.id = d.id and t.name like ?", new String[]{"%" + name + "%"}, null, null, null);
+                "t.id = d.id and t.name like ?" + filterText, new String[]{"%" + name + "%"}, null, null, null);
         List<Card> results = createCards(c);
         c.close();
         return results;
@@ -223,7 +233,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         return card;
     }
 
-    private List<Card> fuzzyQueryByWord(SQLiteDatabase database, String name) {
+    private List<Card> fuzzyQueryByWord(SQLiteDatabase database, String name, List<CardFilter> filters) {
         String[] parts;
         if(UnicodeReader.isEnglish(name)) {
             parts = name.split(" ");
@@ -239,15 +249,24 @@ public class CardsDBHelper extends SQLiteOpenHelper {
             parts[i] = "%" + parts[i] + "%";
         }
 
+        String filterText = "";
+        for(CardFilter filter:filters) {
+            filterText += filter.where();
+        }
+
         Cursor c = database.query(QUERY_TABLES, QUERY_FIELDS,
-                "t.id = d.id" + sqlNamePart, parts, null, null, null);
+                "t.id = d.id" + sqlNamePart + filterText, parts, null, null, null);
 
         return createCards(c);
     }
 
-    private List<Card> fuzzyQueryByDesc(SQLiteDatabase database, String desc) {
+    private List<Card> fuzzyQueryByDesc(SQLiteDatabase database, String desc, List<CardFilter> filters) {
+        String filterText = "";
+        for(CardFilter filter:filters) {
+            filterText += filter.where();
+        }
         Cursor c = database.query(QUERY_TABLES, QUERY_FIELDS,
-                "t.id = d.id and t.desc like ?", new String[]{"%" + desc + "%"}, null, null, null);
+                "t.id = d.id and t.desc like ?" + filterText, new String[]{"%" + desc + "%"}, null, null, null);
         List<Card> results = createCards(c);
         c.close();
         return results;
@@ -289,27 +308,23 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         return card;
     }
 
-    public List<Card> queryByText(String text) {
+    public List<Card> queryByText(String text, List<CardFilter> filters) {
         List<Card> cards = new ArrayList<Card>();
-
-        if (text == null || text.length() == 0) {
-            return cards;
-        }
 
         try {
             SQLiteDatabase database = this.getReadableDatabase();
-            Card card = loadByWholeName(database, text);
+            Card card = loadByWholeName(database, text, filters);
             if (card != null) {
                 cards.add(card);
             }
 
-            List<Card> results = fuzzyQueryByName(database, text);
+            List<Card> results = fuzzyQueryByName(database, text, filters);
             combineCards(cards, results);
 
-            results = fuzzyQueryByWord(database, text);
+            results = fuzzyQueryByWord(database, text, filters);
             combineCards(cards, results);
 
-            results = fuzzyQueryByDesc(database, text);
+            results = fuzzyQueryByDesc(database, text, filters);
             combineCards(cards, results);
 
             database.close();

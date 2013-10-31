@@ -49,9 +49,7 @@ public class DeckBuilderView extends YGOView {
         mGestureDetector = new GestureDetector(new DeckGestureListener(this));
         initSaveAsDialog();
 
-        filter = new SearchFilter();
-        //test
-        filter.show();
+        filter = new SearchFilter(cardNameList);
 
         infoWindow = new InfoWindow(Utils.deckBuilderWidth());
     }
