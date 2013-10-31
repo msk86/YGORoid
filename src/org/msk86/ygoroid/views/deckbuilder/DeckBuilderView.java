@@ -39,6 +39,8 @@ public class DeckBuilderView extends YGOView {
     private InfoWindow infoWindow;
     private ShowCardWindow cardWindow;
 
+    private SearchCriteriaFilter filter;
+
     public DeckBuilderView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -46,6 +48,10 @@ public class DeckBuilderView extends YGOView {
         cardNameList = new CardNameList(this);
         mGestureDetector = new GestureDetector(new DeckGestureListener(this));
         initSaveAsDialog();
+
+        filter = new SearchCriteriaFilter();
+        //test
+        filter.show();
 
         infoWindow = new InfoWindow(Utils.deckBuilderWidth());
     }
@@ -55,8 +61,6 @@ public class DeckBuilderView extends YGOView {
         infoWindow.clearInfo();
         cardWindow = null;
     }
-
-
 
     public void loadDeck(String deck) {
         newDeck();
@@ -87,7 +91,6 @@ public class DeckBuilderView extends YGOView {
         deckBuilder.addToDeck(card);
         updateActionTime();
     }
-
 
 
     @Override
@@ -175,6 +178,9 @@ public class DeckBuilderView extends YGOView {
     private void registerSearchTextEvent() {
         EditText searchTextView = (EditText) Utils.getContext().findViewById(R.id.search_text);
         searchTextView.setOnEditorActionListener(new OnSearchTextEditorActionListener());
+
+        Button criteriaBtn = (Button) Utils.getContext().findViewById(R.id.search_criteria_btn);
+        criteriaBtn.setOnClickListener(new OnSearchCriteriaClickListener());
     }
 
     private void registerButtonEvent() {
@@ -236,7 +242,7 @@ public class DeckBuilderView extends YGOView {
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
             if ("OK".equals(button)) {
-                deckBuilder.saveToDeck(saveAsEdit.getText().toString()+".ydk", false, true);
+                deckBuilder.saveToDeck(saveAsEdit.getText().toString() + ".ydk", false, true);
             }
         }
     }
@@ -260,10 +266,17 @@ public class DeckBuilderView extends YGOView {
             if (actionId == EditorInfo.IME_ACTION_DONE
                     || actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
                 String text = textView.getText().toString();
+                filter.clear();
                 cardNameList.search(text);
             }
-
             return false;
+        }
+    }
+
+    private class OnSearchCriteriaClickListener implements OnClickListener {
+        @Override
+        public void onClick(View view) {
+            filter.show();
         }
     }
 

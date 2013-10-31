@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum CardSubType implements Bmpable {
+    NULL(Const.NULL, "", 0),
     NORMAL(Const.TYPE_NORMAL, Utils.s(R.string.TYPE_NORMAL), R.raw.card_normal_monster),
     EFFECT(Const.TYPE_EFFECT, Utils.s(R.string.TYPE_EFFECT), R.raw.card_effect_monster),
     FUSION(Const.TYPE_FUSION, Utils.s(R.string.TYPE_FUSION), R.raw.card_fusion_monster),
@@ -57,6 +58,9 @@ public enum CardSubType implements Bmpable {
     public static List<CardSubType> getCardSubType(int code) {
         List<CardSubType> types = new ArrayList<CardSubType>();
         for (CardSubType type : CardSubType.values()) {
+            if(type == NULL) {
+                continue;
+            }
             if ((code & type.code) == type.code) {
                 types.add(type);
             }
