@@ -54,7 +54,6 @@ public class Card implements SelectableItem, Drawable, Bmpable {
         this(id, name, desc, 0, 0, 0, 0, 0, 0);
     }
 
-
     public Card(String id, String name, String desc, int typeCode, int attrCode, int raceCode, int level, int atk, int def) {
         this(id, name, desc, typeCode, attrCode, raceCode, level, atk, def, "0", 0);
     }
@@ -252,8 +251,6 @@ public class Card implements SelectableItem, Drawable, Bmpable {
             layout = new StaticLayout(String.valueOf(indicator), textPaint, width, Layout.Alignment.ALIGN_CENTER, 1, 0, true);
         }
         helper.drawLayout(canvas, layout, offsetX, 0);
-
-
     }
 
     private void drawHighLight(Canvas canvas, int x, int y) {
@@ -314,10 +311,6 @@ public class Card implements SelectableItem, Drawable, Bmpable {
     @Override
     public boolean isSelect() {
         return selected;
-    }
-
-    public CardType getType() {
-        return type;
     }
 
     public String cardTypeDesc() {
@@ -404,33 +397,9 @@ public class Card implements SelectableItem, Drawable, Bmpable {
         tokenSerial = 0;
     }
 
-    public Race getRace() {
-        return race;
-    }
-
-    public Attribute getAttribute() {
-        return attribute;
-    }
-
-    public int getAtk() {
-        return atkInt;
-    }
-
-    public int getDef() {
-        return defInt;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
     @Override
     public Card clone() {
         return new Card(id, name, desc, typeCode, attrCode, raceCode, level, atkInt, defInt, aliasId, category);
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
     }
 
     public static class CardComparator implements Comparator<Card> {
