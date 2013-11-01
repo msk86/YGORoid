@@ -92,7 +92,7 @@
     <string name="RACE_AQUA">Aqua</string>
     <string name="RACE_PYRO">Pyro</string>
     <string name="RACE_ROCK">Rock</string>
-    <string name="RACE_WINDBEAST">WindBeast</string>
+    <string name="RACE_WINDBEAST">WingedBeast</string>
     <string name="RACE_PLANT">Plant</string>
     <string name="RACE_INSECT">Insect</string>
     <string name="RACE_THUNDER">thunder</string>
@@ -132,7 +132,7 @@
     <string name="QUIT">Really want to quit YGORoid?</string>
 
     <string name="CARD_NOT_EXIST">Card not exist! You may need to update the database.</string>
-    <string name="DB_NOT_EXIST">"Database [%s] error or not exist!"</string>
+    <string name="DB_NOT_EXIST">Database [%s] error or not exist!</string>
 
     <string name="key_word">Key word</string>
     <string name="btn_open">Open</string>

@@ -84,7 +84,7 @@
     <string name="ERROR_CARD" formatted="false">卡片%s數量不符合要求。</string>
 
     <string name="RACE_WARRIOR">戰士</string>
-    <string name="RACE_SPELLCASTER">魔法師</string>
+    <string name="RACE_SPELLCASTER">魔法使</string>
     <string name="RACE_FAIRY">天使</string>
     <string name="RACE_FIEND">惡魔</string>
     <string name="RACE_ZOMBIE">不死</string>
@@ -103,7 +103,7 @@
     <string name="RACE_FISH">魚</string>
     <string name="RACE_SEASERPENT">海龍</string>
     <string name="RACE_REPTILE">爬蟲</string>
-    <string name="RACE_PSYCHO">念動力</string>
+    <string name="RACE_PSYCHO">超能</string>
     <string name="RACE_DEVINE">幻神獸</string>
     <string name="RACE_CREATORGOD">創世神</string>
 
