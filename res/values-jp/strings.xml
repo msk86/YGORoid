@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">YGORoid</string>
+    <string name="hint">http://my-card.in/roid/jp/hint.html</string>
+    <string name="feedback">https://jinshuju.net/f/EKBxoG</string>
+    <string name="upgrade_check">http://my-card.in/roid/upgrade-jp.json</string>
+    <string name="database_check">http://my-card.in/roid/database-jp.json</string>
+    <string name="pics_api" formatted="false">http://my-card.in/cards/image.json</string>
+    <string name="pics_url_backup" formatted="false">http://images.my-card.in/%s.jpg</string>
+
+    <string name="startup_hint" formatted="false">メニューを押す、もしくわ上へスライドすると、デュエル開始します。</string>
+
+    <string name="wifi_check" formatted="false">WIFIの接続が確認されません、この状況で更新しますか？</string>
+    <string name="database_updating" formatted="false">カード情報更新中[%s] %.1f%%, 更新完成後デュエルを開始してください。</string>
+    <string name="database_updated" formatted="false">カード情報[%s]更新完了。</string>
+    <string name="remote_error" formatted="false">サーバーとの接続ができません[%s]。</string>
+    <string name="pics_updating" formatted="false">カード図鑑更新中[%d/%d]…</string>
+    <string name="pics_updated" formatted="false">カード図鑑更新完了。</string>
+    <string name="pics_update_failed" formatted="false">[%d]カード更新失敗。</string>
+
+    <string name="MENU_CARD_BACK_TO_BOTTOM_OF_DECK">デッキの一番下に戻す</string>
+    <string name="MENU_CARD_CLOSE_REMOVE">裏側表示除外</string>
+    <string name="MENU_DECK_SHUFFLE">シャッフル</string>
+    <string name="MENU_DECK_CLOSE_REMOVE_TOP">一番上を裏側表示除外</string>
+    <string name="MENU_DECK_REVERSE">デッキ反転</string>
+    <string name="MENU_SHOW_HAND">手札オープン</string>
+    <string name="MENU_HIDE_HAND">手札セット</string>
+    <string name="MENU_SHUFFLE_HAND">手札シャッフル</string>
+    <string name="MENU_RESTART">再開</string>
+    <string name="MENU_CHANGE_DECK">デッキ変更</string>
+    <string name="MENU_SIDE">サイド変更</string>
+    <string name="MENU_CARD_SEARCH">カード検索</string>
+    <string name="MENU_DECK_BUILDER">デッキ編集</string>
+    <string name="MENU_TOGGLE">機能スイッチ</string>
+    <string name="MENU_GRAVITY_TOGGLE">重力センシング</string>
+    <string name="MENU_AUTO_SHUFFLE_TOGGLE">デッキ自動シャッフル</string>
+    <string name="MENU_FPS_TOGGLE">FPS表示</string>
+    <string name="MENU_MIRROR_DISPLAY">ミラー表示</string>
+    <string name="MENU_HINT">説明書</string>
+    <string name="MENU_FEEDBACK">フィードバック</string>
+    <string name="MENU_EXIT">終了</string>
+    <string name="MENU_TOGGLE_ON">オン</string>
+    <string name="MENU_TOGGLE_OFF">オフ</string>
+
+    <string name="ATTRIBUTE_EARTH">地</string>
+    <string name="ATTRIBUTE_WATER">水</string>
+    <string name="ATTRIBUTE_FIRE">炎</string>
+    <string name="ATTRIBUTE_WIND">風</string>
+    <string name="ATTRIBUTE_LIGHT">光</string>
+    <string name="ATTRIBUTE_DARK">闇</string>
+    <string name="ATTRIBUTE_DEVINE">神</string>
+
+    <string name="DECK">デッキ</string>
+    <string name="EX">エクストラ</string>
+    <string name="GRAVEYARD">墓地</string>
+    <string name="REMOVED">除外</string>
+    <string name="TEMPORARY">臨時</string>
+
+    <string name="TYPE_NORMAL">通常</string>
+    <string name="TYPE_EFFECT">効果</string>
+    <string name="TYPE_FUSION">融合</string>
+    <string name="TYPE_RITUAL">儀式</string>
+    <string name="TYPE_SPIRIT">スピリット</string>
+    <string name="TYPE_UNION">ユニオン</string>
+    <string name="TYPE_DUAL">デュアル</string>
+    <string name="TYPE_TUNER">チューナー</string>
+    <string name="TYPE_SYNCHRO">シンクロ</string>
+    <string name="TYPE_TOKEN">トークン</string>
+    <string name="TYPE_QUICKPLAY">速攻</string>
+    <string name="TYPE_CONTINUOUS">永続</string>
+    <string name="TYPE_EQUIP">装備</string>
+    <string name="TYPE_FIELD">フィールド</string>
+    <string name="TYPE_COUNTER">カウンター</string>
+    <string name="TYPE_FLIP">リバース</string>
+    <string name="TYPE_TOON">トゥーン</string>
+    <string name="TYPE_XYZ">エクシーズ</string>
+
+    <string name="SAVE_SUCCESS" formatted="false">[%s]保存成功。メイン:%d、エクストラ:%d、サイド:%d。</string>
+    <string name="SAVE_FAIL" formatted="false">保存失敗[%s]。</string>
+
+    <string name="ERROR_MAIN" formatted="false">メインデッキのカード数[%d]がルール違反します。</string>
+    <string name="ERROR_EX" formatted="false">エクストラデッキのカード数[%d]がルール違反します。</string>
+    <string name="ERROR_SIDE" formatted="false">サイドデッキのカード数[%d]がルール違反します。</string>
+    <string name="ERROR_CARD" formatted="false">カード%sの数がルール違反します。</string>
+
+    <string name="RACE_WARRIOR">戦士</string>
+    <string name="RACE_SPELLCASTER">魔法使い</string>
+    <string name="RACE_FAIRY">天使</string>
+    <string name="RACE_FIEND">悪魔</string>
+    <string name="RACE_ZOMBIE">アンデット</string>
+    <string name="RACE_MACHINE">機械</string>
+    <string name="RACE_AQUA">水</string>
+    <string name="RACE_PYRO">炎</string>
+    <string name="RACE_ROCK">岩石</string>
+    <string name="RACE_WINDBEAST">鳥獣</string>
+    <string name="RACE_PLANT">植物</string>
+    <string name="RACE_INSECT">昆虫</string>
+    <string name="RACE_THUNDER">雷</string>
+    <string name="RACE_DRAGON">ドラゴン</string>
+    <string name="RACE_BEAST">獣</string>
+    <string name="RACE_BEASTWARRIOR">獣戦士</string>
+    <string name="RACE_DINOSAUR">恐竜</string>
+    <string name="RACE_FISH">魚</string>
+    <string name="RACE_SEASERPENT">海竜</string>
+    <string name="RACE_REPTILE">爬虫類</string>
+    <string name="RACE_PSYCHO">サイキック</string>
+    <string name="RACE_DEVINE">幻神獣</string>
+    <string name="RACE_CREATORGOD">創造神</string>
+
+    <string name="TYPE_MONSTER">モンスター</string>
+    <string name="TYPE_SPELL">魔法</string>
+    <string name="TYPE_TRAP">罠</string>
+
+    <string name="CRASH_WARNING">プログラムが異常を発生しました、間もなく終了します。エラーログを作者へ送信してください。</string>
+
+    <string name="NEW_VERSION" formatted="false">新しいバージョン[V%s]が発見されました、更新しますか？</string>
+
+    <string name="INPUT_LP">LPを入力</string>
+
+    <string name="CONFIRM_YES">はい</string>
+    <string name="CONFIRM_SAVE">保存</string>
+    <string name="CONFIRM_NO">いいえ</string>
+
+    <string name="CHOOSE_DECK">デッキ選択</string>
+    <string name="NEW_DECK">ニューデッキ…</string>
+    <string name="DECK_NAME">デッキの名前を入力してください。</string>
+    <string name="CARD_NAME">カードの名前を入力してください。</string>
+    <string name="CHANGE_SIDE">サイド変更を終了しますか？</string>
+    <string name="DECK_BUILDER">このデュエルを終了し、デッキ構築を開始しますか？</string>
+
+    <string name="QUIT_DECK_BUILDER">デッキ構築を終了し、デュエルを始まりますか？</string>
+    <string name="QUIT">YGORoidを終了しますか？</string>
+
+    <string name="CARD_NOT_EXIST">カード情報が存在しません、カード情報の更新をしてください。</string>
+    <string name="DB_NOT_EXIST">データーベース[%s]エラー、もしくわデーターベースファイルが存在しません。</string>
+
+    <string name="key_word">キーワード</string>
+    <string name="btn_open">Open</string>
+    <string name="btn_save">Save</string>
+    <string name="btn_save_as">SavAs</string>
+    <string name="btn_search_criteria">条件</string>
+
+    <string name="lbl_type">種類:</string>
+    <string name="lbl_race">種族:</string>
+    <string name="lbl_attr">属性:</string>
+    <string name="lbl_level">レベル:</string>
+    <string name="lbl_atk">攻撃:</string>
+    <string name="lbl_def">守備:</string>
+    <string name="lbl_effect">効果:</string>
+
+</resources>
