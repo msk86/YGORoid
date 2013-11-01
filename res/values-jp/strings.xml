@@ -113,7 +113,7 @@
 
     <string name="CRASH_WARNING">プログラムが異常を発生しました、間もなく終了します。エラーログを作者へ送信してください。</string>
 
-    <string name="NEW_VERSION" formatted="false">新しいバージョン[V%s]が発見されました、更新しますか？</string>
+    <string name="NEW_VERSION" formatted="false">新しいバージョン[V%s]が発見されました、更新しますか？ </string>
 
     <string name="INPUT_LP">LPを入力</string>
 
