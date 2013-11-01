@@ -16,12 +16,15 @@ import java.util.List;
 
 public class DeckBuilder implements Drawable {
     public static final int PADDING = 3;
+    public static final int IN_MAIN = 1;
+    public static final int IN_EX = 2;
+    public static final int IN_SIDE = 3;
 
     private GridLayout mainLayout;
     private GridLayout exLayout;
     private GridLayout sideLayout;
 
-    private boolean isMain = true;
+    private int in = IN_MAIN;
 
     private String orgDeckName;
     private String currentDeckName;
@@ -96,41 +99,45 @@ public class DeckBuilder implements Drawable {
     }
 
     public void addToDeck(Card card) {
-        if (!checkCard(card)) {
-            return;
-        }
-
         Layout layout;
 
-        if (isMain) {
-            if (!card.isEx()) {
+        switch (in) {
+            case IN_MAIN:
                 layout = mainLayout;
-            } else {
+                if(card.isEx()) {
+                    layout = exLayout;
+                }
+                break;
+            case IN_EX:
                 layout = exLayout;
-            }
-        } else {
-            layout = sideLayout;
+                if(!(card instanceof UserDefinedCard) && !card.isEx()) {
+                    layout = mainLayout;
+                }
+                break;
+            default:
+                layout = sideLayout;
+                break;
         }
 
+        if (!checkCard(card, layout)) {
+            return;
+        }
 
         Card clone = card.clone();
         layout.cards().add(clone);
     }
 
-    private boolean checkCard(Card card) {
+    private boolean checkCard(Card card, Layout checkLayout) {
         String info = null;
-
-        if (isMain) {
-            if (!card.isEx()) {
-                if (!DeckChecker.checkMainMax(mainLayout.cards(), true)) {
-                    info = String.format(Utils.s(R.string.ERROR_MAIN), mainLayout.cards().size());
-                }
-            } else {
-                if (!DeckChecker.checkEx(exLayout.cards(), true)) {
-                    info = String.format(Utils.s(R.string.ERROR_EX), exLayout.cards().size());
-                }
+        if(checkLayout == mainLayout) {
+            if (!DeckChecker.checkMainMax(mainLayout.cards(), true)) {
+                info = String.format(Utils.s(R.string.ERROR_MAIN), mainLayout.cards().size());
             }
-        } else {
+        } else if(checkLayout == exLayout) {
+            if (!DeckChecker.checkEx(exLayout.cards(), true)) {
+                info = String.format(Utils.s(R.string.ERROR_EX), exLayout.cards().size());
+            }
+        } else if(checkLayout == sideLayout) {
             if (!DeckChecker.checkSide(sideLayout.cards(), true)) {
                 info = String.format(Utils.s(R.string.ERROR_SIDE), sideLayout.cards().size());
             }
@@ -143,7 +150,12 @@ public class DeckBuilder implements Drawable {
             allCards.addAll(sideLayout.cards());
 
             if (!DeckChecker.checkSingleCard(allCards, card, true)) {
-                String name = Utils.getDbHelper().loadNameById(Integer.parseInt(card.getRealId()));
+                String name;
+                if(card instanceof UserDefinedCard) {
+                    name = card.getName();
+                } else {
+                    name = Utils.getDbHelper().loadNameById(Integer.parseInt(card.getRealId()));
+                }
                 info = String.format(Utils.s(R.string.ERROR_CARD), "[" + name + "]");
             }
         }
@@ -183,12 +195,16 @@ public class DeckBuilder implements Drawable {
         paint.setColor(Configuration.fontColor());
         paint.setAlpha(40);
 
-        if(isMain) {
-            Utils.DrawHelper helper = new Utils.DrawHelper(0, 0);
-            helper.drawRect(canvas, new Rect(0,0,Utils.deckBuilderWidth(), mainLayout.height() + exLayout.height() + PADDING), paint);
-        } else {
-            Utils.DrawHelper helper = new Utils.DrawHelper(0, mainLayout.height() + exLayout.height() + PADDING * 3);
-            helper.drawRect(canvas, new Rect(0,0,Utils.deckBuilderWidth(), sideLayout.height()), paint);
+        switch (in) {
+            case IN_MAIN:
+            case IN_EX:
+                Utils.DrawHelper helper = new Utils.DrawHelper(0, 0);
+                helper.drawRect(canvas, new Rect(0,0,Utils.deckBuilderWidth(), mainLayout.height() + exLayout.height() + PADDING), paint);
+                break;
+            case IN_SIDE:
+                helper = new Utils.DrawHelper(0, mainLayout.height() + exLayout.height() + PADDING * 3);
+                helper.drawRect(canvas, new Rect(0,0,Utils.deckBuilderWidth(), sideLayout.height()), paint);
+                break;
         }
     }
 
@@ -238,7 +254,8 @@ public class DeckBuilder implements Drawable {
         return x < sideLayout.width() && y >= mainLayout.height() + exLayout.height() + PADDING * 3 && y < Utils.screenHeight();
     }
 
-    public void setIsMain(boolean isMain) {
-        this.isMain = isMain;
+
+    public void setIn(int in) {
+        this.in = in;
     }
 }

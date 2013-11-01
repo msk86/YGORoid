@@ -3,6 +3,7 @@ package org.msk86.ygoroid.views.deckbuilder;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import org.msk86.ygoroid.core.Card;
+import org.msk86.ygoroid.core.DeckBuilder;
 import org.msk86.ygoroid.layout.Layout;
 
 public class DeckGestureListener extends GestureDetector.SimpleOnGestureListener {
@@ -28,10 +29,12 @@ public class DeckGestureListener extends GestureDetector.SimpleOnGestureListener
                     view.showCard(card);
                 }
             } else if(view.isInDeckBuilder(x, y)) {
-                if (view.getDeckBuilder().isInMain(x, y) || view.getDeckBuilder().isInEx(x, y)) {
-                    view.getDeckBuilder().setIsMain(true);
-                } else if (view.getDeckBuilder().isInSide(x, y)) {
-                    view.getDeckBuilder().setIsMain(false);
+                if (view.getDeckBuilder().isInMain(x, y)) {
+                    view.getDeckBuilder().setIn(DeckBuilder.IN_MAIN);
+                } else if(view.getDeckBuilder().isInEx(x, y)) {
+                    view.getDeckBuilder().setIn(DeckBuilder.IN_EX);
+                }else if (view.getDeckBuilder().isInSide(x, y)) {
+                    view.getDeckBuilder().setIn(DeckBuilder.IN_SIDE);
                 }
                 Card card = view.getDeckBuilder().cardAt(x, y);
 
