@@ -12,11 +12,15 @@ public class HandCards implements Item, Drawable {
 
     private List<Card> cards;
     private boolean set;
+    private boolean forceSet;
+    private boolean forceOpen;
     private LinerLayout layout;
 
     public HandCards() {
         cards = new ArrayList<Card>();
         set = true;
+        forceSet = false;
+        forceOpen = false;
         layout = new LinerLayout(cards, Utils.totalWidth(), Utils.cardHeight() / 7);
     }
 
@@ -83,22 +87,46 @@ public class HandCards implements Item, Drawable {
         return set;
     }
 
+    public boolean isForceSet() {
+        return forceSet;
+    }
+
+    public void clearForceSet() {
+        forceSet = false;
+    }
+
+    public boolean isForceOpen() {
+        return forceOpen;
+    }
+
+    public void clearForceOpen() {
+        forceOpen = false;
+    }
+
     public void setAll() {
+        setAll(false);
+    }
+
+    public void setAll(boolean force) {
         for (Card card : cards) {
             card.set();
         }
         set = true;
+        this.forceSet = force;
+        this.forceOpen = false;
     }
 
     public void openAll() {
+        openAll(false);
+    }
+
+    public void openAll(boolean force) {
         for (Card card : cards) {
             card.open();
         }
         set = false;
-    }
-
-    public List<Card> getCards() {
-        return cards;
+        this.forceOpen = force;
+        this.forceSet = false;
     }
 
     @Override

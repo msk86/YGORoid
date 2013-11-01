@@ -42,7 +42,8 @@ public class PlaySensorEventListener implements SensorEventListener {
         boolean changed = false;
         if (z >= zLimit) {
             if (z >= zLimit + 0.3) {
-                if (!handCards.isSet()) {
+                handCards.clearForceSet();
+                if (!handCards.isSet() && !handCards.isForceOpen()) {
                     handCards.setAll();
                     changed = true;
                 }
@@ -50,7 +51,8 @@ public class PlaySensorEventListener implements SensorEventListener {
         } else {
             if (z <= zLimit - 0.3) {
                 if(Utils.getContext().isMirror() != x >= 0) {
-                    if (handCards.isSet()) {
+                    handCards.clearForceOpen();
+                    if (handCards.isSet() && !handCards.isForceSet()) {
                         handCards.openAll();
                         changed = true;
                     }
