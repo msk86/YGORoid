@@ -387,7 +387,7 @@ public class Card implements SelectableItem, Drawable, Bmpable {
 
     public boolean isTokenable() {
         return (category & Const.CATEGORY_TOKEN) == Const.CATEGORY_TOKEN ||
-                ((desc.contains("衍生物」") || desc.contains("Token\"") || desc.contains("Tokens\"") || desc.contains("代幣」")));
+                ((desc.contains("衍生物」") || desc.contains("Token\"") || desc.contains("Tokens\"") || desc.contains("代幣」") || desc.contains("トークン」")));
     }
 
 
