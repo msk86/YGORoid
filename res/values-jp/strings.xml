@@ -11,7 +11,7 @@
     <string name="startup_hint" formatted="false">メニューを押す、もしくわ上へスライドすると、デュエル開始します。</string>
 
     <string name="wifi_check" formatted="false">WIFIの接続が確認されません、この状況で更新しますか？</string>
-    <string name="database_updating" formatted="false">カード情報更新中[%s] %.1f%%, 更新完成後デュエルを開始してください。</string>
+    <string name="database_updating" formatted="false">カード情報更新中[%s] %.1f%%, 完成後デュエルを開始してください。</string>
     <string name="database_updated" formatted="false">カード情報[%s]更新完了。</string>
     <string name="remote_error" formatted="false">サーバーとの接続ができません[%s]。</string>
     <string name="pics_updating" formatted="false">カード図鑑更新中[%d/%d]…</string>
@@ -111,7 +111,7 @@
     <string name="TYPE_SPELL">魔法</string>
     <string name="TYPE_TRAP">罠</string>
 
-    <string name="CRASH_WARNING">プログラムが異常を発生しました、間もなく終了します。エラーログを作者へ送信してください。</string>
+    <string name="CRASH_WARNING">異常を発生しました、間もなく終了します。エラーログを作者へ送信してください。</string>
 
     <string name="NEW_VERSION" formatted="false">新しいバージョン[V%s]が発見されました、更新しますか？ </string>
 
