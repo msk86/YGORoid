@@ -2,6 +2,7 @@ package org.msk86.ygoroid.action;
 
 import org.msk86.ygoroid.core.Card;
 import org.msk86.ygoroid.core.SideWindow;
+import org.msk86.ygoroid.core.UserDefinedCard;
 import org.msk86.ygoroid.layout.Layout;
 import org.msk86.ygoroid.op.Operation;
 
@@ -28,7 +29,9 @@ public class ChangeSideAction extends BaseAction {
         }
 
         if (card1 != null && card2 != null) {
-            if (card1.isEx() != card2.isEx()) {
+            if (card1.isEx() != card2.isEx()
+                    && !(card1 instanceof UserDefinedCard)
+                    && !(card2 instanceof UserDefinedCard)) {
                 return;
             }
 
