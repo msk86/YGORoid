@@ -141,8 +141,7 @@
     <string name="btn_search_criteria">Filter</string>
 
     <string name="lbl_type">Type:</string>
-    <string name="lbl_race">Race:</string>
-    <string name="lbl_attr">Attr:</string>
+    <string name="lbl_race_attr">Race\nAttr:</string>
     <string name="lbl_level">Level:</string>
     <string name="lbl_atk">ATK:</string>
     <string name="lbl_def">DEF:</string>
