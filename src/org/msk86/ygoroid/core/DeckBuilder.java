@@ -60,7 +60,7 @@ public class DeckBuilder implements Drawable {
             return;
         }
         orgDeckName = name;
-        currentDeckName = name.substring(0, name.lastIndexOf('.'));
+        currentDeckName = name.contains(".") ? name.substring(0, name.lastIndexOf('.')) : name;
     }
 
     public String getFullCurrentDeckName() {
