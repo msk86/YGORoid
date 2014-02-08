@@ -37,6 +37,7 @@ public class CardNameList {
         selectedCard = null;
         ScrollView scrollList = (ScrollView) Utils.getContext().findViewById(R.id.scroll_list);
         scrollList.setBackgroundDrawable(null);
+        scrollList.scrollTo(0, 0);
     }
 
     public void search(String text) {
