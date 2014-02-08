@@ -102,6 +102,14 @@ public class Configuration {
         try {
             properties.load(new FileInputStream(
                     baseDir() + configPropertyFile()));
+
+            Properties defaultProperties = defaultProperties();
+            for(String name : defaultProperties.stringPropertyNames()) {
+                Object value = properties.get(name);
+                if(value == null) {
+                    properties.setProperty(name, (String) defaultProperties.get(name));
+                }
+            }
         } catch (IOException e) {
             properties = defaultProperties();
         }
@@ -109,7 +117,7 @@ public class Configuration {
     }
 
     public static boolean configProperties(String key) {
-        String value = (String) PROPERTIES.get(key);
+        Object value = PROPERTIES.get(key);
         return "1".equals(value) || "true".equals(value);
     }
 
