@@ -204,6 +204,9 @@ public class ActionDispatcher {
                     case Const.MENU_AUTO_SHUFFLE_TOGGLE:
                         action = new ToggleAction(menuClick, Configuration.PROPERTY_AUTO_SHUFFLE_ENABLE);
                         break;
+                    case Const.MENU_AUTO_DB_UPGRADE:
+                        action = new ToggleAction(menuClick, Configuration.PROPERTY_AUTO_DB_UPGRADE);
+                        break;
                     case Const.MENU_MIRROR_DISPLAY:
                         action = new MirrorDisplayAction(menuClick);
                         break;

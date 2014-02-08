@@ -35,6 +35,7 @@
     <string name="MENU_GRAVITY_TOGGLE">重力感应</string>
     <string name="MENU_AUTO_SHUFFLE_TOGGLE">卡组自动洗切</string>
     <string name="MENU_FPS_TOGGLE">显示FPS</string>
+    <string name="MENU_AUTO_DB_UPGRADE">自动更新数据</string>
     <string name="MENU_MIRROR_DISPLAY">镜像显示</string>
     <string name="MENU_HINT">操作说明</string>
     <string name="MENU_FEEDBACK">问题反馈</string>

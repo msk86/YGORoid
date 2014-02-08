@@ -67,6 +67,7 @@ public class PlayMenuProcessor {
                 toggleMenu.add(Const.MENU_GROUP_MAIN, Const.MENU_GRAVITY_TOGGLE, 0, toggleMenuTxt(Utils.s(R.string.MENU_GRAVITY_TOGGLE), Configuration.PROPERTY_GRAVITY_ENABLE));
                 toggleMenu.add(Const.MENU_GROUP_MAIN, Const.MENU_AUTO_SHUFFLE_TOGGLE, 0, toggleMenuTxt(Utils.s(R.string.MENU_AUTO_SHUFFLE_TOGGLE), Configuration.PROPERTY_AUTO_SHUFFLE_ENABLE));
                 toggleMenu.add(Const.MENU_GROUP_MAIN, Const.MENU_FPS_TOGGLE, 0, toggleMenuTxt(Utils.s(R.string.MENU_FPS_TOGGLE), Configuration.PROPERTY_FPS_ENABLE));
+                toggleMenu.add(Const.MENU_GROUP_MAIN, Const.MENU_AUTO_DB_UPGRADE, 0, toggleMenuTxt(Utils.s(R.string.MENU_AUTO_DB_UPGRADE), Configuration.PROPERTY_AUTO_DB_UPGRADE));
                 if (Utils.getSDK() >= 10) {
                     menu.add(Const.MENU_GROUP_MAIN, Const.MENU_MIRROR_DISPLAY, 0, Utils.s(R.string.MENU_MIRROR_DISPLAY));
                 }

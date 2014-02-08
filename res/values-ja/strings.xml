@@ -35,6 +35,7 @@
     <string name="MENU_GRAVITY_TOGGLE">重力センシング</string>
     <string name="MENU_AUTO_SHUFFLE_TOGGLE">デッキ自動シャッフル</string>
     <string name="MENU_FPS_TOGGLE">FPS表示</string>
+    <string name="MENU_AUTO_DB_UPGRADE">カード情報自動更新</string>
     <string name="MENU_MIRROR_DISPLAY">ミラー表示</string>
     <string name="MENU_HINT">説明書</string>
     <string name="MENU_FEEDBACK">フィードバック</string>

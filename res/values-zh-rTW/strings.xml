@@ -35,6 +35,7 @@
     <string name="MENU_GRAVITY_TOGGLE">重力感應</string>
     <string name="MENU_AUTO_SHUFFLE_TOGGLE">牌組自動洗切</string>
     <string name="MENU_FPS_TOGGLE">顯示FPS</string>
+    <string name="MENU_AUTO_DB_UPGRADE">自動更新數據</string>
     <string name="MENU_MIRROR_DISPLAY">鏡像顯示</string>
     <string name="MENU_HINT">操作說明</string>
     <string name="MENU_FEEDBACK">問題反饋</string>

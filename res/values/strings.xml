@@ -35,6 +35,7 @@
     <string name="MENU_GRAVITY_TOGGLE">Gravity</string>
     <string name="MENU_AUTO_SHUFFLE_TOGGLE">Deck Auto Shuffle</string>
     <string name="MENU_FPS_TOGGLE">Show FPS</string>
+    <string name="MENU_AUTO_DB_UPGRADE">Auto database upgrade</string>
     <string name="MENU_MIRROR_DISPLAY">Mirror-Display</string>
     <string name="MENU_HINT">Instruction</string>
     <string name="MENU_FEEDBACK">Feedback</string>

@@ -92,6 +92,7 @@ public class Const {
     public static final int MENU_GRAVITY_TOGGLE = 0x15;
     public static final int MENU_FPS_TOGGLE = 0x16;
     public static final int MENU_AUTO_SHUFFLE_TOGGLE = 0x17;
+    public static final int MENU_AUTO_DB_UPGRADE = 0x21;
 
     public static final int MENU_DECK_BUILDER = 0x18;
     public static final int MENU_CARD_SEARCH = 0x19;
