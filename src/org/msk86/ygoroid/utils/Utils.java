@@ -125,6 +125,29 @@ public class Utils {
         return (int) (bigCardHeight() / 1.45);
     }
 
+    private static int calculateSampleScale(BitmapFactory.Options options, int reqHeight) {
+        int height = options.outHeight;
+        int inSampleSize = 1;
+        if (height > reqHeight) {
+            inSampleSize = Math.round((float)height / (float)reqHeight);
+        }
+        return inSampleSize;
+    }
+
+    private static int calculateSampleScale(int resId, int targetHeight) {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeResource(context.getResources(), resId, options);
+        return calculateSampleScale(options, targetHeight);
+    }
+
+    private static int calculateSampleScale(String file, int targetHeight) {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(file, options);
+        return calculateSampleScale(options, targetHeight);
+    }
+
     public static Bitmap readBitmapScaleByHeight(int resId, int targetHeight) {
         return readBitmapScaleByHeight(resId, targetHeight, Bitmap.Config.ARGB_4444);
     }
@@ -133,6 +156,7 @@ public class Utils {
         try {
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inPreferredConfig = colorSample;
+            options.inSampleSize = calculateSampleScale(resId, targetHeight);
             Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), resId, options);
             return scaleByHeight(bitmap, targetHeight, colorSample);
         } catch (Exception e) {
@@ -148,6 +172,7 @@ public class Utils {
         try {
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inPreferredConfig = colorSample;
+            options.inSampleSize = calculateSampleScale(file, targetHeight);
             Bitmap bitmap = BitmapFactory.decodeFile(file, options);
             return scaleByHeight(bitmap, targetHeight, colorSample);
         } catch (Exception e) {
