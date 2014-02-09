@@ -126,18 +126,30 @@ public class Utils {
     }
 
     public static Bitmap readBitmapScaleByHeight(int resId, int targetHeight) {
+        return readBitmapScaleByHeight(resId, targetHeight, Bitmap.Config.ARGB_4444);
+    }
+
+    public static Bitmap readBitmapScaleByHeight(int resId, int targetHeight, Bitmap.Config colorSample) {
         try {
-            Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), resId);
-            return scaleByHeight(bitmap, targetHeight);
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inPreferredConfig = colorSample;
+            Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), resId, options);
+            return scaleByHeight(bitmap, targetHeight, colorSample);
         } catch (Exception e) {
             return null;
         }
     }
 
     public static Bitmap readBitmapScaleByHeight(String file, int targetHeight) {
+        return readBitmapScaleByHeight(file, targetHeight, Bitmap.Config.ARGB_4444);
+    }
+
+    public static Bitmap readBitmapScaleByHeight(String file, int targetHeight, Bitmap.Config colorSample) {
         try {
-            Bitmap bitmap = BitmapFactory.decodeFile(file);
-            return scaleByHeight(bitmap, targetHeight);
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inPreferredConfig = colorSample;
+            Bitmap bitmap = BitmapFactory.decodeFile(file, options);
+            return scaleByHeight(bitmap, targetHeight, colorSample);
         } catch (Exception e) {
             return null;
         }
@@ -271,7 +283,7 @@ public class Utils {
         return pics.length;
     }
 
-    public static Bitmap scaleByHeight(Bitmap bitmap, int targetHeight) {
+    public static Bitmap scaleByHeight(Bitmap bitmap, int targetHeight, Bitmap.Config colorSample) {
         Matrix matrix = new Matrix();
 
         float changeRate = targetHeight * 1.0f / bitmap.getHeight();
@@ -279,7 +291,13 @@ public class Utils {
         Bitmap newBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
                 bitmap.getHeight(), matrix, true);
         bitmap.recycle();
-        return newBitmap;
+        if(colorSample == Bitmap.Config.ARGB_8888) {
+            return newBitmap;
+        } else {
+            Bitmap sampledBmp = newBitmap.copy(colorSample, false);
+            newBitmap.recycle();
+            return sampledBmp;
+        }
     }
 
     public static Bitmap rotate(Bitmap bitmap, int degree) {

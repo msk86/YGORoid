@@ -44,7 +44,7 @@ public class Mask implements Drawable {
         if(MASKS != null) {
             return;
         }
-        Bitmap mask = Utils.readBitmapScaleByHeight(R.raw.mask, height());
+        Bitmap mask = Utils.readBitmapScaleByHeight(R.raw.mask, height(), Bitmap.Config.ARGB_8888);
         MASKS = new Bitmap[MAX_THROWING];
         Paint paint = new Paint();
         for(int i=1;i<=MAX_THROWING;i++) {
