@@ -17,11 +17,11 @@ public class IndicatorAction extends BaseAction {
         Field field = (Field) container;
         Card card = field.getTopCard();
 
-        if(card != null && card.isOpen()) {
-            if(vol == VolClick.VOL_UP) {
+        if (card != null && card.isOpen()) {
+            if (vol == VolClick.VOL_UP) {
                 card.addIndicator();
             }
-            if(vol == VolClick.VOL_DOWN) {
+            if (vol == VolClick.VOL_DOWN) {
                 card.removeIndicator();
             }
         }

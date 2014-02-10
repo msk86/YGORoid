@@ -104,9 +104,9 @@ public class Configuration {
                     baseDir() + configPropertyFile()));
 
             Properties defaultProperties = defaultProperties();
-            for(String name : defaultProperties.stringPropertyNames()) {
+            for (String name : defaultProperties.stringPropertyNames()) {
                 Object value = properties.get(name);
-                if(value == null) {
+                if (value == null) {
                     properties.setProperty(name, (String) defaultProperties.get(name));
                 }
             }

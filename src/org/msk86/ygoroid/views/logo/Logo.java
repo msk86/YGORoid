@@ -16,7 +16,7 @@ public class Logo {
     public Logo(int resId) {
         this.resId = resId;
         logo = BitmapFactory.decodeResource(Utils.getContext().getResources(), resId);
-        if(logo.getHeight() > Utils.screenHeight()) {
+        if (logo.getHeight() > Utils.screenHeight()) {
             logo = Utils.scaleByHeight(logo, Utils.screenHeight(), Bitmap.Config.ARGB_4444);
         }
     }

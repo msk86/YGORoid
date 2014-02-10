@@ -22,7 +22,7 @@ public abstract class YGOView extends SurfaceView implements Runnable {
     static {
         BACKGROUND_BMP = Utils.readBitmapScaleByHeight(Configuration.texturePath() + "bg" + Configuration.cardImageSuffix(),
                 Utils.screenHeight());
-        if(BACKGROUND_BMP == null) {
+        if (BACKGROUND_BMP == null) {
             BACKGROUND_BMP = Utils.readBitmapScaleByHeight(R.raw.bg, Utils.screenHeight());
         }
     }
@@ -66,7 +66,7 @@ public abstract class YGOView extends SurfaceView implements Runnable {
     protected void drawBackground(Canvas canvas) {
         canvas.drawColor(Color.BLACK);
         Utils.DrawHelper helper = new Utils.DrawHelper(0, 0);
-        if(BACKGROUND_BMP != null) {
+        if (BACKGROUND_BMP != null) {
             canvas.drawBitmap(BACKGROUND_BMP, helper.center(Utils.screenWidth(), BACKGROUND_BMP.getWidth()), 0, new Paint());
         }
     }

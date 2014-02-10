@@ -21,11 +21,12 @@ public class UpgradeHelper {
             public void run() {
                 try {
                     Thread.sleep(2000);
-                } catch (InterruptedException e) {}
-                if(upgradeChecker.checkUpgrade()) {
+                } catch (InterruptedException e) {
+                }
+                if (upgradeChecker.checkUpgrade()) {
                     return;
                 }
-                if(!Configuration.configProperties(Configuration.PROPERTY_AUTO_DB_UPGRADE)) {
+                if (!Configuration.configProperties(Configuration.PROPERTY_AUTO_DB_UPGRADE)) {
                     return;
                 }
                 databaseChecker.checkUpgrade();

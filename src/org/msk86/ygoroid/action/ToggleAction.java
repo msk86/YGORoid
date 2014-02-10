@@ -5,6 +5,7 @@ import org.msk86.ygoroid.utils.Configuration;
 
 public class ToggleAction extends BaseAction {
     private String toggle;
+
     public ToggleAction(Operation operation, String toggle) {
         super(operation);
         this.toggle = toggle;

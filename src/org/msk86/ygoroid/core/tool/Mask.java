@@ -41,17 +41,17 @@ public class Mask implements Drawable {
     }
 
     private synchronized void prepareMask() {
-        if(MASKS != null) {
+        if (MASKS != null) {
             return;
         }
         Bitmap mask = Utils.readBitmapScaleByHeight(R.raw.mask, height(), Bitmap.Config.ARGB_8888);
         MASKS = new Bitmap[MAX_THROWING];
         Paint paint = new Paint();
-        for(int i=1;i<=MAX_THROWING;i++) {
+        for (int i = 1; i <= MAX_THROWING; i++) {
             int stepWidth = width() * 2 * i / MAX_THROWING;
             Bitmap maskStep = Bitmap.createBitmap(width(), height(), Bitmap.Config.ARGB_8888);
             Canvas canvas = new Canvas(maskStep);
-            canvas.drawBitmap(mask, stepWidth - width() , 0, paint);
+            canvas.drawBitmap(mask, stepWidth - width(), 0, paint);
             MASKS[i - 1] = maskStep;
         }
     }

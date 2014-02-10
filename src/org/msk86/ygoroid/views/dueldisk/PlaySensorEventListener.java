@@ -19,13 +19,13 @@ public class PlaySensorEventListener implements SensorEventListener {
 
     @Override
     public void onSensorChanged(SensorEvent e) {
-        if(!Configuration.configProperties(Configuration.PROPERTY_GRAVITY_ENABLE)) {
+        if (!Configuration.configProperties(Configuration.PROPERTY_GRAVITY_ENABLE)) {
             return;
         }
         HandCards handCards = view.getDuel().getHandCards();
         Duel duel = view.getDuel();
-        if(duel.getSideWindow() == null) {
-            if(view.getDuel().getCardWindow() != null
+        if (duel.getSideWindow() == null) {
+            if (view.getDuel().getCardWindow() != null
                     || view.getDuel().getCardSelector() != null) {
                 handCards.setAll();
                 return;
@@ -50,7 +50,7 @@ public class PlaySensorEventListener implements SensorEventListener {
             }
         } else {
             if (z <= zLimit - 0.3) {
-                if(Utils.getContext().isMirror() != x >= 0) {
+                if (Utils.getContext().isMirror() != x >= 0) {
                     handCards.clearForceOpen();
                     if (handCards.isSet() && !handCards.isForceSet()) {
                         handCards.openAll();

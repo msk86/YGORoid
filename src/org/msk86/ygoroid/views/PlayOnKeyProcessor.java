@@ -24,11 +24,11 @@ public class PlayOnKeyProcessor {
                 break;
             case KeyEvent.KEYCODE_MENU:
                 return false;
-            case KeyEvent.KEYCODE_VOLUME_UP :
+            case KeyEvent.KEYCODE_VOLUME_UP:
                 VolClick vuClick = new VolClick(view.getDuel(), VolClick.VOL_UP);
                 action = ActionDispatcher.dispatch(vuClick);
                 break;
-            case KeyEvent.KEYCODE_VOLUME_DOWN :
+            case KeyEvent.KEYCODE_VOLUME_DOWN:
                 VolClick vdClick = new VolClick(view.getDuel(), VolClick.VOL_DOWN);
                 action = ActionDispatcher.dispatch(vdClick);
                 break;

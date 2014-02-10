@@ -131,8 +131,8 @@ public class Duel implements Item, Drawable {
         allCards.addAll(sideDeckCards);
 
         for (Card card : allCards) {
-            if(!DeckChecker.checkSingleCard(allCards, card)) {
-                if(card instanceof UserDefinedCard || card.getRealId().equals("0")) {
+            if (!DeckChecker.checkSingleCard(allCards, card)) {
+                if (card instanceof UserDefinedCard || card.getRealId().equals("0")) {
                     invalidUDCardNames.add(card.getName());
                 } else {
                     invalidCardIds.add(Integer.parseInt(card.getRealId()));
@@ -359,7 +359,7 @@ public class Duel implements Item, Drawable {
     }
 
     public boolean inShowCardWindow(int x, int y) {
-        if(cardWindow == null) {
+        if (cardWindow == null) {
             return false;
         }
         return x < cardWindow.width();

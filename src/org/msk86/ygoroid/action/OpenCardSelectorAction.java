@@ -17,7 +17,7 @@ public class OpenCardSelectorAction extends BaseAction {
         CardList list;
         SelectableItem source;
         Field field = (Field) container;
-        if(item instanceof InfoWindow) {
+        if (item instanceof InfoWindow) {
             item = field.getItem();
         }
 

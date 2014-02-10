@@ -23,7 +23,7 @@ public class TypeFilter implements CardFilter {
         if (subType == CardSubType.NULL) {
             w += "";
         } else {
-            if((type == CardType.SPELL || type == CardType.TRAP) && (subType == CardSubType.NORMAL)) {
+            if ((type == CardType.SPELL || type == CardType.TRAP) && (subType == CardSubType.NORMAL)) {
                 w += " AND d.type = " + type.getCode();
             } else {
                 w += " AND d.type & " + subType.getCode() + " = " + subType.getCode();

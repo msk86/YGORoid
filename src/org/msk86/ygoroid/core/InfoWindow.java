@@ -48,7 +48,7 @@ public class InfoWindow implements SelectableItem, Drawable {
                     info += " / " + cardList.topCard().toString();
                 }
             }
-        } else if(this.info != null) {
+        } else if (this.info != null) {
             info = this.info;
         }
         return info;
@@ -66,13 +66,13 @@ public class InfoWindow implements SelectableItem, Drawable {
 
         paint.setColor(Configuration.fontColor());
         paint.setStrokeWidth(1);
-        paint.setTextSize((int)(height() / 1.2));
+        paint.setTextSize((int) (height() / 1.2));
         paint.setAntiAlias(true);
 
         Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
 
         String infoText = Utils.cutOneLine(info(), paint, width());
-        StaticLayout layout = new StaticLayout(infoText, paint, width(), Layout.Alignment.ALIGN_NORMAL, 1, 0 ,false);
+        StaticLayout layout = new StaticLayout(infoText, paint, width(), Layout.Alignment.ALIGN_NORMAL, 1, 0, false);
         helper.drawLayout(canvas, layout, 5, 1);
     }
 
@@ -96,7 +96,7 @@ public class InfoWindow implements SelectableItem, Drawable {
 
     @Override
     public int height() {
-        return (int)(Utils.cardHeight() / 5.5) + 3;
+        return (int) (Utils.cardHeight() / 5.5) + 3;
     }
 
     @Override

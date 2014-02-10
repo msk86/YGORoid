@@ -205,7 +205,7 @@ public class SearchFilter {
     }
 
     public void clear() {
-        if(!created) {
+        if (!created) {
             return;
         }
         Spinner searchType = (Spinner) searchFilterView.findViewById(R.id.search_type);
@@ -232,13 +232,13 @@ public class SearchFilter {
 
 
     public List<CardFilter> genFilters() {
-        if(!created) {
+        if (!created) {
             return new ArrayList<CardFilter>();
         }
         List<CardFilter> filters = new ArrayList<CardFilter>();
         Spinner searchType = (Spinner) searchFilterView.findViewById(R.id.search_type);
         Spinner searchSubType = (Spinner) searchFilterView.findViewById(R.id.search_sub_type);
-        filters.add(new TypeFilter((CardType)searchType.getSelectedItem(), (CardSubType)searchSubType.getSelectedItem()));
+        filters.add(new TypeFilter((CardType) searchType.getSelectedItem(), (CardSubType) searchSubType.getSelectedItem()));
 
         Spinner searchRace = (Spinner) searchFilterView.findViewById(R.id.search_race);
         filters.add(new RaceFilter((Race) searchRace.getSelectedItem()));

@@ -32,7 +32,7 @@ public class CardNameList {
 
     public void clearList() {
         searchResult.clear();
-        LinearLayout cardList = (LinearLayout)Utils.getContext().findViewById(R.id.card_list);
+        LinearLayout cardList = (LinearLayout) Utils.getContext().findViewById(R.id.card_list);
         cardList.removeAllViews();
         selectedCard = null;
         ScrollView scrollList = (ScrollView) Utils.getContext().findViewById(R.id.scroll_list);
@@ -49,12 +49,12 @@ public class CardNameList {
     }
 
     public void search(String text, List<CardFilter> filters) {
-        if(text.length() == 0) {
+        if (text.length() == 0) {
             boolean filtersNotValid = true;
-            for(CardFilter filter : filters) {
+            for (CardFilter filter : filters) {
                 filtersNotValid &= !filter.isValid();
             }
-            if(filtersNotValid) {
+            if (filtersNotValid) {
                 clearList();
                 searchText = "";
                 return;
@@ -72,7 +72,7 @@ public class CardNameList {
 
     private void show() {
         LinearLayout cardList = (LinearLayout) Utils.getContext().findViewById(R.id.card_list);
-        for(Card card : searchResult) {
+        for (Card card : searchResult) {
             CardNameView cv = new CardNameView(Utils.getContext(), card);
             cv.setOnClickListener(new OnClickCardNameListener());
             cardList.addView(cv);
@@ -81,10 +81,10 @@ public class CardNameList {
 
     private boolean checkExactQuery(List<Card> cards, String text) {
         boolean exact = false;
-        if(text.length() == 0 ){
+        if (text.length() == 0) {
             exact = true;
         }
-        for(Card card : cards) {
+        for (Card card : cards) {
             if (card.getName().equals(text)) {
                 exact = true;
                 break;
@@ -98,8 +98,8 @@ public class CardNameList {
         @Override
         public void onClick(View view) {
             CardNameView cardNameView = (CardNameView) view;
-            if(cardNameView.isSelected()) {
-                if(selectedCard != null) {
+            if (cardNameView.isSelected()) {
+                if (selectedCard != null) {
                     deckBuilderView.addToDeck(selectedCard);
                 }
                 return;
@@ -130,8 +130,8 @@ public class CardNameList {
     }
 
     public void clearSelect() {
-        LinearLayout cardList = (LinearLayout)Utils.getContext().findViewById(R.id.card_list);
-        for(int i=0;i<cardList.getChildCount();i++) {
+        LinearLayout cardList = (LinearLayout) Utils.getContext().findViewById(R.id.card_list);
+        for (int i = 0; i < cardList.getChildCount(); i++) {
             View cv = cardList.getChildAt(i);
             cv.setSelected(false);
         }

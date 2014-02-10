@@ -18,7 +18,7 @@ public class BmpCache {
         String wh = String.format("%d-%d", w, h);
 
         Bitmap bmp = cache.get(wh);
-        if(bmp == null || bmp.isRecycled()) {
+        if (bmp == null || bmp.isRecycled()) {
             bmp = bmpable.bmp(w, h);
             cache.put(wh, bmp);
         }
@@ -26,7 +26,7 @@ public class BmpCache {
     }
 
     public void clear() {
-        for(String key : cache.keySet()) {
+        for (String key : cache.keySet()) {
             cache.get(key).recycle();
         }
         cache = new HashMap<String, Bitmap>();

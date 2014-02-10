@@ -132,7 +132,7 @@ public class Utils {
         int height = options.outHeight;
         int inSampleSize = 1;
         if (height > reqHeight) {
-            inSampleSize = Math.round((float)height / (float)reqHeight);
+            inSampleSize = Math.round((float) height / (float) reqHeight);
         }
         return inSampleSize;
     }
@@ -319,7 +319,7 @@ public class Utils {
         Bitmap newBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
                 bitmap.getHeight(), matrix, true);
         bitmap.recycle();
-        if(colorSample == Bitmap.Config.ARGB_8888) {
+        if (colorSample == Bitmap.Config.ARGB_8888) {
             return newBitmap;
         } else {
             Bitmap sampledBmp = newBitmap.copy(colorSample, false);

@@ -160,7 +160,7 @@ public class CardList implements SelectableItem, Drawable {
     public void draw(Canvas canvas, int x, int y) {
         Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
         if (cards.size() > 0) {
-            if(!open) {
+            if (!open) {
                 helper.drawBitmap(canvas, Card.CARD_PROTECTOR, helper.center(width(), Card.CARD_PROTECTOR.getWidth()), 0, new Paint());
             } else {
                 Card card = cards.get(0);
@@ -223,7 +223,7 @@ public class CardList implements SelectableItem, Drawable {
     @Override
     public void unSelect() {
         selected = false;
-        if(topCard() != null) {
+        if (topCard() != null) {
             topCard().unSelect();
         }
     }

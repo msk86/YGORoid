@@ -69,8 +69,8 @@ public class ActionDispatcher {
                     } else if (item instanceof CardList) {
                         action = new OpenCardSelectorAction(dblClick);
                     } else if (item instanceof InfoWindow) {
-                        if(field.getItem() instanceof OverRay || field.getItem() instanceof CardList)
-                        action = new OpenCardSelectorAction(dblClick);
+                        if (field.getItem() instanceof OverRay || field.getItem() instanceof CardList)
+                            action = new OpenCardSelectorAction(dblClick);
                     }
                 }
             } else if (container instanceof HandCards && item instanceof Card) {

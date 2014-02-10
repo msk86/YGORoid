@@ -21,13 +21,13 @@ public class ZipReader {
             while (entries.hasMoreElements()) {
                 ZipEntry entry = (ZipEntry) entries.nextElement();
                 String name = entry.getName();
-                if(filenameFilter.accept(null, name)) {
+                if (filenameFilter.accept(null, name)) {
                     fileList.add(name);
                 }
             }
         } catch (IOException e) {
         }
-        String[] fileNames =new String[fileList.size()];
+        String[] fileNames = new String[fileList.size()];
         return fileList.toArray(fileNames);
     }
 

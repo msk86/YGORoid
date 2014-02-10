@@ -30,7 +30,6 @@ public class CardSearchAction extends BaseAction {
     }
 
 
-
     @Override
     public void execute() {
         dialog.show();

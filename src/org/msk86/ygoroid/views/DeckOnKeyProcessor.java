@@ -25,10 +25,10 @@ public class DeckOnKeyProcessor {
                             .create();
                     dialog.show();
                     break;
-                case KeyEvent.KEYCODE_VOLUME_UP :
+                case KeyEvent.KEYCODE_VOLUME_UP:
                     view.sortAllCards();
                     break;
-                case KeyEvent.KEYCODE_VOLUME_DOWN :
+                case KeyEvent.KEYCODE_VOLUME_DOWN:
                     view.shuffleAllCards();
                     break;
             }

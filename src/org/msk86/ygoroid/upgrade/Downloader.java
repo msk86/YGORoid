@@ -36,7 +36,7 @@ public class Downloader {
     }
 
     public void setThreads(int threads) {
-        if(threads > 0) {
+        if (threads > 0) {
             this.threads = threads;
         }
     }
@@ -47,16 +47,16 @@ public class Downloader {
 
     public void startDownload() {
         List<List<Task>> subTasksList = new ArrayList<List<Task>>();
-        for(int i=0;i<threads;i++) {
+        for (int i = 0; i < threads; i++) {
             subTasksList.add(new ArrayList<Task>());
         }
 
-        for(int i=0;i<tasks.size();i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             subTasksList.get(i % threads).add(tasks.get(i));
         }
 
-        for(List<Task> subTasks : subTasksList) {
-            if(subTasks.size() > 0) {
+        for (List<Task> subTasks : subTasksList) {
+            if (subTasks.size() > 0) {
                 new Thread(new DownloadThread(subTasks)).start();
             }
         }
@@ -178,7 +178,7 @@ public class Downloader {
                 }
                 task.clear();
             }
-            doneCount ++;
+            doneCount++;
             if (doneCount == threads && successCallback != null) {
                 successCallback.callback(success, fail, tasks.size());
             }

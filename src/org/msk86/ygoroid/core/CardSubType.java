@@ -58,7 +58,7 @@ public enum CardSubType implements Bmpable {
     public static List<CardSubType> getCardSubType(int code) {
         List<CardSubType> types = new ArrayList<CardSubType>();
         for (CardSubType type : CardSubType.values()) {
-            if(type == NULL) {
+            if (type == NULL) {
                 continue;
             }
             if ((code & type.code) == type.code) {

@@ -75,7 +75,7 @@ public class LogoView extends YGOView {
             context.getLogoView().handler.sendEmptyMessage(0);
             pause();
         } else {
-            logoIdx ++;
+            logoIdx++;
             startTime = System.currentTimeMillis();
         }
     }

@@ -6,6 +6,7 @@ import org.msk86.ygoroid.utils.Utils;
 
 public class UserDefinedCard extends Card {
     private String fileName;
+
     public UserDefinedCard(String name) {
         super("0", name, "");
         fileName = Configuration.userDefinedCardImgPath() + name + Configuration.cardImageSuffix();
@@ -14,7 +15,7 @@ public class UserDefinedCard extends Card {
     @Override
     public Bitmap bmp(int width, int height) {
         Bitmap bmp = Utils.readBitmapScaleByHeight(fileName, height);
-        if(bmp == null) {
+        if (bmp == null) {
             bmp = super.bmp(width, height);
         }
         return bmp;

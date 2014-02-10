@@ -166,7 +166,6 @@ public class DeckBuilderView extends YGOView {
     }
 
 
-
     private void clearQueryText() {
         EditText searchTextView = (EditText) Utils.getContext().findViewById(R.id.search_text);
         searchTextView.setText("");
@@ -250,7 +249,7 @@ public class DeckBuilderView extends YGOView {
         public boolean onEditorAction(TextView textView, int actionId, KeyEvent event) {
             if (actionId == EditorInfo.IME_ACTION_DONE
                     || actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
-                deckBuilder.saveToDeck(textView.getText().toString()+".ydk", false, true);
+                deckBuilder.saveToDeck(textView.getText().toString() + ".ydk", false, true);
                 saveAsDialog.hide();
             }
 
@@ -315,10 +314,10 @@ public class DeckBuilderView extends YGOView {
 
 
     public void select(Card card) {
-        if(card == null) {
+        if (card == null) {
             return;
         }
-        if(currentSelectCard != null) {
+        if (currentSelectCard != null) {
             currentSelectCard.unSelect();
         }
         currentSelectCard = card;
@@ -326,7 +325,7 @@ public class DeckBuilderView extends YGOView {
 
         infoWindow.setInfo(currentSelectCard);
 
-        if(cardWindow != null) {
+        if (cardWindow != null) {
             showCard(currentSelectCard);
         }
     }

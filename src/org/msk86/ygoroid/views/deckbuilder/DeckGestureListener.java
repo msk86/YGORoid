@@ -28,12 +28,12 @@ public class DeckGestureListener extends GestureDetector.SimpleOnGestureListener
                 if (card != null) {
                     view.showCard(card);
                 }
-            } else if(view.isInDeckBuilder(x, y)) {
+            } else if (view.isInDeckBuilder(x, y)) {
                 if (view.getDeckBuilder().isInMain(x, y)) {
                     view.getDeckBuilder().setIn(DeckBuilder.IN_MAIN);
-                } else if(view.getDeckBuilder().isInEx(x, y)) {
+                } else if (view.getDeckBuilder().isInEx(x, y)) {
                     view.getDeckBuilder().setIn(DeckBuilder.IN_EX);
-                }else if (view.getDeckBuilder().isInSide(x, y)) {
+                } else if (view.getDeckBuilder().isInSide(x, y)) {
                     view.getDeckBuilder().setIn(DeckBuilder.IN_SIDE);
                 }
                 Card card = view.getDeckBuilder().cardAt(x, y);

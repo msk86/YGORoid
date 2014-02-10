@@ -26,7 +26,7 @@ public class CloseCardSelectorAction extends BaseAction {
             }
         }
 
-        if(listName.equals(Utils.s(R.string.DECK)) && Configuration.configProperties(Configuration.PROPERTY_AUTO_SHUFFLE_ENABLE)) {
+        if (listName.equals(Utils.s(R.string.DECK)) && Configuration.configProperties(Configuration.PROPERTY_AUTO_SHUFFLE_ENABLE)) {
             list.shuffle();
         }
 

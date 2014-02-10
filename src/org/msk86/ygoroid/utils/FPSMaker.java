@@ -2,8 +2,7 @@ package org.msk86.ygoroid.utils;
 
 import java.text.DecimalFormat;
 
-public class FPSMaker
-{
+public class FPSMaker {
     /**
      * 设定动画运行多少帧后统计一次帧数
      */
@@ -50,26 +49,24 @@ public class FPSMaker
 
     public void limitFPS() {
         long timeDiff = System.currentTimeMillis() - limitTime;
-        sleepTime = (int)(FRAME_PERIOD - timeDiff);
+        sleepTime = (int) (FRAME_PERIOD - timeDiff);
 
-        if(sleepTime > 0) {
+        if (sleepTime > 0) {
             try {
                 Thread.sleep(sleepTime);
-            } catch (InterruptedException e) {}
+            } catch (InterruptedException e) {
+            }
         }
     }
 
     /**
      * 制造FPS数据
-     *
      */
-    public void makeFPS()
-    {
+    public void makeFPS() {
         frameCount++;
         interval += PERIOD;
         //当实际间隔符合时间时。
-        if (interval >= FPS_MAX_INTERVAL)
-        {
+        if (interval >= FPS_MAX_INTERVAL) {
             //nanoTime()返回最准确的可用系统计时器的当前值，以毫微秒为单位
             long timeNow = System.nanoTime();
             // 获得到目前为止的时间距离
@@ -84,8 +81,7 @@ public class FPSMaker
         }
     }
 
-    public void setTime(long time)
-    {
+    public void setTime(long time) {
         this.time = time;
     }
 
@@ -93,8 +89,7 @@ public class FPSMaker
         this.limitTime = limitTime;
     }
 
-    public String getFPS()
-    {
+    public String getFPS() {
         return df.format(nowFPS);
     }
 }

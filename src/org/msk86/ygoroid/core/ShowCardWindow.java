@@ -26,7 +26,7 @@ public class ShowCardWindow implements Item, Drawable {
 
 
     public void nextPage() {
-        page ++;
+        page++;
     }
 
     @Override

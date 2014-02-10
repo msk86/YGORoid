@@ -6,6 +6,7 @@ import org.msk86.ygoroid.utils.Utils;
 
 public class SpCard extends Card {
     private int resId;
+
     public SpCard(String id, String name, String desc, int resId) {
         super(id, name, desc);
         this.resId = resId;

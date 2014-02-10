@@ -30,7 +30,7 @@ public class CardNameView extends TextView {
         this(context);
         this.card = card;
         String name = card.getName();
-        if(card instanceof UserDefinedCard) {
+        if (card instanceof UserDefinedCard) {
             name = "?" + name;
         }
         this.setText(name);

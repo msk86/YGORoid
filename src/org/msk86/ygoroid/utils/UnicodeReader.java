@@ -10,12 +10,9 @@ public class UnicodeReader extends Reader {
     private static final int BOM_SIZE = 4;
 
     /**
-     *
-     * @param in
-     *            inputstream to be read
-     * @param defaultEnc
-     *            default encoding if stream does not have BOM marker. Give NULL
-     *            to use system-level default.
+     * @param in         inputstream to be read
+     * @param defaultEnc default encoding if stream does not have BOM marker. Give NULL
+     *                   to use system-level default.
      */
     public UnicodeReader(InputStream in, String defaultEnc) {
         internalIn = new PushbackInputStream(in, BOM_SIZE);
@@ -96,8 +93,8 @@ public class UnicodeReader extends Reader {
     }
 
     public static boolean isEnglish(String text) {
-        for(char c : text.toCharArray()) {
-            if(c > 256) {
+        for (char c : text.toCharArray()) {
+            if (c > 256) {
                 return false;
             }
         }

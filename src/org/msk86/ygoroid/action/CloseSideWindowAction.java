@@ -27,7 +27,7 @@ public class CloseSideWindowAction extends BaseAction {
     }
 
     private void closeAll(List<Card> cards) {
-        for(Card card : cards) {
+        for (Card card : cards) {
             card.set();
         }
     }

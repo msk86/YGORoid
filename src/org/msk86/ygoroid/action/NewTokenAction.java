@@ -22,23 +22,23 @@ public class NewTokenAction extends BaseAction {
         }
         if (selectItem instanceof CardList) {
             CardList cardList = (CardList) selectItem;
-            if(!cardList.getName().equals(Utils.s(R.string.DECK)) && !cardList.getName().equals(Utils.s(R.string.EX))) {
+            if (!cardList.getName().equals(Utils.s(R.string.DECK)) && !cardList.getName().equals(Utils.s(R.string.EX))) {
                 tokenParent = cardList.topCard();
             }
         }
 
         Card token = null;
-        if(tokenParent != null && tokenParent.isTokenable()) {
+        if (tokenParent != null && tokenParent.isTokenable()) {
             String tokenId = tokenParent.nextTokenId();
             token = Utils.getDbHelper().loadByIdWithNull(Integer.parseInt(tokenId));
-            if(token == null) {
+            if (token == null) {
                 tokenParent.resetTokenId();
                 tokenId = tokenParent.nextTokenId();
                 token = Utils.getDbHelper().loadByIdWithNull(Integer.parseInt(tokenId));
             }
         }
 
-        if(token == null) {
+        if (token == null) {
             String tokenId = "0";
             String tokenName = "TOKEN";
             token = new Card(tokenId, tokenName, "TOKEN", Const.TYPE_TOKEN + Const.TYPE_MONSTER, Const.NULL, Const.NULL, 0, 0, 0);

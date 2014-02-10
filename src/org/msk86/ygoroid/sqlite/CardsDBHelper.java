@@ -157,7 +157,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
 
     private Card loadByWholeName(SQLiteDatabase database, String cardName, List<CardFilter> filters) {
         String filterText = "";
-        for(CardFilter filter:filters) {
+        for (CardFilter filter : filters) {
             filterText += filter.where();
         }
         Cursor c = database.query(QUERY_TABLES, QUERY_FIELDS,
@@ -195,7 +195,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
 
     private List<Card> fuzzyQueryByName(SQLiteDatabase database, String name, List<CardFilter> filters) {
         String filterText = "";
-        for(CardFilter filter:filters) {
+        for (CardFilter filter : filters) {
             filterText += filter.where();
         }
         Cursor c = database.query(QUERY_TABLES, QUERY_FIELDS,
@@ -207,7 +207,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
 
     private Card fuzzyLoadByWord(SQLiteDatabase database, String name) {
         String[] parts;
-        if(UnicodeReader.isEnglish(name)) {
+        if (UnicodeReader.isEnglish(name)) {
             parts = name.split(" ");
         } else {
             parts = new String[name.length()];
@@ -234,7 +234,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
 
     private List<Card> fuzzyQueryByWord(SQLiteDatabase database, String name, List<CardFilter> filters) {
         String[] parts;
-        if(UnicodeReader.isEnglish(name)) {
+        if (UnicodeReader.isEnglish(name)) {
             parts = name.split(" ");
         } else {
             parts = new String[name.length()];
@@ -249,7 +249,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
         }
 
         String filterText = "";
-        for(CardFilter filter:filters) {
+        for (CardFilter filter : filters) {
             filterText += filter.where();
         }
 
@@ -261,7 +261,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
 
     private List<Card> fuzzyQueryByDesc(SQLiteDatabase database, String desc, List<CardFilter> filters) {
         String filterText = "";
-        for(CardFilter filter:filters) {
+        for (CardFilter filter : filters) {
             filterText += filter.where();
         }
         Cursor c = database.query(QUERY_TABLES, QUERY_FIELDS,
@@ -435,9 +435,9 @@ public class CardsDBHelper extends SQLiteOpenHelper {
             }
         }
 
-        if(exCardList.isEmpty()) {
-            for(Card card : mainCardList) {
-                if(card.isEx()) {
+        if (exCardList.isEmpty()) {
+            for (Card card : mainCardList) {
+                if (card.isEx()) {
                     exCardList.add(card);
                 }
             }

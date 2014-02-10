@@ -27,7 +27,7 @@ public class ToDeckBottomAction extends BaseAction {
             ((HandCards) container).remove(card);
         }
 
-        if(card != null) {
+        if (card != null) {
             Deck deck;
             if (card.isEx()) {
                 deck = (Deck) duel.getDuelFields().getExDeckField().getItem();

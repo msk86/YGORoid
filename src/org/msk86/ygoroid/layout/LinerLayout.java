@@ -65,7 +65,7 @@ public class LinerLayout implements Layout, Drawable {
             } else {
                 helper.drawBitmap(canvas, Card.CARD_PROTECTOR, posX, posY, new Paint());
             }
-            if(card.isSelect()) {
+            if (card.isSelect()) {
                 drawHighLight(canvas, x + posX, y + posY);
             }
             posX += unitWidth + cardPadding;
