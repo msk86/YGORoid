@@ -30,7 +30,7 @@ public class DatabaseChecker implements Checker {
             latestDatabaseSize = databaseInfo.getLong("size");
             latestDatabaseCount = databaseInfo.getLong("count");
 
-            if (Configuration.configProperties(Configuration.PROPERTY_AUTO_DB_UPGRADE) && shouldUpgrade()) {
+            if (shouldUpgrade()) {
                 context.getUpgradeMsgHandler().sendEmptyMessage(DATA_BASE);
                 return true;
             } else {

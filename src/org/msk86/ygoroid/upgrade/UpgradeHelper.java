@@ -1,6 +1,7 @@
 package org.msk86.ygoroid.upgrade;
 
 import org.msk86.ygoroid.YGOActivity;
+import org.msk86.ygoroid.utils.Configuration;
 
 public class UpgradeHelper {
 
@@ -22,6 +23,9 @@ public class UpgradeHelper {
                     Thread.sleep(2000);
                 } catch (InterruptedException e) {}
                 if(upgradeChecker.checkUpgrade()) {
+                    return;
+                }
+                if(!Configuration.configProperties(Configuration.PROPERTY_AUTO_DB_UPGRADE)) {
                     return;
                 }
                 databaseChecker.checkUpgrade();
