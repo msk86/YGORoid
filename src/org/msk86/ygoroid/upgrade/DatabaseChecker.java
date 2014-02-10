@@ -53,7 +53,7 @@ public class DatabaseChecker implements Checker {
     }
 
     public void upgrade() {
-        if (!Utils.isWifiEnable()) {
+        if (!Utils.isWifiConnected()) {
             checkWifiDialog();
         } else {
             download();

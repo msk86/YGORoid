@@ -1,9 +1,12 @@
 package org.msk86.ygoroid.utils;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.*;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.text.Layout;
 import android.text.StaticLayout;
@@ -479,8 +482,9 @@ public class Utils {
         return str;
     }
 
-    public static boolean isWifiEnable() {
-        WifiManager wifiManager = (WifiManager) context.getSystemService(Service.WIFI_SERVICE);
-        return wifiManager.isWifiEnabled();
+    public static boolean isWifiConnected() {
+        ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        return mWifi.isConnected();
     }
 }

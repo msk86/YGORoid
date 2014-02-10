@@ -81,7 +81,7 @@ public class PicChecker implements Checker {
                 if (!shouldUpgrade()) {
                     return;
                 }
-                if (!context.isWifiChecked() && !Utils.isWifiEnable()) {
+                if (!context.isWifiChecked() && !Utils.isWifiConnected()) {
                     handler.sendEmptyMessage(0);
                 } else {
                     download();
