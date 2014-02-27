@@ -16,6 +16,7 @@ import org.msk86.ygoroid.upgrade.Downloader;
 import org.msk86.ygoroid.upgrade.UpgradeHelper;
 import org.msk86.ygoroid.upgrade.UpgradeMsgHandler;
 import org.msk86.ygoroid.utils.Utils;
+import org.msk86.ygoroid.utils.Utils2;
 import org.msk86.ygoroid.views.DeckOnKeyProcessor;
 import org.msk86.ygoroid.views.PlayMenuProcessor;
 import org.msk86.ygoroid.views.PlayOnKeyProcessor;
@@ -58,6 +59,7 @@ public class YGOActivity extends Activity {
         crashHandler.init(getApplicationContext());
 
         Utils.initInstance(this);
+        Utils2.initInstance(this);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
