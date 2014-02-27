@@ -27,7 +27,18 @@ public class OverRayRenderer implements Renderer {
 
     @Override
     public Size size() {
+        if(overRay.getOverRayCards().topCard().isPositive()) {
+            return sizePositive();
+        } else {
+            return sizeNegative();
+        }
+    }
+
+    private Size sizePositive() {
         return CardSize.NORMAL;
+    }
+    private Size sizeNegative() {
+        return CardSize.NORMAL_NEGATIVE;
     }
 
     @Override
@@ -37,16 +48,7 @@ public class OverRayRenderer implements Renderer {
 
         drawOverRayUnits(canvas, x, y);
 
-        canvas.save();
-        int offset = (size().height() - size().width()) / 2;
-        canvas.translate(x, y);
-        Card topCard = overRay.getOverRayCards().topCard();
-        if(topCard.isPositive()) {
-            topCard.getRenderer().draw(canvas, offset, 0);
-        } else {
-            topCard.getRenderer().draw(canvas, 0, offset);
-        }
-        canvas.restore();
+        overRay.getOverRayCards().topCard().getRenderer().draw(canvas, x, y);
     }
 
     private void drawOverRayUnits(Canvas canvas, int x, int y) {
@@ -54,18 +56,25 @@ public class OverRayRenderer implements Renderer {
             return;
         }
 
+        Card topCard = overRay.getOverRayCards().topCard();
+
         canvas.save();
-        int offset = (size().height() - size().width()) / 2;
         canvas.translate(x, y);
-        for(int i=1; i<= Math.min(overRay.getOverRayCards().size()-1, maxVisibleUnits()); i++) {
+        for(int i=Math.min(overRay.getOverRayCards().size()-1, maxVisibleUnits()); i>=1; i--) {
             Card unit = overRay.getOverRayCards().getCards().get(i);
-            unit.getRenderer().draw(canvas, offset + overRayOffset() * i, 0);
+            if(topCard.isPositive()) {
+                unit.getRenderer().draw(canvas, overRayOffset() * i, 0);
+            } else {
+                int offset = (size().width() - size().height()) / 2;
+                unit.getRenderer().draw(canvas, offset + overRayOffset() * i, -offset);
+            }
+
         }
         canvas.restore();
     }
 
     private int overRayOffset() {
-        return (size().height() - size().width()) / 2 / maxVisibleUnits();
+        return Math.abs((size().height() - size().width()) / 2 / maxVisibleUnits());
     }
 
     private int maxVisibleUnits() {

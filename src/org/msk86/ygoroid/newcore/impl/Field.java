@@ -1,11 +1,14 @@
 package org.msk86.ygoroid.newcore.impl;
 
+import org.msk86.ygoroid.newcore.Container;
 import org.msk86.ygoroid.newcore.Item;
+import org.msk86.ygoroid.newcore.Layout;
 import org.msk86.ygoroid.newcore.Renderer;
 import org.msk86.ygoroid.newcore.constant.FieldType;
+import org.msk86.ygoroid.newcore.impl.layout.CenterLayout;
 import org.msk86.ygoroid.newcore.impl.renderer.FieldRenderer;
 
-public class Field implements Item {
+public class Field implements Item, Container {
     private FieldType type;
     private Item item;
 
@@ -42,5 +45,10 @@ public class Field implements Item {
             renderer = new FieldRenderer(this);
         }
         return renderer;
+    }
+
+    @Override
+    public Layout getLayout() {
+        return new CenterLayout(this, item);
     }
 }

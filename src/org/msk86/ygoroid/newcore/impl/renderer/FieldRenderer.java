@@ -2,13 +2,13 @@ package org.msk86.ygoroid.newcore.impl.renderer;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.Rect;
 import org.msk86.ygoroid.newcore.Item;
+import org.msk86.ygoroid.newcore.Layout;
 import org.msk86.ygoroid.newcore.Renderer;
 import org.msk86.ygoroid.newcore.constant.FieldType;
-import org.msk86.ygoroid.newcore.impl.Card;
 import org.msk86.ygoroid.newcore.impl.Field;
-import org.msk86.ygoroid.newcore.impl.OverRay;
 import org.msk86.ygoroid.size.FieldSize;
 import org.msk86.ygoroid.size.Size;
 import org.msk86.ygoroid.utils.Style;
@@ -54,44 +54,29 @@ public class FieldRenderer implements Renderer {
         paint.setAlpha(80);
 
         canvas.save();
-
         canvas.translate(x, y);
-
         canvas.drawRect(new Rect(Style.padding(), Style.padding(), size().width() - Style.padding(), size().height() - Style.padding()), paint);
 
         paint.setColor(Style.fieldBorderColor());
         paint.setStrokeWidth(Style.border());
         paint.setStyle(Paint.Style.STROKE);
         paint.setAlpha(255);
-
         canvas.drawRect(new Rect(Style.padding(), Style.padding(), size().width() - Style.padding(), size().height() - Style.padding()), paint);
 
         canvas.restore();
     }
 
     private void drawItem(Canvas canvas, int x, int y) {
-        if (field.getItem() == null) {
+        Item item = field.getItem();
+        if (item == null) {
             return;
         }
-        int offset = Style.padding() +  ((size().width() - Style.padding() * 2) - field.getItem().getRenderer().size().width()) / 2;
 
-        Item item = field.getItem();
-
+        Layout layout = field.getLayout();
+        Point p = layout.itemPosition(item);
         canvas.save();
         canvas.translate(x, y);
-
-        if(item instanceof Card) {
-            Card card = (Card) item;
-            if(card.isPositive()) {
-                item.getRenderer().draw(canvas, offset, Style.padding());
-            } else {
-                item.getRenderer().draw(canvas, Style.padding(), offset);
-            }
-        } else if(item instanceof OverRay){
-            item.getRenderer().draw(canvas, Style.padding(), Style.padding());
-        } else {
-            item.getRenderer().draw(canvas, offset, Style.padding());
-        }
+        item.getRenderer().draw(canvas, p.x, p.y);
         canvas.restore();
     }
 

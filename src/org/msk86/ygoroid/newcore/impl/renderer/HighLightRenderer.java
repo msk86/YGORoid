@@ -1,6 +1,7 @@
 package org.msk86.ygoroid.newcore.impl.renderer;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import org.msk86.ygoroid.newcore.Renderer;
@@ -51,6 +52,7 @@ public class HighLightRenderer implements Renderer {
 
         canvas.save();
         canvas.translate(x, y);
+
         Rect highLightRect = new Rect(0, 0, size().width(), size().height());
         canvas.drawRect(highLightRect, paint);
         canvas.restore();

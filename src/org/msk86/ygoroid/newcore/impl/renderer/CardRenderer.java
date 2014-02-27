@@ -2,6 +2,7 @@ package org.msk86.ygoroid.newcore.impl.renderer;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import org.msk86.ygoroid.newcore.Renderer;
 import org.msk86.ygoroid.newcore.impl.Card;
@@ -13,13 +14,11 @@ import org.msk86.ygoroid.size.Size;
 public class CardRenderer implements Renderer {
     Card card;
     int x, y;
-    Size size;
     HighLight highLight;
 
 
     public CardRenderer(Card card) {
         this.card = card;
-        size = CardSize.NORMAL;
         highLight = new HighLight(card);
     }
 
@@ -35,7 +34,18 @@ public class CardRenderer implements Renderer {
 
     @Override
     public Size size() {
-        return size;
+        if(card.isPositive()) {
+            return sizePositive();
+        } else {
+            return sizeNegative();
+        }
+    }
+
+    private Size sizePositive() {
+        return CardSize.NORMAL;
+    }
+    private Size sizeNegative() {
+        return CardSize.NORMAL_NEGATIVE;
     }
 
     @Override
@@ -53,9 +63,9 @@ public class CardRenderer implements Renderer {
 
     private Bitmap getCardBmp() {
         if (card.isOpen()) {
-            return card.getBmpGenerator().generate(size);
+            return card.getBmpGenerator().generate(sizePositive());
         } else {
-            return CardCover.getInstance().getBmpGenerator().generate(size);
+            return CardCover.getInstance().getBmpGenerator().generate(sizePositive());
         }
     }
 
@@ -65,25 +75,20 @@ public class CardRenderer implements Renderer {
         x = y = 0;
         if (!card.isPositive()) {
             canvas.rotate(-90);
-            x = -size.width();
+            x = -size().height();
         }
         canvas.drawBitmap(cardBmp, x, y, new Paint());
         canvas.restore();
     }
 
-    private void drawIndicator(Canvas canvas, int x, int y) {
-        card.getIndicator().getRenderer().draw(canvas, x, y);
-    }
-
     private void drawHighLight(Canvas canvas, int x, int y) {
         canvas.save();
         canvas.translate(x, y);
-        x = y = 0;
-        if (!card.isPositive()) {
-            canvas.rotate(-90);
-            x = -size.width();
-        }
-        highLight.getRenderer().draw(canvas, x, y);
+        highLight.getRenderer().draw(canvas, 0, 0);
         canvas.restore();
+    }
+
+    private void drawIndicator(Canvas canvas, int x, int y) {
+        card.getIndicator().getRenderer().draw(canvas, x, y);
     }
 }

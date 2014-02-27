@@ -17,6 +17,18 @@ public enum CardSize implements Size {
         }
     },
 
+    NORMAL_NEGATIVE {
+        @Override
+        public int width() {
+            return NORMAL.height();
+        }
+
+        @Override
+        public int height() {
+            return NORMAL.width();
+        }
+    },
+
     SCREEN {
         @Override
         public int width() {
@@ -49,7 +61,7 @@ public enum CardSize implements Size {
 
         @Override
         public int height() {
-            return (int)(width() * 1.45);
+            return (int) (width() * 1.45);
         }
     };
 
