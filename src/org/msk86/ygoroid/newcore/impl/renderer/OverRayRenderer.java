@@ -9,20 +9,9 @@ import org.msk86.ygoroid.size.Size;
 
 public class OverRayRenderer implements Renderer {
     private OverRay overRay;
-    int x, y;
 
     public OverRayRenderer(OverRay overRay) {
         this.overRay = overRay;
-    }
-
-    @Override
-    public int x() {
-        return x;
-    }
-
-    @Override
-    public int y() {
-        return y;
     }
 
     @Override
@@ -43,9 +32,6 @@ public class OverRayRenderer implements Renderer {
 
     @Override
     public void draw(Canvas canvas, int x, int y) {
-        this.x = x;
-        this.y = y;
-
         drawOverRayUnits(canvas, x, y);
 
         overRay.getOverRayCards().topCard().getRenderer().draw(canvas, x, y);

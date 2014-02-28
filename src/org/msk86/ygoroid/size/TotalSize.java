@@ -25,7 +25,19 @@ public enum TotalSize implements Size {
         public int height() {
             return FieldSize.SQUARE.height() * 4;
         }
-    } ;
+    },
+
+    HAND_CARDS {
+        @Override
+        public int width() {
+            return FieldSize.SQUARE.width() * 5 - CardSize.NORMAL.width() / 2;
+        }
+
+        @Override
+        public int height() {
+            return CardSize.NORMAL.height();
+        }
+    };
 
     public int width() {
         return this.width();

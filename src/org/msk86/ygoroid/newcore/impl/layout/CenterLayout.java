@@ -20,7 +20,7 @@ public class CenterLayout implements Layout {
     }
 
     @Override
-    public List<Item> items() {
+    public List<? extends Item> items() {
         List<Item> items = new ArrayList<Item>();
         items.add(item);
         return items;

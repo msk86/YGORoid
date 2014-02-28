@@ -1,13 +1,11 @@
 package org.msk86.ygoroid.newcore.impl.renderer;
 
 import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 import org.msk86.ygoroid.newcore.Renderer;
 import org.msk86.ygoroid.newcore.impl.Card;
-import org.msk86.ygoroid.newcore.impl.CardCover;
 import org.msk86.ygoroid.newcore.impl.Deck;
 import org.msk86.ygoroid.newcore.impl.HighLight;
 import org.msk86.ygoroid.size.CardSize;
@@ -17,22 +15,11 @@ import org.msk86.ygoroid.utils.Utils2;
 
 public class DeckRenderer implements Renderer {
     Deck deck;
-    int x, y;
     HighLight highLight;
 
     public DeckRenderer(Deck deck) {
         this.deck = deck;
         highLight = new HighLight(deck);
-    }
-
-    @Override
-    public int x() {
-        return x;
-    }
-
-    @Override
-    public int y() {
-        return y;
     }
 
     @Override
@@ -57,7 +44,6 @@ public class DeckRenderer implements Renderer {
         TextPaint textPaint = new TextPaint();
         textPaint.setAntiAlias(true);
         textPaint.setTextSize(size().width() / 6);
-//        textPaint.setTextSize(size().height() / 9);
         textPaint.setColor(Style.fontColor());
         textPaint.setShadowLayer(1, 0, 0, Style.textShadowColor());
         textPaint.setUnderlineText(true);

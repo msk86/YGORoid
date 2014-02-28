@@ -15,20 +15,9 @@ import org.msk86.ygoroid.utils.Style;
 
 public class FieldRenderer implements Renderer {
     Field field;
-    int x, y;
 
     public FieldRenderer(Field field) {
         this.field = field;
-    }
-
-    @Override
-    public int x() {
-        return x;
-    }
-
-    @Override
-    public int y() {
-        return y;
     }
 
     @Override
@@ -42,8 +31,6 @@ public class FieldRenderer implements Renderer {
 
     @Override
     public void draw(Canvas canvas, int x, int y) {
-        this.x = x;
-        this.y = y;
         drawFrame(canvas, x, y);
         drawItem(canvas, x, y);
     }

@@ -11,21 +11,10 @@ import org.msk86.ygoroid.size.Size;
 import org.msk86.ygoroid.utils.Configuration;
 
 public class HighLightRenderer implements Renderer {
-    int x, y;
     HighLight highLight;
 
     public HighLightRenderer(HighLight highLight) {
         this.highLight = highLight;
-    }
-
-    @Override
-    public int x() {
-        return x;
-    }
-
-    @Override
-    public int y() {
-        return y;
     }
 
     @Override
@@ -35,9 +24,6 @@ public class HighLightRenderer implements Renderer {
 
     @Override
     public void draw(Canvas canvas, int x, int y) {
-        this.x = x;
-        this.y = y;
-
         if(!(highLight.getTarget() instanceof Selectable)) {
             return;
         }

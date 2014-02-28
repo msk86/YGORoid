@@ -18,20 +18,8 @@ public class IndicatorRenderer implements Renderer {
 
     private Indicator indicator;
 
-    private int x, y;
-
     public IndicatorRenderer(Indicator indicator) {
         this.indicator = indicator;
-    }
-
-    @Override
-    public int x() {
-        return x;
-    }
-
-    @Override
-    public int y() {
-        return y;
     }
 
     @Override
@@ -41,9 +29,6 @@ public class IndicatorRenderer implements Renderer {
 
     @Override
     public void draw(Canvas canvas, int x, int y) {
-        this.x = x;
-        this.y = y;
-
         if(indicator.getCount() == 0) {
             return;
         }

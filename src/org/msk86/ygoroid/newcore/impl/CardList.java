@@ -118,6 +118,10 @@ public class CardList {
         return open;
     }
 
+    public void setOpen(boolean open) {
+        this.open = open;
+    }
+
     public void openAll() {
         for (Card card : cards) {
             card.open();

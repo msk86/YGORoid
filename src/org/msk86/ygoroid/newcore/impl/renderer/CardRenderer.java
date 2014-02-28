@@ -13,23 +13,12 @@ import org.msk86.ygoroid.size.Size;
 
 public class CardRenderer implements Renderer {
     Card card;
-    int x, y;
     HighLight highLight;
 
 
     public CardRenderer(Card card) {
         this.card = card;
         highLight = new HighLight(card);
-    }
-
-    @Override
-    public int x() {
-        return x;
-    }
-
-    @Override
-    public int y() {
-        return y;
     }
 
     @Override
@@ -50,8 +39,6 @@ public class CardRenderer implements Renderer {
 
     @Override
     public void draw(Canvas canvas, int x, int y) {
-        this.x = x;
-        this.y = y;
         Bitmap cardBmp = getCardBmp();
 
         drawCardBmp(canvas, cardBmp, x, y);
