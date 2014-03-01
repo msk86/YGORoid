@@ -148,6 +148,10 @@ public class Card implements Item, Selectable, Controllable, Bmpable {
         return indicator;
     }
 
+    public String getDesc() {
+        return desc;
+    }
+
     public String cardTypeDesc() {
         StringBuilder result = new StringBuilder();
         result.append(type.toString());

@@ -13,6 +13,7 @@ import org.msk86.ygoroid.size.CardSize;
 import org.msk86.ygoroid.size.Size;
 import org.msk86.ygoroid.utils.BmpReader;
 import org.msk86.ygoroid.utils.Configuration;
+import org.msk86.ygoroid.utils.TextUtils;
 import org.msk86.ygoroid.utils.Utils2;
 
 import java.util.HashMap;
@@ -55,7 +56,7 @@ public class CardGenerator implements BmpGenerator {
                 textPaint.setColor(Configuration.syncFontColor());
             }
             textPaint.setAntiAlias(true);
-            CharSequence cs = Utils2.cutOneLine(card.getName(), textPaint, size.width());
+            CharSequence cs = TextUtils.cutOneLine(card.getName(), textPaint, size.width());
             StaticLayout layout = new StaticLayout(cs, textPaint, size.width(), Layout.Alignment.ALIGN_CENTER, 1, 0, true);
 
             canvas.translate(0, size.height() / 20);

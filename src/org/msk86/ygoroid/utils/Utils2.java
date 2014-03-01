@@ -301,33 +301,6 @@ public class Utils2 {
         return context.getResources().getString(id);
     }
 
-    public static String cutOneLine(String str, TextPaint textPaint, int width) {
-        StaticLayout layout = new StaticLayout(str, textPaint, width, Layout.Alignment.ALIGN_NORMAL, 1, 0, true);
-        if (layout.getLineCount() > 1) {
-            str = str.substring(0, layout.getLineEnd(0)).trim();
-        }
-        return str;
-    }
-
-    public static String cutPages(String str, int page, TextPaint textPaint, int width, int height) {
-        StaticLayout layout = new StaticLayout(str, textPaint, width, Layout.Alignment.ALIGN_NORMAL, 1, 0, true);
-        int lineCount = layout.getLineCount();
-        int linePerPage = lineCount;
-        for (int i = 0; i < lineCount; i++) {
-            if (layout.getLineTop(i) >= height) {
-                linePerPage = i;
-                break;
-            }
-        }
-        int pages = (int) Math.ceil(lineCount * 1.0 / linePerPage);
-        page = page % pages;
-        int pageLineStart = page * linePerPage;
-        int pageLineEnd = (page + 1) * linePerPage;
-        pageLineEnd = pageLineEnd >= lineCount ? lineCount : pageLineEnd;
-        str = str.substring(layout.getLineStart(pageLineStart), layout.getLineStart(pageLineEnd)).trim();
-        return str;
-    }
-
     public static boolean isWifiConnected() {
         ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
