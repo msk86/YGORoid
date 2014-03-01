@@ -18,7 +18,7 @@ public class TextUtils {
         int lineCount = layout.getLineCount();
         int linePerPage = lineCount;
         for (int i = 0; i < lineCount; i++) {
-            if (layout.getLineTop(i) >= height) {
+            if (layout.getLineBottom(i) >= height) {
                 linePerPage = i;
                 break;
             }

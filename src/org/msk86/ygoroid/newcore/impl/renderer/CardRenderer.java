@@ -24,17 +24,10 @@ public class CardRenderer implements Renderer {
     @Override
     public Size size() {
         if(card.isPositive()) {
-            return sizePositive();
+            return CardSize.NORMAL;
         } else {
-            return sizeNegative();
+            return CardSize.NORMAL.rotate();
         }
-    }
-
-    private Size sizePositive() {
-        return CardSize.NORMAL;
-    }
-    private Size sizeNegative() {
-        return CardSize.NORMAL_NEGATIVE;
     }
 
     @Override
@@ -49,10 +42,14 @@ public class CardRenderer implements Renderer {
     }
 
     private Bitmap getCardBmp() {
+        Size size = size();
+        if(!card.isPositive()) {
+            size = size.rotate();
+        }
         if (card.isOpen()) {
-            return card.getBmpGenerator().generate(sizePositive());
+            return card.getBmpGenerator().generate(size);
         } else {
-            return CardCover.getInstance().getBmpGenerator().generate(sizePositive());
+            return CardCover.getInstance().getBmpGenerator().generate(size);
         }
     }
 

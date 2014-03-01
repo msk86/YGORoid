@@ -17,17 +17,10 @@ public class OverRayRenderer implements Renderer {
     @Override
     public Size size() {
         if(overRay.getOverRayCards().topCard().isPositive()) {
-            return sizePositive();
+            return CardSize.NORMAL;
         } else {
-            return sizeNegative();
+            return CardSize.NORMAL.rotate();
         }
-    }
-
-    private Size sizePositive() {
-        return CardSize.NORMAL;
-    }
-    private Size sizeNegative() {
-        return CardSize.NORMAL_NEGATIVE;
     }
 
     @Override

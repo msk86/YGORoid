@@ -83,7 +83,7 @@ public class CardGenerator implements BmpGenerator {
     }
 
     private int cardNameFontSize(Size size) {
-        if(size == CardSize.SNAPSHOT || size == CardSize.NORMAL) {
+        if(size.height() <= CardSize.NORMAL.height()) {
             return size.height() / 10;
         } else {
             return size.height() / 15;

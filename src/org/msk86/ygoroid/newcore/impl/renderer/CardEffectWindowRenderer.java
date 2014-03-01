@@ -36,7 +36,7 @@ public class CardEffectWindowRenderer implements Renderer {
     }
 
     private void drawCard(Canvas canvas, int x, int y) {
-        Bitmap cardBmp = cardEffectWindow.getCard().getBmpGenerator().generate(CardSize.SCREEN);
+        Bitmap cardBmp = cardEffectWindow.getCard().getBmpGenerator().generate(cardSize());
 
         canvas.save();
         canvas.translate(x, y);
@@ -51,14 +51,14 @@ public class CardEffectWindowRenderer implements Renderer {
         canvas.save();
         canvas.translate(x, y);
 
-        int fontSize = CardSize.SCREEN.height() / 25;
+        int fontSize = cardSize().height() / 25;
         Paint paint = new Paint();
         paint.setColor(Style.fontColor());
         paint.setTextSize(fontSize);
         paint.setAntiAlias(true);
 
         int top = fontSize * 3 / 2;
-        int left = CardSize.SCREEN.width() + fontSize / 2;
+        int left = cardSize().width() + fontSize / 2;
         int lineHeight = fontSize * 3 / 2;
 
         canvas.drawText(card.getName(), left, top, paint);
@@ -77,9 +77,9 @@ public class CardEffectWindowRenderer implements Renderer {
         top += lineHeight;
         TextPaint textPaint = new TextPaint(paint);
         String pageText = TextUtils.cutPages(card.getDesc(), cardEffectWindow.getEffectTextPage(),
-                textPaint, size().width() - CardSize.SCREEN.width() - fontSize / 2, size().height() - top);
+                textPaint, size().width() - cardSize().width() - fontSize / 2, size().height() - top);
         StaticLayout layout = new StaticLayout(pageText, textPaint,
-                size().width() - CardSize.SCREEN.width() - fontSize / 2, Layout.Alignment.ALIGN_NORMAL, 1, 0, true);
+                size().width() - cardSize().width() - fontSize / 2, Layout.Alignment.ALIGN_NORMAL, 1, 0, true);
 
         canvas.translate(left, top);
         layout.draw(canvas);
@@ -94,5 +94,9 @@ public class CardEffectWindowRenderer implements Renderer {
         paint.setAlpha(150);
         canvas.drawRect(new Rect(0, 0, size().width(), size().height()), paint);
         canvas.restore();
+    }
+
+    private Size cardSize() {
+        return new CardSize(cardEffectWindow.getWindowHolder().getRenderer().size().height());
     }
 }

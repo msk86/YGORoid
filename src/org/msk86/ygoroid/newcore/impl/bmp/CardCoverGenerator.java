@@ -14,9 +14,9 @@ public class CardCoverGenerator implements BmpGenerator {
     @Override
     public Bitmap generate(Size size) {
         if (cover == null) {
-            Bitmap bmp = BmpReader.readBitmap(Configuration.texturePath() + "cover" + Configuration.cardImageSuffix(), CardSize.NORMAL);
+            Bitmap bmp = BmpReader.readBitmap(Configuration.texturePath() + "cover" + Configuration.cardImageSuffix(), size);
             if (bmp == null) {
-                bmp = BmpReader.readBitmap(R.raw.cover, CardSize.NORMAL);
+                bmp = BmpReader.readBitmap(R.raw.cover, size);
             }
             cover = bmp;
         }
