@@ -20,20 +20,24 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CardGenerator implements BmpGenerator {
+    public Map<String, Bitmap> cache = new HashMap<String, Bitmap>();
     private Card card;
-    private Map<Size, Bitmap> cache = new HashMap<Size, Bitmap>();
 
     public CardGenerator(Card card) {
         this.card = card;
     }
 
+    private String cardBmpKey(Size size) {
+        return card.getId() + card.getName() + size.toString();
+    }
+
     @Override
     public Bitmap generate(Size size) {
-        if(cache.get(size) == null) {
-            cache.put(size, bmp(size));
+        if(cache.get(cardBmpKey(size)) == null) {
+            cache.put(cardBmpKey(size), bmp(size));
         }
 
-        return cache.get(size);
+        return cache.get(cardBmpKey(size));
     }
 
     private Bitmap bmp(Size size) {
