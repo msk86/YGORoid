@@ -5,8 +5,8 @@ import android.graphics.Point;
 import org.msk86.ygoroid.newcore.Renderer;
 import org.msk86.ygoroid.newcore.impl.Card;
 import org.msk86.ygoroid.newcore.impl.HandCards;
+import org.msk86.ygoroid.size.OtherSize;
 import org.msk86.ygoroid.size.Size;
-import org.msk86.ygoroid.size.TotalSize;
 
 public class HandCardsRenderer implements Renderer {
     HandCards handCards;
@@ -17,7 +17,7 @@ public class HandCardsRenderer implements Renderer {
 
     @Override
     public Size size() {
-        return TotalSize.HAND_CARDS;
+        return OtherSize.HAND_CARDS;
     }
 
     @Override

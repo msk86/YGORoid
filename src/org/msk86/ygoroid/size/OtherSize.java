@@ -2,7 +2,7 @@ package org.msk86.ygoroid.size;
 
 import org.msk86.ygoroid.utils.Utils2;
 
-public enum TotalSize implements Size {
+public enum OtherSize implements Size {
     SCREEN {
         @Override
         public int width() {
@@ -24,6 +24,18 @@ public enum TotalSize implements Size {
         @Override
         public int height() {
             return FieldSize.SQUARE.height() * 4;
+        }
+    },
+
+    CARD_SELECTOR {
+        @Override
+        public int width() {
+            return TOTAL.width();
+        }
+
+        @Override
+        public int height() {
+            return SCREEN.height();
         }
     },
 

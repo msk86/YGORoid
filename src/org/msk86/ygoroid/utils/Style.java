@@ -26,4 +26,8 @@ public class Style {
     public static int fieldShadowColor() {
         return Color.BLACK;
     }
+
+    public static int windowBackgroundColor() {
+        return Color.BLACK;
+    }
 }
