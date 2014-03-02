@@ -5,7 +5,7 @@ public class OtherSize extends Size {
         super(width, height);
     }
 
-    public static Size HAND_CARDS, CARD_SELECTOR, COIN, DICE, DUEL_FIELDS;
+    public static Size HAND_CARDS, CARD_SELECTOR, COIN, DICE, DUEL_FIELDS, LP;
 
     static {
         HAND_CARDS = new OtherSize(FieldSize.SQUARE.width() * 5 - CardSize.NORMAL.width() / 2,
@@ -15,5 +15,6 @@ public class OtherSize extends Size {
         COIN = new OtherSize(FieldSize.SQUARE.width() / 2, FieldSize.SQUARE.width() / 2);
         DICE = new OtherSize(FieldSize.SQUARE.width() / 2, FieldSize.SQUARE.width() / 2);
         DUEL_FIELDS = new OtherSize(FieldSize.SQUARE.width() * 5 + FieldSize.RECT.width() * 2, FieldSize.SQUARE.height() * 4);
+        LP = new OtherSize((int) (FieldSize.SQUARE.width() * 1.2), FieldSize.SQUARE.height() / 4);
     }
 }
