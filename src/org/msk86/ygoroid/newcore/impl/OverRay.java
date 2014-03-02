@@ -1,12 +1,9 @@
 package org.msk86.ygoroid.newcore.impl;
 
-import org.msk86.ygoroid.newcore.Controllable;
-import org.msk86.ygoroid.newcore.Item;
-import org.msk86.ygoroid.newcore.Renderer;
-import org.msk86.ygoroid.newcore.Selectable;
+import org.msk86.ygoroid.newcore.*;
 import org.msk86.ygoroid.newcore.impl.renderer.OverRayRenderer;
 
-public class OverRay implements Item, Selectable, Controllable {
+public class OverRay implements Item, Selectable, Controllable, Infoable {
 
     CardList overRayCards;
 
@@ -94,5 +91,10 @@ public class OverRay implements Item, Selectable, Controllable {
     @Override
     public boolean isPositive() {
         return overRayCards.topCard().isPositive();
+    }
+
+    @Override
+    public String getInfo() {
+        return overRayCards.topCard().getInfo();
     }
 }

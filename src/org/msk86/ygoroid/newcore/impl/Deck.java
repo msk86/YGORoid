@@ -1,11 +1,12 @@
 package org.msk86.ygoroid.newcore.impl;
 
+import org.msk86.ygoroid.newcore.Infoable;
 import org.msk86.ygoroid.newcore.Item;
 import org.msk86.ygoroid.newcore.Renderer;
 import org.msk86.ygoroid.newcore.Selectable;
 import org.msk86.ygoroid.newcore.impl.renderer.DeckRenderer;
 
-public class Deck implements Item, Selectable {
+public class Deck implements Item, Selectable, Infoable {
     String name;
     CardList cardList;
 
@@ -46,5 +47,14 @@ public class Deck implements Item, Selectable {
     @Override
     public boolean isSelect() {
         return select;
+    }
+
+    @Override
+    public String getInfo() {
+        String info = this.name + "[" + cardList.size() + "]";
+        if(cardList.size() > 0 && cardList.topCard().isOpen()) {
+            info += " / " + cardList.topCard().getInfo();
+        }
+        return info;
     }
 }

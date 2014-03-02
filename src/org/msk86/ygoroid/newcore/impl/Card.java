@@ -10,7 +10,7 @@ import org.msk86.ygoroid.newcore.impl.renderer.CardRenderer;
 
 import java.util.List;
 
-public class Card implements Item, Selectable, Controllable, Bmpable {
+public class Card implements Item, Selectable, Controllable, Bmpable, Infoable {
     String id;
     String aliasId;
     String name;
@@ -186,27 +186,6 @@ public class Card implements Item, Selectable, Controllable, Bmpable {
         return result.toString();
     }
 
-    @Override
-    public String toString() {
-        StringBuilder result = new StringBuilder();
-        result.append(name);
-        result.append(" ");
-
-        if (type == CardType.NULL) {
-            result.append(desc);
-        } else {
-            result.append(cardTypeDesc());
-            if (type != CardType.MONSTER) {
-                return result.toString();
-            }
-            result.append(" ");
-            result.append(levelAndADDesc());
-            result.append(" ");
-            result.append(attrAndRaceDesc());
-        }
-        return result.toString();
-    }
-
     private Renderer renderer;
 
     @Override
@@ -242,5 +221,26 @@ public class Card implements Item, Selectable, Controllable, Bmpable {
     @Override
     public boolean isSelect() {
         return select;
+    }
+
+    @Override
+    public String getInfo() {
+        StringBuilder result = new StringBuilder();
+        result.append(name);
+        result.append(" ");
+
+        if (type == CardType.NULL) {
+            result.append(desc);
+        } else {
+            result.append(cardTypeDesc());
+            if (type != CardType.MONSTER) {
+                return result.toString();
+            }
+            result.append(" ");
+            result.append(levelAndADDesc());
+            result.append(" ");
+            result.append(attrAndRaceDesc());
+        }
+        return result.toString();
     }
 }

@@ -31,6 +31,14 @@ public class Style {
         return Color.BLACK;
     }
 
+    public static int infoBarBackgroundColor() {
+        return Color.BLACK;
+    }
+
+    public static int infoBarBorderColor() {
+        return Color.DKGRAY;
+    }
+
     public static int lineColor() {
         return Color.WHITE;
     }
