@@ -22,7 +22,7 @@ public class FieldRenderer implements Renderer {
 
     @Override
     public Size size() {
-        if (field.getType() == FieldType.MONSTER_ZONE || field.getType() == FieldType.MAGIC_ZONE) {
+        if (field.getType() == FieldType.MONSTER || field.getType() == FieldType.MAGIC_TRAP) {
             return FieldSize.SQUARE;
         } else {
             return FieldSize.RECT;
