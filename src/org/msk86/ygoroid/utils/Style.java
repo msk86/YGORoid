@@ -30,4 +30,8 @@ public class Style {
     public static int windowBackgroundColor() {
         return Color.BLACK;
     }
+
+    public static int lineColor() {
+        return Color.WHITE;
+    }
 }
