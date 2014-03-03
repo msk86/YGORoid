@@ -3,7 +3,7 @@ package org.msk86.ygoroid.size;
 import org.msk86.ygoroid.utils.Style;
 
 public class CalculatorSize {
-    public static Size OPERATOR, NUMBER, BUTTON, NUMBER_PAD, OPERATION_PAD;
+    public static Size OPERATOR, NUMBER, BUTTON, NUMBER_PAD, OPERATION_PAD, LP_DISPLAY;
 
     static {
         OPERATOR = new Size(FieldSize.SQUARE.width() * 2 / 3, FieldSize.SQUARE.width() * 2 / 3);
@@ -12,5 +12,6 @@ public class CalculatorSize {
 
         NUMBER_PAD = new Size(NUMBER.width() * 3 + Style.padding() * 4, NUMBER.height() * 4 + Style.padding() * 6);
         OPERATION_PAD = new Size(OPERATOR.width(), OPERATOR.height() * 4 + Style.padding() * 6);
+        LP_DISPLAY = new Size((int)(NUMBER.width() * 1.5), NUMBER.height() * 2 + Style.padding() * 2);
     }
 }
