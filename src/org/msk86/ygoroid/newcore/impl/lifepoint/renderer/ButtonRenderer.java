@@ -14,7 +14,11 @@ public class ButtonRenderer extends IconRenderer {
 
     @Override
     public Size size() {
-        return CalculatorSize.BUTTON;
+        if(button.getSize() == 1) {
+            return CalculatorSize.NUMBER;
+        } else {
+            return CalculatorSize.BUTTON;
+        }
     }
 
     @Override

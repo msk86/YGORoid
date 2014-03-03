@@ -7,12 +7,18 @@ import org.msk86.ygoroid.newcore.impl.lifepoint.renderer.ButtonRenderer;
 import org.msk86.ygoroid.utils.Utils2;
 
 public enum Button implements Item {
-    CLEAR("C"), OK(Utils2.s(R.string.CONFIRM_YES)), CANCEL(Utils2.s(R.string.CONFIRM_NO));
+    CLEAR("C", 1), OK(Utils2.s(R.string.CONFIRM_YES), 2), CANCEL(Utils2.s(R.string.CONFIRM_NO), 2);
 
     private String text;
+    private int size;
 
-    private Button(String text) {
+    private Button(String text, int size) {
         this.text = text;
+        this.size = size;
+    }
+
+    public int getSize() {
+        return size;
     }
 
     @Override
