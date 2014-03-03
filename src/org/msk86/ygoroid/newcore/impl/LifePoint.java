@@ -5,25 +5,25 @@ import org.msk86.ygoroid.newcore.Renderer;
 import org.msk86.ygoroid.newcore.impl.renderer.LifePointRenderer;
 
 public class LifePoint implements Item {
-    int lp, opponentLp;
+    int[] lps = new int[2];
 
     public LifePoint() {
-        lp = 8000;
-        opponentLp = 8000;
+        lps[0] = 8000;
+        lps[1] = 8000;
     }
 
-    public int getLp() {
-        return lp;
+    public int[] getLps() {
+        return lps;
     }
 
-    public int getOpponentLp() {
-        return opponentLp;
+    public int getLp(int idx) {
+        return lps[idx];
     }
 
     @Override
     public String toString() {
-        String str = "LP: " + lp;
-        str += (opponentLp == 8000 ? "" : " / " + opponentLp);
+        String str = "LP: " + lps[0];
+        str += (lps[1] == 8000 ? "" : " / " + lps[1]);
         return str;
     }
 

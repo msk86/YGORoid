@@ -8,13 +8,15 @@ import org.msk86.ygoroid.newcore.impl.lifepoint.renderer.LpDisplayRenderer;
 public class LpDisplay implements Item, Selectable {
     int lifePoint;
     String name;
+    int index;
     Operator operator;
     String number;
     boolean select;
 
-    public LpDisplay(int lifePoint, String name) {
+    public LpDisplay(int lifePoint, String name, int index) {
         this.lifePoint = lifePoint;
         this.name = name;
+        this.index = index;
         number = "0";
         operator = Operator.MINUS;
     }
@@ -25,6 +27,10 @@ public class LpDisplay implements Item, Selectable {
 
     public String getNumber() {
         return number;
+    }
+
+    public int getIndex() {
+        return index;
     }
 
     public int getLifePoint() {

@@ -77,10 +77,6 @@ public class LpDisplayRenderer implements Renderer {
         return size().height() / 5;
     }
 
-    private String formatText(String s, String format) {
-        return format.substring(0, format.length() - s.length()) + s;
-    }
-
     private int getPadding() {
         return Style.padding() * 2;
     }
