@@ -80,6 +80,9 @@ public class GridLayout implements Layout {
 
     private int getPaddingX() {
         int col = col();
+        if(col == 1) {
+            return 0;
+        }
         int containerWidth = ((Item) container).getRenderer().size().width();
         return (containerWidth - gridSize.width() * col) / (col - 1);
     }

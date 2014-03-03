@@ -16,9 +16,7 @@ public class NumberPad implements Item, Container {
 
     public NumberPad() {
         items = new ArrayList<Item>();
-
         Collections.addAll(items, Numbers.values());
-
         items.add(Button.CLEAR);
     }
 
