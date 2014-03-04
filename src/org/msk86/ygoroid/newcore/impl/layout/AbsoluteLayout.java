@@ -43,7 +43,34 @@ public class AbsoluteLayout implements Layout {
     }
     @Override
     public List<? extends Item> items() {
-        return items;
+        List<Item> zIndexList = new ArrayList<Item>();
+        for(int i=getMinZIndex();i<=getMaxZIndex();i++) {
+            for (Map.Entry<Item, Integer> entry : zIndexMap.entrySet()) {
+                if(entry.getValue() == i) {
+                    zIndexList.add(entry.getKey());
+                }
+            }
+        }
+        return zIndexList;
+    }
+
+    private int getMaxZIndex() {
+        int max = 0;
+        for(Integer z : zIndexMap.values()) {
+            if(z > max) {
+                max = z;
+            }
+        }
+        return max;
+    }
+    private int getMinZIndex() {
+        int min = 0;
+        for(Integer z : zIndexMap.values()) {
+            if(z < min) {
+                min = z;
+            }
+        }
+        return min;
     }
 
     @Override
