@@ -7,13 +7,11 @@ import android.graphics.*;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.text.Layout;
-import android.text.StaticLayout;
-import android.text.TextPaint;
 import android.util.DisplayMetrics;
 import org.msk86.ygoroid.YGOActivity;
 import org.msk86.ygoroid.core.Drawable;
-import org.msk86.ygoroid.size.Size;
 import org.msk86.ygoroid.sqlite.CardsDBHelper;
+import org.msk86.ygoroid.sqlite.CardsDBHelper2;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -23,12 +21,12 @@ import java.util.Comparator;
 public class Utils2 {
     private static DisplayMetrics dm;
     private static YGOActivity context;
-    private static CardsDBHelper dbHelper;
+    private static CardsDBHelper2 dbHelper;
 
     public static void initInstance(YGOActivity activity) {
         context = activity;
         dm = new DisplayMetrics();
-        dbHelper = new CardsDBHelper(activity, 1);
+        dbHelper = new CardsDBHelper2(activity, 1);
         activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
         checkFolders();
     }
@@ -58,7 +56,7 @@ public class Utils2 {
         return context;
     }
 
-    public static CardsDBHelper getDbHelper() {
+    public static CardsDBHelper2 getDbHelper() {
         return dbHelper;
     }
 
