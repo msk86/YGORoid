@@ -28,12 +28,19 @@ public class AbsoluteLayout implements Layout {
     }
 
     public void addItem(Item item, int x, int y, int zIndex) {
+        if(items.contains(item)) {
+            return;
+        }
         items.add(item);
         Point pos = new Point(x, y);
         positionMap.put(item, pos);
         zIndexMap.put(item, zIndex);
     }
-
+    public void removeItem(Item item) {
+        items.remove(item);
+        positionMap.remove(item);
+        zIndexMap.remove(item);
+    }
     @Override
     public List<? extends Item> items() {
         return items;

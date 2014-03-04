@@ -5,7 +5,6 @@ import org.msk86.ygoroid.newcore.BmpGenerator;
 import org.msk86.ygoroid.newcore.constant.CardType;
 import org.msk86.ygoroid.size.Size;
 import org.msk86.ygoroid.utils.BmpReader;
-import org.msk86.ygoroid.utils.Utils2;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,5 +23,9 @@ public class CardTypeGenerator implements BmpGenerator {
             cache.put(size, BmpReader.readBitmap(type.getResId(), size));
         }
         return cache.get(size);
+    }
+
+    @Override
+    public void destroy() {
     }
 }

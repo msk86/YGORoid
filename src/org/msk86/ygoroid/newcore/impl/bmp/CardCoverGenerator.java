@@ -21,4 +21,8 @@ public class CardCoverGenerator implements BmpGenerator {
         }
         return cover;
     }
+
+    @Override
+    public void destroy() {
+    }
 }

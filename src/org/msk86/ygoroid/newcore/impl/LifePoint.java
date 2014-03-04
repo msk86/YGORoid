@@ -20,10 +20,16 @@ public class LifePoint implements Item {
         return lps[idx];
     }
 
+    public void setLp(int lp, int idx) {
+        lps[idx] = lp;
+    }
+
     @Override
     public String toString() {
         String str = "LP: " + lps[0];
-        str += (lps[1] == 8000 ? "" : " / " + lps[1]);
+        if(lps[1] != 8000) {
+            str = "LP-1: " + lps[0] + "\nLP-2: " + lps[1];
+        }
         return str;
     }
 

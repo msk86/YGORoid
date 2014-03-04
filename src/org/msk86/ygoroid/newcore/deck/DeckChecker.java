@@ -78,10 +78,7 @@ public class DeckChecker {
 
     public DeckChecker checkSingleCard() {
         if(error) return this;
-        List<Card> allCards = new ArrayList<Card>();
-        allCards.addAll(deckCards.getMainDeckCards());
-        allCards.addAll(deckCards.getExDeckCards());
-        allCards.addAll(deckCards.getSideDeckCards());
+        List<Card> allCards = deckCards.getAllCards();
 
         for(Card card : allCards) {
             checkSingleCard(card, allCards);

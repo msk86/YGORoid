@@ -53,4 +53,10 @@ public enum CardType implements Bmpable {
     public BmpGenerator getBmpGenerator() {
         return generator;
     }
+
+    @Override
+    public void destroyBmp() {
+    }
+
+
 }

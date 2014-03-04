@@ -71,8 +71,13 @@ public enum CardSubType implements Bmpable {
     }
 
     BmpGenerator generator = new CardSubTypeGenerator(this);
-
+    @Override
     public BmpGenerator getBmpGenerator() {
         return generator;
     }
+
+    @Override
+    public void destroyBmp() {
+    }
+
 }

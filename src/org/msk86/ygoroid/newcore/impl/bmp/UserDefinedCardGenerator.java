@@ -39,6 +39,14 @@ public class UserDefinedCardGenerator implements BmpGenerator {
         return cache.get(cardBmpKey(size));
     }
 
+    @Override
+    public void destroy() {
+        for(Bitmap bitmap : cache.values()) {
+            bitmap.recycle();
+        }
+        cache.clear();
+    }
+
     private Bitmap bmp(Size size) {
         Bitmap cardPic = BmpReader.readBitmap(card.getFileName(), size);
         if (cardPic == null) {
