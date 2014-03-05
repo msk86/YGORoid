@@ -14,6 +14,10 @@ public class ChangeLpOperatorAction extends BaseAction {
         if (item instanceof Operator) {
             Operator operator = (Operator) item;
             LifePointCalculator calculator = duel.getLifePointCalculator();
+            calculator.getSelectedLpDisplay().clearNumber();
+            if(operator == Operator.DIVIDE) {
+                calculator.getSelectedLpDisplay().appendNumber("2");
+            }
             calculator.getSelectedLpDisplay().setOperator(operator);
         }
     }

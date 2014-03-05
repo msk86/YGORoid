@@ -17,6 +17,9 @@ public enum Operator implements Item {
     },
     DIVIDE("/"){
         public int operate(int v1, int v2) {
+            if(v2 == 0) {
+                return v1;
+            }
             return v1 / v2;
         }
     };
