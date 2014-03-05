@@ -1,4 +1,4 @@
-package org.msk86.ygoroid.utils;
+package org.msk86.ygoroid.newutils;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
@@ -10,23 +10,24 @@ import android.text.Layout;
 import android.util.DisplayMetrics;
 import org.msk86.ygoroid.YGOActivity;
 import org.msk86.ygoroid.core.Drawable;
-import org.msk86.ygoroid.sqlite.CardsDBHelper;
-import org.msk86.ygoroid.sqlite.CardsDBHelper2;
+import org.msk86.ygoroid.newsqlite.CardsDBHelper;
+import org.msk86.ygoroid.utils.Configuration;
+import org.msk86.ygoroid.utils.ZipReader;
 
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.Arrays;
 import java.util.Comparator;
 
-public class Utils2 {
+public class Utils {
     private static DisplayMetrics dm;
     private static YGOActivity context;
-    private static CardsDBHelper2 dbHelper;
+    private static CardsDBHelper dbHelper;
 
     public static void initInstance(YGOActivity activity) {
         context = activity;
         dm = new DisplayMetrics();
-        dbHelper = new CardsDBHelper2(activity, 1);
+        dbHelper = new CardsDBHelper(activity, 1);
         activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
         checkFolders();
     }
@@ -56,7 +57,7 @@ public class Utils2 {
         return context;
     }
 
-    public static CardsDBHelper2 getDbHelper() {
+    public static CardsDBHelper getDbHelper() {
         return dbHelper;
     }
 

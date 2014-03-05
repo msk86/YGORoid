@@ -1,17 +1,17 @@
 package org.msk86.ygoroid.newcore.constant;
 
 import org.msk86.ygoroid.R;
-import org.msk86.ygoroid.utils.Utils2;
+import org.msk86.ygoroid.newutils.Utils;
 
 public enum Attribute {
     NULL(Const.NULL, ""),
-    EARTH(Const.ATTRIBUTE_EARTH, Utils2.s(R.string.ATTRIBUTE_EARTH)),
-    WATER(Const.ATTRIBUTE_WATER, Utils2.s(R.string.ATTRIBUTE_WATER)),
-    FIRE(Const.ATTRIBUTE_FIRE, Utils2.s(R.string.ATTRIBUTE_FIRE)),
-    WIND(Const.ATTRIBUTE_WIND, Utils2.s(R.string.ATTRIBUTE_WIND)),
-    LIGHT(Const.ATTRIBUTE_LIGHT, Utils2.s(R.string.ATTRIBUTE_LIGHT)),
-    DARK(Const.ATTRIBUTE_DARK, Utils2.s(R.string.ATTRIBUTE_DARK)),
-    DIVINE(Const.ATTRIBUTE_DEVINE, Utils2.s(R.string.ATTRIBUTE_DEVINE));
+    EARTH(Const.ATTRIBUTE_EARTH, Utils.s(R.string.ATTRIBUTE_EARTH)),
+    WATER(Const.ATTRIBUTE_WATER, Utils.s(R.string.ATTRIBUTE_WATER)),
+    FIRE(Const.ATTRIBUTE_FIRE, Utils.s(R.string.ATTRIBUTE_FIRE)),
+    WIND(Const.ATTRIBUTE_WIND, Utils.s(R.string.ATTRIBUTE_WIND)),
+    LIGHT(Const.ATTRIBUTE_LIGHT, Utils.s(R.string.ATTRIBUTE_LIGHT)),
+    DARK(Const.ATTRIBUTE_DARK, Utils.s(R.string.ATTRIBUTE_DARK)),
+    DIVINE(Const.ATTRIBUTE_DEVINE, Utils.s(R.string.ATTRIBUTE_DEVINE));
 
     Attribute(int code, String text) {
         this.code = code;

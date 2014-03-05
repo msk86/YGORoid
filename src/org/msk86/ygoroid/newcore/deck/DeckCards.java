@@ -1,7 +1,7 @@
 package org.msk86.ygoroid.newcore.deck;
 
 import org.msk86.ygoroid.newcore.impl.Card;
-import org.msk86.ygoroid.utils.Utils2;
+import org.msk86.ygoroid.newutils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ public class DeckCards {
 
     public DeckCards(String deckName) {
         this.deckName = deckName;
-        List<List<Card>> lists = Utils2.getDbHelper().loadFromFile(deckName);
+        List<List<Card>> lists = Utils.getDbHelper().loadFromFile(deckName);
         mainDeckCards = lists.get(0);
         exDeckCards = lists.get(1);
         sideDeckCards = lists.get(2);

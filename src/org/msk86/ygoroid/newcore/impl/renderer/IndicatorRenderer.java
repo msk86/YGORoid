@@ -11,8 +11,8 @@ import org.msk86.ygoroid.newcore.impl.Indicator;
 import org.msk86.ygoroid.size.IndicatorSize;
 import org.msk86.ygoroid.size.Size;
 import org.msk86.ygoroid.utils.Configuration;
-import org.msk86.ygoroid.utils.Style;
-import org.msk86.ygoroid.utils.Utils2;
+import org.msk86.ygoroid.newutils.Style;
+import org.msk86.ygoroid.newutils.Utils;
 
 public class IndicatorRenderer implements Renderer {
 
@@ -33,7 +33,7 @@ public class IndicatorRenderer implements Renderer {
             return;
         }
 
-        Utils2.DrawHelper helper = new Utils2.DrawHelper(x, y);
+        Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
 
         Paint paint = new Paint();
         paint.setColor(Configuration.lineColor());

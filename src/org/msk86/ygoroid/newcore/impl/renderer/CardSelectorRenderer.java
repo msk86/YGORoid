@@ -5,7 +5,7 @@ import org.msk86.ygoroid.newcore.Renderer;
 import org.msk86.ygoroid.newcore.impl.*;
 import org.msk86.ygoroid.size.OtherSize;
 import org.msk86.ygoroid.size.Size;
-import org.msk86.ygoroid.utils.Style;
+import org.msk86.ygoroid.newutils.Style;
 
 public class CardSelectorRenderer implements Renderer {
     CardSelector cardSelector;

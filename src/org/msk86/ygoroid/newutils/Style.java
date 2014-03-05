@@ -1,4 +1,4 @@
-package org.msk86.ygoroid.utils;
+package org.msk86.ygoroid.newutils;
 
 import android.graphics.Color;
 

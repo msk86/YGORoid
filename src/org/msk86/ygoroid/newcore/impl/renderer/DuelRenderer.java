@@ -7,10 +7,11 @@ import org.msk86.ygoroid.newcore.Layout;
 import org.msk86.ygoroid.newcore.Renderer;
 import org.msk86.ygoroid.newcore.impl.Duel;
 import org.msk86.ygoroid.newcore.impl.layout.AbsoluteLayout;
+import org.msk86.ygoroid.newop.Drag;
 import org.msk86.ygoroid.size.FieldSize;
 import org.msk86.ygoroid.size.OtherSize;
 import org.msk86.ygoroid.size.Size;
-import org.msk86.ygoroid.utils.Style;
+import org.msk86.ygoroid.newutils.Style;
 
 public class DuelRenderer implements Renderer {
     private Duel duel;
@@ -34,6 +35,13 @@ public class DuelRenderer implements Renderer {
 
     private void updateLayoutWithWindow() {
         AbsoluteLayout layout = (AbsoluteLayout) duel.getLayout();
+
+        if(duel.getDrag() != null) {
+            Drag drag = duel.getDrag();
+            layout.addItem((Item)drag.getItem(), drag.x(), drag.y(), 2);
+        } else {
+            layout.removeItem((Item) duel.getDrag().getItem());
+        }
 
         if(duel.getCardSelector() != null) {
             layout.addItem(duel.getCardSelector(), 0, 0, 2);

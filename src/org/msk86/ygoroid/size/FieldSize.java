@@ -1,6 +1,6 @@
 package org.msk86.ygoroid.size;
 
-import org.msk86.ygoroid.utils.Style;
+import org.msk86.ygoroid.newutils.Style;
 
 public class FieldSize extends Size {
 

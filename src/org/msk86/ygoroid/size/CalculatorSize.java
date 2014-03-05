@@ -1,6 +1,6 @@
 package org.msk86.ygoroid.size;
 
-import org.msk86.ygoroid.utils.Style;
+import org.msk86.ygoroid.newutils.Style;
 
 public class CalculatorSize {
     public static Size OPERATOR, NUMBER, BUTTON, NUMBER_PAD, OPERATION_PAD, LP_DISPLAY, CALCULATOR;

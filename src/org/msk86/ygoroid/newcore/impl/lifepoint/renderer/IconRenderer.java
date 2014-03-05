@@ -7,7 +7,7 @@ import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 import org.msk86.ygoroid.newcore.Renderer;
-import org.msk86.ygoroid.utils.Style;
+import org.msk86.ygoroid.newutils.Style;
 
 public abstract class IconRenderer implements Renderer {
     public abstract String getText();

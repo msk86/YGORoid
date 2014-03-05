@@ -11,7 +11,7 @@ import org.msk86.ygoroid.newcore.constant.FieldType;
 import org.msk86.ygoroid.newcore.impl.Field;
 import org.msk86.ygoroid.size.FieldSize;
 import org.msk86.ygoroid.size.Size;
-import org.msk86.ygoroid.utils.Style;
+import org.msk86.ygoroid.newutils.Style;
 
 public class FieldRenderer implements Renderer {
     Field field;

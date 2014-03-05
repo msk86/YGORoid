@@ -15,8 +15,6 @@ import org.msk86.ygoroid.service.PersistencyService;
 import org.msk86.ygoroid.upgrade.Downloader;
 import org.msk86.ygoroid.upgrade.UpgradeHelper;
 import org.msk86.ygoroid.upgrade.UpgradeMsgHandler;
-import org.msk86.ygoroid.utils.Utils;
-import org.msk86.ygoroid.utils.Utils2;
 import org.msk86.ygoroid.views.DeckOnKeyProcessor;
 import org.msk86.ygoroid.views.PlayMenuProcessor;
 import org.msk86.ygoroid.views.PlayOnKeyProcessor;
@@ -58,8 +56,8 @@ public class YGOActivity extends Activity {
         CrashHandler crashHandler = CrashHandler.getInstance();
         crashHandler.init(getApplicationContext());
 
-        Utils.initInstance(this);
-        Utils2.initInstance(this);
+        org.msk86.ygoroid.utils.Utils.initInstance(this);
+        org.msk86.ygoroid.newutils.Utils.initInstance(this);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
@@ -67,7 +65,7 @@ public class YGOActivity extends Activity {
 
         if (savedInstanceState != null) {
             if (DUEL_STATE_DECK.equals(savedInstanceState.getString(DUEL_STATE))) {
-                showDeckBuilderWithDeck(Utils.findTempDeck());
+                showDeckBuilderWithDeck(org.msk86.ygoroid.utils.Utils.findTempDeck());
             } else {
                 showDuel();
             }
@@ -96,13 +94,13 @@ public class YGOActivity extends Activity {
     }
 
     public void showHint() {
-        webView.loadUrl(Utils.s(R.string.hint));
+        webView.loadUrl(org.msk86.ygoroid.utils.Utils.s(R.string.hint));
         currentView = webView;
         setContentView(webView);
     }
 
     public void showFeedback() {
-        webView.loadUrl(Utils.s(R.string.feedback));
+        webView.loadUrl(org.msk86.ygoroid.utils.Utils.s(R.string.feedback));
         currentView = webView;
         setContentView(webView);
     }

@@ -4,10 +4,10 @@ import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.newcore.Item;
 import org.msk86.ygoroid.newcore.Renderer;
 import org.msk86.ygoroid.newcore.impl.lifepoint.renderer.ButtonRenderer;
-import org.msk86.ygoroid.utils.Utils2;
+import org.msk86.ygoroid.newutils.Utils;
 
 public enum Button implements Item {
-    CLEAR("C", 1), OK(Utils2.s(R.string.CONFIRM_YES), 2), CANCEL(Utils2.s(R.string.CONFIRM_NO), 2);
+    CLEAR("C", 1), OK(Utils.s(R.string.CONFIRM_YES), 2), CANCEL(Utils.s(R.string.CONFIRM_NO), 2);
 
     private String text;
     private int size;

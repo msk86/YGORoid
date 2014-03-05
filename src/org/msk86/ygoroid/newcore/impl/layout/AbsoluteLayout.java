@@ -55,7 +55,7 @@ public class AbsoluteLayout implements Layout {
     }
 
     private int getMaxZIndex() {
-        int max = 0;
+        int max = Integer.MIN_VALUE;
         for(Integer z : zIndexMap.values()) {
             if(z > max) {
                 max = z;
@@ -64,7 +64,7 @@ public class AbsoluteLayout implements Layout {
         return max;
     }
     private int getMinZIndex() {
-        int min = 0;
+        int min = Integer.MAX_VALUE;
         for(Integer z : zIndexMap.values()) {
             if(z < min) {
                 min = z;

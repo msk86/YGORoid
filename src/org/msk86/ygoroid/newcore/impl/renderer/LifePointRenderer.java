@@ -9,7 +9,7 @@ import org.msk86.ygoroid.newcore.impl.LifePoint;
 import org.msk86.ygoroid.size.OtherSize;
 import org.msk86.ygoroid.size.Size;
 import org.msk86.ygoroid.utils.Configuration;
-import org.msk86.ygoroid.utils.Style;
+import org.msk86.ygoroid.newutils.Style;
 
 public class LifePointRenderer implements Renderer {
     private LifePoint lifePoint;

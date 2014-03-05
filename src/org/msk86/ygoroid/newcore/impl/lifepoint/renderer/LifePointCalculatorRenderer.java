@@ -9,7 +9,7 @@ import org.msk86.ygoroid.newcore.impl.lifepoint.LifePointCalculator;
 import org.msk86.ygoroid.size.CalculatorSize;
 import org.msk86.ygoroid.size.OtherSize;
 import org.msk86.ygoroid.size.Size;
-import org.msk86.ygoroid.utils.Style;
+import org.msk86.ygoroid.newutils.Style;
 
 public class LifePointCalculatorRenderer implements Renderer {
     LifePointCalculator lifePointCalculator;

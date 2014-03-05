@@ -4,13 +4,13 @@ import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.newcore.BmpGenerator;
 import org.msk86.ygoroid.newcore.Bmpable;
 import org.msk86.ygoroid.newcore.constant.bmp.CardTypeGenerator;
-import org.msk86.ygoroid.utils.Utils2;
+import org.msk86.ygoroid.newutils.Utils;
 
 public enum CardType implements Bmpable {
     NULL(0, "", R.raw.card_unknown),
-    MONSTER(Const.TYPE_MONSTER, Utils2.s(R.string.TYPE_MONSTER), 0),
-    SPELL(Const.TYPE_SPELL, Utils2.s(R.string.TYPE_SPELL), R.raw.card_spell),
-    TRAP(Const.TYPE_TRAP, Utils2.s(R.string.TYPE_TRAP), R.raw.card_trap);
+    MONSTER(Const.TYPE_MONSTER, Utils.s(R.string.TYPE_MONSTER), 0),
+    SPELL(Const.TYPE_SPELL, Utils.s(R.string.TYPE_SPELL), R.raw.card_spell),
+    TRAP(Const.TYPE_TRAP, Utils.s(R.string.TYPE_TRAP), R.raw.card_trap);
 
     private int code;
     private String text;

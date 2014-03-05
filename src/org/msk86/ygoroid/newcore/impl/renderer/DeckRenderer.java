@@ -10,8 +10,8 @@ import org.msk86.ygoroid.newcore.impl.Deck;
 import org.msk86.ygoroid.newcore.impl.HighLight;
 import org.msk86.ygoroid.size.CardSize;
 import org.msk86.ygoroid.size.Size;
-import org.msk86.ygoroid.utils.Style;
-import org.msk86.ygoroid.utils.Utils2;
+import org.msk86.ygoroid.newutils.Style;
+import org.msk86.ygoroid.newutils.Utils;
 
 public class DeckRenderer implements Renderer {
     Deck deck;
@@ -39,7 +39,7 @@ public class DeckRenderer implements Renderer {
     }
 
     private void drawText(Canvas canvas, int x, int y) {
-        Utils2.DrawHelper helper = new Utils2.DrawHelper(x, y);
+        Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
 
         TextPaint textPaint = new TextPaint();
         textPaint.setAntiAlias(true);

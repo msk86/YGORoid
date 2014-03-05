@@ -1,4 +1,4 @@
-package org.msk86.ygoroid.sqlite;
+package org.msk86.ygoroid.newsqlite;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -16,14 +16,14 @@ import org.msk86.ygoroid.views.deckbuilder.filter.CardFilter;
 import java.io.*;
 import java.util.*;
 
-public class CardsDBHelper2 extends SQLiteOpenHelper {
+public class CardsDBHelper extends SQLiteOpenHelper {
 
     public static final String QUERY_TABLES = "texts t, datas d";
     public static final String[] QUERY_FIELDS = new String[]{"t.id", "t.name", "t.desc", "d.atk", "d.def", "d.race", "d.level", "d.attribute", "d.type", "d.alias", "d.category"};
     private static final String DB_PATH = Configuration.baseDir() + "cards.cdb";
     Context context;
 
-    public CardsDBHelper2(Context context, int version) {
+    public CardsDBHelper(Context context, int version) {
         super(context, DB_PATH, null, version);
         this.context = context;
     }

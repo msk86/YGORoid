@@ -10,10 +10,10 @@ import org.msk86.ygoroid.newcore.BmpGenerator;
 import org.msk86.ygoroid.newcore.impl.UserDefinedCard;
 import org.msk86.ygoroid.size.CardSize;
 import org.msk86.ygoroid.size.Size;
-import org.msk86.ygoroid.utils.BmpReader;
+import org.msk86.ygoroid.newutils.BmpReader;
 import org.msk86.ygoroid.utils.Configuration;
-import org.msk86.ygoroid.utils.TextUtils;
-import org.msk86.ygoroid.utils.Utils2;
+import org.msk86.ygoroid.newutils.TextUtils;
+import org.msk86.ygoroid.newutils.Utils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -55,7 +55,7 @@ public class UserDefinedCardGenerator implements BmpGenerator {
             Paint paint = new Paint();
 
             Bitmap cardTypeBmp = card.getType().getBmpGenerator().generate(size);
-            Utils2.drawBitmapOnCanvas(canvas, cardTypeBmp, paint, Utils2.DRAW_POSITION_FIRST, Utils2.DRAW_POSITION_FIRST);
+            Utils.drawBitmapOnCanvas(canvas, cardTypeBmp, paint, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_FIRST);
 
             TextPaint textPaint = new TextPaint();
             textPaint.setTextSize(cardNameFontSize(size));

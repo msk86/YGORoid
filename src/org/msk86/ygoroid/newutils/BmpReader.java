@@ -1,9 +1,10 @@
-package org.msk86.ygoroid.utils;
+package org.msk86.ygoroid.newutils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import org.msk86.ygoroid.size.Size;
+import org.msk86.ygoroid.utils.Utils;
 
 public class BmpReader {
 
@@ -13,7 +14,7 @@ public class BmpReader {
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inPreferredConfig = Bitmap.Config.ARGB_4444;
             options.inSampleSize = calculateSampleScale(resId, require);
-            Bitmap bitmap = BitmapFactory.decodeResource(Utils2.getContext().getResources(), resId, options);
+            Bitmap bitmap = BitmapFactory.decodeResource(org.msk86.ygoroid.utils.Utils.getContext().getResources(), resId, options);
             return scale(bitmap, require);
         } catch (Exception e) {
             return null;
@@ -74,7 +75,7 @@ public class BmpReader {
     private static int calculateSampleScale(int resId, Size require) {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
-        BitmapFactory.decodeResource(Utils2.getContext().getResources(), resId, options);
+        BitmapFactory.decodeResource(Utils.getContext().getResources(), resId, options);
         return calculateSampleScale(options, require);
     }
 

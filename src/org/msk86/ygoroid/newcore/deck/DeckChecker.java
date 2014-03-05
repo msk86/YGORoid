@@ -3,8 +3,7 @@ package org.msk86.ygoroid.newcore.deck;
 import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.newcore.impl.Card;
 import org.msk86.ygoroid.newcore.impl.UserDefinedCard;
-import org.msk86.ygoroid.utils.Utils;
-import org.msk86.ygoroid.utils.Utils2;
+import org.msk86.ygoroid.newutils.Utils;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -44,7 +43,7 @@ public class DeckChecker {
         if(error) return this;
         if(deckCards.getMainDeckCards().size() > MAX_MAIN_CARD_COUNT) {
             error = true;
-            errorInfo = String.format(Utils2.s(R.string.ERROR_MAIN), deckCards.getMainDeckCards().size());
+            errorInfo = String.format(Utils.s(R.string.ERROR_MAIN), deckCards.getMainDeckCards().size());
         }
         return this;
     }
@@ -52,7 +51,7 @@ public class DeckChecker {
     public DeckChecker checkMainMin() {
         if(error) return this;
         if(deckCards.getMainDeckCards().size() < MIN_MAIN_CARD_COUNT) {
-            errorInfo = String.format(Utils2.s(R.string.ERROR_MAIN), deckCards.getMainDeckCards().size());
+            errorInfo = String.format(Utils.s(R.string.ERROR_MAIN), deckCards.getMainDeckCards().size());
             error = true;
         }
         return this;
@@ -61,7 +60,7 @@ public class DeckChecker {
     public DeckChecker checkEx() {
         if(error) return this;
         if(deckCards.getExDeckCards().size() > MAX_EX_CARD_COUNT) {
-            errorInfo = String.format(Utils2.s(R.string.ERROR_EX), deckCards.getExDeckCards().size());
+            errorInfo = String.format(Utils.s(R.string.ERROR_EX), deckCards.getExDeckCards().size());
             error = true;
         }
         return this;
@@ -70,7 +69,7 @@ public class DeckChecker {
     public DeckChecker checkSide() {
         if(error) return this;
         if(deckCards.getSideDeckCards().size() > MAX_SIDE_CARD_COUNT) {
-            errorInfo = String.format(Utils2.s(R.string.ERROR_SIDE), deckCards.getSideDeckCards().size());
+            errorInfo = String.format(Utils.s(R.string.ERROR_SIDE), deckCards.getSideDeckCards().size());
             error = true;
         }
         return this;

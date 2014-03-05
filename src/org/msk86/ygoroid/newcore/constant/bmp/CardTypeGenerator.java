@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 import org.msk86.ygoroid.newcore.BmpGenerator;
 import org.msk86.ygoroid.newcore.constant.CardType;
 import org.msk86.ygoroid.size.Size;
-import org.msk86.ygoroid.utils.BmpReader;
+import org.msk86.ygoroid.newutils.BmpReader;
 
 import java.util.HashMap;
 import java.util.Map;
