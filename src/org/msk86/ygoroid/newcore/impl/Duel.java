@@ -172,7 +172,7 @@ public class Duel implements Item, Container {
             unSelect();
         } else {
             if(selectable != currentSelectItem) {
-                currentSelectItem.unSelect();
+                unSelect();
             }
             currentSelectItem = selectable;
             currentSelectItem.select();

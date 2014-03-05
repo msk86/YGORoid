@@ -5,8 +5,11 @@ import android.graphics.Point;
 import org.msk86.ygoroid.newcore.Item;
 import org.msk86.ygoroid.newcore.Layout;
 import org.msk86.ygoroid.newcore.Renderer;
+import org.msk86.ygoroid.newcore.impl.CardEffectWindow;
+import org.msk86.ygoroid.newcore.impl.CardSelector;
 import org.msk86.ygoroid.newcore.impl.Duel;
 import org.msk86.ygoroid.newcore.impl.layout.AbsoluteLayout;
+import org.msk86.ygoroid.newcore.impl.lifepoint.LifePointCalculator;
 import org.msk86.ygoroid.newop.impl.Drag;
 import org.msk86.ygoroid.size.FieldSize;
 import org.msk86.ygoroid.size.OtherSize;
@@ -36,28 +39,36 @@ public class DuelRenderer implements Renderer {
     private void updateLayoutWithWindow() {
         AbsoluteLayout layout = (AbsoluteLayout) duel.getLayout();
 
-        if(duel.getDrag() != null) {
-            Drag drag = duel.getDrag();
-            layout.addItem((Item)drag.getItem(), drag.x(), drag.y(), 2);
-        } else {
-            layout.removeItem((Item) duel.getDrag().getItem());
-        }
+//        if(duel.getDrag() != null) {
+//            Drag drag = duel.getDrag();
+//            layout.addItem(drag.getItem(), drag.x(), drag.y(), 2);
+//        } else {
+//            layout.removeItem(duel.getDrag().getItem());
+//        }
 
         if(duel.getCardSelector() != null) {
             layout.addItem(duel.getCardSelector(), 0, 0, 2);
         } else {
-            layout.removeItem(duel.getCardSelector());
+            removeItemsFromLayoutByClass(layout, CardSelector.class);
         }
-
         if(duel.getCardEffectWindow() != null) {
             layout.addItem(duel.getCardEffectWindow(), 0, 0, 4);
         }  else {
             layout.removeItem(duel.getCardEffectWindow());
+            removeItemsFromLayoutByClass(layout, CardEffectWindow.class);
         }
         if(duel.getLifePointCalculator() != null) {
             layout.addItem(duel.getLifePointCalculator(), 0, 0, 4);
         }  else {
-            layout.removeItem(duel.getLifePointCalculator());
+            removeItemsFromLayoutByClass(layout, LifePointCalculator.class);
+        }
+    }
+
+    private void removeItemsFromLayoutByClass(AbsoluteLayout layout, Class clazz) {
+        for(Item item : layout.items()) {
+            if(clazz.isInstance(item)) {
+                layout.removeItem(item);
+            }
         }
     }
 

@@ -16,13 +16,17 @@ public class LifePointCalculatorRenderer implements Renderer {
 
     public LifePointCalculatorRenderer(LifePointCalculator lifePointCalculator) {
         this.lifePointCalculator = lifePointCalculator;
+
+        int offsetX = (size().width() - CalculatorSize.CALCULATOR.width()) / 2;
+        int offsetY = (size().height() - CalculatorSize.CALCULATOR.height()) / 2;
+
         AbsoluteLayout layout = (AbsoluteLayout) this.lifePointCalculator.getLayout();
-        layout.addItem(lifePointCalculator.getLpDisplay(0), padding(), padding());
-        layout.addItem(lifePointCalculator.getLpDisplay(1), padding(), lifePointCalculator.getLpDisplay(0).getRenderer().size().height() + padding() * 2);
-        layout.addItem(lifePointCalculator.getOperationPad(), lifePointCalculator.getLpDisplay(0).getRenderer().size().width() + padding() * 2, padding());
-        layout.addItem(lifePointCalculator.getNumberPad(), lifePointCalculator.getOperationPad().getRenderer().size().width() + lifePointCalculator.getLpDisplay(0).getRenderer().size().width() + padding() * 3, padding());
-        layout.addItem(lifePointCalculator.getOkButton(), padding() * 4, lifePointCalculator.getNumberPad().getRenderer().size().height() + padding() * 2);
-        layout.addItem(lifePointCalculator.getCancelButton(), CalculatorSize.CALCULATOR.width() - lifePointCalculator.getCancelButton().getRenderer().size().width() - padding() * 4, lifePointCalculator.getNumberPad().getRenderer().size().height() + padding() * 2);
+        layout.addItem(lifePointCalculator.getLpDisplay(0), offsetX + padding(), offsetY + padding());
+        layout.addItem(lifePointCalculator.getLpDisplay(1), offsetX + padding(), offsetY + lifePointCalculator.getLpDisplay(0).getRenderer().size().height() + padding() * 2);
+        layout.addItem(lifePointCalculator.getOperationPad(), offsetX + lifePointCalculator.getLpDisplay(0).getRenderer().size().width() + padding() * 2, offsetY + padding());
+        layout.addItem(lifePointCalculator.getNumberPad(), offsetX + lifePointCalculator.getOperationPad().getRenderer().size().width() + lifePointCalculator.getLpDisplay(0).getRenderer().size().width() + padding() * 3, offsetY + padding());
+        layout.addItem(lifePointCalculator.getOkButton(), offsetX + padding() * 4, offsetY + lifePointCalculator.getNumberPad().getRenderer().size().height() + padding() * 2);
+        layout.addItem(lifePointCalculator.getCancelButton(), offsetX + CalculatorSize.CALCULATOR.width() - lifePointCalculator.getCancelButton().getRenderer().size().width() - padding() * 4, offsetY + lifePointCalculator.getNumberPad().getRenderer().size().height() + padding() * 2);
     }
 
     private int padding() {
@@ -36,10 +40,8 @@ public class LifePointCalculatorRenderer implements Renderer {
 
     @Override
     public void draw(Canvas canvas, int x, int y) {
-        int offsetX = (size().width() - CalculatorSize.CALCULATOR.width()) / 2;
-        int offsetY = (size().height() - CalculatorSize.CALCULATOR.height()) / 2;
         drawFrame(canvas, x, y);
-        drawItems(canvas, x + offsetX, y + offsetY);
+        drawItems(canvas, x, y);
     }
 
     private void drawItems(Canvas canvas, int x, int y) {

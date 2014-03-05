@@ -11,7 +11,7 @@ public class LayoutUtils {
             return item;
         }
         Point pos = container.getLayout().itemPosition(item);
-        return itemAt((Container) item, x + pos.x, y + pos.y);
+        return itemAt((Container) item, x - pos.x, y - pos.y);
     }
 
     public static Container containerAt(Container container, int x, int y) {
@@ -20,6 +20,6 @@ public class LayoutUtils {
             return container;
         }
         Point pos = container.getLayout().itemPosition(item);
-        return containerAt((Container) item, x + pos.x, y + pos.y);
+        return containerAt((Container) item, x - pos.x, y - pos.y);
     }
 }

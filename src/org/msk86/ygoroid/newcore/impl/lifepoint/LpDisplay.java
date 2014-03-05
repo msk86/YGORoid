@@ -25,6 +25,10 @@ public class LpDisplay implements Item, Selectable {
         return operator;
     }
 
+    public void setOperator(Operator operator) {
+        this.operator = operator;
+    }
+
     public String getNumber() {
         return number;
     }

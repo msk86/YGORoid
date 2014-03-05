@@ -61,6 +61,18 @@ public class LifePointCalculator implements Item, Container {
         return lpDisplays[0].isSelect() ? lpDisplays[0] : lpDisplays[1];
     }
 
+    public void selectLpDisplay(LpDisplay lpDisplay) {
+        for(LpDisplay display : lpDisplays) {
+            display.unSelect();
+        }
+        lpDisplay.select();
+    }
+
+    public void calculate() {
+        getLifePoint().setLp(getLpDisplay(0).getResult(), 0);
+        getLifePoint().setLp(getLpDisplay(1).getResult(), 1);
+    }
+
     Renderer renderer;
     @Override
     public Renderer getRenderer() {
