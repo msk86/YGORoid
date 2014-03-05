@@ -7,7 +7,7 @@ import org.msk86.ygoroid.newcore.Layout;
 import org.msk86.ygoroid.newcore.Renderer;
 import org.msk86.ygoroid.newcore.impl.Duel;
 import org.msk86.ygoroid.newcore.impl.layout.AbsoluteLayout;
-import org.msk86.ygoroid.newop.Drag;
+import org.msk86.ygoroid.newop.impl.Drag;
 import org.msk86.ygoroid.size.FieldSize;
 import org.msk86.ygoroid.size.OtherSize;
 import org.msk86.ygoroid.size.Size;
@@ -25,7 +25,7 @@ public class DuelRenderer implements Renderer {
         AbsoluteLayout layout = (AbsoluteLayout) duel.getLayout();
 
         layout.addItem(duel.getDuelFields(), 0, 0, 0);
-        layout.addItem(duel.getHandCards(), (size().width() - duel.getHandCards().getRenderer().size().width()) / 2, FieldSize.RECT.height() * 3, 0);
+        layout.addItem(duel.getHandCards(), (size().width() - duel.getHandCards().getRenderer().size().width()) / 2, FieldSize.RECT.height() * 3, 1);
 
         layout.addItem(duel.getLifePoint(), FieldSize.RECT.width() + padding(), 0, 1);
         layout.addItem(duel.getCoin(), FieldSize.RECT.width() + duel.getLifePoint().getRenderer().size().width() + padding() * 2, (FieldSize.RECT.height() - duel.getCoin().getRenderer().size().height()) / 2, 1);
