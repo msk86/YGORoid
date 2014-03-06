@@ -15,7 +15,7 @@ public class PlayGestureDetector extends GestureDetector {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_UP) {
-//            listener.onUp(event);
+            listener.onUp(event);
         }
         return super.onTouchEvent(event);
     }

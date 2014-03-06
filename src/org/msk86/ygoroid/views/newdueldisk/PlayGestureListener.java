@@ -5,6 +5,7 @@ import android.view.MotionEvent;
 import org.msk86.ygoroid.newaction.Action;
 import org.msk86.ygoroid.newaction.dispatcherimpl.ClickDispatcher;
 import org.msk86.ygoroid.newop.impl.Click;
+import org.msk86.ygoroid.newop.impl.Drag;
 
 import java.util.List;
 
@@ -13,6 +14,17 @@ public class PlayGestureListener extends GestureDetector.SimpleOnGestureListener
 
     public PlayGestureListener(DuelDiskView view) {
         this.view = view;
+    }
+
+    public void onUp(MotionEvent event) {
+        Drag drag = view.getDuel().getDrag();
+        if (drag != null) {
+            drag.dropTo(event.getX(), event.getY());
+            view.getDuel().setDrag(null);
+//            Action action = ActionDispatcher.dispatch(drag);
+//            action.execute();
+        }
+        view.updateActionTime();
     }
 
     @Override

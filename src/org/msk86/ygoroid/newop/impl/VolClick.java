@@ -14,7 +14,9 @@ public class VolClick extends CommonOperation {
         super(duel, -1, -1);
         item = (Item) duel.getCurrentSelectItem();
         Point itemPos = duel.getLayout().itemPosition(item);
-        container = LayoutUtils.containerAt(duel, itemPos.x, itemPos.y);
+        if(itemPos != null) {
+            container = LayoutUtils.containerAt(duel, itemPos.x, itemPos.y);
+        }
         this.vol = vol;
     }
 

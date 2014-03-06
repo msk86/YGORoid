@@ -19,7 +19,6 @@ public class ClickDispatcher implements Dispatcher<Click> {
     @Override
     public List<Action> dispatch(Click op) {
         List<Action> actionChain = new ArrayList<Action>();
-        actionChain.add(new EmptyAction());
 
         Item item = op.getItem();
         if(item instanceof Selectable) {
