@@ -6,9 +6,11 @@ import android.view.MotionEvent;
 import org.msk86.ygoroid.newaction.Action;
 import org.msk86.ygoroid.newaction.dispatcherimpl.ClickConfirmedDispatcher;
 import org.msk86.ygoroid.newaction.dispatcherimpl.ClickDispatcher;
+import org.msk86.ygoroid.newaction.dispatcherimpl.PressDispatcher;
 import org.msk86.ygoroid.newop.impl.Click;
 import org.msk86.ygoroid.newop.impl.ClickConfirmed;
 import org.msk86.ygoroid.newop.impl.Drag;
+import org.msk86.ygoroid.newop.impl.Press;
 
 import java.util.List;
 
@@ -50,5 +52,15 @@ public class PlayGestureListener extends GestureDetector.SimpleOnGestureListener
         }
         view.updateActionTime();
         return true;
+    }
+
+    @Override
+    public void onLongPress(MotionEvent event) {
+        Press press = new Press(view.getDuel(), event.getX(), event.getY());
+        List<Action> actionChain = new PressDispatcher().dispatch(press);
+        for(Action action : actionChain) {
+            action.execute();
+        }
+        view.updateActionTime();
     }
 }
