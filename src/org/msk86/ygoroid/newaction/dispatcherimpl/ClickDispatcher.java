@@ -5,7 +5,10 @@ import org.msk86.ygoroid.newaction.Dispatcher;
 import org.msk86.ygoroid.newaction.actionimpl.*;
 import org.msk86.ygoroid.newcore.Item;
 import org.msk86.ygoroid.newcore.Selectable;
-import org.msk86.ygoroid.newcore.impl.*;
+import org.msk86.ygoroid.newcore.impl.CardEffectWindow;
+import org.msk86.ygoroid.newcore.impl.Coin;
+import org.msk86.ygoroid.newcore.impl.Dice;
+import org.msk86.ygoroid.newcore.impl.LifePoint;
 import org.msk86.ygoroid.newcore.impl.lifepoint.Button;
 import org.msk86.ygoroid.newcore.impl.lifepoint.LpDisplay;
 import org.msk86.ygoroid.newcore.impl.lifepoint.Numbers;
@@ -21,6 +24,7 @@ public class ClickDispatcher implements Dispatcher<Click> {
         List<Action> actionChain = new ArrayList<Action>();
 
         Item item = op.getItem();
+
         if(item instanceof Selectable) {
             actionChain.add(new SelectAction(op));
         }
@@ -32,9 +36,6 @@ public class ClickDispatcher implements Dispatcher<Click> {
         }
         if(item instanceof Coin) {
             actionChain.add(new ThrowCoinAction(op));
-        }
-        if(item instanceof InfoBar) {
-            actionChain.add(new ShowCardEffectWindow(op));
         }
         if(item instanceof CardEffectWindow) {
             actionChain.add(new ShowNextPageDescAction(op));
@@ -61,6 +62,7 @@ public class ClickDispatcher implements Dispatcher<Click> {
                     break;
             }
         }
+
         return actionChain;
     }
 }

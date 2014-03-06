@@ -2,7 +2,6 @@ package org.msk86.ygoroid.newaction.dispatcherimpl;
 
 import org.msk86.ygoroid.newaction.Action;
 import org.msk86.ygoroid.newaction.Dispatcher;
-import org.msk86.ygoroid.newop.impl.Click;
 import org.msk86.ygoroid.newop.impl.Press;
 
 import java.util.List;

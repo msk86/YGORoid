@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import org.msk86.ygoroid.newcore.impl.*;
 import org.msk86.ygoroid.utils.Configuration;
