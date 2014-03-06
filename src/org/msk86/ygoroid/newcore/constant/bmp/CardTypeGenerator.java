@@ -3,8 +3,8 @@ package org.msk86.ygoroid.newcore.constant.bmp;
 import android.graphics.Bitmap;
 import org.msk86.ygoroid.newcore.BmpGenerator;
 import org.msk86.ygoroid.newcore.constant.CardType;
-import org.msk86.ygoroid.size.Size;
 import org.msk86.ygoroid.newutils.BmpReader;
+import org.msk86.ygoroid.size.Size;
 
 import java.util.HashMap;
 import java.util.Map;

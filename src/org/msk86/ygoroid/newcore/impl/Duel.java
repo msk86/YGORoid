@@ -168,9 +168,7 @@ public class Duel implements Item, Container {
     }
 
     public void select(Selectable selectable) {
-        if(selectable == null) {
-            unSelect();
-        } else {
+        if(selectable != null) {
             if(selectable != currentSelectItem) {
                 unSelect();
             }

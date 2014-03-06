@@ -8,12 +8,12 @@ import android.text.StaticLayout;
 import android.text.TextPaint;
 import org.msk86.ygoroid.newcore.BmpGenerator;
 import org.msk86.ygoroid.newcore.impl.UserDefinedCard;
-import org.msk86.ygoroid.size.CardSize;
-import org.msk86.ygoroid.size.Size;
 import org.msk86.ygoroid.newutils.BmpReader;
-import org.msk86.ygoroid.utils.Configuration;
 import org.msk86.ygoroid.newutils.TextUtils;
 import org.msk86.ygoroid.newutils.Utils;
+import org.msk86.ygoroid.size.CardSize;
+import org.msk86.ygoroid.size.Size;
+import org.msk86.ygoroid.utils.Configuration;
 
 import java.util.HashMap;
 import java.util.Map;

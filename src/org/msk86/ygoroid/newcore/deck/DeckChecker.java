@@ -5,7 +5,6 @@ import org.msk86.ygoroid.newcore.impl.Card;
 import org.msk86.ygoroid.newcore.impl.UserDefinedCard;
 import org.msk86.ygoroid.newutils.Utils;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;

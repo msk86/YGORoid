@@ -2,8 +2,8 @@ package org.msk86.ygoroid.newaction.actionimpl;
 
 import org.msk86.ygoroid.newaction.Action;
 import org.msk86.ygoroid.newcore.Container;
-import org.msk86.ygoroid.newcore.impl.Duel;
 import org.msk86.ygoroid.newcore.Item;
+import org.msk86.ygoroid.newcore.impl.Duel;
 import org.msk86.ygoroid.newop.Operation;
 
 public abstract class BaseAction implements Action {

@@ -3,7 +3,7 @@ package org.msk86.ygoroid.newcore.impl;
 import org.msk86.ygoroid.newcore.*;
 import org.msk86.ygoroid.newcore.impl.renderer.OverRayRenderer;
 
-public class OverRay implements Item, Selectable, Controllable, Infoable {
+public class OverRay implements Item, Selectable, Controllable, Infoable, Listable {
 
     CardList overRayCards;
 
@@ -96,5 +96,10 @@ public class OverRay implements Item, Selectable, Controllable, Infoable {
     @Override
     public String getInfo() {
         return overRayCards.topCard().getInfo();
+    }
+
+    @Override
+    public CardList listCards() {
+        return new CardList(overRayCards.isOpen(), true, overRayCards.getCards().subList(1, overRayCards.size()));
     }
 }

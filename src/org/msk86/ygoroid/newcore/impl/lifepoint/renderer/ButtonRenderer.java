@@ -1,7 +1,6 @@
 package org.msk86.ygoroid.newcore.impl.lifepoint.renderer;
 
 import org.msk86.ygoroid.newcore.impl.lifepoint.Button;
-import org.msk86.ygoroid.newcore.impl.lifepoint.Numbers;
 import org.msk86.ygoroid.size.CalculatorSize;
 import org.msk86.ygoroid.size.Size;
 

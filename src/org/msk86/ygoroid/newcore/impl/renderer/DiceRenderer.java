@@ -5,9 +5,9 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import org.msk86.ygoroid.newcore.Renderer;
 import org.msk86.ygoroid.newcore.impl.Dice;
+import org.msk86.ygoroid.newutils.Style;
 import org.msk86.ygoroid.size.OtherSize;
 import org.msk86.ygoroid.size.Size;
-import org.msk86.ygoroid.newutils.Style;
 
 public class DiceRenderer implements Renderer {
     Dice dice;

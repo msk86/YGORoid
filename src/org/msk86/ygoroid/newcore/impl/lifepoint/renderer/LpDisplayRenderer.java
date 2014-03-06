@@ -8,9 +8,9 @@ import android.text.StaticLayout;
 import android.text.TextPaint;
 import org.msk86.ygoroid.newcore.Renderer;
 import org.msk86.ygoroid.newcore.impl.lifepoint.LpDisplay;
+import org.msk86.ygoroid.newutils.Style;
 import org.msk86.ygoroid.size.CalculatorSize;
 import org.msk86.ygoroid.size.Size;
-import org.msk86.ygoroid.newutils.Style;
 
 public class LpDisplayRenderer implements Renderer {
     LpDisplay lpDisplay;

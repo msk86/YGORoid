@@ -1,15 +1,18 @@
 package org.msk86.ygoroid.newcore.impl.lifepoint.renderer;
 
-import android.graphics.*;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Point;
+import android.graphics.Rect;
 import org.msk86.ygoroid.newcore.Item;
 import org.msk86.ygoroid.newcore.Layout;
 import org.msk86.ygoroid.newcore.Renderer;
 import org.msk86.ygoroid.newcore.impl.layout.AbsoluteLayout;
 import org.msk86.ygoroid.newcore.impl.lifepoint.LifePointCalculator;
+import org.msk86.ygoroid.newutils.Style;
 import org.msk86.ygoroid.size.CalculatorSize;
 import org.msk86.ygoroid.size.OtherSize;
 import org.msk86.ygoroid.size.Size;
-import org.msk86.ygoroid.newutils.Style;
 
 public class LifePointCalculatorRenderer implements Renderer {
     LifePointCalculator lifePointCalculator;

@@ -7,7 +7,6 @@ import android.hardware.SensorManager;
 import android.util.Log;
 import org.msk86.ygoroid.newcore.impl.CardList;
 import org.msk86.ygoroid.newcore.impl.HandCards;
-import org.msk86.ygoroid.utils.Configuration;
 import org.msk86.ygoroid.newutils.Utils;
 
 public class PlaySensorEventListener implements SensorEventListener {

@@ -10,11 +10,10 @@ import org.msk86.ygoroid.newcore.impl.CardSelector;
 import org.msk86.ygoroid.newcore.impl.Duel;
 import org.msk86.ygoroid.newcore.impl.layout.AbsoluteLayout;
 import org.msk86.ygoroid.newcore.impl.lifepoint.LifePointCalculator;
-import org.msk86.ygoroid.newop.impl.Drag;
+import org.msk86.ygoroid.newutils.Style;
 import org.msk86.ygoroid.size.FieldSize;
 import org.msk86.ygoroid.size.OtherSize;
 import org.msk86.ygoroid.size.Size;
-import org.msk86.ygoroid.newutils.Style;
 
 public class DuelRenderer implements Renderer {
     private Duel duel;

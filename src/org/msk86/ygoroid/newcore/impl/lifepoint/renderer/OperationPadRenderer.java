@@ -6,9 +6,9 @@ import org.msk86.ygoroid.newcore.Item;
 import org.msk86.ygoroid.newcore.Renderer;
 import org.msk86.ygoroid.newcore.impl.layout.GridLayout;
 import org.msk86.ygoroid.newcore.impl.lifepoint.OperationPad;
+import org.msk86.ygoroid.newutils.Style;
 import org.msk86.ygoroid.size.CalculatorSize;
 import org.msk86.ygoroid.size.Size;
-import org.msk86.ygoroid.newutils.Style;
 
 public class OperationPadRenderer implements Renderer {
     OperationPad operationPad;

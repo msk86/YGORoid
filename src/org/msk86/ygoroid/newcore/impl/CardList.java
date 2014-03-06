@@ -1,8 +1,8 @@
 package org.msk86.ygoroid.newcore.impl;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class CardList {
     boolean open, canStoreToken;
@@ -12,7 +12,7 @@ public class CardList {
         this(true);
     }
     public CardList(boolean open) {
-        this(open, new ArrayList<Card>());
+        this(open, new CopyOnWriteArrayList<Card>());
     }
 
     public CardList(boolean open, List<Card> cards) {
@@ -22,9 +22,12 @@ public class CardList {
     public CardList(boolean open, boolean canStoreToken, List<Card> cards) {
         this.open = open;
         this.canStoreToken = canStoreToken;
-        this.cards = new ArrayList<Card>();
+        this.cards = new CopyOnWriteArrayList<Card>();
         if(cards != null) {
             for (Card card : cards) {
+                if(!canStoreToken && card.isToken()) {
+                    continue;
+                }
                 if (open) {
                     card.open();
                 } else {
@@ -54,7 +57,7 @@ public class CardList {
     }
 
     public List<Card> pop(int size) {
-        List<Card> cards = new ArrayList<Card>();
+        List<Card> cards = new CopyOnWriteArrayList<Card>();
         for (int i = 0; i < size; i++) {
             Card card = pop();
             if (card != null) {
@@ -135,7 +138,7 @@ public class CardList {
     }
 
     public void reserve() {
-        List<Card> reservedCards = new ArrayList<Card>();
+        List<Card> reservedCards = new CopyOnWriteArrayList<Card>();
         for (int i = cards.size() - 1; i >= 0; i--) {
             Card card = cards.get(i);
             card.flip();

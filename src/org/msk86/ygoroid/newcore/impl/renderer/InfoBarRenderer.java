@@ -8,10 +8,10 @@ import android.text.StaticLayout;
 import android.text.TextPaint;
 import org.msk86.ygoroid.newcore.Renderer;
 import org.msk86.ygoroid.newcore.impl.InfoBar;
-import org.msk86.ygoroid.size.CardSize;
-import org.msk86.ygoroid.size.Size;
 import org.msk86.ygoroid.newutils.Style;
 import org.msk86.ygoroid.newutils.TextUtils;
+import org.msk86.ygoroid.size.CardSize;
+import org.msk86.ygoroid.size.Size;
 
 public class InfoBarRenderer implements Renderer {
     InfoBar infoBar;

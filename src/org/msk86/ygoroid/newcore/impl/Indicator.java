@@ -1,6 +1,5 @@
 package org.msk86.ygoroid.newcore.impl;
 
-import android.graphics.Canvas;
 import org.msk86.ygoroid.newcore.Item;
 import org.msk86.ygoroid.newcore.Renderer;
 import org.msk86.ygoroid.newcore.impl.renderer.IndicatorRenderer;

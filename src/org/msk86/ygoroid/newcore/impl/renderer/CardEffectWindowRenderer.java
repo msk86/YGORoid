@@ -11,10 +11,10 @@ import org.msk86.ygoroid.newcore.Renderer;
 import org.msk86.ygoroid.newcore.constant.CardType;
 import org.msk86.ygoroid.newcore.impl.Card;
 import org.msk86.ygoroid.newcore.impl.CardEffectWindow;
-import org.msk86.ygoroid.size.CardSize;
-import org.msk86.ygoroid.size.Size;
 import org.msk86.ygoroid.newutils.Style;
 import org.msk86.ygoroid.newutils.TextUtils;
+import org.msk86.ygoroid.size.CardSize;
+import org.msk86.ygoroid.size.Size;
 
 public class CardEffectWindowRenderer implements Renderer {
     CardEffectWindow cardEffectWindow;

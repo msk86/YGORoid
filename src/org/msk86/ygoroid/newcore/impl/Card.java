@@ -87,6 +87,10 @@ public class Card implements Item, Selectable, Controllable, Bmpable, Infoable {
         return name;
     }
 
+    public int getCategory() {
+        return category;
+    }
+
     public CardType getType() {
         return type;
     }

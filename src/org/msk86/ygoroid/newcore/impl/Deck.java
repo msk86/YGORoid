@@ -1,12 +1,9 @@
 package org.msk86.ygoroid.newcore.impl;
 
-import org.msk86.ygoroid.newcore.Infoable;
-import org.msk86.ygoroid.newcore.Item;
-import org.msk86.ygoroid.newcore.Renderer;
-import org.msk86.ygoroid.newcore.Selectable;
+import org.msk86.ygoroid.newcore.*;
 import org.msk86.ygoroid.newcore.impl.renderer.DeckRenderer;
 
-public class Deck implements Item, Selectable, Infoable {
+public class Deck implements Item, Selectable, Infoable, Listable {
     String name;
     CardList cardList;
 
@@ -56,5 +53,10 @@ public class Deck implements Item, Selectable, Infoable {
             info += " / " + cardList.topCard().getInfo();
         }
         return info;
+    }
+
+    @Override
+    public CardList listCards() {
+        return cardList;
     }
 }

@@ -8,11 +8,11 @@ import android.text.StaticLayout;
 import android.text.TextPaint;
 import org.msk86.ygoroid.newcore.Renderer;
 import org.msk86.ygoroid.newcore.impl.Indicator;
+import org.msk86.ygoroid.newutils.Style;
+import org.msk86.ygoroid.newutils.Utils;
 import org.msk86.ygoroid.size.IndicatorSize;
 import org.msk86.ygoroid.size.Size;
 import org.msk86.ygoroid.utils.Configuration;
-import org.msk86.ygoroid.newutils.Style;
-import org.msk86.ygoroid.newutils.Utils;
 
 public class IndicatorRenderer implements Renderer {
 

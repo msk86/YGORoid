@@ -4,9 +4,9 @@ import android.graphics.Point;
 import org.msk86.ygoroid.newcore.Container;
 import org.msk86.ygoroid.newcore.Item;
 import org.msk86.ygoroid.newcore.Layout;
+import org.msk86.ygoroid.newutils.Style;
 import org.msk86.ygoroid.size.CardSize;
 import org.msk86.ygoroid.size.Size;
-import org.msk86.ygoroid.newutils.Style;
 
 import java.util.List;
 

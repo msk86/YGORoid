@@ -5,9 +5,9 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import org.msk86.ygoroid.newcore.Renderer;
 import org.msk86.ygoroid.newcore.impl.Coin;
+import org.msk86.ygoroid.newutils.Style;
 import org.msk86.ygoroid.size.OtherSize;
 import org.msk86.ygoroid.size.Size;
-import org.msk86.ygoroid.newutils.Style;
 
 public class CoinRenderer implements Renderer {
     Coin coin;

@@ -1,16 +1,13 @@
 package org.msk86.ygoroid.views.newdueldisk;
 
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import org.msk86.ygoroid.newaction.Action;
 import org.msk86.ygoroid.newaction.dispatcherimpl.ClickConfirmedDispatcher;
 import org.msk86.ygoroid.newaction.dispatcherimpl.ClickDispatcher;
+import org.msk86.ygoroid.newaction.dispatcherimpl.DoubleClickDispatcher;
 import org.msk86.ygoroid.newaction.dispatcherimpl.PressDispatcher;
-import org.msk86.ygoroid.newop.impl.Click;
-import org.msk86.ygoroid.newop.impl.ClickConfirmed;
-import org.msk86.ygoroid.newop.impl.Drag;
-import org.msk86.ygoroid.newop.impl.Press;
+import org.msk86.ygoroid.newop.impl.*;
 
 import java.util.List;
 
@@ -62,5 +59,16 @@ public class PlayGestureListener extends GestureDetector.SimpleOnGestureListener
             action.execute();
         }
         view.updateActionTime();
+    }
+
+    @Override
+    public boolean onDoubleTap(MotionEvent event) {
+        DoubleClick dblClick = new DoubleClick(view.getDuel(), event.getX(), event.getY());
+        List<Action> actionChain = new DoubleClickDispatcher().dispatch(dblClick);
+        for(Action action : actionChain) {
+            action.execute();
+        }
+        view.updateActionTime();
+        return super.onDoubleTap(event);
     }
 }

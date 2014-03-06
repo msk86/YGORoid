@@ -2,7 +2,6 @@ package org.msk86.ygoroid.newop.impl;
 
 import org.msk86.ygoroid.newcore.Container;
 import org.msk86.ygoroid.newcore.Item;
-import org.msk86.ygoroid.newcore.Selectable;
 import org.msk86.ygoroid.newcore.impl.Duel;
 import org.msk86.ygoroid.newop.Operation;
 import org.msk86.ygoroid.newutils.LayoutUtils;
