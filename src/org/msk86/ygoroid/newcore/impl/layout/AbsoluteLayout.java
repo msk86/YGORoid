@@ -5,10 +5,10 @@ import org.msk86.ygoroid.newcore.Container;
 import org.msk86.ygoroid.newcore.Item;
 import org.msk86.ygoroid.newcore.Layout;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class AbsoluteLayout implements Layout {
     Container container;
@@ -18,7 +18,7 @@ public class AbsoluteLayout implements Layout {
 
     public AbsoluteLayout(Container container) {
         this.container = container;
-        items = new ArrayList<Item>();
+        items = new CopyOnWriteArrayList<Item>();
         positionMap = new HashMap<Item, Point>();
         zIndexMap = new HashMap<Item, Integer>();
     }
@@ -36,6 +36,12 @@ public class AbsoluteLayout implements Layout {
         positionMap.put(item, pos);
         zIndexMap.put(item, zIndex);
     }
+
+    public void updateItem(Item item, int x, int y, int zIndex) {
+        removeItem(item);
+        addItem(item, x, y, zIndex);
+    }
+
     public void removeItem(Item item) {
         items.remove(item);
         positionMap.remove(item);
@@ -43,7 +49,7 @@ public class AbsoluteLayout implements Layout {
     }
     @Override
     public List<? extends Item> items() {
-        List<Item> zIndexList = new ArrayList<Item>();
+        List<Item> zIndexList = new CopyOnWriteArrayList<Item>();
         for(int i=getMinZIndex();i<=getMaxZIndex();i++) {
             for (Map.Entry<Item, Integer> entry : zIndexMap.entrySet()) {
                 if(entry.getValue() == i) {

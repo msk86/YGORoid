@@ -1,12 +1,10 @@
 package org.msk86.ygoroid.views.newdueldisk;
 
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import org.msk86.ygoroid.newaction.Action;
-import org.msk86.ygoroid.newaction.dispatcherimpl.ClickConfirmedDispatcher;
-import org.msk86.ygoroid.newaction.dispatcherimpl.ClickDispatcher;
-import org.msk86.ygoroid.newaction.dispatcherimpl.DoubleClickDispatcher;
-import org.msk86.ygoroid.newaction.dispatcherimpl.PressDispatcher;
+import org.msk86.ygoroid.newaction.dispatcherimpl.*;
 import org.msk86.ygoroid.newop.impl.*;
 
 import java.util.List;
@@ -23,8 +21,10 @@ public class PlayGestureListener extends GestureDetector.SimpleOnGestureListener
         if (drag != null) {
             drag.dropTo(event.getX(), event.getY());
             view.getDuel().setDrag(null);
-//            Action action = ActionDispatcher.dispatch(drag);
-//            action.execute();
+            List<Action> actionChain = new DragDispatcher().dispatch(drag);
+            for(Action action : actionChain) {
+                action.execute();
+            }
         }
         view.updateActionTime();
     }
@@ -70,5 +70,23 @@ public class PlayGestureListener extends GestureDetector.SimpleOnGestureListener
         }
         view.updateActionTime();
         return super.onDoubleTap(event);
+    }
+
+    @Override
+    public boolean onScroll(MotionEvent event1, MotionEvent event2, float dx, float dy) {
+        Drag drag = view.getDuel().getDrag();
+        if (drag == null) {
+            StartDrag startDrag = new StartDrag(view.getDuel(), event1.getX(), event1.getY());
+            List<Action> actionChain = new StartDragDispatcher().dispatch(startDrag);
+            for(Action action: actionChain) {
+                action.execute();
+            }
+
+            drag = new Drag(view.getDuel(), event1.getX(), event1.getY(), startDrag);
+            view.getDuel().setDrag(drag);
+        }
+        drag.move(event2.getX(), event2.getY());
+        view.updateActionTime();
+        return true;
     }
 }

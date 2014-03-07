@@ -29,19 +29,29 @@ public class OverRay implements Item, Selectable, Controllable, Infoable, Listab
         return overRayCards;
     }
 
+    private boolean deepSelect = false;
     @Override
     public void select() {
+        if(isSelect()) {
+            deepSelect = true;
+        }
         overRayCards.topCard().select();
+
     }
 
     @Override
     public void unSelect() {
         overRayCards.topCard().unSelect();
+        deepSelect = false;
     }
 
     @Override
     public boolean isSelect() {
         return overRayCards.topCard().isSelect();
+    }
+
+    public boolean isDeepSelect() {
+        return deepSelect;
     }
 
     private Renderer renderer;

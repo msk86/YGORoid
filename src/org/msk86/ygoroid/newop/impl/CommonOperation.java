@@ -36,11 +36,11 @@ public class CommonOperation implements Operation {
 
     @Override
     public int x() {
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+        return x;
     }
 
     @Override
     public int y() {
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+        return y;
     }
 }

@@ -4,10 +4,14 @@ import org.msk86.ygoroid.newcore.Selectable;
 import org.msk86.ygoroid.newcore.constant.Const;
 import org.msk86.ygoroid.newcore.impl.Card;
 import org.msk86.ygoroid.newcore.impl.Deck;
+import org.msk86.ygoroid.newcore.impl.Field;
 import org.msk86.ygoroid.newcore.impl.OverRay;
 import org.msk86.ygoroid.newop.Operation;
+import org.msk86.ygoroid.newutils.Utils;
 
 public class NewTokenAction extends BaseAction {
+    private static Card PREVIOUS_CARD_PARENT = null;
+    private static int TOKEN_SERIAL = 1;
 
     public NewTokenAction(Operation operation) {
         super(operation);
@@ -30,14 +34,30 @@ public class NewTokenAction extends BaseAction {
             }
         }
 
-        if (tokenParent != null && isTokenable(tokenParent)) {
+        if (tokenParent != null) {
+            int tokenSerial = getTokenSerial(tokenParent);
+            int tokenId = Integer.parseInt(tokenParent.getId()) + tokenSerial;
+            token = Utils.getDbHelper().loadByIdWithNull(tokenId);
+            if (!token.isToken()) {
+                token = null;
+            }
         }
+
+        if (token == null) {
+            token = new Card("0", "TOKEN", "TOKEN", Const.TYPE_TOKEN + Const.TYPE_MONSTER, Const.NULL, Const.NULL, 0, 0, 0);
+        }
+
+        token.negative();
+        ((Field) container).setItem(token);
     }
 
-    public boolean isTokenable(Card card) {
-        return (card.getCategory() & Const.CATEGORY_TOKEN) == Const.CATEGORY_TOKEN ||
-                ((card.getDesc().contains("衍生物」") || card.getDesc().toLowerCase().contains("token\"") ||
-                        card.getDesc().toLowerCase().contains("tokens\"") || card.getDesc().contains("代幣」") ||
-                        card.getDesc().contains("トークン」")));
+    private int getTokenSerial(Card tokenParent) {
+        if (tokenParent == PREVIOUS_CARD_PARENT) {
+            TOKEN_SERIAL++;
+        } else {
+            TOKEN_SERIAL = 1;
+        }
+        PREVIOUS_CARD_PARENT = tokenParent;
+        return TOKEN_SERIAL;
     }
 }
