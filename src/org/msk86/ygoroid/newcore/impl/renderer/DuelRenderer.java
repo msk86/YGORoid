@@ -2,7 +2,6 @@ package org.msk86.ygoroid.newcore.impl.renderer;
 
 import android.graphics.Canvas;
 import android.graphics.Point;
-import android.util.Log;
 import org.msk86.ygoroid.newcore.Item;
 import org.msk86.ygoroid.newcore.Layout;
 import org.msk86.ygoroid.newcore.Renderer;
@@ -42,8 +41,10 @@ public class DuelRenderer implements Renderer {
 
         if(duel.getDrag() != null) {
             Drag drag = duel.getDrag();
-            layout.addItem(drag.getItem(), drag.x(), drag.y(), 2);
-            layout.updateItem(drag.getItem(), drag.x(), drag.y(), 2);
+            if(drag.getItem() != null) {
+                layout.addItem(drag.getItem(), drag.x(), drag.y(), 2);
+                layout.updateItem(drag.getItem(), drag.x(), drag.y(), 2);
+            }
         } else {
             removeItemsFromLayoutByClass(layout, Drag.class);
         }

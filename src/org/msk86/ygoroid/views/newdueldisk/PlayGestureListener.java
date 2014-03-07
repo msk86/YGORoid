@@ -1,6 +1,5 @@
 package org.msk86.ygoroid.views.newdueldisk;
 
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import org.msk86.ygoroid.newaction.Action;
@@ -81,11 +80,8 @@ public class PlayGestureListener extends GestureDetector.SimpleOnGestureListener
             for(Action action: actionChain) {
                 action.execute();
             }
-
-            if(startDrag.isDraggable()) {
-                drag = new Drag(view.getDuel(), event1.getX(), event1.getY(), startDrag);
-                view.getDuel().setDrag(drag);
-            }
+            drag = new Drag(view.getDuel(), event1.getX(), event1.getY(), startDrag);
+            view.getDuel().setDrag(drag);
         } else {
             drag.move(event2.getX(), event2.getY());
         }

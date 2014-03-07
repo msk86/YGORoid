@@ -1,5 +1,6 @@
 package org.msk86.ygoroid.newaction.actionimpl;
 
+import org.msk86.ygoroid.newcore.Item;
 import org.msk86.ygoroid.newcore.impl.Card;
 import org.msk86.ygoroid.newcore.impl.Field;
 import org.msk86.ygoroid.newcore.impl.OverRay;
@@ -19,13 +20,14 @@ public class DragOverRayAction extends BaseAction {
         if(overRay.isDeepSelect()) {
             Card topCard = overRay.getOverRayCards().topCard();
             overRay.getOverRayCards().remove(topCard);
-            ((StartDrag) operation).setItem(topCard);
+            ((StartDrag) operation).setDragItem(topCard);
             duel.select(topCard);
             if(overRay.getOverRayCards().size() == 1) {
                 field.setItem(overRay.getOverRayCards().topCard());
             }
         } else {
-            field.removeItem();
+            Item item = field.removeItem();
+            ((StartDrag) operation).setDragItem(item);
         }
     }
 }

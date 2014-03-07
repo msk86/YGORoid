@@ -10,7 +10,7 @@ public class Drag extends CommonOperation {
 
     public Drag(Duel duel, float fx, float fy, StartDrag startDrag) {
         super(duel, fx, fy);
-        item = startDrag.getItem();
+        item = startDrag.getDragItem();
         this.container = null;
         this.startDrag = startDrag;
     }

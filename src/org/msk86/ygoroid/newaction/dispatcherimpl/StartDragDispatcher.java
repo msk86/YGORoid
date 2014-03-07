@@ -38,10 +38,6 @@ public class StartDragDispatcher implements Dispatcher<StartDrag> {
             actionChain.add(new CloseCardSelectorAction(op));
         }
 
-        if(actionChain.size() == 0) {
-            op.setDraggable(false);
-        }
-
         return actionChain;
     }
 }

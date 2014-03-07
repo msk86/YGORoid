@@ -4,22 +4,22 @@ import org.msk86.ygoroid.newcore.Item;
 import org.msk86.ygoroid.newcore.impl.Duel;
 
 public class StartDrag extends CommonOperation {
-    boolean draggable;
+    Item dragItem;
+
     public StartDrag(Duel duel, float fx, float fy) {
         super(duel, fx, fy);
-        draggable = true;
     }
 
     public void setItem(Item item) {
         this.item = item;
     }
 
-    public boolean isDraggable() {
-        return draggable;
+    public Item getDragItem() {
+        return dragItem;
     }
 
-    public void setDraggable(boolean draggable) {
-        this.draggable = draggable;
+    public void setDragItem(Item dragItem) {
+        this.dragItem = dragItem;
     }
 
     @Override

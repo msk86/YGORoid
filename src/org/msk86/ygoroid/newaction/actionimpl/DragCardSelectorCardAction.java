@@ -3,8 +3,8 @@ package org.msk86.ygoroid.newaction.actionimpl;
 import org.msk86.ygoroid.newcore.Listable;
 import org.msk86.ygoroid.newcore.impl.Card;
 import org.msk86.ygoroid.newcore.impl.CardSelector;
-import org.msk86.ygoroid.newcore.impl.Deck;
 import org.msk86.ygoroid.newop.Operation;
+import org.msk86.ygoroid.newop.impl.StartDrag;
 
 public class DragCardSelectorCardAction extends BaseAction {
     public DragCardSelectorCardAction(Operation operation) {
@@ -21,6 +21,7 @@ public class DragCardSelectorCardAction extends BaseAction {
                 card.open();
             }
             listable.listCards().remove(card);
+            ((StartDrag) operation).setDragItem(card);
         }
     }
 }

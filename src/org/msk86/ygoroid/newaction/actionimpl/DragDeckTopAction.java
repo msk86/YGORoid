@@ -16,7 +16,7 @@ public class DragDeckTopAction extends BaseAction {
             Deck deck = (Deck) item;
             Card card = deck.getCardList().topCard();
             deck.getCardList().remove(card);
-            ((StartDrag) operation).setItem(card);
+            ((StartDrag) operation).setDragItem(card);
             duel.select(card);
         }
     }
