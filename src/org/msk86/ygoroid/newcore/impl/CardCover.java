@@ -8,8 +8,12 @@ public class CardCover implements Bmpable {
 
     private CardCover() {}
 
-    public static CardCover getInstance() {
-        return new CardCover();
+    public static CardCover instance;
+    public synchronized static CardCover getInstance() {
+        if(instance == null){
+            instance = new CardCover();
+        }
+        return instance;
     }
 
     private BmpGenerator generator;
