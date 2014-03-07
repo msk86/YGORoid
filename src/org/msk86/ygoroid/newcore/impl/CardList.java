@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class CardList {
-    boolean open, canStoreToken;
+    boolean open, canStoreToken, listTopCard;
     List<Card> cards;
 
     public CardList() {
@@ -22,6 +22,7 @@ public class CardList {
     public CardList(boolean open, boolean canStoreToken, List<Card> cards) {
         this.open = open;
         this.canStoreToken = canStoreToken;
+        this.listTopCard = true;
         this.cards = new CopyOnWriteArrayList<Card>();
         if(cards != null) {
             for (Card card : cards) {
@@ -154,5 +155,9 @@ public class CardList {
 
     public List<Card> getCards() {
         return cards;
+    }
+
+    public void setListTopCard(boolean listTopCard) {
+        this.listTopCard = listTopCard;
     }
 }

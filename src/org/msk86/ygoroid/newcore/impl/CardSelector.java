@@ -4,6 +4,8 @@ import org.msk86.ygoroid.newcore.*;
 import org.msk86.ygoroid.newcore.impl.layout.GridLayout;
 import org.msk86.ygoroid.newcore.impl.renderer.CardSelectorRenderer;
 
+import java.util.List;
+
 public class CardSelector implements Item, Container {
     Listable source;
     CardList cardList;
@@ -25,7 +27,11 @@ public class CardSelector implements Item, Container {
     @Override
     public Layout getLayout() {
         if(layout == null) {
-            layout = new GridLayout(this, cardList.getCards());
+            List<Card> cardsInLayout = cardList.getCards();
+            if(!cardList.listTopCard && cardList.size() >= 1) {
+                cardsInLayout = cardList.getCards().subList(1, cardList.size());
+            }
+            layout = new GridLayout(this, cardsInLayout);
         }
         return layout;
     }

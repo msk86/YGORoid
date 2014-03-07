@@ -2,9 +2,7 @@ package org.msk86.ygoroid.newaction.dispatcherimpl;
 
 import org.msk86.ygoroid.newaction.Action;
 import org.msk86.ygoroid.newaction.Dispatcher;
-import org.msk86.ygoroid.newaction.actionimpl.DragFieldCardAction;
-import org.msk86.ygoroid.newaction.actionimpl.DragHandCardAction;
-import org.msk86.ygoroid.newaction.actionimpl.DragOverRayAction;
+import org.msk86.ygoroid.newaction.actionimpl.*;
 import org.msk86.ygoroid.newcore.Container;
 import org.msk86.ygoroid.newcore.Item;
 import org.msk86.ygoroid.newcore.impl.*;
@@ -31,13 +29,18 @@ public class StartDragDispatcher implements Dispatcher<StartDrag> {
             if(item instanceof OverRay) {
                 actionChain.add(new DragOverRayAction(op));
             }
-//            if(item instanceof Deck) {
-//                actionChain.add(DragDeckTopAction(op));
-//            }
+            if(item instanceof Deck) {
+                actionChain.add(new DragDeckTopAction(op));
+            }
         }
-//        if(container instanceof CardSelector) {
-//            actionChain.add(DragCardSelectorCardAction(op));
-//        }
+        if(container instanceof CardSelector) {
+            actionChain.add(new DragCardSelectorCardAction(op));
+            actionChain.add(new CloseCardSelectorAction(op));
+        }
+
+        if(actionChain.size() == 0) {
+            op.setDraggable(false);
+        }
 
         return actionChain;
     }

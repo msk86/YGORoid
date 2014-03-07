@@ -82,10 +82,13 @@ public class PlayGestureListener extends GestureDetector.SimpleOnGestureListener
                 action.execute();
             }
 
-            drag = new Drag(view.getDuel(), event1.getX(), event1.getY(), startDrag);
-            view.getDuel().setDrag(drag);
+            if(startDrag.isDraggable()) {
+                drag = new Drag(view.getDuel(), event1.getX(), event1.getY(), startDrag);
+                view.getDuel().setDrag(drag);
+            }
+        } else {
+            drag.move(event2.getX(), event2.getY());
         }
-        drag.move(event2.getX(), event2.getY());
         view.updateActionTime();
         return true;
     }

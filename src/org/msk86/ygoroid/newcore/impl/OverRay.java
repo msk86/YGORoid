@@ -9,6 +9,7 @@ public class OverRay implements Item, Selectable, Controllable, Infoable, Listab
 
     public OverRay() {
         overRayCards = new CardList(true, true, null);
+        overRayCards.setListTopCard(false);
     }
 
     public void overRay(Card card) {
@@ -110,6 +111,6 @@ public class OverRay implements Item, Selectable, Controllable, Infoable, Listab
 
     @Override
     public CardList listCards() {
-        return new CardList(overRayCards.isOpen(), true, overRayCards.getCards().subList(1, overRayCards.size()));
+        return overRayCards;
     }
 }

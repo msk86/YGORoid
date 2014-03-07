@@ -31,4 +31,13 @@ public class Drag extends CommonOperation {
     public StartDrag getStartDrag() {
         return startDrag;
     }
+
+    @Override
+    public int x() {
+        return x - item.getRenderer().size().width() / 2;
+    }
+    @Override
+    public int y() {
+        return y - item.getRenderer().size().height() / 2;
+    }
 }

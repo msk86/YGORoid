@@ -77,7 +77,7 @@ public class LinerLayout implements Layout {
     }
 
     private int getPadding() {
-        if(items().size() == 0) {
+        if(items().size() == 0 || items().size() == 1) {
             return 0;
         }
         int containerWidth = ((Item) this.container).getRenderer().size().width();

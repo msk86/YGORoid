@@ -38,8 +38,9 @@ public class AbsoluteLayout implements Layout {
     }
 
     public void updateItem(Item item, int x, int y, int zIndex) {
-        removeItem(item);
-        addItem(item, x, y, zIndex);
+        Point pos = new Point(x, y);
+        positionMap.put(item, pos);
+        zIndexMap.put(item, zIndex);
     }
 
     public void removeItem(Item item) {

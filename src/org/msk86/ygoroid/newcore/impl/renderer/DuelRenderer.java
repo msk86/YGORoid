@@ -42,6 +42,7 @@ public class DuelRenderer implements Renderer {
 
         if(duel.getDrag() != null) {
             Drag drag = duel.getDrag();
+            layout.addItem(drag.getItem(), drag.x(), drag.y(), 2);
             layout.updateItem(drag.getItem(), drag.x(), drag.y(), 2);
         } else {
             removeItemsFromLayoutByClass(layout, Drag.class);
