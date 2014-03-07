@@ -49,18 +49,8 @@ public class ClickDispatcher implements Dispatcher<Click> {
         if(item instanceof LpDisplay) {
             actionChain.add(new SwitchLpDisplayAction(op));
         }
-        if(item instanceof Button) {
-            Button button = (Button) item;
-            switch (button) {
-                case CLEAR:
-                    actionChain.add(new ClearLpNumberAction(op));
-                    break;
-                case OK:
-                    actionChain.add(new ChangeLpAction(op));
-                case CANCEL:
-                    actionChain.add(new CloseLpCalculatorAction(op));
-                    break;
-            }
+        if(item instanceof Button && item == Button.CLEAR) {
+            actionChain.add(new ClearLpNumberAction(op));
         }
 
         return actionChain;

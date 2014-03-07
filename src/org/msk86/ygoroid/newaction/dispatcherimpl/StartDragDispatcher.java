@@ -29,7 +29,7 @@ public class StartDragDispatcher implements Dispatcher<StartDrag> {
             if(item instanceof OverRay) {
                 actionChain.add(new DragOverRayAction(op));
             }
-            if(item instanceof Deck) {
+            if(item instanceof Deck && ((Deck) item).getCardList().size() > 0) {
                 actionChain.add(new DragDeckTopAction(op));
             }
         }
