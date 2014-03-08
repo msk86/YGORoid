@@ -11,6 +11,7 @@ import org.msk86.ygoroid.newcore.impl.lifepoint.LifePointCalculator;
 import org.msk86.ygoroid.newcore.impl.renderer.DuelRenderer;
 import org.msk86.ygoroid.newop.impl.Drag;
 import org.msk86.ygoroid.newutils.Utils;
+import org.msk86.ygoroid.utils.Configuration;
 
 public class Duel implements Item, Container {
     private LifePoint lifePoint;
@@ -180,6 +181,12 @@ public class Duel implements Item, Container {
     }
 
     public void setCardSelector(CardSelector cardSelector) {
+        if(Configuration.configProperties(Configuration.PROPERTY_AUTO_SHUFFLE_ENABLE) && cardSelector == null && this.cardSelector != null) {
+            Listable source = this.cardSelector.getSource();
+            if(source instanceof Deck && ((Deck) source).getName().equals(Utils.s(R.string.DECK))) {
+                ((Deck) source).getCardList().shuffle();
+            }
+        }
         this.cardSelector = cardSelector;
     }
 
