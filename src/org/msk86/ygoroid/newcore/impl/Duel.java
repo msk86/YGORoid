@@ -176,6 +176,10 @@ public class Duel implements Item, Container {
         return coin;
     }
 
+    public DeckCards getDeckCards() {
+        return deckCards;
+    }
+
     public void setLifePointCalculator(LifePointCalculator lifePointCalculator) {
         this.lifePointCalculator = lifePointCalculator;
     }
