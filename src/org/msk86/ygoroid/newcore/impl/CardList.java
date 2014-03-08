@@ -138,7 +138,7 @@ public class CardList {
         }
     }
 
-    public void reserve() {
+    public void reverse() {
         List<Card> reservedCards = new CopyOnWriteArrayList<Card>();
         for (int i = cards.size() - 1; i >= 0; i--) {
             Card card = cards.get(i);

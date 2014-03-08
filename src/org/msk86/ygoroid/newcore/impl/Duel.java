@@ -49,7 +49,7 @@ public class Duel implements Item, Container {
         initHandCards();
     }
 
-    private void restart() {
+    public void restart() {
         start(this.deckCards);
     }
 

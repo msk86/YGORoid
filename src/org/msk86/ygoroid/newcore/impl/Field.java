@@ -34,10 +34,6 @@ public class Field implements Item, Container {
         return item;
     }
 
-    public Card getTopCard() {
-        return (Card) item;
-    }
-
     private Renderer renderer;
     @Override
     public Renderer getRenderer() {

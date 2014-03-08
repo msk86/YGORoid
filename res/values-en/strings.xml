@@ -19,9 +19,9 @@
     <string name="pics_update_failed" formatted="false"> [%d] pics fail to download.</string>
 
     <string name="MENU_CARD_BACK_TO_BOTTOM_OF_DECK">To Deck Bottom</string>
-    <string name="MENU_CARD_CLOSE_REMOVE">Face-Down Banish</string>
+    <string name="MENU_CARD_CLOSE_BANISH">Face-Down Banish</string>
     <string name="MENU_DECK_SHUFFLE">Shuffle</string>
-    <string name="MENU_DECK_CLOSE_REMOVE_TOP">Face-Down Banish the Top</string>
+    <string name="MENU_DECK_CLOSE_BANISH_TOP">Face-Down Banish the Top</string>
     <string name="MENU_DECK_REVERSE">Flip Deck</string>
     <string name="MENU_SHOW_HAND">Show All Hand</string>
     <string name="MENU_HIDE_HAND">Set All Hand</string>

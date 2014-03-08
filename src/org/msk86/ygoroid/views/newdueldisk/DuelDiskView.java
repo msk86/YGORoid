@@ -51,7 +51,7 @@ public class DuelDiskView extends YGOView {
     public void doDraw(Canvas canvas) {
         drawBackground(canvas);
         duel.getRenderer().draw(canvas, 0, 0);
-        drawVersion(canvas);
+//        drawVersion(canvas);
         if (Configuration.configProperties(Configuration.PROPERTY_FPS_ENABLE)) {
 //            drawFPS(canvas);
         }

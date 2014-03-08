@@ -37,13 +37,13 @@ public class PlayMenuProcessor {
                     }
                     if (!card.isToken()) {
                         menu.add(Const.MENU_GROUP_FIELD_CARD, Const.MENU_CARD_BACK_TO_BOTTOM_OF_DECK, 0, Utils.s(R.string.MENU_CARD_BACK_TO_BOTTOM_OF_DECK));
-                        menu.add(Const.MENU_GROUP_FIELD_CARD, Const.MENU_CARD_CLOSE_REMOVE, 0, Utils.s(R.string.MENU_CARD_CLOSE_REMOVE));
+                        menu.add(Const.MENU_GROUP_FIELD_CARD, Const.MENU_CARD_CLOSE_REMOVE, 0, Utils.s(R.string.MENU_CARD_CLOSE_BANISH));
                     }
                 } else if (item instanceof CardList) {
                     CardList cardList = (CardList) item;
                     if (cardList.getName().equals(Utils.s(R.string.DECK))) {
                         menu.add(Const.MENU_GROUP_DECK, Const.MENU_DECK_SHUFFLE, 0, Utils.s(R.string.MENU_DECK_SHUFFLE));
-                        menu.add(Const.MENU_GROUP_DECK, Const.MENU_DECK_CLOSE_REMOVE_TOP, 0, Utils.s(R.string.MENU_DECK_CLOSE_REMOVE_TOP));
+                        menu.add(Const.MENU_GROUP_DECK, Const.MENU_DECK_CLOSE_REMOVE_TOP, 0, Utils.s(R.string.MENU_DECK_CLOSE_BANISH_TOP));
                         menu.add(Const.MENU_GROUP_DECK, Const.MENU_DECK_REVERSE, 0, Utils.s(R.string.MENU_DECK_REVERSE));
                     } else if (cardList.getName().equals(Utils.s(R.string.TEMPORARY))) {
                         menu.add(Const.MENU_GROUP_DECK, Const.MENU_DECK_SHUFFLE, 0, Utils.s(R.string.MENU_DECK_SHUFFLE));
@@ -52,7 +52,7 @@ public class PlayMenuProcessor {
             } else if (container instanceof HandCards) {
                 if (item instanceof Card) {
                     menu.add(Const.MENU_GROUP_HAND_CARD, Const.MENU_CARD_BACK_TO_BOTTOM_OF_DECK, 0, Utils.s(R.string.MENU_CARD_BACK_TO_BOTTOM_OF_DECK));
-                    menu.add(Const.MENU_GROUP_HAND_CARD, Const.MENU_CARD_CLOSE_REMOVE, 0, Utils.s(R.string.MENU_CARD_CLOSE_REMOVE));
+                    menu.add(Const.MENU_GROUP_HAND_CARD, Const.MENU_CARD_CLOSE_REMOVE, 0, Utils.s(R.string.MENU_CARD_CLOSE_BANISH));
                     menu.add(Const.MENU_GROUP_HAND_CARD, Const.MENU_SHOW_HAND, 0, Utils.s(R.string.MENU_SHOW_HAND));
                     menu.add(Const.MENU_GROUP_HAND_CARD, Const.MENU_HIDE_HAND, 0, Utils.s(R.string.MENU_HIDE_HAND));
                     menu.add(Const.MENU_GROUP_HAND_CARD, Const.MENU_SHUFFLE_HAND, 0, Utils.s(R.string.MENU_SHUFFLE_HAND));

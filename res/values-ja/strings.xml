@@ -19,9 +19,9 @@
     <string name="pics_update_failed" formatted="false">[%d]カード更新失敗。</string>
 
     <string name="MENU_CARD_BACK_TO_BOTTOM_OF_DECK">デッキの一番下に戻す</string>
-    <string name="MENU_CARD_CLOSE_REMOVE">裏側表示除外</string>
+    <string name="MENU_CARD_CLOSE_BANISH">裏側表示除外</string>
     <string name="MENU_DECK_SHUFFLE">シャッフル</string>
-    <string name="MENU_DECK_CLOSE_REMOVE_TOP">一番上を裏側表示除外</string>
+    <string name="MENU_DECK_CLOSE_BANISH_TOP">一番上を裏側表示除外</string>
     <string name="MENU_DECK_REVERSE">デッキ反転</string>
     <string name="MENU_SHOW_HAND">手札オープン</string>
     <string name="MENU_HIDE_HAND">手札セット</string>
