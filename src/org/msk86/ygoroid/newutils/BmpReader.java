@@ -9,6 +9,14 @@ import org.msk86.ygoroid.utils.Utils;
 public class BmpReader {
 
 
+    public static Bitmap readBitmap(String file, int defaultResId, Size size) {
+        Bitmap bmp = readBitmap(file, size);
+        if(bmp == null) {
+            bmp = readBitmap(defaultResId, size);
+        }
+        return bmp;
+    }
+
     public static Bitmap readBitmap(int resId, Size require) {
         try {
             BitmapFactory.Options options = new BitmapFactory.Options();

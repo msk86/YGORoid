@@ -1,9 +1,6 @@
 package org.msk86.ygoroid.newcore.impl.renderer;
 
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Point;
-import android.graphics.Rect;
+import android.graphics.*;
 import org.msk86.ygoroid.newcore.Item;
 import org.msk86.ygoroid.newcore.Layout;
 import org.msk86.ygoroid.newcore.Renderer;
@@ -32,7 +29,15 @@ public class FieldRenderer implements Renderer {
     @Override
     public void draw(Canvas canvas, int x, int y) {
         drawFrame(canvas, x, y);
+        drawBackground(canvas, x, y);
         drawItem(canvas, x, y);
+    }
+
+    private void drawBackground(Canvas canvas, int x, int y) {
+        Bitmap bmp = field.getType().getBmpGenerator().generate(size());
+        if(bmp != null) {
+            canvas.drawBitmap(bmp, x, y, new Paint());
+        }
     }
 
     private void drawFrame(Canvas canvas, int x, int y) {
