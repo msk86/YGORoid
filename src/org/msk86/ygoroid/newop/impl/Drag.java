@@ -1,18 +1,24 @@
 package org.msk86.ygoroid.newop.impl;
 
 import org.msk86.ygoroid.newcore.Container;
+import org.msk86.ygoroid.newcore.Item;
 import org.msk86.ygoroid.newcore.impl.Duel;
+import org.msk86.ygoroid.newop.Operation;
 import org.msk86.ygoroid.newutils.LayoutUtils;
 
-public class Drag extends CommonOperation {
+public class Drag implements Operation {
+    Item item;
+    Container container;
+    Duel duel;
+    int x, y;
     StartDrag startDrag;
     boolean dragging;
 
     public Drag(Duel duel, float fx, float fy, StartDrag startDrag) {
-        super(duel, fx, fy);
         item = startDrag.getDragItem();
-        this.container = null;
+        this.duel = duel;
         this.startDrag = startDrag;
+        move(fx, fy);
     }
 
     public void move(float fx, float fy) {
@@ -30,6 +36,21 @@ public class Drag extends CommonOperation {
 
     public StartDrag getStartDrag() {
         return startDrag;
+    }
+
+    @Override
+    public Duel getDuel() {
+        return duel;
+    }
+
+    @Override
+    public Item getItem() {
+        return item;
+    }
+
+    @Override
+    public Container getContainer() {
+        return container;
     }
 
     @Override

@@ -10,7 +10,6 @@ import org.msk86.ygoroid.newcore.impl.CardSelector;
 import org.msk86.ygoroid.newcore.impl.Duel;
 import org.msk86.ygoroid.newcore.impl.layout.AbsoluteLayout;
 import org.msk86.ygoroid.newcore.impl.lifepoint.LifePointCalculator;
-import org.msk86.ygoroid.newop.impl.Drag;
 import org.msk86.ygoroid.newutils.Style;
 import org.msk86.ygoroid.size.FieldSize;
 import org.msk86.ygoroid.size.OtherSize;
@@ -39,15 +38,6 @@ public class DuelRenderer implements Renderer {
     private void updateLayoutWithWindow() {
         AbsoluteLayout layout = (AbsoluteLayout) duel.getLayout();
 
-        if(duel.getDrag() != null) {
-            Drag drag = duel.getDrag();
-            if(drag.getItem() != null) {
-                layout.addItem(drag.getItem(), drag.x(), drag.y(), 2);
-                layout.updateItem(drag.getItem(), drag.x(), drag.y(), 2);
-            }
-        } else {
-            removeItemsFromLayoutByClass(layout, Drag.class);
-        }
         if(duel.getCardSelector() != null) {
             layout.addItem(duel.getCardSelector(), 0, 0, 2);
         } else {
@@ -87,6 +77,10 @@ public class DuelRenderer implements Renderer {
         for(Item item : layout.items()) {
             Point pos = layout.itemPosition(item);
             item.getRenderer().draw(canvas, pos.x, pos.y);
+        }
+
+        if(duel.getDrag() != null && duel.getDrag().getItem() != null) {
+            duel.getDrag().getItem().getRenderer().draw(canvas, duel.getDrag().x(), duel.getDrag().y());
         }
     }
 

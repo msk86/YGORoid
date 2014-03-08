@@ -18,8 +18,8 @@ public class PlayGestureListener extends GestureDetector.SimpleOnGestureListener
     public void onUp(MotionEvent event) {
         Drag drag = view.getDuel().getDrag();
         if (drag != null) {
-            drag.dropTo(event.getX(), event.getY());
             view.getDuel().setDrag(null);
+            drag.dropTo(event.getX(), event.getY());
             List<Action> actionChain = new DragDispatcher().dispatch(drag);
             for(Action action : actionChain) {
                 action.execute();

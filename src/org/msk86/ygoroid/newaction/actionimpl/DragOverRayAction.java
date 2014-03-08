@@ -17,13 +17,13 @@ public class DragOverRayAction extends BaseAction {
         OverRay overRay = (OverRay) item;
         Field field = (Field) container;
 
-        if(overRay.isDeepSelect()) {
+        if(overRay.isDeepSelect() || overRay.getOverRayCards().size() == 1) {
             Card topCard = overRay.getOverRayCards().topCard();
-            overRay.getOverRayCards().remove(topCard);
             ((StartDrag) operation).setDragItem(topCard);
+            overRay.getOverRayCards().remove(topCard);
             duel.select(topCard);
-            if(overRay.getOverRayCards().size() == 1) {
-                field.setItem(overRay.getOverRayCards().topCard());
+            if(overRay.getOverRayCards().size() == 0) {
+                field.removeItem();
             }
         } else {
             Item item = field.removeItem();

@@ -1,6 +1,7 @@
 package org.msk86.ygoroid.newcore.impl.renderer;
 
 import android.graphics.*;
+import org.msk86.ygoroid.newcore.Item;
 import org.msk86.ygoroid.newcore.Renderer;
 import org.msk86.ygoroid.newcore.impl.*;
 import org.msk86.ygoroid.newutils.Style;
@@ -30,7 +31,9 @@ public class CardSelectorRenderer implements Renderer {
         canvas.translate(x, y);
 
         CardList cardList = cardSelector.getCardList();
-        for(Card card: cardList.getCards()) {
+        for(Item item: cardSelector.getLayout().items()) {
+            Card card = (Card) item;
+
             Point pos = cardSelector.getLayout().itemPosition(card);
             Bitmap cardBmp;
             if(cardList.isOpen() && !card.isOpen()) {

@@ -42,7 +42,9 @@ public class OverRay implements Item, Selectable, Controllable, Infoable, Listab
 
     @Override
     public void unSelect() {
-        overRayCards.topCard().unSelect();
+        if(overRayCards.topCard() != null) {
+            overRayCards.topCard().unSelect();
+        }
         deepSelect = false;
     }
 
