@@ -19,7 +19,7 @@ public class DragDispatcher implements Dispatcher<Drag> {
 
         if(op.getItem() == null) {
             if(op.getStartDrag().getItem() instanceof InfoBar) {
-                // menu
+                actionChain.add(new OpenMenuAction(op));
             }
         } else {
             if (op.getContainer() instanceof Field) {
