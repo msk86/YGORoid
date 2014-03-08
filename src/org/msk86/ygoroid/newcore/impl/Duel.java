@@ -43,8 +43,9 @@ public class Duel implements Item, Container {
             return;
         }
         if(!isSameDeck) {
-            clearPreviousDuel(deckCards);
+            recycleUselessBmp(deckCards);
         }
+        clearDuel();
         initDeck();
         initHandCards();
     }
@@ -53,7 +54,7 @@ public class Duel implements Item, Container {
         start(this.deckCards);
     }
 
-    private void clearPreviousDuel(DeckCards deckCards) {
+    private void recycleUselessBmp(DeckCards deckCards) {
         for (Card card : deckCards.getAllCards()) {
             card.destroyBmp();
         }
@@ -75,6 +76,35 @@ public class Duel implements Item, Container {
 
         dice = new Dice();
         coin = new Coin();
+    }
+
+    private void clearDuel() {
+        handCards.getCardList().getCards().clear();
+
+        Deck deck = (Deck) duelFields.getField(FieldType.DECK).getItem();
+        deck.getCardList().getCards().clear();
+        Deck exDeck = (Deck) duelFields.getField(FieldType.EX_DECK).getItem();
+        exDeck.getCardList().getCards().clear();
+        Deck graveyard = (Deck) duelFields.getField(FieldType.GRAVEYARD).getItem();
+        graveyard.getCardList().getCards().clear();
+        Deck banished = (Deck) duelFields.getField(FieldType.BANISHED).getItem();
+        banished.getCardList().getCards().clear();
+        Deck temp = (Deck) duelFields.getField(FieldType.TEMP).getItem();
+        temp.getCardList().getCards().clear();
+
+        duelFields.getField(FieldType.FIELD_MAGIC).removeItem();
+        duelFields.getField(FieldType.PENDULUM_LEFT).removeItem();
+        duelFields.getField(FieldType.PENDULUM_RIGHT).removeItem();
+
+        for(Field field : duelFields.getFields(FieldType.MONSTER)) {
+            field.removeItem();
+        }
+        for(Field field : duelFields.getFields(FieldType.MAGIC_TRAP)) {
+            field.removeItem();
+        }
+        lifePoint.reset();
+        dice.reset();
+        coin.reset();
     }
 
     private void initDeck() {

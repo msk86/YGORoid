@@ -15,6 +15,10 @@ public class Coin implements Item {
         random = new Random();
     }
 
+    public void reset() {
+        coinNumber = 1;
+    }
+
     public void throwCoin() {
         coinNumber = random.nextInt(2);
     }

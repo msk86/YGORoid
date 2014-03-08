@@ -15,6 +15,10 @@ public class Dice implements Item {
         random = new Random();
     }
 
+    public void reset() {
+        diceNumber = 6;
+    }
+
     public void throwDice() {
         diceNumber = random.nextInt(6) + 1;
     }

@@ -24,6 +24,11 @@ public class LifePoint implements Item {
         lps[idx] = lp;
     }
 
+    public void reset() {
+        lps[0] = 8000;
+        lps[1] = 8000;
+    }
+
     @Override
     public String toString() {
         String str = "LP: " + lps[0];
