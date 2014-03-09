@@ -13,16 +13,28 @@ public class OverRay implements Item, Selectable, Controllable, Infoable, Listab
     }
 
     public void overRay(Card card) {
+        boolean isCardNegative = !card.isPositive();
         // Token can be used as a XYZ card.
         if(card.isXYZ() || card.isToken()) {
+            changeOverRayUnitsPosition();
             overRayCards.push(card);
+            if(isCardNegative) card.negative();
         } else {
             Card top = overRayCards.topCard();
             if(top != null && (top.isXYZ() || top.isToken())) {
                 overRayCards.unShift(card);
             } else {
+                changeOverRayUnitsPosition();
                 overRayCards.push(card);
+                if(isCardNegative) card.negative();
             }
+        }
+    }
+
+    private void changeOverRayUnitsPosition() {
+        for(Card overRayUnits : overRayCards.getCards()) {
+            overRayUnits.positive();
+            overRayUnits.open();
         }
     }
 

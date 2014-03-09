@@ -17,8 +17,8 @@ public class DragDispatcher implements Dispatcher<Drag> {
     public List<Action> dispatch(Drag op) {
         List<Action> actionChain = new ArrayList<Action>();
 
-        if(op.getItem() == null) {
-            if(op.getStartDrag().getItem() instanceof InfoBar) {
+        if (op.getItem() == null) {
+            if (op.getStartDrag().getItem() instanceof InfoBar) {
                 actionChain.add(new OpenMenuAction(op));
             }
         } else {
@@ -55,7 +55,8 @@ public class DragDispatcher implements Dispatcher<Drag> {
                 if (op.getItem() instanceof Card) {
                     actionChain.add(new AddHandCardAction(op));
                 }
-            } else {
+            }
+            if (actionChain.size() == 0) {
                 actionChain.add(new RevertDragAction(op));
             }
         }
