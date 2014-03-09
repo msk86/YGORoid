@@ -38,7 +38,7 @@ public class DuelDiskView extends YGOView {
     }
 
     private void initAbout() {
-        duel.start("交通机甲.ydk");
+//        duel.start("交通机甲.ydk");
     }
 
     @Override

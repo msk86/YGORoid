@@ -5,6 +5,7 @@ import org.msk86.ygoroid.newaction.Action;
 import org.msk86.ygoroid.newaction.Dispatcher;
 import org.msk86.ygoroid.newaction.actionimpl.FlipCardAction;
 import org.msk86.ygoroid.newaction.actionimpl.MoveCardToTempAction;
+import org.msk86.ygoroid.newaction.actionimpl.NewTokenAction;
 import org.msk86.ygoroid.newaction.actionimpl.OpenCardSelectorAction;
 import org.msk86.ygoroid.newcore.Container;
 import org.msk86.ygoroid.newcore.Controllable;
@@ -42,7 +43,7 @@ public class DoubleClickDispatcher implements Dispatcher<DoubleClick> {
         if(container instanceof Field) {
             Field field = (Field) container;
             if(item == null && field.getType() == FieldType.MONSTER) {
-//                actionChain.add(new NewTokenAction(op));
+                actionChain.add(new NewTokenAction(op));
             }
             if(item instanceof Controllable) {
                 actionChain.add(new FlipCardAction(op));

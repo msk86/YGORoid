@@ -12,6 +12,7 @@ import org.msk86.ygoroid.newutils.Utils;
 public class NewTokenAction extends BaseAction {
     private static Card PREVIOUS_CARD_PARENT = null;
     private static int TOKEN_SERIAL = 1;
+    private static boolean CARD_PARENT_HAS_CREATED_TOKEN = false;
 
     public NewTokenAction(Operation operation) {
         super(operation);
@@ -33,31 +34,62 @@ public class NewTokenAction extends BaseAction {
                 tokenParent = deck.getCardList().topCard();
             }
         }
+        token = createToken(tokenParent);
+        ((Field) container).setItem(token);
+    }
 
+    private Card createToken(Card tokenParent) {
+        Card token = null;
+        if(tokenParent != null && tokenParent.isToken()) {
+            tokenParent = PREVIOUS_CARD_PARENT;
+        }
         if (tokenParent != null) {
-            int tokenSerial = getTokenSerial(tokenParent);
-            int tokenId = Integer.parseInt(tokenParent.getId()) + tokenSerial;
-            token = Utils.getDbHelper().loadByIdWithNull(tokenId);
-            if (!token.isToken()) {
-                token = null;
+            token = createDynamicToken(tokenParent);
+        }
+        if (token == null) {
+            token = createNormalToken();
+        }
+        token.negative();
+        return token;
+    }
+
+    private Card createNormalToken(){
+        PREVIOUS_CARD_PARENT = null;
+        return new Card("0", "TOKEN", "TOKEN", Const.TYPE_TOKEN + Const.TYPE_MONSTER, Const.NULL, Const.NULL, 0, 0, 0);
+    }
+
+    private Card createDynamicToken(Card tokenParent) {
+        int tokenSerial = getTokenSerial(tokenParent);
+        int tokenId = Integer.parseInt(tokenParent.getId()) + tokenSerial;
+        Card token = Utils.getDbHelper().loadByIdWithNull(tokenId);
+        if(token != null && token.isToken()) {
+            CARD_PARENT_HAS_CREATED_TOKEN = true;
+        } else {
+            if (CARD_PARENT_HAS_CREATED_TOKEN) {
+                resetTokenSerial();
+                token = createDynamicToken(tokenParent);
             }
         }
-
-        if (token == null) {
-            token = new Card("0", "TOKEN", "TOKEN", Const.TYPE_TOKEN + Const.TYPE_MONSTER, Const.NULL, Const.NULL, 0, 0, 0);
+        if(token != null && !token.isToken()) {
+            token = null;
         }
+        return token;
+    }
 
-        token.negative();
-        ((Field) container).setItem(token);
+    private void resetTokenSerial() {
+        TOKEN_SERIAL = 0;
     }
 
     private int getTokenSerial(Card tokenParent) {
         if (tokenParent == PREVIOUS_CARD_PARENT) {
             TOKEN_SERIAL++;
         } else {
+            CARD_PARENT_HAS_CREATED_TOKEN = false;
             TOKEN_SERIAL = 1;
         }
-        PREVIOUS_CARD_PARENT = tokenParent;
+        if(!tokenParent.isToken()) {
+            PREVIOUS_CARD_PARENT = tokenParent;
+        }
         return TOKEN_SERIAL;
     }
 }

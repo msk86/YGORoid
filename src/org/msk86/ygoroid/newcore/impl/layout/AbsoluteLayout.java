@@ -37,12 +37,6 @@ public class AbsoluteLayout implements Layout {
         zIndexMap.put(item, zIndex);
     }
 
-    public void updateItem(Item item, int x, int y, int zIndex) {
-        Point pos = new Point(x, y);
-        positionMap.put(item, pos);
-        zIndexMap.put(item, zIndex);
-    }
-
     public void removeItem(Item item) {
         items.remove(item);
         positionMap.remove(item);
