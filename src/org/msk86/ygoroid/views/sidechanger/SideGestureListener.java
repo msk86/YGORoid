@@ -2,6 +2,11 @@ package org.msk86.ygoroid.views.sidechanger;
 
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import org.msk86.ygoroid.newaction.Action;
+import org.msk86.ygoroid.newaction.sidechanger.dispatcherimpl.ClickConfirmedDispatcher;
+import org.msk86.ygoroid.newop.impl.ClickConfirmed;
+
+import java.util.List;
 
 public class SideGestureListener extends GestureDetector.SimpleOnGestureListener {
     SideChangerView view;
@@ -10,25 +15,20 @@ public class SideGestureListener extends GestureDetector.SimpleOnGestureListener
         this.view = view;
     }
 
-    public void onUp(MotionEvent event) {
-        view.updateActionTime();
-    }
-
     @Override
     public boolean onDown(MotionEvent event) {
-        view.updateActionTime();
         return true;
     }
 
     @Override
     public boolean onSingleTapConfirmed(MotionEvent event) {
+        ClickConfirmed clickConfirmed = new ClickConfirmed(view.getSideChanger(), event.getX(), event.getY());
+        List<Action> actions = new ClickConfirmedDispatcher().dispatch(clickConfirmed);
+        for(Action action : actions) {
+            action.execute();
+        }
         view.updateActionTime();
         return true;
-    }
-
-    @Override
-    public void onLongPress(MotionEvent event) {
-        view.updateActionTime();
     }
 
     @Override
@@ -36,9 +36,4 @@ public class SideGestureListener extends GestureDetector.SimpleOnGestureListener
         return super.onDoubleTap(event);
     }
 
-    @Override
-    public boolean onScroll(MotionEvent event1, MotionEvent event2, float dx, float dy) {
-        view.updateActionTime();
-        return true;
-    }
 }

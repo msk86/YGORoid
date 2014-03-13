@@ -25,7 +25,7 @@ public class DuelDiskView extends YGOView {
         super(context, attrs);
 
         duel = new Duel();
-        mGestureDetector = new PlayGestureDetector(new PlayGestureListener(this));
+        mGestureDetector = new PlayGestureDetector(context, new PlayGestureListener(this));
         sensorManager = ((SensorManager) context.getSystemService(Context.SENSOR_SERVICE));
         Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         sensorManager.registerListener(new PlaySensorEventListener(this), sensor, SensorManager.SENSOR_DELAY_GAME);

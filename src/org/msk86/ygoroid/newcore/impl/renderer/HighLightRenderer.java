@@ -18,6 +18,9 @@ public class HighLightRenderer implements Renderer {
 
     @Override
     public Size size() {
+        if(highLight.getSize() != null) {
+            return highLight.getSize();
+        }
         return highLight.getTarget().getRenderer().size();
     }
 

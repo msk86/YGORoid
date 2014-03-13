@@ -35,6 +35,7 @@ public class ExDeckSectionRenderer implements Renderer {
             canvas.drawBitmap(card.getBmpGenerator().generate(CardSize.SIDING), pos.x, pos.y, new Paint());
             if(card.isSelect()) {
                 HighLight highLight = new HighLight(card);
+                highLight.setSize(CardSize.SIDING);
                 highLight.getRenderer().draw(canvas, pos.x, pos.y);
             }
         }

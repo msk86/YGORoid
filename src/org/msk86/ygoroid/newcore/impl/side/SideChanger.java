@@ -1,10 +1,9 @@
 package org.msk86.ygoroid.newcore.impl.side;
 
-import org.msk86.ygoroid.newcore.Container;
-import org.msk86.ygoroid.newcore.Item;
-import org.msk86.ygoroid.newcore.Layout;
-import org.msk86.ygoroid.newcore.Renderer;
+import org.msk86.ygoroid.newcore.*;
 import org.msk86.ygoroid.newcore.deck.DeckCards;
+import org.msk86.ygoroid.newcore.impl.Card;
+import org.msk86.ygoroid.newcore.impl.CardEffectWindow;
 import org.msk86.ygoroid.newcore.impl.InfoBar;
 import org.msk86.ygoroid.newcore.impl.layout.VerticalLayout;
 import org.msk86.ygoroid.newcore.impl.side.renderer.SideChangerRenderer;
@@ -40,6 +39,34 @@ public class SideChanger implements Item, Container {
     public SideDeckSection getSideDeckSection() {
         return (SideDeckSection) sections.get(2);
     }
+    public InfoBar getInfoBar() {
+        return (InfoBar) sections.get(3);
+    }
+
+    Card currentSelectCard;
+
+    public void unSelect() {
+        if (currentSelectCard != null) {
+            currentSelectCard.unSelect();
+            currentSelectCard = null;
+        }
+        getInfoBar().clearInfo();
+    }
+
+    public void select(Card selectable) {
+        if(selectable != null) {
+            if(selectable != currentSelectCard) {
+                unSelect();
+            }
+            currentSelectCard = selectable;
+            currentSelectCard.select();
+        }
+        getInfoBar().setInfo(currentSelectCard);
+    }
+
+    public Card getCurrentSelectCard() {
+        return currentSelectCard;
+    }
 
     Renderer renderer;
     @Override
@@ -57,5 +84,14 @@ public class SideChanger implements Item, Container {
             layout = new VerticalLayout(this, sections);
         }
         return layout;
+    }
+
+    CardEffectWindow cardEffectWindow;
+    public void setCardEffectWindow(CardEffectWindow window) {
+        cardEffectWindow = window;
+    }
+
+    public CardEffectWindow getCardEffectWindow() {
+        return cardEffectWindow;
     }
 }

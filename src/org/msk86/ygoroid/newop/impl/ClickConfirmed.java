@@ -1,9 +1,9 @@
 package org.msk86.ygoroid.newop.impl;
 
-import org.msk86.ygoroid.newcore.impl.Duel;
+import org.msk86.ygoroid.newcore.Container;
 
 public class ClickConfirmed extends CommonOperation {
-    public ClickConfirmed(Duel duel, float fx, float fy) {
-        super(duel, fx, fy);
+    public ClickConfirmed(Container baseContainer, float fx, float fy) {
+        super(baseContainer, fx, fy);
     }
 }

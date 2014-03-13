@@ -3,6 +3,7 @@ package org.msk86.ygoroid.views.sidechanger;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import org.msk86.ygoroid.newcore.Item;
 import org.msk86.ygoroid.newcore.deck.DeckCards;
@@ -13,7 +14,7 @@ import org.msk86.ygoroid.views.YGOView;
 
 public class SideChangerView extends YGOView {
 
-    private SideGestureDetector mGestureDetector;
+    private GestureDetector mGestureDetector;
 
     private SideChanger sideChanger;
 
@@ -22,7 +23,7 @@ public class SideChangerView extends YGOView {
 
         sideChanger = new SideChanger();
 
-        mGestureDetector = new SideGestureDetector(new SideGestureListener(this));
+        mGestureDetector = new GestureDetector(context, new SideGestureListener(this));
     }
 
     public void loadDeck(DeckCards cards) {
@@ -69,5 +70,9 @@ public class SideChangerView extends YGOView {
     @Override
     public void importData(Item item) {
         this.sideChanger = (SideChanger) item;
+    }
+
+    public SideChanger getSideChanger() {
+        return sideChanger;
     }
 }

@@ -1,4 +1,4 @@
-package org.msk86.ygoroid.newaction.dueldisk.actionimpl;
+package org.msk86.ygoroid.newaction.sidechanger.actionimpl;
 
 import org.msk86.ygoroid.newop.Operation;
 

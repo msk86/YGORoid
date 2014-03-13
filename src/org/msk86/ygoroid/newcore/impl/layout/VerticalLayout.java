@@ -1,7 +1,6 @@
 package org.msk86.ygoroid.newcore.impl.layout;
 
 import android.graphics.Point;
-import android.util.Log;
 import org.msk86.ygoroid.newcore.Container;
 import org.msk86.ygoroid.newcore.Item;
 import org.msk86.ygoroid.newcore.Layout;
@@ -61,7 +60,6 @@ public class VerticalLayout implements Layout {
         int y = 0;
         for (int i = 1; i <= index; i++) {
             y += items().get(i - 1).getRenderer().size().height() + getPadding();
-            Log.e("YGO", "Y:" + items().get(i - 1).getRenderer().size().height());
         }
 
         return new Point(0, y);

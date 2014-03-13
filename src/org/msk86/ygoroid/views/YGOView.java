@@ -133,4 +133,6 @@ public abstract class YGOView extends SurfaceView implements Runnable {
 
     public abstract Item exportData();
     public abstract void importData(Item item);
+
+
 }
