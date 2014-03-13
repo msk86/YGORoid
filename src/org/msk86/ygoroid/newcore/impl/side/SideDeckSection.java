@@ -9,13 +9,22 @@ import org.msk86.ygoroid.newcore.impl.Card;
 import org.msk86.ygoroid.newcore.impl.layout.LinerLayout;
 import org.msk86.ygoroid.newcore.impl.side.renderer.SideDeckSectionRenderer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SideDeckSection implements Item, Container {
     DeckCards cards;
     List<Card> sideDeck;
 
+    public SideDeckSection() {
+        sideDeck = new ArrayList<Card>();
+    }
+
     public SideDeckSection(DeckCards cards) {
+        setCards(cards);
+    }
+
+    public void setCards(DeckCards cards) {
         this.cards = cards;
         sideDeck = this.cards.getSideDeckCards();
     }

@@ -3,7 +3,7 @@ package org.msk86.ygoroid.views.newdueldisk;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import org.msk86.ygoroid.newaction.Action;
-import org.msk86.ygoroid.newaction.dispatcherimpl.*;
+import org.msk86.ygoroid.newaction.dueldisk.dispatcherimpl.*;
 import org.msk86.ygoroid.newop.impl.*;
 
 import java.util.List;

@@ -10,13 +10,22 @@ import org.msk86.ygoroid.newcore.impl.layout.LinerLayout;
 import org.msk86.ygoroid.newcore.impl.side.renderer.ExDeckSectionRenderer;
 import org.msk86.ygoroid.newcore.impl.side.renderer.MainDeckSectionRenderer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ExDeckSection implements Item, Container {
     DeckCards cards;
     List<Card> exDeck;
 
+    public ExDeckSection() {
+        exDeck = new ArrayList<Card>();
+    }
+
     public ExDeckSection(DeckCards cards) {
+        setCards(cards);
+    }
+
+    public void setCards(DeckCards cards) {
         this.cards = cards;
         exDeck = this.cards.getExDeckCards();
     }

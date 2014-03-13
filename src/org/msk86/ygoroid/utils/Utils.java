@@ -1,13 +1,11 @@
 package org.msk86.ygoroid.utils;
 
-import android.app.Service;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.*;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.wifi.WifiManager;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;

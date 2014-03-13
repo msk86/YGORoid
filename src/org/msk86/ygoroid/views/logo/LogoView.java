@@ -10,6 +10,8 @@ import android.view.MotionEvent;
 import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.YGOActivity;
 import org.msk86.ygoroid.utils.Utils;
+import org.msk86.ygoroid.views.OnKeyProcessor;
+import org.msk86.ygoroid.views.OnMenuProcessor;
 import org.msk86.ygoroid.views.YGOView;
 
 public class LogoView extends YGOView {
@@ -86,4 +88,21 @@ public class LogoView extends YGOView {
             context.showDuel();
         }
     };
+
+
+
+    @Override
+    public OnKeyProcessor getOnKeyProcessor() {
+        return null;
+    }
+
+    @Override
+    public OnMenuProcessor getOnMenuProcessor() {
+        return null;
+    }
+
+    @Override
+    public String getDuelState() {
+        return YGOView.DUEL_STATE_LOGO;
+    }
 }

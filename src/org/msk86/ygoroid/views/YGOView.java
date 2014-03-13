@@ -120,4 +120,13 @@ public abstract class YGOView extends SurfaceView implements Runnable {
     public void updateActionTime() {
         actionTime = System.currentTimeMillis();
     }
+
+    public abstract OnKeyProcessor getOnKeyProcessor();
+    public abstract OnMenuProcessor getOnMenuProcessor();
+
+    public static final String DUEL_STATE_LOGO = "DUEL_STATE_LOGO";
+    public static final String DUEL_STATE_DUEL = "DUEL_STATE_DUEL";
+    public static final String DUEL_STATE_SIDE = "DUEL_STATE_SIDE";
+    public static final String DUEL_STATE_DECK = "DUEL_STATE_DECK";
+    public abstract String getDuelState();
 }

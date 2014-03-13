@@ -21,6 +21,8 @@ import org.msk86.ygoroid.core.InfoWindow;
 import org.msk86.ygoroid.core.ShowCardWindow;
 import org.msk86.ygoroid.utils.Configuration;
 import org.msk86.ygoroid.utils.Utils;
+import org.msk86.ygoroid.views.OnKeyProcessor;
+import org.msk86.ygoroid.views.OnMenuProcessor;
 import org.msk86.ygoroid.views.YGOView;
 
 public class DeckBuilderView extends YGOView {
@@ -349,5 +351,25 @@ public class DeckBuilderView extends YGOView {
     public void showCard(Card card) {
         ShowCardWindow cardWindow = new ShowCardWindow(card, Utils.deckBuilderWidth());
         setCardWindow(cardWindow);
+    }
+
+    OnKeyProcessor onKeyProcessor;
+
+    @Override
+    public OnKeyProcessor getOnKeyProcessor() {
+        if(onKeyProcessor == null) {
+            onKeyProcessor = new DeckOnKeyProcessor(this);
+        }
+        return onKeyProcessor;
+    }
+
+    @Override
+    public OnMenuProcessor getOnMenuProcessor() {
+        return null;
+    }
+
+    @Override
+    public String getDuelState() {
+        return YGOView.DUEL_STATE_DECK;
     }
 }

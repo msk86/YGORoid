@@ -16,15 +16,19 @@ public class SideChanger implements Item, Container {
     DeckCards cards;
     List<Item> sections;
 
-
-    public SideChanger(DeckCards cards) {
-        this.cards = cards;
+    public SideChanger() {
         sections = new ArrayList<Item>();
-        sections.add(new MainDeckSection(cards));
-        sections.add(new ExDeckSection(cards));
-        sections.add(new SideDeckSection(cards));
+        sections.add(new MainDeckSection());
+        sections.add(new ExDeckSection());
+        sections.add(new SideDeckSection());
         sections.add(new InfoBar(this));
+    }
 
+    public void loadDeck(DeckCards cards) {
+        this.cards = cards;
+        getMainDeckSection().setCards(cards);
+        getExDeckSection().setCards(cards);
+        getSideDeckSection().setCards(cards);
     }
 
     public MainDeckSection getMainDeckSection() {
@@ -54,5 +58,4 @@ public class SideChanger implements Item, Container {
         }
         return layout;
     }
-
 }

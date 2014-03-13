@@ -12,7 +12,17 @@ public class DeckCards {
     List<Card> exDeckCards;
     List<Card> sideDeckCards;
 
+    public DeckCards() {
+        mainDeckCards = new ArrayList<Card>();
+        exDeckCards = new ArrayList<Card>();
+        sideDeckCards = new ArrayList<Card>();
+    }
+
     public DeckCards(String deckName) {
+        loadDeck(deckName);
+    }
+
+    public void loadDeck(String deckName) {
         this.deckName = deckName;
         List<List<Card>> lists = Utils.getDbHelper().loadFromFile(deckName);
         mainDeckCards = lists.get(0);

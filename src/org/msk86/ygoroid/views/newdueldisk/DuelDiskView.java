@@ -9,6 +9,8 @@ import android.view.MotionEvent;
 import org.msk86.ygoroid.newcore.impl.Duel;
 import org.msk86.ygoroid.newcore.impl.side.SideChanger;
 import org.msk86.ygoroid.utils.Configuration;
+import org.msk86.ygoroid.views.OnKeyProcessor;
+import org.msk86.ygoroid.views.OnMenuProcessor;
 import org.msk86.ygoroid.views.YGOView;
 
 public class DuelDiskView extends YGOView {
@@ -17,8 +19,6 @@ public class DuelDiskView extends YGOView {
     private SensorManager sensorManager;
 
     private Duel duel;
-
-    private SideChanger sideChanger;
 
     public DuelDiskView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -60,5 +60,28 @@ public class DuelDiskView extends YGOView {
         if (Configuration.configProperties(Configuration.PROPERTY_FPS_ENABLE)) {
 //            drawFPS(canvas);
         }
+    }
+
+    OnKeyProcessor onKeyProcessor;
+    @Override
+    public OnKeyProcessor getOnKeyProcessor() {
+        if(onKeyProcessor == null) {
+            onKeyProcessor = new PlayOnKeyProcessor(this);
+        }
+        return onKeyProcessor;
+    }
+
+    OnMenuProcessor onMenuProcessor;
+    @Override
+    public OnMenuProcessor getOnMenuProcessor() {
+        if(onMenuProcessor == null) {
+            onMenuProcessor = new PlayOnMenuProcessor(this);
+        }
+        return onMenuProcessor;
+    }
+
+    @Override
+    public String getDuelState() {
+        return YGOView.DUEL_STATE_DUEL;
     }
 }
