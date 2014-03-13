@@ -7,16 +7,16 @@ import org.msk86.ygoroid.newop.Operation;
 import org.msk86.ygoroid.newutils.LayoutUtils;
 
 public class Drag implements Operation {
+    Container baseContainer;
     Item item;
     Container container;
-    Duel duel;
     int x, y;
     StartDrag startDrag;
     boolean dragging;
 
-    public Drag(Duel duel, float fx, float fy, StartDrag startDrag) {
+    public Drag(Container baseContainer, float fx, float fy, StartDrag startDrag) {
         item = startDrag.getDragItem();
-        this.duel = duel;
+        this.baseContainer = baseContainer;
         this.startDrag = startDrag;
         move(fx, fy);
     }
@@ -29,7 +29,7 @@ public class Drag implements Operation {
     public Container dropTo(float fx, float fy) {
         x = (int) fx;
         y = (int) fy;
-        container = LayoutUtils.containerAt(duel, x,  y);
+        container = LayoutUtils.containerAt(baseContainer, x,  y);
         dragging = false;
         return container;
     }
@@ -38,9 +38,13 @@ public class Drag implements Operation {
         return startDrag;
     }
 
-    @Override
     public Duel getDuel() {
-        return duel;
+        return (Duel) getBaseContainer();
+    }
+
+    @Override
+    public Container getBaseContainer() {
+        return baseContainer;
     }
 
     @Override

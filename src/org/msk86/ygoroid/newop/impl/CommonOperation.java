@@ -8,20 +8,21 @@ import org.msk86.ygoroid.newutils.LayoutUtils;
 
 public class CommonOperation implements Operation {
     int x, y;
-    Duel duel;
+    Container baseContainer;
     Container container;
     Item item;
 
-    public CommonOperation(Duel duel, float fx, float fy) {
+    public CommonOperation(Container baseContainer, float fx, float fy) {
         this.x = (int) fx;
         this.y = (int) fy;
-        this.duel = duel;
-        container = LayoutUtils.containerAt(duel, x, y);
-        item = LayoutUtils.itemAt(duel, x, y);
+        this.baseContainer = baseContainer;
+        container = LayoutUtils.containerAt(baseContainer, x, y);
+        item = LayoutUtils.itemAt(baseContainer, x, y);
     }
+
     @Override
-    public Duel getDuel() {
-        return duel;
+    public Container getBaseContainer() {
+        return baseContainer;
     }
 
     @Override

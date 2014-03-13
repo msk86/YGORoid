@@ -16,7 +16,7 @@ public class ReturnClickDispatcher implements Dispatcher<ReturnClick> {
     public List<Action> dispatch(ReturnClick op) {
         List<Action> actionChain = new ArrayList<Action>();
 
-        Duel duel = op.getDuel();
+        Duel duel = (Duel) op.getBaseContainer();
 
         if(duel.getCardEffectWindow() != null) {
             actionChain.add(new CloseCardEffectWindowAction(op));

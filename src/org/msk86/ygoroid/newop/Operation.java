@@ -5,7 +5,7 @@ import org.msk86.ygoroid.newcore.Item;
 import org.msk86.ygoroid.newcore.impl.Duel;
 
 public interface Operation {
-    public Duel getDuel();
+    public Container getBaseContainer();
 
     public Item getItem();
 
