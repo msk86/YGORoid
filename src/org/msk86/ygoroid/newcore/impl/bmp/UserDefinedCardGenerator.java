@@ -15,11 +15,13 @@ import org.msk86.ygoroid.size.CardSize;
 import org.msk86.ygoroid.size.Size;
 import org.msk86.ygoroid.utils.Configuration;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class UserDefinedCardGenerator implements BmpGenerator {
-    public Map<String, Bitmap> cache = new HashMap<String, Bitmap>();
+    public static Map<String, Bitmap> cache = new HashMap<String, Bitmap>();
     private UserDefinedCard card;
 
     public UserDefinedCardGenerator(UserDefinedCard card) {
@@ -32,7 +34,7 @@ public class UserDefinedCardGenerator implements BmpGenerator {
 
     @Override
     public Bitmap generate(Size size) {
-        if (cache.get(cardBmpKey(size)) == null) {
+        if (cache.get(cardBmpKey(size)) == null || cache.get(cardBmpKey(size)).isRecycled()) {
             cache.put(cardBmpKey(size), bmp(size));
         }
 
@@ -41,10 +43,16 @@ public class UserDefinedCardGenerator implements BmpGenerator {
 
     @Override
     public void destroy() {
-        for(Bitmap bitmap : cache.values()) {
-            bitmap.recycle();
+        List<String> removeKeys = new ArrayList<String>();
+        for (String key : cache.keySet()) {
+            if (key.startsWith(card.getId() + card.getName())) {
+                removeKeys.add(key);
+            }
         }
-        cache.clear();
+        for(String key: removeKeys) {
+            cache.get(key).recycle();
+            cache.remove(key);
+        }
     }
 
     private Bitmap bmp(Size size) {

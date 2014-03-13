@@ -37,6 +37,7 @@ public class Duel implements Item, Container {
 
     private void start(DeckCards deckCards) {
         boolean isSameDeck = this.deckCards == deckCards;
+        DeckCards originalDeckCards = this.deckCards;
         this.deckCards = deckCards;
         DeckChecker checker = new DeckChecker(this.deckCards);
         if(checker.checkMainMin().startCheck().checkMainMax().checkEx().checkSide().checkSingleCard().isError()) {
@@ -44,7 +45,7 @@ public class Duel implements Item, Container {
             return;
         }
         if(!isSameDeck) {
-            recycleUselessBmp(deckCards);
+            recycleUselessBmp(originalDeckCards);
         }
         clearDuel();
         initDeck();
@@ -55,7 +56,14 @@ public class Duel implements Item, Container {
         start(this.deckCards);
     }
 
+    public void recycleUselessBmp() {
+        recycleUselessBmp(this.deckCards);
+    }
+
     private void recycleUselessBmp(DeckCards deckCards) {
+        if(deckCards == null) {
+            return;
+        }
         for (Card card : deckCards.getAllCards()) {
             card.destroyBmp();
         }
