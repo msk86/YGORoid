@@ -12,6 +12,7 @@ import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import org.msk86.ygoroid.R;
+import org.msk86.ygoroid.newcore.Item;
 import org.msk86.ygoroid.utils.Configuration;
 import org.msk86.ygoroid.utils.FPSMaker;
 import org.msk86.ygoroid.utils.Utils;
@@ -129,4 +130,7 @@ public abstract class YGOView extends SurfaceView implements Runnable {
     public static final String DUEL_STATE_SIDE = "DUEL_STATE_SIDE";
     public static final String DUEL_STATE_DECK = "DUEL_STATE_DECK";
     public abstract String getDuelState();
+
+    public abstract Item exportData();
+    public abstract void importData(Item item);
 }

@@ -19,6 +19,7 @@ import org.msk86.ygoroid.core.Card;
 import org.msk86.ygoroid.core.DeckBuilder;
 import org.msk86.ygoroid.core.InfoWindow;
 import org.msk86.ygoroid.core.ShowCardWindow;
+import org.msk86.ygoroid.newcore.Item;
 import org.msk86.ygoroid.utils.Configuration;
 import org.msk86.ygoroid.utils.Utils;
 import org.msk86.ygoroid.views.OnKeyProcessor;
@@ -371,5 +372,16 @@ public class DeckBuilderView extends YGOView {
     @Override
     public String getDuelState() {
         return YGOView.DUEL_STATE_DECK;
+    }
+
+
+    @Override
+    public Item exportData() {
+        return null;
+    }
+
+    @Override
+    public void importData(Item item) {
+
     }
 }

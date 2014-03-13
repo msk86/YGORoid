@@ -25,7 +25,7 @@ public class MenuClickDispatcher implements Dispatcher<MenuClick> {
                         actionChain.add(new ChangeDeckAction(op));
                         break;
                     case Const.MENU_SIDE:
-                        actionChain.add(new ChangeSideAction(op));
+                        actionChain.add(new ToSideChangerAction(op));
                         break;
                     case Const.MENU_CARD_SEARCH:
                         actionChain.add(new SearchCardAction(op));

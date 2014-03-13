@@ -6,6 +6,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import org.msk86.ygoroid.newcore.Item;
 import org.msk86.ygoroid.newcore.impl.Duel;
 import org.msk86.ygoroid.newcore.impl.side.SideChanger;
 import org.msk86.ygoroid.utils.Configuration;
@@ -83,5 +84,15 @@ public class DuelDiskView extends YGOView {
     @Override
     public String getDuelState() {
         return YGOView.DUEL_STATE_DUEL;
+    }
+
+    @Override
+    public Item exportData() {
+        return duel;
+    }
+
+    @Override
+    public void importData(Item item) {
+        this.duel = (Duel) item;
     }
 }

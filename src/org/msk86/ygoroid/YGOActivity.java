@@ -11,6 +11,7 @@ import android.view.*;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import org.msk86.ygoroid.exception.CrashHandler;
+import org.msk86.ygoroid.newcore.Item;
 import org.msk86.ygoroid.newcore.deck.DeckCards;
 import org.msk86.ygoroid.service.PersistencyService;
 import org.msk86.ygoroid.upgrade.Downloader;
@@ -304,13 +305,16 @@ public class YGOActivity extends Activity {
         }
 
         private void persistentDuel() {
-            if (service != null && duelDiskView != null) {
-                if (service.getDuel() != null) {
-                    duelDiskView.setDuel(service.getDuel());
+            if(service != null && currentView instanceof YGOView) {
+                YGOView view = (YGOView) currentView;
+                Item data = service.fetchItem(view);
+                if(data != null) {
+                    view.importData(data);
                 } else {
-                    service.setDuel(duelDiskView.getDuel());
+                    service.storeItem(view, view.exportData());
                 }
             }
+
             if (service != null && downloader != null) {
                 service.setDownloader(downloader);
             }
