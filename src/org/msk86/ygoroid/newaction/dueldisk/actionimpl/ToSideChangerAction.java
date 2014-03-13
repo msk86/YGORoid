@@ -13,7 +13,7 @@ public class ToSideChangerAction extends BaseAction {
     public void execute() {
         if (duel.getDeckCards() != null) {
             DeckCards deckCards = duel.getDeckCards();
-            Utils.getContext().showSideChangeViewWithDeck(deckCards);
+            Utils.getContext().showSideChangerWithDeck(deckCards);
         }
     }
 }

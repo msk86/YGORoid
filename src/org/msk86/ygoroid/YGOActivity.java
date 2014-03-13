@@ -64,6 +64,8 @@ public class YGOActivity extends Activity {
         if (savedInstanceState != null) {
             if (YGOView.DUEL_STATE_DECK.equals(savedInstanceState.getString(DUEL_STATE))) {
                 showDeckBuilderWithDeck(org.msk86.ygoroid.newutils.Utils.findTempDeck());
+            } else if(YGOView.DUEL_STATE_SIDE.equals(savedInstanceState.getString(DUEL_STATE))) {
+                showSideChanger();
             } else {
                 showDuel();
             }
@@ -116,7 +118,6 @@ public class YGOActivity extends Activity {
             duelDiskView.resume();
         }
         currentView = duelDiskView;
-
         duelDiskView.updateActionTime();
     }
 
@@ -128,13 +129,18 @@ public class YGOActivity extends Activity {
         duelDiskView.updateActionTime();
     }
 
-    public void showSideChangeViewWithDeck(DeckCards cards) {
+    public void showSideChanger() {
         super.setContentView(R.layout.side_changer);
         sideChangerView = (SideChangerView) findViewById(R.id.sideChangerView);
         if (!sideChangerView.isRunning()) {
             sideChangerView.resume();
         }
         currentView = sideChangerView;
+        sideChangerView.updateActionTime();
+    }
+
+    public void showSideChangerWithDeck(DeckCards cards) {
+        showSideChanger();
         if (cards != null) {
             sideChangerView.loadDeck(cards);
         }
