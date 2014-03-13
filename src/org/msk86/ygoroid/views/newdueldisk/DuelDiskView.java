@@ -7,6 +7,7 @@ import android.hardware.SensorManager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import org.msk86.ygoroid.newcore.impl.Duel;
+import org.msk86.ygoroid.newcore.impl.side.SideChanger;
 import org.msk86.ygoroid.utils.Configuration;
 import org.msk86.ygoroid.views.YGOView;
 
@@ -16,6 +17,8 @@ public class DuelDiskView extends YGOView {
     private SensorManager sensorManager;
 
     private Duel duel;
+
+    private SideChanger sideChanger;
 
     public DuelDiskView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -39,6 +42,7 @@ public class DuelDiskView extends YGOView {
 
     private void initAbout() {
 //        duel.start("交通机甲.ydk");
+//        sideChanger = new SideChanger(duel.getDeckCards());
     }
 
     @Override
@@ -51,6 +55,7 @@ public class DuelDiskView extends YGOView {
     public void doDraw(Canvas canvas) {
         drawBackground(canvas);
         duel.getRenderer().draw(canvas, 0, 0);
+//        sideChanger.getRenderer().draw(canvas, 0, 0);
 //        drawVersion(canvas);
         if (Configuration.configProperties(Configuration.PROPERTY_FPS_ENABLE)) {
 //            drawFPS(canvas);

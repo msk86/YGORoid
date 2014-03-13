@@ -10,7 +10,7 @@ import org.msk86.ygoroid.newcore.Renderer;
 import org.msk86.ygoroid.newcore.impl.InfoBar;
 import org.msk86.ygoroid.newutils.Style;
 import org.msk86.ygoroid.newutils.TextUtils;
-import org.msk86.ygoroid.size.CardSize;
+import org.msk86.ygoroid.size.InfoBarSize;
 import org.msk86.ygoroid.size.Size;
 
 public class InfoBarRenderer implements Renderer {
@@ -23,9 +23,7 @@ public class InfoBarRenderer implements Renderer {
     @Override
     public Size size() {
         int w = infoBar.getBarHolder().getRenderer().size().width();
-        int h = (int)(CardSize.NORMAL.height() / 5.5) + 3;
-        h = Math.min(h, 30);
-        return new Size(w, h);
+        return new Size(w, InfoBarSize.INFO_BAR.height());
     }
 
     @Override
@@ -58,10 +56,9 @@ public class InfoBarRenderer implements Renderer {
         canvas.drawRect(new Rect(0, 0, size().width(), size().height()), paint);
 
         paint.setColor(Style.infoBarBorderColor());
-        paint.setStrokeWidth(4);
-        canvas.drawLine(0, 0, size().width(), 0, paint);
-        canvas.drawLine(0, 0, 0, size().height(), paint);
-        canvas.drawLine(size().width(), 0, size().width(), size().height(), paint);
+        paint.setStrokeWidth(3);
+        paint.setStyle(Paint.Style.STROKE);
+        canvas.drawRect(new Rect(0, 0, size().width() + 3, size().height() + 3), paint);
 
         canvas.restore();
     }

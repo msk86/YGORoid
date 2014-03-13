@@ -1,5 +1,7 @@
 package org.msk86.ygoroid.size;
 
+import org.msk86.ygoroid.newutils.Utils;
+
 public class OtherSize extends Size {
     public OtherSize(int width, int height) {
         super(width, height);

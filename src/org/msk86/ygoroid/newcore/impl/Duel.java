@@ -39,7 +39,7 @@ public class Duel implements Item, Container {
         boolean isSameDeck = this.deckCards == deckCards;
         this.deckCards = deckCards;
         DeckChecker checker = new DeckChecker(this.deckCards);
-        if(checker.checkMainMin().checkMainMax().checkEx().checkSide().checkSingleCard().isError()) {
+        if(checker.checkMainMin().startCheck().checkMainMax().checkEx().checkSide().checkSingleCard().isError()) {
             Toast.makeText(Utils.getContext(), checker.getErrorInfo(), Toast.LENGTH_LONG).show();
             return;
         }

@@ -23,12 +23,17 @@ public class DeckChecker {
     Set<Integer> invalidCardIds;
     Set<String> invalidCardNames;
 
+    int[] cardCounts = new int[3];
+
     public DeckChecker(DeckCards deckCards) {
         this.deckCards = deckCards;
         error = false;
         errorInfo = "";
         invalidCardIds = new HashSet<Integer>();
         invalidCardNames = new HashSet<String>();
+        cardCounts[0] = deckCards.getMainDeckCards().size();
+        cardCounts[1] = deckCards.getExDeckCards().size();
+        cardCounts[2] = deckCards.getSideDeckCards().size();
     }
 
     public DeckChecker startCheck() {
@@ -111,6 +116,20 @@ public class DeckChecker {
             } else {
                 invalidCardIds.add(Integer.parseInt(card.getRealId()));
             }
+        }
+        return this;
+    }
+
+    public DeckChecker checkSideChange() {
+        if(error) return this;
+        if(deckCards.getMainDeckCards().size() != cardCounts[0]) {
+            errorInfo = "SIDE CHANGE CHECK NOT PASS: COUNT OF MD SHOULD BE 40 BUT 41";
+            error = true;
+
+        } else
+        if(deckCards.getExDeckCards().size() != cardCounts[1]){
+            errorInfo = "SIDE CHANGE CHECK NOT PASS: COUNT OF ED SHOULD BE 15 BUT 14";
+            error = true;
         }
         return this;
     }
