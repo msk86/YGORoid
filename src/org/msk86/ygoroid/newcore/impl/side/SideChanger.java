@@ -6,6 +6,8 @@ import org.msk86.ygoroid.newcore.deck.DeckChecker;
 import org.msk86.ygoroid.newcore.impl.Card;
 import org.msk86.ygoroid.newcore.impl.CardEffectWindow;
 import org.msk86.ygoroid.newcore.impl.InfoBar;
+import org.msk86.ygoroid.newcore.impl.bmp.CardGenerator;
+import org.msk86.ygoroid.newcore.impl.bmp.UserDefinedCardGenerator;
 import org.msk86.ygoroid.newcore.impl.layout.AbsoluteLayout;
 import org.msk86.ygoroid.newcore.impl.side.renderer.SideChangerRenderer;
 
@@ -73,6 +75,11 @@ public class SideChanger implements Item, Container, BaseContainer {
             currentSelectCard.select();
         }
         getInfoBar().setInfo(currentSelectCard);
+    }
+
+    public void recycleUselessBmp() {
+        CardGenerator.clearCache();
+        UserDefinedCardGenerator.clearCache();
     }
 
     Renderer renderer;

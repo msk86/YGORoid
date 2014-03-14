@@ -7,7 +7,6 @@ import org.msk86.ygoroid.newaction.dueldisk.dispatcherimpl.VolClickDispatcher;
 import org.msk86.ygoroid.newop.impl.ReturnClick;
 import org.msk86.ygoroid.newop.impl.VolClick;
 import org.msk86.ygoroid.views.OnKeyProcessor;
-import org.msk86.ygoroid.views.newdueldisk.DuelDiskView;
 
 import java.util.ArrayList;
 import java.util.List;

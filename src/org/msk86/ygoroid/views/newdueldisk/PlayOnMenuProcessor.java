@@ -6,15 +6,15 @@ import android.view.SubMenu;
 import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.newaction.Action;
 import org.msk86.ygoroid.newaction.dueldisk.dispatcherimpl.MenuClickDispatcher;
-import org.msk86.ygoroid.newcore.*;
+import org.msk86.ygoroid.newcore.Container;
+import org.msk86.ygoroid.newcore.Item;
 import org.msk86.ygoroid.newcore.constant.Const;
 import org.msk86.ygoroid.newcore.impl.*;
 import org.msk86.ygoroid.newop.impl.MenuClick;
 import org.msk86.ygoroid.newutils.LayoutUtils;
-import org.msk86.ygoroid.utils.Configuration;
 import org.msk86.ygoroid.newutils.Utils;
+import org.msk86.ygoroid.utils.Configuration;
 import org.msk86.ygoroid.views.OnMenuProcessor;
-import org.msk86.ygoroid.views.newdueldisk.DuelDiskView;
 
 import java.util.List;
 

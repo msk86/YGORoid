@@ -8,7 +8,6 @@ import org.msk86.ygoroid.newcore.deck.DeckCards;
 import org.msk86.ygoroid.newcore.impl.Card;
 import org.msk86.ygoroid.newcore.impl.layout.LinerLayout;
 import org.msk86.ygoroid.newcore.impl.side.renderer.ExDeckSectionRenderer;
-import org.msk86.ygoroid.newcore.impl.side.renderer.MainDeckSectionRenderer;
 
 import java.util.ArrayList;
 import java.util.List;

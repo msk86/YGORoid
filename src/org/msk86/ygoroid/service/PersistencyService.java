@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 import org.msk86.ygoroid.newcore.Item;
-import org.msk86.ygoroid.newcore.impl.Duel;
 import org.msk86.ygoroid.upgrade.Downloader;
 import org.msk86.ygoroid.views.YGOView;
 

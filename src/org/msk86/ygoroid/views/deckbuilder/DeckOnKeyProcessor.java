@@ -6,7 +6,6 @@ import android.view.KeyEvent;
 import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.utils.Utils;
 import org.msk86.ygoroid.views.OnKeyProcessor;
-import org.msk86.ygoroid.views.deckbuilder.DeckBuilderView;
 
 public class DeckOnKeyProcessor implements OnKeyProcessor {
     DeckBuilderView view;

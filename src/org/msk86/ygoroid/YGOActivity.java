@@ -118,6 +118,7 @@ public class YGOActivity extends Activity {
             duelDiskView.resume();
         }
         currentView = duelDiskView;
+        duelDiskView.getDuel().recycleUselessBmp();
         duelDiskView.updateActionTime();
     }
 
@@ -144,6 +145,7 @@ public class YGOActivity extends Activity {
             sideChangerView.resume();
         }
         currentView = sideChangerView;
+        sideChangerView.getSideChanger().recycleUselessBmp();
         sideChangerView.updateActionTime();
     }
 

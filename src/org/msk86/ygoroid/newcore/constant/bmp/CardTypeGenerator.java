@@ -24,8 +24,4 @@ public class CardTypeGenerator implements BmpGenerator {
         }
         return cache.get(size);
     }
-
-    @Override
-    public void destroy() {
-    }
 }

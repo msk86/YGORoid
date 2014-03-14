@@ -9,7 +9,6 @@ import org.msk86.ygoroid.newcore.impl.layout.AbsoluteLayout;
 import org.msk86.ygoroid.newcore.impl.side.SideChanger;
 import org.msk86.ygoroid.newutils.Style;
 import org.msk86.ygoroid.size.InfoBarSize;
-import org.msk86.ygoroid.size.OtherSize;
 import org.msk86.ygoroid.size.SideChangerSize;
 import org.msk86.ygoroid.size.Size;
 

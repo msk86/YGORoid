@@ -4,7 +4,6 @@ import org.msk86.ygoroid.newcore.*;
 import org.msk86.ygoroid.newcore.impl.layout.GridLayout;
 import org.msk86.ygoroid.newcore.impl.renderer.CardSelectorRenderer;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 

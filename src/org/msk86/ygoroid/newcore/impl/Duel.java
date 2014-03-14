@@ -6,6 +6,8 @@ import org.msk86.ygoroid.newcore.*;
 import org.msk86.ygoroid.newcore.constant.FieldType;
 import org.msk86.ygoroid.newcore.deck.DeckCards;
 import org.msk86.ygoroid.newcore.deck.DeckChecker;
+import org.msk86.ygoroid.newcore.impl.bmp.CardGenerator;
+import org.msk86.ygoroid.newcore.impl.bmp.UserDefinedCardGenerator;
 import org.msk86.ygoroid.newcore.impl.layout.AbsoluteLayout;
 import org.msk86.ygoroid.newcore.impl.lifepoint.LifePointCalculator;
 import org.msk86.ygoroid.newcore.impl.renderer.DuelRenderer;
@@ -42,10 +44,9 @@ public class Duel implements Item, Container, BaseContainer {
             return;
         }
         boolean isSameDeck = this.deckCards == deckCards;
-        DeckCards originalDeckCards = this.deckCards;
         this.deckCards = deckCards;
         if(!isSameDeck) {
-            recycleUselessBmp(originalDeckCards);
+            recycleUselessBmp();
         }
         clearDuel();
         initDeck();
@@ -59,16 +60,8 @@ public class Duel implements Item, Container, BaseContainer {
     }
 
     public void recycleUselessBmp() {
-        recycleUselessBmp(this.deckCards);
-    }
-
-    private void recycleUselessBmp(DeckCards deckCards) {
-        if(deckCards == null) {
-            return;
-        }
-        for (Card card : deckCards.getAllCards()) {
-            card.destroyBmp();
-        }
+        CardGenerator.clearCache();
+        UserDefinedCardGenerator.clearCache();
     }
 
     private void initDuelFields() {

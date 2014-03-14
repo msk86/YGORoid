@@ -24,8 +24,4 @@ public class CardCover implements Bmpable {
         }
         return generator;
     }
-
-    @Override
-    public void destroyBmp() {
-    }
 }

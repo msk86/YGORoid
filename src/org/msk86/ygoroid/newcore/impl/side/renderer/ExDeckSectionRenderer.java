@@ -8,7 +8,6 @@ import org.msk86.ygoroid.newcore.Renderer;
 import org.msk86.ygoroid.newcore.impl.Card;
 import org.msk86.ygoroid.newcore.impl.HighLight;
 import org.msk86.ygoroid.newcore.impl.side.ExDeckSection;
-import org.msk86.ygoroid.newcore.impl.side.MainDeckSection;
 import org.msk86.ygoroid.size.CardSize;
 import org.msk86.ygoroid.size.SideChangerSize;
 import org.msk86.ygoroid.size.Size;

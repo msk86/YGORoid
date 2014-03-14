@@ -221,12 +221,6 @@ public class Card implements Item, Selectable, Controllable, Bmpable, Infoable {
         return generator;
     }
 
-    @Override
-    public void destroyBmp() {
-        getBmpGenerator().destroy();
-    }
-
-
     private boolean select;
     @Override
     public void select() {

@@ -2,7 +2,6 @@ package org.msk86.ygoroid.newcore.constant.bmp;
 
 import android.graphics.Bitmap;
 import org.msk86.ygoroid.newcore.BmpGenerator;
-import org.msk86.ygoroid.newcore.constant.CardType;
 import org.msk86.ygoroid.newcore.constant.FieldType;
 import org.msk86.ygoroid.newutils.BmpReader;
 import org.msk86.ygoroid.size.Size;
@@ -24,9 +23,5 @@ public class FieldTypeGenerator implements BmpGenerator {
             cache.put(size, BmpReader.readBitmap(type.getDefaultBgResId(), size));
         }
         return cache.get(size);
-    }
-
-    @Override
-    public void destroy() {
     }
 }
