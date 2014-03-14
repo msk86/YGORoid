@@ -2,13 +2,9 @@ package org.msk86.ygoroid.views.sidechanger;
 
 import android.view.KeyEvent;
 import org.msk86.ygoroid.newaction.Action;
-import org.msk86.ygoroid.newaction.dueldisk.dispatcherimpl.ReturnClickDispatcher;
-import org.msk86.ygoroid.newaction.dueldisk.dispatcherimpl.VolClickDispatcher;
+import org.msk86.ygoroid.newaction.sidechanger.dispatcherimpl.ReturnClickDispatcher;
 import org.msk86.ygoroid.newop.impl.ReturnClick;
-import org.msk86.ygoroid.newop.impl.VolClick;
 import org.msk86.ygoroid.views.OnKeyProcessor;
-import org.msk86.ygoroid.views.newdueldisk.DuelDiskView;
-import org.msk86.ygoroid.views.sidechanger.SideChangerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +20,8 @@ public class SideOnKeyProcessor implements OnKeyProcessor {
         List<Action> actionChain = new ArrayList<Action>();
         switch (keyCode) {
             case KeyEvent.KEYCODE_BACK:
+                ReturnClick returnClick = new ReturnClick(view.getSideChanger());
+                actionChain = new ReturnClickDispatcher().dispatch(returnClick);
                 break;
             case KeyEvent.KEYCODE_MENU:
                 return false;

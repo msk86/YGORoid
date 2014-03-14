@@ -129,6 +129,14 @@ public class YGOActivity extends Activity {
         duelDiskView.updateActionTime();
     }
 
+    public void showDuelWithDeck(DeckCards deck) {
+        showDuel();
+        if (deck != null) {
+            duelDiskView.getDuel().start(deck);
+        }
+        duelDiskView.updateActionTime();
+    }
+
     public void showSideChanger() {
         super.setContentView(R.layout.side_changer);
         sideChangerView = (SideChangerView) findViewById(R.id.sideChangerView);

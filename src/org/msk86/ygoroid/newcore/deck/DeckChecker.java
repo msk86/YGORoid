@@ -31,9 +31,11 @@ public class DeckChecker {
         errorInfo = "";
         invalidCardIds = new HashSet<Integer>();
         invalidCardNames = new HashSet<String>();
-        cardCounts[0] = deckCards.getMainDeckCards().size();
-        cardCounts[1] = deckCards.getExDeckCards().size();
-        cardCounts[2] = deckCards.getSideDeckCards().size();
+        if(deckCards != null) {
+            cardCounts[0] = deckCards.getMainDeckCards().size();
+            cardCounts[1] = deckCards.getExDeckCards().size();
+            cardCounts[2] = deckCards.getSideDeckCards().size();
+        }
     }
 
     public DeckChecker startCheck() {

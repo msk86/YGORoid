@@ -13,7 +13,7 @@ import org.msk86.ygoroid.newop.impl.Drag;
 import org.msk86.ygoroid.newutils.Utils;
 import org.msk86.ygoroid.utils.Configuration;
 
-public class Duel implements Item, Container {
+public class Duel implements Item, Container, BaseContainer {
     private LifePoint lifePoint;
     private LifePointCalculator lifePointCalculator;
     private DuelFields duelFields;
@@ -35,15 +35,15 @@ public class Duel implements Item, Container {
         start(deckCards);
     }
 
-    private void start(DeckCards deckCards) {
-        boolean isSameDeck = this.deckCards == deckCards;
-        DeckCards originalDeckCards = this.deckCards;
-        this.deckCards = deckCards;
-        DeckChecker checker = new DeckChecker(this.deckCards);
+    public void start(DeckCards deckCards) {
+        DeckChecker checker = new DeckChecker(deckCards);
         if(checker.checkMainMin().startCheck().checkMainMax().checkEx().checkSide().checkSingleCard().isError()) {
             Toast.makeText(Utils.getContext(), checker.getErrorInfo(), Toast.LENGTH_LONG).show();
             return;
         }
+        boolean isSameDeck = this.deckCards == deckCards;
+        DeckCards originalDeckCards = this.deckCards;
+        this.deckCards = deckCards;
         if(!isSameDeck) {
             recycleUselessBmp(originalDeckCards);
         }
@@ -53,7 +53,9 @@ public class Duel implements Item, Container {
     }
 
     public void restart() {
-        start(this.deckCards);
+        if(this.deckCards != null) {
+            start(this.deckCards);
+        }
     }
 
     public void recycleUselessBmp() {
@@ -229,6 +231,7 @@ public class Duel implements Item, Container {
         }
     }
 
+    @Override
     public Selectable getCurrentSelectItem() {
         return currentSelectItem;
     }

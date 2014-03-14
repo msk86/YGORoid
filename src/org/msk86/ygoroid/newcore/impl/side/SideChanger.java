@@ -1,10 +1,8 @@
 package org.msk86.ygoroid.newcore.impl.side;
 
-import org.msk86.ygoroid.newcore.Container;
-import org.msk86.ygoroid.newcore.Item;
-import org.msk86.ygoroid.newcore.Layout;
-import org.msk86.ygoroid.newcore.Renderer;
+import org.msk86.ygoroid.newcore.*;
 import org.msk86.ygoroid.newcore.deck.DeckCards;
+import org.msk86.ygoroid.newcore.deck.DeckChecker;
 import org.msk86.ygoroid.newcore.impl.Card;
 import org.msk86.ygoroid.newcore.impl.CardEffectWindow;
 import org.msk86.ygoroid.newcore.impl.InfoBar;
@@ -14,8 +12,9 @@ import org.msk86.ygoroid.newcore.impl.side.renderer.SideChangerRenderer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SideChanger implements Item, Container {
+public class SideChanger implements Item, Container, BaseContainer {
     DeckCards cards;
+    DeckChecker checker;
     List<Item> sections;
 
     public SideChanger() {
@@ -28,9 +27,18 @@ public class SideChanger implements Item, Container {
 
     public void loadDeck(DeckCards cards) {
         this.cards = cards;
+        checker = new DeckChecker(this.cards).startCheck();
         getMainDeckSection().setCards(cards);
         getExDeckSection().setCards(cards);
         getSideDeckSection().setCards(cards);
+    }
+
+    public DeckCards getCards() {
+        return cards;
+    }
+
+    public DeckChecker getChecker() {
+        return checker;
     }
 
     public MainDeckSection getMainDeckSection() {
@@ -67,10 +75,6 @@ public class SideChanger implements Item, Container {
         getInfoBar().setInfo(currentSelectCard);
     }
 
-    public Card getCurrentSelectCard() {
-        return currentSelectCard;
-    }
-
     Renderer renderer;
     @Override
     public Renderer getRenderer() {
@@ -96,5 +100,10 @@ public class SideChanger implements Item, Container {
 
     public CardEffectWindow getCardEffectWindow() {
         return cardEffectWindow;
+    }
+
+    @Override
+    public Selectable getCurrentSelectItem() {
+        return currentSelectCard;
     }
 }
