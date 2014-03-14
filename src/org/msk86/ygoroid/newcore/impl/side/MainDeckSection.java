@@ -9,19 +9,15 @@ import org.msk86.ygoroid.newcore.impl.Card;
 import org.msk86.ygoroid.newcore.impl.layout.GridLayout;
 import org.msk86.ygoroid.newcore.impl.side.renderer.MainDeckSectionRenderer;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class MainDeckSection implements Item, Container {
     DeckCards cards;
     List<Card> mainDeck;
 
     public MainDeckSection() {
-        mainDeck = new ArrayList<Card>();
-    }
-
-    public MainDeckSection(DeckCards cards) {
-        setCards(cards);
+        mainDeck = new CopyOnWriteArrayList<Card>();
     }
 
     public void setCards(DeckCards cards) {

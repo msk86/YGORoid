@@ -15,6 +15,7 @@ import org.msk86.ygoroid.views.deckbuilder.filter.CardFilter;
 
 import java.io.*;
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class CardsDBHelper extends SQLiteOpenHelper {
 
@@ -375,9 +376,9 @@ public class CardsDBHelper extends SQLiteOpenHelper {
 
     public List<List<Card>> loadFromFile(String fileName) {
         File deckFile = new File(Configuration.deckPath() + fileName);
-        List<Card> mainCardList = new ArrayList<Card>();
-        List<Card> exCardList = new ArrayList<Card>();
-        List<Card> sideCardList = new ArrayList<Card>();
+        List<Card> mainCardList = new CopyOnWriteArrayList<Card>();
+        List<Card> exCardList = new CopyOnWriteArrayList<Card>();
+        List<Card> sideCardList = new CopyOnWriteArrayList<Card>();
 
         if (deckFile.exists()) {
             try {

@@ -20,10 +20,6 @@ public class LinerLayout implements Layout {
         this.items = items;
     }
 
-    public boolean isCenterAligned() {
-        return centerAligned;
-    }
-
     public LinerLayout setCenterAligned(boolean centerAligned) {
         this.centerAligned = centerAligned;
         return this;
