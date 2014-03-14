@@ -5,6 +5,7 @@ import org.msk86.ygoroid.newaction.Dispatcher;
 import org.msk86.ygoroid.newaction.dueldisk.actionimpl.CloseCardEffectWindowAction;
 import org.msk86.ygoroid.newaction.dueldisk.actionimpl.CloseCardSelectorAction;
 import org.msk86.ygoroid.newaction.dueldisk.actionimpl.CloseLpCalculatorAction;
+import org.msk86.ygoroid.newaction.dueldisk.actionimpl.UnSelectAction;
 import org.msk86.ygoroid.newcore.impl.Duel;
 import org.msk86.ygoroid.newop.impl.ReturnClick;
 
@@ -24,6 +25,8 @@ public class ReturnClickDispatcher implements Dispatcher<ReturnClick> {
             actionChain.add(new CloseCardSelectorAction(op));
         } else if(duel.getLifePointCalculator() != null) {
             actionChain.add(new CloseLpCalculatorAction(op));
+        } else {
+            actionChain.add(new UnSelectAction(op));
         }
 
         return actionChain;
