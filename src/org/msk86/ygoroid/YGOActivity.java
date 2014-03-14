@@ -182,6 +182,7 @@ public class YGOActivity extends Activity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         if(currentView instanceof YGOView) {
             OnMenuProcessor onMenuProcessor = ((YGOView) currentView).getOnMenuProcessor();
+            menu.clear();
             if(onMenuProcessor != null) {
                 return onMenuProcessor.onMenuPrepare(menu);
             }
