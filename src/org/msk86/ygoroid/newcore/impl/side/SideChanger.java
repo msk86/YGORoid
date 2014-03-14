@@ -1,11 +1,14 @@
 package org.msk86.ygoroid.newcore.impl.side;
 
-import org.msk86.ygoroid.newcore.*;
+import org.msk86.ygoroid.newcore.Container;
+import org.msk86.ygoroid.newcore.Item;
+import org.msk86.ygoroid.newcore.Layout;
+import org.msk86.ygoroid.newcore.Renderer;
 import org.msk86.ygoroid.newcore.deck.DeckCards;
 import org.msk86.ygoroid.newcore.impl.Card;
 import org.msk86.ygoroid.newcore.impl.CardEffectWindow;
 import org.msk86.ygoroid.newcore.impl.InfoBar;
-import org.msk86.ygoroid.newcore.impl.layout.VerticalLayout;
+import org.msk86.ygoroid.newcore.impl.layout.AbsoluteLayout;
 import org.msk86.ygoroid.newcore.impl.side.renderer.SideChangerRenderer;
 
 import java.util.ArrayList;
@@ -81,7 +84,7 @@ public class SideChanger implements Item, Container {
     @Override
     public Layout getLayout() {
         if( layout==null) {
-            layout = new VerticalLayout(this, sections);
+            layout = new AbsoluteLayout(this);
         }
         return layout;
     }

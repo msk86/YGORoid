@@ -41,26 +41,17 @@ public class DuelRenderer implements Renderer {
         if(duel.getCardSelector() != null) {
             layout.addItem(duel.getCardSelector(), 0, 0, 2);
         } else {
-            removeItemsFromLayoutByClass(layout, CardSelector.class);
+            layout.removeItems(CardSelector.class);
         }
         if(duel.getCardEffectWindow() != null) {
             layout.addItem(duel.getCardEffectWindow(), 0, 0, 4);
         }  else {
-            layout.removeItem(duel.getCardEffectWindow());
-            removeItemsFromLayoutByClass(layout, CardEffectWindow.class);
+            layout.removeItems(CardEffectWindow.class);
         }
         if(duel.getLifePointCalculator() != null) {
             layout.addItem(duel.getLifePointCalculator(), 0, 0, 4);
         }  else {
-            removeItemsFromLayoutByClass(layout, LifePointCalculator.class);
-        }
-    }
-
-    private void removeItemsFromLayoutByClass(AbsoluteLayout layout, Class clazz) {
-        for(Item item : layout.items()) {
-            if(clazz.isInstance(item)) {
-                layout.removeItem(item);
-            }
+            layout.removeItems(LifePointCalculator.class);
         }
     }
 

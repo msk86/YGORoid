@@ -42,6 +42,15 @@ public class AbsoluteLayout implements Layout {
         positionMap.remove(item);
         zIndexMap.remove(item);
     }
+
+    public void removeItems(Class clazz) {
+        for(Item item : items) {
+            if(clazz.isInstance(item)) {
+                removeItem(item);
+            }
+        }
+    }
+
     @Override
     public List<? extends Item> items() {
         List<Item> zIndexList = new CopyOnWriteArrayList<Item>();
