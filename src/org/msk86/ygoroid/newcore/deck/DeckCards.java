@@ -46,6 +46,13 @@ public class DeckCards {
         return sideDeckCards;
     }
 
+    public List<Card> getDeckByCard(Card card) {
+        if(mainDeckCards.contains(card)) return mainDeckCards;
+        if(exDeckCards.contains(card)) return exDeckCards;
+        if(sideDeckCards.contains(card)) return sideDeckCards;
+        return null;
+    }
+
     public List<Card> getAllCards() {
         List<Card> all = new ArrayList<Card>();
         all.addAll(mainDeckCards);

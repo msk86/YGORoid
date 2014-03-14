@@ -1,8 +1,8 @@
 package org.msk86.ygoroid.newop.impl;
 
+import org.msk86.ygoroid.newcore.BaseContainer;
 import org.msk86.ygoroid.newcore.Container;
 import org.msk86.ygoroid.newcore.Item;
-import org.msk86.ygoroid.newcore.impl.Duel;
 import org.msk86.ygoroid.newop.Operation;
 import org.msk86.ygoroid.newutils.LayoutUtils;
 
@@ -12,7 +12,7 @@ public class CommonOperation implements Operation {
     Container container;
     Item item;
 
-    public CommonOperation(Container baseContainer, float fx, float fy) {
+    public CommonOperation(BaseContainer baseContainer, float fx, float fy) {
         this.x = (int) fx;
         this.y = (int) fy;
         this.baseContainer = baseContainer;

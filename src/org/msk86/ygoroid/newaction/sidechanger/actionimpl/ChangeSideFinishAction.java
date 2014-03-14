@@ -41,7 +41,6 @@ public class ChangeSideFinishAction extends BaseAction {
         public void onClick(DialogInterface dialogInterface, int i) {
             if ("OK".equals(button)) {
                 Utils.getContext().showDuelWithDeck(sideChanger.getCards());
-
             }
         }
     }

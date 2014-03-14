@@ -1,5 +1,6 @@
 package org.msk86.ygoroid.newop.impl;
 
+import org.msk86.ygoroid.newcore.BaseContainer;
 import org.msk86.ygoroid.newcore.Container;
 import org.msk86.ygoroid.newcore.Item;
 import org.msk86.ygoroid.newcore.impl.Duel;
@@ -14,7 +15,7 @@ public class Drag implements Operation {
     StartDrag startDrag;
     boolean dragging;
 
-    public Drag(Container baseContainer, float fx, float fy, StartDrag startDrag) {
+    public Drag(BaseContainer baseContainer, float fx, float fy, StartDrag startDrag) {
         item = startDrag.getDragItem();
         this.baseContainer = baseContainer;
         this.startDrag = startDrag;
