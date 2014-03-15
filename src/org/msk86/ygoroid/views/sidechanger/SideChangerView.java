@@ -20,9 +20,7 @@ public class SideChangerView extends YGOView {
 
     public SideChangerView(Context context, AttributeSet attrs) {
         super(context, attrs);
-
         sideChanger = new SideChanger();
-
         mGestureDetector = new GestureDetector(context, new SideGestureListener(this));
     }
 
@@ -74,5 +72,11 @@ public class SideChangerView extends YGOView {
 
     public SideChanger getSideChanger() {
         return sideChanger;
+    }
+
+
+    @Override
+    public void deallocateMemory() {
+        sideChanger.recycleUselessBmp();
     }
 }

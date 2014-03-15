@@ -117,4 +117,8 @@ public class LogoView extends YGOView {
     public void importData(Item item) {
 
     }
+
+    @Override
+    public void deallocateMemory() {
+    }
 }

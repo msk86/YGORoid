@@ -90,7 +90,7 @@ public class GridLayout implements Layout {
     private Point itemPositionInGrid(Item item) {
         int idx = items().indexOf(item);
         if(idx < 0) {
-            return new Point(2000, 2000);
+            return new Point(-2000, -2000);
         }
 
         int col = col();

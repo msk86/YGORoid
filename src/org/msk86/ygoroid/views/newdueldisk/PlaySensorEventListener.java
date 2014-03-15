@@ -23,11 +23,14 @@ public class PlaySensorEventListener implements SensorEventListener {
         if (!Configuration.configProperties(Configuration.PROPERTY_GRAVITY_ENABLE)) {
             return;
         }
-        HandCards handCards = view.getDuel().getHandCards();
+        if(view.getDuel() == null) {
+            return;
+        }
         float z = e.values[SensorManager.DATA_Z];
         float x = e.values[SensorManager.DATA_X];
-
         boolean changed = false;
+
+        HandCards handCards = view.getDuel().getHandCards();
         CardList cardList = handCards.getCardList();
         if (z >= zLimit + 0.3 && previousZ < zLimit + 0.3) {
             cardList.setAll();

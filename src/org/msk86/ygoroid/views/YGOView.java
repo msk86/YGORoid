@@ -112,6 +112,7 @@ public abstract class YGOView extends SurfaceView implements Runnable {
 
     public void pause() {
         running = false;
+        deallocateMemory();
     }
 
     public boolean isRunning() {
@@ -133,6 +134,8 @@ public abstract class YGOView extends SurfaceView implements Runnable {
 
     public abstract Item exportData();
     public abstract void importData(Item item);
+
+    public abstract void deallocateMemory();
 
 
 }

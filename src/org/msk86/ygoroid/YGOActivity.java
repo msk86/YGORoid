@@ -26,12 +26,15 @@ import org.msk86.ygoroid.views.newdueldisk.DuelDiskView;
 import org.msk86.ygoroid.views.sidechanger.SideChangerView;
 
 public class YGOActivity extends Activity {
+    private LayoutInflater inflater;
+    private View duelDiskLayout, sideChangerLayout, deckBuilderLayout;
+
     private View currentView;
+    private LogoView logoView;
     private DuelDiskView duelDiskView;
     private SideChangerView sideChangerView;
     private DeckBuilderView deckBuilderView;
     private WebView webView;
-    private LogoView logoView;
 
     private PersistencyService service;
     private ServiceConnection sConn;
@@ -50,6 +53,7 @@ public class YGOActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        inflater = getLayoutInflater();
 
         CrashHandler crashHandler = CrashHandler.getInstance();
         crashHandler.init(getApplicationContext());
@@ -64,13 +68,12 @@ public class YGOActivity extends Activity {
         if (savedInstanceState != null) {
             if (YGOView.DUEL_STATE_DECK.equals(savedInstanceState.getString(DUEL_STATE))) {
                 showDeckBuilderWithDeck(org.msk86.ygoroid.newutils.Utils.findTempDeck());
-            } else if(YGOView.DUEL_STATE_SIDE.equals(savedInstanceState.getString(DUEL_STATE))) {
+            } else if (YGOView.DUEL_STATE_SIDE.equals(savedInstanceState.getString(DUEL_STATE))) {
                 showSideChanger();
             } else {
                 showDuel();
             }
         } else {
-            showDuel();
             showLogo();
         }
 
@@ -112,13 +115,19 @@ public class YGOActivity extends Activity {
     }
 
     public void showDuel() {
-        super.setContentView(R.layout.new_duel_disk);
+        if(duelDiskLayout == null) {
+            duelDiskLayout = inflater.inflate(R.layout.new_duel_disk, null);
+        }
+
+        super.setContentView(duelDiskLayout);
         duelDiskView = (DuelDiskView) findViewById(R.id.newDuelDiskView);
+        if(currentView instanceof YGOView) {
+            ((YGOView)currentView).pause();
+        }
         if (!duelDiskView.isRunning()) {
             duelDiskView.resume();
         }
         currentView = duelDiskView;
-        duelDiskView.getDuel().recycleUselessBmp();
         duelDiskView.updateActionTime();
     }
 
@@ -139,13 +148,18 @@ public class YGOActivity extends Activity {
     }
 
     public void showSideChanger() {
-        super.setContentView(R.layout.side_changer);
+        if(sideChangerLayout == null) {
+            sideChangerLayout = inflater.inflate(R.layout.side_changer, null);
+        }
+        super.setContentView(sideChangerLayout);
         sideChangerView = (SideChangerView) findViewById(R.id.sideChangerView);
+        if(currentView instanceof YGOView) {
+            ((YGOView)currentView).pause();
+        }
         if (!sideChangerView.isRunning()) {
             sideChangerView.resume();
         }
         currentView = sideChangerView;
-        sideChangerView.getSideChanger().recycleUselessBmp();
         sideChangerView.updateActionTime();
     }
 
@@ -158,8 +172,14 @@ public class YGOActivity extends Activity {
     }
 
     public void showDeckBuilderWithDeck(String deck) {
-        super.setContentView(R.layout.deck_builder);
+        if(deckBuilderLayout == null) {
+            deckBuilderLayout = inflater.inflate(R.layout.deck_builder, null);
+        }
+        super.setContentView(deckBuilderLayout);
         deckBuilderView = (DeckBuilderView) findViewById(R.id.deck_builder);
+        if(currentView instanceof YGOView) {
+            ((YGOView)currentView).pause();
+        }
         if (!deckBuilderView.isRunning()) {
             deckBuilderView.resume();
         }
@@ -180,10 +200,10 @@ public class YGOActivity extends Activity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        if(currentView instanceof YGOView) {
+        if (currentView instanceof YGOView) {
             OnMenuProcessor onMenuProcessor = ((YGOView) currentView).getOnMenuProcessor();
             menu.clear();
-            if(onMenuProcessor != null) {
+            if (onMenuProcessor != null) {
                 return onMenuProcessor.onMenuPrepare(menu);
             }
         }
@@ -192,9 +212,9 @@ public class YGOActivity extends Activity {
 
     @Override
     public boolean onMenuItemSelected(int id, MenuItem menuItem) {
-        if(currentView instanceof YGOView) {
+        if (currentView instanceof YGOView) {
             OnMenuProcessor onMenuProcessor = ((YGOView) currentView).getOnMenuProcessor();
-            if(onMenuProcessor != null) {
+            if (onMenuProcessor != null) {
                 return onMenuProcessor.onMenuClick(menuItem);
             }
         }
@@ -204,9 +224,9 @@ public class YGOActivity extends Activity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(currentView instanceof YGOView) {
+        if (currentView instanceof YGOView) {
             OnKeyProcessor onKeyProcessor = ((YGOView) currentView).getOnKeyProcessor();
-            if(onKeyProcessor != null) {
+            if (onKeyProcessor != null) {
                 return onKeyProcessor.onKey(keyCode, event);
             }
         } else {
@@ -322,10 +342,10 @@ public class YGOActivity extends Activity {
         }
 
         private void persistentDuel() {
-            if(service != null && currentView instanceof YGOView) {
+            if (service != null && currentView instanceof YGOView) {
                 YGOView view = (YGOView) currentView;
                 Item data = service.fetchItem(view);
-                if(data != null) {
+                if (data != null) {
                     view.importData(data);
                 } else {
                     service.storeItem(view, view.exportData());

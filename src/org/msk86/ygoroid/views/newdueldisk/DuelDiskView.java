@@ -8,7 +8,6 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import org.msk86.ygoroid.newcore.Item;
 import org.msk86.ygoroid.newcore.impl.Duel;
-import org.msk86.ygoroid.utils.Configuration;
 import org.msk86.ygoroid.views.OnKeyProcessor;
 import org.msk86.ygoroid.views.OnMenuProcessor;
 import org.msk86.ygoroid.views.YGOView;
@@ -22,7 +21,6 @@ public class DuelDiskView extends YGOView {
 
     public DuelDiskView(Context context, AttributeSet attrs) {
         super(context, attrs);
-
         duel = new Duel();
         mGestureDetector = new PlayGestureDetector(context, new PlayGestureListener(this));
         sensorManager = ((SensorManager) context.getSystemService(Context.SENSOR_SERVICE));
@@ -41,8 +39,6 @@ public class DuelDiskView extends YGOView {
     }
 
     private void initAbout() {
-//        duel.start("交通机甲.ydk");
-//        sideChanger = new SideChanger(duel.getDeckCards());
     }
 
     @Override
@@ -55,11 +51,7 @@ public class DuelDiskView extends YGOView {
     public void doDraw(Canvas canvas) {
         drawBackground(canvas);
         duel.getRenderer().draw(canvas, 0, 0);
-//        sideChanger.getRenderer().draw(canvas, 0, 0);
 //        drawVersion(canvas);
-        if (Configuration.configProperties(Configuration.PROPERTY_FPS_ENABLE)) {
-//            drawFPS(canvas);
-        }
     }
 
     OnKeyProcessor onKeyProcessor;
@@ -93,5 +85,10 @@ public class DuelDiskView extends YGOView {
     @Override
     public void importData(Item item) {
         this.duel = (Duel) item;
+    }
+
+    @Override
+    public void deallocateMemory() {
+        duel.recycleUselessBmp();
     }
 }
