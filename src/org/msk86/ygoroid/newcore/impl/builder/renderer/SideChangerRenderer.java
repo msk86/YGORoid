@@ -1,4 +1,4 @@
-package org.msk86.ygoroid.newcore.impl.side.renderer;
+package org.msk86.ygoroid.newcore.impl.builder.renderer;
 
 import android.graphics.Canvas;
 import android.graphics.Point;
@@ -6,7 +6,7 @@ import org.msk86.ygoroid.newcore.Item;
 import org.msk86.ygoroid.newcore.Renderer;
 import org.msk86.ygoroid.newcore.impl.CardEffectWindow;
 import org.msk86.ygoroid.newcore.impl.layout.AbsoluteLayout;
-import org.msk86.ygoroid.newcore.impl.side.SideChanger;
+import org.msk86.ygoroid.newcore.impl.builder.SideChanger;
 import org.msk86.ygoroid.newutils.Style;
 import org.msk86.ygoroid.size.InfoBarSize;
 import org.msk86.ygoroid.size.SideChangerSize;

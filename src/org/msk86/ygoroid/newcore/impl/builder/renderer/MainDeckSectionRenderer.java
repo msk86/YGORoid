@@ -1,4 +1,4 @@
-package org.msk86.ygoroid.newcore.impl.side.renderer;
+package org.msk86.ygoroid.newcore.impl.builder.renderer;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -8,7 +8,7 @@ import org.msk86.ygoroid.newcore.Renderer;
 import org.msk86.ygoroid.newcore.impl.Card;
 import org.msk86.ygoroid.newcore.impl.HighLight;
 import org.msk86.ygoroid.newcore.impl.layout.GridLayout;
-import org.msk86.ygoroid.newcore.impl.side.MainDeckSection;
+import org.msk86.ygoroid.newcore.impl.builder.MainDeckSection;
 import org.msk86.ygoroid.size.CardSize;
 import org.msk86.ygoroid.size.SideChangerSize;
 import org.msk86.ygoroid.size.Size;

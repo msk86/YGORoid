@@ -7,7 +7,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import org.msk86.ygoroid.newcore.Item;
 import org.msk86.ygoroid.newcore.deck.DeckCards;
-import org.msk86.ygoroid.newcore.impl.side.SideChanger;
+import org.msk86.ygoroid.newcore.impl.builder.SideChanger;
 import org.msk86.ygoroid.views.OnKeyProcessor;
 import org.msk86.ygoroid.views.OnMenuProcessor;
 import org.msk86.ygoroid.views.YGOView;

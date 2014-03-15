@@ -1,4 +1,4 @@
-package org.msk86.ygoroid.newcore.impl.side;
+package org.msk86.ygoroid.newcore.impl.builder;
 
 import org.msk86.ygoroid.newcore.*;
 import org.msk86.ygoroid.newcore.deck.DeckCards;
@@ -9,7 +9,7 @@ import org.msk86.ygoroid.newcore.impl.InfoBar;
 import org.msk86.ygoroid.newcore.impl.bmp.CardGenerator;
 import org.msk86.ygoroid.newcore.impl.bmp.UserDefinedCardGenerator;
 import org.msk86.ygoroid.newcore.impl.layout.AbsoluteLayout;
-import org.msk86.ygoroid.newcore.impl.side.renderer.SideChangerRenderer;
+import org.msk86.ygoroid.newcore.impl.builder.renderer.SideChangerRenderer;
 
 import java.util.ArrayList;
 import java.util.List;

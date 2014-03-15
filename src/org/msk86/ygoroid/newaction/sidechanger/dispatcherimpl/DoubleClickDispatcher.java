@@ -4,7 +4,7 @@ import org.msk86.ygoroid.newaction.Action;
 import org.msk86.ygoroid.newaction.Dispatcher;
 import org.msk86.ygoroid.newaction.sidechanger.actionimpl.ChangeSideCardAction;
 import org.msk86.ygoroid.newcore.impl.Card;
-import org.msk86.ygoroid.newcore.impl.side.SideChanger;
+import org.msk86.ygoroid.newcore.impl.builder.SideChanger;
 import org.msk86.ygoroid.newop.impl.DoubleClick;
 
 import java.util.ArrayList;

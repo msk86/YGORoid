@@ -1,4 +1,4 @@
-package org.msk86.ygoroid.newcore.impl.side;
+package org.msk86.ygoroid.newcore.impl.builder;
 
 import org.msk86.ygoroid.newcore.Container;
 import org.msk86.ygoroid.newcore.Item;
@@ -7,7 +7,7 @@ import org.msk86.ygoroid.newcore.Renderer;
 import org.msk86.ygoroid.newcore.deck.DeckCards;
 import org.msk86.ygoroid.newcore.impl.Card;
 import org.msk86.ygoroid.newcore.impl.layout.GridLayout;
-import org.msk86.ygoroid.newcore.impl.side.renderer.MainDeckSectionRenderer;
+import org.msk86.ygoroid.newcore.impl.builder.renderer.MainDeckSectionRenderer;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;

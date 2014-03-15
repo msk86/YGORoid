@@ -3,7 +3,7 @@ package org.msk86.ygoroid.newaction.sidechanger.actionimpl;
 import org.msk86.ygoroid.newaction.Action;
 import org.msk86.ygoroid.newcore.Container;
 import org.msk86.ygoroid.newcore.Item;
-import org.msk86.ygoroid.newcore.impl.side.SideChanger;
+import org.msk86.ygoroid.newcore.impl.builder.SideChanger;
 import org.msk86.ygoroid.newop.Operation;
 
 public abstract class BaseAction implements Action {

@@ -3,7 +3,7 @@ package org.msk86.ygoroid.newaction.sidechanger.actionimpl;
 import org.msk86.ygoroid.newcore.Container;
 import org.msk86.ygoroid.newcore.impl.Card;
 import org.msk86.ygoroid.newcore.impl.UserDefinedCard;
-import org.msk86.ygoroid.newcore.impl.side.SideDeckSection;
+import org.msk86.ygoroid.newcore.impl.builder.SideDeckSection;
 import org.msk86.ygoroid.newop.Operation;
 import org.msk86.ygoroid.newutils.LayoutUtils;
 

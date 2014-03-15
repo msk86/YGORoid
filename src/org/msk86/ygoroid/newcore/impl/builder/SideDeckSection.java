@@ -1,4 +1,4 @@
-package org.msk86.ygoroid.newcore.impl.side;
+package org.msk86.ygoroid.newcore.impl.builder;
 
 import org.msk86.ygoroid.newcore.Container;
 import org.msk86.ygoroid.newcore.Item;
@@ -7,24 +7,24 @@ import org.msk86.ygoroid.newcore.Renderer;
 import org.msk86.ygoroid.newcore.deck.DeckCards;
 import org.msk86.ygoroid.newcore.impl.Card;
 import org.msk86.ygoroid.newcore.impl.layout.LinerLayout;
-import org.msk86.ygoroid.newcore.impl.side.renderer.ExDeckSectionRenderer;
+import org.msk86.ygoroid.newcore.impl.builder.renderer.SideDeckSectionRenderer;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class ExDeckSection implements Item, Container {
+public class SideDeckSection implements Item, Container {
     DeckCards cards;
-    List<Card> exDeck;
+    List<Card> sideDeck;
     Item holder;
 
-    public ExDeckSection(Item holder) {
-        exDeck = new CopyOnWriteArrayList<Card>();
+    public SideDeckSection(Item holder) {
+        sideDeck = new CopyOnWriteArrayList<Card>();
         this.holder = holder;
     }
 
     public void setCards(DeckCards cards) {
         this.cards = cards;
-        exDeck = this.cards.getExDeckCards();
+        sideDeck = this.cards.getSideDeckCards();
     }
 
     public Item getHolder() {
@@ -35,7 +35,7 @@ public class ExDeckSection implements Item, Container {
     @Override
     public Renderer getRenderer() {
         if(renderer == null) {
-            renderer = new ExDeckSectionRenderer(this);
+            renderer = new SideDeckSectionRenderer(this);
         }
         return renderer;
     }
@@ -44,7 +44,7 @@ public class ExDeckSection implements Item, Container {
     @Override
     public Layout getLayout() {
         if(layout == null) {
-            layout = new LinerLayout(this, exDeck);
+            layout = new LinerLayout(this, sideDeck);
         }
         return layout;
     }
