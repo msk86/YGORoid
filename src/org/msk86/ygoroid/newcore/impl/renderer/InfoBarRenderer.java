@@ -58,7 +58,7 @@ public class InfoBarRenderer implements Renderer {
         paint.setColor(Style.infoBarBorderColor());
         paint.setStrokeWidth(3);
         paint.setStyle(Paint.Style.STROKE);
-        canvas.drawRect(new Rect(0, 0, size().width() + 3, size().height() + 3), paint);
+        canvas.drawRect(new Rect(0, 0, size().width(), size().height() + 3), paint);
 
         canvas.restore();
     }

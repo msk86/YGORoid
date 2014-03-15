@@ -8,8 +8,8 @@ import org.msk86.ygoroid.newcore.Renderer;
 import org.msk86.ygoroid.newcore.impl.Card;
 import org.msk86.ygoroid.newcore.impl.HighLight;
 import org.msk86.ygoroid.newcore.impl.builder.ExDeckSection;
+import org.msk86.ygoroid.size.BuilderSize;
 import org.msk86.ygoroid.size.CardSize;
-import org.msk86.ygoroid.size.SideChangerSize;
 import org.msk86.ygoroid.size.Size;
 
 public class ExDeckSectionRenderer implements Renderer {
@@ -21,7 +21,7 @@ public class ExDeckSectionRenderer implements Renderer {
 
     @Override
     public Size size() {
-        return new Size(exDeckSection.getHolder().getRenderer().size().width(), SideChangerSize.EX_SECTION.height());
+        return new Size(exDeckSection.getHolder().getRenderer().size().width(), BuilderSize.EX_SECTION.height());
 
 
     }
