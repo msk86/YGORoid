@@ -21,9 +21,9 @@ public class SideChanger implements Item, Container, BaseContainer {
 
     public SideChanger() {
         sections = new ArrayList<Item>();
-        sections.add(new MainDeckSection());
-        sections.add(new ExDeckSection());
-        sections.add(new SideDeckSection());
+        sections.add(new MainDeckSection(this));
+        sections.add(new ExDeckSection(this));
+        sections.add(new SideDeckSection(this));
         sections.add(new InfoBar(this));
     }
 

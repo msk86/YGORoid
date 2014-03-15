@@ -24,7 +24,7 @@ public class MainDeckSectionRenderer implements Renderer {
 
     @Override
     public Size size() {
-        return SideChangerSize.MAIN_SECTION;
+        return new Size(mainDeckSection.getHolder().getRenderer().size().width(), SideChangerSize.MAIN_SECTION.height());
     }
 
     @Override

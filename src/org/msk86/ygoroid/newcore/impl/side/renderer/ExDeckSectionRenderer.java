@@ -21,7 +21,9 @@ public class ExDeckSectionRenderer implements Renderer {
 
     @Override
     public Size size() {
-        return SideChangerSize.EX_SECTION;
+        return new Size(exDeckSection.getHolder().getRenderer().size().width(), SideChangerSize.EX_SECTION.height());
+
+
     }
 
     @Override

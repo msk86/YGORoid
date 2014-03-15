@@ -15,14 +15,20 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class ExDeckSection implements Item, Container {
     DeckCards cards;
     List<Card> exDeck;
+    Item holder;
 
-    public ExDeckSection() {
+    public ExDeckSection(Item holder) {
         exDeck = new CopyOnWriteArrayList<Card>();
+        this.holder = holder;
     }
 
     public void setCards(DeckCards cards) {
         this.cards = cards;
         exDeck = this.cards.getExDeckCards();
+    }
+
+    public Item getHolder() {
+        return holder;
     }
 
     Renderer renderer;

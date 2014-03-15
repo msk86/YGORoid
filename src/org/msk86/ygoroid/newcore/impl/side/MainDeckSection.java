@@ -15,14 +15,20 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class MainDeckSection implements Item, Container {
     DeckCards cards;
     List<Card> mainDeck;
+    Item holder;
 
-    public MainDeckSection() {
+    public MainDeckSection(Item holder) {
         mainDeck = new CopyOnWriteArrayList<Card>();
+        this.holder = holder;
     }
 
     public void setCards(DeckCards cards) {
         this.cards = cards;
         mainDeck = this.cards.getMainDeckCards();
+    }
+
+    public Item getHolder() {
+        return holder;
     }
 
     Renderer renderer;
