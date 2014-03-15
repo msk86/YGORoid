@@ -25,6 +25,7 @@ public class CoinRenderer implements Renderer {
     public void draw(Canvas canvas, int x, int y) {
         drawCoinFrame(canvas, x, y);
         drawCoin(canvas, x, y);
+        coin.getMask().getRenderer().draw(canvas, x, y);
     }
 
     private void drawCoin(Canvas canvas, int x, int y) {

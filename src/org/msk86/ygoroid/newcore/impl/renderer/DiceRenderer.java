@@ -25,6 +25,7 @@ public class DiceRenderer implements Renderer {
     public void draw(Canvas canvas, int x, int y) {
         drawDiceFrame(canvas, x, y);
         drawDice(canvas, x, y);
+        dice.getMask().getRenderer().draw(canvas, x, y);
     }
 
     private void drawDice(Canvas canvas, int x, int y) {
