@@ -74,7 +74,6 @@ public class SideChangerView extends YGOView {
         return sideChanger;
     }
 
-
     @Override
     public void deallocateMemory() {
         sideChanger.recycleUselessBmp();

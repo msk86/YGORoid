@@ -20,7 +20,7 @@ import org.msk86.ygoroid.upgrade.UpgradeMsgHandler;
 import org.msk86.ygoroid.views.OnKeyProcessor;
 import org.msk86.ygoroid.views.OnMenuProcessor;
 import org.msk86.ygoroid.views.YGOView;
-import org.msk86.ygoroid.views.deckbuilder.DeckBuilderView;
+import org.msk86.ygoroid.views.newdeckbuilder.DeckBuilderView;
 import org.msk86.ygoroid.views.logo.LogoView;
 import org.msk86.ygoroid.views.newdueldisk.DuelDiskView;
 import org.msk86.ygoroid.views.sidechanger.SideChangerView;
@@ -173,7 +173,7 @@ public class YGOActivity extends Activity {
 
     public void showDeckBuilderWithDeck(String deck) {
         if(deckBuilderLayout == null) {
-            deckBuilderLayout = inflater.inflate(R.layout.deck_builder, null);
+            deckBuilderLayout = inflater.inflate(R.layout.new_deck_builder, null);
         }
         super.setContentView(deckBuilderLayout);
         deckBuilderView = (DeckBuilderView) findViewById(R.id.deck_builder);
@@ -185,7 +185,7 @@ public class YGOActivity extends Activity {
         }
         currentView = deckBuilderView;
         if (deck != null) {
-            deckBuilderView.loadDeck(deck);
+//            deckBuilderView.loadDeck(deck);
         }
         deckBuilderView.updateActionTime();
     }
@@ -294,7 +294,7 @@ public class YGOActivity extends Activity {
 
     public void showInfo(String info) {
         if (currentView == deckBuilderView) {
-            deckBuilderView.getInfoWindow().setInfo(info);
+//            deckBuilderView.getInfoWindow().setInfo(info);
             deckBuilderView.updateActionTime();
         }
         if (currentView == duelDiskView) {

@@ -119,4 +119,8 @@ public class DeckBuilder implements Item, Container, BaseContainer {
     public Selectable getCurrentSelectItem() {
         return currentSelectCard;
     }
+
+    public void addToDeck(Card card) {
+
+    }
 }

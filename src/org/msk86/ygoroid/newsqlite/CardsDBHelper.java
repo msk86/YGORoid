@@ -11,7 +11,7 @@ import org.msk86.ygoroid.utils.CharSet;
 import org.msk86.ygoroid.utils.Configuration;
 import org.msk86.ygoroid.utils.UnicodeReader;
 import org.msk86.ygoroid.utils.Utils;
-import org.msk86.ygoroid.views.deckbuilder.filter.CardFilter;
+import org.msk86.ygoroid.views.newdeckbuilder.filter.CardFilter;
 
 import java.io.*;
 import java.util.*;

@@ -60,4 +60,12 @@ public class DeckCards {
         all.addAll(sideDeckCards);
         return all;
     }
+
+    public boolean save() {
+        if(deckName == null || deckName.length() == 0) {
+            return false;
+        }
+
+        return Utils.getDbHelper().saveToFile(deckName, mainDeckCards, exDeckCards, sideDeckCards);
+    }
 }
