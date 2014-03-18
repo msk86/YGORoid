@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.widget.EditText;
 import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.newaction.Action;
+import org.msk86.ygoroid.newcore.deck.DeckCards;
 import org.msk86.ygoroid.newutils.Utils;
 import org.msk86.ygoroid.views.newdeckbuilder.DeckBuilderView;
 
@@ -53,5 +54,19 @@ public class ChangeDeckAction implements Action {
 
     private void loadDeck(String deckName) {
         view.getDeckBuilder().loadDeck(deckName);
+        updateDeckFileFormat();
+    }
+
+    private void updateDeckFileFormat() {
+        DeckCards cards = view.getDeckBuilder().getCards();
+        String orgDeckName = cards.getDeckName(), newDeckName = cards.getDeckName();
+        if(newDeckName.contains(".")) {
+            newDeckName = newDeckName.substring(0, newDeckName.lastIndexOf("."));
+        }
+        newDeckName += ".ydk";
+        boolean saved = cards.saveAs(newDeckName);
+        if(saved) {
+            Utils.deleteDeck(orgDeckName);
+        }
     }
 }

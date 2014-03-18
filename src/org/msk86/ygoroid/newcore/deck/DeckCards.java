@@ -77,4 +77,8 @@ public class DeckCards {
         }
         return saved;
     }
+
+    public boolean delete() {
+        return false;
+    }
 }
