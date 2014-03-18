@@ -26,6 +26,7 @@ public class ChangeDeckAction implements Action {
         builder.setItems(deckList, new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int which) {
+                view.getDeckBuilder().recycleUselessBmp();
                 if (which == 0) {
                     newDeck();
                 } else {
