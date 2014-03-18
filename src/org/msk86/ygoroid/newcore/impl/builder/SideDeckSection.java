@@ -25,6 +25,9 @@ public class SideDeckSection implements Item, Container {
     public void setCards(DeckCards cards) {
         this.cards = cards;
         sideDeck = this.cards.getSideDeckCards();
+        if(layout != null) {
+            layout.setItems(sideDeck);
+        }
     }
 
     public Item getHolder() {
@@ -40,7 +43,7 @@ public class SideDeckSection implements Item, Container {
         return renderer;
     }
 
-    Layout layout;
+    LinerLayout layout;
     @Override
     public Layout getLayout() {
         if(layout == null) {

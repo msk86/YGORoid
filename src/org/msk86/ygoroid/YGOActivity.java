@@ -171,12 +171,17 @@ public class YGOActivity extends Activity {
         sideChangerView.updateActionTime();
     }
 
-    public void showDeckBuilderWithDeck(String deck) {
+    public void showDeckBuilder() {
+        boolean initDeckBuilder = false;
         if(deckBuilderLayout == null) {
             deckBuilderLayout = inflater.inflate(R.layout.new_deck_builder, null);
+            initDeckBuilder = true;
         }
         super.setContentView(deckBuilderLayout);
         deckBuilderView = (DeckBuilderView) findViewById(R.id.deck_builder);
+        if(initDeckBuilder) {
+            deckBuilderView.getController().registerEvent();
+        }
         if(currentView instanceof YGOView) {
             ((YGOView)currentView).pause();
         }
@@ -184,6 +189,10 @@ public class YGOActivity extends Activity {
             deckBuilderView.resume();
         }
         currentView = deckBuilderView;
+    }
+
+    public void showDeckBuilderWithDeck(String deck) {
+        showDeckBuilder();
         if (deck != null) {
 //            deckBuilderView.loadDeck(deck);
         }

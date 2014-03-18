@@ -17,10 +17,12 @@ public class GridLayout implements Layout {
     int maxPaddingX = Style.padding(),paddingY = Style.padding();
     Size gridSize = CardSize.NORMAL;
 
-
-
     public GridLayout(Container container, List<? extends Item> items) {
         this.container = container;
+        this.items = items;
+    }
+
+    public void setItems(List<? extends Item> items) {
         this.items = items;
     }
 

@@ -25,6 +25,9 @@ public class MainDeckSection implements Item, Container {
     public void setCards(DeckCards cards) {
         this.cards = cards;
         mainDeck = this.cards.getMainDeckCards();
+        if(layout != null) {
+            layout.setItems(mainDeck);
+        }
     }
 
     public Item getHolder() {
@@ -40,7 +43,7 @@ public class MainDeckSection implements Item, Container {
         return renderer;
     }
 
-    Layout layout;
+    GridLayout layout;
     @Override
     public Layout getLayout() {
         if(layout == null) {

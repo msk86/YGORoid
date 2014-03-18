@@ -9,20 +9,19 @@ import android.widget.TextView;
 import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.newaction.Action;
 import org.msk86.ygoroid.newaction.deckbuilder.actionimpl.*;
-import org.msk86.ygoroid.newcore.impl.builder.DeckBuilder;
-import org.msk86.ygoroid.utils.Utils;
+import org.msk86.ygoroid.newutils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DeckController {
-    private DeckBuilder deckBuilder;
+    private DeckBuilderView deckBuilderView;
 
-    public DeckController(DeckBuilder deckBuilder) {
-        this.deckBuilder = deckBuilder;
+    public DeckController(DeckBuilderView deckBuilderView) {
+        this.deckBuilderView = deckBuilderView;
     }
 
-    private void registerEvent() {
+    public void registerEvent() {
         EditText searchTextView = (EditText) Utils.getContext().findViewById(R.id.search_text);
         searchTextView.setOnEditorActionListener(new OnSearchTextEditorActionListener());
 
@@ -35,7 +34,6 @@ public class DeckController {
         Button filterBtn = (Button) Utils.getContext().findViewById(R.id.search_filter_btn);
         filterBtn.setOnClickListener(new OnButtonClickListener(OnButtonClickListener.SEARCH_FILTER_BTN));
     }
-
 
     private class OnButtonClickListener implements View.OnClickListener {
         public static final int OPEN_BTN = 0;
@@ -55,7 +53,7 @@ public class DeckController {
             List<Action> actionChain = new ArrayList<Action>();
             switch (button) {
                 case OPEN_BTN:
-                    actionChain.add(new ChangeDeckAction());
+                    actionChain.add(new ChangeDeckAction(deckBuilderView));
                     break;
                 case SAVE_BTN:
                     actionChain.add(new SaveDeckAction());

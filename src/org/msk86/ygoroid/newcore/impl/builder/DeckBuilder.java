@@ -28,6 +28,11 @@ public class DeckBuilder implements Item, Container, BaseContainer {
         sections.add(new InfoBar(this));
     }
 
+    public void newDeck() {
+        DeckCards cards = new DeckCards();
+        loadDeck(cards);
+    }
+
     public void loadDeck(String deck) {
         DeckCards deckCards = new DeckCards(deck);
         loadDeck(deckCards);
