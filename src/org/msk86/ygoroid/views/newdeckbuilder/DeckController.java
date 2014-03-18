@@ -56,7 +56,11 @@ public class DeckController {
                     actionChain.add(new ChangeDeckAction(deckBuilderView));
                     break;
                 case SAVE_BTN:
-                    actionChain.add(new SaveDeckAction());
+                    if(deckBuilderView.getDeckBuilder().getCards().getDeckName() == null) {
+                        actionChain.add(new SaveDeckAsAction());
+                    } else {
+                        actionChain.add(new SaveDeckAction(deckBuilderView));
+                    }
                     break;
                 case SAVE_AS_BTN:
                     actionChain.add(new SaveDeckAsAction());
