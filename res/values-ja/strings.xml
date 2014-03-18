@@ -137,8 +137,9 @@
 
     <string name="key_word">キーワード</string>
     <string name="btn_open">Open</string>
+    <string name="btn_delete">Delete</string>
     <string name="btn_save">Save</string>
-    <string name="btn_save_as">SavAs</string>
+    <string name="btn_save_as">SaveAs</string>
     <string name="btn_search_criteria">条件</string>
 
     <string name="lbl_type">種類:</string>

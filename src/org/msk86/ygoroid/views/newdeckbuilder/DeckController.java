@@ -27,6 +27,8 @@ public class DeckController {
 
         Button openBtn = (Button) Utils.getContext().findViewById(R.id.open_btn);
         openBtn.setOnClickListener(new OnButtonClickListener(OnButtonClickListener.OPEN_BTN));
+        Button deleteBtn = (Button) Utils.getContext().findViewById(R.id.delete_btn);
+        deleteBtn.setOnClickListener(new OnButtonClickListener(OnButtonClickListener.DELETE_BTN));
         Button saveBtn = (Button) Utils.getContext().findViewById(R.id.save_btn);
         saveBtn.setOnClickListener(new OnButtonClickListener(OnButtonClickListener.SAVE_BTN));
         Button saveAsBtn = (Button) Utils.getContext().findViewById(R.id.save_as_btn);
@@ -66,7 +68,7 @@ public class DeckController {
                     actionChain.add(new SaveDeckAsAction(deckBuilderView));
                     break;
                 case DELETE_BTN:
-                    actionChain.add(new DeleteDeckAction());
+                    actionChain.add(new DeleteDeckAction(deckBuilderView));
                     break;
                 case SEARCH_FILTER_BTN:
                     actionChain.add(new OpenSearchFilterAction());

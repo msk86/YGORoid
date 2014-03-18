@@ -137,6 +137,7 @@
 
     <string name="key_word">关键字</string>
     <string name="btn_open">打开</string>
+    <string name="btn_delete">删除</string>
     <string name="btn_save">保存</string>
     <string name="btn_save_as">另存</string>
     <string name="btn_search_criteria">条件</string>

@@ -34,28 +34,42 @@
                     android:layout_height="wrap_content" android:text="@string/btn_search_criteria"
                     android:textSize="8sp" android:layout_alignRight="@id/search_text"/>
             <LinearLayout
-                    android:id="@+id/buttons"
+                    android:id="@+id/buttons2"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
-                    android:paddingBottom="6sp"
-                    android:paddingTop="3sp"
+                    android:paddingBottom="1sp"
+                    android:paddingTop="1sp"
                     >
-                <Button android:id="@+id/open_btn" android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:text="@string/btn_open"
-                        android:textSize="8sp"/>
-                <Button android:id="@+id/save_btn" android:layout_width="wrap_content"
+                <Button android:id="@+id/save_btn" android:layout_width="60sp"
                         android:layout_height="wrap_content" android:text="@string/btn_save"
-                        android:textSize="8sp"/>
-                <Button android:id="@+id/save_as_btn" android:layout_width="wrap_content"
+                        android:textSize="10sp"/>
+                <Button android:id="@+id/save_as_btn" android:layout_width="60sp"
                         android:layout_height="wrap_content" android:text="@string/btn_save_as"
-                        android:textSize="8sp"/>
+                        android:textSize="10sp"/>
             </LinearLayout>
+            <LinearLayout
+                    android:id="@+id/buttons1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:paddingBottom="1sp"
+                    android:paddingTop="1sp"
+                    android:layout_above="@id/buttons2"
+                    >
+                <Button android:id="@+id/open_btn" android:layout_width="60sp"
+                        android:layout_height="wrap_content" android:text="@string/btn_open"
+                        android:textSize="10sp"/>
+                <Button android:id="@+id/delete_btn" android:layout_width="60sp"
+                        android:layout_height="wrap_content" android:text="@string/btn_delete"
+                        android:textSize="10sp"/>
+            </LinearLayout>
+
             <ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent"
                         android:id="@+id/scroll_list"
                         android:layout_below="@id/search_text"
-                        android:layout_above="@id/buttons"
+                        android:layout_above="@id/buttons1"
                         android:gravity="top">
                 <LinearLayout android:id="@+id/card_list"
                               android:layout_height="wrap_content"
