@@ -57,13 +57,13 @@ public class DeckController {
                     break;
                 case SAVE_BTN:
                     if(deckBuilderView.getDeckBuilder().getCards().getDeckName() == null) {
-                        actionChain.add(new SaveDeckAsAction());
+                        actionChain.add(new SaveDeckAsAction(deckBuilderView));
                     } else {
                         actionChain.add(new SaveDeckAction(deckBuilderView));
                     }
                     break;
                 case SAVE_AS_BTN:
-                    actionChain.add(new SaveDeckAsAction());
+                    actionChain.add(new SaveDeckAsAction(deckBuilderView));
                     break;
                 case DELETE_BTN:
                     actionChain.add(new DeleteDeckAction());

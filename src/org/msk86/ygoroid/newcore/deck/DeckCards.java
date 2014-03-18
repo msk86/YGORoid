@@ -68,4 +68,13 @@ public class DeckCards {
 
         return Utils.getDbHelper().saveToFile(deckName, mainDeckCards, exDeckCards, sideDeckCards);
     }
+
+    public boolean saveAs(String deckName) {
+        this.deckName = deckName;
+        boolean saved = save();
+        if(!saved) {
+            this.deckName = null;
+        }
+        return saved;
+    }
 }
