@@ -158,6 +158,10 @@ public class CardList {
         Collections.shuffle(cards);
     }
 
+    public void sort() {
+        Collections.sort(cards, new Card.CardComparator());
+    }
+
     public List<Card> getCards() {
         return cards;
     }
