@@ -1,7 +1,7 @@
 package org.msk86.ygoroid.upgrade;
 
 import org.msk86.ygoroid.YGOActivity;
-import org.msk86.ygoroid.utils.Configuration;
+import org.msk86.ygoroid.newutils.Configuration;
 
 public class UpgradeHelper {
 

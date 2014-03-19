@@ -11,11 +11,9 @@ import org.msk86.ygoroid.newcore.impl.HighLight;
 import org.msk86.ygoroid.newcore.impl.layout.GridLayout;
 import org.msk86.ygoroid.newcore.impl.builder.MainDeckSection;
 import org.msk86.ygoroid.newutils.Style;
-import org.msk86.ygoroid.newutils.Utils;
 import org.msk86.ygoroid.size.BuilderSize;
 import org.msk86.ygoroid.size.CardSize;
 import org.msk86.ygoroid.size.Size;
-import org.msk86.ygoroid.utils.Configuration;
 
 public class MainDeckSectionRenderer implements Renderer {
     MainDeckSection mainDeckSection;

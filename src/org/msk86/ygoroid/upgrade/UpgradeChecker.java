@@ -7,7 +7,7 @@ import android.net.Uri;
 import org.json.JSONObject;
 import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.YGOActivity;
-import org.msk86.ygoroid.utils.Utils;
+import org.msk86.ygoroid.newutils.Utils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

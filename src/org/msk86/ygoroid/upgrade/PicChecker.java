@@ -7,8 +7,8 @@ import android.os.Message;
 import org.json.JSONObject;
 import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.YGOActivity;
-import org.msk86.ygoroid.utils.Configuration;
-import org.msk86.ygoroid.utils.Utils;
+import org.msk86.ygoroid.newutils.Configuration;
+import org.msk86.ygoroid.newutils.Utils;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -49,12 +49,6 @@ public class PicChecker implements Checker {
 
         String[] pics = Utils.cardPics();
         Collections.addAll(cardPics, pics);
-
-        String[] zips = Utils.cardPicZips();
-        for (String zip : zips) {
-            String[] picsInZip = Utils.cardPicsInZip(Configuration.cardImgPath() + zip);
-            Collections.addAll(cardPics, picsInZip);
-        }
 
         for (String pic : cardPics) {
             String id = pic.substring(pic.lastIndexOf('/') + 1, pic.lastIndexOf('.'));

@@ -1,6 +1,6 @@
 package org.msk86.ygoroid.views.newdeckbuilder.filter;
 
-import org.msk86.ygoroid.core.Race;
+import org.msk86.ygoroid.newcore.constant.Race;
 
 public class RaceFilter implements CardFilter {
 

@@ -5,7 +5,7 @@ import org.msk86.ygoroid.newaction.Dispatcher;
 import org.msk86.ygoroid.newaction.dueldisk.actionimpl.*;
 import org.msk86.ygoroid.newcore.constant.Const;
 import org.msk86.ygoroid.newop.impl.MenuClick;
-import org.msk86.ygoroid.utils.Configuration;
+import org.msk86.ygoroid.newutils.Configuration;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -2,7 +2,7 @@ package org.msk86.ygoroid.newcore.impl;
 
 import org.msk86.ygoroid.newcore.BmpGenerator;
 import org.msk86.ygoroid.newcore.impl.bmp.UserDefinedCardGenerator;
-import org.msk86.ygoroid.utils.Configuration;
+import org.msk86.ygoroid.newutils.Configuration;
 
 public class UserDefinedCard extends Card {
     private String fileName;

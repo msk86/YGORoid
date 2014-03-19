@@ -9,10 +9,7 @@ import android.net.NetworkInfo;
 import android.text.Layout;
 import android.util.DisplayMetrics;
 import org.msk86.ygoroid.YGOActivity;
-import org.msk86.ygoroid.core.Drawable;
 import org.msk86.ygoroid.newsqlite.CardsDBHelper;
-import org.msk86.ygoroid.utils.Configuration;
-import org.msk86.ygoroid.utils.ZipReader;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -151,15 +148,6 @@ public class Utils {
         return zips;
     }
 
-    public static String[] cardPicsInZip(String zip) {
-        return ZipReader.listFile(zip, new FilenameFilter() {
-            @Override
-            public boolean accept(File file, String name) {
-                return name.endsWith(".jpg");
-            }
-        });
-    }
-
     public static String[] cardPics() {
         File picsDir = new File(Configuration.cardImgPath());
         return picsDir.list(new FilenameFilter() {
@@ -269,10 +257,6 @@ public class Utils {
             if (!bitmap.isRecycled()) {
                 canvas.drawBitmap(bitmap, x + left, y + top, paint);
             }
-        }
-
-        public void drawDrawable(Canvas canvas, Drawable drawable, int left, int top) {
-            drawable.draw(canvas, x + left, y + top);
         }
 
         public void drawLayout(Canvas canvas, Layout layout, int left, int top) {

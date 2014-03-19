@@ -13,7 +13,7 @@ import org.msk86.ygoroid.newutils.TextUtils;
 import org.msk86.ygoroid.newutils.Utils;
 import org.msk86.ygoroid.size.CardSize;
 import org.msk86.ygoroid.size.Size;
-import org.msk86.ygoroid.utils.Configuration;
+import org.msk86.ygoroid.newutils.Configuration;
 
 import java.util.HashMap;
 import java.util.Map;

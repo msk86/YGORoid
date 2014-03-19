@@ -3,8 +3,9 @@ package org.msk86.ygoroid.newcore.constant.bmp;
 import android.graphics.Bitmap;
 import org.msk86.ygoroid.newcore.BmpGenerator;
 import org.msk86.ygoroid.newcore.constant.CardSubType;
+import org.msk86.ygoroid.newutils.BmpReader;
 import org.msk86.ygoroid.size.Size;
-import org.msk86.ygoroid.utils.Utils;
+import org.msk86.ygoroid.newutils.Utils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,7 +21,7 @@ public class CardSubTypeGenerator implements BmpGenerator {
     @Override
     public Bitmap generate(Size size) {
         if(cache.get(size) == null) {
-            cache.put(size, Utils.readBitmapScaleByHeight(subType.getResId(), size.height()));
+            cache.put(size, BmpReader.readBitmap(subType.getResId(), size));
         }
         return cache.get(size);
     }

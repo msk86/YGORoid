@@ -12,7 +12,7 @@ import org.msk86.ygoroid.newutils.Style;
 import org.msk86.ygoroid.newutils.Utils;
 import org.msk86.ygoroid.size.IndicatorSize;
 import org.msk86.ygoroid.size.Size;
-import org.msk86.ygoroid.utils.Configuration;
+import org.msk86.ygoroid.newutils.Configuration;
 
 public class IndicatorRenderer implements Renderer {
 

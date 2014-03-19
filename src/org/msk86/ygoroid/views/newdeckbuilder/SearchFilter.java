@@ -9,13 +9,13 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.*;
 import org.msk86.ygoroid.R;
-import org.msk86.ygoroid.core.Attribute;
-import org.msk86.ygoroid.core.CardSubType;
-import org.msk86.ygoroid.core.CardType;
-import org.msk86.ygoroid.core.Race;
+import org.msk86.ygoroid.newcore.constant.Attribute;
+import org.msk86.ygoroid.newcore.constant.CardSubType;
+import org.msk86.ygoroid.newcore.constant.CardType;
+import org.msk86.ygoroid.newcore.constant.Race;
 import org.msk86.ygoroid.newaction.Action;
 import org.msk86.ygoroid.newaction.deckbuilder.actionimpl.SearchByFilterAction;
-import org.msk86.ygoroid.utils.Utils;
+import org.msk86.ygoroid.newutils.Utils;
 import org.msk86.ygoroid.views.newdeckbuilder.filter.*;
 
 import java.util.ArrayList;

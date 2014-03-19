@@ -3,7 +3,9 @@ package org.msk86.ygoroid.views.logo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import org.msk86.ygoroid.utils.Utils;
+import org.msk86.ygoroid.newutils.BmpReader;
+import org.msk86.ygoroid.newutils.Utils;
+import org.msk86.ygoroid.size.OtherSize;
 
 public class Logo {
 
@@ -15,10 +17,7 @@ public class Logo {
 
     public Logo(int resId) {
         this.resId = resId;
-        logo = BitmapFactory.decodeResource(Utils.getContext().getResources(), resId);
-        if (logo.getHeight() > Utils.screenHeight()) {
-            logo = Utils.scaleByHeight(logo, Utils.screenHeight(), Bitmap.Config.ARGB_4444);
-        }
+        logo = BmpReader.readBitmap(resId, OtherSize.SCREEN);
     }
 
     public Logo(int resId, int maskColor) {

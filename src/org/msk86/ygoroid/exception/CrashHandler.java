@@ -8,8 +8,8 @@ import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 import org.msk86.ygoroid.R;
-import org.msk86.ygoroid.utils.Configuration;
-import org.msk86.ygoroid.utils.Utils;
+import org.msk86.ygoroid.newutils.Configuration;
+import org.msk86.ygoroid.newutils.Utils;
 
 import java.io.FileOutputStream;
 import java.io.PrintWriter;

@@ -10,7 +10,7 @@ import android.view.MotionEvent;
 import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.YGOActivity;
 import org.msk86.ygoroid.newcore.Item;
-import org.msk86.ygoroid.utils.Utils;
+import org.msk86.ygoroid.newutils.Utils;
 import org.msk86.ygoroid.views.OnKeyProcessor;
 import org.msk86.ygoroid.views.OnMenuProcessor;
 import org.msk86.ygoroid.views.YGOView;

@@ -2,9 +2,6 @@ package org.msk86.ygoroid.views.newdeckbuilder;
 
 import android.view.GestureDetector;
 import android.view.MotionEvent;
-import org.msk86.ygoroid.core.Card;
-import org.msk86.ygoroid.core.DeckBuilder;
-import org.msk86.ygoroid.layout.Layout;
 import org.msk86.ygoroid.newaction.Action;
 import org.msk86.ygoroid.newaction.deckbuilder.dispatcherimpl.ClickConfirmedDispatcher;
 import org.msk86.ygoroid.newaction.deckbuilder.dispatcherimpl.DoubleClickDispatcher;

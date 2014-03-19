@@ -5,27 +5,22 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.text.Layout;
-import android.text.StaticLayout;
-import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.newcore.Item;
-import org.msk86.ygoroid.utils.Configuration;
-import org.msk86.ygoroid.utils.FPSMaker;
-import org.msk86.ygoroid.utils.Utils;
+import org.msk86.ygoroid.newutils.BmpReader;
+import org.msk86.ygoroid.newutils.Configuration;
+import org.msk86.ygoroid.newutils.FPSMaker;
+import org.msk86.ygoroid.newutils.Utils;
+import org.msk86.ygoroid.size.OtherSize;
 
 public abstract class YGOView extends SurfaceView implements Runnable {
     private static Bitmap BACKGROUND_BMP;
 
     static {
-        BACKGROUND_BMP = Utils.readBitmapScaleByHeight(Configuration.texturePath() + "bg" + Configuration.cardImageSuffix(),
-                Utils.screenHeight());
-        if (BACKGROUND_BMP == null) {
-            BACKGROUND_BMP = Utils.readBitmapScaleByHeight(R.raw.bg, Utils.screenHeight());
-        }
+        BACKGROUND_BMP = BmpReader.readBitmap(Configuration.texturePath() + "bg" + Configuration.cardImageSuffix(), R.raw.bg, OtherSize.SCREEN);
     }
 
     private static final int ACTIVE_DRAW_DURATION = 1500;
@@ -45,23 +40,14 @@ public abstract class YGOView extends SurfaceView implements Runnable {
 
 
     protected void drawVersion(Canvas canvas) {
-        TextPaint paint = new TextPaint();
-        paint.setColor(Configuration.fontColor());
-        int fontSize = Utils.unitLength() / 7;
-        paint.setTextSize(fontSize);
-        paint.setAntiAlias(true);
-        StaticLayout layout = new StaticLayout("V" + Utils.getVersion(), paint, Utils.unitLength() / 2, Layout.Alignment.ALIGN_OPPOSITE, 1, 0, false);
-        Utils.DrawHelper helper = new Utils.DrawHelper(0, 0);
-        helper.drawLayout(canvas, layout, Utils.unitLength() * 11 / 2, Utils.screenHeight() - fontSize - 2);
-    }
-
-    protected void drawFPS(Canvas canvas) {
-        Paint paint = new Paint();
-        paint.setColor(Configuration.fontColor());
-        int fontSize = Utils.unitLength() / 7;
-        paint.setTextSize(fontSize);
-        paint.setAntiAlias(true);
-        canvas.drawText("FPS:" + fpsMaker.getFPS(), Utils.unitLength() / 10, fontSize, paint);
+//        TextPaint paint = new TextPaint();
+//        paint.setColor(Configuration.fontColor());
+//        int fontSize = Utils.unitLength() / 7;
+//        paint.setTextSize(fontSize);
+//        paint.setAntiAlias(true);
+//        StaticLayout layout = new StaticLayout("V" + Utils.getVersion(), paint, Utils.unitLength() / 2, Layout.Alignment.ALIGN_OPPOSITE, 1, 0, false);
+//        Utils.DrawHelper helper = new Utils.DrawHelper(0, 0);
+//        helper.drawLayout(canvas, layout, Utils.unitLength() * 11 / 2, Utils.screenHeight() - fontSize - 2);
     }
 
     protected void drawBackground(Canvas canvas) {
@@ -136,6 +122,4 @@ public abstract class YGOView extends SurfaceView implements Runnable {
     public abstract void importData(Item item);
 
     public abstract void deallocateMemory();
-
-
 }

@@ -7,10 +7,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.newcore.impl.Card;
 import org.msk86.ygoroid.newcore.impl.UserDefinedCard;
-import org.msk86.ygoroid.utils.CharSet;
-import org.msk86.ygoroid.utils.Configuration;
-import org.msk86.ygoroid.utils.UnicodeReader;
-import org.msk86.ygoroid.utils.Utils;
+import org.msk86.ygoroid.newutils.CharSet;
+import org.msk86.ygoroid.newutils.Configuration;
+import org.msk86.ygoroid.newutils.UnicodeReader;
+import org.msk86.ygoroid.newutils.Utils;
 import org.msk86.ygoroid.views.newdeckbuilder.filter.CardFilter;
 
 import java.io.*;

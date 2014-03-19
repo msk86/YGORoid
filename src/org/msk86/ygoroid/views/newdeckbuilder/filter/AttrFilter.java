@@ -1,6 +1,6 @@
 package org.msk86.ygoroid.views.newdeckbuilder.filter;
 
-import org.msk86.ygoroid.core.Attribute;
+import org.msk86.ygoroid.newcore.constant.Attribute;
 
 public class AttrFilter implements CardFilter {
 

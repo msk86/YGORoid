@@ -1,7 +1,7 @@
 package org.msk86.ygoroid.views.newdeckbuilder.filter;
 
-import org.msk86.ygoroid.core.CardSubType;
-import org.msk86.ygoroid.core.CardType;
+import org.msk86.ygoroid.newcore.constant.CardSubType;
+import org.msk86.ygoroid.newcore.constant.CardType;
 
 public class TypeFilter implements CardFilter {
 

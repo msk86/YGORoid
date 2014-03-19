@@ -13,6 +13,7 @@ import android.webkit.WebViewClient;
 import org.msk86.ygoroid.exception.CrashHandler;
 import org.msk86.ygoroid.newcore.Item;
 import org.msk86.ygoroid.newcore.deck.DeckCards;
+import org.msk86.ygoroid.newutils.Utils;
 import org.msk86.ygoroid.service.PersistencyService;
 import org.msk86.ygoroid.upgrade.Downloader;
 import org.msk86.ygoroid.upgrade.UpgradeHelper;
@@ -20,8 +21,8 @@ import org.msk86.ygoroid.upgrade.UpgradeMsgHandler;
 import org.msk86.ygoroid.views.OnKeyProcessor;
 import org.msk86.ygoroid.views.OnMenuProcessor;
 import org.msk86.ygoroid.views.YGOView;
-import org.msk86.ygoroid.views.newdeckbuilder.DeckBuilderView;
 import org.msk86.ygoroid.views.logo.LogoView;
+import org.msk86.ygoroid.views.newdeckbuilder.DeckBuilderView;
 import org.msk86.ygoroid.views.newdueldisk.DuelDiskView;
 import org.msk86.ygoroid.views.sidechanger.SideChangerView;
 
@@ -58,8 +59,7 @@ public class YGOActivity extends Activity {
         CrashHandler crashHandler = CrashHandler.getInstance();
         crashHandler.init(getApplicationContext());
 
-        org.msk86.ygoroid.utils.Utils.initInstance(this);
-        org.msk86.ygoroid.newutils.Utils.initInstance(this);
+        Utils.initInstance(this);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
@@ -97,13 +97,13 @@ public class YGOActivity extends Activity {
     }
 
     public void showHint() {
-        webView.loadUrl(org.msk86.ygoroid.utils.Utils.s(R.string.hint));
+        webView.loadUrl(Utils.s(R.string.hint));
         currentView = webView;
         setContentView(webView);
     }
 
     public void showFeedback() {
-        webView.loadUrl(org.msk86.ygoroid.utils.Utils.s(R.string.feedback));
+        webView.loadUrl(Utils.s(R.string.feedback));
         currentView = webView;
         setContentView(webView);
     }
