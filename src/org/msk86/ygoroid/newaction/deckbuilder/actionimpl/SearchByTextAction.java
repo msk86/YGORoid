@@ -22,9 +22,9 @@ public class SearchByTextAction implements Action {
     @Override
     public void execute() {
         String text = textView.getText().toString();
+        textView.setText("");
         if (text.length() == 0) {
             deckBuilderView.getSearchResultList().clear();
-            textView.setText("");
             return;
         }
         List<Card> cards = Utils.getDbHelper().queryByText(text, new ArrayList<CardFilter>());

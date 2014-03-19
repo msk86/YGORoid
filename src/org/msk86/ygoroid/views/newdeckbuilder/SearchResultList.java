@@ -35,10 +35,10 @@ public class SearchResultList {
     }
 
     public void addResult(List<Card> cards, String searchText) {
-        searchResult.addAll(cards);
         if (!checkExactQuery(cards, searchText)) {
             cards.add(new UserDefinedCard(searchText));
         }
+        searchResult.addAll(cards);
     }
 
     public void refresh() {
