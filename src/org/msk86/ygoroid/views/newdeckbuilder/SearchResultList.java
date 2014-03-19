@@ -5,22 +5,25 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.newaction.Action;
+import org.msk86.ygoroid.newaction.deckbuilder.actionimpl.AddCardToDeckAction;
+import org.msk86.ygoroid.newaction.deckbuilder.actionimpl.SelectSearchResultAction;
 import org.msk86.ygoroid.newcore.impl.Card;
 import org.msk86.ygoroid.newcore.impl.UserDefinedCard;
 import org.msk86.ygoroid.newcore.impl.builder.DeckBuilder;
 import org.msk86.ygoroid.newutils.Utils;
-import org.msk86.ygoroid.views.newdeckbuilder.filter.CardFilter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SearchResultList {
+    DeckBuilderView deckBuilderView;
     DeckBuilder deckBuilder;
     List<Card> searchResult;
     Card selectedCard;
 
-    public SearchResultList(DeckBuilder deckBuilder) {
-        this.deckBuilder = deckBuilder;
+    public SearchResultList(DeckBuilderView deckBuilderView) {
+        this.deckBuilderView = deckBuilderView;
+        this.deckBuilder = deckBuilderView.getDeckBuilder();
         this.searchResult = new ArrayList<Card>();
     }
 
@@ -64,6 +67,13 @@ public class SearchResultList {
         return exact;
     }
 
+    public void clearSelect() {
+        LinearLayout cardList = (LinearLayout) Utils.getContext().findViewById(R.id.card_list);
+        for (int i = 0; i < cardList.getChildCount(); i++) {
+            View cv = cardList.getChildAt(i);
+            cv.setSelected(false);
+        }
+    }
 
 
     private class OnClickCardNameListener implements View.OnClickListener {
@@ -74,14 +84,15 @@ public class SearchResultList {
 
             CardNameView cardNameView = (CardNameView) view;
             if (cardNameView.isSelected()) {
-//                actionChain.add(new AddCardToDeckAction());
+                actionChain.add(new AddCardToDeckAction());
             } else {
-//                actionChain.add(new SelectSearchResultAction());
+                actionChain.add(new SelectSearchResultAction(deckBuilderView, cardNameView));
             }
 
             for(Action action:actionChain) {
                 action.execute();
             }
+            deckBuilderView.updateActionTime();
         }
     }
 }

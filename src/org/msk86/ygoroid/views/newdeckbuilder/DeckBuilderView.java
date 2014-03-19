@@ -24,7 +24,7 @@ public class DeckBuilderView extends YGOView {
         deckBuilder = new DeckBuilder();
         mGestureDetector = new GestureDetector(new DeckGestureListener(this));
 
-        searchResultList = new SearchResultList(deckBuilder);
+        searchResultList = new SearchResultList(this);
         controller = new DeckController(this);
     }
 
