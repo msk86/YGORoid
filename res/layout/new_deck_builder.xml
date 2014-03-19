@@ -39,8 +39,6 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
-                    android:paddingBottom="1sp"
-                    android:paddingTop="1sp"
                     >
                 <Button android:id="@+id/save_btn" android:layout_width="60sp"
                         android:layout_height="wrap_content" android:text="@string/btn_save"
@@ -54,8 +52,6 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:paddingBottom="1sp"
-                    android:paddingTop="1sp"
                     android:layout_above="@id/buttons2"
                     >
                 <Button android:id="@+id/open_btn" android:layout_width="60sp"

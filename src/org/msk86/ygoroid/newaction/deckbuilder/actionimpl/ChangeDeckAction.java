@@ -64,9 +64,11 @@ public class ChangeDeckAction implements Action {
             newDeckName = newDeckName.substring(0, newDeckName.lastIndexOf("."));
         }
         newDeckName += ".ydk";
-        boolean saved = cards.saveAs(newDeckName);
-        if(saved) {
-            Utils.deleteDeck(orgDeckName);
+        if(!newDeckName.equals(orgDeckName)) {
+            boolean saved = cards.saveAs(newDeckName);
+            if(saved) {
+                Utils.deleteDeck(orgDeckName);
+            }
         }
     }
 }

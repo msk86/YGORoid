@@ -41,6 +41,10 @@ public class DeckBuilder implements Item, Container, BaseContainer {
     private void loadDeck(DeckCards cards) {
         this.cards = cards;
         checker = new DeckChecker(this.cards).startCheck();
+        refreshDeck();
+    }
+
+    public void refreshDeck() {
         getMainDeckSection().setCards(cards);
         getExDeckSection().setCards(cards);
         getSideDeckSection().setCards(cards);

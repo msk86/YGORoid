@@ -19,7 +19,7 @@ public class DeleteDeckAction implements Action {
     @Override
     public void execute() {
         DeckCards cards = deckBuilderView.getDeckBuilder().getCards();
-        if(cards.getAllCards().size() == 0) {
+        if(cards == null || cards.getAllCards().size() == 0) {
             return;
         }
         AlertDialog dialog = new AlertDialog.Builder(Utils.getContext())
@@ -41,9 +41,12 @@ public class DeleteDeckAction implements Action {
         public void onClick(DialogInterface dialogInterface, int i) {
             if ("OK".equals(button)) {
                 DeckCards cards = deckBuilderView.getDeckBuilder().getCards();
+                String deckName = cards.getDeckName() == null ? "" : cards.getDeckName();
                 cards.delete();
                 deckBuilderView.getDeckBuilder().recycleUselessBmp();
-                String info = String.format(Utils.s(R.string.DELETE_SUCCESS), cards.getDeckName());
+                deckBuilderView.getDeckBuilder().refreshDeck();
+                deckBuilderView.updateActionTime();
+                String info = String.format(Utils.s(R.string.DELETE_SUCCESS), deckName);
                 Toast.makeText(Utils.getContext(), info, Toast.LENGTH_LONG).show();
             }
         }
