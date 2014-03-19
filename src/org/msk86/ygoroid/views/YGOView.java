@@ -13,7 +13,6 @@ import org.msk86.ygoroid.newcore.Item;
 import org.msk86.ygoroid.newutils.BmpReader;
 import org.msk86.ygoroid.newutils.Configuration;
 import org.msk86.ygoroid.newutils.FPSMaker;
-import org.msk86.ygoroid.newutils.Utils;
 import org.msk86.ygoroid.size.OtherSize;
 
 public abstract class YGOView extends SurfaceView implements Runnable {

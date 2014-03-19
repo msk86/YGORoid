@@ -6,8 +6,8 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import org.msk86.ygoroid.newcore.impl.CardList;
 import org.msk86.ygoroid.newcore.impl.HandCards;
-import org.msk86.ygoroid.newutils.Utils;
 import org.msk86.ygoroid.newutils.Configuration;
+import org.msk86.ygoroid.newutils.Utils;
 
 public class PlaySensorEventListener implements SensorEventListener {
     DuelDiskView view;

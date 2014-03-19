@@ -5,7 +5,6 @@ import org.msk86.ygoroid.newcore.BmpGenerator;
 import org.msk86.ygoroid.newcore.constant.CardSubType;
 import org.msk86.ygoroid.newutils.BmpReader;
 import org.msk86.ygoroid.size.Size;
-import org.msk86.ygoroid.newutils.Utils;
 
 import java.util.HashMap;
 import java.util.Map;

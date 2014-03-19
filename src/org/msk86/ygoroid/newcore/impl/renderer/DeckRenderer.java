@@ -9,7 +9,6 @@ import org.msk86.ygoroid.newcore.impl.Card;
 import org.msk86.ygoroid.newcore.impl.Deck;
 import org.msk86.ygoroid.newcore.impl.HighLight;
 import org.msk86.ygoroid.newutils.Style;
-import org.msk86.ygoroid.newutils.Utils;
 import org.msk86.ygoroid.size.CardSize;
 import org.msk86.ygoroid.size.Size;
 

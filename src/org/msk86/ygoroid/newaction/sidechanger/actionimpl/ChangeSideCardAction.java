@@ -8,8 +8,6 @@ import org.msk86.ygoroid.newcore.impl.builder.SideDeckSection;
 import org.msk86.ygoroid.newop.Operation;
 import org.msk86.ygoroid.newutils.LayoutUtils;
 
-import java.util.List;
-
 public class ChangeSideCardAction extends BaseAction {
     public ChangeSideCardAction(Operation operation) {
         super(operation);

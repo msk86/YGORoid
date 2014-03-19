@@ -11,9 +11,9 @@ import org.msk86.ygoroid.newcore.Item;
 import org.msk86.ygoroid.newcore.constant.Const;
 import org.msk86.ygoroid.newcore.impl.*;
 import org.msk86.ygoroid.newop.impl.MenuClick;
+import org.msk86.ygoroid.newutils.Configuration;
 import org.msk86.ygoroid.newutils.LayoutUtils;
 import org.msk86.ygoroid.newutils.Utils;
-import org.msk86.ygoroid.newutils.Configuration;
 import org.msk86.ygoroid.views.OnMenuProcessor;
 
 import java.util.List;

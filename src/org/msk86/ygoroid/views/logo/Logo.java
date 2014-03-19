@@ -1,10 +1,8 @@
 package org.msk86.ygoroid.views.logo;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import org.msk86.ygoroid.newutils.BmpReader;
-import org.msk86.ygoroid.newutils.Utils;
 import org.msk86.ygoroid.size.OtherSize;
 
 public class Logo {

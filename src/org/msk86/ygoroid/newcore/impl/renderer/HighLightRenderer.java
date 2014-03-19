@@ -8,7 +8,6 @@ import org.msk86.ygoroid.newcore.Selectable;
 import org.msk86.ygoroid.newcore.impl.HighLight;
 import org.msk86.ygoroid.newutils.Style;
 import org.msk86.ygoroid.size.Size;
-import org.msk86.ygoroid.newutils.Configuration;
 
 public class HighLightRenderer implements Renderer {
     HighLight highLight;

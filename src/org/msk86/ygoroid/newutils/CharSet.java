@@ -1,7 +1,5 @@
 package org.msk86.ygoroid.newutils;
 
-import org.msk86.ygoroid.newutils.UnicodeReader;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;

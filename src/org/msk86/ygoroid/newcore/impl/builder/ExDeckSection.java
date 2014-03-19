@@ -5,13 +5,9 @@ import org.msk86.ygoroid.newcore.Item;
 import org.msk86.ygoroid.newcore.Layout;
 import org.msk86.ygoroid.newcore.Renderer;
 import org.msk86.ygoroid.newcore.deck.DeckCards;
-import org.msk86.ygoroid.newcore.impl.Card;
 import org.msk86.ygoroid.newcore.impl.CardList;
-import org.msk86.ygoroid.newcore.impl.layout.LinerLayout;
 import org.msk86.ygoroid.newcore.impl.builder.renderer.ExDeckSectionRenderer;
-
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
+import org.msk86.ygoroid.newcore.impl.layout.LinerLayout;
 
 public class ExDeckSection implements Item, Container {
     DeckCards cards;

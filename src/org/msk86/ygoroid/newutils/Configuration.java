@@ -1,6 +1,5 @@
 package org.msk86.ygoroid.newutils;
 
-import android.graphics.Color;
 import android.os.Environment;
 
 import java.io.FileInputStream;

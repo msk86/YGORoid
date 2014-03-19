@@ -4,7 +4,6 @@ import org.msk86.ygoroid.newaction.Action;
 import org.msk86.ygoroid.newaction.Dispatcher;
 import org.msk86.ygoroid.newaction.deckbuilder.actionimpl.ShuffleDeckAction;
 import org.msk86.ygoroid.newaction.deckbuilder.actionimpl.SortDeckAction;
-import org.msk86.ygoroid.newcore.impl.builder.DeckBuilder;
 import org.msk86.ygoroid.newop.impl.VolClick;
 
 import java.util.ArrayList;

@@ -2,7 +2,6 @@ package org.msk86.ygoroid.newop.impl;
 
 import org.msk86.ygoroid.newcore.BaseContainer;
 import org.msk86.ygoroid.newcore.Item;
-import org.msk86.ygoroid.newcore.impl.Duel;
 import org.msk86.ygoroid.newutils.LayoutUtils;
 
 public class VolClick extends CommonOperation {

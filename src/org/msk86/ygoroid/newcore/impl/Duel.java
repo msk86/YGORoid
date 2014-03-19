@@ -12,8 +12,8 @@ import org.msk86.ygoroid.newcore.impl.layout.AbsoluteLayout;
 import org.msk86.ygoroid.newcore.impl.lifepoint.LifePointCalculator;
 import org.msk86.ygoroid.newcore.impl.renderer.DuelRenderer;
 import org.msk86.ygoroid.newop.impl.Drag;
-import org.msk86.ygoroid.newutils.Utils;
 import org.msk86.ygoroid.newutils.Configuration;
+import org.msk86.ygoroid.newutils.Utils;
 
 public class Duel implements Item, Container, BaseContainer {
     private LifePoint lifePoint;
