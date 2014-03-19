@@ -26,12 +26,18 @@ public class PlaySensorEventListener implements SensorEventListener {
         if(view.getDuel() == null) {
             return;
         }
+
+        HandCards handCards = view.getDuel().getHandCards();
+        CardList cardList = handCards.getCardList();
+        if(view.getDuel().getCardEffectWindow() != null || view.getDuel().getCardSelector() != null || view.getDuel().getLifePointCalculator() != null) {
+            cardList.setAll();
+            return;
+        }
+
         float z = e.values[SensorManager.DATA_Z];
         float x = e.values[SensorManager.DATA_X];
         boolean changed = false;
 
-        HandCards handCards = view.getDuel().getHandCards();
-        CardList cardList = handCards.getCardList();
         if (z >= zLimit + 0.3 && previousZ < zLimit + 0.3) {
             cardList.setAll();
             cardList.setOpen(false);
