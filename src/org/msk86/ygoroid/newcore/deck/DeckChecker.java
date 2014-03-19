@@ -122,20 +122,6 @@ public class DeckChecker {
         return this;
     }
 
-    public DeckChecker checkSideChange() {
-        if(error) return this;
-        if(deckCards.getMainDeckCards().size() != cardCounts[0]) {
-            errorInfo = "SIDE CHANGE CHECK NOT PASS: COUNT OF MD SHOULD BE 40 BUT 41";
-            error = true;
-
-        } else
-        if(deckCards.getExDeckCards().size() != cardCounts[1]){
-            errorInfo = "SIDE CHANGE CHECK NOT PASS: COUNT OF ED SHOULD BE 15 BUT 14";
-            error = true;
-        }
-        return this;
-    }
-
     public boolean isError() {
         return error;
     }

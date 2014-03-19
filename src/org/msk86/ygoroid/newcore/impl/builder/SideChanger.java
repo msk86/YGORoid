@@ -8,8 +8,8 @@ import org.msk86.ygoroid.newcore.impl.CardEffectWindow;
 import org.msk86.ygoroid.newcore.impl.InfoBar;
 import org.msk86.ygoroid.newcore.impl.bmp.CardGenerator;
 import org.msk86.ygoroid.newcore.impl.bmp.UserDefinedCardGenerator;
-import org.msk86.ygoroid.newcore.impl.layout.AbsoluteLayout;
 import org.msk86.ygoroid.newcore.impl.builder.renderer.SideChangerRenderer;
+import org.msk86.ygoroid.newcore.impl.layout.AbsoluteLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,10 +37,6 @@ public class SideChanger implements Item, Container, BaseContainer {
 
     public DeckCards getCards() {
         return cards;
-    }
-
-    public DeckChecker getChecker() {
-        return checker;
     }
 
     public MainDeckSection getMainDeckSection() {
