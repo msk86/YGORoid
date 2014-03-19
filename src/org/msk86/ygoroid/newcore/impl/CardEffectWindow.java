@@ -27,6 +27,11 @@ public class CardEffectWindow implements Item {
         return card;
     }
 
+    public void setCard(Card card) {
+        this.card = card;
+        effectTextPage = 0;
+    }
+
     public int getEffectTextPage() {
         return effectTextPage;
     }

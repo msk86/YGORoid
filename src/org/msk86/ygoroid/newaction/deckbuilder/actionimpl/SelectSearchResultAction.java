@@ -9,6 +9,8 @@ import android.widget.ScrollView;
 import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.newaction.Action;
 import org.msk86.ygoroid.newcore.impl.Card;
+import org.msk86.ygoroid.newcore.impl.CardEffectWindow;
+import org.msk86.ygoroid.newcore.impl.builder.DeckBuilder;
 import org.msk86.ygoroid.newutils.Utils;
 import org.msk86.ygoroid.size.CardSize;
 import org.msk86.ygoroid.views.newdeckbuilder.CardNameView;
@@ -28,7 +30,12 @@ public class SelectSearchResultAction implements Action {
         deckBuilderView.getSearchResultList().clearSelect();
         cardNameView.setSelected(true);
         Card selectedCard = cardNameView.getCard();
-        deckBuilderView.getDeckBuilder().select(selectedCard);
+        DeckBuilder deckBuilder = deckBuilderView.getDeckBuilder();
+        deckBuilder.select(selectedCard);
+        CardEffectWindow cardEffectWindow = deckBuilder.getCardEffectWindow();
+        if(cardEffectWindow != null) {
+            cardEffectWindow.setCard(selectedCard);
+        }
         ScrollView scrollList = (ScrollView) Utils.getContext().findViewById(R.id.scroll_list);
         scrollList.setBackgroundDrawable(getCardPicDrawable(selectedCard, scrollList.getWidth(), scrollList.getHeight()));
     }
