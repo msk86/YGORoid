@@ -6,6 +6,7 @@ import org.msk86.ygoroid.newcore.Container;
 import org.msk86.ygoroid.newcore.deck.DeckCards;
 import org.msk86.ygoroid.newcore.deck.DeckChecker;
 import org.msk86.ygoroid.newcore.impl.Card;
+import org.msk86.ygoroid.newcore.impl.CardList;
 import org.msk86.ygoroid.newcore.impl.UserDefinedCard;
 import org.msk86.ygoroid.newcore.impl.builder.DeckBuilder;
 import org.msk86.ygoroid.newcore.impl.builder.ExDeckSection;
@@ -14,8 +15,6 @@ import org.msk86.ygoroid.newcore.impl.builder.SideDeckSection;
 import org.msk86.ygoroid.newutils.Utils;
 import org.msk86.ygoroid.views.newdeckbuilder.CardNameView;
 import org.msk86.ygoroid.views.newdeckbuilder.DeckBuilderView;
-
-import java.util.List;
 
 public class AddCardToDeckAction implements Action {
     DeckBuilderView deckBuilderView;
@@ -31,7 +30,7 @@ public class AddCardToDeckAction implements Action {
         Card card = cardNameView.getCard().clone();
         DeckBuilder builder = deckBuilderView.getDeckBuilder();
         DeckCards cards = builder.getCards();
-        List<Card> deck = null;
+        CardList deck = null;
         if(card instanceof UserDefinedCard) {
             Container section = builder.getCurrentSection();
             if(section instanceof MainDeckSection) {
@@ -56,7 +55,7 @@ public class AddCardToDeckAction implements Action {
         }
 
         if(deck != null) {
-            deck.add(card);
+            deck.unShift(card);
             DeckChecker checker = new DeckChecker(cards);
             checker.startCheck().checkMainMax().checkEx().checkSide().checkSingleCard();
             if(checker.isError()) {

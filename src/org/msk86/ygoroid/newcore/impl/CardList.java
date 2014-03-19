@@ -97,6 +97,11 @@ public class CardList {
         add(card, cards.size(), false);
     }
 
+    public void unshiftAll(List<Card> cardList) {
+        for(Card card : cardList) {
+            unShift(card);
+        }
+    }
 
     private void add(Card card, int index, boolean force) {
         if (card == null) {

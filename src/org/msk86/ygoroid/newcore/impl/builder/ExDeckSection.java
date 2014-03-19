@@ -6,6 +6,7 @@ import org.msk86.ygoroid.newcore.Layout;
 import org.msk86.ygoroid.newcore.Renderer;
 import org.msk86.ygoroid.newcore.deck.DeckCards;
 import org.msk86.ygoroid.newcore.impl.Card;
+import org.msk86.ygoroid.newcore.impl.CardList;
 import org.msk86.ygoroid.newcore.impl.layout.LinerLayout;
 import org.msk86.ygoroid.newcore.impl.builder.renderer.ExDeckSectionRenderer;
 
@@ -14,11 +15,11 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ExDeckSection implements Item, Container {
     DeckCards cards;
-    List<Card> exDeck;
+    CardList exDeck;
     Item holder;
 
     public ExDeckSection(Item holder) {
-        exDeck = new CopyOnWriteArrayList<Card>();
+        exDeck = new CardList();
         this.holder = holder;
     }
 
@@ -26,7 +27,7 @@ public class ExDeckSection implements Item, Container {
         this.cards = cards;
         exDeck = this.cards.getExDeckCards();
         if(layout != null) {
-            layout.setItems(exDeck);
+            layout.setItems(exDeck.getCards());
         }
     }
 
@@ -47,7 +48,7 @@ public class ExDeckSection implements Item, Container {
     @Override
     public Layout getLayout() {
         if(layout == null) {
-            layout = new LinerLayout(this, exDeck);
+            layout = new LinerLayout(this, exDeck.getCards());
         }
         return layout;
     }

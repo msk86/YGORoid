@@ -2,6 +2,7 @@ package org.msk86.ygoroid.newaction.sidechanger.actionimpl;
 
 import org.msk86.ygoroid.newcore.Container;
 import org.msk86.ygoroid.newcore.impl.Card;
+import org.msk86.ygoroid.newcore.impl.CardList;
 import org.msk86.ygoroid.newcore.impl.UserDefinedCard;
 import org.msk86.ygoroid.newcore.impl.builder.SideDeckSection;
 import org.msk86.ygoroid.newop.Operation;
@@ -36,14 +37,14 @@ public class ChangeSideCardAction extends BaseAction {
             return;
         }
 
-        List<Card> l1 = sideChanger.getCards().getDeckByCard(selected);
-        List<Card> l2 = sideChanger.getCards().getDeckByCard(target);
+        CardList l1 = sideChanger.getCards().getDeckByCard(selected);
+        CardList l2 = sideChanger.getCards().getDeckByCard(target);
 
         l1.remove(selected);
         l2.remove(target);
 
-        l1.add(target);
-        l2.add(selected);
+        l1.unShift(target);
+        l2.unShift(selected);
 
         sideChanger.unSelect();
     }

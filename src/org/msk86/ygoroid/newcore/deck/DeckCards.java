@@ -1,6 +1,7 @@
 package org.msk86.ygoroid.newcore.deck;
 
 import org.msk86.ygoroid.newcore.impl.Card;
+import org.msk86.ygoroid.newcore.impl.CardList;
 import org.msk86.ygoroid.newutils.Utils;
 
 import java.util.ArrayList;
@@ -8,56 +9,57 @@ import java.util.List;
 
 public class DeckCards {
     String deckName;
-    List<Card> mainDeckCards;
-    List<Card> exDeckCards;
-    List<Card> sideDeckCards;
+    CardList mainDeckCards;
+    CardList exDeckCards;
+    CardList sideDeckCards;
 
     public DeckCards() {
-        mainDeckCards = new ArrayList<Card>();
-        exDeckCards = new ArrayList<Card>();
-        sideDeckCards = new ArrayList<Card>();
+        mainDeckCards = new CardList();
+        exDeckCards = new CardList();
+        sideDeckCards = new CardList();
     }
 
     public DeckCards(String deckName) {
+        this();
         loadDeck(deckName);
     }
 
     public void loadDeck(String deckName) {
         this.deckName = deckName;
         List<List<Card>> lists = Utils.getDbHelper().loadFromFile(deckName);
-        mainDeckCards = lists.get(0);
-        exDeckCards = lists.get(1);
-        sideDeckCards = lists.get(2);
+        mainDeckCards.unshiftAll(lists.get(0));
+        exDeckCards.unshiftAll(lists.get(1));
+        sideDeckCards.unshiftAll(lists.get(2));
     }
 
     public String getDeckName() {
         return deckName;
     }
 
-    public List<Card> getMainDeckCards() {
+    public CardList getMainDeckCards() {
         return mainDeckCards;
     }
 
-    public List<Card> getExDeckCards() {
+    public CardList getExDeckCards() {
         return exDeckCards;
     }
 
-    public List<Card> getSideDeckCards() {
+    public CardList getSideDeckCards() {
         return sideDeckCards;
     }
 
-    public List<Card> getDeckByCard(Card card) {
-        if(mainDeckCards.contains(card)) return mainDeckCards;
-        if(exDeckCards.contains(card)) return exDeckCards;
-        if(sideDeckCards.contains(card)) return sideDeckCards;
+    public CardList getDeckByCard(Card card) {
+        if(mainDeckCards.getCards().contains(card)) return mainDeckCards;
+        if(exDeckCards.getCards().contains(card)) return exDeckCards;
+        if(sideDeckCards.getCards().contains(card)) return sideDeckCards;
         return null;
     }
 
     public List<Card> getAllCards() {
         List<Card> all = new ArrayList<Card>();
-        all.addAll(mainDeckCards);
-        all.addAll(exDeckCards);
-        all.addAll(sideDeckCards);
+        all.addAll(mainDeckCards.getCards());
+        all.addAll(exDeckCards.getCards());
+        all.addAll(sideDeckCards.getCards());
         return all;
     }
 
@@ -66,7 +68,7 @@ public class DeckCards {
             return false;
         }
 
-        return Utils.getDbHelper().saveToFile(deckName, mainDeckCards, exDeckCards, sideDeckCards);
+        return Utils.getDbHelper().saveToFile(deckName, mainDeckCards.getCards(), exDeckCards.getCards(), sideDeckCards.getCards());
     }
 
     public boolean saveAs(String deckName) {
@@ -83,8 +85,8 @@ public class DeckCards {
             Utils.deleteDeck(deckName);
         }
         deckName = null;
-        mainDeckCards = new ArrayList<Card>();
-        exDeckCards = new ArrayList<Card>();
-        sideDeckCards = new ArrayList<Card>();
+        mainDeckCards = new CardList();
+        exDeckCards = new CardList();
+        sideDeckCards = new CardList();
     }
 }

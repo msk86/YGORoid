@@ -86,8 +86,4 @@ public class DeckBuilderView extends YGOView {
     public void deallocateMemory() {
         deckBuilder.recycleUselessBmp();
     }
-
-
-
-
 }
