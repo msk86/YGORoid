@@ -194,7 +194,7 @@ public class YGOActivity extends Activity {
     public void showDeckBuilderWithDeck(String deck) {
         showDeckBuilder();
         if (deck != null) {
-//            deckBuilderView.loadDeck(deck);
+            deckBuilderView.getDeckBuilder().getCards().loadDeck(deck);
         }
         deckBuilderView.updateActionTime();
     }
