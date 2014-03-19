@@ -77,6 +77,7 @@ public class DeckController {
             for(Action action: actionChain) {
                 action.execute();
             }
+            deckBuilderView.updateActionTime();
         }
     }
 
@@ -87,6 +88,7 @@ public class DeckController {
                     || actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
                 Action action = new SearchByTextAction(deckBuilderView, textView);
                 action.execute();
+                deckBuilderView.updateActionTime();
             }
             return false;
         }

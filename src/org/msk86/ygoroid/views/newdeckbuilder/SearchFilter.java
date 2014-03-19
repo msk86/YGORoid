@@ -22,11 +22,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchFilter {
+    DeckBuilderView deckBuilderView;
     View searchFilterView;
     AlertDialog dialog;
     boolean created;
 
-    public SearchFilter() {
+    public SearchFilter(DeckBuilderView deckBuilderView) {
+        this.deckBuilderView = deckBuilderView;
         this.created = false;
     }
 
@@ -38,6 +40,7 @@ public class SearchFilter {
 
     private void create() {
         created = true;
+        final SearchFilter filter = this;
         LayoutInflater layoutInflater = Utils.getContext().getLayoutInflater();
         searchFilterView = layoutInflater.inflate(R.layout.search_filter, null);
 
@@ -46,8 +49,9 @@ public class SearchFilter {
                 .setPositiveButton(Utils.s(R.string.CONFIRM_YES), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Action action = new SearchByFilterAction();
+                        Action action = new SearchByFilterAction(deckBuilderView, filter);
                         action.execute();
+                        deckBuilderView.updateActionTime();
                         dialog.dismiss();
                     }
                 })

@@ -11,7 +11,7 @@ public class OpenSearchFilterAction implements Action {
     public OpenSearchFilterAction(DeckBuilderView deckBuilderView) {
         this.deckBuilderView = deckBuilderView;
         if(filter == null) {
-            filter = new SearchFilter();
+            filter = new SearchFilter(deckBuilderView);
         }
     }
 
