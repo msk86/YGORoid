@@ -2,6 +2,8 @@ package org.msk86.ygoroid.newaction.deckbuilder.dispatcherimpl;
 
 import org.msk86.ygoroid.newaction.Action;
 import org.msk86.ygoroid.newaction.Dispatcher;
+import org.msk86.ygoroid.newaction.deckbuilder.actionimpl.ShuffleDeckAction;
+import org.msk86.ygoroid.newaction.deckbuilder.actionimpl.SortDeckAction;
 import org.msk86.ygoroid.newcore.impl.builder.DeckBuilder;
 import org.msk86.ygoroid.newop.impl.VolClick;
 
@@ -13,15 +15,11 @@ public class VolClickDispatcher implements Dispatcher<VolClick> {
     public List<Action> dispatch(VolClick op) {
         List<Action> actionChain = new ArrayList<Action>();
 
-        DeckBuilder deckBuilder = (DeckBuilder) op.getBaseContainer();
-
         if(op.getVol() == VolClick.VOL_DOWN) {
-            deckBuilder.getCards().getMainDeckCards().shuffle();
+            actionChain.add(new ShuffleDeckAction(op));
         }
         if(op.getVol() == VolClick.VOL_UP) {
-            deckBuilder.getCards().getMainDeckCards().sort();
-            deckBuilder.getCards().getExDeckCards().sort();
-            deckBuilder.getCards().getSideDeckCards().sort();
+            actionChain.add(new SortDeckAction(op));
         }
 
         return actionChain;
