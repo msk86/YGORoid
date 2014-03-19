@@ -85,7 +85,7 @@ public class DeckController {
         public boolean onEditorAction(TextView textView, int actionId, KeyEvent event) {
             if (actionId == EditorInfo.IME_ACTION_DONE
                     || actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
-                Action action = new SearchByTextAction();
+                Action action = new SearchByTextAction(deckBuilderView, textView);
                 action.execute();
             }
             return false;

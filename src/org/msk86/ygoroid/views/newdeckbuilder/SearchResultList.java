@@ -34,8 +34,11 @@ public class SearchResultList {
         scrollList.scrollTo(0, 0);
     }
 
-    public void addResult(List<Card> cards) {
+    public void addResult(List<Card> cards, String searchText) {
         searchResult.addAll(cards);
+        if (!checkExactQuery(cards, searchText)) {
+            cards.add(new UserDefinedCard(searchText));
+        }
     }
 
     public void refresh() {
@@ -46,6 +49,22 @@ public class SearchResultList {
             cardList.addView(cv);
         }
     }
+
+    private boolean checkExactQuery(List<Card> cards, String text) {
+        boolean exact = false;
+        if (text.length() == 0) {
+            exact = true;
+        }
+        for (Card card : cards) {
+            if (card.getName().equals(text)) {
+                exact = true;
+                break;
+            }
+        }
+        return exact;
+    }
+
+
 
     private class OnClickCardNameListener implements View.OnClickListener {
 
