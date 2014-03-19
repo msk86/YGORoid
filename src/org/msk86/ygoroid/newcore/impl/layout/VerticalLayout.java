@@ -7,6 +7,7 @@ import org.msk86.ygoroid.newcore.Layout;
 import org.msk86.ygoroid.newutils.Style;
 
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class VerticalLayout implements Layout {
     Container container;
@@ -30,7 +31,9 @@ public class VerticalLayout implements Layout {
 
     @Override
     public List<? extends Item> items() {
-        return items;
+        List<Item> newItems = new CopyOnWriteArrayList<Item>();
+        newItems.addAll(items);
+        return newItems;
     }
 
     @Override

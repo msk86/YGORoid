@@ -19,6 +19,7 @@ public class DeckBuilder implements Item, Container, BaseContainer {
     DeckCards cards;
     DeckChecker checker;
     List<Item> sections;
+    Container currentSection;
 
     public DeckBuilder() {
         sections = new ArrayList<Item>();
@@ -26,6 +27,7 @@ public class DeckBuilder implements Item, Container, BaseContainer {
         sections.add(new ExDeckSection(this));
         sections.add(new SideDeckSection(this));
         sections.add(new InfoBar(this));
+        newDeck();
     }
 
     public void newDeck() {
@@ -131,5 +133,13 @@ public class DeckBuilder implements Item, Container, BaseContainer {
 
     public void addToDeck(Card card) {
 
+    }
+
+    public Container getCurrentSection() {
+        return currentSection;
+    }
+
+    public void setCurrentSection(Container currentSection) {
+        this.currentSection = currentSection;
     }
 }

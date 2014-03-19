@@ -84,7 +84,7 @@ public class SearchResultList {
 
             CardNameView cardNameView = (CardNameView) view;
             if (cardNameView.isSelected()) {
-                actionChain.add(new AddCardToDeckAction());
+                actionChain.add(new AddCardToDeckAction(deckBuilderView, cardNameView));
             } else {
                 actionChain.add(new SelectSearchResultAction(deckBuilderView, cardNameView));
             }

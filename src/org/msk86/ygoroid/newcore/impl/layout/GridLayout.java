@@ -9,6 +9,7 @@ import org.msk86.ygoroid.size.CardSize;
 import org.msk86.ygoroid.size.Size;
 
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class GridLayout implements Layout {
     Container container;
@@ -48,7 +49,9 @@ public class GridLayout implements Layout {
 
     @Override
     public List<? extends Item> items() {
-        return items;
+        List<Item> newItems = new CopyOnWriteArrayList<Item>();
+        newItems.addAll(items);
+        return newItems;
     }
 
     @Override
