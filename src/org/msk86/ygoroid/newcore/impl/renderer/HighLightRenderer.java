@@ -6,6 +6,7 @@ import android.graphics.Rect;
 import org.msk86.ygoroid.newcore.Renderer;
 import org.msk86.ygoroid.newcore.Selectable;
 import org.msk86.ygoroid.newcore.impl.HighLight;
+import org.msk86.ygoroid.newutils.Style;
 import org.msk86.ygoroid.size.Size;
 import org.msk86.ygoroid.newutils.Configuration;
 
@@ -34,7 +35,7 @@ public class HighLightRenderer implements Renderer {
         }
 
         Paint paint = new Paint();
-        paint.setColor(Configuration.highlightColor());
+        paint.setColor(Style.highlightColor());
         paint.setStrokeWidth(2);
         paint.setStyle(Paint.Style.STROKE);
 

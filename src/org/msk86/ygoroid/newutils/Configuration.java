@@ -10,30 +10,6 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class Configuration {
-    public static int highlightColor() {
-        return Color.BLUE;
-    }
-
-    public static int fontColor() {
-        return Color.WHITE;
-    }
-
-    public static int syncFontColor() {
-        return Color.BLACK;
-    }
-
-    public static int textShadowColor() {
-        return Color.BLACK;
-    }
-
-    public static int lineColor() {
-        return Color.WHITE;
-    }
-
-    public static int windowBackgroundColor() {
-        return Color.BLACK;
-    }
-
     public static String device() {
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             return Environment.getExternalStorageDirectory().getAbsolutePath() + "/";
@@ -65,14 +41,6 @@ public class Configuration {
         return ".jpg";
     }
 
-    public static int fieldColor() {
-        return Color.BLACK;
-    }
-
-    public static String zipInnerPicPath() {
-        return "pics/";
-    }
-
     public static String configPropertyFile() {
         return "config.properties";
     }
@@ -90,7 +58,7 @@ public class Configuration {
     private static Properties defaultProperties() {
         Properties properties = new Properties();
         properties.setProperty(PROPERTY_GRAVITY_ENABLE, "1");
-        properties.setProperty(PROPERTY_AUTO_SHUFFLE_ENABLE, "0");
+        properties.setProperty(PROPERTY_AUTO_SHUFFLE_ENABLE, "1");
         properties.setProperty(PROPERTY_AUTO_DB_UPGRADE, "1");
         return properties;
     }

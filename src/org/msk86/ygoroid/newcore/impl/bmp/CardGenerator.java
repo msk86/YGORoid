@@ -10,11 +10,11 @@ import org.msk86.ygoroid.newcore.BmpGenerator;
 import org.msk86.ygoroid.newcore.constant.CardSubType;
 import org.msk86.ygoroid.newcore.impl.Card;
 import org.msk86.ygoroid.newutils.BmpReader;
+import org.msk86.ygoroid.newutils.Configuration;
+import org.msk86.ygoroid.newutils.Style;
 import org.msk86.ygoroid.newutils.TextUtils;
-import org.msk86.ygoroid.newutils.Utils;
 import org.msk86.ygoroid.size.CardSize;
 import org.msk86.ygoroid.size.Size;
-import org.msk86.ygoroid.newutils.Configuration;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -54,10 +54,10 @@ public class CardGenerator implements BmpGenerator {
             textPaint.setTextSize(cardNameFontSize(size));
 
             if (!card.getSubTypes().contains(CardSubType.SYNC)) {
-                textPaint.setColor(Configuration.fontColor());
-                textPaint.setShadowLayer(1, 0, 0, Configuration.textShadowColor());
+                textPaint.setColor(Style.fontColor());
+                textPaint.setShadowLayer(1, 0, 0, Style.textShadowColor());
             } else {
-                textPaint.setColor(Configuration.syncFontColor());
+                textPaint.setColor(Style.syncFontColor());
             }
             textPaint.setAntiAlias(true);
             CharSequence cs = TextUtils.cutOneLine(card.getName(), textPaint, size.width());

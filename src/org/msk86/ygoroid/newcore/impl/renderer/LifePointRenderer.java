@@ -9,7 +9,6 @@ import org.msk86.ygoroid.newcore.impl.LifePoint;
 import org.msk86.ygoroid.newutils.Style;
 import org.msk86.ygoroid.size.OtherSize;
 import org.msk86.ygoroid.size.Size;
-import org.msk86.ygoroid.newutils.Configuration;
 
 public class LifePointRenderer implements Renderer {
     private LifePoint lifePoint;
@@ -29,7 +28,7 @@ public class LifePointRenderer implements Renderer {
         textPaint.setAntiAlias(true);
         textPaint.setTextSize(getFontSize());
         textPaint.setColor(Style.fontColor());
-        textPaint.setShadowLayer(1, 0, 0, Configuration.textShadowColor());
+        textPaint.setShadowLayer(1, 0, 0, Style.textShadowColor());
 
         StaticLayout layout = new StaticLayout(lifePoint.toString(), textPaint, size().width(), Layout.Alignment.ALIGN_NORMAL, 1, 0, true);
         canvas.save();

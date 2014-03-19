@@ -39,6 +39,14 @@ public class Style {
         return Color.DKGRAY;
     }
 
+    public static int highlightColor() {
+        return Color.BLUE;
+    }
+
+    public static int syncFontColor() {
+        return Color.BLACK;
+    }
+
     public static int lineColor() {
         return Color.WHITE;
     }
