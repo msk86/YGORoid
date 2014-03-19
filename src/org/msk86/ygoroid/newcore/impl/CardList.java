@@ -174,4 +174,8 @@ public class CardList {
     public void setListTopCard(boolean listTopCard) {
         this.listTopCard = listTopCard;
     }
+
+    public void clear() {
+        this.cards.clear();
+    }
 }

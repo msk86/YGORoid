@@ -27,8 +27,11 @@ public class DeckCards {
     public void loadDeck(String deckName) {
         this.deckName = deckName;
         List<List<Card>> lists = Utils.getDbHelper().loadFromFile(deckName);
+        mainDeckCards.clear();
         mainDeckCards.unshiftAll(lists.get(0));
+        exDeckCards.clear();
         exDeckCards.unshiftAll(lists.get(1));
+        sideDeckCards.clear();
         sideDeckCards.unshiftAll(lists.get(2));
     }
 
