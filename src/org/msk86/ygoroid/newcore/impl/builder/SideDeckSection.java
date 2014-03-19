@@ -17,6 +17,7 @@ public class SideDeckSection implements Item, Container {
     DeckCards cards;
     CardList sideDeck;
     Item holder;
+    boolean highLight;
 
     public SideDeckSection(Item holder) {
         sideDeck = new CardList();
@@ -33,6 +34,14 @@ public class SideDeckSection implements Item, Container {
 
     public Item getHolder() {
         return holder;
+    }
+
+    public boolean isHighLight() {
+        return highLight;
+    }
+
+    public void setHighLight(boolean highLight) {
+        this.highLight = highLight;
     }
 
     Renderer renderer;

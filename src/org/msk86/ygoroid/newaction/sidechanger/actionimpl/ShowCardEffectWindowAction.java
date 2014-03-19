@@ -6,8 +6,8 @@ import org.msk86.ygoroid.newcore.impl.CardEffectWindow;
 import org.msk86.ygoroid.newcore.impl.InfoBar;
 import org.msk86.ygoroid.newop.Operation;
 
-public class ShowCardEffectWindow extends BaseAction {
-    public ShowCardEffectWindow(Operation operation) {
+public class ShowCardEffectWindowAction extends BaseAction {
+    public ShowCardEffectWindowAction(Operation operation) {
         super(operation);
     }
 

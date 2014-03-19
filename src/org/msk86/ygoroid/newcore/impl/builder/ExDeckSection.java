@@ -17,6 +17,7 @@ public class ExDeckSection implements Item, Container {
     DeckCards cards;
     CardList exDeck;
     Item holder;
+    boolean highLight;
 
     public ExDeckSection(Item holder) {
         exDeck = new CardList();
@@ -33,6 +34,14 @@ public class ExDeckSection implements Item, Container {
 
     public Item getHolder() {
         return holder;
+    }
+
+    public boolean isHighLight() {
+        return highLight;
+    }
+
+    public void setHighLight(boolean highLight) {
+        this.highLight = highLight;
     }
 
     Renderer renderer;

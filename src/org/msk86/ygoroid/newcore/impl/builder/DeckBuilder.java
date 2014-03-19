@@ -44,6 +44,7 @@ public class DeckBuilder implements Item, Container, BaseContainer {
         this.cards = cards;
         checker = new DeckChecker(this.cards).startCheck();
         refreshDeck();
+        setCurrentSection(getMainDeckSection());
     }
 
     public void refreshDeck() {
@@ -54,10 +55,6 @@ public class DeckBuilder implements Item, Container, BaseContainer {
 
     public DeckCards getCards() {
         return cards;
-    }
-
-    public DeckChecker getChecker() {
-        return checker;
     }
 
     public MainDeckSection getMainDeckSection() {
@@ -131,15 +128,23 @@ public class DeckBuilder implements Item, Container, BaseContainer {
         return currentSelectCard;
     }
 
-    public void addToDeck(Card card) {
-
-    }
-
     public Container getCurrentSection() {
         return currentSection;
     }
 
     public void setCurrentSection(Container currentSection) {
+        getMainDeckSection().setHighLight(false);
+        getExDeckSection().setHighLight(false);
+        getSideDeckSection().setHighLight(false);
         this.currentSection = currentSection;
+        if(currentSection instanceof MainDeckSection) {
+            ((MainDeckSection) currentSection).setHighLight(true);
+        }
+        if(currentSection instanceof ExDeckSection) {
+            ((ExDeckSection) currentSection).setHighLight(true);
+        }
+        if(currentSection instanceof SideDeckSection) {
+            ((SideDeckSection) currentSection).setHighLight(true);
+        }
     }
 }

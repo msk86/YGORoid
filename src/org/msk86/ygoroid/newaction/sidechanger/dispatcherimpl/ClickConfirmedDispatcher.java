@@ -3,10 +3,12 @@ package org.msk86.ygoroid.newaction.sidechanger.dispatcherimpl;
 import org.msk86.ygoroid.newaction.Action;
 import org.msk86.ygoroid.newaction.Dispatcher;
 import org.msk86.ygoroid.newaction.sidechanger.actionimpl.SelectAction;
-import org.msk86.ygoroid.newaction.sidechanger.actionimpl.ShowCardEffectWindow;
+import org.msk86.ygoroid.newaction.sidechanger.actionimpl.ShowCardEffectWindowAction;
+import org.msk86.ygoroid.newaction.sidechanger.actionimpl.ShowNextPageDescAction;
 import org.msk86.ygoroid.newaction.sidechanger.actionimpl.UnSelectAction;
 import org.msk86.ygoroid.newcore.Item;
 import org.msk86.ygoroid.newcore.impl.Card;
+import org.msk86.ygoroid.newcore.impl.CardEffectWindow;
 import org.msk86.ygoroid.newcore.impl.InfoBar;
 import org.msk86.ygoroid.newop.impl.ClickConfirmed;
 
@@ -25,7 +27,10 @@ public class ClickConfirmedDispatcher implements Dispatcher<ClickConfirmed> {
             actionChain.add(new SelectAction(op));
         }
         if(item instanceof InfoBar) {
-            actionChain.add(new ShowCardEffectWindow(op));
+            actionChain.add(new ShowCardEffectWindowAction(op));
+        }
+        if(item instanceof CardEffectWindow) {
+            actionChain.add(new ShowNextPageDescAction(op));
         }
 
         return actionChain;
