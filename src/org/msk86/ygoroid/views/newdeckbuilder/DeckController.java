@@ -71,7 +71,7 @@ public class DeckController {
                     actionChain.add(new DeleteDeckAction(deckBuilderView));
                     break;
                 case SEARCH_FILTER_BTN:
-                    actionChain.add(new OpenSearchFilterAction());
+                    actionChain.add(new OpenSearchFilterAction(deckBuilderView));
             }
 
             for(Action action: actionChain) {

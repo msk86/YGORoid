@@ -14,7 +14,7 @@ import org.msk86.ygoroid.core.CardSubType;
 import org.msk86.ygoroid.core.CardType;
 import org.msk86.ygoroid.core.Race;
 import org.msk86.ygoroid.newaction.Action;
-import org.msk86.ygoroid.newaction.deckbuilder.actionimpl.SearchDeckAction;
+import org.msk86.ygoroid.newaction.deckbuilder.actionimpl.SearchByFilterAction;
 import org.msk86.ygoroid.utils.Utils;
 import org.msk86.ygoroid.views.newdeckbuilder.filter.*;
 
@@ -24,11 +24,9 @@ import java.util.List;
 public class SearchFilter {
     View searchFilterView;
     AlertDialog dialog;
-    SearchResultList searchResultList;
     boolean created;
 
-    public SearchFilter(SearchResultList searchResultList) {
-        this.searchResultList = searchResultList;
+    public SearchFilter() {
         this.created = false;
     }
 
@@ -48,7 +46,7 @@ public class SearchFilter {
                 .setPositiveButton(Utils.s(R.string.CONFIRM_YES), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Action action = new SearchDeckAction();
+                        Action action = new SearchByFilterAction();
                         action.execute();
                         dialog.dismiss();
                     }
@@ -56,7 +54,6 @@ public class SearchFilter {
                 .setNegativeButton(Utils.s(R.string.CONFIRM_NO), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        clear();
                         dialog.dismiss();
                     }
                 })
