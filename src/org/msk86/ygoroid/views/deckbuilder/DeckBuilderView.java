@@ -108,9 +108,6 @@ public class DeckBuilderView extends YGOView {
         }
 
         drawVersion(canvas);
-        if (Configuration.configProperties(Configuration.PROPERTY_FPS_ENABLE)) {
-            drawFPS(canvas);
-        }
     }
 
     private void drawShadow(Canvas canvas) {

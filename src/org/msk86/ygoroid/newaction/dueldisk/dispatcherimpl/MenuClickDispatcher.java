@@ -36,9 +36,6 @@ public class MenuClickDispatcher implements Dispatcher<MenuClick> {
                     case Const.MENU_GRAVITY_TOGGLE:
                         actionChain.add(new ToggleAction(op, Configuration.PROPERTY_GRAVITY_ENABLE));
                         break;
-                    case Const.MENU_FPS_TOGGLE:
-                        actionChain.add(new ToggleAction(op, Configuration.PROPERTY_FPS_ENABLE));
-                        break;
                     case Const.MENU_AUTO_SHUFFLE_TOGGLE:
                         actionChain.add(new ToggleAction(op, Configuration.PROPERTY_AUTO_SHUFFLE_ENABLE));
                         break;
