@@ -47,7 +47,7 @@ public class UserDefinedCardGenerator implements BmpGenerator {
             Paint paint = new Paint();
 
             Bitmap cardTypeBmp = card.getType().getBmpGenerator().generate(size);
-            Utils.drawBitmapOnCanvas(canvas, cardTypeBmp, paint, Utils.DRAW_POSITION_FIRST, Utils.DRAW_POSITION_FIRST);
+            canvas.drawBitmap(cardTypeBmp, 0, 0, paint);
 
             TextPaint textPaint = new TextPaint();
             textPaint.setTextSize(cardNameFontSize(size));

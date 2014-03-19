@@ -33,15 +33,16 @@ public class IndicatorRenderer implements Renderer {
             return;
         }
 
-        Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
-
         Paint paint = new Paint();
         paint.setColor(Configuration.lineColor());
         paint.setStrokeWidth(Style.border());
         paint.setStyle(Paint.Style.STROKE);
 
         Rect indicatorRect = new Rect(0, 0, size().width(), size().height());
-        helper.drawRect(canvas, indicatorRect, paint);
+        canvas.save();
+        canvas.translate(x, y);
+        canvas.drawRect(indicatorRect, paint);
+        canvas.restore();
 
         TextPaint textPaint = new TextPaint();
         textPaint.setTextSize(defaultFontSize());
@@ -56,7 +57,10 @@ public class IndicatorRenderer implements Renderer {
                 break;
             }
         }
-        helper.drawLayout(canvas, layout, 0, 0);
+        canvas.save();
+        canvas.translate(x, y);
+        layout.draw(canvas);
+        canvas.restore();
     }
 
     private int defaultFontSize() {

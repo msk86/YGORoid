@@ -67,7 +67,7 @@ public class YGOActivity extends Activity {
 
         if (savedInstanceState != null) {
             if (YGOView.DUEL_STATE_DECK.equals(savedInstanceState.getString(DUEL_STATE))) {
-                showDeckBuilderWithDeck(org.msk86.ygoroid.newutils.Utils.findTempDeck());
+                showDeckBuilder();
             } else if (YGOView.DUEL_STATE_SIDE.equals(savedInstanceState.getString(DUEL_STATE))) {
                 showSideChanger();
             } else {

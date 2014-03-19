@@ -52,9 +52,8 @@ public abstract class YGOView extends SurfaceView implements Runnable {
 
     protected void drawBackground(Canvas canvas) {
         canvas.drawColor(Color.BLACK);
-        Utils.DrawHelper helper = new Utils.DrawHelper(0, 0);
         if (BACKGROUND_BMP != null) {
-            canvas.drawBitmap(BACKGROUND_BMP, helper.center(Utils.screenWidth(), BACKGROUND_BMP.getWidth()), 0, new Paint());
+            canvas.drawBitmap(BACKGROUND_BMP, 0, 0, new Paint());
         }
     }
 

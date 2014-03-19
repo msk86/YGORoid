@@ -39,8 +39,6 @@ public class DeckRenderer implements Renderer {
     }
 
     private void drawText(Canvas canvas, int x, int y) {
-        Utils.DrawHelper helper = new Utils.DrawHelper(x, y);
-
         TextPaint textPaint = new TextPaint();
         textPaint.setAntiAlias(true);
         textPaint.setTextSize(size().width() / 6);
@@ -49,11 +47,18 @@ public class DeckRenderer implements Renderer {
         textPaint.setUnderlineText(true);
 
         StaticLayout layout = new StaticLayout(deck.getName(), textPaint, size().width(), Layout.Alignment.ALIGN_CENTER, 1, 0, false);
-        helper.drawLayout(canvas, layout, 0, size().height() * 3 / 4);
+        canvas.save();
+        canvas.translate(x, y + size().height() * 3 / 4);
+        layout.draw(canvas);
+        canvas.restore();
 
         layout = new StaticLayout(String.valueOf(deck.getCardList().size()), textPaint, size().width(), Layout.Alignment.ALIGN_CENTER, 1, 0, false);
         textPaint.setUnderlineText(false);
-        helper.drawLayout(canvas, layout, 0, size().height() * 7 / 8);
+
+        canvas.save();
+        canvas.translate(x, y + size().height() * 7 / 8);
+        layout.draw(canvas);
+        canvas.restore();
     }
 
     private void drawHighLight(Canvas canvas, int x, int y) {

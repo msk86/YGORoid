@@ -49,10 +49,8 @@ public class LogoView extends YGOView {
     @Override
     protected void doDraw(Canvas canvas) {
         Logo currentLogo = logos[logoIdx];
-        Utils.DrawHelper helper = new Utils.DrawHelper(0, 0);
-        helper.drawBitmap(canvas, currentLogo.logo,
-                helper.center(Utils.screenWidth(), currentLogo.logo.getWidth()),
-                helper.center(Utils.screenHeight(), currentLogo.logo.getHeight()), new Paint());
+        canvas.drawBitmap(currentLogo.logo, (Utils.screenWidth() - currentLogo.logo.getWidth()) / 2,
+                (Utils.screenHeight() - currentLogo.logo.getHeight()) / 2, new Paint());
 
         long now = System.currentTimeMillis();
         if (now - startTime < currentLogo.stayTime) {
