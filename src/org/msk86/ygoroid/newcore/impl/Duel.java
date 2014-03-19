@@ -109,6 +109,10 @@ public class Duel implements Item, Container, BaseContainer {
         lifePoint.reset();
         dice.reset();
         coin.reset();
+
+        setCardEffectWindow(null);
+        setCardSelector(null);
+        setLifePointCalculator(null);
     }
 
     private void initDeck() {
