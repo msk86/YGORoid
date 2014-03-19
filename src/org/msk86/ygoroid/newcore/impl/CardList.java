@@ -1,5 +1,6 @@
 package org.msk86.ygoroid.newcore.impl;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -159,7 +160,11 @@ public class CardList {
     }
 
     public void sort() {
-        Collections.sort(cards, new Card.CardComparator());
+        List<Card> tempCards = new ArrayList<Card>();
+        tempCards.addAll(cards);
+        Collections.sort(tempCards, new Card.CardComparator());
+        cards.clear();
+        cards.addAll(tempCards);
     }
 
     public List<Card> getCards() {
