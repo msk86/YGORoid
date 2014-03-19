@@ -78,6 +78,7 @@
 
     <string name="SAVE_SUCCESS" formatted="false">已保存[%s]。主牌組:%d，額外:%d，副牌組:%d。</string>
     <string name="SAVE_FAIL" formatted="false">保存[%s]失敗。</string>
+    <string name="DELETE_SUCCESS" formatted="false">[%s]已刪除。</string>
 
     <string name="ERROR_MAIN" formatted="false">主牌組卡片數量[%d]不符合要求。</string>
     <string name="ERROR_EX" formatted="false">额外卡组卡片數量[%d]不符合要求。</string>
@@ -123,6 +124,7 @@
     <string name="CONFIRM_NO">取消</string>
 
     <string name="CHOOSE_DECK">請選擇牌組</string>
+    <string name="DELETE_DECK" formatted="false">確定刪除牌組[%s]?</string>
     <string name="NEW_DECK">新牌組…</string>
     <string name="DECK_NAME">請輸入牌組名</string>
     <string name="CARD_NAME">請輸入卡名</string>

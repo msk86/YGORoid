@@ -78,6 +78,7 @@
 
     <string name="SAVE_SUCCESS" formatted="false">已保存[%s]。主卡组:%d，额外:%d，副卡组:%d。</string>
     <string name="SAVE_FAIL" formatted="false">保存[%s]失败。</string>
+    <string name="DELETE_SUCCESS" formatted="false">[%s]已删除。</string>
 
     <string name="ERROR_MAIN" formatted="false">主卡组卡片数量[%d]不符合要求。</string>
     <string name="ERROR_EX" formatted="false">额外卡组卡片数量[%d]不符合要求。</string>
@@ -124,6 +125,7 @@
 
     <string name="CHOOSE_DECK">请选择卡组</string>
     <string name="NEW_DECK">新卡组…</string>
+    <string name="DELETE_DECK" formatted="false">确定删除卡组[%s]?</string>
     <string name="DECK_NAME">请输入卡组名</string>
     <string name="CARD_NAME">请输入卡名</string>
     <string name="CHANGE_SIDE">副卡组更换完成？</string>

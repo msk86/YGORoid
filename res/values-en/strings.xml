@@ -78,6 +78,7 @@
 
     <string name="SAVE_SUCCESS" formatted="false">[%s] saved. Main:%d, Extra:%d, side:%d.</string>
     <string name="SAVE_FAIL" formatted="false">Fail to save [%s].</string>
+    <string name="DELETE_SUCCESS" formatted="false">[%s] deleted.</string>
 
     <string name="ERROR_MAIN" formatted="false">Number of cards in main [%d] doesn\'t pass the check.</string>
     <string name="ERROR_EX" formatted="false">Number of cards in extra [%d] doesn\'t pass the check.</string>
@@ -124,6 +125,7 @@
 
     <string name="CHOOSE_DECK">Choose deck</string>
     <string name="NEW_DECK">New Deck…</string>
+    <string name="DELETE_DECK">Really want to delete deck [%s]?</string>
     <string name="DECK_NAME">Please input deck name</string>
     <string name="CARD_NAME">Please input card name</string>
     <string name="CHANGE_SIDE">Finish to change side?</string>

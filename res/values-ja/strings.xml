@@ -78,6 +78,7 @@
 
     <string name="SAVE_SUCCESS" formatted="false">[%s]保存成功。メイン:%d、エクストラ:%d、サイド:%d。</string>
     <string name="SAVE_FAIL" formatted="false">保存失敗[%s]。</string>
+    <string name="DELETE_SUCCESS" formatted="false">[%s]削除成功。</string>
 
     <string name="ERROR_MAIN" formatted="false">メインデッキのカード数[%d]がルール違反します。</string>
     <string name="ERROR_EX" formatted="false">エクストラデッキのカード数[%d]がルール違反します。</string>
@@ -124,6 +125,7 @@
 
     <string name="CHOOSE_DECK">デッキ選択</string>
     <string name="NEW_DECK">ニューデッキ…</string>
+    <string name="DELETE_DECK" formatted="false">デッキ[%s]を削除しますか?</string>
     <string name="DECK_NAME">デッキの名前を入力してください。</string>
     <string name="CARD_NAME">カードの名前を入力してください。</string>
     <string name="CHANGE_SIDE">サイド変更を終了しますか？</string>

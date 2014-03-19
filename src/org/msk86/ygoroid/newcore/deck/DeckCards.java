@@ -78,7 +78,13 @@ public class DeckCards {
         return saved;
     }
 
-    public boolean delete() {
-        return false;
+    public void delete() {
+        if(deckName != null) {
+            Utils.deleteDeck(deckName);
+        }
+        deckName = null;
+        mainDeckCards = new ArrayList<Card>();
+        exDeckCards = new ArrayList<Card>();
+        sideDeckCards = new ArrayList<Card>();
     }
 }
