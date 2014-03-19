@@ -33,16 +33,16 @@ public class SearchCardAction extends BaseAction {
         layout.addView(edit, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
 
-        dialog = new AlertDialog.Builder(org.msk86.ygoroid.utils.Utils.getContext())
-                .setTitle(org.msk86.ygoroid.utils.Utils.s(R.string.CARD_NAME))
-                .setPositiveButton(org.msk86.ygoroid.utils.Utils.s(R.string.CONFIRM_YES), new OnCardSearchClickListener("OK"))
-                .setNegativeButton(org.msk86.ygoroid.utils.Utils.s(R.string.CONFIRM_NO), new OnCardSearchClickListener("Cancel"))
+        dialog = new AlertDialog.Builder(Utils.getContext())
+                .setTitle(Utils.s(R.string.CARD_NAME))
+                .setPositiveButton(Utils.s(R.string.CONFIRM_YES), new OnCardSearchClickListener("OK"))
+                .setNegativeButton(Utils.s(R.string.CONFIRM_NO), new OnCardSearchClickListener("Cancel"))
                 .create();
         dialog.setView(layout);
     }
 
     private void createEdit() {
-        edit = new EditText(org.msk86.ygoroid.utils.Utils.getContext());
+        edit = new EditText(Utils.getContext());
         edit.setGravity(Gravity.CENTER);
         edit.setSingleLine();
         edit.setOnEditorActionListener(new OnCardSearchActionListener());
@@ -58,6 +58,9 @@ public class SearchCardAction extends BaseAction {
 
     private void search() {
         String text = edit.getText().toString();
+        if(text.length() == 0) {
+            return;
+        }
         Card card = Utils.getDbHelper().loadByName(text);
         CardEffectWindow cardWindow = new CardEffectWindow(duel, card);
         duel.setCardEffectWindow(cardWindow);
