@@ -89,7 +89,7 @@ public class GridLayout implements Layout {
             return 0;
         }
         int containerWidth = ((Item) container).getRenderer().size().width();
-        return (containerWidth - gridSize.width() * col) / (col - 1);
+        return (int)Math.floor(1.0 * (containerWidth - gridSize.width() * col) / (col - 1));
     }
 
     private Point itemPositionInGrid(Item item) {

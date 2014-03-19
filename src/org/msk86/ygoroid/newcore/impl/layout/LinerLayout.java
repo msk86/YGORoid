@@ -90,7 +90,7 @@ public class LinerLayout implements Layout {
             totalItemWidth += item.getRenderer().size().width();
         }
 
-        int padding = (containerWidth - totalItemWidth) / (items().size() - 1);
+        int padding = (int)Math.floor(1.0 * (containerWidth - totalItemWidth) / (items().size() - 1));
 
         return Math.min(padding, getMaxPadding());
     }
