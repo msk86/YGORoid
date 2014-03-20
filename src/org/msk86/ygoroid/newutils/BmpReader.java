@@ -19,7 +19,6 @@ public class BmpReader {
     public static Bitmap readBitmap(int resId, Size require) {
         try {
             BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inPreferredConfig = Bitmap.Config.ARGB_4444;
             options.inSampleSize = calculateSampleScale(resId, require);
             Bitmap bitmap = BitmapFactory.decodeResource(Utils.getContext().getResources(), resId, options);
             return scale(bitmap, require);
@@ -31,7 +30,6 @@ public class BmpReader {
     public static Bitmap readBitmap(String file, Size require) {
         try {
             BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inPreferredConfig = Bitmap.Config.ARGB_4444;
             options.inSampleSize = calculateSampleScale(file, require);
             Bitmap bitmap = BitmapFactory.decodeFile(file, options);
             return scale(bitmap, require);
@@ -49,9 +47,7 @@ public class BmpReader {
         Bitmap newBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
                 bitmap.getHeight(), matrix, true);
         bitmap.recycle();
-        Bitmap sampledBmp = newBitmap.copy(Bitmap.Config.ARGB_4444, false);
-        newBitmap.recycle();
-        return sampledBmp;
+        return newBitmap;
     }
 
     private static int calculateSampleScale(BitmapFactory.Options options, Size require) {

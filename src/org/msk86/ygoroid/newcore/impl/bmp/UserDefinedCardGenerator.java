@@ -41,7 +41,7 @@ public class UserDefinedCardGenerator implements BmpGenerator {
     private Bitmap bmp(Size size) {
         Bitmap cardPic = BmpReader.readBitmap(card.getFileName(), size);
         if (cardPic == null) {
-            cardPic = Bitmap.createBitmap(size.width(), size.height(), Bitmap.Config.ARGB_4444);
+            cardPic = Bitmap.createBitmap(size.width(), size.height(), Bitmap.Config.ARGB_8888);
             Canvas canvas = new Canvas(cardPic);
             Paint paint = new Paint();
 
