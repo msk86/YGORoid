@@ -9,7 +9,6 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.YGOActivity;
-import org.msk86.ygoroid.newcore.Item;
 import org.msk86.ygoroid.newutils.Utils;
 import org.msk86.ygoroid.views.OnKeyProcessor;
 import org.msk86.ygoroid.views.OnMenuProcessor;
@@ -105,16 +104,6 @@ public class LogoView extends YGOView {
         return YGOView.DUEL_STATE_LOGO;
     }
 
-
-    @Override
-    public Item exportData() {
-        return null;
-    }
-
-    @Override
-    public void importData(Item item) {
-
-    }
 
     @Override
     public void deallocateMemory() {

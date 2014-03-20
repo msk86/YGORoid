@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
-import org.msk86.ygoroid.newcore.Item;
 import org.msk86.ygoroid.newcore.impl.builder.DeckBuilder;
 import org.msk86.ygoroid.views.OnKeyProcessor;
 import org.msk86.ygoroid.views.OnMenuProcessor;
@@ -69,16 +68,6 @@ public class DeckBuilderView extends YGOView {
     @Override
     public String getDuelState() {
         return YGOView.DUEL_STATE_DECK;
-    }
-
-    @Override
-    public Item exportData() {
-        return deckBuilder;
-    }
-
-    @Override
-    public void importData(Item item) {
-        deckBuilder = (DeckBuilder) item;
     }
 
     @Override

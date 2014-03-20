@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
-import org.msk86.ygoroid.newcore.Item;
 import org.msk86.ygoroid.newcore.deck.DeckCards;
 import org.msk86.ygoroid.newcore.impl.builder.SideChanger;
 import org.msk86.ygoroid.views.OnKeyProcessor;
@@ -57,16 +56,6 @@ public class SideChangerView extends YGOView {
     @Override
     public String getDuelState() {
         return YGOView.DUEL_STATE_SIDE;
-    }
-
-    @Override
-    public Item exportData() {
-        return sideChanger;
-    }
-
-    @Override
-    public void importData(Item item) {
-        this.sideChanger = (SideChanger) item;
     }
 
     public SideChanger getSideChanger() {

@@ -115,14 +115,14 @@ public class YGOActivity extends Activity {
     }
 
     public void showDuel() {
-        if(duelDiskLayout == null) {
+        if (duelDiskLayout == null) {
             duelDiskLayout = inflater.inflate(R.layout.new_duel_disk, null);
         }
 
         super.setContentView(duelDiskLayout);
         duelDiskView = (DuelDiskView) findViewById(R.id.newDuelDiskView);
-        if(currentView instanceof YGOView) {
-            ((YGOView)currentView).pause();
+        if (currentView instanceof YGOView) {
+            ((YGOView) currentView).pause();
         }
         if (!duelDiskView.isRunning()) {
             duelDiskView.resume();
@@ -148,13 +148,13 @@ public class YGOActivity extends Activity {
     }
 
     public void showSideChanger() {
-        if(sideChangerLayout == null) {
+        if (sideChangerLayout == null) {
             sideChangerLayout = inflater.inflate(R.layout.side_changer, null);
         }
         super.setContentView(sideChangerLayout);
         sideChangerView = (SideChangerView) findViewById(R.id.sideChangerView);
-        if(currentView instanceof YGOView) {
-            ((YGOView)currentView).pause();
+        if (currentView instanceof YGOView) {
+            ((YGOView) currentView).pause();
         }
         if (!sideChangerView.isRunning()) {
             sideChangerView.resume();
@@ -173,17 +173,17 @@ public class YGOActivity extends Activity {
 
     public void showDeckBuilder() {
         boolean initDeckBuilder = false;
-        if(deckBuilderLayout == null) {
+        if (deckBuilderLayout == null) {
             deckBuilderLayout = inflater.inflate(R.layout.new_deck_builder, null);
             initDeckBuilder = true;
         }
         super.setContentView(deckBuilderLayout);
         deckBuilderView = (DeckBuilderView) findViewById(R.id.deck_builder);
-        if(initDeckBuilder) {
+        if (initDeckBuilder) {
             deckBuilderView.getController().registerEvent();
         }
-        if(currentView instanceof YGOView) {
-            ((YGOView)currentView).pause();
+        if (currentView instanceof YGOView) {
+            ((YGOView) currentView).pause();
         }
         if (!deckBuilderView.isRunning()) {
             deckBuilderView.resume();
@@ -355,16 +355,6 @@ public class YGOActivity extends Activity {
         }
 
         private void persistentDuel() {
-            if (service != null && currentView instanceof YGOView) {
-                YGOView view = (YGOView) currentView;
-                Item data = service.fetchItem(view);
-                if (data != null) {
-                    view.importData(data);
-                } else {
-                    service.storeItem(view, view.exportData());
-                }
-            }
-
             if (service != null && downloader != null) {
                 service.setDownloader(downloader);
             }
