@@ -19,7 +19,7 @@ public abstract class YGOView extends SurfaceView implements Runnable {
     private static Bitmap BACKGROUND_BMP;
 
     static {
-        BACKGROUND_BMP = BmpReader.readBitmap(Configuration.texturePath() + "bg" + Configuration.cardImageSuffix(), R.raw.bg, OtherSize.SCREEN);
+        BACKGROUND_BMP = BmpReader.readScaleBitmap(Configuration.texturePath() + "bg" + Configuration.cardImageSuffix(), R.raw.bg, OtherSize.SCREEN);
     }
 
     private static final int ACTIVE_DRAW_DURATION = 1500;
@@ -40,7 +40,8 @@ public abstract class YGOView extends SurfaceView implements Runnable {
     protected void drawBackground(Canvas canvas) {
         canvas.drawColor(Color.BLACK);
         if (BACKGROUND_BMP != null) {
-            canvas.drawBitmap(BACKGROUND_BMP, 0, 0, new Paint());
+            canvas.drawBitmap(BACKGROUND_BMP, (OtherSize.SCREEN.width() - BACKGROUND_BMP.getWidth()) / 2,
+                    (OtherSize.SCREEN.height() - BACKGROUND_BMP.getHeight()) / 2, new Paint());
         }
     }
 

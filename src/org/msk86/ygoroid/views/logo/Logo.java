@@ -15,7 +15,7 @@ public class Logo {
 
     public Logo(int resId) {
         this.resId = resId;
-        logo = BmpReader.readBitmap(resId, OtherSize.SCREEN);
+        logo = BmpReader.readScaleBitmap(resId, OtherSize.SCREEN);
     }
 
     public Logo(int resId, int maskColor) {
