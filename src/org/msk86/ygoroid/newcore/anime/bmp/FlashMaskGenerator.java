@@ -29,6 +29,6 @@ public class FlashMaskGenerator implements BmpGenerator {
     }
 
     private Bitmap bmp(Size size) {
-        return BmpReader.readBitmap(R.raw.mask, size);
+        return BmpReader.readScaleBitmap(R.raw.mask, size);
     }
 }
