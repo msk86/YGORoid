@@ -12,6 +12,7 @@ import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.newutils.BmpReader;
 import org.msk86.ygoroid.newutils.Configuration;
 import org.msk86.ygoroid.newutils.FPSMaker;
+import org.msk86.ygoroid.newutils.Utils;
 import org.msk86.ygoroid.size.OtherSize;
 
 public abstract class YGOView extends SurfaceView implements Runnable {
@@ -59,7 +60,11 @@ public abstract class YGOView extends SurfaceView implements Runnable {
                 try {
                     canvas = holder.lockCanvas();
                     synchronized (holder) {
-                        doDraw(canvas);
+                        if(canvas.getWidth() == Utils.screenHeight()) {
+                            updateActionTime();
+                        } else {
+                            doDraw(canvas);
+                        }
                     }
                 } catch (Exception e) {
                 } finally {
@@ -67,7 +72,6 @@ public abstract class YGOView extends SurfaceView implements Runnable {
                         holder.unlockCanvasAndPost(canvas);
                     }
                 }
-
             }
 
             fpsMaker.limitFPS();
@@ -77,9 +81,9 @@ public abstract class YGOView extends SurfaceView implements Runnable {
 
     public void resume() {
         running = true;
-        updateActionTime();
         renderThread = new Thread(this);
         renderThread.start();
+        updateActionTime();
     }
 
     public void pause() {
