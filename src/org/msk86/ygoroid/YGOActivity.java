@@ -303,12 +303,16 @@ public class YGOActivity extends Activity {
 
     public void showInfo(String info) {
         if (currentView == deckBuilderView) {
-//            deckBuilderView.getInfoWindow().setInfo(info);
+            deckBuilderView.getDeckBuilder().getInfoBar().setInfo(info);
             deckBuilderView.updateActionTime();
         }
         if (currentView == duelDiskView) {
             duelDiskView.getDuel().getInfoBar().setInfo(info);
             duelDiskView.updateActionTime();
+        }
+        if (currentView == sideChangerView) {
+            sideChangerView.getSideChanger().getInfoBar().setInfo(info);
+            sideChangerView.updateActionTime();
         }
     }
 
