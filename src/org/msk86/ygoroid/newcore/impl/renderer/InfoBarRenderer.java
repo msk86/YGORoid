@@ -40,9 +40,9 @@ public class InfoBarRenderer implements Renderer {
         paint.setAntiAlias(true);
 
         String infoText = TextUtils.cutOneLine(infoBar.info(), paint, size().width());
-        StaticLayout layout = new StaticLayout(infoText, paint, size().width(), Layout.Alignment.ALIGN_NORMAL, 1, 0, false);
+        StaticLayout layout = new StaticLayout(infoText, paint, size().width() - 8, Layout.Alignment.ALIGN_NORMAL, 1, 0, false);
         canvas.save();
-        canvas.translate(x + 5, y + 1);
+        canvas.translate(x + 4, y + 1);
         layout.draw(canvas);
         canvas.restore();
     }

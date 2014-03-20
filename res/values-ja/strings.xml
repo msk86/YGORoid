@@ -8,7 +8,7 @@
     <string name="pics_api" formatted="false">http://my-card.in/cards/image.json</string>
     <string name="pics_url_backup" formatted="false">http://images.my-card.in/%s.jpg</string>
 
-    <string name="startup_hint" formatted="false">メニューを押す、もしくわ上へスライドすると、デュエル開始します。</string>
+    <string name="startup_hint" formatted="false">メニューを押す、もしくは最下のインフォバーをスクロールする、デュエル開始します。</string>
 
     <string name="wifi_check" formatted="false">WIFIの接続が確認されません、この状況で更新しますか？</string>
     <string name="database_updating" formatted="false">カード情報更新中[%s] %.1f%%, 完成後デュエルを開始してください。</string>

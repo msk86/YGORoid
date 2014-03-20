@@ -6,11 +6,17 @@ import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.newcore.Item;
+import org.msk86.ygoroid.newcore.constant.FieldType;
 import org.msk86.ygoroid.newcore.impl.Duel;
+import org.msk86.ygoroid.newcore.impl.Field;
+import org.msk86.ygoroid.newcore.impl.SpCard;
 import org.msk86.ygoroid.views.OnKeyProcessor;
 import org.msk86.ygoroid.views.OnMenuProcessor;
 import org.msk86.ygoroid.views.YGOView;
+
+import java.util.List;
 
 public class DuelDiskView extends YGOView {
 
@@ -34,11 +40,15 @@ public class DuelDiskView extends YGOView {
         return duel;
     }
 
-    public void setDuel(Duel duel) {
-        this.duel = duel;
-    }
-
     private void initAbout() {
+        List<Field> monsterZones = duel.getDuelFields().getFields(FieldType.MONSTER);
+        List<Field> magicZones = duel.getDuelFields().getFields(FieldType.MAGIC_TRAP);
+        monsterZones.get(2).setItem(SpCard.createMsk86());
+        monsterZones.get(1).setItem(SpCard.createHeaven());
+        monsterZones.get(3).setItem(SpCard.createZh99998());
+        SpCard quickStart = SpCard.createQuickStart();
+        magicZones.get(2).setItem(quickStart);
+        duel.select(quickStart);
     }
 
     @Override

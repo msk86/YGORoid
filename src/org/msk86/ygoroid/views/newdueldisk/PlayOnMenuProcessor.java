@@ -32,8 +32,6 @@ public class PlayOnMenuProcessor implements OnMenuProcessor {
         Item item = (Item) duel.getCurrentSelectItem();
         Container container = LayoutUtils.itemContainer(duel, item);
 
-        // not duel disk?
-
         if(container instanceof Field) {
             if(item instanceof Card || item instanceof OverRay) {
                 Card card;
@@ -42,7 +40,9 @@ public class PlayOnMenuProcessor implements OnMenuProcessor {
                 } else {
                     card = (Card) item;
                 }
-                if(!card.isToken()) {
+                if(card instanceof SpCard) {
+                    systemMenu(menu);
+                } else if(!card.isToken()) {
                     fieldCardMenu(menu);
                 }
             }
