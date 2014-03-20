@@ -10,5 +10,6 @@ public class CloseCardSelectorAction extends BaseAction {
     @Override
     public void execute() {
         duel.setCardSelector(null);
+        duel.unSelect();
     }
 }
