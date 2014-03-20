@@ -40,17 +40,6 @@ public class BmpReader {
         }
     }
 
-    public static Bitmap rotate(Bitmap bitmap, int degree) {
-        Matrix matrix = new Matrix();
-        matrix.postScale(1f, 1f);
-        matrix.postRotate(degree);
-        Bitmap newBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
-                bitmap.getHeight(), matrix, true);
-        Bitmap sampledBmp = newBitmap.copy(Bitmap.Config.ARGB_4444, false);
-        newBitmap.recycle();
-        return sampledBmp;
-    }
-
     public static Bitmap scale(Bitmap bitmap, Size size) {
         Matrix matrix = new Matrix();
 
