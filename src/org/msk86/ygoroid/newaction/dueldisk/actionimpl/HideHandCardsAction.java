@@ -12,5 +12,6 @@ public class HideHandCardsAction extends BaseAction {
     public void execute() {
         HandCards handCards = (HandCards) container;
         handCards.getCardList().setAll();
+        handCards.getCardList().setOpen(false);
     }
 }

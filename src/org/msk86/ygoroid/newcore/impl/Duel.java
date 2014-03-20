@@ -113,6 +113,7 @@ public class Duel implements Item, Container, BaseContainer {
         setCardEffectWindow(null);
         setCardSelector(null);
         setLifePointCalculator(null);
+        infoBar.clearInfo();
     }
 
     private void initDeck() {

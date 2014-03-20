@@ -10,8 +10,8 @@ public class ShowHandCardsAction extends BaseAction {
 
     @Override
     public void execute() {
-
         HandCards handCards = (HandCards) container;
         handCards.getCardList().openAll();
+        handCards.getCardList().setOpen(true);
     }
 }

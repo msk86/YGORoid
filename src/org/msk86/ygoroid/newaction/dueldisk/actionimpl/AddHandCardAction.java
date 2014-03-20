@@ -12,6 +12,8 @@ public class AddHandCardAction extends BaseAction {
     @Override
     public void execute() {
         HandCards handCards = (HandCards) container;
-        handCards.add((Card) item);
+        Card card = (Card) item;
+        handCards.add(card);
+        duel.select(card);
     }
 }

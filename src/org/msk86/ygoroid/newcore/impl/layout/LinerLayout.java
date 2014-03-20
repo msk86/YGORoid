@@ -49,6 +49,9 @@ public class LinerLayout implements Layout {
     @Override
     public Item itemAt(int x, int y) {
         int rx = x - centerOffset();
+        if(rx < 0) {
+            return null;
+        }
         int currentRightX = 0;
         for (int i = 0; i< items().size(); i++) {
             Item item = items().get(i);
