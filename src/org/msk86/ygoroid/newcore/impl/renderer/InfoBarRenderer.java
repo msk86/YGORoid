@@ -55,26 +55,13 @@ public class InfoBarRenderer implements Renderer {
         canvas.restore();
     }
 
-    protected void drawVersion(Canvas canvas) {
-        TextPaint paint = new TextPaint();
-        paint.setColor(Style.fontColor());
-        int fontSize = FieldSize.SQUARE.width() / 7;
-        paint.setTextSize(fontSize);
-        paint.setAntiAlias(true);
-        String versionText = "V" + Utils.getVersion();
-        StaticLayout layout = new StaticLayout(versionText, paint, fontSize * 5, Layout.Alignment.ALIGN_NORMAL, 1, 0, false);
-        canvas.save();
-        canvas.translate(4, 0);
-        layout.draw(canvas);
-        canvas.restore();
-    }
-
     private void drawFrame(Canvas canvas, int x, int y) {
         canvas.save();
         canvas.translate(x, y);
 
         Paint paint = new Paint();
         paint.setColor(Style.infoBarBackgroundColor());
+        paint.setAlpha(180);
         canvas.drawRect(new Rect(0, 0, size().width(), size().height()), paint);
 
         paint.setColor(Style.infoBarBorderColor());
