@@ -9,6 +9,7 @@ import android.text.TextPaint;
 import org.msk86.ygoroid.newcore.Renderer;
 import org.msk86.ygoroid.newcore.impl.Indicator;
 import org.msk86.ygoroid.newutils.Style;
+import org.msk86.ygoroid.newutils.TextUtils;
 import org.msk86.ygoroid.size.IndicatorSize;
 import org.msk86.ygoroid.size.Size;
 
@@ -48,13 +49,7 @@ public class IndicatorRenderer implements Renderer {
         textPaint.setShadowLayer(1, 0, 0, Style.textShadowColor());
         textPaint.setAntiAlias(true);
         StaticLayout layout = new StaticLayout(String.valueOf(indicator.getCount()), textPaint, size().width(), Layout.Alignment.ALIGN_CENTER, 1, 0, true);
-        while (layout.getLineCount() > 1) {
-            textPaint.setTextSize(textPaint.getTextSize() * 0.9f);
-            layout = new StaticLayout(String.valueOf(indicator.getCount()), textPaint, size().width(), Layout.Alignment.ALIGN_CENTER, 1, 0, true);
-            if(textPaint.getTextSize() < 1) {
-                break;
-            }
-        }
+        layout = TextUtils.scaleToOneLine(layout);
         canvas.save();
         canvas.translate(x, y);
         layout.draw(canvas);

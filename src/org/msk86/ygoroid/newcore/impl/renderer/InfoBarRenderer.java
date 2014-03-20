@@ -39,19 +39,22 @@ public class InfoBarRenderer implements Renderer {
         paint.setColor(Style.fontColor());
         paint.setStrokeWidth(1);
         paint.setAntiAlias(true);
-        int fontSize = (int) (size().height() / 1.2);
+        int fontSize = (int) (size().height() / 1.3);
         paint.setTextSize(fontSize);
 
         String versionText = "V" + Utils.getVersion();
-        String infoText = TextUtils.cutOneLine(infoBar.info(), paint, size().width());
-        StaticLayout layout = new StaticLayout(infoText, paint, size().width() - fontSize * versionText.length() - 8, Layout.Alignment.ALIGN_NORMAL, 1, 0, false);
         canvas.save();
-        canvas.translate(x + 4, y + 1);
+        canvas.translate(x, y + 1);
+        StaticLayout layout = new StaticLayout(versionText, paint, size().width() - 4, Layout.Alignment.ALIGN_OPPOSITE, 1, 0, false);
         layout.draw(canvas);
-        canvas.translate(-4, 0);
 
-        layout = new StaticLayout(versionText, paint, size().width() - 4, Layout.Alignment.ALIGN_OPPOSITE, 1, 0, false);
+        int versionWidth = TextUtils.getTextWidth(versionText, paint);
+        String infoText = infoBar.info();
+        canvas.translate(4, 0);
+        layout = new StaticLayout(infoText, paint, size().width() - versionWidth - 8, Layout.Alignment.ALIGN_NORMAL, 1, 0, false);
+        layout = TextUtils.scaleToOneLine(layout);
         layout.draw(canvas);
+
         canvas.restore();
     }
 
@@ -67,6 +70,7 @@ public class InfoBarRenderer implements Renderer {
         paint.setColor(Style.infoBarBorderColor());
         paint.setStrokeWidth(3);
         paint.setStyle(Paint.Style.STROKE);
+        paint.setAlpha(255);
         canvas.drawRect(new Rect(0, 0, size().width(), size().height() + 3), paint);
 
         canvas.restore();
