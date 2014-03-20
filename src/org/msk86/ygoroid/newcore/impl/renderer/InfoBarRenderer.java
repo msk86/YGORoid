@@ -10,6 +10,8 @@ import org.msk86.ygoroid.newcore.Renderer;
 import org.msk86.ygoroid.newcore.impl.InfoBar;
 import org.msk86.ygoroid.newutils.Style;
 import org.msk86.ygoroid.newutils.TextUtils;
+import org.msk86.ygoroid.newutils.Utils;
+import org.msk86.ygoroid.size.FieldSize;
 import org.msk86.ygoroid.size.InfoBarSize;
 import org.msk86.ygoroid.size.Size;
 
@@ -36,13 +38,33 @@ public class InfoBarRenderer implements Renderer {
         TextPaint paint = new TextPaint();
         paint.setColor(Style.fontColor());
         paint.setStrokeWidth(1);
-        paint.setTextSize((int) (size().height() / 1.2));
         paint.setAntiAlias(true);
+        int fontSize = (int) (size().height() / 1.2);
+        paint.setTextSize(fontSize);
 
+        String versionText = "V" + Utils.getVersion();
         String infoText = TextUtils.cutOneLine(infoBar.info(), paint, size().width());
-        StaticLayout layout = new StaticLayout(infoText, paint, size().width() - 8, Layout.Alignment.ALIGN_NORMAL, 1, 0, false);
+        StaticLayout layout = new StaticLayout(infoText, paint, size().width() - fontSize * versionText.length() - 8, Layout.Alignment.ALIGN_NORMAL, 1, 0, false);
         canvas.save();
         canvas.translate(x + 4, y + 1);
+        layout.draw(canvas);
+        canvas.translate(-4, 0);
+
+        layout = new StaticLayout(versionText, paint, size().width() - 4, Layout.Alignment.ALIGN_OPPOSITE, 1, 0, false);
+        layout.draw(canvas);
+        canvas.restore();
+    }
+
+    protected void drawVersion(Canvas canvas) {
+        TextPaint paint = new TextPaint();
+        paint.setColor(Style.fontColor());
+        int fontSize = FieldSize.SQUARE.width() / 7;
+        paint.setTextSize(fontSize);
+        paint.setAntiAlias(true);
+        String versionText = "V" + Utils.getVersion();
+        StaticLayout layout = new StaticLayout(versionText, paint, fontSize * 5, Layout.Alignment.ALIGN_NORMAL, 1, 0, false);
+        canvas.save();
+        canvas.translate(4, 0);
         layout.draw(canvas);
         canvas.restore();
     }

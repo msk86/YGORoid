@@ -19,15 +19,15 @@ public class SpCard extends Card {
     }
 
     public static SpCard createMsk86() {
-        return new SpCard("-1000", "Msk86:", "Developer, Email: msk86.kaiser@gmail.com", R.raw.sp_msk86);
+        return new SpCard("-1000", "Msk86.kaiser@gmail.com:", "Developer", R.raw.sp_msk86);
     }
 
     public static SpCard createZh99998() {
-        return new SpCard("-1000", "Zh99998:", "Resource Provider, Email: zh99998@gmail.com", R.raw.sp_zh99998);
+        return new SpCard("-1000", "Zh99998@gmail.com:", "Resource Provider", R.raw.sp_zh99998);
     }
 
     public static SpCard createHeaven() {
-        return new SpCard("-1000", "Heaven:", "Group Manager, Email: 20650688@qq.com", R.raw.sp_heaven);
+        return new SpCard("-1000", "20650688@qq.com:", "Group Manager", R.raw.sp_heaven);
     }
 
     public static SpCard createQuickStart() {

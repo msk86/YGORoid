@@ -44,7 +44,6 @@ public class DeckBuilderView extends YGOView {
     protected void doDraw(Canvas canvas) {
         drawBackground(canvas);
         deckBuilder.getRenderer().draw(canvas, 0, 0);
-//        drawVersion(canvas);
     }
 
     @Override

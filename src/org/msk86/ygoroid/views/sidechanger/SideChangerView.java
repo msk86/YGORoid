@@ -38,7 +38,6 @@ public class SideChangerView extends YGOView {
     public void doDraw(Canvas canvas) {
         drawBackground(canvas);
         sideChanger.getRenderer().draw(canvas, 0, 0);
-//        drawVersion(canvas);
     }
 
     OnKeyProcessor onKeyProcessor;
