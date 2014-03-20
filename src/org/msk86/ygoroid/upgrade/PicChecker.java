@@ -44,7 +44,6 @@ public class PicChecker implements Checker {
 
     private void getMissingIds() {
         Set<String> cardIdInFile = new HashSet<String>(10000);
-
         Set<String> cardPics = new HashSet<String>(10000);
 
         String[] pics = Utils.cardPics();

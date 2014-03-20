@@ -56,9 +56,7 @@ public class Downloader {
         }
 
         for (List<Task> subTasks : subTasksList) {
-            if (subTasks.size() > 0) {
-                new Thread(new DownloadThread(subTasks)).start();
-            }
+            new Thread(new DownloadThread(subTasks)).start();
         }
     }
 
@@ -98,13 +96,18 @@ public class Downloader {
         if (targetFile.exists()) {
             targetFile.delete();
         }
-        tmpFile.renameTo(targetFile);
 
         try {
             is.close();
         } catch (Exception ex) {
         }
 
+        if(tmpFile.length() != 0) {
+            tmpFile.renameTo(targetFile);
+        } else {
+            tmpFile.delete();
+            throw new IOException("Download error");
+        }
     }
 
     private DownloadProgress defaultDownloadProgress() {
