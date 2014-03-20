@@ -72,7 +72,8 @@ public class Utils {
         return picsDir.list(new FilenameFilter() {
             @Override
             public boolean accept(File file, String name) {
-                return name.endsWith(".jpg");
+                File currentFile = new File(file.getAbsolutePath(), name);
+                return currentFile.length() != 0 && name.endsWith(".jpg");
             }
         });
     }
