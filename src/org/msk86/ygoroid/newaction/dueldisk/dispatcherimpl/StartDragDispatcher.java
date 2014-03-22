@@ -34,8 +34,8 @@ public class StartDragDispatcher implements Dispatcher<StartDrag> {
             }
         }
         if(container instanceof CardSelector) {
-            actionChain.add(new DragCardSelectorCardAction(op));
             actionChain.add(new CloseCardSelectorAction(op));
+            actionChain.add(new DragCardSelectorCardAction(op));
         }
 
         return actionChain;

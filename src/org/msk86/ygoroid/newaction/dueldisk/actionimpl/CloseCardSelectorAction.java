@@ -1,5 +1,7 @@
 package org.msk86.ygoroid.newaction.dueldisk.actionimpl;
 
+import org.msk86.ygoroid.newcore.Listable;
+import org.msk86.ygoroid.newcore.Selectable;
 import org.msk86.ygoroid.newop.Operation;
 
 public class CloseCardSelectorAction extends BaseAction {
@@ -9,7 +11,10 @@ public class CloseCardSelectorAction extends BaseAction {
 
     @Override
     public void execute() {
+        Listable source = duel.getCardSelector().getSource();
         duel.setCardSelector(null);
-        duel.unSelect();
+        if(source instanceof Selectable) {
+            duel.select((Selectable) source);
+        }
     }
 }

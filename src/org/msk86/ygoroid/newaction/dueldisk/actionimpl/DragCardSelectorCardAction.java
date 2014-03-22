@@ -22,6 +22,7 @@ public class DragCardSelectorCardAction extends BaseAction {
             }
             listable.listCards().remove(card);
             ((StartDrag) operation).setDragItem(card);
+            duel.select(card);
         }
     }
 }
