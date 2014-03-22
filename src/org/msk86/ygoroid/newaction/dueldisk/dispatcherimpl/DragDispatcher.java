@@ -55,6 +55,8 @@ public class DragDispatcher implements Dispatcher<Drag> {
                 if (op.getItem() instanceof Card) {
                     actionChain.add(new AddHandCardAction(op));
                 }
+            } else if(op.getItem() instanceof InfoBar) {
+                actionChain.add(new AddHandCardAction(op));
             }
             if (actionChain.size() == 0) {
                 actionChain.add(new RevertDragAction(op));
