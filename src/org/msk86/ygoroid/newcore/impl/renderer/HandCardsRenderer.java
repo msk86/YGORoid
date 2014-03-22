@@ -25,6 +25,8 @@ public class HandCardsRenderer implements Renderer {
         canvas.save();
         canvas.translate(x, y);
 
+        canvas.clipRect(0, 0, size().width(), size().height());
+
         for(Card card : handCards.getCardList().getCards()) {
             Point pos = handCards.getLayout().itemPosition(card);
             card.getRenderer().draw(canvas, pos.x, pos.y + selectCardPaddingY(card));
