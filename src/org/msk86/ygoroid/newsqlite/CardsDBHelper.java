@@ -419,7 +419,11 @@ public class CardsDBHelper extends SQLiteOpenHelper {
                         }
                         switch (cardIn) {
                             case IN_MAIN:
-                                mainCardList.add(card);
+                                if(!card.isEx()) {
+                                    mainCardList.add(card);
+                                } else {
+                                    exCardList.add(card);
+                                }
                                 break;
                             case IN_EX:
                                 exCardList.add(card);
@@ -457,7 +461,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
 
         txt.append(cardListTxt("#main", main));
         txt.append(cardListTxt("#ex", ex));
-        txt.append(cardListTxt("!side", side));
+        txt.append(cardListTxt("!", side));
 
         String deckPath = Configuration.deckPath() + deck;
 
@@ -492,7 +496,7 @@ public class CardsDBHelper extends SQLiteOpenHelper {
     }
 
     private boolean isSide(String line) {
-        return line.startsWith("!side") || line.startsWith("##");
+        return line.startsWith("!") || line.startsWith("##");
     }
 
     private boolean isEx(String line) {
