@@ -6,6 +6,7 @@ public class InfoBarSize {
     public static Size INFO_BAR;
 
     static {
-        InfoBarSize.INFO_BAR = new OtherSize(Utils.screenWidth(), 25);
+        int infoBarHeight = Math.min(25, Utils.screenHeight() / 18);
+        InfoBarSize.INFO_BAR = new OtherSize(Utils.screenWidth(), infoBarHeight);
     }
 }

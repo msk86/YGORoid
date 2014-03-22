@@ -62,6 +62,8 @@ public class InfoBarRenderer implements Renderer {
         canvas.save();
         canvas.translate(x, y);
 
+        canvas.clipRect(0, 0, size().width(), size().height());
+
         Paint paint = new Paint();
         paint.setColor(Style.infoBarBackgroundColor());
         paint.setAlpha(180);
