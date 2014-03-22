@@ -20,7 +20,9 @@
                 android:layout_width="0dip"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
             <EditText
                     android:id="@+id/search_text"
                     android:layout_width="fill_parent"
@@ -28,7 +30,8 @@
                     android:textSize="16sp"
                     android:singleLine="true"
                     android:cursorVisible="false"
-                    android:hint="@string/key_word"/>
+                    android:hint="@string/key_word"
+                    android:selectAllOnFocus="true"/>
             <Button android:id="@+id/search_filter_btn" android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:text="@string/btn_search_criteria"
                     android:textSize="8sp" android:layout_alignRight="@id/search_text"/>

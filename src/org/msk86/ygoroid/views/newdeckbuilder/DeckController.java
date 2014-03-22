@@ -37,6 +37,10 @@ public class DeckController {
         filterBtn.setOnClickListener(new OnButtonClickListener(OnButtonClickListener.SEARCH_FILTER_BTN));
     }
 
+    public String getSearchText() {
+        return ((EditText) Utils.getContext().findViewById(R.id.search_text)).getText().toString();
+    }
+
     private class OnButtonClickListener implements View.OnClickListener {
         public static final int OPEN_BTN = 0;
         public static final int SAVE_BTN = 1;
@@ -88,6 +92,7 @@ public class DeckController {
                     || actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
                 Action action = new SearchByTextAction(deckBuilderView, textView);
                 action.execute();
+                textView.clearFocus();
                 deckBuilderView.updateActionTime();
             }
             return false;

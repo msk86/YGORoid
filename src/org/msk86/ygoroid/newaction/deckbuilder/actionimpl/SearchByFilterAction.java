@@ -23,6 +23,7 @@ public class SearchByFilterAction implements Action {
     public void execute() {
         SearchResultList searchResult = deckBuilderView.getSearchResultList();
         List<CardFilter> filters = searchFilter.genFilters();
+        String searchText = deckBuilderView.getController().getSearchText();
 
         searchResult.clear();
 
@@ -33,7 +34,7 @@ public class SearchByFilterAction implements Action {
         if (filtersNotValid) {
             return;
         }
-        List<Card> cards = Utils.getDbHelper().queryByText("", filters);
+        List<Card> cards = Utils.getDbHelper().queryByText(searchText, filters);
         searchResult.addResult(cards, "");
         searchResult.refresh();
     }
