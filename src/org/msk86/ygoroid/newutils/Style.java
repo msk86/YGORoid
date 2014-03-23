@@ -1,11 +1,16 @@
 package org.msk86.ygoroid.newutils;
 
 import android.graphics.Color;
+import org.msk86.ygoroid.size.CardSize;
 
 public class Style {
 
     public static int padding() {
         return 2;
+    }
+
+    public static int fieldPadding() {
+        return CardSize.NORMAL.height() / 50;
     }
 
     public static int border() {

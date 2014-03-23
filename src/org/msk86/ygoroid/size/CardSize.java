@@ -12,7 +12,9 @@ public class CardSize extends Size {
     static {
         int medianH = Utils.screenHeight() / 4 - Style.padding() * 2;
         int medianW = (int) ((Utils.screenWidth() - 14 * Style.padding()) * 1.45 / 9.25);
-        NORMAL = new CardSize(medianW < medianH ? medianW : medianH);
+        int cardHeight = medianW < medianH ? medianW : medianH;
+        NORMAL = new CardSize(cardHeight);
+        NORMAL = new CardSize(cardHeight + (Style.padding() - Style.fieldPadding()) * 2);
         int smallH = (Utils.screenHeight() - InfoBarSize.INFO_BAR.height() - Style.padding() * 5) / 5;
         SIDING = new CardSize(smallH);
         PREVIEW = new CardSize((int)(Utils.screenWidth() / 4 * 1.45));

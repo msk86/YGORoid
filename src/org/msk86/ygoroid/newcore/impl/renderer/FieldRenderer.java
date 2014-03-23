@@ -49,13 +49,13 @@ public class FieldRenderer implements Renderer {
 
         canvas.save();
         canvas.translate(x, y);
-        canvas.drawRect(new Rect(Style.padding(), Style.padding(), size().width() - Style.padding(), size().height() - Style.padding()), paint);
+        canvas.drawRect(new Rect(Style.fieldPadding(), Style.fieldPadding(), size().width() - Style.fieldPadding(), size().height() - Style.fieldPadding()), paint);
 
         paint.setColor(Style.fieldBorderColor());
         paint.setStrokeWidth(Style.border());
         paint.setStyle(Paint.Style.STROKE);
         paint.setAlpha(255);
-        canvas.drawRect(new Rect(Style.padding(), Style.padding(), size().width() - Style.padding(), size().height() - Style.padding()), paint);
+        canvas.drawRect(new Rect(Style.fieldPadding(), Style.fieldPadding(), size().width() - Style.fieldPadding(), size().height() - Style.fieldPadding()), paint);
 
         canvas.restore();
     }

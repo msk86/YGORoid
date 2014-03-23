@@ -10,7 +10,7 @@ public class FieldSize extends Size {
 
     public static Size RECT, SQUARE;
     static {
-        RECT = new FieldSize(CardSize.NORMAL.width() + 2 * Style.padding(), CardSize.NORMAL.height() + 2 * Style.padding());
-        SQUARE = new FieldSize(CardSize.NORMAL.height() + 2 * Style.padding(), CardSize.NORMAL.height() + 2 * Style.padding());
+        RECT = new FieldSize(CardSize.NORMAL.width() + 2 * Style.fieldPadding(), CardSize.NORMAL.height() + 2 * Style.fieldPadding());
+        SQUARE = new FieldSize(CardSize.NORMAL.height() + 2 * Style.fieldPadding(), CardSize.NORMAL.height() + 2 * Style.fieldPadding());
     }
 }
