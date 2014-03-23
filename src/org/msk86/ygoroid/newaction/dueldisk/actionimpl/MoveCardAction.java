@@ -1,6 +1,7 @@
 package org.msk86.ygoroid.newaction.dueldisk.actionimpl;
 
 import org.msk86.ygoroid.newcore.Controllable;
+import org.msk86.ygoroid.newcore.Selectable;
 import org.msk86.ygoroid.newcore.constant.FieldType;
 import org.msk86.ygoroid.newcore.impl.Field;
 import org.msk86.ygoroid.newop.Operation;
@@ -25,6 +26,10 @@ public class MoveCardAction extends BaseAction {
             }
 
             field.setItem((item));
+
+            if(item instanceof Selectable) {
+                duel.select((Selectable) item);
+            }
         }
     }
 }
