@@ -26,10 +26,6 @@ public class MoveCardAction extends BaseAction {
             }
 
             field.setItem((item));
-
-            if(item instanceof Selectable) {
-                duel.select((Selectable) item);
-            }
         }
     }
 }

@@ -1,6 +1,7 @@
 package org.msk86.ygoroid.newaction.dueldisk.actionimpl;
 
 import org.msk86.ygoroid.newcore.Listable;
+import org.msk86.ygoroid.newcore.Selectable;
 import org.msk86.ygoroid.newcore.impl.Card;
 import org.msk86.ygoroid.newcore.impl.CardSelector;
 import org.msk86.ygoroid.newop.Operation;
@@ -22,7 +23,9 @@ public class DragCardSelectorCardAction extends BaseAction {
             }
             listable.listCards().remove(card);
             ((StartDrag) operation).setDragItem(card);
-            duel.select(card);
+            if(item instanceof Selectable) {
+                duel.select((Selectable) item);
+            }
         }
     }
 }
