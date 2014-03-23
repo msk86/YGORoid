@@ -35,6 +35,7 @@ public class OverRay implements Item, Selectable, Controllable, Infoable, Listab
         for(Card overRayUnits : overRayCards.getCards()) {
             overRayUnits.positive();
             overRayUnits.open();
+            overRayUnits.unSelect();
         }
     }
 
