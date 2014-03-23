@@ -17,7 +17,7 @@ public class DragOverRayAction extends BaseAction {
         OverRay overRay = (OverRay) item;
         Field field = (Field) container;
 
-        if(overRay.isDeepSelect() || overRay.getOverRayCards().size() == 1) {
+        if(overRay.isSelect() || overRay.getOverRayCards().size() == 1) {
             Card topCard = overRay.getOverRayCards().topCard();
             ((StartDrag) operation).setDragItem(topCard);
             overRay.getOverRayCards().remove(topCard);
@@ -26,8 +26,9 @@ public class DragOverRayAction extends BaseAction {
                 field.removeItem();
             }
         } else {
-            Item item = field.removeItem();
-            ((StartDrag) operation).setDragItem(item);
+            field.removeItem();
+            ((StartDrag) operation).setDragItem(overRay);
+            duel.select(overRay);
         }
     }
 }

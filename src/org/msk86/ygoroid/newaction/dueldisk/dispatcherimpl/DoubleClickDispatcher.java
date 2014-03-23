@@ -46,7 +46,16 @@ public class DoubleClickDispatcher implements Dispatcher<DoubleClick> {
                 actionChain.add(new NewTokenAction(op));
             }
             if(item instanceof Controllable) {
-                actionChain.add(new FlipCardAction(op));
+                if(item instanceof OverRay) {
+                    OverRay overRay = (OverRay) item;
+                    if(overRay.isSelect()) {
+                        actionChain.add(new OpenCardSelectorAction(op));
+                    } else {
+                        actionChain.add(new FlipCardAction(op));
+                    }
+                } else {
+                    actionChain.add(new FlipCardAction(op));
+                }
             }
             if(item instanceof Deck) {
                 actionChain.add(new OpenCardSelectorAction(op));
