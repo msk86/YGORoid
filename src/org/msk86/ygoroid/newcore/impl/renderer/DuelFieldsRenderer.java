@@ -1,6 +1,8 @@
 package org.msk86.ygoroid.newcore.impl.renderer;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.Point;
 import org.msk86.ygoroid.newcore.Item;
 import org.msk86.ygoroid.newcore.Layout;
@@ -8,6 +10,8 @@ import org.msk86.ygoroid.newcore.Renderer;
 import org.msk86.ygoroid.newcore.constant.FieldType;
 import org.msk86.ygoroid.newcore.impl.DuelFields;
 import org.msk86.ygoroid.newcore.impl.layout.AbsoluteLayout;
+import org.msk86.ygoroid.newutils.BmpReader;
+import org.msk86.ygoroid.newutils.Configuration;
 import org.msk86.ygoroid.size.FieldSize;
 import org.msk86.ygoroid.size.OtherSize;
 import org.msk86.ygoroid.size.Size;
@@ -43,6 +47,11 @@ public class DuelFieldsRenderer implements Renderer {
 
     @Override
     public void draw(Canvas canvas, int x, int y) {
+        drawBmpFrame(canvas, x, y);
+        drawItems(canvas, x, y);
+    }
+
+    private void drawItems(Canvas canvas, int x, int y) {
         canvas.save();
         canvas.translate(x, y);
         Layout layout = fields.getLayout();
@@ -50,5 +59,18 @@ public class DuelFieldsRenderer implements Renderer {
             Point point = layout.itemPosition(item);
             item.getRenderer().draw(canvas, point.x, point.y);
         }
+    }
+
+    private void drawBmpFrame(Canvas canvas, int x, int y) {
+        Bitmap bmp = fields.getBmpGenerator().generate(size());
+        if(bmp != null) {
+            hasBmpFrame = true;
+            canvas.drawBitmap(bmp, x, y, new Paint());
+        }
+    }
+
+    private boolean hasBmpFrame = false;
+    public boolean hasBmpFrame() {
+        return hasBmpFrame;
     }
 }

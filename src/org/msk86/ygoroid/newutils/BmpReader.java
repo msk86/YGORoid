@@ -71,6 +71,9 @@ public class BmpReader {
 
         float changeRateW = size.width() * 1.0f / bitmap.getWidth();
         float changeRateH = size.height() * 1.0f / bitmap.getHeight();
+        if(changeRateH == 1 && changeRateW == 1) {
+            return bitmap;
+        }
         matrix.postScale(changeRateW, changeRateH);
         Bitmap newBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
                 bitmap.getHeight(), matrix, true);

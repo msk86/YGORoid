@@ -28,14 +28,16 @@ public class FieldRenderer implements Renderer {
 
     @Override
     public void draw(Canvas canvas, int x, int y) {
-        drawFrame(canvas, x, y);
-        drawBackground(canvas, x, y);
+        if (!((DuelFieldsRenderer) field.getDuelFields().getRenderer()).hasBmpFrame()) {
+            drawFrame(canvas, x, y);
+            drawBackground(canvas, x, y);
+        }
         drawItem(canvas, x, y);
     }
 
     private void drawBackground(Canvas canvas, int x, int y) {
         Bitmap bmp = field.getType().getBmpGenerator().generate(size());
-        if(bmp != null) {
+        if (bmp != null) {
             canvas.drawBitmap(bmp, x, y, new Paint());
         }
     }

@@ -9,11 +9,17 @@ import org.msk86.ygoroid.newcore.impl.layout.CenterLayout;
 import org.msk86.ygoroid.newcore.impl.renderer.FieldRenderer;
 
 public class Field implements Item, Container {
+    private DuelFields duelFields;
     private FieldType type;
     private Item item;
 
-    public Field(FieldType type) {
+    public Field(FieldType type, DuelFields duelFields) {
         this.type = type;
+        this.duelFields = duelFields;
+    }
+
+    public DuelFields getDuelFields() {
+        return duelFields;
     }
 
     public FieldType getType() {

@@ -1,10 +1,8 @@
 package org.msk86.ygoroid.newcore.impl;
 
-import org.msk86.ygoroid.newcore.Container;
-import org.msk86.ygoroid.newcore.Item;
-import org.msk86.ygoroid.newcore.Layout;
-import org.msk86.ygoroid.newcore.Renderer;
+import org.msk86.ygoroid.newcore.*;
 import org.msk86.ygoroid.newcore.constant.FieldType;
+import org.msk86.ygoroid.newcore.impl.bmp.DuelFieldsGenerator;
 import org.msk86.ygoroid.newcore.impl.layout.AbsoluteLayout;
 import org.msk86.ygoroid.newcore.impl.renderer.DuelFieldsRenderer;
 
@@ -13,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DuelFields implements Item, Container {
+public class DuelFields implements Item, Container, Bmpable {
     Map<FieldType, Field> typeFieldMapping;
     Map<FieldType, List<Field>> typeFieldsMapping;
 
@@ -24,14 +22,14 @@ public class DuelFields implements Item, Container {
         for (FieldType type : new FieldType[]{FieldType.DECK, FieldType.EX_DECK, FieldType.GRAVEYARD,
                 FieldType.BANISHED, FieldType.PENDULUM_LEFT, FieldType.PENDULUM_RIGHT, FieldType.TEMP,
                 FieldType.FIELD_MAGIC}) {
-            typeFieldMapping.put(type, new Field(type));
+            typeFieldMapping.put(type, new Field(type, this));
         }
 
         List<Field> monsterZone = new ArrayList<Field>();
         List<Field> magicZone = new ArrayList<Field>();
         for (int i = 0; i < 5; i++) {
-            monsterZone.add(new Field(FieldType.MONSTER));
-            magicZone.add(new Field(FieldType.MAGIC_TRAP));
+            monsterZone.add(new Field(FieldType.MONSTER, this));
+            magicZone.add(new Field(FieldType.MAGIC_TRAP, this));
         }
         typeFieldsMapping.put(FieldType.MONSTER, monsterZone);
         typeFieldsMapping.put(FieldType.MAGIC_TRAP, magicZone);
@@ -63,5 +61,14 @@ public class DuelFields implements Item, Container {
             layout = new AbsoluteLayout(this);
         }
         return layout;
+    }
+
+    BmpGenerator generator;
+    @Override
+    public BmpGenerator getBmpGenerator() {
+        if (generator == null) {
+            generator = new DuelFieldsGenerator(this);
+        }
+        return generator;
     }
 }
