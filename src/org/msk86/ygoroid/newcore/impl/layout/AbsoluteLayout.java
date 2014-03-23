@@ -15,6 +15,7 @@ public class AbsoluteLayout implements Layout {
     List<Item> items;
     Map<Item, Point> positionMap;
     Map<Item, Integer> zIndexMap;
+    private int offsetX;
 
     public AbsoluteLayout(Container container) {
         this.container = container;
@@ -32,7 +33,7 @@ public class AbsoluteLayout implements Layout {
             return;
         }
         items.add(item);
-        Point pos = new Point(x, y);
+        Point pos = new Point(offsetX + x, y);
         positionMap.put(item, pos);
         zIndexMap.put(item, zIndex);
     }
@@ -101,5 +102,9 @@ public class AbsoluteLayout implements Layout {
     @Override
     public Point itemPosition(Item item) {
         return positionMap.get(item);
+    }
+
+    public void setOffset(int offsetX, int i) {
+        this.offsetX = offsetX;
     }
 }

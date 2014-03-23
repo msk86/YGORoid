@@ -59,6 +59,7 @@ public class DuelFieldsRenderer implements Renderer {
             Point point = layout.itemPosition(item);
             item.getRenderer().draw(canvas, point.x, point.y);
         }
+        canvas.restore();
     }
 
     private void drawBmpFrame(Canvas canvas, int x, int y) {

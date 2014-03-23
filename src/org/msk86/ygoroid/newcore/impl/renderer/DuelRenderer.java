@@ -25,6 +25,8 @@ public class DuelRenderer implements Renderer {
 
     private void initLayout() {
         AbsoluteLayout layout = (AbsoluteLayout) duel.getLayout();
+        int offsetX = (OtherSize.SCREEN.width() - size().width()) / 2;
+        layout.setOffset(offsetX, 0);
 
         layout.addItem(duel.getDuelFields(), 0, 0, 0);
         layout.addItem(duel.getHandCards(), (size().width() - duel.getHandCards().getRenderer().size().width()) / 2, FieldSize.RECT.height() * 3, 1);
@@ -62,17 +64,20 @@ public class DuelRenderer implements Renderer {
 
     @Override
     public void draw(Canvas canvas, int x, int y) {
+        canvas.save();
+        canvas.translate(x, y);
         updateLayoutWithWindow();
 
         Layout layout = duel.getLayout();
-        for(Item item : layout.items()) {
+        for (Item item : layout.items()) {
             Point pos = layout.itemPosition(item);
             item.getRenderer().draw(canvas, pos.x, pos.y);
         }
 
-        if(duel.getDrag() != null && duel.getDrag().getItem() != null) {
+        if (duel.getDrag() != null && duel.getDrag().getItem() != null) {
             duel.getDrag().getItem().getRenderer().draw(canvas, duel.getDrag().x(), duel.getDrag().y());
         }
+        canvas.restore();
     }
 
     private int padding() {
