@@ -2,11 +2,9 @@ package org.msk86.ygoroid.newaction.dueldisk.dispatcherimpl;
 
 import org.msk86.ygoroid.newaction.Action;
 import org.msk86.ygoroid.newaction.Dispatcher;
-import org.msk86.ygoroid.newaction.dueldisk.actionimpl.ChangeLpAction;
-import org.msk86.ygoroid.newaction.dueldisk.actionimpl.CloseLpCalculatorAction;
-import org.msk86.ygoroid.newaction.dueldisk.actionimpl.ShowCardEffectWindow;
-import org.msk86.ygoroid.newaction.dueldisk.actionimpl.UnSelectAction;
+import org.msk86.ygoroid.newaction.dueldisk.actionimpl.*;
 import org.msk86.ygoroid.newcore.Item;
+import org.msk86.ygoroid.newcore.Selectable;
 import org.msk86.ygoroid.newcore.impl.InfoBar;
 import org.msk86.ygoroid.newcore.impl.lifepoint.Button;
 import org.msk86.ygoroid.newop.impl.ClickConfirmed;
@@ -23,6 +21,10 @@ public class ClickConfirmedDispatcher implements Dispatcher<ClickConfirmed> {
 
         if(item == null) {
             actionChain.add(new UnSelectAction(op));
+        }
+
+        if(item instanceof Selectable) {
+            actionChain.add(new SelectAction(op));
         }
         if(item instanceof InfoBar) {
             actionChain.add(new ShowCardEffectWindow(op));

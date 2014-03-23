@@ -25,9 +25,6 @@ public class ClickDispatcher implements Dispatcher<Click> {
 
         Item item = op.getItem();
 
-        if(item instanceof Selectable) {
-            actionChain.add(new SelectAction(op));
-        }
         if(item instanceof LifePoint) {
             actionChain.add(new ShowLifeCalculatorAction(op));
         }
