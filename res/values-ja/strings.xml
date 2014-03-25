@@ -75,6 +75,7 @@
     <string name="TYPE_FLIP">リバース</string>
     <string name="TYPE_TOON">トゥーン</string>
     <string name="TYPE_XYZ">エクシーズ</string>
+    <string name="TYPE_PENDULUM">ペンデュラム</string>
 
     <string name="SAVE_SUCCESS" formatted="false">[%s]保存成功。メイン:%d、エクストラ:%d、サイド:%d。</string>
     <string name="SAVE_FAIL" formatted="false">保存失敗[%s]。</string>

@@ -75,6 +75,7 @@
     <string name="TYPE_FLIP">反轉</string>
     <string name="TYPE_TOON">卡通</string>
     <string name="TYPE_XYZ">XYZ</string>
+    <string name="TYPE_PENDULUM">搖擺</string>
 
     <string name="SAVE_SUCCESS" formatted="false">已保存[%s]。主牌組:%d，額外:%d，副牌組:%d。</string>
     <string name="SAVE_FAIL" formatted="false">保存[%s]失敗。</string>

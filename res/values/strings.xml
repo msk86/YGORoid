@@ -75,6 +75,7 @@
     <string name="TYPE_FLIP">Flip</string>
     <string name="TYPE_TOON">Toon</string>
     <string name="TYPE_XYZ">XYZ</string>
+    <string name="TYPE_PENDULUM">PENDULUM</string>
 
     <string name="SAVE_SUCCESS" formatted="false">[%s] saved. Main:%d, Extra:%d, side:%d.</string>
     <string name="SAVE_FAIL" formatted="false">Fail to save [%s].</string>

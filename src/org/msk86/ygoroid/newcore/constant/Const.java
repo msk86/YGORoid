@@ -28,6 +28,7 @@ public class Const {
     public static final int TYPE_FLIP = 0x200000;
     public static final int TYPE_TOON = 0x400000;
     public static final int TYPE_XYZ = 0x800000;
+    public static final int TYPE_PENDULUM = 0x1000000;
 
     //Attributes
     public static final int ATTRIBUTE_EARTH = 0x01;
