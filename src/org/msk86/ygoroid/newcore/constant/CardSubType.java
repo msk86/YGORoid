@@ -32,7 +32,7 @@ public enum CardSubType implements Bmpable {
     FLIP(Const.TYPE_FLIP, Utils.s(R.string.TYPE_FLIP), 0),
     TOON(Const.TYPE_TOON, Utils.s(R.string.TYPE_TOON), 0),
     XYZ(Const.TYPE_XYZ, Utils.s(R.string.TYPE_XYZ), R.raw.card_xyz_monster),
-    PENDULUM(Const.TYPE_PENDULUM, Utils.s(R.string.TYPE_PENDULUM), R.raw.card_unknown);
+    PENDULUM(Const.TYPE_PENDULUM, Utils.s(R.string.TYPE_PENDULUM), R.raw.card_p_monster);
 
     private int resId;
     private int code;
