@@ -60,6 +60,7 @@ public class Const {
     public static final int RACE_FISH = 0x20000;
     public static final int RACE_SEASERPENT = 0x40000;
     public static final int RACE_REPTILE = 0x80000;
+    public static final int RACE_WYRMS = 0x800000;
     public static final int RACE_PSYCHO = 0x100000;
     public static final int RACE_DEVINE = 0x200000;
     public static final int RACE_CREATORGOD = 0x400000;
