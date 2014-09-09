@@ -61,7 +61,7 @@ public class Card implements Item, Selectable, Controllable, Bmpable, Infoable {
         this.attribute = Attribute.getAttribute(attrCode);
         this.raceCode = raceCode;
         this.race = Race.getRace(raceCode);
-        this.level = level;
+        this.level = level & 0xF;
         this.atkInt = atk;
         this.defInt = def;
         this.atk = atk >= 0 ? String.valueOf(atk) : "?";

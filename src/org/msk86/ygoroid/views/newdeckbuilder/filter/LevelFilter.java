@@ -13,7 +13,7 @@ public class LevelFilter implements CardFilter {
         if (!isValid()) {
             return "";
         }
-        return " AND d.level = " + level;
+        return " AND d.level & 15 = " + level;
     }
 
     @Override
