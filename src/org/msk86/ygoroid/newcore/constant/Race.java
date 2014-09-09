@@ -25,6 +25,7 @@ public enum Race {
     FISH(Const.RACE_FISH, Utils.s(R.string.RACE_FISH)),
     SEA_SERPENT(Const.RACE_SEASERPENT, Utils.s(R.string.RACE_SEASERPENT)),
     REPTILE(Const.RACE_REPTILE, Utils.s(R.string.RACE_REPTILE)),
+    WYRMS(Const.RACE_WYRMS, Utils.s(R.string.RACE_WYRMS)),
     PSYCHO(Const.RACE_PSYCHO, Utils.s(R.string.RACE_PSYCHO)),
     DEVINE(Const.RACE_DEVINE, Utils.s(R.string.RACE_DEVINE)),
     CREATOR_GOD(Const.RACE_CREATORGOD, Utils.s(R.string.RACE_CREATORGOD));
