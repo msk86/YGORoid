@@ -78,6 +78,7 @@ public class BmpReader {
         Bitmap newBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
                 bitmap.getHeight(), matrix, true);
         bitmap.recycle();
+        bitmap=null;
         return newBitmap;
     }
 
@@ -98,13 +99,14 @@ public class BmpReader {
         Bitmap newBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
                 bitmap.getHeight(), matrix, true);
         bitmap.recycle();
+        bitmap=null;
         return newBitmap;
     }
 
     private static int calculateSampleScale(BitmapFactory.Options options, Size require) {
         int width = options.outWidth;
         int height = options.outHeight;
-        int inSampleSizeH = 1, inSampleSizeW = 1;
+        int inSampleSizeH = 9/5, inSampleSizeW = 9/5;
         if (height > require.height()) {
             inSampleSizeH = Math.round((float) height / (float) require.height());
         }
