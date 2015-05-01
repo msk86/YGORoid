@@ -106,7 +106,7 @@ public class BmpReader {
     private static int calculateSampleScale(BitmapFactory.Options options, Size require) {
         int width = options.outWidth;
         int height = options.outHeight;
-        int inSampleSizeH = 9/5, inSampleSizeW = 9/5;
+        int inSampleSizeH = 1, inSampleSizeW = 1;
         if (height > require.height()) {
             inSampleSizeH = Math.round((float) height / (float) require.height());
         }
