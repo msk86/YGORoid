@@ -7,7 +7,7 @@ import org.msk86.ygoroid.newcore.constant.bmp.FieldTypeGenerator;
 
 public enum FieldType implements Bmpable {
     MONSTER, MAGIC_TRAP, FIELD_MAGIC, DECK, EX_DECK,
-    GRAVEYARD, BANISHED, TEMP, PENDULUM_LEFT(R.raw.pendulum_left), PENDULUM_RIGHT(R.raw.pendulum_right);
+    GRAVEYARD, BANISHED, TEMP, EX_MONSTER;
 
     private int defaultBgResId;
 

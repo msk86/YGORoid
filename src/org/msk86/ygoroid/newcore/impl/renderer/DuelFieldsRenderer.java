@@ -10,8 +10,6 @@ import org.msk86.ygoroid.newcore.Renderer;
 import org.msk86.ygoroid.newcore.constant.FieldType;
 import org.msk86.ygoroid.newcore.impl.DuelFields;
 import org.msk86.ygoroid.newcore.impl.layout.AbsoluteLayout;
-import org.msk86.ygoroid.newutils.BmpReader;
-import org.msk86.ygoroid.newutils.Configuration;
 import org.msk86.ygoroid.size.FieldSize;
 import org.msk86.ygoroid.size.OtherSize;
 import org.msk86.ygoroid.size.Size;
@@ -26,17 +24,19 @@ public class DuelFieldsRenderer implements Renderer {
 
         layout.addItem(fields.getField(FieldType.TEMP), 0, 0);
         layout.addItem(fields.getField(FieldType.FIELD_MAGIC), 0, FieldSize.SQUARE.height());
-        layout.addItem(fields.getField(FieldType.PENDULUM_LEFT), 0, FieldSize.SQUARE.height() * 2);
-        layout.addItem(fields.getField(FieldType.EX_DECK), 0, FieldSize.SQUARE.height() * 3);
+        layout.addItem(fields.getField(FieldType.EX_DECK), 0, FieldSize.SQUARE.height() * 2);
 
         layout.addItem(fields.getField(FieldType.BANISHED), FieldSize.RECT.width() + FieldSize.SQUARE.width() * 5, 0);
         layout.addItem(fields.getField(FieldType.GRAVEYARD), FieldSize.RECT.width() + FieldSize.SQUARE.width() * 5, FieldSize.SQUARE.height());
-        layout.addItem(fields.getField(FieldType.PENDULUM_RIGHT), FieldSize.RECT.width() + FieldSize.SQUARE.width() * 5, FieldSize.SQUARE.height() * 2);
-        layout.addItem(fields.getField(FieldType.DECK), FieldSize.RECT.width() + FieldSize.SQUARE.width() * 5, FieldSize.SQUARE.height() * 3);
+        layout.addItem(fields.getField(FieldType.DECK), FieldSize.RECT.width() + FieldSize.SQUARE.width() * 5, FieldSize.SQUARE.height() * 2);
 
         for (int i = 0; i < 5; i++) {
             layout.addItem(fields.getFields(FieldType.MONSTER).get(i), FieldSize.RECT.width() + FieldSize.SQUARE.width() * i, FieldSize.SQUARE.height());
             layout.addItem(fields.getFields(FieldType.MAGIC_TRAP).get(i), FieldSize.RECT.width() + FieldSize.SQUARE.width() * i, FieldSize.SQUARE.height() * 2);
+        }
+
+        for (int i = 0; i < 2; i++) {
+            layout.addItem(fields.getFields(FieldType.EX_MONSTER).get(i), FieldSize.RECT.width() / 2 + FieldSize.SQUARE.width() * (4 * i + 3) / 2, 0);
         }
     }
 

@@ -76,7 +76,7 @@ public class Duel implements Item, Container, BaseContainer {
 
         handCards = new HandCards();
 
-        infoBar = new InfoBar(handCards);
+        infoBar = new InfoBar(duelFields);
 
         dice = new Dice();
         coin = new Coin();
@@ -97,13 +97,14 @@ public class Duel implements Item, Container, BaseContainer {
         temp.getCardList().getCards().clear();
 
         duelFields.getField(FieldType.FIELD_MAGIC).removeItem();
-        duelFields.getField(FieldType.PENDULUM_LEFT).removeItem();
-        duelFields.getField(FieldType.PENDULUM_RIGHT).removeItem();
 
         for(Field field : duelFields.getFields(FieldType.MONSTER)) {
             field.removeItem();
         }
         for(Field field : duelFields.getFields(FieldType.MAGIC_TRAP)) {
+            field.removeItem();
+        }
+        for(Field field : duelFields.getFields(FieldType.EX_MONSTER)) {
             field.removeItem();
         }
         lifePoint.reset();
