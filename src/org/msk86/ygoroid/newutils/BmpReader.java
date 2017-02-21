@@ -78,6 +78,7 @@ public class BmpReader {
         Bitmap newBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
                 bitmap.getHeight(), matrix, true);
         bitmap.recycle();
+        bitmap = null;
         return newBitmap;
     }
 
@@ -98,6 +99,7 @@ public class BmpReader {
         Bitmap newBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
                 bitmap.getHeight(), matrix, true);
         bitmap.recycle();
+        bitmap = null;
         return newBitmap;
     }
 
