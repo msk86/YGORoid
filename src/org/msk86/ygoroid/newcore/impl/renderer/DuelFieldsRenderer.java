@@ -36,7 +36,7 @@ public class DuelFieldsRenderer implements Renderer {
         }
 
         for (int i = 0; i < 2; i++) {
-            layout.addItem(fields.getFields(FieldType.EX_MONSTER).get(i), FieldSize.RECT.width() / 2 + FieldSize.SQUARE.width() * (4 * i + 3) / 2, 0);
+            layout.addItem(fields.getFields(FieldType.EX_MONSTER).get(i), FieldSize.RECT.width() + FieldSize.SQUARE.width() * (2 * i + 1), 0);
         }
     }
 

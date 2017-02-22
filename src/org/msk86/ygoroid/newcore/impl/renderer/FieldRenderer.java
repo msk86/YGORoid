@@ -19,7 +19,9 @@ public class FieldRenderer implements Renderer {
 
     @Override
     public Size size() {
-        if (field.getType() == FieldType.MONSTER || field.getType() == FieldType.MAGIC_TRAP) {
+        if (field.getType() == FieldType.MONSTER
+                || field.getType() == FieldType.MAGIC_TRAP
+                || field.getType() == FieldType.EX_MONSTER) {
             return FieldSize.SQUARE;
         } else {
             return FieldSize.RECT;

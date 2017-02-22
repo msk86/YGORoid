@@ -31,9 +31,9 @@ public class DuelRenderer implements Renderer {
         layout.addItem(duel.getDuelFields(), 0, 0, 0);
         layout.addItem(duel.getHandCards(), (size().width() - duel.getHandCards().getRenderer().size().width()) / 2, FieldSize.RECT.height() * 3, 1);
 
-        layout.addItem(duel.getLifePoint(), FieldSize.RECT.width() + padding(), 0, 1);
-        layout.addItem(duel.getCoin(), (3 * FieldSize.RECT.width() + 7 * FieldSize.SQUARE.width()) / 2 + padding(), (FieldSize.RECT.height() - duel.getCoin().getRenderer().size().height()) / 2, 1);
-        layout.addItem(duel.getDice(), (3 * FieldSize.RECT.width() + 7 * FieldSize.SQUARE.width()) / 2 + padding() * 2 + duel.getCoin().getRenderer().size().width(), (FieldSize.RECT.height() - duel.getDice().getRenderer().size().height()) / 2, 1);
+        layout.addItem(duel.getLifePoint(), FieldSize.RECT.width() + smallPadding(), 0, 1);
+        layout.addItem(duel.getCoin(), FieldSize.RECT.width() + 4 * FieldSize.SQUARE.width() + smallPadding(), (FieldSize.RECT.height() - duel.getCoin().getRenderer().size().height()) / 2, 1);
+        layout.addItem(duel.getDice(), FieldSize.RECT.width() + 4 * FieldSize.SQUARE.width() + smallPadding() + duel.getCoin().getRenderer().size().width(), (FieldSize.RECT.height() - duel.getDice().getRenderer().size().height()) / 2, 1);
         layout.addItem(duel.getInfoBar(), 0, size().height() - duel.getInfoBar().getRenderer().size().height(), 3);
     }
 
@@ -82,5 +82,9 @@ public class DuelRenderer implements Renderer {
 
     private int padding() {
         return Style.padding() * 5;
+    }
+
+    private int smallPadding() {
+        return Style.padding() * 5 / 2;
     }
 }
