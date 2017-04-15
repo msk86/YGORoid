@@ -29,13 +29,13 @@ public class DragDispatcher implements Dispatcher<Drag> {
                     if (op.getStartDrag().getContainer() instanceof HandCards) {
                         Card card = (Card) op.getItem();
                         if (card.isOpen()) {
-                            if (field.getType() == FieldType.MONSTER) {
+                            if (field.getType() == FieldType.MONSTER || field.getType() == FieldType.EX_MONSTER) {
                                 actionChain.add(new SummonAction(op));
                             } else {
                                 actionChain.add(new EffectAction(op));
                             }
                         } else {
-                            if (field.getType() == FieldType.MONSTER) {
+                            if (field.getType() == FieldType.MONSTER || field.getType() == FieldType.EX_MONSTER) {
                                 actionChain.add(new SetMonsterAction(op));
                             } else {
                                 actionChain.add(new SetCardAction(op));

@@ -41,6 +41,8 @@ public class Card implements Item, Selectable, Controllable, Bmpable, Infoable {
 
     private Indicator indicator;
 
+    private LinkMarker marker;
+
     public Card(String id, String name, String desc) {
         this(id, name, desc, 0, 0, 0, 0, 0, 0);
     }
@@ -71,6 +73,10 @@ public class Card implements Item, Selectable, Controllable, Bmpable, Infoable {
         this.set = false;
 
         this.indicator = new Indicator();
+
+        if(isLink()) {
+            this.marker = new LinkMarker(this.level, this.defInt);
+        }
     }
 
 
@@ -151,11 +157,19 @@ public class Card implements Item, Selectable, Controllable, Bmpable, Infoable {
 
     public boolean isEx() {
         return subTypes.contains(CardSubType.FUSION) || subTypes.contains(CardSubType.SYNC)
-                || subTypes.contains(CardSubType.XYZ);
+                || subTypes.contains(CardSubType.XYZ) || subTypes.contains(CardSubType.LINK);
+    }
+
+    public boolean isLink() {
+        return subTypes.contains(CardSubType.LINK);
     }
 
     public Indicator getIndicator() {
         return indicator;
+    }
+
+    public LinkMarker                                                                                                                                                                                                                                                                     getLinkMarker() {
+        return marker;
     }
 
     public String getDesc() {
@@ -177,14 +191,35 @@ public class Card implements Item, Selectable, Controllable, Bmpable, Infoable {
 
     public String levelAndADDesc() {
         StringBuilder result = new StringBuilder();
-        if (subTypes.contains(CardSubType.XYZ)) {
-            result.append("R");
+        if (!this.isLink()) {
+            if (this.isXYZ()) {
+                result.append("R");
+            } else {
+                result.append("L");
+            }
         } else {
-            result.append("L");
+            result.append("LINK");
         }
         result.append(level);
         result.append(" ");
-        result.append(atk + "/" + def);
+
+        result.append(atk);
+
+        if (!this.isLink()) {
+            result.append("/");
+            result.append(def);
+        }
+        return result.toString();
+    }
+
+    public String linkMarkerDirection() {
+        if (!this.isLink()) {
+            return "";
+        }
+        StringBuilder result = new StringBuilder();
+        result.append("[");
+        result.append(marker.toString());
+        result.append("]");
         return result.toString();
     }
 
@@ -253,6 +288,8 @@ public class Card implements Item, Selectable, Controllable, Bmpable, Infoable {
             result.append(" ");
             result.append(levelAndADDesc());
             result.append(" ");
+            result.append(linkMarkerDirection());
+            result.append(" ");
             result.append(attrAndRaceDesc());
         }
         return result.toString();
@@ -267,7 +304,7 @@ public class Card implements Item, Selectable, Controllable, Bmpable, Infoable {
                 return card1.type.getCode() - card2.type.getCode();
             }
 
-            // subtype 普 -> 效 -> 仪 -> 融 -> 同 -> 超; 速 -> 永 -> 装 -> 场 -> 反
+            // subtype 普 -> 效 -> 仪 -> 融 -> 同 -> 超 -> 摆 -> 连; 速 -> 永 -> 装 -> 场 -> 反
             int card1SortType = sortSubTypeCode(card1);
             int card2SortType = sortSubTypeCode(card2);
             if (card1SortType != card2SortType) {
@@ -303,7 +340,7 @@ public class Card implements Item, Selectable, Controllable, Bmpable, Infoable {
         }
 
         public static int sortSubTypeCode(Card card) {
-            CardSubType[] sortableSubTypes = {CardSubType.NORMAL, CardSubType.FUSION, CardSubType.RITUAL, CardSubType.SYNC, CardSubType.XYZ,
+            CardSubType[] sortableSubTypes = {CardSubType.NORMAL, CardSubType.FUSION, CardSubType.RITUAL, CardSubType.SYNC, CardSubType.XYZ, CardSubType.PENDULUM, CardSubType.LINK,
                     CardSubType.QUICK_PLAY, CardSubType.CONTINUOUS, CardSubType.EQUIP, CardSubType.FIELD, CardSubType.COUNTER, CardSubType.EFFECT};
             for (CardSubType subType : sortableSubTypes) {
                 if (card.getSubTypes().contains(subType)) {

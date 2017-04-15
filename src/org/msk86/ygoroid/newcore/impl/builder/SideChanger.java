@@ -7,6 +7,7 @@ import org.msk86.ygoroid.newcore.impl.Card;
 import org.msk86.ygoroid.newcore.impl.CardEffectWindow;
 import org.msk86.ygoroid.newcore.impl.InfoBar;
 import org.msk86.ygoroid.newcore.impl.bmp.CardGenerator;
+import org.msk86.ygoroid.newcore.impl.bmp.LinkMarkerGenerator;
 import org.msk86.ygoroid.newcore.impl.bmp.UserDefinedCardGenerator;
 import org.msk86.ygoroid.newcore.impl.builder.renderer.SideChangerRenderer;
 import org.msk86.ygoroid.newcore.impl.layout.AbsoluteLayout;
@@ -75,6 +76,7 @@ public class SideChanger implements Item, Container, BaseContainer {
 
     public void recycleUselessBmp() {
         CardGenerator.clearCache();
+        LinkMarkerGenerator.clearCache();
         UserDefinedCardGenerator.clearCache();
     }
 

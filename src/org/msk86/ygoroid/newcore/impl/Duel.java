@@ -7,6 +7,7 @@ import org.msk86.ygoroid.newcore.constant.FieldType;
 import org.msk86.ygoroid.newcore.deck.DeckCards;
 import org.msk86.ygoroid.newcore.deck.DeckChecker;
 import org.msk86.ygoroid.newcore.impl.bmp.CardGenerator;
+import org.msk86.ygoroid.newcore.impl.bmp.LinkMarkerGenerator;
 import org.msk86.ygoroid.newcore.impl.bmp.UserDefinedCardGenerator;
 import org.msk86.ygoroid.newcore.impl.layout.AbsoluteLayout;
 import org.msk86.ygoroid.newcore.impl.lifepoint.LifePointCalculator;
@@ -61,6 +62,7 @@ public class Duel implements Item, Container, BaseContainer {
 
     public void recycleUselessBmp() {
         CardGenerator.clearCache();
+        LinkMarkerGenerator.clearCache();
         UserDefinedCardGenerator.clearCache();
     }
 

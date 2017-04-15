@@ -76,6 +76,7 @@
     <string name="TYPE_TOON">卡通</string>
     <string name="TYPE_XYZ">超量</string>
     <string name="TYPE_PENDULUM">灵摆</string>
+    <string name="TYPE_LINK">链接</string>
 
     <string name="SAVE_SUCCESS" formatted="false">已保存[%s]。主卡组:%d，额外:%d，副卡组:%d。</string>
     <string name="SAVE_FAIL" formatted="false">保存[%s]失败。</string>
@@ -108,6 +109,7 @@
     <string name="RACE_REPTILE">爬虫</string>
     <string name="RACE_WYRMS">幻龙</string>
     <string name="RACE_PSYCHO">念动力</string>
+    <string name="RACE_CYBERSE">电子界</string>
     <string name="RACE_DEVINE">幻神兽</string>
     <string name="RACE_CREATORGOD">创世神</string>
 

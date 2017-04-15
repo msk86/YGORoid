@@ -19,7 +19,7 @@ public class PressDispatcher implements Dispatcher<Press> {
         Container container = op.getContainer();
         if(container instanceof Field) {
             Field field = (Field) container;
-            if(op.getItem() instanceof Controllable && field.getType() == FieldType.MONSTER) {
+            if(op.getItem() instanceof Controllable && (field.getType() == FieldType.MONSTER || field.getType() == FieldType.EX_MONSTER)) {
                 actionChain.add(new RotateMonsterPositionAction(op));
             }
 

@@ -129,7 +129,7 @@ public class SearchFilter {
                     case MONSTER:
                         searchSubType.setEnabled(true);
                         setMonsterRelatedEnable(true);
-                        createSearchSubTypeValues(new CardSubType[]{CardSubType.NULL, CardSubType.NORMAL, CardSubType.EFFECT, CardSubType.TUNER, CardSubType.PENDULUM, CardSubType.FUSION, CardSubType.RITUAL, CardSubType.SYNC, CardSubType.XYZ, CardSubType.DUAL, CardSubType.FLIP, CardSubType.SPIRIT, CardSubType.TOON, CardSubType.UNION});
+                        createSearchSubTypeValues(new CardSubType[]{CardSubType.NULL, CardSubType.NORMAL, CardSubType.EFFECT, CardSubType.TUNER, CardSubType.PENDULUM, CardSubType.LINK, CardSubType.FUSION, CardSubType.RITUAL, CardSubType.SYNC, CardSubType.XYZ, CardSubType.DUAL, CardSubType.FLIP, CardSubType.SPIRIT, CardSubType.TOON, CardSubType.UNION});
                         break;
                     case SPELL:
                         searchSubType.setEnabled(true);

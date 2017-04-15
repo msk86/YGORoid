@@ -76,6 +76,7 @@
     <string name="TYPE_TOON">トゥーン</string>
     <string name="TYPE_XYZ">エクシーズ</string>
     <string name="TYPE_PENDULUM">ペンデュラム</string>
+    <string name="TYPE_LINK">リンク</string>
 
     <string name="SAVE_SUCCESS" formatted="false">[%s]保存成功。メイン:%d、エクストラ:%d、サイド:%d。</string>
     <string name="SAVE_FAIL" formatted="false">保存失敗[%s]。</string>
@@ -108,6 +109,7 @@
     <string name="RACE_REPTILE">爬虫類</string>
     <string name="RACE_WYRMS">幻竜</string>
     <string name="RACE_PSYCHO">サイキック</string>
+    <string name="RACE_CYBERSE">サイバース</string>
     <string name="RACE_DEVINE">幻神獣</string>
     <string name="RACE_CREATORGOD">創造神</string>
 

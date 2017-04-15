@@ -71,7 +71,7 @@ public class CardEffectWindowRenderer implements Renderer {
         if (card.getType() == CardType.MONSTER) {
             top += lineHeight;
 
-            canvas.drawText(card.levelAndADDesc(),
+            canvas.drawText(card.levelAndADDesc() + " " + card.linkMarkerDirection(),
                     left, top, paint);
         }
         top += lineHeight;
