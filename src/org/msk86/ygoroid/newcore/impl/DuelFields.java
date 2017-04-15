@@ -20,19 +20,24 @@ public class DuelFields implements Item, Container, Bmpable {
         typeFieldsMapping = new HashMap<FieldType, List<Field>>();
 
         for (FieldType type : new FieldType[]{FieldType.DECK, FieldType.EX_DECK, FieldType.GRAVEYARD,
-                FieldType.BANISHED, FieldType.PENDULUM_LEFT, FieldType.PENDULUM_RIGHT, FieldType.TEMP,
+                FieldType.BANISHED, FieldType.EX_MONSTER, FieldType.TEMP,
                 FieldType.FIELD_MAGIC}) {
             typeFieldMapping.put(type, new Field(type, this));
         }
 
         List<Field> monsterZone = new ArrayList<Field>();
         List<Field> magicZone = new ArrayList<Field>();
+        List<Field> exMonsterZone = new ArrayList<Field>();
         for (int i = 0; i < 5; i++) {
             monsterZone.add(new Field(FieldType.MONSTER, this));
             magicZone.add(new Field(FieldType.MAGIC_TRAP, this));
         }
+        for (int i = 0; i < 2; i++) {
+            exMonsterZone.add(new Field(FieldType.EX_MONSTER, this));
+        }
         typeFieldsMapping.put(FieldType.MONSTER, monsterZone);
         typeFieldsMapping.put(FieldType.MAGIC_TRAP, magicZone);
+        typeFieldsMapping.put(FieldType.EX_MONSTER, exMonsterZone);
     }
 
     public Field getField(FieldType type) {

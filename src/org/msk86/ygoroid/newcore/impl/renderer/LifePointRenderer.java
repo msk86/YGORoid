@@ -44,6 +44,6 @@ public class LifePointRenderer implements Renderer {
     }
 
     private int getFontSize() {
-        return size().height() / 4;
+        return size().height() / 5;
     }
 }

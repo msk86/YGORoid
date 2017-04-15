@@ -49,16 +49,22 @@ public class CoinRenderer implements Renderer {
     }
 
     private void drawCoinFrame(Canvas canvas, int x, int y) {
+        Point center = centerPosition();
         Paint paint = new Paint();
-        paint.setColor(Style.lineColor());
-        paint.setStrokeWidth(3);
-        paint.setStyle(Paint.Style.STROKE);
+        paint.setColor(Style.fieldShadowColor());
+        paint.setAlpha(80);
         paint.setAntiAlias(true);
 
         canvas.save();
         canvas.translate(x, y);
 
-        Point center = centerPosition();
+        canvas.drawCircle(center.x, center.y, extorialRadius(), paint);
+
+        paint.setColor(Style.lineColor());
+        paint.setStrokeWidth(3);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setAlpha(255);
+
         canvas.drawCircle(center.x, center.y, extorialRadius(), paint);
 
         paint.setStrokeWidth(2);

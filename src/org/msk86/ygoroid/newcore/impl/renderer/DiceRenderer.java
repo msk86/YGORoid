@@ -77,13 +77,21 @@ public class DiceRenderer implements Renderer {
 
     private void drawDiceFrame(Canvas canvas, int x, int y) {
         Paint paint = new Paint();
-        paint.setColor(Style.lineColor());
-        paint.setStrokeWidth(2);
-        paint.setStyle(Paint.Style.STROKE);
+        paint.setColor(Style.fieldShadowColor());
+        paint.setAlpha(80);
         paint.setAntiAlias(true);
 
         canvas.save();
         canvas.translate(x, y);
+
+        canvas.drawRoundRect(new RectF(Style.padding(), Style.padding(),
+                        size().width() - Style.padding(), size().height() - Style.padding()),
+                7, 7, paint);
+
+        paint.setColor(Style.lineColor());
+        paint.setStrokeWidth(2);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setAlpha(255);
 
         canvas.drawRoundRect(new RectF(Style.padding(), Style.padding(),
                 size().width() - Style.padding(), size().height() - Style.padding()),

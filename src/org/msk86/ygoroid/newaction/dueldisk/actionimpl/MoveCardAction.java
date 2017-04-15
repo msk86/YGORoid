@@ -17,7 +17,7 @@ public class MoveCardAction extends BaseAction {
         if(item instanceof Controllable) {
             Controllable controllable = (Controllable) item;
 
-            if(field.getType() == FieldType.MONSTER) {
+            if(field.getType() == FieldType.MONSTER || field.getType() == FieldType.EX_MONSTER) {
                 if(!controllable.isOpen()) {
                     controllable.negative();
                 }

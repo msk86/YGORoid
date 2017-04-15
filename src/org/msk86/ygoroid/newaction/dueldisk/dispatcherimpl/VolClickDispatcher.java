@@ -22,8 +22,7 @@ public class VolClickDispatcher implements Dispatcher<VolClick> {
                 Field field = (Field) op.getContainer();
                 if(field.getType() == FieldType.MONSTER || field.getType() == FieldType.MAGIC_TRAP
                         || field.getType() == FieldType.FIELD_MAGIC
-                        || field.getType() == FieldType.PENDULUM_LEFT
-                        || field.getType() == FieldType.PENDULUM_RIGHT) {
+                        || field.getType() == FieldType.EX_MONSTER) {
                     if(op.getVol() == VolClick.VOL_UP) {
                         actionChain.add(new IndicatorIncreaseAction(op));
                     } else {

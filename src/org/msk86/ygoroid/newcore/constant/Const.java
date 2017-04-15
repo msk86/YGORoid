@@ -29,6 +29,7 @@ public class Const {
     public static final int TYPE_TOON = 0x400000;
     public static final int TYPE_XYZ = 0x800000;
     public static final int TYPE_PENDULUM = 0x1000000;
+    public static final int TYPE_LINK = 0x4000000;
 
     //Attributes
     public static final int ATTRIBUTE_EARTH = 0x01;
@@ -62,6 +63,7 @@ public class Const {
     public static final int RACE_REPTILE = 0x80000;
     public static final int RACE_WYRMS = 0x800000;
     public static final int RACE_PSYCHO = 0x100000;
+    public static final int RACE_CYBERSE = 0x1000000;
     public static final int RACE_DEVINE = 0x200000;
     public static final int RACE_CREATORGOD = 0x400000;
 
@@ -99,4 +101,13 @@ public class Const {
     public static final int MENU_CARD_SEARCH = 0x19;
 
     public static final int MENU_EXIT = 0x100;
+
+    public static final int LINK_DIRECTION_SOUTHWEST = 0x1;
+    public static final int LINK_DIRECTION_SOUTH = 0x2;
+    public static final int LINK_DIRECTION_SOUTHEAST = 0x4;
+    public static final int LINK_DIRECTION_WEST = 0x8;
+    public static final int LINK_DIRECTION_EAST = 0x20;
+    public static final int LINK_DIRECTION_NORTHWEST = 0x40;
+    public static final int LINK_DIRECTION_NORTH = 0x80;
+    public static final int LINK_DIRECTION_NORTHEAST = 0x100;
 }

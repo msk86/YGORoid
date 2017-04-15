@@ -75,7 +75,8 @@
     <string name="TYPE_FLIP">Flip</string>
     <string name="TYPE_TOON">Toon</string>
     <string name="TYPE_XYZ">XYZ</string>
-    <string name="TYPE_PENDULUM">PENDULUM</string>
+    <string name="TYPE_PENDULUM">Pendulum</string>
+    <string name="TYPE_LINK">Link</string>
 
     <string name="SAVE_SUCCESS" formatted="false">[%s] saved. Main:%d, Extra:%d, side:%d.</string>
     <string name="SAVE_FAIL" formatted="false">Fail to save [%s].</string>
@@ -108,6 +109,7 @@
     <string name="RACE_REPTILE">Reptile</string>
     <string name="RACE_WYRMS">Wyrms</string>
     <string name="RACE_PSYCHO">Psycho</string>
+    <string name="RACE_CYBERSE">Cyberse</string>
     <string name="RACE_DEVINE">Devine</string>
     <string name="RACE_CREATORGOD">CreatorGod</string>
 

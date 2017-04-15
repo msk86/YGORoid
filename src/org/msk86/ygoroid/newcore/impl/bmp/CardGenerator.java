@@ -2,12 +2,14 @@ package org.msk86.ygoroid.newcore.impl.bmp;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 import org.msk86.ygoroid.newcore.BmpGenerator;
 import org.msk86.ygoroid.newcore.constant.CardSubType;
+import org.msk86.ygoroid.newcore.constant.Const;
 import org.msk86.ygoroid.newcore.impl.Card;
 import org.msk86.ygoroid.newutils.BmpReader;
 import org.msk86.ygoroid.newutils.Configuration;
@@ -49,6 +51,11 @@ public class CardGenerator implements BmpGenerator {
 
             Bitmap cardTypeBmp = cardTypeBmp(size);
             canvas.drawBitmap(cardTypeBmp, 0, 0, paint);
+
+            if(card.isLink()) {
+                Bitmap marker = card.getLinkMarker().getBmpGenerator().generate(size);
+                canvas.drawBitmap(marker, 0, 0, paint);
+            }
 
             TextPaint textPaint = new TextPaint();
             textPaint.setTextSize(cardNameFontSize(size));

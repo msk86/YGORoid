@@ -69,7 +69,8 @@ public class Configuration {
                     baseDir() + configPropertyFile()));
 
             Properties defaultProperties = defaultProperties();
-            for (String name : defaultProperties.stringPropertyNames()) {
+            String[] pNames = {PROPERTY_GRAVITY_ENABLE, PROPERTY_AUTO_SHUFFLE_ENABLE, PROPERTY_AUTO_DB_UPGRADE};
+            for (String name : pNames) {
                 Object value = properties.get(name);
                 if (value == null) {
                     properties.setProperty(name, (String) defaultProperties.get(name));

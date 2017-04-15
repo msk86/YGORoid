@@ -33,7 +33,7 @@ public class LifePoint implements Item {
     public String toString() {
         String str = "LP: " + lps[0];
         if(lps[1] != 8000) {
-            str = "LP-1: " + lps[0] + "\nLP-2: " + lps[1];
+            str = "LP1:" + lps[0] + "\nLP2:" + lps[1];
         }
         return str;
     }
