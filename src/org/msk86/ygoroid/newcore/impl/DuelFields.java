@@ -1,5 +1,6 @@
 package org.msk86.ygoroid.newcore.impl;
 
+import org.msk86.ygoroid.R;
 import org.msk86.ygoroid.newcore.*;
 import org.msk86.ygoroid.newcore.constant.FieldType;
 import org.msk86.ygoroid.newcore.impl.bmp.DuelFieldsGenerator;
@@ -30,8 +31,14 @@ public class DuelFields implements Item, Container, Bmpable {
         List<Field> exMonsterZone = new ArrayList<Field>();
         for (int i = 0; i < 5; i++) {
             monsterZone.add(new Field(FieldType.MONSTER, this));
+        }
+
+        magicZone.add(new Field(FieldType.MAGIC_TRAP, R.raw.pendulum_left, this));
+        for (int i = 0; i < 3; i++) {
             magicZone.add(new Field(FieldType.MAGIC_TRAP, this));
         }
+        magicZone.add(new Field(FieldType.MAGIC_TRAP, R.raw.pendulum_right, this));
+
         for (int i = 0; i < 2; i++) {
             exMonsterZone.add(new Field(FieldType.EX_MONSTER, this));
         }

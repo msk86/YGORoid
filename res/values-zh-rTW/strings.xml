@@ -76,7 +76,7 @@
     <string name="TYPE_TOON">卡通</string>
     <string name="TYPE_XYZ">XYZ</string>
     <string name="TYPE_PENDULUM">擺動</string>
-    <string name="TYPE_LINK">鏈接</string>
+    <string name="TYPE_LINK">連接</string>
 
     <string name="SAVE_SUCCESS" formatted="false">已保存[%s]。主牌組:%d，額外:%d，副牌組:%d。</string>
     <string name="SAVE_FAIL" formatted="false">保存[%s]失敗。</string>

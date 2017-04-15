@@ -38,7 +38,7 @@ public class FieldRenderer implements Renderer {
     }
 
     private void drawBackground(Canvas canvas, int x, int y) {
-        Bitmap bmp = field.getType().getBmpGenerator().generate(size());
+        Bitmap bmp = field.getBmpGenerator().generate(size());
         if (bmp != null) {
             canvas.drawBitmap(bmp, x, y, new Paint());
         }

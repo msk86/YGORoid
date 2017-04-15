@@ -76,7 +76,7 @@
     <string name="TYPE_TOON">卡通</string>
     <string name="TYPE_XYZ">超量</string>
     <string name="TYPE_PENDULUM">灵摆</string>
-    <string name="TYPE_LINK">链接</string>
+    <string name="TYPE_LINK">连接</string>
 
     <string name="SAVE_SUCCESS" formatted="false">已保存[%s]。主卡组:%d，额外:%d，副卡组:%d。</string>
     <string name="SAVE_FAIL" formatted="false">保存[%s]失败。</string>
