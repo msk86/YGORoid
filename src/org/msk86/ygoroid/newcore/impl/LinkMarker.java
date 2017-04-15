@@ -8,9 +8,9 @@ import org.msk86.ygoroid.newcore.impl.bmp.LinkMarkerGenerator;
 
 public class LinkMarker implements Bmpable {
 
-    private static int[] MARKER_POSITIONS = new int[] {Const.LINK_DIRECTION_NORTH, Const.LINK_DIRECTION_NORTHEAST, Const.LINK_DIRECTION_EAST,
-            Const.LINK_DIRECTION_SOUTHEAST, Const.LINK_DIRECTION_SOUTH, Const.LINK_DIRECTION_SOUTHWEST, Const.LINK_DIRECTION_WEST,
-            Const.LINK_DIRECTION_NORTHWEST};
+    private static int[] MARKER_POSITIONS = new int[] {Const.LINK_DIRECTION_NORTH, Const.LINK_DIRECTION_NORTHWEST, Const.LINK_DIRECTION_WEST,
+            Const.LINK_DIRECTION_SOUTHWEST, Const.LINK_DIRECTION_SOUTH, Const.LINK_DIRECTION_SOUTHEAST, Const.LINK_DIRECTION_EAST,
+            Const.LINK_DIRECTION_NORTHEAST};
 
     private int markerInt;
     private int[] markers;
@@ -20,9 +20,9 @@ public class LinkMarker implements Bmpable {
     public LinkMarker(int link, int markerInt) {
         this.markerInt = markerInt;
 
-        int[] markerResources = new int[] {R.raw.card_link_marker_on_n, R.raw.card_link_marker_on_ne, R.raw.card_link_marker_on_e,
-                R.raw.card_link_marker_on_se, R.raw.card_link_marker_on_s, R.raw.card_link_marker_on_sw, R.raw.card_link_marker_on_w,
-                R.raw.card_link_marker_on_nw};
+        int[] markerResources = new int[] {R.raw.card_link_marker_on_n, R.raw.card_link_marker_on_nw, R.raw.card_link_marker_on_w,
+                R.raw.card_link_marker_on_sw, R.raw.card_link_marker_on_s, R.raw.card_link_marker_on_se, R.raw.card_link_marker_on_e,
+                R.raw.card_link_marker_on_ne};
 
         this.markers = new int[link];
         int i = 0;

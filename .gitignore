@@ -22,3 +22,6 @@ local.properties
 *.ipr
 *.iws
 *.iml
+
+# os files
+.DS_Store
