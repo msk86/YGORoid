@@ -2,6 +2,7 @@ package org.msk86.ygoroid.newutils;
 
 import android.os.Environment;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -17,7 +18,11 @@ public class Configuration {
     }
 
     public static String baseDir() {
-        return device() + "YGORoid/";
+        File mfl =new File(device() + "ygocore/");
+        if(!mfl.exists())
+            return device() + "YGORoid/";
+        else
+            return device() + "ygocore/";
     }
 
     public static String deckPath() {

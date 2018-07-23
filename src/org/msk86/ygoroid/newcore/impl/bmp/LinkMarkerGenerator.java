@@ -35,7 +35,7 @@ public class LinkMarkerGenerator implements BmpGenerator {
     }
 
     private Bitmap bmp(Size size) {
-        Bitmap linkMarker = BmpReader.readBitmap(R.raw.card_link_marker_off, size);
+        Bitmap linkMarker = BmpReader.readBitmap(R.raw.card_link_marker_off, size).copy(Bitmap.Config.ARGB_8888, true);
 
         Canvas canvas = new Canvas(linkMarker);
         Paint paint = new Paint();
