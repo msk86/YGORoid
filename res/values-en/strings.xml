@@ -61,9 +61,9 @@
     <string name="TYPE_EFFECT">Effect</string>
     <string name="TYPE_FUSION">Fusion</string>
     <string name="TYPE_RITUAL">Ritual</string>
-    <string name="TYPE_SPIRIT">Sprite</string>
+    <string name="TYPE_SPIRIT">Spirit</string>
     <string name="TYPE_UNION">Union</string>
-    <string name="TYPE_DUAL">Dual</string>
+    <string name="TYPE_DUAL">Gemini</string>
     <string name="TYPE_TUNER">Tuner</string>
     <string name="TYPE_SYNCHRO">Synchro</string>
     <string name="TYPE_TOKEN">Token</string>
@@ -72,7 +72,7 @@
     <string name="TYPE_EQUIP">Equip</string>
     <string name="TYPE_FIELD">Field</string>
     <string name="TYPE_COUNTER">Counter</string>
-    <string name="TYPE_FLIP">Flip</string>
+    <string name="TYPE_FLIP">Flip Effect</string>
     <string name="TYPE_TOON">Toon</string>
     <string name="TYPE_XYZ">XYZ</string>
     <string name="TYPE_PENDULUM">Pendulum</string>
@@ -88,7 +88,7 @@
     <string name="ERROR_CARD" formatted="false">Number of cards %s doesn\'t pass the check.</string>
 
     <string name="RACE_WARRIOR">Warrior</string>
-    <string name="RACE_SPELLCASTER">SpellCaster</string>
+    <string name="RACE_SPELLCASTER">Spellcaster</string>
     <string name="RACE_FAIRY">Fairy</string>
     <string name="RACE_FIEND">Fiend</string>
     <string name="RACE_ZOMBIE">Zombie</string>
@@ -96,22 +96,22 @@
     <string name="RACE_AQUA">Aqua</string>
     <string name="RACE_PYRO">Pyro</string>
     <string name="RACE_ROCK">Rock</string>
-    <string name="RACE_WINDBEAST">WingedBeast</string>
+    <string name="RACE_WINDBEAST">Winged Beast</string>
     <string name="RACE_PLANT">Plant</string>
     <string name="RACE_INSECT">Insect</string>
-    <string name="RACE_THUNDER">thunder</string>
+    <string name="RACE_THUNDER">Thunder</string>
     <string name="RACE_DRAGON">Dragon</string>
     <string name="RACE_BEAST">Beast</string>
-    <string name="RACE_BEASTWARRIOR">BeastWarrior</string>
+    <string name="RACE_BEASTWARRIOR">Beast-Warrior</string>
     <string name="RACE_DINOSAUR">Dinosaur</string>
     <string name="RACE_FISH">Fish</string>
-    <string name="RACE_SEASERPENT">SeaSerpent</string>
+    <string name="RACE_SEASERPENT">Sea Serpent</string>
     <string name="RACE_REPTILE">Reptile</string>
     <string name="RACE_WYRMS">Wyrms</string>
-    <string name="RACE_PSYCHO">Psycho</string>
+    <string name="RACE_PSYCHO">Psychic</string>
     <string name="RACE_CYBERSE">Cyberse</string>
-    <string name="RACE_DEVINE">Devine</string>
-    <string name="RACE_CREATORGOD">CreatorGod</string>
+    <string name="RACE_DEVINE">Divine-Beast</string>
+    <string name="RACE_CREATORGOD">Divine</string>
 
     <string name="TYPE_MONSTER">Monster</string>
     <string name="TYPE_SPELL">Spell</string>
